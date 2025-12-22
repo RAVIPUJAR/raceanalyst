@@ -639,6 +639,13 @@
             }
         }
         
+        /* Admin label styling */
+        .admin-label span {
+            color: #ffc107;
+            font-weight: 600;
+            cursor: default;
+        }
+
         /* Footer */
         footer {
             background-color: #1a3c34;
@@ -806,6 +813,9 @@
             
             <nav class="nav-menu" id="navMenu">
                 <ul>
+                    <li class="admin-label">
+                        <span><i class="fas fa-user-shield"></i> Admin</span>
+                    </li>
                     <li><a href="#"><i class="fas fa-clipboard-list"></i> Selections</a></li>
                     <li><a href="#"><i class="fas fa-chart-line"></i> Performance</a></li>
                     <li><a href="#"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
