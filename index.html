@@ -811,9 +811,6 @@
                     <li><a href="#"><i class="fas fa-chart-line"></i> Performance</a></li>
                     <li><a href="#"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
                     <li><a href="#"><i class="fas fa-envelope"></i> Subscribe</a></li>
-                    <li><a href="#" class="admin-menu-item" id="adminMenuBtn">
-                        <i class="fas fa-lock"></i> Admin
-                    </a></li>
                 </ul>
             </nav>
         </div>
@@ -1161,8 +1158,6 @@ E/W: MARATHON MAN`
         
         // Admin elements
         const adminPanel = document.getElementById('adminPanel');
-        const adminMenuBtn = document.getElementById('adminMenuBtn');
-        const hideAdminBtn = document.getElementById('hideAdminBtn');
         const adminVenue = document.getElementById('adminVenue');
         const adminDate = document.getElementById('adminDate');
         const adminRaceNo = document.getElementById('adminRaceNo');
@@ -1471,17 +1466,6 @@ E/W: MARATHON MAN`
             }
         });
 
-        // Admin Panel Functions via Menu Button
-        adminMenuBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            adminPanel.style.display = 'block';
-            // Scroll to admin panel
-            adminPanel.scrollIntoView({ behavior: 'smooth' });
-        });
-
-        hideAdminBtn.addEventListener('click', function() {
-            adminPanel.style.display = 'none';
-        });
 
         saveBtn.addEventListener('click', function() {
             const venue = adminVenue.value.trim();
