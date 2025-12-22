@@ -1695,9 +1695,6 @@ E/W: MARATHON MAN`
             input.click();
         };
 
-        const SHEET_ID = '1fs_DhXWii9a7_XruGo1OuEJ0KIB7iQ3whDmHUOc3SEk';
-        const SHEET_NAME = 'Sheet1'; // change if needed
-
         async function loadUpcomingRacesFromSheet() {
             const url = `https://opensheet.elk.sh/${SHEET_ID}/${SHEET_NAME}`;
 
@@ -1708,15 +1705,15 @@ E/W: MARATHON MAN`
                 const list = document.getElementById('upcomingRaces');
                 list.innerHTML = '';
 
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
+                const todayDate = new Date();
+                todayDate.setHours(0, 0, 0, 0);
 
                 const upcoming = races
                     .filter(r => r.venue && r.date)
                     .filter(r => {
                         const raceDate = new Date(r.date);
                         raceDate.setHours(0, 0, 0, 0);
-                        return raceDate >= today;   // 🔥 AUTO-REMOVE EXPIRED
+                        return raceDate >= todayDate;
                     })
                     .sort((a, b) => new Date(a.date) - new Date(b.date));
 
@@ -1733,22 +1730,22 @@ E/W: MARATHON MAN`
                         year: 'numeric'
                     });
 
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                        <span class="race-venue">${race.venue}</span>
-                        <span class="race-date">${formattedDate}</span>
+                    list.innerHTML += `
+                        <li>
+                            <span class="race-venue">${race.venue}</span>
+                            <span class="race-date">${formattedDate}</span>
+                        </li>
                     `;
-                    list.appendChild(li);
                 });
 
-            } catch (error) {
-                console.error('Upcoming races load failed', error);
+            } catch (err) {
+                console.error(err);
                 document.getElementById('upcomingRaces').innerHTML =
                     '<li>Unable to load races</li>';
             }
         }
 
-document.addEventListener('DOMContentLoaded', loadUpcomingRacesFromSheet);
+        document.addEventListener('DOMContentLoaded', loadUpcomingRacesFromSheet);
     </script>
 </body>
 </html>
