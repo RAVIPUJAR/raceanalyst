@@ -933,7 +933,7 @@
                     <button type="submit">Subscribe Now</button>
                 </form>
             </div>
-        </div> -->
+        </div>
         
         <!-- Admin Panel (Hidden by Default, Full Width) -->
         <div class="admin-panel" id="adminPanel">
@@ -1004,18 +1004,18 @@
                     <h4>Quick Links</h4>
                     <ul style="list-style: none;">
                         <li><a href="#" style="color: #ccc; text-decoration: none;">Today's Selections</a></li>
-                        <!-- <li><a href="#" style="color: #ccc; text-decoration: none;">Performance Tracker</a></li>
-                        <li><a href="#" style="color: #ccc; text-decoration: none;">Race Calendar</a></li> -->
-                        <!-- <li><a href="#" style="color: #ccc; text-decoration: none;">Subscription Plans</a></li> -->
+                        <li><a href="#" style="color: #ccc; text-decoration: none;">Performance Tracker</a></li>
+                        <li><a href="#" style="color: #ccc; text-decoration: none;">Race Calendar</a></li>
+                        <li><a href="#" style="color: #ccc; text-decoration: none;">Subscription Plans</a></li>
                         <li><a href="#" style="color: #ccc; text-decoration: none;">Contact</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h4>Contact</h4>
-                    <!-- <p><i class="fas fa-envelope"></i> selections@raceanalyst.in</p>
+                    <p><i class="fas fa-envelope"></i> selections@raceanalyst.in</p>
                     <p><i class="fas fa-phone"></i> +91 98765 43210</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Mumbai, India</p> -->
+                    <p><i class="fas fa-map-marker-alt"></i> Mumbai, India</p>
                 </div>
             </div>
             
@@ -1489,8 +1489,12 @@ E/W: MARATHON MAN`
             raceAnalyses[key] = { venue, date, raceNo, analysis };
             showToast('Analysis saved successfully!');
             
-            // Save to localStorage
-            localStorage.setItem('raceAnalyses', JSON.stringify(raceAnalyses));
+            // Save to Cloudflare KV
+            fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/save", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ key, data: { venue, date, raceNo, analysis } })
+            });
             
             // Refresh dropdowns and check today's button
             initializeDropdowns();
@@ -1529,8 +1533,12 @@ E/W: MARATHON MAN`
             raceAnalyses[newKey] = { venue, date, raceNo, analysis };
             showToast('Analysis updated successfully!');
             
-            // Save to localStorage
-            localStorage.setItem('raceAnalyses', JSON.stringify(raceAnalyses));
+            // Save to Cloudflare KV
+            fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/save", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ key: newKey, data: { venue, date, raceNo, analysis } })
+            });
             
             // Refresh and select updated race
             initializeDropdowns();
@@ -1549,8 +1557,12 @@ E/W: MARATHON MAN`
                 delete raceAnalyses[selectedKey];
                 showToast('Analysis deleted successfully!');
                 
-                // Save to localStorage
-                localStorage.setItem('raceAnalyses', JSON.stringify(raceAnalyses));
+                // Delete from Cloudflare KV
+                fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/delete", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ key: selectedKey })
+                });
                 
                 // Refresh dropdowns and check today's button
                 initializeDropdowns();
@@ -1600,17 +1612,20 @@ E/W: MARATHON MAN`
             }
         }
 
-        // Load from localStorage on startup
-        document.addEventListener('DOMContentLoaded', function() {
-            const saved = localStorage.getItem('raceAnalyses');
-            if (saved) {
+        // Load from Cloudflare KV on startup
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Load analyses from Cloudflare KV
+            // Load analyses from Cloudflare KV
+            async function loadFromKV() {
                 try {
-                    raceAnalyses = JSON.parse(saved);
+                    const response = await fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/get-all");
+                    const data = await response.json();
+                    raceAnalyses = data || {};
                 } catch (e) {
-                    console.log('Error loading saved analyses');
+                    console.error("Failed to load data from KV");
                 }
             }
-            
+            await loadFromKV();
             initializeDropdowns();
             createCalendar();
             animateStats();
@@ -1623,7 +1638,6 @@ E/W: MARATHON MAN`
                     const dateA = raceAnalyses[a].date;
                     const dateB = raceAnalyses[b].date;
                     return dateB.localeCompare(dateA);
-            syncAnalysisHeight();
                 });
                 
                 const latestKey = allKeys[0];
@@ -1665,7 +1679,7 @@ E/W: MARATHON MAN`
                     try {
                         const imported = JSON.parse(e.target.result);
                         raceAnalyses = imported;
-                        localStorage.setItem('raceAnalyses', JSON.stringify(raceAnalyses));
+                        // localStorage.setItem('raceAnalyses', JSON.stringify(raceAnalyses));
                         initializeDropdowns();
                         showToast('Data imported successfully!');
                     } catch (err) {
@@ -1733,12 +1747,6 @@ E/W: MARATHON MAN`
         }
 
         document.addEventListener('DOMContentLoaded', loadUpcomingRacesFromSheet);
-
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.getRegistrations().then(regs => {
-            regs.forEach(reg => reg.unregister());
-          });
-        }
     </script>
 </body>
 </html>
