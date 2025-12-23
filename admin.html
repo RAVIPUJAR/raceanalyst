@@ -1045,14 +1045,14 @@
 
     <script>
     /* ---------------------------------------------------
-       CONFIGURATION
+    CONFIGURATION
     --------------------------------------------------- */
     let raceAnalyses = {};
     const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
     const today = new Date().toISOString().split('T')[0];
-    
+
     /* ---------------------------------------------------
-       DOM ELEMENTS
+    DOM ELEMENTS
     --------------------------------------------------- */
     const adminPanel = document.getElementById("adminPanel");
     const hideAdminBtn = document.getElementById("hideAdminBtn");
@@ -1065,7 +1065,7 @@
     const deleteBtn = document.getElementById("deleteBtn");
     const clearBtn = document.getElementById("clearBtn");
     const toast = document.getElementById("toast");
-    
+
     const venueSelect = document.getElementById("venueSelect");
     const dateSelect = document.getElementById("dateSelect");
     const raceSelect = document.getElementById("raceSelect");
@@ -1076,28 +1076,28 @@
     const selectedDate = document.getElementById("selectedDate");
     const selectedRace = document.getElementById("selectedRace");
     const calendarWidget = document.getElementById("calendarWidget");
-    
+
     // Set today's date
     adminDate.value = today;
-    
+
     /* ---------------------------------------------------
-       HELPER FUNCTIONS
+    HELPER FUNCTIONS
     --------------------------------------------------- */
     function showToast(message, type = 'success') {
         toast.textContent = message;
         toast.style.background = type === 'success' ? '#28a745' : 
-                               type === 'error' ? '#dc3545' : 
-                               type === 'info' ? '#17a2b8' : '#28a745';
+                            type === 'error' ? '#dc3545' : 
+                            type === 'info' ? '#17a2b8' : '#28a745';
         toast.style.display = "block";
         setTimeout(() => (toast.style.display = "none"), 3000);
     }
-    
+
     function generateKey(venue, date, raceNo) {
         return `${venue}-${date}-${raceNo}`;
     }
-    
+
     /* ---------------------------------------------------
-       CLOUDFLARE KV FUNCTIONS
+    CLOUDFLARE KV FUNCTIONS (ONLY STORAGE)
     --------------------------------------------------- */
     async function loadFromKV() {
         try {
@@ -1108,31 +1108,30 @@
                 cache: 'no-store'
             });
             
-            console.log("KV Response status:", response.status);
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: Failed to load from KV`);
+            }
             
-            if (response.ok) {
-                const data = await response.json();
-                console.log("KV Data received:", data);
-                
-                if (data && typeof data === 'object' && Object.keys(data).length > 0) {
-                    raceAnalyses = data;
-                    console.log(`✅ Loaded ${Object.keys(data).length} analyses from Cloudflare KV`);
-                    showToast(`Loaded ${Object.keys(data).length} analyses from cloud`, 'success');
-                    return { success: true, source: 'kv', count: Object.keys(data).length };
-                } else {
-                    console.log("ℹ️ KV store is empty");
-                    return { success: true, source: 'kv', count: 0 };
-                }
+            const data = await response.json();
+            console.log("KV Data received:", data);
+            
+            if (data && typeof data === 'object') {
+                raceAnalyses = data;
+                const count = Object.keys(data).length;
+                console.log(`✅ Loaded ${count} analyses from Cloudflare KV`);
+                showToast(`Loaded ${count} analyses from cloud`, 'success');
+                return { success: true, count };
             } else {
-                console.error("❌ KV request failed:", response.status);
-                return { success: false, error: `HTTP ${response.status}` };
+                throw new Error("Invalid data format from KV");
             }
         } catch (error) {
             console.error("❌ KV load error:", error);
+            showToast('Failed to load from cloud storage', 'error');
+            raceAnalyses = {}; // Start with empty
             return { success: false, error: error.message };
         }
     }
-    
+
     async function saveToKV(key, data) {
         try {
             console.log("💾 Saving to KV:", key);
@@ -1145,23 +1144,20 @@
                 body: JSON.stringify({ key, data })
             });
             
-            console.log("Save response:", response.status);
-            
-            if (response.ok) {
-                const result = await response.json();
-                console.log("✅ Save successful:", result);
-                return { success: true, result };
-            } else {
+            if (!response.ok) {
                 const errorText = await response.text();
-                console.error("❌ Save failed:", response.status, errorText);
-                return { success: false, error: `HTTP ${response.status}: ${errorText}` };
+                throw new Error(`HTTP ${response.status}: ${errorText}`);
             }
+            
+            const result = await response.json();
+            console.log("✅ Save successful:", result);
+            return { success: true, result };
         } catch (error) {
             console.error("❌ Save error:", error);
-            return { success: false, error: error.message };
+            throw error; // Re-throw to be handled by caller
         }
     }
-    
+
     async function deleteFromKV(key) {
         try {
             console.log("🗑️ Deleting from KV:", key);
@@ -1174,75 +1170,22 @@
                 body: JSON.stringify({ key })
             });
             
-            console.log("Delete response:", response.status);
-            
-            if (response.ok) {
-                const result = await response.json();
-                console.log("✅ Delete successful:", result);
-                return { success: true, result };
-            } else {
+            if (!response.ok) {
                 const errorText = await response.text();
-                console.error("❌ Delete failed:", response.status, errorText);
-                return { success: false, error: `HTTP ${response.status}: ${errorText}` };
+                throw new Error(`HTTP ${response.status}: ${errorText}`);
             }
+            
+            const result = await response.json();
+            console.log("✅ Delete successful:", result);
+            return { success: true, result };
         } catch (error) {
             console.error("❌ Delete error:", error);
-            return { success: false, error: error.message };
+            throw error; // Re-throw to be handled by caller
         }
     }
-    
+
     /* ---------------------------------------------------
-       LOCAL STORAGE FUNCTIONS (FALLBACK)
-    --------------------------------------------------- */
-    function loadFromLocalStorage() {
-        const saved = localStorage.getItem('raceAnalyses');
-        if (saved) {
-            try {
-                raceAnalyses = JSON.parse(saved);
-                console.log(`📱 Loaded ${Object.keys(raceAnalyses).length} analyses from localStorage`);
-                return { success: true, source: 'local', count: Object.keys(raceAnalyses).length };
-            } catch (e) {
-                console.error("❌ LocalStorage parse error:", e);
-                return { success: false, error: e.message };
-            }
-        }
-        return { success: true, source: 'local', count: 0 };
-    }
-    
-    function saveToLocalStorage() {
-        try {
-            localStorage.setItem('raceAnalyses', JSON.stringify(raceAnalyses));
-            console.log("📱 Backup saved to localStorage");
-            return { success: true };
-        } catch (e) {
-            console.error("❌ LocalStorage save error:", e);
-            return { success: false, error: e.message };
-        }
-    }
-    
-    /* ---------------------------------------------------
-       SYNC FUNCTIONS
-    --------------------------------------------------- */
-    async function syncLocalToKV() {
-        console.log("🔄 Syncing localStorage to KV...");
-        const localData = loadFromLocalStorage();
-        
-        if (localData.success && localData.count > 0) {
-            console.log(`Syncing ${localData.count} items to KV...`);
-            
-            for (const [key, data] of Object.entries(raceAnalyses)) {
-                await saveToKV(key, data);
-            }
-            
-            console.log("✅ Sync complete");
-            return { success: true, synced: localData.count };
-        }
-        
-        return { success: false, error: 'No local data to sync' };
-    }
-    
-    /* ---------------------------------------------------
-       UI MANAGEMENT FUNCTIONS
+    UI MANAGEMENT FUNCTIONS
     --------------------------------------------------- */
     function initializeDropdowns() {
         // Extract unique venues
@@ -1253,7 +1196,7 @@
         updateDateDropdown();
         updateRaceDropdown();
     }
-    
+
     function updateDateDropdown() {
         const selectedVenueVal = venueSelect.value;
         let dates = [];
@@ -1284,7 +1227,7 @@
         
         updateRaceDropdown();
     }
-    
+
     function updateRaceDropdown() {
         const selectedVenueVal = venueSelect.value;
         const selectedDateVal = dateSelect.value;
@@ -1305,7 +1248,7 @@
             displayAnalysis(races[0].key);
         }
     }
-    
+
     function displayAnalysis(key) {
         if (!key || !raceAnalyses[key]) {
             analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-exclamation-circle"></i><p>No analysis found</p></div>';
@@ -1349,9 +1292,9 @@
         adminRaceNo.value = analysis.raceNo;
         adminAnalysis.value = analysis.analysis;
     }
-    
+
     /* ---------------------------------------------------
-       EVENT HANDLERS
+    EVENT HANDLERS (KV-ONLY)
     --------------------------------------------------- */
     // Save button - CREATE NEW
     saveBtn.addEventListener('click', async function() {
@@ -1375,15 +1318,12 @@
             }
         }
         
-        // Save to KV
-        const kvResult = await saveToKV(key, data);
-        
-        if (kvResult.success) {
+        try {
+            // Save to KV
+            await saveToKV(key, data);
+            
             // Update local state
             raceAnalyses[key] = data;
-            
-            // Backup to localStorage
-            saveToLocalStorage();
             
             showToast('✅ Analysis saved to cloud!', 'success');
             
@@ -1393,22 +1333,13 @@
             updateDateDropdown();
             raceSelect.value = key;
             displayAnalysis(key);
-        } else {
-            showToast('❌ Failed to save to cloud. Saving locally only.', 'error');
             
-            // Save locally anyway
-            raceAnalyses[key] = data;
-            saveToLocalStorage();
-            
-            // Refresh UI
-            initializeDropdowns();
-            venueSelect.value = venue;
-            updateDateDropdown();
-            raceSelect.value = key;
-            displayAnalysis(key);
+        } catch (error) {
+            showToast(`❌ Failed to save to cloud: ${error.message}`, 'error');
+            console.error("Save failed:", error);
         }
     });
-    
+
     // Update button - UPDATE EXISTING
     updateBtn.addEventListener('click', async function() {
         const selectedKey = raceSelect.value;
@@ -1430,47 +1361,34 @@
         const newKey = generateKey(venue, date, raceNo);
         const data = { venue, date, raceNo, analysis };
         
-        let kvSuccess = true;
-        let kvError = '';
-        
-        // Save new entry to KV
-        const saveResult = await saveToKV(newKey, data);
-        if (!saveResult.success) {
-            kvSuccess = false;
-            kvError = saveResult.error;
-        }
-        
-        // Delete old entry if key changed
-        if (selectedKey !== newKey) {
-            const deleteResult = await deleteFromKV(selectedKey);
-            if (!deleteResult.success && kvSuccess) {
-                // Only show error if we thought KV was working
-                kvSuccess = false;
-                kvError = deleteResult.error;
+        try {
+            // Save new entry to KV
+            await saveToKV(newKey, data);
+            
+            // Delete old entry if key changed
+            if (selectedKey !== newKey) {
+                await deleteFromKV(selectedKey);
             }
-        }
-        
-        // Update local state
-        if (selectedKey !== newKey) {
-            delete raceAnalyses[selectedKey];
-        }
-        raceAnalyses[newKey] = data;
-        
-        // Backup to localStorage
-        saveToLocalStorage();
-        
-        if (kvSuccess) {
+            
+            // Update local state
+            if (selectedKey !== newKey) {
+                delete raceAnalyses[selectedKey];
+            }
+            raceAnalyses[newKey] = data;
+            
             showToast('✅ Analysis updated in cloud!', 'success');
-        } else {
-            showToast(`⚠ Updated locally only (Cloud: ${kvError})`, 'warning');
+            
+            // Refresh UI
+            initializeDropdowns();
+            raceSelect.value = newKey;
+            displayAnalysis(newKey);
+            
+        } catch (error) {
+            showToast(`❌ Failed to update in cloud: ${error.message}`, 'error');
+            console.error("Update failed:", error);
         }
-        
-        // Refresh UI
-        initializeDropdowns();
-        raceSelect.value = newKey;
-        displayAnalysis(newKey);
     });
-    
+
     // Delete button
     deleteBtn.addEventListener('click', async function() {
         const selectedKey = raceSelect.value;
@@ -1483,28 +1401,29 @@
             return;
         }
         
-        // Delete from KV
-        const kvResult = await deleteFromKV(selectedKey);
-        
-        // Delete from local state regardless
-        delete raceAnalyses[selectedKey];
-        saveToLocalStorage();
-        
-        if (kvResult.success) {
+        try {
+            // Delete from KV
+            await deleteFromKV(selectedKey);
+            
+            // Delete from local state
+            delete raceAnalyses[selectedKey];
+            
             showToast('✅ Analysis deleted from cloud!', 'success');
-        } else {
-            showToast('⚠ Deleted locally only (Cloud failed)', 'warning');
+            
+            // Refresh UI
+            initializeDropdowns();
+            
+            // Clear analysis display
+            analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race to view analysis</p></div>';
+            analysisTitle.textContent = 'Race Analysis';
+            raceInfo.style.display = 'none';
+            
+        } catch (error) {
+            showToast(`❌ Failed to delete from cloud: ${error.message}`, 'error');
+            console.error("Delete failed:", error);
         }
-        
-        // Refresh UI
-        initializeDropdowns();
-        
-        // Clear analysis display
-        analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race to view analysis</p></div>';
-        analysisTitle.textContent = 'Race Analysis';
-        raceInfo.style.display = 'none';
     });
-    
+
     // Clear button
     clearBtn.addEventListener('click', function() {
         adminVenue.value = '';
@@ -1513,25 +1432,12 @@
         adminAnalysis.value = '';
         showToast('Form cleared', 'info');
     });
-    
-    // Sync button (add this to your admin panel HTML later)
-    async function syncToCloud() {
-        const result = await syncLocalToKV();
-        if (result.success) {
-            showToast(`✅ Synced ${result.synced} analyses to cloud!`, 'success');
-            
-            // Reload from KV to ensure consistency
-            await loadData();
-        } else {
-            showToast('❌ Sync failed: ' + result.error, 'error');
-        }
-    }
-    
+
     // Hide admin button
     hideAdminBtn.addEventListener('click', function() {
         window.location.href = '/';
     });
-    
+
     // Dropdown events
     venueSelect.addEventListener('change', updateDateDropdown);
     dateSelect.addEventListener('change', updateRaceDropdown);
@@ -1544,9 +1450,9 @@
             raceInfo.style.display = 'none';
         }
     });
-    
+
     /* ---------------------------------------------------
-       CALENDAR FUNCTION
+    CALENDAR FUNCTION
     --------------------------------------------------- */
     function createCalendar() {
         const todayObj = new Date();
@@ -1554,7 +1460,7 @@
         const currentYear = todayObj.getFullYear();
         
         const monthNames = ["January", "February", "March", "April", "May", "June",
-                           "July", "August", "September", "October", "November", "December"];
+                        "July", "August", "September", "October", "November", "December"];
         
         const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
         const firstDay = new Date(currentYear, currentMonth, 1).getDay();
@@ -1592,88 +1498,83 @@
         calendarHTML += `</div>`;
         calendarWidget.innerHTML = calendarHTML;
     }
-    
+
     /* ---------------------------------------------------
-       DATA LOADING STRATEGY
+    CREATE SAMPLE DATA FUNCTION
     --------------------------------------------------- */
-    async function loadData() {
-        console.log("🔄 Loading data...");
+    async function createSampleData() {
+        console.log("📝 Creating sample data in KV...");
         
-        // Try Cloudflare KV first
-        const kvResult = await loadFromKV();
-        
-        if (kvResult.success && kvResult.count > 0) {
-            console.log("✅ Using data from Cloudflare KV");
-            showToast(`Loaded ${kvResult.count} analyses from cloud`, 'success');
-            return true;
-        }
-        
-        // If KV is empty or failed, try localStorage
-        const localResult = loadFromLocalStorage();
-        
-        if (localResult.success && localResult.count > 0) {
-            console.log("✅ Using data from localStorage");
-            showToast(`Loaded ${localResult.count} analyses from local storage`, 'info');
-            return true;
-        }
-        
-        // If both are empty, create sample data
-        console.log("📝 Creating sample data");
-        raceAnalyses = {
+        const sampleData = {
             "Mumbai-2024-03-23-10": {
                 venue: "Mumbai",
                 date: "2024-03-23",
                 raceNo: "10",
                 analysis: `## MUMBAI RACE 10 - CLASS 4 HANDICAP
-    
+
     **Distance:** 1400m
     **Track:** Good
     **Prize Money:** ₹500,000
-    
+
     ### TOP SELECTIONS:
-    
+
     1. **HORSE #5 - DESERT STORM**
-       - Best recent form
-       - Good gate speed
-       - Should lead or sit handy
-    
+    - Best recent form
+    - Good gate speed
+    - Should lead or sit handy
+
     2. **HORSE #3 - MOUNTAIN KING** 
-       - Strong finisher
-       - Drops in weight
-       - Each-way value
-    
+    - Strong finisher
+    - Drops in weight
+    - Each-way value
+
     3. **HORSE #7 - LIGHTNING FLASH**
-       - Consistent performer
-       - Good barrier draw
-       - Place chance
-    
+    - Consistent performer
+    - Good barrier draw
+    - Place chance
+
     ### BETTING STRATEGY:
     - **WIN:** Horse #5
     - **EACH-WAY:** Horse #3
     - **PLACE:** Horse #7
-    
+
     **Best Bet:** Race 10 No. 5 DESERT STORM`
             }
         };
         
-        // Save sample to both KV and localStorage
-        for (const [key, data] of Object.entries(raceAnalyses)) {
-            await saveToKV(key, data);
+        try {
+            // Save sample data to KV
+            for (const [key, data] of Object.entries(sampleData)) {
+                await saveToKV(key, data);
+            }
+            
+            // Update local state
+            raceAnalyses = sampleData;
+            
+            showToast('✅ Sample data created in cloud storage', 'success');
+            return true;
+        } catch (error) {
+            console.error("Failed to create sample data:", error);
+            showToast('❌ Failed to create sample data', 'error');
+            return false;
         }
-        saveToLocalStorage();
-        
-        showToast('Created sample data', 'info');
-        return true;
     }
-    
+
     /* ---------------------------------------------------
-       INITIALIZATION
+    INITIALIZATION
     --------------------------------------------------- */
     document.addEventListener('DOMContentLoaded', async function() {
-        console.log("🚀 Initializing RaceAnalyst Admin...");
+        console.log("🚀 Initializing RaceAnalyst Admin (KV-Only)...");
         
-        // Load data
-        await loadData();
+        // Load data from KV
+        const loadResult = await loadFromKV();
+        
+        // If KV is empty, offer to create sample data
+        if (loadResult.success && Object.keys(raceAnalyses).length === 0) {
+            if (confirm("Cloud storage is empty. Would you like to create sample data?")) {
+                await createSampleData();
+            }
+        }
         
         // Initialize UI
         initializeDropdowns();
@@ -1699,7 +1600,7 @@
         }
         
         console.log("✅ Admin page ready!");
-        console.log("Analyses loaded:", Object.keys(raceAnalyses));
+        console.log("Analyses in memory:", Object.keys(raceAnalyses).length);
     });
     </script>
 </body>
