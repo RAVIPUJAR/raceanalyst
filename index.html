@@ -1733,6 +1733,12 @@ E/W: MARATHON MAN`
         }
 
         document.addEventListener('DOMContentLoaded', loadUpcomingRacesFromSheet);
+
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(regs => {
+            regs.forEach(reg => reg.unregister());
+          });
+        }
     </script>
 </body>
 </html>
