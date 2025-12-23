@@ -1271,49 +1271,7 @@
             calendarWidget.innerHTML = calendarHTML;
         }
 
-        // Animate Stats
-        function animateStats() {
-            const stats = {
-                winRate: { target: 72, current: 0 },
-                roi: { target: 48.3, current: 0 },
-                placeRate: { target: 91, current: 0 },
-                winners: { target: 28, current: 0 }
-            };
-            
-            const speed = 50; // ms per update
-            
-            Object.keys(stats).forEach(statId => {
-                const element = document.getElementById(statId);
-                const stat = stats[statId];
-                const increment = stat.target / 20;
-                
-                const timer = setInterval(() => {
-                    stat.current += increment;
-                    if (stat.current >= stat.target) {
-                        stat.current = stat.target;
-                        clearInterval(timer);
-                    }
-                    
-                    if (statId === 'roi') {
-                        element.textContent = '+' + stat.current.toFixed(1);
-                    } else if (statId === 'winners') {
-                        element.textContent = Math.floor(stat.current);
-                    } else {
-                        element.textContent = Math.floor(stat.current) + '%';
-                    }
-                }, speed);
-            });
-        }
 
-        // Newsletter subscription
-        document.getElementById('subscribeForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = this.querySelector('input[type="text"]').value;
-            const email = this.querySelector('input[type="email"]').value;
-            
-            showToast(`Thank you ${name}! You've subscribed to RaceAnalyst updates.`);
-            this.reset();
-        });
 
         // Event Listeners
         venueSelect.addEventListener('change', updateDateDropdown);
@@ -1513,7 +1471,6 @@
             await loadFromKV();
             initializeDropdowns();
             createCalendar();
-            animateStats();
             
             // Auto-select latest analysis
             const allKeys = Object.keys(raceAnalyses);
