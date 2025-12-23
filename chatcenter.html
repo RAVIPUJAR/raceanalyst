@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Center | RaceAnalyst</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Source+Serif+Pro:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            background: #f7f8fa;
+            font-family: 'Source Serif Pro', serif;
+        }
+
+        header {
+            background: #1a3c34;
+            padding: 1rem 0;
+            color: white;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 600;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.8rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a3c34;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 0.6rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e6e6e6;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            font-family: 'Source Serif Pro';
+        }
+
+        button {
+            background: #1a3c34;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            color: white;
+            font-family: 'Montserrat';
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #244e44;
+        }
+
+        .topic-item {
+            background: #f1f3f5;
+            padding: 14px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .topic-item:hover {
+            background: #e6eaed;
+        }
+
+        .topic-title {
+            font-family: 'Montserrat';
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .topic-meta {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Thread view */
+        .thread-message {
+            background: #eef2f3;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .reply-box {
+            margin-top: 1rem;
+            padding-left: 15px;
+        }
+
+        .reply-thread {
+            margin-left: 20px;
+            margin-top: 10px;
+            border-left: 2px solid #d4af37;
+            padding-left: 12px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #0066cc;
+            cursor: pointer;
+            margin-right: 12px;
+        }
+
+        .action-btn.delete {
+            color: #d11a2a;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 1.2rem;
+        }
+
+        .pagination button {
+            margin: 0 4px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <span class="page-title"><i class="fas fa-comments"></i> Chat Center</span>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- Create New Chat Topic -->
+    <div class="card">
+        <h2><i class="fas fa-plus-circle"></i> New Chat Topic</h2>
+
+        <input type="text" id="topicTitle" placeholder="Topic Title (e.g., 'Mumbai Race - Final Thoughts')">
+
+        <textarea id="topicBody" placeholder="Write the first message for this topic..." style="min-height:120px;"></textarea>
+
+        <button onclick="createTopic()">
+            <i class="fas fa-paper-plane"></i> Create Topic
+        </button>
+    </div>
+
+    <!-- Topics List -->
+    <div class="card" id="topicsCard">
+        <h2><i class="fas fa-comments"></i> All Chat Topics</h2>
+        <div id="topicsList">Loading topics...</div>
+        <div class="pagination" id="pagination"></div>
+    </div>
+
+</div>
+
+
+<script>
+let topics = [];
+let currentPage = 1;
+const perPage = 10;
+
+// Load topics from KV
+async function loadTopics() {
+    const res = await fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/feedback/get-topics");
+    const data = await res.json();
+    topics = data.reverse();
+    renderTopics();
+}
+
+function paginate(arr) {
+    const start = (currentPage - 1) * perPage;
+    return arr.slice(start, start + perPage);
+}
+
+function renderPagination() {
+    const pages = Math.ceil(topics.length / perPage);
+    let html = "";
+    for (let i = 1; i <= pages; i++) {
+        html += `<button onclick="goToPage(${i})">${i}</button>`;
+    }
+    document.getElementById("pagination").innerHTML = html;
+}
+
+function goToPage(p) {
+    currentPage = p;
+    renderTopics();
+}
+
+function renderTopics() {
+    const list = document.getElementById("topicsList");
+    const pageItems = paginate(topics);
+
+    if (!pageItems.length) {
+        list.innerHTML = "<p>No topics yet. Start one above!</p>";
+        return;
+    }
+
+    list.innerHTML = pageItems.map(t => `
+        <div class="topic-item" onclick="openTopic('${t.id}')">
+            <div class="topic-title">${t.title}</div>
+            <div class="topic-meta">${t.messages.length} messages • ${t.createdAt}</div>
+        </div>
+    `).join("");
+
+    renderPagination();
+}
+
+async function createTopic() {
+    const title = document.getElementById("topicTitle").value.trim();
+    const body = document.getElementById("topicBody").value.trim();
+
+    if (!title || !body) {
+        alert("Both title and message are required.");
+        return;
+    }
+
+    const newTopic = {
+        id: Date.now().toString(),
+        title,
+        createdAt: new Date().toLocaleString(),
+        messages: [
+            {
+                id: Date.now().toString() + "-msg",
+                user: "Anonymous",
+                text: body,
+                date: new Date().toLocaleString(),
+                likes: 0,
+                replies: []
+            }
+        ]
+    };
+
+    topics.unshift(newTopic);
+
+    await fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/feedback/save-topics", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(topics)
+    });
+
+    document.getElementById("topicTitle").value = "";
+    document.getElementById("topicBody").value = "";
+
+    renderTopics();
+}
+
+function openTopic(id) {
+    window.location.href = `chatcenter_thread.html?topic=${id}`;
+}
+
+loadTopics();
+</script>
+
+</body>
+</html>
