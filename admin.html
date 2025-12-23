@@ -1044,243 +1044,553 @@
     <div class="toast" id="toast"></div>
 
     <script>
-/* ---------------------------------------------------
-   GLOBAL STATE
---------------------------------------------------- */
-let raceAnalyses = {};
-const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
-
-/* ---------------------------------------------------
-   ADMIN ELEMENTS (Real IDs from admin.html)
---------------------------------------------------- */
-const adminPanel   = document.getElementById("adminPanel");
-const hideAdminBtn = document.getElementById("hideAdminBtn");
-
-const adminVenue   = document.getElementById("adminVenue");
-const adminDate    = document.getElementById("adminDate");
-const adminRaceNo  = document.getElementById("adminRaceNo");
-const adminAnalysis= document.getElementById("adminAnalysis");
-
-const saveBtn      = document.getElementById("saveBtn");
-const updateBtn    = document.getElementById("updateBtn");
-const deleteBtn    = document.getElementById("deleteBtn");
-const clearBtn     = document.getElementById("clearBtn");
-const toast        = document.getElementById("toast");
-
-/* Dropdowns + viewer */
-const venueSelect  = document.getElementById("venueSelect");
-const dateSelect   = document.getElementById("dateSelect");
-const raceSelect   = document.getElementById("raceSelect");
-
-const analysisTitle   = document.getElementById("analysisTitle");
-const analysisContent = document.getElementById("analysisContent");
-const raceInfo        = document.getElementById("raceInfo");
-const selectedVenue   = document.getElementById("selectedVenue");
-const selectedDate    = document.getElementById("selectedDate");
-const selectedRace    = document.getElementById("selectedRace");
-
-/* ---------------------------------------------------
-   TOAST FUNCTION
---------------------------------------------------- */
-function showToast(msg) {
-    toast.textContent = msg;
-    toast.style.display = "block";
-    setTimeout(() => (toast.style.display = "none"), 2000);
-}
-
-/* ---------------------------------------------------
-   LOAD ALL FROM KV
---------------------------------------------------- */
-async function loadFromKV() {
-    try {
-        const res = await fetch(workerBase + "/get-all", { cache: "no-store" });
-        raceAnalyses = await res.json();
-
-        populateAdminDropdowns();
-        populateViewDropdowns();
-        updateCalendar();
-        updateUpcoming();
-    } catch (e) {
-        console.error("KV load failed:", e);
-    }
-}
-
-/* ---------------------------------------------------
-   POPULATE ADMIN PANEL DROPDOWNS
---------------------------------------------------- */
-function populateAdminDropdowns() {
-    const keys = Object.keys(raceAnalyses).sort();
-
-    adminRaceNo.innerHTML = `<option value="">Select</option>`;
-    keys.forEach(k => {
-        adminRaceNo.innerHTML += `<option value="${k}">${k}</option>`;
-    });
-
-    updateBtn.disabled = true;
-    deleteBtn.disabled = true;
-}
-
-/* ---------------------------------------------------
-   POPULATE MAIN VIEW DROPDOWNS
---------------------------------------------------- */
-function populateViewDropdowns() {
-    const venues = [...new Set(Object.values(raceAnalyses).map(a => a.venue))].sort();
-    const dates  = [...new Set(Object.values(raceAnalyses).map(a => a.date))].sort();
-
-    venueSelect.innerHTML = `<option value="">Select Venue</option>` + venues.map(v => `<option value="${v}">${v}</option>`).join("");
-    dateSelect.innerHTML  = `<option value="">Select Date</option>` + dates.map(v => `<option value="${v}">${v}</option>`).join("");
-
-    raceSelect.innerHTML = `<option value="">Select Race</option>`;
-}
-
-/* ---------------------------------------------------
-   ADMIN: LOAD SELECTED TO FORM
---------------------------------------------------- */
-adminRaceNo.addEventListener("change", () => {
-    const key = adminRaceNo.value;
-    if (!key) return;
-
-    const rec = raceAnalyses[key];
-    if (!rec) return;
-
-    adminVenue.value = rec.venue;
-    adminDate.value  = rec.date;
-    adminRaceNo.value = key;
-    adminAnalysis.value = rec.analysis;
-
-    updateBtn.disabled = false;
-    deleteBtn.disabled = false;
-    saveBtn.disabled = true;
-});
-
-/* ---------------------------------------------------
-   SAVE TO KV
---------------------------------------------------- */
-async function saveToKV(isUpdate = false) {
-    const venue = adminVenue.value.trim();
-    const date  = adminDate.value.trim();
-    const race  = adminRaceNo.value.trim();
-    const analysis = adminAnalysis.value.trim();
-
-    if (!venue || !date || !race || !analysis) {
-        showToast("Fill all fields!");
-        return;
-    }
-
-    const key = race;   // raceNo is the unique key
-    const payload = { key, data: { venue, date, raceNo: race, analysis }};
-
-    await fetch(workerBase + "/save", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-    });
-
-    await loadFromKV();
-
-    showToast(isUpdate ? "Updated!" : "Saved!");
-    saveBtn.disabled = false;
-}
-
-/* SAVE NEW */
-saveBtn.addEventListener("click", () => saveToKV(false));
-
-/* UPDATE */
-updateBtn.addEventListener("click", () => {
-    if (!adminRaceNo.value) return showToast("Select a record first.");
-    saveToKV(true);
-});
-
-/* DELETE */
-deleteBtn.addEventListener("click", async () => {
-    const key = adminRaceNo.value;
-    if (!key) return;
-
-    await fetch(workerBase + "/delete", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ key })
-    });
-
-    await loadFromKV();
-    showToast("Deleted!");
-
-    adminVenue.value = "";
-    adminDate.value  = "";
-    adminRaceNo.value = "";
-    adminAnalysis.value = "";
-    saveBtn.disabled = false;
-});
-
-/* CLEAR FORM */
-clearBtn.addEventListener("click", () => {
-    adminVenue.value = "";
-    adminDate.value  = "";
-    adminRaceNo.value = "";
-    adminAnalysis.value = "";
-    saveBtn.disabled = false;
-    updateBtn.disabled = true;
-    deleteBtn.disabled = true;
-});
-
-/* ---------------------------------------------------
-   MAIN VIEW — CHANGE HANDLERS
---------------------------------------------------- */
-venueSelect.addEventListener("change", () => {
-    const selectedVenueVal = venueSelect.value;
-    const dates = [...new Set(Object.values(raceAnalyses)
-                .filter(a => a.venue === selectedVenueVal)
-                .map(a => a.date))]
-                .sort();
-
-    dateSelect.innerHTML = `<option value="">Select Date</option>` +
-        dates.map(d => `<option value="${d}">${d}</option>`).join("");
-
-    raceSelect.innerHTML = `<option value="">Select Race</option>`;
-    analysisContent.innerHTML = `<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race to view analysis</p></div>`;
-});
-
-dateSelect.addEventListener("change", () => {
-    const v = venueSelect.value;
-    const d = dateSelect.value;
-
-    const keys = Object.keys(raceAnalyses)
-                .filter(k => raceAnalyses[k].venue === v && raceAnalyses[k].date === d)
-                .sort();
-
-    raceSelect.innerHTML = `<option value="">Select Race</option>` +
-        keys.map(k => `<option value="${k}">${k}</option>`).join("");
-
-    analysisContent.innerHTML = `<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race to view analysis</p></div>`;
-});
-
-/* VIEW ANALYSIS */
-raceSelect.addEventListener("change", () => {
-    const key = raceSelect.value;
-    const rec = raceAnalyses[key];
-
-    if (!rec) return;
-
-    selectedVenue.textContent = rec.venue;
-    selectedDate.textContent  = rec.date;
-    selectedRace.textContent  = key;
-    raceInfo.style.display = "flex";
-
-    analysisContent.textContent = rec.analysis;
-});
-
-/* ---------------------------------------------------
-   HIDE ADMIN BUTTON
---------------------------------------------------- */
-hideAdminBtn.addEventListener("click", () => {
-    window.location.href = "/";
-});
-
-
-/* ---------------------------------------------------
-   LOAD ON STARTUP
---------------------------------------------------- */
-document.addEventListener("DOMContentLoaded", loadFromKV);
-</script>
+        /* ---------------------------------------------------
+           GLOBAL STATE
+        --------------------------------------------------- */
+        let raceAnalyses = {};
+        const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
+        
+        /* ---------------------------------------------------
+           ADMIN ELEMENTS
+        --------------------------------------------------- */
+        const adminPanel   = document.getElementById("adminPanel");
+        const hideAdminBtn = document.getElementById("hideAdminBtn");
+        const adminVenue   = document.getElementById("adminVenue");
+        const adminDate    = document.getElementById("adminDate");
+        const adminRaceNo  = document.getElementById("adminRaceNo");
+        const adminAnalysis= document.getElementById("adminAnalysis");
+        const saveBtn      = document.getElementById("saveBtn");
+        const updateBtn    = document.getElementById("updateBtn");
+        const deleteBtn    = document.getElementById("deleteBtn");
+        const clearBtn     = document.getElementById("clearBtn");
+        const toast        = document.getElementById("toast");
+        
+        /* Dropdowns + viewer */
+        const venueSelect  = document.getElementById("venueSelect");
+        const dateSelect   = document.getElementById("dateSelect");
+        const raceSelect   = document.getElementById("raceSelect");
+        const analysisTitle   = document.getElementById("analysisTitle");
+        const analysisContent = document.getElementById("analysisContent");
+        const raceInfo        = document.getElementById("raceInfo");
+        const selectedVenue   = document.getElementById("selectedVenue");
+        const selectedDate    = document.getElementById("selectedDate");
+        const selectedRace    = document.getElementById("selectedRace");
+        
+        // Today's date for default
+        const today = new Date().toISOString().split('T')[0];
+        adminDate.value = today;
+        
+        /* ---------------------------------------------------
+           HELPER FUNCTIONS
+        --------------------------------------------------- */
+        function showToast(message, type = 'success') {
+            toast.textContent = message;
+            toast.style.background = type === 'success' ? '#28a745' : 
+                                   type === 'error' ? '#dc3545' : 
+                                   type === 'info' ? '#17a2b8' : '#28a745';
+            toast.style.display = "block";
+            setTimeout(() => (toast.style.display = "none"), 3000);
+        }
+        
+        function generateKey(venue, date, raceNo) {
+            return `${venue}-${date}-${raceNo}`;
+        }
+        
+        function updateAdminDropdown(key) {
+            if (!key || !raceAnalyses[key]) return;
+            
+            const analysis = raceAnalyses[key];
+            adminVenue.value = analysis.venue;
+            adminDate.value = analysis.date;
+            adminRaceNo.value = analysis.raceNo;
+            adminAnalysis.value = analysis.analysis;
+        }
+        
+        /* ---------------------------------------------------
+           LOAD ALL FROM KV
+        --------------------------------------------------- */
+        async function loadFromKV() {
+            try {
+                console.log("Loading data from KV...");
+                const res = await fetch(workerBase + "/get-all", { 
+                    cache: "no-store",
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (!res.ok) {
+                    throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+                }
+                
+                const data = await res.json();
+                console.log("Data loaded:", data);
+                
+                if (data && typeof data === 'object') {
+                    raceAnalyses = data;
+                } else {
+                    raceAnalyses = {};
+                    console.warn("No data returned from KV");
+                }
+                
+                // Update UI
+                initializeDropdowns();
+                createCalendar();
+                
+                // Show success message
+                showToast('Data loaded successfully', 'success');
+                
+            } catch (e) {
+                console.error("KV load failed:", e);
+                showToast('Failed to load data: ' + e.message, 'error');
+            }
+        }
+        
+        /* ---------------------------------------------------
+           SAVE TO KV
+        --------------------------------------------------- */
+        async function saveToKV(key, data) {
+            try {
+                console.log("Saving to KV:", { key, data });
+                
+                const response = await fetch(workerBase + "/save", {
+                    method: "POST",
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({ key, data })
+                });
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Save failed: ${response.status} - ${errorText}`);
+                }
+                
+                const result = await response.json();
+                console.log("Save result:", result);
+                
+                return { success: true, result };
+                
+            } catch (error) {
+                console.error("Save error:", error);
+                return { success: false, error: error.message };
+            }
+        }
+        
+        /* ---------------------------------------------------
+           DELETE FROM KV
+        --------------------------------------------------- */
+        async function deleteFromKV(key) {
+            try {
+                console.log("Deleting from KV:", key);
+                
+                const response = await fetch(workerBase + "/delete", {
+                    method: "POST",
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({ key })
+                });
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Delete failed: ${response.status} - ${errorText}`);
+                }
+                
+                const result = await response.json();
+                console.log("Delete result:", result);
+                
+                return { success: true, result };
+                
+            } catch (error) {
+                console.error("Delete error:", error);
+                return { success: false, error: error.message };
+            }
+        }
+        
+        /* ---------------------------------------------------
+           DROPDOWN MANAGEMENT
+        --------------------------------------------------- */
+        function initializeDropdowns() {
+            // Extract unique venues
+            const venues = [...new Set(Object.values(raceAnalyses).map(a => a.venue))];
+            venueSelect.innerHTML = '<option value="">Select Venue</option>' + 
+                venues.map(v => `<option value="${v}">${v}</option>`).join('');
+            
+            updateDateDropdown();
+            updateRaceDropdown();
+        }
+        
+        function updateDateDropdown() {
+            const selectedVenueVal = venueSelect.value;
+            let dates = [];
+            
+            if (selectedVenueVal) {
+                dates = [...new Set(Object.values(raceAnalyses)
+                    .filter(a => a.venue === selectedVenueVal)
+                    .map(a => a.date)
+                    .sort((a, b) => b.localeCompare(a)))]; // Latest first
+            }
+            
+            dateSelect.innerHTML = '<option value="">Select Date</option>' + 
+                dates.map(d => {
+                    const dateObj = new Date(d);
+                    const formatted = dateObj.toLocaleDateString('en-IN', {
+                        day: '2-digit',
+                        month: 'short',
+                        year: 'numeric'
+                    });
+                    const isToday = d === today ? ' (Today)' : '';
+                    return `<option value="${d}">${formatted}${isToday}</option>`;
+                }).join('');
+            
+            // Auto-select latest date if venue selected
+            if (dates.length > 0 && !dateSelect.value) {
+                dateSelect.value = dates[0];
+                updateRaceDropdown();
+            } else if (!selectedVenueVal) {
+                dateSelect.innerHTML = '<option value="">Select Venue First</option>';
+            }
+            
+            updateRaceDropdown();
+        }
+        
+        function updateRaceDropdown() {
+            const selectedVenueVal = venueSelect.value;
+            const selectedDateVal = dateSelect.value;
+            let races = [];
+            
+            if (selectedVenueVal && selectedDateVal) {
+                races = Object.values(raceAnalyses)
+                    .filter(a => a.venue === selectedVenueVal && a.date === selectedDateVal)
+                    .map(a => ({ number: a.raceNo, key: generateKey(a.venue, a.date, a.raceNo) }))
+                    .sort((a, b) => parseInt(a.number) - parseInt(b.number));
+            }
+            
+            raceSelect.innerHTML = '<option value="">Select Race</option>' + 
+                races.map(r => `<option value="${r.key}">Race ${r.number}</option>`).join('');
+            
+            // Auto-select first race if available
+            if (races.length > 0 && !raceSelect.value) {
+                raceSelect.value = races[0].key;
+                displayAnalysis(races[0].key);
+            } else if (!selectedVenueVal || !selectedDateVal) {
+                raceSelect.innerHTML = '<option value="">Select Venue and Date First</option>';
+                clearAnalysis();
+            }
+        }
+        
+        function displayAnalysis(key) {
+            if (!key || !raceAnalyses[key]) {
+                analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-exclamation-circle"></i><p>No analysis found for selected race</p></div>';
+                analysisTitle.textContent = 'Race Analysis';
+                raceInfo.style.display = 'none';
+                return;
+            }
+            
+            const analysis = raceAnalyses[key];
+            
+            // Format analysis text
+            let formattedAnalysis = analysis.analysis
+                .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/====+/g, '<hr>')
+                .replace(/\n/g, '<br>');
+            
+            // Add line breaks for list items
+            formattedAnalysis = formattedAnalysis.replace(/^- /g, '<br>- ');
+            
+            analysisContent.innerHTML = formattedAnalysis;
+            analysisTitle.textContent = `${analysis.venue} - Race ${analysis.raceNo} Analysis`;
+            
+            // Update race info
+            const dateObj = new Date(analysis.date);
+            const formattedDate = dateObj.toLocaleDateString('en-IN', {
+                weekday: 'long',
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+            });
+            
+            selectedVenue.textContent = analysis.venue;
+            selectedDate.textContent = formattedDate;
+            selectedRace.textContent = `Race ${analysis.raceNo}`;
+            raceInfo.style.display = 'flex';
+            
+            // Update admin form with current selection
+            updateAdminDropdown(key);
+        }
+        
+        function clearAnalysis() {
+            analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race from the dropdowns above to view detailed analysis</p></div>';
+            analysisTitle.textContent = 'Race Analysis';
+            raceInfo.style.display = 'none';
+        }
+        
+        /* ---------------------------------------------------
+           EVENT HANDLERS
+        --------------------------------------------------- */
+        // Save button - CREATE NEW
+        saveBtn.addEventListener('click', async function() {
+            const venue = adminVenue.value.trim();
+            const date = adminDate.value;
+            const raceNo = adminRaceNo.value.trim();
+            const analysis = adminAnalysis.value.trim();
+            
+            if (!venue || !date || !raceNo || !analysis) {
+                showToast('Please fill all fields', 'error');
+                return;
+            }
+            
+            const key = generateKey(venue, date, raceNo);
+            const data = { venue, date, raceNo, analysis };
+            
+            // Check if already exists
+            if (raceAnalyses[key]) {
+                if (!confirm('Analysis already exists for this race. Update?')) {
+                    return;
+                }
+            }
+            
+            // Save to KV
+            const result = await saveToKV(key, data);
+            
+            if (result.success) {
+                // Update local state
+                raceAnalyses[key] = data;
+                
+                showToast('Analysis saved successfully!', 'success');
+                
+                // Refresh dropdowns
+                initializeDropdowns();
+                
+                // Select the newly added race
+                venueSelect.value = venue;
+                updateDateDropdown();
+                raceSelect.value = key;
+                displayAnalysis(key);
+            } else {
+                showToast('Failed to save: ' + result.error, 'error');
+            }
+        });
+        
+        // Update button - UPDATE EXISTING
+        updateBtn.addEventListener('click', async function() {
+            const selectedKey = raceSelect.value;
+            if (!selectedKey || !raceAnalyses[selectedKey]) {
+                showToast('No race selected to update', 'error');
+                return;
+            }
+            
+            const venue = adminVenue.value.trim();
+            const date = adminDate.value;
+            const raceNo = adminRaceNo.value.trim();
+            const analysis = adminAnalysis.value.trim();
+            
+            if (!venue || !date || !raceNo || !analysis) {
+                showToast('Please fill all fields', 'error');
+                return;
+            }
+            
+            const newKey = generateKey(venue, date, raceNo);
+            const data = { venue, date, raceNo, analysis };
+            
+            // Save to KV first
+            const result = await saveToKV(newKey, data);
+            
+            if (result.success) {
+                // Update local state
+                // If key changed, delete old entry
+                if (selectedKey !== newKey) {
+                    await deleteFromKV(selectedKey);
+                    delete raceAnalyses[selectedKey];
+                }
+                
+                raceAnalyses[newKey] = data;
+                
+                showToast('Analysis updated successfully!', 'success');
+                
+                // Refresh and select updated race
+                initializeDropdowns();
+                raceSelect.value = newKey;
+                displayAnalysis(newKey);
+            } else {
+                showToast('Failed to update: ' + result.error, 'error');
+            }
+        });
+        
+        // Delete button
+        deleteBtn.addEventListener('click', async function() {
+            const selectedKey = raceSelect.value;
+            if (!selectedKey || !raceAnalyses[selectedKey]) {
+                showToast('No race selected to delete', 'error');
+                return;
+            }
+            
+            if (confirm('Are you sure you want to delete this analysis?')) {
+                // Delete from KV
+                const result = await deleteFromKV(selectedKey);
+                
+                if (result.success) {
+                    // Update local state
+                    delete raceAnalyses[selectedKey];
+                    
+                    showToast('Analysis deleted successfully!', 'success');
+                    
+                    // Refresh dropdowns
+                    initializeDropdowns();
+                    clearAnalysis();
+                } else {
+                    showToast('Failed to delete: ' + result.error, 'error');
+                }
+            }
+        });
+        
+        // Clear button
+        clearBtn.addEventListener('click', function() {
+            adminVenue.value = '';
+            adminDate.value = today;
+            adminRaceNo.value = '';
+            adminAnalysis.value = '';
+            showToast('Form cleared', 'info');
+        });
+        
+        // Hide admin button
+        hideAdminBtn.addEventListener('click', function() {
+            window.location.href = '/';
+        });
+        
+        // Dropdown event listeners
+        venueSelect.addEventListener('change', updateDateDropdown);
+        dateSelect.addEventListener('change', updateRaceDropdown);
+        raceSelect.addEventListener('change', function() {
+            if (this.value) {
+                displayAnalysis(this.value);
+            } else {
+                clearAnalysis();
+            }
+        });
+        
+        /* ---------------------------------------------------
+           CALENDAR & SIDEBAR FUNCTIONS
+        --------------------------------------------------- */
+        function createCalendar() {
+            const today = new Date();
+            const currentMonth = today.getMonth();
+            const currentYear = today.getFullYear();
+            
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                               "July", "August", "September", "October", "November", "December"];
+            
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            
+            let calendarHTML = `
+                <div class="calendar-header">
+                    <h4>${monthNames[currentMonth]} ${currentYear}</h4>
+                </div>
+                <div class="calendar-grid">
+                    <div class="calendar-day-header">S</div>
+                    <div class="calendar-day-header">M</div>
+                    <div class="calendar-day-header">T</div>
+                    <div class="calendar-day-header">W</div>
+                    <div class="calendar-day-header">T</div>
+                    <div class="calendar-day-header">F</div>
+                    <div class="calendar-day-header">S</div>
+            `;
+            
+            // Empty days before first day of month
+            for (let i = 0; i < firstDay; i++) {
+                calendarHTML += `<div class="calendar-day"></div>`;
+            }
+            
+            // Days of month
+            const raceDays = [5, 12, 19, 26, 30];
+            for (let day = 1; day <= daysInMonth; day++) {
+                const isToday = day === today.getDate() && currentMonth === today.getMonth();
+                const isRaceDay = raceDays.includes(day);
+                
+                let dayClass = 'calendar-day';
+                if (isToday) dayClass += ' today';
+                if (isRaceDay) dayClass += ' race-day';
+                
+                calendarHTML += `<div class="${dayClass}">${day}</div>`;
+            }
+            
+            calendarHTML += `</div>`;
+            calendarWidget.innerHTML = calendarHTML;
+        }
+        
+        // Animate Stats
+        function animateStats() {
+            const stats = {
+                winRate: { target: 72, current: 0 },
+                roi: { target: 48.3, current: 0 },
+                placeRate: { target: 91, current: 0 },
+                winners: { target: 28, current: 0 }
+            };
+            
+            const speed = 50;
+            
+            Object.keys(stats).forEach(statId => {
+                const element = document.getElementById(statId);
+                const stat = stats[statId];
+                const increment = stat.target / 20;
+                
+                const timer = setInterval(() => {
+                    stat.current += increment;
+                    if (stat.current >= stat.target) {
+                        stat.current = stat.target;
+                        clearInterval(timer);
+                    }
+                    
+                    if (statId === 'roi') {
+                        element.textContent = '+' + stat.current.toFixed(1);
+                    } else if (statId === 'winners') {
+                        element.textContent = Math.floor(stat.current);
+                    } else {
+                        element.textContent = Math.floor(stat.current) + '%';
+                    }
+                }, speed);
+            });
+        }
+        
+        /* ---------------------------------------------------
+           INITIALIZATION
+        --------------------------------------------------- */
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log("Admin page loading...");
+            
+            // Load data from KV
+            await loadFromKV();
+            
+            // Animate stats
+            animateStats();
+            
+            // Auto-select latest analysis if available
+            const allKeys = Object.keys(raceAnalyses);
+            if (allKeys.length > 0) {
+                // Sort by date (newest first)
+                allKeys.sort((a, b) => {
+                    const dateA = raceAnalyses[a].date;
+                    const dateB = raceAnalyses[b].date;
+                    return dateB.localeCompare(dateA);
+                });
+                
+                const latestKey = allKeys[0];
+                const latest = raceAnalyses[latestKey];
+                
+                venueSelect.value = latest.venue;
+                updateDateDropdown();
+                raceSelect.value = latestKey;
+                displayAnalysis(latestKey);
+            }
+            
+            console.log("Admin page loaded successfully");
+            });
+        </script>
 </body>
 </html>
