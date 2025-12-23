@@ -1508,15 +1508,40 @@
         document.addEventListener('DOMContentLoaded', async function() {
             // Load analyses from Cloudflare KV
             // Load analyses from Cloudflare KV
+            // Replace the loadFromKV function in your regular page with:
             async function loadFromKV() {
                 try {
-                    const response = await fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/get-all");
+                    const response = await fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/get-all", {
+                        headers: { 'Accept': 'application/json' },
+                        cache: 'no-store'
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: Failed to load from KV`);
+                    }
+                    
                     const data = await response.json();
-                    raceAnalyses = data || {};
-                } catch (e) {
-                    console.error("Failed to load data from KV");
+                    if (data && typeof data === 'object') {
+                        raceAnalyses = data;
+                        console.log(`Loaded ${Object.keys(data).length} analyses from Cloudflare KV`);
+                        return true;
+                    }
+                } catch (error) {
+                    console.error("Failed to load from KV:", error);
+                    // Show error to user
+                    analysisContent.innerHTML = `
+                        <div class="no-analysis">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>Unable to load data from server</p>
+                            <p style="font-size: 0.9rem; color: #dc3545;">Error: ${error.message}</p>
+                        </div>
+                    `;
+                    return false;
                 }
+                return false;
             }
+
+            // Remove all localStorage references from your regular page
             await loadFromKV();
             initializeDropdowns();
             createCalendar();
