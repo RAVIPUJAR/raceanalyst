@@ -486,7 +486,7 @@
             border-radius: 8px;
             padding: 2rem;
             margin-top: 2rem;
-            display: block;
+            display: none;
             grid-column: 1 / -1;
         }
         
@@ -1433,10 +1433,8 @@
         showToast('Form cleared', 'info');
     });
 
-    // Hide admin button
-    hideAdminBtn.addEventListener('click', function() {
-        window.location.href = '/';
-    });
+
+    // (Removed previous hideAdminBtn event listener that redirected to '/')
 
     // Dropdown events
     venueSelect.addEventListener('change', updateDateDropdown);
@@ -1605,3 +1603,15 @@
     </script>
 </body>
 </html>
+    // Admin panel show/hide logic
+    const adminMenuItem = document.querySelector('.admin-label span'); // Admin button in nav
+
+    // Show admin panel when clicking "Admin"
+    adminMenuItem.addEventListener('click', () => {
+        adminPanel.style.display = 'block';
+    });
+
+    // Hide admin panel when clicking "Hide Panel" button
+    hideAdminBtn.addEventListener('click', () => {
+        adminPanel.style.display = 'none';
+    });
