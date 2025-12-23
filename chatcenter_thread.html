@@ -1,273 +1,201 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Thread | RaceAnalyst</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+import { getAnalysis, saveAnalysis, deleteAnalysis } from "./analysis.js";
 
-    <style>
-        body {
-            margin: 0;
-            background: #f7f8fa;
-            font-family: 'Source Serif Pro', serif;
-        }
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    const kv = env.MY_KV_NAMESPACE;
 
-        header {
-            background: #1a3c34;
-            padding: 1rem 0;
-            color: white;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 0 20px;
-        }
-
-        .page-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.7rem;
-            font-weight: 600;
-        }
-
-        .card {
-            background: #ffffff;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-top: 1.8rem;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        }
-
-        .message-box {
-            background: #eef2f3;
-            padding: 14px;
-            border-radius: 6px;
-            margin-bottom: 12px;
-        }
-
-        .meta {
-            font-size: 0.85rem;
-            color: #666;
-        }
-
-        .msg-actions {
-            margin-top: 8px;
-        }
-
-        .action-btn {
-            background: none;
-            border: none;
-            color: #0066cc;
-            cursor: pointer;
-            margin-right: 12px;
-        }
-
-        .action-btn.delete {
-            color: #c62828;
-        }
-
-        .reply-thread {
-            margin-left: 20px;
-            border-left: 2px solid #d4af37;
-            padding-left: 12px;
-            margin-top: 10px;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e6e6e6;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-            font-family: 'Source Serif Pro';
-        }
-
-        button {
-            background: #1a3c34;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 6px;
-            color: white;
-            font-family: 'Montserrat';
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #244e44;
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    <div class="container">
-        <span class="page-title"><i class="fas fa-comment-dots"></i> Chat Thread</span>
-    </div>
-</header>
-
-<div class="container">
-    <div class="card">
-        <h2 id="topicTitle">Loading topic...</h2>
-        <div id="messagesList">Loading messages...</div>
-
-        <h3 style="margin-top:2rem;">Add a Reply</h3>
-        <textarea id="replyText" placeholder="Write your reply..." style="min-height:120px;"></textarea>
-        <button onclick="submitReply()">Reply</button>
-    </div>
-</div>
-
-<script>
-let topicId = new URLSearchParams(window.location.search).get("topic");
-let allTopics = [];
-let currentTopic = null;
-
-// Load topics from KV
-async function loadTopic() {
-    const res = await fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/feedback/get-topics");
-    const data = await res.json();
-    allTopics = data;
-
-    currentTopic = allTopics.find(t => t.id === topicId);
-
-    if (!currentTopic) {
-        document.getElementById("topicTitle").innerHTML = "Topic not found";
-        return;
+    // Handle OPTIONS requests first
+    if (request.method === "OPTIONS") {
+      return handleCors(request);
     }
 
-    document.getElementById("topicTitle").innerHTML = currentTopic.title;
-
-    renderMessages();
-}
-
-// Render thread messages
-function renderMessages() {
-    const list = document.getElementById("messagesList");
-
-    list.innerHTML = currentTopic.messages
-        .map(msg => renderMessage(msg))
-        .join("");
-}
-
-// Render single message including nested replies
-function renderMessage(msg) {
-    return `
-        <div class="message-box">
-            <strong>${msg.user}</strong>
-            <p>${msg.text}</p>
-            <span class="meta">${msg.date}</span>
-
-            <div class="msg-actions">
-                <button class="action-btn" onclick="likeMessage('${msg.id}')">👍 ${msg.likes}</button>
-                <button class="action-btn" onclick="showReplyBox('${msg.id}')">Reply</button>
-                <button class="action-btn delete" onclick="deleteMessage('${msg.id}')">Delete</button>
-            </div>
-
-            <div id="replyBox-${msg.id}" style="display:none; margin-top:10px;">
-                <textarea id="replyInput-${msg.id}" placeholder="Write reply..." style="min-height:80px;"></textarea>
-                <button onclick="submitNestedReply('${msg.id}')">Submit Reply</button>
-            </div>
-
-            <div class="reply-thread">
-                ${(msg.replies || []).map(r => renderMessage(r)).join("")}
-            </div>
-        </div>
-    `;
-}
-
-// Like a message
-async function likeMessage(id) {
-    let msg = findMessage(currentTopic.messages, id);
-    if (msg) {
-        msg.likes++;
-        await saveTopics();
-        renderMessages();
+    // ---- EXISTING ANALYSIS ENDPOINTS ----
+    if (url.pathname === "/analysis/get" && request.method === "GET") {
+      const data = await getAnalysis(kv);
+      return cors(
+        new Response(JSON.stringify(data), { 
+          headers: { "Content-Type": "application/json" } 
+        }),
+        request
+      );
     }
-}
 
-// Delete a message
-async function deleteMessage(id) {
-    currentTopic.messages = removeMessage(currentTopic.messages, id);
-    await saveTopics();
-    renderMessages();
-}
+    if (url.pathname === "/analysis/save" && request.method === "POST") {
+      const body = await request.json();
+      await saveAnalysis(kv, body);
+      return cors(
+        new Response(JSON.stringify({ status: "ok" }), { 
+          headers: { "Content-Type": "application/json" } 
+        }),
+        request
+      );
+    }
 
-function removeMessage(arr, id) {
-    return arr.filter(m => {
-        if (m.id === id) return false;
-        if (m.replies) m.replies = removeMessage(m.replies, id);
-        return true;
-    });
-}
+    if (url.pathname === "/analysis/delete" && request.method === "POST") {
+      const body = await request.json();
+      await deleteAnalysis(kv, body.id);
+      return cors(
+        new Response(JSON.stringify({ status: "deleted" }), { 
+          headers: { "Content-Type": "application/json" } 
+        }),
+        request
+      );
+    }
 
-function findMessage(arr, id) {
-    for (let m of arr) {
-        if (m.id === id) return m;
-        if (m.replies) {
-            let found = findMessage(m.replies, id);
-            if (found) return found;
+    // ---- GET ALL CHAT TOPICS ----
+    if (url.pathname === "/feedback/get-topics" && request.method === "GET") {
+      const data = await kv.get("chat_topics", "json");
+      return cors(
+        new Response(JSON.stringify(data || []), { 
+          headers: { "Content-Type": "application/json" } 
+        }),
+        request
+      );
+    }
+
+    // ---- SAVE / UPDATE CHAT TOPICS ----
+    if (url.pathname === "/feedback/save-topics" && request.method === "POST") {
+      const body = await request.json();
+      await kv.put("chat_topics", JSON.stringify(body));
+      return cors(
+        new Response(JSON.stringify({ status: "ok" }), { 
+          headers: { "Content-Type": "application/json" } 
+        }),
+        request
+      );
+    }
+
+    // ---- SAVE CHAT MESSAGES ----
+    if (url.pathname === "/chat/save" && request.method === "POST") {
+      const body = await request.json();
+      const { topicId, messages } = body;
+      
+      if (!topicId || !messages) {
+        return cors(
+          new Response(JSON.stringify({ error: "Missing topicId or messages" }), { 
+            status: 400,
+            headers: { "Content-Type": "application/json" } 
+          }),
+          request
+        );
+      }
+      
+      // Save messages for this topic
+      await kv.put(`chat_${topicId}`, JSON.stringify(messages));
+      
+      return cors(
+        new Response(JSON.stringify({ status: "ok" }), { 
+          headers: { "Content-Type": "application/json" } 
+        }),
+        request
+      );
+    }
+
+    // ---- GET CHAT MESSAGES FOR A TOPIC ----
+    if (url.pathname === "/chat/get" && request.method === "GET") {
+      const topicId = url.searchParams.get("topicId");
+      
+      if (!topicId) {
+        return cors(
+          new Response(JSON.stringify({ error: "Missing topicId" }), { 
+            status: 400,
+            headers: { "Content-Type": "application/json" } 
+          }),
+          request
+        );
+      }
+      
+      const messages = await kv.get(`chat_${topicId}`, "json");
+      
+      return cors(
+        new Response(JSON.stringify(messages || []), { 
+          headers: { "Content-Type": "application/json" } 
+        }),
+        request
+      );
+    }
+
+    // ---- DELETE CHAT MESSAGES FOR A TOPIC ----
+    if (url.pathname === "/chat/delete" && request.method === "POST") {
+      const body = await request.json();
+      const { topicId } = body;
+      
+      if (!topicId) {
+        return cors(
+          new Response(JSON.stringify({ error: "Missing topicId" }), { 
+            status: 400,
+            headers: { "Content-Type": "application/json" } 
+          }),
+          request
+        );
+      }
+      
+      await kv.delete(`chat_${topicId}`);
+      
+      return cors(
+        new Response(JSON.stringify({ status: "deleted" }), { 
+          headers: { "Content-Type": "application/json" } 
+        }),
+        request
+      );
+    }
+
+    // ---- GET ALL CHATS (for listing) ----
+    if (url.pathname === "/chat/list" && request.method === "GET") {
+      // Note: KV doesn't support listing keys by prefix in the same way
+      // You might need to maintain a separate list of chat topics
+      const topics = await kv.get("chat_topics", "json") || [];
+      const chats = [];
+      
+      // For each topic, get the last message or metadata
+      for (const topic of topics) {
+        const messages = await kv.get(`chat_${topic.id}`, "json") || [];
+        if (messages.length > 0) {
+          chats.push({
+            topicId: topic.id,
+            topicName: topic.name,
+            lastMessage: messages[messages.length - 1],
+            messageCount: messages.length,
+            lastUpdated: new Date().toISOString() // You should store this timestamp
+          });
         }
+      }
+      
+      return cors(
+        new Response(JSON.stringify(chats), { 
+          headers: { "Content-Type": "application/json" } 
+        }),
+        request
+      );
     }
-    return null;
+
+    return new Response("Not found", { status: 404 });
+  }
+};
+
+function handleCors(request) {
+  return new Response(null, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    }
+  });
 }
 
-// Show reply input
-function showReplyBox(id) {
-    document.getElementById("replyBox-" + id).style.display = "block";
+function cors(response, request) {
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+  
+  // Clone response and add CORS headers
+  const newResponse = new Response(response.body, response);
+  for (const [key, value] of Object.entries(headers)) {
+    newResponse.headers.set(key, value);
+  }
+  
+  return newResponse;
 }
-
-// Submit nested reply
-async function submitNestedReply(parentId) {
-    const box = document.getElementById("replyInput-" + parentId);
-    const text = box.value.trim();
-    if (!text) return alert("Reply cannot be empty.");
-
-    let parent = findMessage(currentTopic.messages, parentId);
-    parent.replies.push({
-        id: Date.now().toString(),
-        user: "Anonymous",
-        text,
-        date: new Date().toLocaleString(),
-        likes: 0,
-        replies: []
-    });
-
-    box.value = "";
-    await saveTopics();
-    renderMessages();
-}
-
-// Main reply for the thread
-async function submitReply() {
-    const text = document.getElementById("replyText").value.trim();
-    if (!text) return alert("Reply cannot be empty.");
-
-    currentTopic.messages.push({
-        id: Date.now().toString(),
-        user: "Anonymous",
-        text,
-        date: new Date().toLocaleString(),
-        likes: 0,
-        replies: []
-    });
-
-    document.getElementById("replyText").value = "";
-    await saveTopics();
-    renderMessages();
-}
-
-// Save to KV
-async function saveTopics() {
-    await fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/feedback/save-topics", {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(allTopics)
-    });
-}
-
-loadTopic();
-</script>
-
-</body>
-</html>
