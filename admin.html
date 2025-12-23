@@ -1045,40 +1045,96 @@
 
     <script>
     /* ---------------------------------------------------
-       GLOBAL STATE
+       CONFIGURATION
     --------------------------------------------------- */
     let raceAnalyses = {};
     const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
+    let useKV = true; // We'll test this first
+    const today = new Date().toISOString().split('T')[0];
     
     /* ---------------------------------------------------
-       ADMIN ELEMENTS
+       DOM ELEMENTS
     --------------------------------------------------- */
-    const adminPanel   = document.getElementById("adminPanel");
+    const adminPanel = document.getElementById("adminPanel");
     const hideAdminBtn = document.getElementById("hideAdminBtn");
-    const adminVenue   = document.getElementById("adminVenue");
-    const adminDate    = document.getElementById("adminDate");
-    const adminRaceNo  = document.getElementById("adminRaceNo");
-    const adminAnalysis= document.getElementById("adminAnalysis");
-    const saveBtn      = document.getElementById("saveBtn");
-    const updateBtn    = document.getElementById("updateBtn");
-    const deleteBtn    = document.getElementById("deleteBtn");
-    const clearBtn     = document.getElementById("clearBtn");
-    const toast        = document.getElementById("toast");
+    const adminVenue = document.getElementById("adminVenue");
+    const adminDate = document.getElementById("adminDate");
+    const adminRaceNo = document.getElementById("adminRaceNo");
+    const adminAnalysis = document.getElementById("adminAnalysis");
+    const saveBtn = document.getElementById("saveBtn");
+    const updateBtn = document.getElementById("updateBtn");
+    const deleteBtn = document.getElementById("deleteBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const toast = document.getElementById("toast");
     
-    /* Dropdowns + viewer */
-    const venueSelect  = document.getElementById("venueSelect");
-    const dateSelect   = document.getElementById("dateSelect");
-    const raceSelect   = document.getElementById("raceSelect");
-    const analysisTitle   = document.getElementById("analysisTitle");
+    const venueSelect = document.getElementById("venueSelect");
+    const dateSelect = document.getElementById("dateSelect");
+    const raceSelect = document.getElementById("raceSelect");
+    const analysisTitle = document.getElementById("analysisTitle");
     const analysisContent = document.getElementById("analysisContent");
-    const raceInfo        = document.getElementById("raceInfo");
-    const selectedVenue   = document.getElementById("selectedVenue");
-    const selectedDate    = document.getElementById("selectedDate");
-    const selectedRace    = document.getElementById("selectedRace");
+    const raceInfo = document.getElementById("raceInfo");
+    const selectedVenue = document.getElementById("selectedVenue");
+    const selectedDate = document.getElementById("selectedDate");
+    const selectedRace = document.getElementById("selectedRace");
+    const calendarWidget = document.getElementById("calendarWidget");
     
-    // Today's date for default
-    const today = new Date().toISOString().split('T')[0];
+    // Set today's date
     adminDate.value = today;
+    
+    /* ---------------------------------------------------
+       DEBUG & TESTING FUNCTIONS
+    --------------------------------------------------- */
+    async function debugWorkerConnection() {
+        console.group("🔍 Cloudflare Worker Debug");
+        
+        // Test 1: Basic GET request to root
+        console.log("Testing Worker at:", workerBase);
+        
+        try {
+            const response = await fetch(workerBase, {
+                method: 'GET',
+                headers: { 'Accept': 'application/json' }
+            });
+            
+            console.log("Root response status:", response.status);
+            console.log("Root response headers:", Object.fromEntries(response.headers.entries()));
+            
+            const rootText = await response.text();
+            console.log("Root response text:", rootText);
+            
+            // Test 2: Try /get-all endpoint
+            console.log("\nTesting /get-all endpoint...");
+            const getAllResponse = await fetch(workerBase + "/get-all", {
+                method: 'GET',
+                headers: { 'Accept': 'application/json' }
+            });
+            
+            console.log("/get-all status:", getAllResponse.status);
+            console.log("/get-all headers:", Object.fromEntries(getAllResponse.headers.entries()));
+            
+            if (getAllResponse.ok) {
+                const data = await getAllResponse.json();
+                console.log("/get-all data:", data);
+                console.log("Number of items:", Object.keys(data).length);
+                
+                if (Object.keys(data).length === 0) {
+                    console.warn("⚠ KV store appears to be empty");
+                }
+                
+                return { success: true, data };
+            } else {
+                const errorText = await getAllResponse.text();
+                console.error("/get-all error:", errorText);
+                return { success: false, error: `HTTP ${getAllResponse.status}: ${errorText}` };
+            }
+            
+        } catch (error) {
+            console.error("Network error:", error);
+            return { success: false, error: error.message };
+        } finally {
+            console.groupEnd();
+        }
+    }
     
     /* ---------------------------------------------------
        HELPER FUNCTIONS
@@ -1096,63 +1152,48 @@
         return `${venue}-${date}-${raceNo}`;
     }
     
-    function updateAdminDropdown(key) {
-        if (!key || !raceAnalyses[key]) return;
-        
-        const analysis = raceAnalyses[key];
-        adminVenue.value = analysis.venue;
-        adminDate.value = analysis.date;
-        adminRaceNo.value = analysis.raceNo;
-        adminAnalysis.value = analysis.analysis;
-    }
-    
     /* ---------------------------------------------------
-       LOAD ALL FROM KV
+       DATA STORAGE FUNCTIONS
     --------------------------------------------------- */
     async function loadFromKV() {
+        console.log("🔍 Loading data from Cloudflare KV...");
+        
         try {
-            console.log("Loading data from KV...");
-            const res = await fetch(workerBase + "/get-all", { 
-                cache: "no-store",
-                headers: {
-                    'Accept': 'application/json'
-                }
+            const response = await fetch(workerBase + "/get-all", {
+                method: 'GET',
+                headers: { 'Accept': 'application/json' },
+                cache: 'no-cache'
             });
             
-            if (!res.ok) {
-                throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+            console.log("Response status:", response.status);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${await response.text()}`);
             }
             
-            const data = await res.json();
-            console.log("Data loaded:", data);
+            const data = await response.json();
+            console.log("Loaded data:", data);
             
             if (data && typeof data === 'object') {
                 raceAnalyses = data;
+                console.log(`✓ Loaded ${Object.keys(data).length} analyses from KV`);
+                return { success: true, count: Object.keys(data).length };
             } else {
+                console.warn("Received invalid data format from KV");
                 raceAnalyses = {};
-                console.warn("No data returned from KV");
+                return { success: true, count: 0 };
             }
             
-            // Update UI
-            initializeDropdowns();
-            createCalendar();
-            
-            // Show success message
-            showToast('Data loaded successfully', 'success');
-            
-        } catch (e) {
-            console.error("KV load failed:", e);
-            showToast('Failed to load data: ' + e.message, 'error');
+        } catch (error) {
+            console.error("❌ Failed to load from KV:", error);
+            return { success: false, error: error.message };
         }
     }
     
-    /* ---------------------------------------------------
-       SAVE TO KV
-    --------------------------------------------------- */
     async function saveToKV(key, data) {
+        console.log("💾 Saving to KV:", { key, data });
+        
         try {
-            console.log("Saving to KV:", { key, data });
-            
             const response = await fetch(workerBase + "/save", {
                 method: "POST",
                 headers: { 
@@ -1162,9 +1203,11 @@
                 body: JSON.stringify({ key, data })
             });
             
+            console.log("Save response status:", response.status);
+            
             if (!response.ok) {
                 const errorText = await response.text();
-                throw new Error(`Save failed: ${response.status} - ${errorText}`);
+                throw new Error(`HTTP ${response.status}: ${errorText}`);
             }
             
             const result = await response.json();
@@ -1173,18 +1216,15 @@
             return { success: true, result };
             
         } catch (error) {
-            console.error("Save error:", error);
+            console.error("❌ Save failed:", error);
             return { success: false, error: error.message };
         }
     }
     
-    /* ---------------------------------------------------
-       DELETE FROM KV
-    --------------------------------------------------- */
     async function deleteFromKV(key) {
+        console.log("🗑️ Deleting from KV:", key);
+        
         try {
-            console.log("Deleting from KV:", key);
-            
             const response = await fetch(workerBase + "/delete", {
                 method: "POST",
                 headers: { 
@@ -1194,9 +1234,11 @@
                 body: JSON.stringify({ key })
             });
             
+            console.log("Delete response status:", response.status);
+            
             if (!response.ok) {
                 const errorText = await response.text();
-                throw new Error(`Delete failed: ${response.status} - ${errorText}`);
+                throw new Error(`HTTP ${response.status}: ${errorText}`);
             }
             
             const result = await response.json();
@@ -1205,13 +1247,33 @@
             return { success: true, result };
             
         } catch (error) {
-            console.error("Delete error:", error);
+            console.error("❌ Delete failed:", error);
             return { success: false, error: error.message };
         }
     }
     
+    // LocalStorage backup
+    function saveToLocalStorage() {
+        localStorage.setItem('raceAnalyses', JSON.stringify(raceAnalyses));
+        console.log("✓ Backup saved to localStorage");
+    }
+    
+    function loadFromLocalStorage() {
+        const saved = localStorage.getItem('raceAnalyses');
+        if (saved) {
+            try {
+                raceAnalyses = JSON.parse(saved);
+                console.log(`✓ Loaded ${Object.keys(raceAnalyses).length} analyses from localStorage`);
+                return true;
+            } catch (e) {
+                console.error("Error loading from localStorage:", e);
+            }
+        }
+        return false;
+    }
+    
     /* ---------------------------------------------------
-       DROPDOWN MANAGEMENT
+       UI MANAGEMENT FUNCTIONS
     --------------------------------------------------- */
     function initializeDropdowns() {
         // Extract unique venues
@@ -1231,7 +1293,7 @@
             dates = [...new Set(Object.values(raceAnalyses)
                 .filter(a => a.venue === selectedVenueVal)
                 .map(a => a.date)
-                .sort((a, b) => b.localeCompare(a)))]; // Latest first
+                .sort((a, b) => b.localeCompare(a)))];
         }
         
         dateSelect.innerHTML = '<option value="">Select Date</option>' + 
@@ -1246,12 +1308,9 @@
                 return `<option value="${d}">${formatted}${isToday}</option>`;
             }).join('');
         
-        // Auto-select latest date if venue selected
         if (dates.length > 0 && !dateSelect.value) {
             dateSelect.value = dates[0];
             updateRaceDropdown();
-        } else if (!selectedVenueVal) {
-            dateSelect.innerHTML = '<option value="">Select Venue First</option>';
         }
         
         updateRaceDropdown();
@@ -1272,19 +1331,15 @@
         raceSelect.innerHTML = '<option value="">Select Race</option>' + 
             races.map(r => `<option value="${r.key}">Race ${r.number}</option>`).join('');
         
-        // Auto-select first race if available
         if (races.length > 0 && !raceSelect.value) {
             raceSelect.value = races[0].key;
             displayAnalysis(races[0].key);
-        } else if (!selectedVenueVal || !selectedDateVal) {
-            raceSelect.innerHTML = '<option value="">Select Venue and Date First</option>';
-            clearAnalysis();
         }
     }
     
     function displayAnalysis(key) {
         if (!key || !raceAnalyses[key]) {
-            analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-exclamation-circle"></i><p>No analysis found for selected race</p></div>';
+            analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-exclamation-circle"></i><p>No analysis found</p></div>';
             analysisTitle.textContent = 'Race Analysis';
             raceInfo.style.display = 'none';
             return;
@@ -1292,7 +1347,7 @@
         
         const analysis = raceAnalyses[key];
         
-        // Format analysis text
+        // Format the analysis
         let formattedAnalysis = analysis.analysis
             .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
@@ -1300,7 +1355,6 @@
             .replace(/====+/g, '<hr>')
             .replace(/\n/g, '<br>');
         
-        // Add line breaks for list items
         formattedAnalysis = formattedAnalysis.replace(/^- /g, '<br>- ');
         
         analysisContent.innerHTML = formattedAnalysis;
@@ -1320,14 +1374,11 @@
         selectedRace.textContent = `Race ${analysis.raceNo}`;
         raceInfo.style.display = 'flex';
         
-        // Update admin form with current selection
-        updateAdminDropdown(key);
-    }
-    
-    function clearAnalysis() {
-        analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race from the dropdowns above to view detailed analysis</p></div>';
-        analysisTitle.textContent = 'Race Analysis';
-        raceInfo.style.display = 'none';
+        // Update admin form
+        adminVenue.value = analysis.venue;
+        adminDate.value = analysis.date;
+        adminRaceNo.value = analysis.raceNo;
+        adminAnalysis.value = analysis.analysis;
     }
     
     /* ---------------------------------------------------
@@ -1355,33 +1406,38 @@
             }
         }
         
-        // Save to KV
-        const result = await saveToKV(key, data);
-        
-        if (result.success) {
-            // Update local state
-            raceAnalyses[key] = data;
-            
-            showToast('Analysis saved successfully!', 'success');
-            
-            // Refresh dropdowns
-            initializeDropdowns();
-            
-            // Select the newly added race
-            venueSelect.value = venue;
-            updateDateDropdown();
-            raceSelect.value = key;
-            displayAnalysis(key);
-        } else {
-            showToast('Failed to save: ' + result.error, 'error');
+        // Try to save to KV
+        if (useKV) {
+            const result = await saveToKV(key, data);
+            if (!result.success) {
+                showToast(`KV Save failed: ${result.error}`, 'error');
+                // Fallback to localStorage
+                useKV = false;
+                showToast('Falling back to localStorage', 'info');
+            }
         }
+        
+        // Update local state
+        raceAnalyses[key] = data;
+        
+        // Always backup to localStorage
+        saveToLocalStorage();
+        
+        showToast('Analysis saved!', 'success');
+        
+        // Refresh UI
+        initializeDropdowns();
+        venueSelect.value = venue;
+        updateDateDropdown();
+        raceSelect.value = key;
+        displayAnalysis(key);
     });
     
     // Update button - UPDATE EXISTING
     updateBtn.addEventListener('click', async function() {
         const selectedKey = raceSelect.value;
         if (!selectedKey || !raceAnalyses[selectedKey]) {
-            showToast('No race selected to update', 'error');
+            showToast('Select a race first', 'error');
             return;
         }
         
@@ -1398,55 +1454,86 @@
         const newKey = generateKey(venue, date, raceNo);
         const data = { venue, date, raceNo, analysis };
         
-        // Save to KV first
-        const result = await saveToKV(newKey, data);
+        let kvSuccess = true;
         
-        if (result.success) {
-            // Update local state
-            // If key changed, delete old entry
-            if (selectedKey !== newKey) {
-                await deleteFromKV(selectedKey);
-                delete raceAnalyses[selectedKey];
+        // Save new entry to KV
+        if (useKV) {
+            const saveResult = await saveToKV(newKey, data);
+            kvSuccess = saveResult.success;
+            
+            if (!kvSuccess) {
+                showToast(`KV Update failed: ${saveResult.error}`, 'error');
+                useKV = false;
+                showToast('Falling back to localStorage', 'info');
             }
             
-            raceAnalyses[newKey] = data;
-            
-            showToast('Analysis updated successfully!', 'success');
-            
-            // Refresh and select updated race
-            initializeDropdowns();
-            raceSelect.value = newKey;
-            displayAnalysis(newKey);
-        } else {
-            showToast('Failed to update: ' + result.error, 'error');
+            // Delete old entry if key changed
+            if (selectedKey !== newKey) {
+                const deleteResult = await deleteFromKV(selectedKey);
+                if (!deleteResult.success) {
+                    console.warn("Failed to delete old KV entry:", deleteResult.error);
+                }
+            }
         }
+        
+        // Update local state
+        if (selectedKey !== newKey) {
+            delete raceAnalyses[selectedKey];
+        }
+        raceAnalyses[newKey] = data;
+        
+        // Backup to localStorage
+        saveToLocalStorage();
+        
+        if (kvSuccess) {
+            showToast('Analysis updated!', 'success');
+        } else {
+            showToast('Analysis updated (local storage only)', 'info');
+        }
+        
+        // Refresh UI
+        initializeDropdowns();
+        raceSelect.value = newKey;
+        displayAnalysis(newKey);
     });
     
     // Delete button
     deleteBtn.addEventListener('click', async function() {
         const selectedKey = raceSelect.value;
         if (!selectedKey || !raceAnalyses[selectedKey]) {
-            showToast('No race selected to delete', 'error');
+            showToast('Select a race first', 'error');
             return;
         }
         
-        if (confirm('Are you sure you want to delete this analysis?')) {
-            // Delete from KV
+        if (!confirm('Are you sure you want to delete this analysis?')) {
+            return;
+        }
+        
+        // Delete from KV
+        if (useKV) {
             const result = await deleteFromKV(selectedKey);
-            
-            if (result.success) {
-                // Update local state
-                delete raceAnalyses[selectedKey];
-                
-                showToast('Analysis deleted successfully!', 'success');
-                
-                // Refresh dropdowns
-                initializeDropdowns();
-                clearAnalysis();
-            } else {
-                showToast('Failed to delete: ' + result.error, 'error');
+            if (!result.success) {
+                showToast(`KV Delete failed: ${result.error}`, 'error');
+                useKV = false;
+                showToast('Falling back to localStorage', 'info');
             }
         }
+        
+        // Delete from local state
+        delete raceAnalyses[selectedKey];
+        
+        // Update localStorage
+        saveToLocalStorage();
+        
+        showToast('Analysis deleted!', 'success');
+        
+        // Refresh UI
+        initializeDropdowns();
+        
+        // Clear analysis display
+        analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race to view analysis</p></div>';
+        analysisTitle.textContent = 'Race Analysis';
+        raceInfo.style.display = 'none';
     });
     
     // Clear button
@@ -1463,24 +1550,26 @@
         window.location.href = '/';
     });
     
-    // Dropdown event listeners
+    // Dropdown events
     venueSelect.addEventListener('change', updateDateDropdown);
     dateSelect.addEventListener('change', updateRaceDropdown);
     raceSelect.addEventListener('change', function() {
         if (this.value) {
             displayAnalysis(this.value);
         } else {
-            clearAnalysis();
+            analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race to view analysis</p></div>';
+            analysisTitle.textContent = 'Race Analysis';
+            raceInfo.style.display = 'none';
         }
     });
     
     /* ---------------------------------------------------
-       CALENDAR & SIDEBAR FUNCTIONS
+       CALENDAR FUNCTION
     --------------------------------------------------- */
     function createCalendar() {
-        const today = new Date();
-        const currentMonth = today.getMonth();
-        const currentYear = today.getFullYear();
+        const todayObj = new Date();
+        const currentMonth = todayObj.getMonth();
+        const currentYear = todayObj.getFullYear();
         
         const monthNames = ["January", "February", "March", "April", "May", "June",
                            "July", "August", "September", "October", "November", "December"];
@@ -1502,15 +1591,13 @@
                 <div class="calendar-day-header">S</div>
         `;
         
-        // Empty days before first day of month
         for (let i = 0; i < firstDay; i++) {
             calendarHTML += `<div class="calendar-day"></div>`;
         }
         
-        // Days of month
         const raceDays = [5, 12, 19, 26, 30];
         for (let day = 1; day <= daysInMonth; day++) {
-            const isToday = day === today.getDate() && currentMonth === today.getMonth();
+            const isToday = day === todayObj.getDate() && currentMonth === todayObj.getMonth();
             const isRaceDay = raceDays.includes(day);
             
             let dayClass = 'calendar-day';
@@ -1524,53 +1611,65 @@
         calendarWidget.innerHTML = calendarHTML;
     }
     
-    // Animate Stats
-    function animateStats() {
-        const stats = {
-            winRate: { target: 72, current: 0 },
-            roi: { target: 48.3, current: 0 },
-            placeRate: { target: 91, current: 0 },
-            winners: { target: 28, current: 0 }
-        };
-        
-        const speed = 50;
-        
-        Object.keys(stats).forEach(statId => {
-            const element = document.getElementById(statId);
-            const stat = stats[statId];
-            const increment = stat.target / 20;
-            
-            const timer = setInterval(() => {
-                stat.current += increment;
-                if (stat.current >= stat.target) {
-                    stat.current = stat.target;
-                    clearInterval(timer);
-                }
-                
-                if (statId === 'roi') {
-                    element.textContent = '+' + stat.current.toFixed(1);
-                } else if (statId === 'winners') {
-                    element.textContent = Math.floor(stat.current);
-                } else {
-                    element.textContent = Math.floor(stat.current) + '%';
-                }
-            }, speed);
-        });
-    }
-    
     /* ---------------------------------------------------
        INITIALIZATION
     --------------------------------------------------- */
     document.addEventListener('DOMContentLoaded', async function() {
-        console.log("Admin page loading...");
+        console.log("🚀 Initializing RaceAnalyst Admin...");
         
-        // Load data from KV
-        await loadFromKV();
+        // First, debug the worker connection
+        const debugResult = await debugWorkerConnection();
         
-        // Animate stats
-        animateStats();
+        if (debugResult.success) {
+            console.log("✅ Cloudflare Worker is accessible");
+            useKV = true;
+            
+            if (debugResult.data && Object.keys(debugResult.data).length > 0) {
+                raceAnalyses = debugResult.data;
+                showToast(`Loaded ${Object.keys(raceAnalyses).length} analyses from Cloudflare KV`, 'success');
+            } else {
+                // Try to load from localStorage as fallback
+                if (loadFromLocalStorage()) {
+                    showToast('KV empty, loaded from localStorage', 'info');
+                } else {
+                    // Create default data
+                    raceAnalyses = {
+                        "Mumbai-2024-03-23-10": {
+                            venue: "Mumbai",
+                            date: "2024-03-23",
+                            raceNo: "10",
+                            analysis: "## Sample Analysis\n\n**Top Pick:** Horse #5\n**Each Way:** Horse #3\n\nThis is a sample analysis to get you started."
+                        }
+                    };
+                    showToast('Created sample data', 'info');
+                }
+            }
+        } else {
+            console.error("❌ Cloudflare Worker not accessible:", debugResult.error);
+            useKV = false;
+            
+            // Load from localStorage
+            if (loadFromLocalStorage()) {
+                showToast('Loaded from localStorage (Cloudflare Worker unavailable)', 'info');
+            } else {
+                // Create default data
+                raceAnalyses = {
+                    "Mumbai-2024-03-23-10": {
+                        venue: "Mumbai",
+                        date: "2024-03-23",
+                        raceNo: "10",
+                        analysis: "## Sample Analysis\n\n**Top Pick:** Horse #5\n**Each Way:** Horse #3\n\nThis is a sample analysis to get you started."
+                    }
+                };
+                showToast('Created sample data (local storage)', 'info');
+            }
+        }
         
-        // Auto-select latest analysis if available
+        // Initialize UI
+        initializeDropdowns();
+        createCalendar();
+        
+        // Auto-select the first analysis if available
         const allKeys = Object.keys(raceAnalyses);
         if (allKeys.length > 0) {
             // Sort by date (newest first)
@@ -1589,7 +1688,7 @@
             displayAnalysis(latestKey);
         }
         
-        console.log("Admin page loaded successfully");
+        console.log("✅ Admin page ready! KV enabled:", useKV);
     });
     </script>
 </body>
