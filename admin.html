@@ -1087,25 +1087,26 @@
             }
             
             const data = await response.json();
-            console.log("KV Data received:", data);
             
             if (data && typeof data === 'object') {
                 raceAnalyses = data;
                 const count = Object.keys(data).length;
                 console.log(`✅ Loaded ${count} analyses from Cloudflare KV`);
-                showToast(`Loaded ${count} analyses from cloud`, 'success');
                 return { success: true, count };
             } else {
-                throw new Error("Invalid data format from KV");
+                // If KV returns empty or invalid, start with empty object
+                raceAnalyses = {};
+                console.log("✅ KV returned empty, starting fresh");
+                return { success: true, count: 0 };
             }
         } catch (error) {
             console.error("❌ KV load error:", error);
-            showToast('Failed to load from cloud storage', 'error');
-            raceAnalyses = {}; // Start with empty
+            // Start with empty object on error
+            raceAnalyses = {};
+            showToast('Using local storage (cloud error)', 'warning');
             return { success: false, error: error.message };
         }
     }
-
     async function saveToKV(key, data) {
         try {
             console.log("💾 Saving to KV:", key);
@@ -1471,66 +1472,6 @@
         calendarWidget.innerHTML = calendarHTML;
     }
 
-    /* ---------------------------------------------------
-    CREATE SAMPLE DATA FUNCTION
-    --------------------------------------------------- */
-    async function createSampleData() {
-        console.log("📝 Creating sample data in KV...");
-        
-        const sampleData = {
-            "Mumbai-2024-03-23-10": {
-                venue: "Mumbai",
-                date: "2024-03-23",
-                raceNo: "10",
-                analysis: `## MUMBAI RACE 10 - CLASS 4 HANDICAP
-
-    **Distance:** 1400m
-    **Track:** Good
-    **Prize Money:** ₹500,000
-
-    ### TOP SELECTIONS:
-
-    1. **HORSE #5 - DESERT STORM**
-    - Best recent form
-    - Good gate speed
-    - Should lead or sit handy
-
-    2. **HORSE #3 - MOUNTAIN KING** 
-    - Strong finisher
-    - Drops in weight
-    - Each-way value
-
-    3. **HORSE #7 - LIGHTNING FLASH**
-    - Consistent performer
-    - Good barrier draw
-    - Place chance
-
-    ### BETTING STRATEGY:
-    - **WIN:** Horse #5
-    - **EACH-WAY:** Horse #3
-    - **PLACE:** Horse #7
-
-    **Best Bet:** Race 10 No. 5 DESERT STORM`
-            }
-        };
-        
-        try {
-            // Save sample data to KV
-            for (const [key, data] of Object.entries(sampleData)) {
-                await saveToKV(key, data);
-            }
-            
-            // Update local state
-            raceAnalyses = sampleData;
-            
-            showToast('✅ Sample data created in cloud storage', 'success');
-            return true;
-        } catch (error) {
-            console.error("Failed to create sample data:", error);
-            showToast('❌ Failed to create sample data', 'error');
-            return false;
-        }
-    }
 
     /* ---------------------------------------------------
     INITIALIZATION
@@ -1538,41 +1479,62 @@
     document.addEventListener('DOMContentLoaded', async function() {
         console.log("🚀 Initializing RaceAnalyst Admin (KV-Only)...");
         
-        // Load data from KV
-        const loadResult = await loadFromKV();
-        
-        // If KV is empty, offer to create sample data
-        if (loadResult.success && Object.keys(raceAnalyses).length === 0) {
-            if (confirm("Cloud storage is empty. Would you like to create sample data?")) {
-                await createSampleData();
+        try {
+            // Load race analyses from Cloudflare KV
+            const loadResult = await loadFromKV();
+            
+            // Initialize UI components
+            initializeDropdowns();
+            createCalendar();
+            loadUpcomingRacesFromSheet(); // Load from Google Sheets
+            
+            // Auto-select the first analysis if available
+            if (raceAnalyses && typeof raceAnalyses === 'object') {
+                const allKeys = Object.keys(raceAnalyses);
+                if (allKeys.length > 0) {
+                    // Sort by date (newest first)
+                    allKeys.sort((a, b) => {
+                        const analysisA = raceAnalyses[a];
+                        const analysisB = raceAnalyses[b];
+                        
+                        if (!analysisA || !analysisB || !analysisA.date || !analysisB.date) {
+                            return 0;
+                        }
+                        
+                        return analysisB.date.localeCompare(analysisA.date);
+                    });
+                    
+                    const latestKey = allKeys[0];
+                    const latest = raceAnalyses[latestKey];
+                    
+                    if (latest && latest.venue) {
+                        venueSelect.value = latest.venue;
+                        updateDateDropdown();
+                        raceSelect.value = latestKey;
+                        displayAnalysis(latestKey);
+                    }
+                } else {
+                    console.log("No analyses found in KV storage");
+                    showToast("No analyses found. Start by adding one!", "info");
+                }
             }
-        }
-        
-        // Initialize UI
-        initializeDropdowns();
-        createCalendar();
-        
-        // Auto-select the first analysis if available
-        const allKeys = Object.keys(raceAnalyses);
-        if (allKeys.length > 0) {
-            // Sort by date (newest first)
-            allKeys.sort((a, b) => {
-                const dateA = raceAnalyses[a].date;
-                const dateB = raceAnalyses[b].date;
-                return dateB.localeCompare(dateA);
-            });
             
-            const latestKey = allKeys[0];
-            const latest = raceAnalyses[latestKey];
+            console.log("✅ Admin page ready!");
+            console.log("Analyses loaded:", raceAnalyses ? Object.keys(raceAnalyses).length : 0);
             
-            venueSelect.value = latest.venue;
-            updateDateDropdown();
-            raceSelect.value = latestKey;
-            displayAnalysis(latestKey);
+        } catch (error) {
+            console.error("Initialization error:", error);
+            showToast("Error initializing page. Please refresh.", "error");
+            
+            // Show error in analysis content
+            analysisContent.innerHTML = `
+                <div class="no-analysis">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Error loading data</p>
+                    <p style="font-size: 0.9rem; color: #dc3545;">${error.message}</p>
+                </div>
+            `;
         }
-        
-        console.log("✅ Admin page ready!");
-        console.log("Analyses in memory:", Object.keys(raceAnalyses).length);
     });
         // Admin panel show/hide logic
     const adminMenuItem = document.querySelector('.admin-label span'); // Admin button in nav
