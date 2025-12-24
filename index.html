@@ -1365,18 +1365,6 @@
         // Mobile menu functionality
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navMenu = document.getElementById('navMenu');
-        
-        mobileMenuBtn.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (navMenu.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
 
         function syncAnalysisHeight() {
             const sidebar = document.querySelector('.sidebar');
@@ -1531,14 +1519,29 @@
         }
 
 
-        window.addEventListener('includeJsReady', async () => {
-            console.log("include.js loaded — starting initialization");
-            await loadFromKV();
-            initializeDropdowns();
-            createCalendar();
-            loadUpcomingRacesFromSheet();
-            syncAnalysisHeight();
+window.addEventListener('includeJsReady', async () => {
+    console.log("include.js loaded — starting initialization");
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
+    if (mobileMenuBtn && navMenu) {
+        mobileMenuBtn.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         });
+    }
+    await loadFromKV();
+    initializeDropdowns();
+    createCalendar();
+    loadUpcomingRacesFromSheet();
+    syncAnalysisHeight();
+});
 
         /* ----------------------
            FEEDBACK SECTION LOGIC
