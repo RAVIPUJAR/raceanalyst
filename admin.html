@@ -831,7 +831,7 @@
                         <a href="https://raceanalyst.pages.dev/chatcenter" id="navChatCenter"><i class="fas fa-comments"></i> Chat Center</a>
                     </li>
                     <li>
-                        <a href="#" id="navSelections"><i class="fas fa-clipboard-list"></i> Selections</a>
+                        <a href="#" id="navAnalysis"><i class="fas fa-clipboard-list"></i> Analysis</a>
                     </li>
                 </ul>
             </nav>
@@ -1600,16 +1600,18 @@
 
     document.getElementById("navUpcomingRaces").addEventListener("click", function(e) {
         e.preventDefault();
-        const upcoming = document.querySelector('.sidebar-widget h3 i.fas.fa-trophy').parentElement.parentElement;
-        upcoming.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        showToast('Viewing Upcoming Races', 'info');
+        const upcoming = document.querySelector('.sidebar-widget:has(h3 i.fas.fa-trophy)');
+        if (upcoming) {
+            upcoming.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            showToast('Viewing Upcoming Races', 'info');
+        }
     });
 
-    document.getElementById("navSelections").addEventListener("click", function(e) {
+    document.getElementById("navAnalysis").addEventListener("click", function(e) {
         e.preventDefault();
-        const selectionCard = document.querySelector('.selection-card');
-        selectionCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        showToast('Viewing Selections', 'info');
+        const analysisCard = document.querySelector('.selection-card');
+        analysisCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        showToast('Viewing Analysis', 'info');
     });
     </script>
 </body>
