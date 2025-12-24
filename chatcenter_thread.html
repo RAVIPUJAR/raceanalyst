@@ -124,50 +124,40 @@ let allTopics = [];
 let currentTopic = null;
 
 // Updated endpoint URLs
+// Replace the existing fetch URLs in your chatcenter page:
 const BASE_URL = "https://broad-sound-fdb7.raceanalyst.workers.dev";
-const GET_TOPICS_URL = `${BASE_URL}/chatcenter/get-topics`;
-const SAVE_TOPICS_URL = `${BASE_URL}/chatcenter/save-topics`;
 
-// Load topics from KV with error handling
-async function loadTopic() {
+// CORRECT ENDPOINTS - use /chatcenter/ not /feedback/
+async function loadTopics() {
   try {
-    console.log("Loading topics from:", GET_TOPICS_URL);
-    const res = await fetch(GET_TOPICS_URL);
+    console.log("Fetching from:", `${BASE_URL}/chatcenter/get-topics`);
+    const response = await fetch(`${BASE_URL}/chatcenter/get-topics`);
     
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
     }
     
-    const data = await res.json();
-    allTopics = data || [];
-    console.log("Loaded topics:", allTopics.length);
-
-    if (!topicId) {
-      document.getElementById("topicTitle").innerHTML = "No topic ID specified";
-      return;
+    const data = await response.json();
+    
+    // IMPORTANT: Check if data is an array before using reverse()
+    if (!Array.isArray(data)) {
+      console.error("API returned non-array data:", data);
+      // Try to extract array from response
+      if (data && data.topics && Array.isArray(data.topics)) {
+        displayTopics(data.topics.reverse());
+      } else if (data && Array.isArray(data)) {
+        displayTopics(data.reverse());
+      } else {
+        displayTopics([]); // Empty array as fallback
+      }
+    } else {
+      displayTopics(data.reverse());
     }
-
-    currentTopic = allTopics.find(t => t.id === topicId);
-
-    if (!currentTopic) {
-      document.getElementById("topicTitle").innerHTML = "Topic not found";
-      document.getElementById("messagesList").innerHTML = 
-        `<div class="message-box"><p>This topic doesn't exist or has been deleted.</p></div>`;
-      return;
-    }
-
-    document.getElementById("topicTitle").innerHTML = currentTopic.title;
-    renderMessages();
     
   } catch (error) {
     console.error("Failed to load topics:", error);
-    document.getElementById("topicTitle").innerHTML = "Error Loading Chat";
-    document.getElementById("messagesList").innerHTML = 
-      `<div class="message-box" style="background:#ffe6e6;">
-         <p><strong>Connection Error:</strong> Could not load chat messages.</p>
-         <p>Please check your internet connection and try again.</p>
-         <p>Error details: ${error.message}</p>
-       </div>`;
+    document.getElementById("topicsList").innerHTML = 
+      `<div class="error">Error loading topics: ${error.message}</div>`;
   }
 }
 
