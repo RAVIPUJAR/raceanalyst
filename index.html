@@ -1530,7 +1530,15 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadUpcomingRacesFromSheet);
+
+        window.addEventListener('includeJsReady', async () => {
+            console.log("include.js loaded — starting initialization");
+            await loadFromKV();
+            initializeDropdowns();
+            createCalendar();
+            loadUpcomingRacesFromSheet();
+            syncAnalysisHeight();
+        });
 
         /* ----------------------
            FEEDBACK SECTION LOGIC
