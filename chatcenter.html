@@ -392,7 +392,7 @@
                 <span style="font-weight:600;">Admin Mode Active</span>
                 <button onclick="toggleAdminMode(false)" style="margin-left:auto; padding:0.3rem 0.8rem; background:#c62828; color:white; border:none; border-radius:4px; cursor:pointer;">
                     Exit Admin
-                </button>
+                </button> 
             </div>
         </div>
         
@@ -632,7 +632,7 @@ function renderTopics(topics) {
             <span><i class="fas fa-user"></i> ${topic.user || "Anonymous"}</span>
             <span><i class="fas fa-calendar"></i> ${formatDate(topic.date)}</span>
             <span><i class="fas fa-comments"></i> ${messageCount} message${messageCount !== 1 ? 's' : ''}</span>
-            <span><i class="fas fa-heart" style="color:green;"></i> ${totalLikes} like${totalLikes !== 1 ? 's' : ''}</span>
+            <span><i class="fas fa-heart" style="color:#e91e63;"></i> ${totalLikes} like${totalLikes !== 1 ? 's' : ''}</span>
             <span><i class="fas fa-clock"></i> Last activity: ${lastMessage ? formatDate(lastMessage.date) : formatDate(topic.date)}</span>
         </div>
     </div>
@@ -813,7 +813,7 @@ function renderChatMessages(messages) {
 function renderChatMessage(msg, depth = 0) {
   const messageId = msg.id;
   const userLiked = userLikes[messageId] === true;
-  const likeStyle = userLiked ? 'style="color:#c62828;"' : '';
+  const likeStyle = userLiked ? 'style="color:#e91e63;"' : '';
   
   // Check if user can like (only one like per message per user)
   const canLike = !userLiked;
@@ -838,8 +838,8 @@ function renderChatMessage(msg, depth = 0) {
           <!-- Like button -->
           <button onclick="${canLike ? `likeChatMessage('${messageId}')` : ''}" 
             ${!canLike ? 'disabled' : ''}
-            style="background:none; border:none; color:${userLiked ? '#c62828' : '#666'}; cursor:${canLike ? 'pointer' : 'not-allowed'}; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
-            <i class="fas fa-thumbs-up" ${likeStyle}></i>
+            style="background:none; border:none; color:${userLiked ? '#e91e63' : '#666'}; cursor:${canLike ? 'pointer' : 'not-allowed'}; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
+            <i class="fas fa-heart" style="color:#e91e63;"></i>
             ${msg.likes || 0} Like${msg.likes !== 1 ? 's' : ''}
             ${userLiked ? ' (You liked)' : ''}
           </button>
