@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Thread | RaceAnalyst</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Source+Serif+Pro:wght@400;600&display=swap" rel="stylesheet">
+
     <style>
         body {
             margin: 0;
@@ -39,12 +39,39 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.08);
         }
 
-        h2 {
-            font-family: 'Montserrat', sans-serif;
-            color: #1a3c34;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #d4af37;
-            padding-bottom: 0.6rem;
+        .message-box {
+            background: #eef2f3;
+            padding: 14px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .meta {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .msg-actions {
+            margin-top: 8px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #0066cc;
+            cursor: pointer;
+            margin-right: 12px;
+        }
+
+        .action-btn.delete {
+            color: #c62828;
+        }
+
+        .reply-thread {
+            margin-left: 20px;
+            border-left: 2px solid #d4af37;
+            padding-left: 12px;
+            margin-top: 10px;
         }
 
         input, textarea {
@@ -65,465 +92,181 @@
             font-family: 'Montserrat';
             font-weight: 600;
             cursor: pointer;
-            margin-right: 10px;
         }
 
         button:hover {
             background: #244e44;
-        }
-
-        button.back-btn {
-            background: #666;
-        }
-
-        button.back-btn:hover {
-            background: #555;
-        }
-
-        .thread-message {
-            background: #eef2f3;
-            padding: 14px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            border-left: 4px solid #d4af37;
-        }
-
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .message-user {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            color: #1a3c34;
-        }
-
-        .message-time {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .message-content {
-            margin: 10px 0;
-            line-height: 1.5;
-        }
-
-        .message-actions {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .action-btn {
-            background: none;
-            border: none;
-            color: #0066cc;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-        }
-
-        .action-btn:hover {
-            text-decoration: underline;
-        }
-
-        .action-btn.like {
-            color: #d11a2a;
-        }
-
-        .action-btn.reply {
-            color: #1a3c34;
-        }
-
-        .reply-thread {
-            margin-left: 30px;
-            margin-top: 15px;
-            border-left: 2px solid #999;
-            padding-left: 15px;
-        }
-
-        .reply-box {
-            margin-top: 2rem;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border: 1px solid #e6e6e6;
-        }
-
-        .thread-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .message-count {
-            font-family: 'Montserrat', sans-serif;
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        .logo-icon {
-            font-size: 2rem;
-            color: #d4af37;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo h1 {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .logo h1 span {
-            color: #d4af37;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 10px;
-            align-items: center;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="container header-content">
-        <div class="logo">
-            <div class="logo-icon">
-                <i class="fas fa-chart-line"></i>
-            </div>
-            <h1>Race<span>Analyst</span></h1>
-        </div>
-        
-        <div class="header-actions">
-            <button class="back-btn" onclick="window.location.href='chatcenter.html'">
-                <i class="fas fa-arrow-left"></i> Back to Topics
-            </button>
-        </div>
+    <div class="container">
+        <span class="page-title"><i class="fas fa-comment-dots"></i> Chat Thread</span>
     </div>
 </header>
 
 <div class="container">
     <div class="card">
-        <div class="thread-header">
-            <h2 id="threadTitle">Loading thread...</h2>
-            <div class="message-count" id="messageCount">0 messages</div>
-        </div>
-        
-        <div id="messagesContainer">
-            <p>Loading messages...</p>
-        </div>
-        
-        <div class="reply-box">
-            <h3><i class="fas fa-reply"></i> Reply to this thread</h3>
-            <textarea id="newMessage" placeholder="Type your message here..." rows="4"></textarea>
-            <div style="display: flex; justify-content: flex-end;">
-                <button onclick="sendReply()">
-                    <i class="fas fa-paper-plane"></i> Post Reply
-                </button>
-            </div>
-        </div>
+        <h2 id="topicTitle">Loading topic...</h2>
+        <div id="messagesList">Loading messages...</div>
+
+        <h3 style="margin-top:2rem;">Add a Reply</h3>
+        <textarea id="replyText" placeholder="Write your reply..." style="min-height:120px;"></textarea>
+        <button onclick="submitReply()">Reply</button>
     </div>
 </div>
 
 <script>
-// Configuration
-const WORKER_URL = "https://broad-sound-fdb7.raceanalyst.workers.dev";
-
-// State
-let currentTopicId = null;
+let topicId = new URLSearchParams(window.location.search).get("topic");
+let allTopics = [];
 let currentTopic = null;
-let messages = [];
 
-// Get topic ID from URL
-const urlParams = new URLSearchParams(window.location.search);
-currentTopicId = urlParams.get('topic');
+// Load topics from KV
+async function loadTopic() {
+    const res = await fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/feedback/get-topics");
+    const data = await res.json();
+    allTopics = data;
 
-// Load topic and messages when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    if (currentTopicId) {
-        loadThread();
-    } else {
-        alert("No topic specified!");
-        window.location.href = "chatcenter.html";
-    }
-});
+    currentTopic = allTopics.find(t => t.id === topicId);
 
-// Load thread data
-async function loadThread() {
-    try {
-        // Show loading state
-        document.getElementById('threadTitle').textContent = 'Loading...';
-        document.getElementById('messagesContainer').innerHTML = '<p>Loading messages...</p>';
-        
-        // Get all topics to find this one
-        const topicsRes = await fetch(`${WORKER_URL}/feedback/get-topics`);
-        if (!topicsRes.ok) {
-            throw new Error('Failed to load topics');
-        }
-        
-        const allTopics = await topicsRes.json();
-        
-        // Find current topic
-        currentTopic = allTopics.find(t => t.id === currentTopicId);
-        
-        if (!currentTopic) {
-            alert("Topic not found!");
-            window.location.href = "chatcenter.html";
-            return;
-        }
-        
-        // Update UI with topic info
-        document.getElementById('threadTitle').textContent = currentTopic.title;
-        document.getElementById('messageCount').textContent = 
-            `${currentTopic.messages ? currentTopic.messages.length : 0} messages`;
-        
-        // Use messages from topic
-        messages = currentTopic.messages || [];
-        
-        // Render messages
-        renderMessages();
-        
-    } catch (error) {
-        console.error("Error loading thread:", error);
-        document.getElementById('messagesContainer').innerHTML = 
-            `<p style="color: #d11a2a;">Error loading messages: ${error.message}</p>`;
-    }
-}
-
-// Render messages in the thread
-function renderMessages() {
-    const container = document.getElementById('messagesContainer');
-    
-    if (!messages || messages.length === 0) {
-        container.innerHTML = '<p>No messages yet. Be the first to reply!</p>';
+    if (!currentTopic) {
+        document.getElementById("topicTitle").innerHTML = "Topic not found";
         return;
     }
-    
-    container.innerHTML = messages.map((msg, index) => `
-        <div class="thread-message" id="msg-${msg.id}">
-            <div class="message-header">
-                <div class="message-user">
-                    <i class="fas fa-user"></i> ${msg.user || 'Anonymous'}
-                </div>
-                <div class="message-time">
-                    ${formatDate(msg.date)}
-                </div>
+
+    document.getElementById("topicTitle").innerHTML = currentTopic.title;
+
+    renderMessages();
+}
+
+// Render thread messages
+function renderMessages() {
+    const list = document.getElementById("messagesList");
+
+    list.innerHTML = currentTopic.messages
+        .map(msg => renderMessage(msg))
+        .join("");
+}
+
+// Render single message including nested replies
+function renderMessage(msg) {
+    return `
+        <div class="message-box">
+            <strong>${msg.user}</strong>
+            <p>${msg.text}</p>
+            <span class="meta">${msg.date}</span>
+
+            <div class="msg-actions">
+                <button class="action-btn" onclick="likeMessage('${msg.id}')">👍 ${msg.likes}</button>
+                <button class="action-btn" onclick="showReplyBox('${msg.id}')">Reply</button>
+                <button class="action-btn delete" onclick="deleteMessage('${msg.id}')">Delete</button>
             </div>
-            
-            <div class="message-content">
-                ${msg.text}
+
+            <div id="replyBox-${msg.id}" style="display:none; margin-top:10px;">
+                <textarea id="replyInput-${msg.id}" placeholder="Write reply..." style="min-height:80px;"></textarea>
+                <button onclick="submitNestedReply('${msg.id}')">Submit Reply</button>
             </div>
-            
-            <div class="message-actions">
-                <button class="action-btn like" onclick="likeMessage('${msg.id}')">
-                    <i class="far fa-thumbs-up"></i> Like (${msg.likes || 0})
-                </button>
-                <button class="action-btn reply" onclick="showReplyBox('${msg.id}')">
-                    <i class="fas fa-reply"></i> Reply
-                </button>
-            </div>
-            
-            ${msg.replies && msg.replies.length > 0 ? `
-                <div class="reply-thread">
-                    <h4><i class="fas fa-comments"></i> Replies (${msg.replies.length})</h4>
-                    ${msg.replies.map(reply => `
-                        <div style="margin-bottom: 15px; padding: 10px; background: #e6f7ff; border-radius: 6px;">
-                            <div style="display: flex; justify-content: space-between;">
-                                <strong>${reply.user || 'Anonymous'}</strong>
-                                <small>${formatDate(reply.date)}</small>
-                            </div>
-                            <div style="margin-top: 5px;">${reply.text}</div>
-                        </div>
-                    `).join('')}
-                </div>
-            ` : ''}
-            
-            <div id="reply-box-${msg.id}" style="display: none; margin-top: 15px;">
-                <textarea id="reply-text-${msg.id}" placeholder="Write a reply..." rows="2" style="width: 100%;"></textarea>
-                <div style="margin-top: 10px;">
-                    <button onclick="sendReplyToMessage('${msg.id}')">Post Reply</button>
-                    <button onclick="hideReplyBox('${msg.id}')" style="background: #666;">Cancel</button>
-                </div>
+
+            <div class="reply-thread">
+                ${(msg.replies || []).map(r => renderMessage(r)).join("")}
             </div>
         </div>
-    `).join('');
-}
-
-// Send a reply to the main thread
-async function sendReply() {
-    const messageInput = document.getElementById('newMessage');
-    const text = messageInput.value.trim();
-    
-    if (!text) {
-        alert('Please enter a message');
-        return;
-    }
-    
-    try {
-        // Create new message object
-        const newMsg = {
-            id: `msg_${Date.now()}`,
-            user: 'Anonymous',
-            text: text,
-            date: new Date().toISOString(),
-            likes: 0,
-            replies: []
-        };
-        
-        // Add to local messages array
-        messages.push(newMsg);
-        
-        // Save to backend
-        const response = await fetch(`${WORKER_URL}/chat/save`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                topicId: currentTopicId,
-                messages: messages
-            })
-        });
-        
-        if (!response.ok) {
-            throw new Error('Failed to save message');
-        }
-        
-        // Clear input and refresh
-        messageInput.value = '';
-        await loadThread(); // Reload to get updated message count
-        
-        // Scroll to new message
-        setTimeout(() => {
-            const newMsgElement = document.getElementById(`msg-${newMsg.id}`);
-            if (newMsgElement) {
-                newMsgElement.scrollIntoView({ behavior: 'smooth' });
-            }
-        }, 100);
-        
-    } catch (error) {
-        console.error('Error sending reply:', error);
-        alert('Error sending reply. Please try again.');
-    }
+    `;
 }
 
 // Like a message
-async function likeMessage(messageId) {
-    const message = messages.find(m => m.id === messageId);
-    if (message) {
-        message.likes = (message.likes || 0) + 1;
-        
-        // Save to backend
-        try {
-            await fetch(`${WORKER_URL}/chat/save`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    topicId: currentTopicId,
-                    messages: messages
-                })
-            });
-            
-            // Update UI
-            const likeBtn = document.querySelector(`#msg-${messageId} .like`);
-            if (likeBtn) {
-                likeBtn.innerHTML = `<i class="far fa-thumbs-up"></i> Like (${message.likes})`;
-            }
-        } catch (error) {
-            console.error('Error liking message:', error);
-        }
+async function likeMessage(id) {
+    let msg = findMessage(currentTopic.messages, id);
+    if (msg) {
+        msg.likes++;
+        await saveTopics();
+        renderMessages();
     }
 }
 
-// Show reply box for a specific message
-function showReplyBox(messageId) {
-    const replyBox = document.getElementById(`reply-box-${messageId}`);
-    if (replyBox) {
-        replyBox.style.display = 'block';
-        document.getElementById(`reply-text-${messageId}`).focus();
-    }
+// Delete a message
+async function deleteMessage(id) {
+    currentTopic.messages = removeMessage(currentTopic.messages, id);
+    await saveTopics();
+    renderMessages();
 }
 
-// Hide reply box
-function hideReplyBox(messageId) {
-    const replyBox = document.getElementById(`reply-box-${messageId}`);
-    if (replyBox) {
-        replyBox.style.display = 'none';
-        document.getElementById(`reply-text-${messageId}`).value = '';
-    }
-}
-
-// Send reply to a specific message
-async function sendReplyToMessage(messageId) {
-    const replyInput = document.getElementById(`reply-text-${messageId}`);
-    const text = replyInput.value.trim();
-    
-    if (!text) {
-        alert('Please enter a reply');
-        return;
-    }
-    
-    const message = messages.find(m => m.id === messageId);
-    if (message) {
-        if (!message.replies) {
-            message.replies = [];
-        }
-        
-        const newReply = {
-            id: `reply_${Date.now()}`,
-            user: 'Anonymous',
-            text: text,
-            date: new Date().toISOString()
-        };
-        
-        message.replies.push(newReply);
-        
-        // Save to backend
-        try {
-            await fetch(`${WORKER_URL}/chat/save`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    topicId: currentTopicId,
-                    messages: messages
-                })
-            });
-            
-            // Hide reply box and clear input
-            hideReplyBox(messageId);
-            
-            // Refresh messages
-            renderMessages();
-            
-        } catch (error) {
-            console.error('Error sending reply:', error);
-            alert('Error sending reply. Please try again.');
-        }
-    }
-}
-
-// Format date for display
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
+function removeMessage(arr, id) {
+    return arr.filter(m => {
+        if (m.id === id) return false;
+        if (m.replies) m.replies = removeMessage(m.replies, id);
+        return true;
     });
 }
+
+function findMessage(arr, id) {
+    for (let m of arr) {
+        if (m.id === id) return m;
+        if (m.replies) {
+            let found = findMessage(m.replies, id);
+            if (found) return found;
+        }
+    }
+    return null;
+}
+
+// Show reply input
+function showReplyBox(id) {
+    document.getElementById("replyBox-" + id).style.display = "block";
+}
+
+// Submit nested reply
+async function submitNestedReply(parentId) {
+    const box = document.getElementById("replyInput-" + parentId);
+    const text = box.value.trim();
+    if (!text) return alert("Reply cannot be empty.");
+
+    let parent = findMessage(currentTopic.messages, parentId);
+    parent.replies.push({
+        id: Date.now().toString(),
+        user: "Anonymous",
+        text,
+        date: new Date().toLocaleString(),
+        likes: 0,
+        replies: []
+    });
+
+    box.value = "";
+    await saveTopics();
+    renderMessages();
+}
+
+// Main reply for the thread
+async function submitReply() {
+    const text = document.getElementById("replyText").value.trim();
+    if (!text) return alert("Reply cannot be empty.");
+
+    currentTopic.messages.push({
+        id: Date.now().toString(),
+        user: "Anonymous",
+        text,
+        date: new Date().toLocaleString(),
+        likes: 0,
+        replies: []
+    });
+
+    document.getElementById("replyText").value = "";
+    await saveTopics();
+    renderMessages();
+}
+
+// Save to KV
+async function saveTopics() {
+    await fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/feedback/save-topics", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(allTopics)
+    });
+}
+
+loadTopic();
 </script>
 
 </body>
