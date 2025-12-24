@@ -816,14 +816,22 @@
                     <li class="admin-label">
                         <span><i class="fas fa-user-shield"></i> Admin</span>
                     </li>
-                    <li><a href="#"><i class="fas fa-clipboard-list"></i> Selections</a></li>
-                    <li><a href="#"><i class="fas fa-chart-line"></i> Performance</a></li>
-                    <li><a href="#"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
-                    <li><a href="#"><i class="fas fa-envelope"></i> Subscribe</a></li>
                     <li>
-                      <a href="/" class="admin-menu-item">
-                        <i class="fas fa-home"></i> Home
-                      </a>
+                        <a href="/" class="admin-menu-item">
+                            <i class="fas fa-home"></i> Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="navRaceCalendar"><i class="fas fa-calendar-alt"></i> Race Calendar</a>
+                    </li>
+                    <li>
+                        <a href="#" id="navUpcomingRaces"><i class="fas fa-trophy"></i> Upcoming Races</a>
+                    </li>
+                    <li>
+                        <a href="https://raceanalyst.pages.dev/chatcenter" id="navChatCenter"><i class="fas fa-comments"></i> Chat Center</a>
+                    </li>
+                    <li>
+                        <a href="#" id="navSelections"><i class="fas fa-clipboard-list"></i> Selections</a>
                     </li>
                 </ul>
             </nav>
@@ -1611,6 +1619,29 @@
     // Hide admin panel when clicking "Hide Panel" button
     hideAdminBtn.addEventListener('click', () => {
         adminPanel.style.display = 'none';
+    });
+    /* ---------------------------------------------------
+    ADMIN PAGE NAVIGATION
+    --------------------------------------------------- */
+    document.getElementById("navRaceCalendar").addEventListener("click", function(e) {
+        e.preventDefault();
+        const calendar = document.querySelector('.sidebar-widget h3 i.fas.fa-calendar-alt').parentElement.parentElement;
+        calendar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        showToast('Viewing Race Calendar', 'info');
+    });
+
+    document.getElementById("navUpcomingRaces").addEventListener("click", function(e) {
+        e.preventDefault();
+        const upcoming = document.querySelector('.sidebar-widget h3 i.fas.fa-trophy').parentElement.parentElement;
+        upcoming.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        showToast('Viewing Upcoming Races', 'info');
+    });
+
+    document.getElementById("navSelections").addEventListener("click", function(e) {
+        e.preventDefault();
+        const selectionCard = document.querySelector('.selection-card');
+        selectionCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        showToast('Viewing Selections', 'info');
     });
     </script>
 </body>
