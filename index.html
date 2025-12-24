@@ -1397,41 +1397,121 @@
         }
 
         // Load from Cloudflare KV on startup
-        document.addEventListener('DOMContentLoaded', async function() {
-            // Load analyses from Cloudflare KV
-            // Load analyses from Cloudflare KV
-            // Replace the loadFromKV function in your regular page with:
-            async function loadFromKV() {
-                try {
-                    const response = await fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/get-all", {
-                        headers: { 'Accept': 'application/json' },
-                        cache: 'no-store'
+        // Replace the entire DOMContentLoaded event in index.html with this:
+
+        // Wait for include.js to be ready
+        window.addEventListener('includeJsReady', initMainPage);
+
+        // Also check if include.js is already ready
+        if (window.includeJsReady) {
+            initMainPage();
+        } else {
+            // Fallback: if include.js doesn't fire the event, wait a bit
+            setTimeout(initMainPage, 500);
+        }
+
+        function initMainPage() {
+            console.log("Initializing main page...");
+            
+            // Database simulation
+            let raceAnalyses = {};
+
+            // DOM Elements - NOW THEY EXIST
+            const venueSelect = document.getElementById('venueSelect');
+            const dateSelect = document.getElementById('dateSelect');
+            const raceSelect = document.getElementById('raceSelect');
+            const analysisContent = document.getElementById('analysisContent');
+            const analysisTitle = document.getElementById('analysisTitle');
+            const raceInfo = document.getElementById('raceInfo');
+            const selectedVenue = document.getElementById('selectedVenue');
+            const selectedDate = document.getElementById('selectedDate');
+            const selectedRace = document.getElementById('selectedRace');
+            const todaysSelectionsBtn = document.getElementById('todaysSelectionsBtn');
+            
+            // Sidebar elements
+            const calendarWidget = document.getElementById('calendarWidget');
+            
+            // Admin elements
+            const adminPanel = document.getElementById('adminPanel');
+            const adminVenue = document.getElementById('adminVenue');
+            const adminDate = document.getElementById('adminDate');
+            const adminRaceNo = document.getElementById('adminRaceNo');
+            const adminAnalysis = document.getElementById('adminAnalysis');
+            const saveBtn = document.getElementById('saveBtn');
+            const updateBtn = document.getElementById('updateBtn');
+            const deleteBtn = document.getElementById('deleteBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const toast = document.getElementById('toast');
+
+            // Today's date in YYYY-MM-DD format
+            const today = new Date().toISOString().split('T')[0];
+
+            // Rest of your functions (initializeDropdowns, updateDateDropdown, etc.)
+            // ... copy all your existing functions here ...
+            
+            // Load data and initialize
+            async function loadAndInitialize() {
+                await loadFromKV();
+                initializeDropdowns();
+                createCalendar();
+                
+                // Auto-select latest analysis
+                const allKeys = Object.keys(raceAnalyses);
+                if (allKeys.length > 0) {
+                    // Sort by date (newest first)
+                    allKeys.sort((a, b) => {
+                        const dateA = raceAnalyses[a].date;
+                        const dateB = raceAnalyses[b].date;
+                        return dateB.localeCompare(dateA);
                     });
                     
-                    if (!response.ok) {
-                        throw new Error(`HTTP ${response.status}: Failed to load from KV`);
-                    }
+                    const latestKey = allKeys[0];
+                    const latest = raceAnalyses[latestKey];
                     
-                    const data = await response.json();
-                    if (data && typeof data === 'object') {
-                        raceAnalyses = data;
-                        console.log(`Loaded ${Object.keys(data).length} analyses from Cloudflare KV`);
-                        return true;
-                    }
-                } catch (error) {
-                    console.error("Failed to load from KV:", error);
-                    // Show error to user
-                    analysisContent.innerHTML = `
-                        <div class="no-analysis">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <p>Unable to load data from server</p>
-                            <p style="font-size: 0.9rem; color: #dc3545;">Error: ${error.message}</p>
-                        </div>
-                    `;
-                    return false;
+                    venueSelect.value = latest.venue;
+                    updateDateDropdown();
+                    raceSelect.value = latestKey;
+                    displayAnalysis(latestKey);
+                    setTimeout(syncAnalysisHeight, 0);
                 }
+            }
+            
+            // Start everything
+            loadAndInitialize();
+        }
+
+        // Load from Cloudflare KV function
+        async function loadFromKV() {
+            try {
+                const response = await fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/get-all", {
+                    headers: { 'Accept': 'application/json' },
+                    cache: 'no-store'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: Failed to load from KV`);
+                }
+                
+                const data = await response.json();
+                if (data && typeof data === 'object') {
+                    raceAnalyses = data;
+                    console.log(`Loaded ${Object.keys(data).length} analyses from Cloudflare KV`);
+                    return true;
+                }
+            } catch (error) {
+                console.error("Failed to load from KV:", error);
+                // Show error to user
+                analysisContent.innerHTML = `
+                    <div class="no-analysis">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Unable to load data from server</p>
+                        <p style="font-size: 0.9rem; color: #dc3545;">Error: ${error.message}</p>
+                    </div>
+                `;
                 return false;
             }
+            return false;
+        }
 
             // Remove all localStorage references from your regular page
             await loadFromKV();
@@ -1456,8 +1536,7 @@
                 raceSelect.value = latestKey;
                 displayAnalysis(latestKey);
                 setTimeout(syncAnalysisHeight, 0);
-            }
-        });
+            };
 
         window.addEventListener('resize', syncAnalysisHeight);
         // Export/Import functionality for backup
