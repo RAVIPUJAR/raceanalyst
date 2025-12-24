@@ -309,6 +309,7 @@
             .nav-menu ul li a {
                 display: block;
                 padding: 0.5rem 0;
+                justify-content: center;
             }
             
             .header-content {
@@ -490,13 +491,14 @@ let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}'); // Track 
 // Simple admin password (change this in production!)
 const ADMIN_PASSWORD = "raceadmin123";
 
-// Mobile menu toggle
+// Mobile menu toggle - SIMPLIFIED VERSION
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navMenu = document.getElementById('navMenu');
     
     if (mobileMenuBtn && navMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent event bubbling
             navMenu.classList.toggle('active');
             // Change icon based on state
             const icon = mobileMenuBtn.querySelector('i');
@@ -509,26 +511,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Close menu when clicking outside
+        // Close menu when clicking outside - SIMPLIFIED
         document.addEventListener('click', function(event) {
             if (!navMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
                 navMenu.classList.remove('active');
                 const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
             }
         });
         
-        // Close menu when clicking a link (for mobile)
-        const navLinks = navMenu.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                navMenu.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            });
-        });
+        // REMOVED the event listener that was interfering with link clicks
+        // Navigation links will now work normally
     }
 });
 
