@@ -801,9 +801,7 @@
     <header>
         <div class="container header-content">
             <div class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-horse"></i>
-                </div>
+                <i class="fas fa-horse-head logo-icon"></i>
                 <h1>Race<span>Analyst</span></h1>
             </div>
             
@@ -1598,14 +1596,18 @@
         showToast('Viewing Race Calendar', 'info');
     });
 
-    document.getElementById("navUpcomingRaces").addEventListener("click", function(e) {
-        e.preventDefault();
-        const upcoming = document.querySelector('.sidebar-widget:has(h3 i.fas.fa-trophy)');
-        if (upcoming) {
-            upcoming.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            showToast('Viewing Upcoming Races', 'info');
-        }
-    });
+document.getElementById("navUpcomingRaces").addEventListener("click", function(e) {
+    e.preventDefault();
+
+    const trophyIcon = document.querySelector('.sidebar-widget h3 i.fas.fa-trophy');
+    if (trophyIcon) {
+        const widget = trophyIcon.closest('.sidebar-widget');
+        widget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        showToast('Viewing Upcoming Races', 'info');
+    } else {
+        showToast('Upcoming Races widget not found', 'error');
+    }
+});
 
     document.getElementById("navAnalysis").addEventListener("click", function(e) {
         e.preventDefault();
