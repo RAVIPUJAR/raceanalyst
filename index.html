@@ -1543,7 +1543,9 @@ window.addEventListener('includeJsReady', async () => {
     document.querySelectorAll('.nav-menu a').forEach(link => {
         link.addEventListener('click', (e) => {
             const targetId = link.getAttribute('href');
-            if (targetId.startsWith('#')) {
+
+            // Only scroll if href is a valid id (ignore '#')
+            if (targetId.startsWith('#') && targetId.length > 1) {
                 e.preventDefault(); // prevent default jump
                 const target = document.querySelector(targetId);
                 if (target) {
