@@ -356,12 +356,18 @@
 <div class="container">
     <!-- Create New Chat Topic -->
     <div class="card">
-        <h2><i class="fas fa-plus-circle"></i> New Chat Topic</h2>
-        <input type="text" id="topicTitle" placeholder="Topic Title">
-        <textarea id="topicBody" placeholder="Write the first message..." style="min-height:120px;"></textarea>
-        <button onclick="createTopic()">
-            <i class="fas fa-paper-plane"></i> Create Topic
-        </button>
+        <h2 id="newTopicHeader" style="cursor:pointer; display:flex; align-items:center; gap:10px;">
+            <span id="newTopicToggleIcon">➕</span>
+            New Chat Topic
+        </h2>
+
+        <div id="newTopicContent" style="display:none;">
+            <input type="text" id="topicTitle" placeholder="Topic Title">
+            <textarea id="topicBody" placeholder="Write the first message..." style="min-height:120px;"></textarea>
+            <button onclick="createTopic()">
+                <i class="fas fa-paper-plane"></i> Create Topic
+            </button>
+        </div>
     </div>
 
     <!-- Topics List with Expandable Chats -->
@@ -446,7 +452,7 @@
 </div>
 
 
-// Update this in your chatcenter.html file
+<!-- Update this in your chatcenter.html file -->
 <script>
 const BASE_URL = "https://broad-sound-fdb7.raceanalyst.workers.dev";
 const GET_TOPICS_URL = `${BASE_URL}/chatcenter/get-topics`;
@@ -458,8 +464,23 @@ let currentOpenTopic = null;
 let isAdminMode = false;
 let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}'); // Track user likes
 
+if (!enable) localStorage.removeItem("isAdmin");
 // Simple admin password (change this in production!)
 const ADMIN_PASSWORD = "raceadmin123";
+
+
+document.getElementById("newTopicHeader").onclick = function() {
+    const box = document.getElementById("newTopicContent");
+    const icon = document.getElementById("newTopicToggleIcon");
+
+    if (box.style.display === "none") {
+        box.style.display = "block";
+        icon.textContent = "➖";
+    } else {
+        box.style.display = "none";
+        icon.textContent = "➕";
+    }
+};
 
 // 1. Load all chat topics
 async function loadTopics() {
@@ -555,74 +576,26 @@ function renderTopics(topics) {
     const totalEngagement = messageCount + totalReplies;
     
     return `
-      <div class="topic-item" style="background:#f8f9fa; border-left:4px solid #d4af37; padding:1.2rem; margin-bottom:1rem; border-radius:6px; transition:all 0.3s ease;">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div style="flex:1;">
-            <!-- Topic Title -->
-            <h3 style="margin:0 0 0.5rem 0; font-size:1.2rem; color:#1a3c34;">
-              <i class="fas fa-comment-dots" style="color:#d4af37; margin-right:0.5rem;"></i>
-              ${topic.title || 'Untitled Topic'}
+        <div class="topic-item" style="background:#f8f9fa; border-left:4px solid #d4af37; padding:1.2rem; margin-bottom:1rem; border-radius:6px;">
+            <h3 style="margin:0 0 0.5rem 0; color:#1a3c34;">
+                <i class="fas fa-comment-dots" style="color:#d4af37; margin-right:0.5rem;"></i>
+                ${topic.title}
             </h3>
-            
-            <!-- Topic Description -->
-            ${topic.description ? `
-              <p style="color:#555; margin:0 0 0.8rem 0; font-size:0.95rem; line-height:1.4;">
-                ${topic.description}
-              </p>
-            ` : ''}
-            
-            <!-- Topic Metadata -->
-            <div style="display:flex; flex-wrap:wrap; gap:1.2rem; font-size:0.85rem; color:#666;">
-              <span style="display:flex; align-items:center; gap:0.3rem;">
-                <i class="fas fa-user" style="color:#1a3c34;"></i>
-                <span>${topic.user || 'Anonymous'}</span>
-              </span>
-              
-              <span style="display:flex; align-items:center; gap:0.3rem;">
-                <i class="fas fa-calendar-alt" style="color:#1a3c34;"></i>
-                <span>${topic.date ? formatDate(topic.date) : 'No date'}</span>
-              </span>
-              
-              <span style="display:flex; align-items:center; gap:0.3rem;">
-                <i class="fas fa-comments" style="color:#d4af37;"></i>
-                <span>${totalEngagement} message${totalEngagement !== 1 ? 's' : ''}</span>
-              </span>
-              
-              <span style="display:flex; align-items:center; gap:0.3rem;">
-                <i class="fas fa-fire" style="color:#c62828;"></i>
-                <span>${totalLikes} like${totalLikes !== 1 ? 's' : ''}</span>
-              </span>
-              
-              ${lastMessage ? `
-                <span style="display:flex; align-items:center; gap:0.3rem;">
-                  <i class="fas fa-clock" style="color:#666;"></i>
-                  <span>Last activity: ${formatDate(lastMessage.date)}</span>
-                </span>
-              ` : ''}
+
+            <div style="font-size:0.9rem; color:#666; display:flex; gap:1.5rem; flex-wrap:wrap;">
+                <span><i class="fas fa-user"></i> ${topic.user || "Anonymous"}</span>
+                <span><i class="fas fa-calendar"></i> ${formatDate(topic.date)}</span>
+                <span><i class="fas fa-comments"></i> ${messageCount} message${messageCount !== 1 ? 's' : ''}</span>
+                <span><i class="fas fa-fire"></i> ${totalLikes} like${totalLikes !== 1 ? 's' : ''}</span>
+                <span><i class="fas fa-clock"></i> Last activity: ${lastMessage ? formatDate(lastMessage.date) : formatDate(topic.date)}</span>
             </div>
-          </div>
-          
-          <!-- Action Buttons -->
-          <div style="display:flex; flex-direction:column; gap:0.5rem; min-width:120px;">
-            <!-- View Chat Button -->
+
             <button onclick="openChatThread('${topic.id}')" 
-              style="background:#1a3c34; color:white; border:none; padding:0.6rem 1rem; border-radius:6px; cursor:pointer; font-size:0.9rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:background 0.3s;">
-              <i class="fas fa-eye"></i>
-              View Chat
+                style="margin-top:1rem; background:#1a3c34; color:white; padding:0.6rem 1rem; border-radius:6px; border:none; cursor:pointer;">
+                <i class="fas fa-eye"></i> View Chat
             </button>
-            
-            <!-- Admin Delete Button (only shown in admin mode) -->
-            ${isAdminMode ? `
-              <button onclick="deleteTopic('${topic.id}')" 
-                style="background:#c62828; color:white; border:none; padding:0.6rem 1rem; border-radius:6px; cursor:pointer; font-size:0.9rem; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:background 0.3s;">
-                <i class="fas fa-trash"></i>
-                Delete Topic
-              </button>
-            ` : ''}
-          </div>
         </div>
-      </div>
-    `;
+        `;
   }).join('');
   
   container.innerHTML = topicsHtml;
@@ -1039,7 +1012,7 @@ function attemptAdminLogin() {
   const password = document.getElementById("adminPassword").value;
   
   if (password === ADMIN_PASSWORD) {
-    isAdminMode = true;
+    localStorage.setItem("isAdmin", "true");
     document.getElementById("adminPanel").style.display = "block";
     closeAdminLogin();
     loadTopics(); // Re-render with delete buttons
@@ -1222,7 +1195,9 @@ window.addEventListener('DOMContentLoaded', () => {
     adminBtn.innerHTML = '<i class="fas fa-user-shield"></i> Admin';
     adminBtn.style.cssText = "background:#d4af37; color:white; border:none; padding:0.5rem 1rem; border-radius:4px; cursor:pointer; margin-left:1rem;";
     adminBtn.onclick = showAdminLogin;
+    if (localStorage.getItem("isAdmin") === "true") {
     header.appendChild(adminBtn);
+}
   }
   
   // Load topics
