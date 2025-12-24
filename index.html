@@ -1419,6 +1419,16 @@
         }
 
         function syncAnalysisHeight() {
+            // Completely disable on mobile to prevent auto-expanding height
+            if (window.innerWidth <= 768) {
+                const analysisBox = document.getElementById('analysisDisplay');
+                if (analysisBox) {
+                    analysisBox.style.height = 'auto';
+                    analysisBox.style.maxHeight = 'none';
+                }
+                return;
+            }
+
             const sidebar = document.querySelector('.sidebar');
             const selectionCard = document.querySelector('.selection-card');
             const analysisBox = document.getElementById('analysisDisplay');
@@ -1607,6 +1617,10 @@
         }
 
         window.addEventListener('resize', syncAnalysisHeight);
+        window.addEventListener('scroll', function() {
+            if (window.innerWidth <= 768) return; // disable recalculation on mobile scroll
+            syncAnalysisHeight();
+        });
 
         const SHEET_ID = '1fs_DhXWii9a7_XruGo1OuEJ0KIB7iQ3whDmHUOc3SEk';
         const SHEET_NAME = 'Sheet1'; // change if needed
