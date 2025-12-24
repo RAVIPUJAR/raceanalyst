@@ -342,11 +342,39 @@ let currentPage = 1;
 const perPage = 10;
 
 // Load topics from KV
+// OLD/WRONG CODE (causing 404):
 async function loadTopics() {
-    const res = await fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/feedback/get-topics");
-    const data = await res.json();
-    topics = data.reverse();
-    renderTopics();
+  const response = await fetch("/feedback/get-topics"); // ← WRONG URL
+  const data = await response.json();
+  data.reverse(); // ← CAUSES ERROR if data not array
+  // ... display logic
+}
+
+// NEW/CORRECT CODE:
+async function loadTopics() {
+  try {
+    const response = await fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/chatcenter/get-topics");
+    
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    
+    let data = await response.json();
+    
+    // FIX for reverse() error:
+    if (!Array.isArray(data)) {
+      console.warn("Data is not array, converting:", data);
+      // Try different ways to get array
+      if (data && data.topics) data = data.topics;
+      else if (typeof data === 'object') data = Object.values(data);
+      else data = [];
+    }
+    
+    // NOW safe to reverse:
+    displayTopics(data.reverse());
+    
+  } catch (error) {
+    console.error("Failed to load topics:", error);
+    // Show error to user
+  }
 }
 
 function paginate(arr) {
