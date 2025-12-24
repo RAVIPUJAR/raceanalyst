@@ -1413,9 +1413,6 @@
         function initMainPage() {
             console.log("Initializing main page...");
             
-            // Database simulation
-            let raceAnalyses = {};
-
             // DOM Elements - NOW THEY EXIST
             const venueSelect = document.getElementById('venueSelect');
             const dateSelect = document.getElementById('dateSelect');
@@ -1513,30 +1510,7 @@
             return false;
         }
 
-            // Remove all localStorage references from your regular page
-            await loadFromKV();
-            initializeDropdowns();
-            createCalendar();
-            
-            // Auto-select latest analysis
-            const allKeys = Object.keys(raceAnalyses);
-            if (allKeys.length > 0) {
-                // Sort by date (newest first)
-                allKeys.sort((a, b) => {
-                    const dateA = raceAnalyses[a].date;
-                    const dateB = raceAnalyses[b].date;
-                    return dateB.localeCompare(dateA);
-                });
-                
-                const latestKey = allKeys[0];
-                const latest = raceAnalyses[latestKey];
-                
-                venueSelect.value = latest.venue;
-                updateDateDropdown();
-                raceSelect.value = latestKey;
-                displayAnalysis(latestKey);
-                setTimeout(syncAnalysisHeight, 0);
-            };
+
 
         window.addEventListener('resize', syncAnalysisHeight);
         // Export/Import functionality for backup
