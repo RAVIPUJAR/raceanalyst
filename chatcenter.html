@@ -304,6 +304,26 @@
                 padding: 0.8rem 0;
             }
         }
+
+        .topic-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: #f0f7f4 !important;
+        }
+
+        .topic-item button:hover {
+            opacity: 0.9;
+        }
+
+        #chatOverlay {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
     </style>
 </head>
 
@@ -346,11 +366,18 @@
 <div id="chatOverlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:1000; justify-content:center; align-items:center;">
     <div id="chatContainer" style="background:white; width:90%; max-width:800px; max-height:90vh; border-radius:12px; display:flex; flex-direction:column;">
         <!-- Chat Header -->
-        <div style="background:#1a3c34; color:white; padding:1rem; border-radius:12px 12px 0 0; display:flex; justify-content:space-between; align-items:center;">
-            <h3 id="chatTopicTitle" style="margin:0; color:white;"></h3>
-            <button onclick="closeChatThread()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">
+        <div style="background:linear-gradient(135deg, #1a3c34 0%, #244e44 100%); color:white; padding:1.2rem; border-radius:12px 12px 0 0;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div style="flex:1;">
+                    <div id="chatTopicTitle">
+                        <!-- Topic details will be inserted here -->
+                    </div>
+                </div>
+                <button onclick="closeChatThread()" 
+                style="background:rgba(255,255,255,0.2); color:white; border:none; width:40px; height:40px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:1.2rem; transition:background 0.3s;">
                 <i class="fas fa-times"></i>
-            </button>
+                </button>
+            </div>
         </div>
         
         <!-- Chat Messages -->
@@ -452,6 +479,7 @@ async function loadTopics() {
 }
 
 // 2. Render topics list with expandable chat preview
+// 2. Render topics list - SIMPLIFIED: Only shows topic, not messages
 function renderTopics(topics) {
   const container = document.getElementById("topicsList");
   const pagination = document.getElementById("pagination");
@@ -479,7 +507,7 @@ function renderTopics(topics) {
   const pageTopics = sortedTopics.slice(startIndex, endIndex);
   const totalPages = Math.ceil(sortedTopics.length / itemsPerPage);
   
-  // Create HTML for each topic
+  // Create SIMPLIFIED HTML for each topic - NO MESSAGE PREVIEWS
   const topicsHtml = pageTopics.map(topic => {
     const messageCount = topic.messages ? topic.messages.length : 0;
     const lastMessage = topic.messages && topic.messages.length > 0 
@@ -488,10 +516,12 @@ function renderTopics(topics) {
     
     // Calculate total likes for this topic
     let totalLikes = 0;
+    let totalReplies = 0;
     if (topic.messages) {
       topic.messages.forEach(msg => {
         totalLikes += msg.likes || 0;
         if (msg.replies) {
+          totalReplies += msg.replies.length;
           msg.replies.forEach(reply => {
             totalLikes += reply.likes || 0;
           });
@@ -499,51 +529,72 @@ function renderTopics(topics) {
       });
     }
     
+    // Calculate total engagement (messages + replies)
+    const totalEngagement = messageCount + totalReplies;
+    
     return `
-      <div class="topic-item" style="background:#f8f9fa; border-left:4px solid #d4af37; padding:1rem; margin-bottom:1rem; border-radius:4px;">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div class="topic-item" style="background:#f8f9fa; border-left:4px solid #d4af37; padding:1.2rem; margin-bottom:1rem; border-radius:6px; transition:all 0.3s ease;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
           <div style="flex:1;">
-            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
-              <h3 style="margin:0; font-size:1.1rem;">
-                <a href="javascript:void(0)" onclick="openChatThread('${topic.id}')" style="color:#1a3c34; text-decoration:none; font-weight:600;">
-                  <i class="fas fa-comment-dots" style="color:#d4af37; margin-right:0.5rem;"></i>
-                  ${topic.title || 'Untitled Topic'}
-                </a>
-              </h3>
-              <span style="background:#e8f5e9; color:#2e7d32; padding:0.2rem 0.5rem; border-radius:12px; font-size:0.8rem;">
-                <i class="fas fa-fire" style="margin-right:0.3rem;"></i>${totalLikes} likes
-              </span>
-            </div>
+            <!-- Topic Title -->
+            <h3 style="margin:0 0 0.5rem 0; font-size:1.2rem; color:#1a3c34;">
+              <i class="fas fa-comment-dots" style="color:#d4af37; margin-right:0.5rem;"></i>
+              ${topic.title || 'Untitled Topic'}
+            </h3>
             
+            <!-- Topic Description -->
             ${topic.description ? `
-              <p style="color:#555; margin:0 0 0.5rem 0; font-size:0.9rem;">
+              <p style="color:#555; margin:0 0 0.8rem 0; font-size:0.95rem; line-height:1.4;">
                 ${topic.description}
               </p>
             ` : ''}
             
-            <!-- First 2 messages as preview -->
-            ${topic.messages && topic.messages.length > 0 ? renderMessagePreview(topic.messages.slice(0, 2)) : ''}
-            
-            <div style="display:flex; flex-wrap:wrap; gap:1rem; font-size:0.85rem; color:#666; margin-top:0.5rem;">
-              <span><i class="fas fa-user" style="margin-right:0.3rem;"></i> ${topic.user || 'Anonymous'}</span>
-              <span><i class="fas fa-calendar" style="margin-right:0.3rem;"></i> ${topic.date || 'No date'}</span>
-              <span><i class="fas fa-comment" style="margin-right:0.3rem;"></i> ${messageCount} message${messageCount !== 1 ? 's' : ''}</span>
+            <!-- Topic Metadata -->
+            <div style="display:flex; flex-wrap:wrap; gap:1.2rem; font-size:0.85rem; color:#666;">
+              <span style="display:flex; align-items:center; gap:0.3rem;">
+                <i class="fas fa-user" style="color:#1a3c34;"></i>
+                <span>${topic.user || 'Anonymous'}</span>
+              </span>
+              
+              <span style="display:flex; align-items:center; gap:0.3rem;">
+                <i class="fas fa-calendar-alt" style="color:#1a3c34;"></i>
+                <span>${topic.date ? formatDate(topic.date) : 'No date'}</span>
+              </span>
+              
+              <span style="display:flex; align-items:center; gap:0.3rem;">
+                <i class="fas fa-comments" style="color:#d4af37;"></i>
+                <span>${totalEngagement} message${totalEngagement !== 1 ? 's' : ''}</span>
+              </span>
+              
+              <span style="display:flex; align-items:center; gap:0.3rem;">
+                <i class="fas fa-fire" style="color:#c62828;"></i>
+                <span>${totalLikes} like${totalLikes !== 1 ? 's' : ''}</span>
+              </span>
               
               ${lastMessage ? `
-                <span><i class="fas fa-clock" style="margin-right:0.3rem;"></i> Last: ${formatDate(lastMessage.date)}</span>
+                <span style="display:flex; align-items:center; gap:0.3rem;">
+                  <i class="fas fa-clock" style="color:#666;"></i>
+                  <span>Last activity: ${formatDate(lastMessage.date)}</span>
+                </span>
               ` : ''}
             </div>
           </div>
           
-          <div style="display:flex; gap:0.5rem;">
-            <button onclick="openChatThread('${topic.id}')" style="background:#1a3c34; color:white; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; font-size:0.85rem;">
-              <i class="fas fa-eye"></i> View Chat
+          <!-- Action Buttons -->
+          <div style="display:flex; flex-direction:column; gap:0.5rem; min-width:120px;">
+            <!-- View Chat Button -->
+            <button onclick="openChatThread('${topic.id}')" 
+              style="background:#1a3c34; color:white; border:none; padding:0.6rem 1rem; border-radius:6px; cursor:pointer; font-size:0.9rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:background 0.3s;">
+              <i class="fas fa-eye"></i>
+              View Chat
             </button>
             
+            <!-- Admin Delete Button (only shown in admin mode) -->
             ${isAdminMode ? `
-              <button onclick="deleteTopic('${topic.id}')" class="delete-btn" 
-                style="background:#c62828; color:white; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; font-size:0.85rem;">
-                <i class="fas fa-trash"></i> Delete
+              <button onclick="deleteTopic('${topic.id}')" 
+                style="background:#c62828; color:white; border:none; padding:0.6rem 1rem; border-radius:6px; cursor:pointer; font-size:0.9rem; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:background 0.3s;">
+                <i class="fas fa-trash"></i>
+                Delete Topic
               </button>
             ` : ''}
           </div>
@@ -642,14 +693,53 @@ function renderPagination(currentPage, totalPages) {
 }
 
 // 5. Open chat thread in overlay
+// 5. Open chat thread in overlay - ENHANCED to show topic details
 function openChatThread(topicId) {
   const topic = allTopics.find(t => t.id === topicId);
   if (!topic) return;
   
   currentOpenTopic = topic;
   
-  // Update UI
-  document.getElementById("chatTopicTitle").textContent = topic.title || "Chat";
+  // Calculate stats for this topic
+  let totalLikes = 0;
+  let totalReplies = 0;
+  if (topic.messages) {
+    topic.messages.forEach(msg => {
+      totalLikes += msg.likes || 0;
+      if (msg.replies) {
+        totalReplies += msg.replies.length;
+        msg.replies.forEach(reply => {
+          totalLikes += reply.likes || 0;
+        });
+      }
+    });
+  }
+  
+  const totalMessages = (topic.messages ? topic.messages.length : 0) + totalReplies;
+  
+  // Update chat header with topic details
+  const headerHtml = `
+    <div>
+      <h3 style="margin:0 0 0.3rem 0; color:white; font-size:1.3rem;">
+        <i class="fas fa-comment-dots" style="margin-right:0.5rem;"></i>
+        ${topic.title || 'Chat Topic'}
+      </h3>
+      <div style="display:flex; gap:1rem; font-size:0.85rem; opacity:0.9;">
+        <span><i class="fas fa-user"></i> ${topic.user || 'Anonymous'}</span>
+        <span><i class="fas fa-calendar"></i> ${topic.date ? formatDate(topic.date) : ''}</span>
+        <span><i class="fas fa-comments"></i> ${totalMessages} messages</span>
+        <span><i class="fas fa-fire"></i> ${totalLikes} likes</span>
+      </div>
+      ${topic.description ? `
+        <div style="margin-top:0.5rem; padding:0.5rem; background:rgba(255,255,255,0.1); border-radius:4px; font-size:0.9rem;">
+          <i class="fas fa-info-circle" style="margin-right:0.3rem;"></i>
+          ${topic.description}
+        </div>
+      ` : ''}
+    </div>
+  `;
+  
+  document.getElementById("chatTopicTitle").innerHTML = headerHtml;
   document.getElementById("chatMessages").scrollTop = 0;
   
   // Render messages
@@ -657,7 +747,12 @@ function openChatThread(topicId) {
   
   // Show overlay
   document.getElementById("chatOverlay").style.display = "flex";
-  document.body.style.overflow = "hidden"; // Prevent scrolling behind overlay
+  document.body.style.overflow = "hidden";
+  
+  // Focus on reply input
+  setTimeout(() => {
+    document.getElementById("chatReplyInput").focus();
+  }, 300);
 }
 
 // 6. Render chat messages
