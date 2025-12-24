@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const footerHtml = await fetch("shared/footer.html").then(r => r.text());
     footerContainer.innerHTML = footerHtml;
+    // Signal that layout (header + footer) is ready
+    window.dispatchEvent(new Event("layoutReady"));
 
     // Highlight Active Page
     const currentPage = location.pathname.split("/").pop().replace(".html", "");
