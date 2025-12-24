@@ -20,6 +20,9 @@
         // Setup mobile menu
         setTimeout(setupMobileMenu, 100);
         
+        // Setup smooth scroll - ADD THIS LINE
+         setTimeout(setupSmoothScroll, 150);
+         
         // Signal that include.js is done
         window.includeJsReady = true;
         window.dispatchEvent(new Event('includeJsReady'));
@@ -45,7 +48,7 @@
                         <li><a href="index.html">
                             <i class="fas fa-home"></i> Home</a>
                         </li>
-                        <li><a href="#">
+                        <li><a href="#calendarWidget">
                             <i class="fas fa-calendar-alt"></i> Race Calendar</a>
                         </li>
                         <li><a href="chatcenter.html">
@@ -137,6 +140,52 @@
                 }
             });
         }
+    }
+
+    function setupSmoothScroll() {
+    document.addEventListener('click', function(e) {
+        // Check if clicked element is an anchor with hash
+        const link = e.target.closest('a[href^="#"]');
+        if (!link) return;
+        
+        const href = link.getAttribute('href');
+        if (href === '#' || href === '#!') return; // Skip empty hashes
+        
+        const targetId = href.substring(1); // Remove the #
+        const target = document.getElementById(targetId);
+        
+        if (target) {
+            e.preventDefault();
+            
+            // Close mobile menu if open
+            const navMenu = document.getElementById('navMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            if (navMenu && navMenu.classList.contains('active') && mobileMenuBtn) {
+                navMenu.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+            
+            // Smooth scroll to target
+            const headerHeight = document.querySelector('header')?.offsetHeight || 80;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+            
+            // Optional: Add highlight effect
+            const originalBoxShadow = target.style.boxShadow;
+            target.style.transition = 'box-shadow 0.3s ease';
+            target.style.boxShadow = '0 0 0 3px rgba(212, 175, 55, 0.3)';
+            
+            setTimeout(() => {
+                target.style.boxShadow = originalBoxShadow;
+            }, 1500);
+            }
+        });
     }
     
     // Run immediately if DOM is already loaded, otherwise wait
