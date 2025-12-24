@@ -1541,26 +1541,24 @@ window.addEventListener('includeJsReady', async () => {
     }
     // Close mobile menu and smooth scroll when a nav item is clicked
     document.querySelectorAll('.nav-menu a').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const targetId = link.getAttribute('href');
-
-            // Only scroll if href is a valid id (ignore '#')
-            if (targetId.startsWith('#') && targetId.length > 1) {
+        const targetId = link.getAttribute('href');
+        if (targetId.startsWith('#') && targetId.length > 1) {
+            link.addEventListener('click', (e) => {
                 e.preventDefault(); // prevent default jump
                 const target = document.querySelector(targetId);
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-            }
 
-            // Close mobile menu if open
-            if (navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
+                // Close mobile menu if open (mobile only)
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        }
     });
     await loadFromKV();
     initializeDropdowns();
