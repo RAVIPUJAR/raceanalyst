@@ -2064,7 +2064,7 @@
     /* ---------------------------------------------------
     UPDATE ADMIN PANEL TOGGLE
     --------------------------------------------------- */
-
+    const adminMenuItem = document.querySelector('.admin-label span');
     adminMenuItem.addEventListener('click', async () => {
         const canProceed = await requireAuth('access admin panel');
         if (!canProceed) return;
