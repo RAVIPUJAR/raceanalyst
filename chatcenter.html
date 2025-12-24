@@ -464,7 +464,6 @@ let currentOpenTopic = null;
 let isAdminMode = false;
 let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}'); // Track user likes
 
-if (!enable) localStorage.removeItem("isAdmin");
 // Simple admin password (change this in production!)
 const ADMIN_PASSWORD = "raceadmin123";
 
