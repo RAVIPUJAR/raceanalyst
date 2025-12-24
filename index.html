@@ -813,13 +813,6 @@
             .nav-overlay.active {
                 display: block;
             }
-            
-            /* Admin menu item styling for mobile */
-            .admin-menu-item-mobile {
-                margin-top: 20px;
-                border-top: 1px solid rgba(255,255,255,0.2);
-                padding-top: 20px;
-            }
         }
         
         @media (max-width: 480px) {
@@ -838,77 +831,6 @@
                 padding: 12px 20px;
                 font-size: 0.9rem;
             }
-        }
-        
-        /* Chat Center Styles */
-        .chat-center-popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            width: 90%;
-            max-width: 400px;
-            z-index: 10000;
-            overflow: hidden;
-        }
-        
-        .chat-popup-header {
-            background: #1a3c34;
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .chat-popup-header h3 {
-            color: white;
-            margin: 0;
-        }
-        
-        .close-chat-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0;
-        }
-        
-        .chat-popup-content {
-            padding: 20px;
-        }
-        
-        .chat-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .chat-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #333;
-            transition: all 0.3s;
-        }
-        
-        .chat-option:hover {
-            background: #e9ecef;
-            transform: translateY(-2px);
-        }
-        
-        .chat-option i {
-            font-size: 1.2rem;
-            color: #d4af37;
         }
     </style>
 </head>
@@ -931,10 +853,8 @@
                 <ul>
                     <li><a href="#" id="homeLink"><i class="fas fa-home"></i> Home</a></li>
                     <li><a href="#" id="raceCalendarLink"><i class="fas fa-calendar-alt"></i> Race Calendar</a></li>
-                    <li><a href="#" id="chatCenterLink"><i class="fas fa-comments"></i> Chat Center</a></li>
+                    <li><a href="https://raceanalyst.pages.dev/chatcenter" target="_blank" id="chatCenterLink"><i class="fas fa-comments"></i> Chat Center</a></li>
                     <li><a href="#" class="admin-menu-item" id="adminLink"><i class="fas fa-lock"></i> Admin</a></li>
-                    <li class="admin-menu-item-mobile"><a href="#" onclick="window.exportRaceData()"><i class="fas fa-download"></i> Export</a></li>
-                    <li class="admin-menu-item-mobile"><a href="#" onclick="window.importRaceData()"><i class="fas fa-upload"></i> Import</a></li>
                 </ul>
             </nav>
             
@@ -1094,7 +1014,7 @@
                     <h4>Quick Links</h4>
                     <p><a href="#todaysSelectionsBtn" style="color: #d4af37; text-decoration: none;">Today's Selections</a></p>
                     <p><a href="#" id="footerRaceCalendar" style="color: #d4af37; text-decoration: none;">Race Calendar</a></p>
-                    <p><a href="#" id="footerChatCenter" style="color: #d4af37; text-decoration: none;">Chat Center</a></p>
+                    <p><a href="https://raceanalyst.pages.dev/chatcenter" target="_blank" style="color: #d4af37; text-decoration: none;">Chat Center</a></p>
                 </div>
                 <div class="footer-section">
                     <h4>Connect With Us</h4>
@@ -1110,41 +1030,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Chat Center Popup -->
-    <div class="chat-center-popup" id="chatCenterPopup">
-        <div class="chat-popup-header">
-            <h3>Chat Center</h3>
-            <button class="close-chat-btn" id="closeChatBtn">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="chat-popup-content">
-            <div class="chat-options">
-                <a href="https://t.me/raceanalyst" target="_blank" class="chat-option">
-                    <i class="fab fa-telegram"></i>
-                    <div>
-                        <strong>Telegram Group</strong>
-                        <small>Join our community for live discussions</small>
-                    </div>
-                </a>
-                <a href="https://wa.me/yournumber" target="_blank" class="chat-option">
-                    <i class="fab fa-whatsapp"></i>
-                    <div>
-                        <strong>WhatsApp Updates</strong>
-                        <small>Get instant race updates</small>
-                    </div>
-                </a>
-                <a href="mailto:info@raceanalyst.com" class="chat-option">
-                    <i class="fas fa-envelope"></i>
-                    <div>
-                        <strong>Email Support</strong>
-                        <small>Contact us for queries</small>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
 
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
@@ -1168,14 +1053,8 @@
         // Navigation elements
         const homeLink = document.getElementById('homeLink');
         const raceCalendarLink = document.getElementById('raceCalendarLink');
-        const chatCenterLink = document.getElementById('chatCenterLink');
         const adminLink = document.getElementById('adminLink');
         const footerRaceCalendar = document.getElementById('footerRaceCalendar');
-        const footerChatCenter = document.getElementById('footerChatCenter');
-        
-        // Chat Center elements
-        const chatCenterPopup = document.getElementById('chatCenterPopup');
-        const closeChatBtn = document.getElementById('closeChatBtn');
         
         // Mobile menu elements
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -1509,34 +1388,6 @@
                 showToast('Viewing Race Calendar', 'info');
             });
             
-            // Chat Center functionality
-            chatCenterLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                chatCenterPopup.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            });
-            
-            // Footer Chat Center link
-            footerChatCenter.addEventListener('click', function(e) {
-                e.preventDefault();
-                chatCenterPopup.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            });
-            
-            // Close Chat Center
-            closeChatBtn.addEventListener('click', function() {
-                chatCenterPopup.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Close Chat Center when clicking outside
-            window.addEventListener('click', function(e) {
-                if (e.target === chatCenterPopup) {
-                    chatCenterPopup.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }
-            });
-            
             // Admin Panel functionality
             adminLink.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1735,46 +1586,6 @@
         }
 
         window.addEventListener('resize', syncAnalysisHeight);
-        
-        // Export/Import functionality for backup
-        window.exportRaceData = function() {
-            const dataStr = JSON.stringify(raceAnalyses, null, 2);
-            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-            const exportFileDefaultName = 'race-analyses-backup.json';
-            
-            const linkElement = document.createElement('a');
-            linkElement.setAttribute('href', dataUri);
-            linkElement.setAttribute('download', exportFileDefaultName);
-            linkElement.click();
-            
-            showToast('Data exported successfully!');
-        };
-
-        window.importRaceData = function() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.json';
-            
-            input.onchange = function(e) {
-                const file = e.target.files[0];
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    try {
-                        const imported = JSON.parse(e.target.result);
-                        raceAnalyses = imported;
-                        initializeDropdowns();
-                        showToast('Data imported successfully!');
-                    } catch (err) {
-                        showToast('Error importing data', 'error');
-                    }
-                };
-                
-                reader.readAsText(file);
-            };
-            
-            input.click();
-        };
 
         const SHEET_ID = '1fs_DhXWii9a7_XruGo1OuEJ0KIB7iQ3whDmHUOc3SEk';
         const SHEET_NAME = 'Sheet1'; // change if needed
