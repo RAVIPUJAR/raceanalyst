@@ -787,6 +787,34 @@
                 gap: 0.5rem;
             }
         }
+
+        /* Mobile menu styles - ADD THIS */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block !important;
+            }
+            
+            .nav-menu ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                background: #1a3c34;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 1rem 0;
+                z-index: 1000;
+            }
+            
+            .nav-menu.active ul {
+                display: flex !important;
+            }
+            
+            .nav-menu ul li {
+                padding: 0.8rem 0;
+            }
+        }
     </style>
 </head>
 <body>
