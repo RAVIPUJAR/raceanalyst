@@ -631,7 +631,7 @@ function renderTopics(topics) {
         <div style="font-size:0.9rem; color:#444; display:flex; gap:1.5rem; flex-wrap:wrap; margin-top:6px;">
             <span><i class="fas fa-user"></i> ${topic.user || "Anonymous"}</span>
             <span><i class="fas fa-calendar"></i> ${formatDate(topic.date)}</span>
-            <span><i class="fas fa-comments"></i> ${messageCount} message${messageCount !== 1 ? 's' : ''}</span>
+            <span><i class="fas fa-comments" style="color:#25D366;"></i> ${messageCount} message${messageCount !== 1 ? 's' : ''}</span>
             <span><i class="fas fa-heart" style="color:#e91e63;"></i> ${totalLikes} like${totalLikes !== 1 ? 's' : ''}</span>
             <span><i class="fas fa-clock"></i> Last activity: ${lastMessage ? formatDate(lastMessage.date) : formatDate(topic.date)}</span>
         </div>
@@ -763,7 +763,7 @@ function openChatThread(topicId) {
       <div style="display:flex; gap:1rem; font-size:0.85rem; opacity:0.9;">
         <span><i class="fas fa-user"></i> ${topic.user || 'Anonymous'}</span>
         <span><i class="fas fa-calendar"></i> ${topic.date ? formatDate(topic.date) : ''}</span>
-        <span><i class="fas fa-comments"></i> ${totalMessages} messages</span>
+        <span><i class="fas fa-comments" style="color:#25D366;"></i> ${totalMessages} messages</span>
         <span><i class="fas fa-fire"></i> ${totalLikes} likes</span>
       </div>
       ${topic.description ? `
