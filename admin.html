@@ -1472,6 +1472,85 @@
         calendarWidget.innerHTML = calendarHTML;
     }
 
+    /* ---------------------------------------------------
+    LOAD UPCOMING RACES FROM GOOGLE SHEETS
+    --------------------------------------------------- */
+    const SHEET_ID = '1fs_DhXWii9a7_XruGo1OuEJ0KIB7iQ3whDmHUOc3SEk';
+    const SHEET_NAME = 'Sheet1';
+
+    async function loadUpcomingRacesFromSheet() {
+        const url = `https://opensheet.elk.sh/${SHEET_ID}/${SHEET_NAME}`;
+        const list = document.getElementById('upcomingRaces');
+
+        if (!list) {
+            console.warn("upcomingRaces element not found");
+            return;
+        }
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+            const races = await response.json();
+            
+            // Clear loading message
+            list.innerHTML = '';
+
+            const todayDate = new Date();
+            todayDate.setHours(0, 0, 0, 0);
+
+            // Filter and sort upcoming races
+            const upcoming = races
+                .filter(r => r.venue && r.date)
+                .filter(r => {
+                    try {
+                        const raceDate = new Date(r.date);
+                        raceDate.setHours(0, 0, 0, 0);
+                        return raceDate >= todayDate;
+                    } catch (e) {
+                        console.error("Error parsing date for race:", r);
+                        return false;
+                    }
+                })
+                .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            if (upcoming.length === 0) {
+                list.innerHTML = '<li>No upcoming major races</li>';
+                return;
+            }
+
+            // Display upcoming races (limit to 5)
+            upcoming.slice(0, 5).forEach(race => {
+                try {
+                    const dateObj = new Date(race.date);
+                    const formattedDate = dateObj.toLocaleDateString('en-IN', {
+                        day: '2-digit',
+                        month: 'short',
+                        year: 'numeric'
+                    });
+
+                    list.innerHTML += `
+                        <li>
+                            <span class="race-venue">${race.venue}</span>
+                            <span class="race-date">${formattedDate}</span>
+                        </li>
+                    `;
+                } catch (e) {
+                    console.error("Error processing race:", race);
+                }
+            });
+
+        } catch (err) {
+            console.error("Failed to load upcoming races:", err);
+            list.innerHTML = `
+                <li style="color: #dc3545;">
+                    <i class="fas fa-exclamation-circle"></i> Unable to load races
+                </li>
+            `;
+        }
+    }
 
     /* ---------------------------------------------------
     INITIALIZATION
