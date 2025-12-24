@@ -1814,6 +1814,380 @@
         }
     });
 
+    /* ---------------------------------------------------
+    CLOUDFLARE ZERO TRUST AUTHENTICATION
+    --------------------------------------------------- */
+
+    // Global auth state
+    let currentUser = null;
+    let isAuthenticated = false;
+
+    /* ---------------------------------------------------
+    AUTHENTICATION FUNCTIONS
+    --------------------------------------------------- */
+    async function checkCloudflareAuth() {
+        try {
+            console.log("🔐 Checking Cloudflare authentication...");
+            
+            const response = await fetch(workerBase + "/auth-status", {
+                method: 'GET',
+                credentials: 'include', // Crucial for sending cookies/auth headers
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            console.log("Auth check response status:", response.status);
+            
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Auth data received:", data);
+                
+                if (data.authenticated) {
+                    currentUser = {
+                        email: data.email,
+                        name: data.name,
+                        authenticated: true
+                    };
+                    isAuthenticated = true;
+                    
+                    console.log(`✅ Authenticated as: ${data.name || data.email || 'User'}`);
+                    return { 
+                        authenticated: true, 
+                        user: currentUser,
+                        data: data 
+                    };
+                }
+            } else if (response.status === 401) {
+                console.log("❌ Not authenticated (401)");
+            }
+            
+            // Not authenticated
+            currentUser = null;
+            isAuthenticated = false;
+            console.log("❌ Not authenticated");
+            return { 
+                authenticated: false, 
+                user: null,
+                status: response.status 
+            };
+            
+        } catch (error) {
+            console.error("Auth check failed:", error);
+            currentUser = null;
+            isAuthenticated = false;
+            return { 
+                authenticated: false, 
+                user: null, 
+                error: error.message 
+            };
+        }
+    }
+
+    // Debug function to check headers
+    async function debugHeaders() {
+        try {
+            const response = await fetch(workerBase + "/debug-headers", {
+                method: 'GET',
+                credentials: 'include'
+            });
+            
+            const data = await response.json();
+            console.log("📋 Headers debug:", data);
+            return data;
+        } catch (error) {
+            console.error("Debug failed:", error);
+            return { error: error.message };
+        }
+    }
+
+    /* ---------------------------------------------------
+    PROTECTED ACTION WRAPPER
+    --------------------------------------------------- */
+    async function requireAuth(actionName = 'perform this action') {
+        if (!isAuthenticated) {
+            const authResult = await checkCloudflareAuth();
+            if (!authResult.authenticated) {
+                showToast(`Please login to ${actionName}`, 'error');
+                
+                // Offer to redirect after a short delay
+                setTimeout(() => {
+                    if (confirm(`Admin access requires authentication. Would you like to login now to ${actionName}?`)) {
+                        // Force a page reload which should trigger Cloudflare Zero Trust
+                        window.location.href = window.location.origin;
+                    }
+                }, 500);
+                
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+    /* ---------------------------------------------------
+    UPDATE EVENT HANDLERS
+    --------------------------------------------------- */
+    // Save button - with auth check
+    saveBtn.addEventListener('click', async function(e) {
+        e.preventDefault();
+        
+        const canProceed = await requireAuth('save analysis');
+        if (!canProceed) return;
+        
+        // Original save logic
+        const venue = adminVenue.value.trim();
+        const date = adminDate.value;
+        const raceNo = adminRaceNo.value.trim();
+        const analysis = adminAnalysis.value.trim();
+        
+        if (!venue || !date || !raceNo || !analysis) {
+            showToast('Please fill all fields', 'error');
+            return;
+        }
+        
+        const key = generateKey(venue, date, raceNo);
+        const data = { venue, date, raceNo, analysis };
+        
+        // Check if already exists
+        if (raceAnalyses[key]) {
+            if (!confirm('Analysis already exists for this race. Update?')) {
+                return;
+            }
+        }
+        
+        try {
+            // Save to KV
+            await saveToKV(key, data);
+            
+            // Update local state
+            raceAnalyses[key] = data;
+            
+            showToast('✅ Analysis saved to cloud!', 'success');
+            
+            // Refresh UI
+            initializeDropdowns();
+            venueSelect.value = venue;
+            updateDateDropdown();
+            raceSelect.value = key;
+            displayAnalysis(key);
+            
+        } catch (error) {
+            showToast(`❌ Failed to save: ${error.message}`, 'error');
+            console.error("Save failed:", error);
+        }
+    });
+
+    // Update button - with auth check
+    updateBtn.addEventListener('click', async function(e) {
+        e.preventDefault();
+        
+        const canProceed = await requireAuth('update analysis');
+        if (!canProceed) return;
+        
+        // Original update logic
+        const selectedKey = raceSelect.value;
+        if (!selectedKey || !raceAnalyses[selectedKey]) {
+            showToast('Select a race first', 'error');
+            return;
+        }
+        
+        const venue = adminVenue.value.trim();
+        const date = adminDate.value;
+        const raceNo = adminRaceNo.value.trim();
+        const analysis = adminAnalysis.value.trim();
+        
+        if (!venue || !date || !raceNo || !analysis) {
+            showToast('Please fill all fields', 'error');
+            return;
+        }
+        
+        const newKey = generateKey(venue, date, raceNo);
+        const data = { venue, date, raceNo, analysis };
+        
+        try {
+            // Save new entry to KV
+            await saveToKV(newKey, data);
+            
+            // Delete old entry if key changed
+            if (selectedKey !== newKey) {
+                await deleteFromKV(selectedKey);
+            }
+            
+            // Update local state
+            if (selectedKey !== newKey) {
+                delete raceAnalyses[selectedKey];
+            }
+            raceAnalyses[newKey] = data;
+            
+            showToast('✅ Analysis updated in cloud!', 'success');
+            
+            // Refresh UI
+            initializeDropdowns();
+            raceSelect.value = newKey;
+            displayAnalysis(newKey);
+            
+        } catch (error) {
+            showToast(`❌ Failed to update: ${error.message}`, 'error');
+            console.error("Update failed:", error);
+        }
+    });
+
+    // Delete button - with auth check
+    deleteBtn.addEventListener('click', async function(e) {
+        e.preventDefault();
+        
+        const canProceed = await requireAuth('delete analysis');
+        if (!canProceed) return;
+        
+        const selectedKey = raceSelect.value;
+        if (!selectedKey || !raceAnalyses[selectedKey]) {
+            showToast('Select a race first', 'error');
+            return;
+        }
+        
+        if (!confirm('Are you sure you want to delete this analysis?')) {
+            return;
+        }
+        
+        try {
+            // Delete from KV
+            await deleteFromKV(selectedKey);
+            
+            // Delete from local state
+            delete raceAnalyses[selectedKey];
+            
+            showToast('✅ Analysis deleted from cloud!', 'success');
+            
+            // Refresh UI
+            initializeDropdowns();
+            
+            // Clear analysis display
+            analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race to view analysis</p></div>';
+            analysisTitle.textContent = 'Race Analysis';
+            raceInfo.style.display = 'none';
+            
+        } catch (error) {
+            showToast(`❌ Failed to delete: ${error.message}`, 'error');
+            console.error("Delete failed:", error);
+        }
+    });
+
+    /* ---------------------------------------------------
+    UPDATE ADMIN PANEL TOGGLE
+    --------------------------------------------------- */
+
+    adminMenuItem.addEventListener('click', async () => {
+        const canProceed = await requireAuth('access admin panel');
+        if (!canProceed) return;
+        
+        // User is authenticated, show admin panel
+        adminPanel.style.display = 'block';
+        showToast(`Welcome ${currentUser.name || currentUser.email || 'Admin'}!`, 'success');
+    });
+
+    // Hide admin panel
+    hideAdminBtn.addEventListener('click', () => {
+        adminPanel.style.display = 'none';
+    });
+
+    /* ---------------------------------------------------
+    UPDATE INITIALIZATION
+    --------------------------------------------------- */
+    document.addEventListener('DOMContentLoaded', async function() {
+        console.log("🚀 Initializing RaceAnalyst Admin with Cloudflare Auth...");
+        
+        try {
+            // First check authentication
+            const authResult = await checkCloudflareAuth();
+            
+            // Debug: Check headers (optional)
+            // await debugHeaders();
+            
+            if (authResult.authenticated) {
+                console.log(`✅ Authenticated as: ${authResult.user.name || authResult.user.email || 'User'}`);
+                
+                // Update UI for authenticated user
+                const adminLabel = document.querySelector('.admin-label span');
+                if (adminLabel) {
+                    adminLabel.innerHTML = `
+                        <i class="fas fa-user-shield"></i> 
+                        ${authResult.user.name ? `Admin (${authResult.user.name})` : 
+                        authResult.user.email ? `Admin (${authResult.user.email})` : 'Admin'}
+                    `;
+                }
+                
+                showToast(`Welcome ${authResult.user.name || authResult.user.email || 'Admin'}!`, 'success');
+            } else {
+                console.log("⚠️ Not authenticated - admin features will be limited");
+                
+                // Update UI for non-authenticated user
+                const adminLabel = document.querySelector('.admin-label');
+                if (adminLabel) {
+                    adminLabel.style.opacity = '0.6';
+                    adminLabel.title = 'Login required for admin access';
+                    
+                    // Change text to indicate login needed
+                    const span = adminLabel.querySelector('span');
+                    if (span) {
+                        span.innerHTML = '<i class="fas fa-user-lock"></i> Login for Admin';
+                    }
+                }
+                
+                showToast('Login for full admin access', 'info');
+            }
+            
+            // Load race analyses from Cloudflare KV
+            const loadResult = await loadFromKV();
+            
+            // Initialize UI components
+            initializeDropdowns();
+            createCalendar();
+            loadUpcomingRacesFromSheet();
+            
+            // Auto-select the first analysis if available
+            if (raceAnalyses && typeof raceAnalyses === 'object') {
+                const allKeys = Object.keys(raceAnalyses);
+                if (allKeys.length > 0) {
+                    allKeys.sort((a, b) => {
+                        const analysisA = raceAnalyses[a];
+                        const analysisB = raceAnalyses[b];
+                        
+                        if (!analysisA || !analysisB || !analysisA.date || !analysisB.date) {
+                            return 0;
+                        }
+                        
+                        return analysisB.date.localeCompare(analysisA.date);
+                    });
+                    
+                    const latestKey = allKeys[0];
+                    const latest = raceAnalyses[latestKey];
+                    
+                    if (latest && latest.venue) {
+                        venueSelect.value = latest.venue;
+                        updateDateDropdown();
+                        raceSelect.value = latestKey;
+                        displayAnalysis(latestKey);
+                    }
+                }
+            }
+            
+            console.log("✅ Admin page ready!");
+            console.log("Auth status:", isAuthenticated ? 'Authenticated' : 'Not authenticated');
+            
+        } catch (error) {
+            console.error("Initialization error:", error);
+            showToast("Error loading page: " + error.message, "error");
+            
+            analysisContent.innerHTML = `
+                <div class="no-analysis">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Error loading data</p>
+                    <p style="font-size: 0.9rem; color: #dc3545;">${error.message}</p>
+                </div>
+            `;
+        }
+    });
     </script>
 </body>
 </html>
