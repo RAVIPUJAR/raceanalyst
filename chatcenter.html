@@ -135,36 +135,96 @@
         .logo-icon {
             font-size: 2rem;
             color: #d4af37;
-        } 
+        }
 
-        /* Mobile menu styles - ADD THIS */
+        /* ===== HEADER STYLES ===== */
+        header {
+            background: #1a3c34;
+            padding: 1rem 0;
+            color: white;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: white;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+        }
+
+        .logo span {
+            color: #d4af37;
+        }
+
+        .nav-menu ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .nav-menu a:hover {
+            color: #d4af37;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Mobile menu styles */
         @media (max-width: 768px) {
             .mobile-menu-btn {
                 display: block !important;
             }
             
-            .nav-menu ul {
+            .nav-menu {
                 display: none;
-                flex-direction: column;
                 width: 100%;
                 text-align: center;
-                background: #1a3c34;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                padding: 1rem 0;
-                z-index: 1000;
             }
             
-            .nav-menu.active ul {
+            .nav-menu.active {
                 display: flex !important;
+                flex-direction: column;
             }
             
-            .nav-menu ul li {
-                padding: 0.8rem 0;
+            .nav-menu ul {
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
             }
         }
-
     </style>
 </head>
 
