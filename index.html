@@ -113,6 +113,7 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            z-index: 1001;
         }
         
         /* Hero Section */
@@ -616,28 +617,32 @@
             background: #c82333;
         }
         
-        /* Toast Notification */
+        /* Toast Notification - FIXED FOR MOBILE */
         .toast {
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            right: 50%;
+            transform: translateX(50%);
             background: #28a745;
             color: white;
             padding: 15px 25px;
             border-radius: 6px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             display: none;
-            z-index: 500;
+            z-index: 5000;
             animation: slideIn 0.3s ease;
+            text-align: center;
+            max-width: 90%;
+            word-wrap: break-word;
         }
         
         @keyframes slideIn {
             from {
-                transform: translateX(100%);
+                transform: translateX(50%) translateY(100%);
                 opacity: 0;
             }
             to {
-                transform: translateX(0);
+                transform: translateX(50%) translateY(0);
                 opacity: 1;
             }
         }
@@ -710,7 +715,6 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            /* Removed .analysis-display { min-height: auto; } */
             .admin-form-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -718,15 +722,8 @@
         
         @media (max-width: 768px) {
             .header-content {
-                flex-direction: column;
+                flex-direction: row;
                 gap: 1rem;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-                width: 100%;
             }
             
             .hero h2 {
@@ -735,21 +732,6 @@
             
             .footer-content {
                 grid-template-columns: 1fr;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .nav-menu {
-                display: none;
-                width: 100%;
-                text-align: center;
-            }
-            
-            .nav-menu.active {
-                display: flex;
-                flex-direction: column;
             }
             
             .dropdown-grid {
@@ -778,6 +760,59 @@
             .admin-form-grid {
                 grid-template-columns: 1fr;
             }
+            
+            /* FIXED MOBILE NAVIGATION */
+            .mobile-menu-btn {
+                display: block !important;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+                width: 70%;
+                height: 100vh;
+                background: #1a3c34;
+                padding: 80px 20px 40px;
+                transition: right 0.3s ease-in-out;
+                z-index: 1000;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            
+            nav ul.active {
+                right: 0;
+            }
+            
+            nav ul li {
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav a {
+                display: block;
+                padding: 12px 20px;
+                font-size: 1.1rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            /* Overlay for when menu is open */
+            .nav-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+            
+            .nav-overlay.active {
+                display: block;
+            }
         }
         
         @media (max-width: 480px) {
@@ -789,39 +824,44 @@
                 flex-direction: column;
                 gap: 0.5rem;
             }
-        }
-
-        /* Mobile menu styles - ADD THIS */
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block !important;
-            }
             
-            .nav-menu ul {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                text-align: center;
-                background: #1a3c34;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                padding: 1rem 0;
-                z-index: 3000;
-            }
-            
-            .nav-menu.active ul {
-                display: flex !important;
-            }
-            
-            .nav-menu ul li {
-                padding: 0.8rem 0;
+            .toast {
+                width: 90%;
+                max-width: 300px;
+                padding: 12px 20px;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
-
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-horse-head logo-icon"></i>
+                <h1>Race<span>Analyst</span></h1>
+            </div>
+            
+            <!-- ADD THIS MOBILE MENU BUTTON -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="#todaysSelectionsBtn"><i class="fas fa-calendar-day"></i> Today's Selections</a></li>
+                    <li><a href="#" onclick="window.exportRaceData()"><i class="fas fa-download"></i> Export Data</a></li>
+                    <li><a href="#" onclick="window.importRaceData()"><i class="fas fa-upload"></i> Import Data</a></li>
+                    <li><a href="#" class="admin-menu-item" id="showAdminBtn"><i class="fas fa-lock"></i> Admin</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Overlay for mobile menu -->
+            <div class="nav-overlay" id="navOverlay"></div>
+        </div>
+    </header>
 
     <!-- Hero Section with Today's Selections Button -->
     <section class="hero">
@@ -981,6 +1021,11 @@
         const selectedDate = document.getElementById('selectedDate');
         const selectedRace = document.getElementById('selectedRace');
         const todaysSelectionsBtn = document.getElementById('todaysSelectionsBtn');
+        
+        // Mobile menu elements
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        const navOverlay = document.getElementById('navOverlay');
         
         // Sidebar elements
         const calendarWidget = document.getElementById('calendarWidget');
@@ -1240,7 +1285,95 @@
             calendarWidget.innerHTML = calendarHTML;
         }
 
+        // Mobile menu functionality
+        function setupMobileMenu() {
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    navMenu.querySelector('ul').classList.toggle('active');
+                    navOverlay.classList.toggle('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    if (navMenu.querySelector('ul').classList.contains('active')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            }
+            
+            if (navOverlay) {
+                navOverlay.addEventListener('click', function() {
+                    navMenu.querySelector('ul').classList.remove('active');
+                    navOverlay.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            }
+            
+            // Close mobile menu when clicking on links
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.querySelector('ul').classList.remove('active');
+                    navOverlay.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+        }
 
+        function syncAnalysisHeight() {
+            const sidebar = document.querySelector('.sidebar');
+            const selectionCard = document.querySelector('.selection-card');
+            const analysisBox = document.getElementById('analysisDisplay');
+
+            if (!sidebar || !selectionCard || !analysisBox) return;
+
+            const sidebarBottom = sidebar.getBoundingClientRect().bottom;
+            const selectionBottom = selectionCard.getBoundingClientRect().bottom;
+
+            const height = sidebarBottom - selectionBottom - 24;
+
+            if (height > 200) {
+                analysisBox.style.height = height + 'px';
+                analysisBox.style.maxHeight = height + 'px';
+            }
+        }
+
+        // Load from Cloudflare KV function
+        async function loadFromKV() {
+            try {
+                const response = await fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/get-all", {
+                    headers: { 'Accept': 'application/json' },
+                    cache: 'no-store'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: Failed to load from KV`);
+                }
+                
+                const data = await response.json();
+                if (data && typeof data === 'object') {
+                    raceAnalyses = data;
+                    console.log(`Loaded ${Object.keys(data).length} analyses from Cloudflare KV`);
+                    return true;
+                }
+            } catch (error) {
+                console.error("Failed to load from KV:", error);
+                // Show error to user
+                analysisContent.innerHTML = `
+                    <div class="no-analysis">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Unable to load data from server</p>
+                        <p style="font-size: 0.9rem; color: #dc3545;">Error: ${error.message}</p>
+                    </div>
+                `;
+                return false;
+            }
+            return false;
+        }
 
         // Event Listeners
         venueSelect.addEventListener('change', updateDateDropdown);
@@ -1252,7 +1385,6 @@
                 clearAnalysis();
             }
         });
-
 
         saveBtn.addEventListener('click', function() {
             const venue = adminVenue.value.trim();
@@ -1365,68 +1497,29 @@
             showToast('Form cleared', 'info');
         });
 
-        // Mobile menu functionality
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navMenu = document.getElementById('navMenu');
-
-        function syncAnalysisHeight() {
-            const sidebar = document.querySelector('.sidebar');
-            const selectionCard = document.querySelector('.selection-card');
-            const analysisBox = document.getElementById('analysisDisplay');
-
-            if (!sidebar || !selectionCard || !analysisBox) return;
-
-            const sidebarBottom = sidebar.getBoundingClientRect().bottom;
-            const selectionBottom = selectionCard.getBoundingClientRect().bottom;
-
-            const height = sidebarBottom - selectionBottom - 24;
-
-            if (height > 200) {
-                analysisBox.style.height = height + 'px';
-                analysisBox.style.maxHeight = height + 'px';
-            }
+        // Initialize the app
+        async function initApp() {
+            setupMobileMenu();
+            await loadFromKV();
+            initializeDropdowns();
+            createCalendar();
+            loadUpcomingRacesFromSheet();
+            syncAnalysisHeight();
+            
+            // Add admin panel toggle
+            document.getElementById('showAdminBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                adminPanel.style.display = 'block';
+                this.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            document.getElementById('hideAdminBtn').addEventListener('click', function() {
+                adminPanel.style.display = 'none';
+            });
         }
-
-        // Load from Cloudflare KV on startup
-        // Replace the entire DOMContentLoaded event in index.html with this:
-
-
-        // Load from Cloudflare KV function
-        async function loadFromKV() {
-            try {
-                const response = await fetch("https://broad-sound-fdb7.raceanalyst.workers.dev/get-all", {
-                    headers: { 'Accept': 'application/json' },
-                    cache: 'no-store'
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: Failed to load from KV`);
-                }
-                
-                const data = await response.json();
-                if (data && typeof data === 'object') {
-                    raceAnalyses = data;
-                    console.log(`Loaded ${Object.keys(data).length} analyses from Cloudflare KV`);
-                    return true;
-                }
-            } catch (error) {
-                console.error("Failed to load from KV:", error);
-                // Show error to user
-                analysisContent.innerHTML = `
-                    <div class="no-analysis">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <p>Unable to load data from server</p>
-                        <p style="font-size: 0.9rem; color: #dc3545;">Error: ${error.message}</p>
-                    </div>
-                `;
-                return false;
-            }
-            return false;
-        }
-
-
 
         window.addEventListener('resize', syncAnalysisHeight);
+        
         // Export/Import functionality for backup
         window.exportRaceData = function() {
             const dataStr = JSON.stringify(raceAnalyses, null, 2);
@@ -1454,7 +1547,6 @@
                     try {
                         const imported = JSON.parse(e.target.result);
                         raceAnalyses = imported;
-                        // localStorage.setItem('raceAnalyses', JSON.stringify(raceAnalyses));
                         initializeDropdowns();
                         showToast('Data imported successfully!');
                     } catch (err) {
@@ -1521,53 +1613,8 @@
             }
         }
 
-
-window.addEventListener('includeJsReady', async () => {
-    console.log("include.js loaded — starting initialization");
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navMenu = document.getElementById('navMenu');
-    if (mobileMenuBtn && navMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (navMenu.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-    }
-    // Close mobile menu and smooth scroll when a nav item is clicked
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-        const targetId = link.getAttribute('href');
-        if (targetId.startsWith('#') && targetId.length > 1) {
-            link.addEventListener('click', (e) => {
-                e.preventDefault(); // prevent default jump
-                const target = document.querySelector(targetId);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-
-                // Close mobile menu if open (mobile only)
-                if (navMenu.classList.contains('active')) {
-                    navMenu.classList.remove('active');
-                    const icon = mobileMenuBtn.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
-        }
-    });
-    await loadFromKV();
-    initializeDropdowns();
-    createCalendar();
-    loadUpcomingRacesFromSheet();
-    syncAnalysisHeight();
-});
-
+        // Initialize app
+        window.addEventListener('DOMContentLoaded', initApp);
     </script>
-    <script src="shared/include.js"></script>
 </body>
 </html>
