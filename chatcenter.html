@@ -138,46 +138,49 @@
         }
 
         /* ===== HEADER STYLES ===== */
+        /* Header */
         header {
-            background: #1a3c34;
-            padding: 1rem 0;
+            background-color: #1a3c34;
             color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-
+        
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
+        
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: #d4af37;
+        }
+        
         .logo h1 {
             font-size: 1.8rem;
             color: white;
             font-weight: 700;
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
         }
-
+        
         .logo span {
             color: #d4af37;
         }
-
-        .nav-menu ul {
+        
+        nav ul {
             display: flex;
             list-style: none;
             gap: 1.5rem;
             align-items: center;
-            margin: 0;
-            padding: 0;
         }
-
-        .nav-menu a {
+        
+        nav a {
             color: white;
             text-decoration: none;
             font-weight: 500;
@@ -186,10 +189,9 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            font-family: 'Montserrat', sans-serif;
         }
-
-        .nav-menu a:hover {
+        
+        nav a:hover {
             color: #d4af37;
         }
 
@@ -202,27 +204,32 @@
             cursor: pointer;
         }
 
-        /* Mobile menu styles */
+
+        /* Mobile menu styles - ADD THIS */
         @media (max-width: 768px) {
             .mobile-menu-btn {
                 display: block !important;
             }
             
-            .nav-menu {
+            .nav-menu ul {
                 display: none;
+                flex-direction: column;
                 width: 100%;
                 text-align: center;
+                background: #1a3c34;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 1rem 0;
+                z-index: 1000;
             }
             
-            .nav-menu.active {
+            .nav-menu.active ul {
                 display: flex !important;
-                flex-direction: column;
             }
             
-            .nav-menu ul {
-                flex-direction: column;
-                gap: 1rem;
-                width: 100%;
+            .nav-menu ul li {
+                padding: 0.8rem 0;
             }
         }
     </style>
