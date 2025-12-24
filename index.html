@@ -1623,34 +1623,6 @@ window.addEventListener('includeJsReady', async () => {
                 .join('');
         }
 
-        document.getElementById('submitFeedbackBtn').addEventListener('click', () => {
-            const name = document.getElementById('feedbackName').value.trim();
-            const text = document.getElementById('feedbackText').value.trim();
-
-            if (!text) {
-                showToast('Please enter feedback before submitting', 'error');
-                return;
-            }
-
-            const newEntry = {
-                id: Date.now().toString(),
-                name: name || 'Anonymous',
-                text,
-                date: new Date().toLocaleString(),
-                likes: 0,
-                replies: []
-            };
-
-            feedbackData.unshift(newEntry);
-            saveFeedbackToKV();
-            renderFeedback();
-
-            document.getElementById('feedbackName').value = '';
-            document.getElementById('feedbackText').value = '';
-
-            showToast('Thank you for your feedback!', 'success');
-        });
-
         document.addEventListener('DOMContentLoaded', async () => {
             await loadFeedbackFromKV();
             renderFeedback();
