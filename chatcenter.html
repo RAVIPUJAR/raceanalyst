@@ -495,27 +495,23 @@ let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}'); // Track 
 const ADMIN_PASSWORD = "raceadmin123";
 
 // ===== NAVIGATION FUNCTIONS =====
-// These match the functionality of index.html
 function navigateToHome() {
-    window.location.href = 'index.html';
-    return false; // Prevent default link behavior
+    window.location.href = 'index.html#home';
+    return false;
 }
 
 function navigateToRaceCalendar() {
-    window.location.href = 'index.html';
-    // The index.html page will handle scrolling to calendar section
+    window.location.href = 'index.html#race-calendar';
     return false;
 }
 
 function navigateToAnalysis() {
-    window.location.href = 'index.html';
-    // The index.html page will handle showing analysis section
+    window.location.href = 'index.html#analysis';
     return false;
 }
 
 function navigateToUpcomingRaces() {
-    window.location.href = 'index.html';
-    // The index.html page will handle showing upcoming races section
+    window.location.href = 'index.html#upcoming-races';
     return false;
 }
 
