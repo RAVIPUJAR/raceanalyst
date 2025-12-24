@@ -260,6 +260,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            cursor: pointer;
         }
         
         nav a:hover {
@@ -307,9 +308,11 @@
             }
             
             .nav-menu ul li a {
-                display: block;
-                padding: 0.5rem 0;
+                display: flex;
                 justify-content: center;
+                align-items: center;
+                padding: 0.5rem 0;
+                width: 100%;
             }
             
             .header-content {
@@ -352,7 +355,7 @@
     <div class="container header-content">
         <div class="logo">
             <div class="logo-icon">
-                <!-- Changed from chart-line to horse-head -->
+                <!-- Horse head icon for RaceAnalyst -->
                 <i class="fas fa-horse-head"></i>
             </div>
             <h1>Race<span>Analyst</span></h1>
@@ -364,11 +367,12 @@
 
         <nav class="nav-menu" id="navMenu">
             <ul>
-                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="analysis.html"><i class="fas fa-chart-bar"></i> Analysis</a></li>
-                <li><a href="calendar.html"><i class="fas fa-calendar"></i> Race Calendar</a></li>
-                <li><a href="upcoming.html"><i class="fas fa-flag-checkered"></i> Upcoming Races</a></li>
-                <li><a href="chatcenter.html"><i class="fas fa-comments"></i> Chat Center</a></li>
+                <!-- Links matching index.html structure - using href="#" with onclick handlers -->
+                <li><a href="#" onclick="navigateToHome()"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#" onclick="navigateToRaceCalendar()"><i class="fas fa-calendar-alt"></i> Race Calendar</a></li>
+                <li><a href="https://raceanalyst.pages.dev/chatcenter" target="_blank"><i class="fas fa-comments"></i> Chat Center</a></li>
+                <li><a href="#" onclick="navigateToAnalysis()"><i class="fas fa-chart-bar"></i> Analysis</a></li>
+                <li><a href="#" onclick="navigateToUpcomingRaces()"><i class="fas fa-flag-checkered"></i> Upcoming Races</a></li>
             </ul>
         </nav>
     </div>
@@ -476,7 +480,6 @@
 </div>
 
 
-<!-- Update this in your chatcenter.html file -->
 <script>
 const BASE_URL = "https://broad-sound-fdb7.raceanalyst.workers.dev";
 const GET_TOPICS_URL = `${BASE_URL}/chatcenter/get-topics`;
@@ -491,14 +494,39 @@ let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}'); // Track 
 // Simple admin password (change this in production!)
 const ADMIN_PASSWORD = "raceadmin123";
 
-// Mobile menu toggle - SIMPLIFIED VERSION
+// ===== NAVIGATION FUNCTIONS =====
+// These match the functionality of index.html
+function navigateToHome() {
+    window.location.href = 'index.html';
+    return false; // Prevent default link behavior
+}
+
+function navigateToRaceCalendar() {
+    window.location.href = 'index.html';
+    // The index.html page will handle scrolling to calendar section
+    return false;
+}
+
+function navigateToAnalysis() {
+    window.location.href = 'index.html';
+    // The index.html page will handle showing analysis section
+    return false;
+}
+
+function navigateToUpcomingRaces() {
+    window.location.href = 'index.html';
+    // The index.html page will handle showing upcoming races section
+    return false;
+}
+
+// ===== MOBILE MENU =====
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navMenu = document.getElementById('navMenu');
     
     if (mobileMenuBtn && navMenu) {
         mobileMenuBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent event bubbling
+            e.stopPropagation();
             navMenu.classList.toggle('active');
             // Change icon based on state
             const icon = mobileMenuBtn.querySelector('i');
@@ -511,7 +539,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Close menu when clicking outside - SIMPLIFIED
+        // Close menu when clicking outside
         document.addEventListener('click', function(event) {
             if (!navMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
                 navMenu.classList.remove('active');
@@ -523,11 +551,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // REMOVED the event listener that was interfering with link clicks
-        // Navigation links will now work normally
+        // Close menu when clicking a link
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
     }
 });
 
+// ===== CHAT CENTER FUNCTIONS =====
 document.getElementById("newTopicHeader").onclick = function() {
     const box = document.getElementById("newTopicContent");
     const icon = document.getElementById("newTopicToggleIcon");
@@ -592,8 +631,7 @@ async function loadTopics() {
   }
 }
 
-// 2. Render topics list with expandable chat preview
-// 2. Render topics list - SIMPLIFIED: Only shows topic, not messages
+// 2. Render topics list
 function renderTopics(topics) {
   const container = document.getElementById("topicsList");
   const pagination = document.getElementById("pagination");
@@ -621,7 +659,6 @@ function renderTopics(topics) {
   const pageTopics = sortedTopics.slice(startIndex, endIndex);
   const totalPages = Math.ceil(sortedTopics.length / itemsPerPage);
   
-  // Create SIMPLIFIED HTML for each topic - NO MESSAGE PREVIEWS
   const topicsHtml = pageTopics.map(topic => {
     const messageCount = topic.messages ? topic.messages.length : 0;
     const lastMessage = topic.messages && topic.messages.length > 0 
@@ -642,9 +679,6 @@ function renderTopics(topics) {
         }
       });
     }
-    
-    // Calculate total engagement (messages + replies)
-    const totalEngagement = messageCount + totalReplies;
     
     return `
     <div class="topic-item topic-row" onclick="openChatThread('${topic.id}')" 
@@ -694,32 +728,7 @@ function renderTopics(topics) {
   renderPagination(page, totalPages);
 }
 
-// 3. Render message preview (first 2 messages)
-function renderMessagePreview(messages) {
-  return messages.map(msg => `
-    <div style="background:white; border:1px solid #eee; border-radius:6px; padding:0.8rem; margin-bottom:0.5rem;">
-      <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-        <div style="flex:1;">
-          <div style="font-weight:600; color:#444; margin-bottom:0.3rem;">
-            ${msg.user || 'Anonymous'}
-            <span style="font-weight:normal; color:#888; font-size:0.8rem; margin-left:0.5rem;">
-              ${formatDate(msg.date)}
-            </span>
-          </div>
-          <div style="color:#555; font-size:0.9rem;">
-            ${msg.text.substring(0, 100)}${msg.text.length > 100 ? '...' : ''}
-          </div>
-          <div style="display:flex; gap:0.8rem; margin-top:0.5rem; font-size:0.8rem;">
-            <span><i class="fas fa-thumbs-up" style="color:#1a3c34; margin-right:0.3rem;"></i>${msg.likes || 0}</span>
-            <span><i class="fas fa-reply" style="color:#666; margin-right:0.3rem;"></i>${msg.replies ? msg.replies.length : 0}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-// 4. Pagination helper
+// 3. Pagination helper
 function renderPagination(currentPage, totalPages) {
   const pagination = document.getElementById("pagination");
   
@@ -777,8 +786,7 @@ function renderPagination(currentPage, totalPages) {
   pagination.innerHTML = paginationHtml;
 }
 
-// 5. Open chat thread in overlay
-// 5. Open chat thread in overlay - ENHANCED to show topic details
+// 4. Open chat thread in overlay
 function openChatThread(topicId) {
   const topic = allTopics.find(t => t.id === topicId);
   if (!topic) return;
@@ -840,7 +848,7 @@ function openChatThread(topicId) {
   }, 300);
 }
 
-// 6. Render chat messages
+// 5. Render chat messages
 function renderChatMessages(messages) {
   const container = document.getElementById("messagesContainer");
   
@@ -858,11 +866,10 @@ function renderChatMessages(messages) {
   container.innerHTML = messages.map(msg => renderChatMessage(msg, 0)).join('');
 }
 
-// 7. Render single chat message with limited actions
+// 6. Render single chat message with limited actions
 function renderChatMessage(msg, depth = 0) {
   const messageId = msg.id;
   const userLiked = userLikes[messageId] === true;
-  const likeStyle = userLiked ? 'style="color:#e91e63;"' : '';
   
   // Check if user can like (only one like per message per user)
   const canLike = !userLiked;
@@ -922,7 +929,7 @@ function renderChatMessage(msg, depth = 0) {
   `;
 }
 
-// 8. Like a chat message (with one-like restriction)
+// 7. Like a chat message (with one-like restriction)
 async function likeChatMessage(messageId) {
   if (userLikes[messageId]) {
     alert("You have already liked this message!");
@@ -965,7 +972,7 @@ async function likeChatMessage(messageId) {
   }
 }
 
-// 9. Show/hide reply box in chat
+// 8. Show/hide reply box in chat
 function showChatReplyBox(messageId) {
   document.getElementById(`chatReplyBox-${messageId}`).style.display = 'block';
   document.getElementById(`chatReplyInput-${messageId}`).focus();
@@ -976,7 +983,7 @@ function hideChatReplyBox(messageId) {
   document.getElementById(`chatReplyInput-${messageId}`).value = '';
 }
 
-// 10. Submit nested reply in chat
+// 9. Submit nested reply in chat
 async function submitChatNestedReply(parentId) {
   const input = document.getElementById(`chatReplyInput-${parentId}`);
   const text = input.value.trim();
@@ -1032,7 +1039,7 @@ async function submitChatNestedReply(parentId) {
   }
 }
 
-// 11. Submit main reply in chat
+// 10. Submit main reply in chat
 async function submitChatReply() {
   const input = document.getElementById("chatReplyInput");
   const text = input.value.trim();
@@ -1077,7 +1084,7 @@ async function submitChatReply() {
   }, 100);
 }
 
-// 12. Close chat thread
+// 11. Close chat thread
 function closeChatThread() {
   document.getElementById("chatOverlay").style.display = "none";
   document.body.style.overflow = "auto";
@@ -1087,7 +1094,7 @@ function closeChatThread() {
   loadTopics();
 }
 
-// 13. Admin functionality
+// 12. Admin functionality
 function showAdminLogin() {
   document.getElementById("adminLoginOverlay").style.display = "flex";
   document.getElementById("adminPassword").focus();
@@ -1120,7 +1127,7 @@ function toggleAdminMode(enable) {
   loadTopics(); // Re-render with/without delete buttons
 }
 
-// 14. Save topics to server
+// 13. Save topics to server
 async function saveTopicsToServer() {
   try {
     const response = await fetch(SAVE_TOPICS_URL, {
@@ -1141,7 +1148,7 @@ async function saveTopicsToServer() {
   }
 }
 
-// 15. Create topic function (updated)
+// 14. Create topic function
 async function createTopic() {
   const titleInput = document.getElementById("topicTitle");
   const bodyInput = document.getElementById("topicBody");
@@ -1214,7 +1221,7 @@ async function createTopic() {
   }
 }
 
-// 16. Delete topic (admin only)
+// 15. Delete topic (admin only)
 async function deleteTopic(topicId) {
   if (!isAdminMode) {
     showAdminLogin();
@@ -1240,7 +1247,7 @@ async function deleteTopic(topicId) {
   }
 }
 
-// 17. Helper functions
+// 16. Helper functions
 function formatDate(dateString) {
   if (!dateString) return 'Unknown';
   
@@ -1271,7 +1278,7 @@ function goToPage(pageNumber) {
   window.location.href = url.toString();
 }
 
-// 18. Initialize
+// 17. Initialize
 window.addEventListener('DOMContentLoaded', () => {
   console.log("Chat Center initialized");
   
@@ -1286,15 +1293,15 @@ window.addEventListener('DOMContentLoaded', () => {
     adminBtn.style.cssText = "background:#d4af37; color:white; border:none; padding:0.5rem 1rem; border-radius:4px; cursor:pointer; margin-left:1rem;";
     adminBtn.onclick = showAdminLogin;
     if (localStorage.getItem("isAdmin") === "true") {
-    header.appendChild(adminBtn);
-}
+      header.appendChild(adminBtn);
+    }
   }
   
   // Load topics
   loadTopics();
 });
 
-// 19. Global functions
+// 18. Global functions
 window.loadTopics = loadTopics;
 window.createTopic = createTopic;
 window.deleteTopic = deleteTopic;
@@ -1310,6 +1317,12 @@ window.closeAdminLogin = closeAdminLogin;
 window.attemptAdminLogin = attemptAdminLogin;
 window.toggleAdminMode = toggleAdminMode;
 window.goToPage = goToPage;
+
+// Navigation functions
+window.navigateToHome = navigateToHome;
+window.navigateToRaceCalendar = navigateToRaceCalendar;
+window.navigateToAnalysis = navigateToAnalysis;
+window.navigateToUpcomingRaces = navigateToUpcomingRaces;
 </script>
 
 </footer>
@@ -1322,9 +1335,9 @@ window.goToPage = goToPage;
 
             <div class="footer-section">
                 <h4>Quick Links</h4>
-                <p><a href="index.html" style="color:#ccc; text-decoration:none;">Home</a></p>
-                <p><a href="analysis.html" style="color:#ccc; text-decoration:none;">Analysis</a></p>
-                <p><a href="chatcenter.html" style="color:#ccc; text-decoration:none;">Chat Center</a></p>
+                <p><a href="#" onclick="navigateToHome()" style="color:#ccc; text-decoration:none;">Home</a></p>
+                <p><a href="#" onclick="navigateToAnalysis()" style="color:#ccc; text-decoration:none;">Analysis</a></p>
+                <p><a href="https://raceanalyst.pages.dev/chatcenter" target="_blank" style="color:#ccc; text-decoration:none;">Chat Center</a></p>
             </div>
 
             <div class="footer-section">
