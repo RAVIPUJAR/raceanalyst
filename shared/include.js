@@ -1,20 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     console.log("include.js loaded - injecting header/footer");
     
-    // 1. FIRST remove any existing headers/footers
-    const oldHeader = document.querySelector('header');
-    if (oldHeader) {
-        console.log("Removing old header");
-        oldHeader.remove();
-    }
-    
-    const oldFooter = document.querySelector('footer');
-    if (oldFooter) {
-        console.log("Removing old footer");
-        oldFooter.remove();
-    }
-    
-    // 2. CREATE and INSERT UNIFIED HEADER
+    // CREATE HEADER HTML
     const headerHTML = `
     <header>
         <div class="container header-content">
@@ -39,11 +26,10 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
     </header>`;
     
-    // Insert at the VERY beginning of body
+    // Insert header at the beginning
     document.body.insertAdjacentHTML('afterbegin', headerHTML);
-    console.log("New header inserted");
     
-    // 3. CREATE and INSERT UNIFIED FOOTER
+    // CREATE FOOTER HTML
     const footerHTML = `
     <footer>
         <div class="container">
@@ -83,15 +69,10 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
     </footer>`;
     
-    // Insert at the VERY end of body
+    // Insert footer at the end
     document.body.insertAdjacentHTML('beforeend', footerHTML);
-    console.log("New footer inserted");
     
-    // 4. ADD Mobile Menu Functionality
-    setupMobileMenu();
-});
-
-function setupMobileMenu() {
+    // Setup mobile menu
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navMenu = document.getElementById('navMenu');
     
@@ -108,4 +89,4 @@ function setupMobileMenu() {
             }
         });
     }
-}
+});
