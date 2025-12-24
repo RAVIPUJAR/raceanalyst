@@ -118,53 +118,83 @@
     </div>
 </div>
 
-<script>
+ <script>
+// Global variables
 let topicId = new URLSearchParams(window.location.search).get("topic");
 let allTopics = [];
 let currentTopic = null;
 
 // Updated endpoint URLs
-// Replace the existing fetch URLs in your chatcenter page:
 const BASE_URL = "https://broad-sound-fdb7.raceanalyst.workers.dev";
+const GET_TOPICS_URL = `${BASE_URL}/chatcenter/get-topics`;
+const SAVE_TOPICS_URL = `${BASE_URL}/chatcenter/save-topics`;
 
-// CORRECT ENDPOINTS - use /chatcenter/ not /feedback/
+// 1. FIXED: Renamed from loadTopic() to loadTopics() 
 async function loadTopics() {
   try {
-    console.log("Fetching from:", `${BASE_URL}/chatcenter/get-topics`);
-    const response = await fetch(`${BASE_URL}/chatcenter/get-topics`);
+    console.log("Loading topics from:", GET_TOPICS_URL);
+    console.log("Topic ID from URL:", topicId);
     
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+    const res = await fetch(GET_TOPICS_URL);
+    
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}: ${res.statusText}`);
     }
     
-    const data = await response.json();
-    
-    // IMPORTANT: Check if data is an array before using reverse()
-    if (!Array.isArray(data)) {
-      console.error("API returned non-array data:", data);
-      // Try to extract array from response
-      if (data && data.topics && Array.isArray(data.topics)) {
-        displayTopics(data.topics.reverse());
-      } else if (data && Array.isArray(data)) {
-        displayTopics(data.reverse());
-      } else {
-        displayTopics([]); // Empty array as fallback
-      }
-    } else {
-      displayTopics(data.reverse());
+    const data = await res.json();
+    allTopics = Array.isArray(data) ? data : [];
+    console.log("Loaded topics count:", allTopics.length);
+    console.log("All topics:", allTopics);
+
+    if (!topicId) {
+      document.getElementById("topicTitle").innerHTML = "No topic ID specified";
+      document.getElementById("messagesList").innerHTML = 
+        '<div class="message-box"><p>Please go back and select a topic.</p></div>';
+      return;
     }
+
+    // Find the current topic
+    currentTopic = allTopics.find(t => t.id === topicId);
+    console.log("Found topic:", currentTopic);
+
+    if (!currentTopic) {
+      document.getElementById("topicTitle").innerHTML = "Topic not found";
+      document.getElementById("messagesList").innerHTML = 
+        `<div class="message-box"><p>Topic with ID "${topicId}" doesn't exist.</p></div>`;
+      return;
+    }
+
+    // Initialize messages array if it doesn't exist
+    if (!currentTopic.messages) {
+      currentTopic.messages = [];
+    }
+
+    document.getElementById("topicTitle").innerHTML = currentTopic.title || "Untitled Topic";
+    renderMessages();
     
   } catch (error) {
     console.error("Failed to load topics:", error);
-    document.getElementById("topicsList").innerHTML = 
-      `<div class="error">Error loading topics: ${error.message}</div>`;
+    document.getElementById("topicTitle").innerHTML = "Error Loading Chat";
+    document.getElementById("messagesList").innerHTML = 
+      `<div class="message-box" style="background:#ffe6e6;">
+         <p><strong>Connection Error:</strong> Could not load chat messages.</p>
+         <p>Please check your internet connection and try again.</p>
+         <p><small>Error: ${error.message}</small></p>
+       </div>`;
   }
 }
 
-// Render thread messages
+// 2. Render thread messages
 function renderMessages() {
   const list = document.getElementById("messagesList");
   
+  // Check if currentTopic exists
+  if (!currentTopic) {
+    list.innerHTML = `<div class="message-box"><p>Topic not loaded.</p></div>`;
+    return;
+  }
+  
+  // Check if messages exist
   if (!currentTopic.messages || currentTopic.messages.length === 0) {
     list.innerHTML = `<div class="message-box"><p>No messages yet. Start the conversation!</p></div>`;
     return;
@@ -175,7 +205,7 @@ function renderMessages() {
     .join("");
 }
 
-// Render single message including nested replies
+// 3. Render single message including nested replies
 function renderMessage(msg) {
   return `
     <div class="message-box" id="msg-${msg.id}">
@@ -208,7 +238,7 @@ function renderMessage(msg) {
   `;
 }
 
-// Show/hide reply input
+// 4. Show/hide reply input
 function showReplyBox(id) {
   document.getElementById(`replyBox-${id}`).style.display = "block";
   document.getElementById(`replyInput-${id}`).focus();
@@ -219,8 +249,10 @@ function hideReplyBox(id) {
   document.getElementById(`replyInput-${id}`).value = "";
 }
 
-// Like a message
+// 5. Like a message
 async function likeMessage(id) {
+  if (!currentTopic) return;
+  
   let msg = findMessage(currentTopic.messages, id);
   if (msg) {
     msg.likes = (msg.likes || 0) + 1;
@@ -229,8 +261,9 @@ async function likeMessage(id) {
   }
 }
 
-// Delete a message
+// 6. Delete a message
 async function deleteMessage(id) {
+  if (!currentTopic) return;
   if (!confirm("Are you sure you want to delete this message?")) return;
   
   currentTopic.messages = removeMessage(currentTopic.messages, id);
@@ -257,8 +290,13 @@ function findMessage(arr, id) {
   return null;
 }
 
-// Submit nested reply
+// 7. Submit nested reply
 async function submitNestedReply(parentId) {
+  if (!currentTopic) {
+    alert("Topic not loaded. Please refresh the page.");
+    return;
+  }
+  
   const box = document.getElementById(`replyInput-${parentId}`);
   const text = box.value.trim();
   
@@ -290,8 +328,14 @@ async function submitNestedReply(parentId) {
   renderMessages();
 }
 
-// Main reply for the thread
+// 8. Main reply for the thread - FIXED NULL CHECK
 async function submitReply() {
+  // Check if currentTopic exists
+  if (!currentTopic) {
+    alert("Topic not loaded. Please refresh the page.");
+    return;
+  }
+  
   const textarea = document.getElementById("replyText");
   const text = textarea.value.trim();
   
@@ -300,7 +344,10 @@ async function submitReply() {
     return;
   }
   
-  if (!currentTopic.messages) currentTopic.messages = [];
+  // Initialize messages array if it doesn't exist
+  if (!currentTopic.messages) {
+    currentTopic.messages = [];
+  }
   
   currentTopic.messages.push({
     id: Date.now().toString(),
@@ -316,10 +363,24 @@ async function submitReply() {
   renderMessages();
 }
 
-// Save to KV with retry logic
+// 9. Save to KV with retry logic
 async function saveTopics() {
+  if (!currentTopic) {
+    console.error("Cannot save: currentTopic is null");
+    return;
+  }
+  
   try {
     console.log("Saving topics to:", SAVE_TOPICS_URL);
+    
+    // Update the topic in allTopics array
+    const topicIndex = allTopics.findIndex(t => t.id === currentTopic.id);
+    if (topicIndex !== -1) {
+      allTopics[topicIndex] = currentTopic;
+    } else {
+      allTopics.push(currentTopic);
+    }
+    
     const response = await fetch(SAVE_TOPICS_URL, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -341,11 +402,22 @@ async function saveTopics() {
   }
 }
 
-// Initialize
+// 10. Initialize - FIXED: Changed from loadTopic() to loadTopics()
 window.addEventListener('DOMContentLoaded', () => {
   console.log("Chat thread initialized with topic ID:", topicId);
-  loadTopic();
+  loadTopics(); // This was calling loadTopic() which didn't exist
 });
+
+// Make functions available globally
+window.loadTopics = loadTopics;
+window.renderMessages = renderMessages;
+window.showReplyBox = showReplyBox;
+window.hideReplyBox = hideReplyBox;
+window.likeMessage = likeMessage;
+window.deleteMessage = deleteMessage;
+window.submitNestedReply = submitNestedReply;
+window.submitReply = submitReply;
+window.saveTopics = saveTopics;
 </script>
 
 </body>
