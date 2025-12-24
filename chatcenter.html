@@ -5,37 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Center | RaceAnalyst</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Source+Serif+Pro:wght@400;600&display=swap" rel="stylesheet">
+
     <style>
         body {
             margin: 0;
             background: #f7f8fa;
             font-family: 'Source Serif Pro', serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        header {
-            background: #1a3c34;
-            padding: 1rem 0;
-            color: white;
         }
 
         .container {
             max-width: 1100px;
             margin: auto;
             padding: 0 20px;
-            flex: 1;
         }
 
         .page-title {
             font-family: 'Montserrat', sans-serif;
             font-size: 1.7rem;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .card {
@@ -46,6 +34,14 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.08);
         }
 
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a3c34;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 0.6rem;
+        }
+
         input, textarea {
             width: 100%;
             padding: 12px;
@@ -53,7 +49,6 @@
             border-radius: 6px;
             margin-bottom: 1rem;
             font-family: 'Source Serif Pro';
-            font-size: 1rem;
         }
 
         button {
@@ -65,88 +60,249 @@
             font-family: 'Montserrat';
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
         }
 
         button:hover {
             background: #244e44;
-            transform: translateY(-2px);
         }
 
-        button.admin-btn {
-            background: #d4af37;
-        }
-
-        button.delete-btn {
-            background: #c62828;
-        }
-
-        footer {
-            background: #1a3c34;
-            color: white;
-            padding: 1.5rem 0;
-            margin-top: 3rem;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1100px;
-            margin: auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .footer-links a {
-            color: #d4af37;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        /* Collapsible section styles */
-        .collapsible-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            padding: 1rem;
-            background: #f0f7f4;
+        .topic-item {
+            background: #f1f3f5;
+            padding: 14px;
             border-radius: 6px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .topic-item:hover {
+            background: #e6eaed;
+        }
+
+        .topic-title {
+            font-family: 'Montserrat';
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .topic-meta {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Thread view */
+        .thread-message {
+            background: #eef2f3;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .reply-box {
+            margin-top: 1rem;
+            padding-left: 15px;
+        }
+
+        .reply-thread {
+            margin-left: 20px;
+            margin-top: 10px;
+            border-left: 2px solid #d4af37;
+            padding-left: 12px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #0066cc;
+            cursor: pointer;
+            margin-right: 12px;
+        }
+
+        .action-btn.delete {
+            color: #d11a2a;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 1.2rem;
+        }
+
+        .pagination button {
+            margin: 0 4px;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: #d4af37;
+        }
+        /* Footer */
+        footer {
+            background-color: #1a3c34;
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            color: #d4af37;
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section p {
+            color: #ccc;
             margin-bottom: 1rem;
         }
-
-        .collapsible-header h2 {
-            margin: 0;
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            background-color: #2d5248;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            color: #1a3c34;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: #d4af37;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #2d5248;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            /* Removed .analysis-display { min-height: auto; } */
+            .admin-form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        /* ===== HEADER STYLES ===== */
+        /* Header */
+        header {
+            background-color: #1a3c34;
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: #d4af37;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: white;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #d4af37;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        nav a:hover {
+            color: #d4af37;
         }
 
-        .collapsible-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out;
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
-        .collapsible-content.expanded {
-            max-height: 500px;
-        }
 
-        /* Topic item hover effects */
-        .topic-item {
-            transition: all 0.3s ease;
+        /* Mobile menu styles - ADD THIS */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block !important;
+            }
+            
+            .nav-menu ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                background: #1a3c34;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 1rem 0;
+                z-index: 1000;
+            }
+            
+            .nav-menu.active ul {
+                display: flex !important;
+            }
+            
+            .nav-menu ul li {
+                padding: 0.8rem 0;
+            }
         }
 
         .topic-item:hover {
@@ -154,58 +310,65 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             background: #f0f7f4 !important;
         }
+
+        .topic-item button:hover {
+            opacity: 0.9;
+        }
+
+        #chatOverlay {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
     </style>
 </head>
-<body>
 
-<!-- Header -->
+<body>
 <header>
-    <div class="container">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span class="page-title">
-                <i class="fas fa-comments"></i> RaceAnalyst Chat Center
-            </span>
-            <div id="adminButtonContainer"></div>
+    <div class="container header-content">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h1>Race<span>Analyst</span></h1>
         </div>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <nav class="nav-menu" id="navMenu">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="analysis.html"><i class="fas fa-chart-bar"></i> Analysis</a></li>
+                <li><a href="calendar.html"><i class="fas fa-calendar"></i> Race Calendar</a></li>
+                <li><a href="upcoming.html"><i class="fas fa-flag-checkered"></i> Upcoming Races</a></li>
+                <li><a href="chatcenter.html"><i class="fas fa-comments"></i> Chat Center</a></li>
+            </ul>
+        </nav>
     </div>
 </header>
 
-<!-- Main Content -->
 <div class="container">
-    
-    <!-- Collapsible New Chat Topic Section -->
-    <div class="card" id="newTopicSection">
-        <div class="collapsible-header" onclick="toggleNewTopicSection()">
-            <h2>
-                <i class="fas fa-plus-circle"></i> New Chat Topic
-                <span id="newTopicIndicator" style="font-size: 0.9rem; color: #666; font-weight: normal; margin-left: 1rem;">
-                    (Click to expand/collapse)
-                </span>
-            </h2>
-            <i class="fas fa-chevron-down" id="newTopicArrow"></i>
-        </div>
-        
-        <div class="collapsible-content" id="newTopicContent">
-            <input type="text" id="topicTitle" placeholder="Topic Title (e.g., 'Mumbai Race - Final Thoughts')">
-            <textarea id="topicBody" placeholder="Write the first message for this topic..." style="min-height:120px;"></textarea>
-            <div style="display: flex; gap: 1rem;">
-                <button onclick="createTopic()" style="background: #1a3c34;">
-                    <i class="fas fa-paper-plane"></i> Create Topic
-                </button>
-                <button onclick="clearNewTopicForm()" style="background: #666;">
-                    <i class="fas fa-times"></i> Clear
-                </button>
-            </div>
-        </div>
+    <!-- Create New Chat Topic -->
+    <div class="card">
+        <h2><i class="fas fa-plus-circle"></i> New Chat Topic</h2>
+        <input type="text" id="topicTitle" placeholder="Topic Title">
+        <textarea id="topicBody" placeholder="Write the first message..." style="min-height:120px;"></textarea>
+        <button onclick="createTopic()">
+            <i class="fas fa-paper-plane"></i> Create Topic
+        </button>
     </div>
 
-    <!-- Topics List -->
+    <!-- Topics List with Expandable Chats -->
     <div class="card" id="topicsCard">
-        <h2 style="color: #1a3c34; display: flex; align-items: center; gap: 0.5rem; margin-top: 0;">
-            <i class="fas fa-comments"></i> All Chat Topics
-        </h2>
+        <h2><i class="fas fa-comments"></i> All Chat Topics</h2>
         
-        <!-- Admin Panel (Hidden by default) -->
+        <!-- Admin Toggle (Hidden by default) -->
         <div id="adminPanel" style="display:none; margin-bottom:1rem; padding:1rem; background:#f0f7f4; border-radius:6px;">
             <div style="display:flex; align-items:center; gap:1rem;">
                 <i class="fas fa-user-shield" style="color:#1a3c34;"></i>
@@ -221,22 +384,7 @@
     </div>
 </div>
 
-<!-- Footer -->
-<footer>
-    <div class="footer-content">
-        <div>
-            <p style="margin: 0; color: #d4af37; font-weight: 600;">RaceAnalyst Chat Center</p>
-            <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.8;">Real-time discussions for racing enthusiasts</p>
-        </div>
-        <div class="footer-links">
-            <a href="https://raceanalyst.pages.dev" target="_blank"><i class="fas fa-home"></i> Home</a>
-            <a href="#" onclick="showAdminLogin()"><i class="fas fa-user-shield"></i> Admin</a>
-            <a href="#" onclick="loadTopics()"><i class="fas fa-sync-alt"></i> Refresh</a>
-        </div>
-    </div>
-</footer>
-
-<!-- Hidden Chat Thread Container -->
+<!-- Hidden Chat Thread Container (for expanded chats) -->
 <div id="chatOverlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:1000; justify-content:center; align-items:center;">
     <div id="chatContainer" style="background:white; width:90%; max-width:800px; max-height:90vh; border-radius:12px; display:flex; flex-direction:column;">
         <!-- Chat Header -->
@@ -248,8 +396,8 @@
                     </div>
                 </div>
                 <button onclick="closeChatThread()" 
-                  style="background:rgba(255,255,255,0.2); color:white; border:none; width:40px; height:40px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:1.2rem; transition:background 0.3s;">
-                  <i class="fas fa-times"></i>
+                style="background:rgba(255,255,255,0.2); color:white; border:none; width:40px; height:40px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:1.2rem; transition:background 0.3s;">
+                <i class="fas fa-times"></i>
                 </button>
             </div>
         </div>
@@ -292,64 +440,78 @@
         </div>
         
         <p style="font-size:0.8rem; color:#888; margin-top:1rem; text-align:center;">
-            <i class="fas fa-info-circle"></i> Contact system administrator for password
+            <i class="fas fa-info-circle"></i> Default password: "raceadmin123" (Change in code)
         </p>
     </div>
 </div>
 
+
+// Update this in your chatcenter.html file
 <script>
-// ... [ALL YOUR PREVIOUS JAVASCRIPT CODE FROM THE LAST MESSAGE GOES HERE] ...
+const BASE_URL = "https://broad-sound-fdb7.raceanalyst.workers.dev";
+const GET_TOPICS_URL = `${BASE_URL}/chatcenter/get-topics`;
+const SAVE_TOPICS_URL = `${BASE_URL}/chatcenter/save-topics`;
 
-// ================= NEW FUNCTIONS TO ADD =================
+// State management
+let allTopics = [];
+let currentOpenTopic = null;
+let isAdminMode = false;
+let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}'); // Track user likes
 
-// 20. Toggle New Topic Section (Collapse/Expand)
-let isNewTopicExpanded = false;
+// Simple admin password (change this in production!)
+const ADMIN_PASSWORD = "raceadmin123";
 
-function toggleNewTopicSection() {
-    const content = document.getElementById('newTopicContent');
-    const arrow = document.getElementById('newTopicArrow');
-    const indicator = document.getElementById('newTopicIndicator');
+// 1. Load all chat topics
+async function loadTopics() {
+  try {
+    const topicsList = document.getElementById("topicsList");
+    topicsList.innerHTML = '<div class="loading">Loading topics...</div>';
     
-    isNewTopicExpanded = !isNewTopicExpanded;
+    const response = await fetch(GET_TOPICS_URL);
     
-    if (isNewTopicExpanded) {
-        content.classList.add('expanded');
-        arrow.classList.remove('fa-chevron-down');
-        arrow.classList.add('fa-chevron-up');
-        indicator.textContent = '(Click to collapse)';
-        
-        // Focus on title input when expanded
-        setTimeout(() => {
-            document.getElementById('topicTitle').focus();
-        }, 300);
-    } else {
-        content.classList.remove('expanded');
-        arrow.classList.remove('fa-chevron-up');
-        arrow.classList.add('fa-chevron-down');
-        indicator.textContent = '(Click to expand)';
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    
+    let topics = await response.json();
+    
+    // Ensure topics is an array
+    if (!Array.isArray(topics)) {
+      if (topics && Array.isArray(topics.topics)) {
+        topics = topics.topics;
+      } else if (topics && typeof topics === 'object') {
+        topics = Object.values(topics);
+      } else {
+        topics = [];
+      }
     }
+    
+    allTopics = topics;
+    renderTopics(topics);
+    
+  } catch (error) {
+    console.error("Failed to load topics:", error);
+    const topicsList = document.getElementById("topicsList");
+    topicsList.innerHTML = `
+      <div class="error" style="background:#ffe6e6; padding:1rem; border-radius:6px;">
+        <h3 style="color:#c62828; margin-top:0;">Error Loading Topics</h3>
+        <p>${error.message}</p>
+        <button onclick="loadTopics()" style="margin-top:0.5rem;">Retry</button>
+      </div>
+    `;
+  }
 }
 
-// 21. Clear New Topic Form
-function clearNewTopicForm() {
-    document.getElementById('topicTitle').value = '';
-    document.getElementById('topicBody').value = '';
-    document.getElementById('topicTitle').focus();
-}
-
-// 22. SIMPLIFIED renderTopics() - NO MESSAGE PREVIEWS
+// 2. Render topics list with expandable chat preview
+// 2. Render topics list - SIMPLIFIED: Only shows topic, not messages
 function renderTopics(topics) {
   const container = document.getElementById("topicsList");
   const pagination = document.getElementById("pagination");
   
   if (!topics || topics.length === 0) {
     container.innerHTML = `
-      <div class="empty-state" style="text-align:center; padding:3rem; color:#666;">
-        <i class="fas fa-comments" style="font-size:3rem; color:#ccc; margin-bottom:1.5rem;"></i>
-        <h3 style="margin:0 0 0.8rem 0; color:#1a3c34;">No Chat Topics Yet</h3>
-        <p style="margin:0 0 1.5rem 0; color:#666; max-width:400px; margin:0 auto 1.5rem auto;">
-          Start the first conversation! Click "New Chat Topic" above to begin.
-        </p>
+      <div class="empty-state" style="text-align:center; padding:2rem; color:#666;">
+        <i class="fas fa-comments" style="font-size:2.5rem; color:#ccc; margin-bottom:1rem;"></i>
+        <h3 style="margin:0 0 0.5rem 0;">No Chat Topics Yet</h3>
+        <p style="margin:0 0 1rem 0;">Be the first to start a conversation!</p>
       </div>
     `;
     pagination.innerHTML = '';
@@ -359,7 +521,7 @@ function renderTopics(topics) {
   // Reverse to show newest first
   const sortedTopics = [...topics].reverse();
   
-  // Pagination
+  // Simple pagination
   const itemsPerPage = 10;
   const page = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
   const startIndex = (page - 1) * itemsPerPage;
@@ -367,14 +529,14 @@ function renderTopics(topics) {
   const pageTopics = sortedTopics.slice(startIndex, endIndex);
   const totalPages = Math.ceil(sortedTopics.length / itemsPerPage);
   
-  // Create SIMPLIFIED HTML - NO MESSAGE PREVIEWS
+  // Create SIMPLIFIED HTML for each topic - NO MESSAGE PREVIEWS
   const topicsHtml = pageTopics.map(topic => {
     const messageCount = topic.messages ? topic.messages.length : 0;
     const lastMessage = topic.messages && topic.messages.length > 0 
       ? topic.messages[topic.messages.length - 1] 
       : null;
     
-    // Calculate stats
+    // Calculate total likes for this topic
     let totalLikes = 0;
     let totalReplies = 0;
     if (topic.messages) {
@@ -389,72 +551,72 @@ function renderTopics(topics) {
       });
     }
     
-    const totalMessages = messageCount + totalReplies;
-    const hasRecentActivity = lastMessage ? (new Date() - new Date(lastMessage.date)) < 86400000 : false;
+    // Calculate total engagement (messages + replies)
+    const totalEngagement = messageCount + totalReplies;
     
     return `
-      <div class="topic-item" style="background:#f8f9fa; border-left:4px solid #d4af37; padding:1.5rem; margin-bottom:1rem; border-radius:8px;">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div class="topic-item" style="background:#f8f9fa; border-left:4px solid #d4af37; padding:1.2rem; margin-bottom:1rem; border-radius:6px; transition:all 0.3s ease;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
           <div style="flex:1;">
-            <!-- Topic Title and Stats -->
-            <div style="display:flex; align-items:center; gap:1rem; margin-bottom:0.8rem;">
-              <h3 style="margin:0; font-size:1.3rem; color:#1a3c34;">
-                ${topic.title || 'Untitled Topic'}
-              </h3>
-              ${hasRecentActivity ? `
-                <span style="background:#e8f5e9; color:#2e7d32; padding:0.2rem 0.6rem; border-radius:12px; font-size:0.8rem; font-weight:600;">
-                  <i class="fas fa-bolt" style="margin-right:0.3rem;"></i>Active
-                </span>
-              ` : ''}
-            </div>
+            <!-- Topic Title -->
+            <h3 style="margin:0 0 0.5rem 0; font-size:1.2rem; color:#1a3c34;">
+              <i class="fas fa-comment-dots" style="color:#d4af37; margin-right:0.5rem;"></i>
+              ${topic.title || 'Untitled Topic'}
+            </h3>
             
             <!-- Topic Description -->
             ${topic.description ? `
-              <p style="color:#555; margin:0 0 1rem 0; font-size:1rem; line-height:1.5;">
-                <i class="fas fa-quote-left" style="color:#d4af37; margin-right:0.5rem;"></i>
+              <p style="color:#555; margin:0 0 0.8rem 0; font-size:0.95rem; line-height:1.4;">
                 ${topic.description}
               </p>
             ` : ''}
             
             <!-- Topic Metadata -->
-            <div style="display:flex; flex-wrap:wrap; gap:1.5rem; font-size:0.9rem; color:#666; padding:0.8rem; background:white; border-radius:6px;">
-              <span style="display:flex; align-items:center; gap:0.5rem;">
+            <div style="display:flex; flex-wrap:wrap; gap:1.2rem; font-size:0.85rem; color:#666;">
+              <span style="display:flex; align-items:center; gap:0.3rem;">
                 <i class="fas fa-user" style="color:#1a3c34;"></i>
-                <span><strong>Author:</strong> ${topic.user || 'Anonymous'}</span>
+                <span>${topic.user || 'Anonymous'}</span>
               </span>
               
-              <span style="display:flex; align-items:center; gap:0.5rem;">
+              <span style="display:flex; align-items:center; gap:0.3rem;">
                 <i class="fas fa-calendar-alt" style="color:#1a3c34;"></i>
-                <span><strong>Created:</strong> ${topic.date ? formatDate(topic.date) : 'No date'}</span>
+                <span>${topic.date ? formatDate(topic.date) : 'No date'}</span>
               </span>
               
-              <span style="display:flex; align-items:center; gap:0.5rem;">
+              <span style="display:flex; align-items:center; gap:0.3rem;">
                 <i class="fas fa-comments" style="color:#d4af37;"></i>
-                <span><strong>Messages:</strong> ${totalMessages}</span>
+                <span>${totalEngagement} message${totalEngagement !== 1 ? 's' : ''}</span>
               </span>
               
-              <span style="display:flex; align-items:center; gap:0.5rem;">
+              <span style="display:flex; align-items:center; gap:0.3rem;">
                 <i class="fas fa-fire" style="color:#c62828;"></i>
-                <span><strong>Likes:</strong> ${totalLikes}</span>
+                <span>${totalLikes} like${totalLikes !== 1 ? 's' : ''}</span>
               </span>
+              
+              ${lastMessage ? `
+                <span style="display:flex; align-items:center; gap:0.3rem;">
+                  <i class="fas fa-clock" style="color:#666;"></i>
+                  <span>Last activity: ${formatDate(lastMessage.date)}</span>
+                </span>
+              ` : ''}
             </div>
           </div>
           
           <!-- Action Buttons -->
-          <div style="display:flex; flex-direction:column; gap:0.8rem; min-width:140px; margin-left:1.5rem;">
+          <div style="display:flex; flex-direction:column; gap:0.5rem; min-width:120px;">
             <!-- View Chat Button -->
             <button onclick="openChatThread('${topic.id}')" 
-              style="background:#1a3c34; color:white; border:none; padding:0.8rem 1.2rem; border-radius:6px; cursor:pointer; font-size:1rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
-              <i class="fas fa-comments"></i>
+              style="background:#1a3c34; color:white; border:none; padding:0.6rem 1rem; border-radius:6px; cursor:pointer; font-size:0.9rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:background 0.3s;">
+              <i class="fas fa-eye"></i>
               View Chat
             </button>
             
-            <!-- Admin Delete Button -->
+            <!-- Admin Delete Button (only shown in admin mode) -->
             ${isAdminMode ? `
               <button onclick="deleteTopic('${topic.id}')" 
-                style="background:#c62828; color:white; border:none; padding:0.8rem 1.2rem; border-radius:6px; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
-                <i class="fas fa-trash-alt"></i>
-                Delete
+                style="background:#c62828; color:white; border:none; padding:0.6rem 1rem; border-radius:6px; cursor:pointer; font-size:0.9rem; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:background 0.3s;">
+                <i class="fas fa-trash"></i>
+                Delete Topic
               </button>
             ` : ''}
           </div>
@@ -469,7 +631,584 @@ function renderTopics(topics) {
   renderPagination(page, totalPages);
 }
 
-// 23. Initialize with Header/Footer
+// 3. Render message preview (first 2 messages)
+function renderMessagePreview(messages) {
+  return messages.map(msg => `
+    <div style="background:white; border:1px solid #eee; border-radius:6px; padding:0.8rem; margin-bottom:0.5rem;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+        <div style="flex:1;">
+          <div style="font-weight:600; color:#444; margin-bottom:0.3rem;">
+            ${msg.user || 'Anonymous'}
+            <span style="font-weight:normal; color:#888; font-size:0.8rem; margin-left:0.5rem;">
+              ${formatDate(msg.date)}
+            </span>
+          </div>
+          <div style="color:#555; font-size:0.9rem;">
+            ${msg.text.substring(0, 100)}${msg.text.length > 100 ? '...' : ''}
+          </div>
+          <div style="display:flex; gap:0.8rem; margin-top:0.5rem; font-size:0.8rem;">
+            <span><i class="fas fa-thumbs-up" style="color:#1a3c34; margin-right:0.3rem;"></i>${msg.likes || 0}</span>
+            <span><i class="fas fa-reply" style="color:#666; margin-right:0.3rem;"></i>${msg.replies ? msg.replies.length : 0}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// 4. Pagination helper
+function renderPagination(currentPage, totalPages) {
+  const pagination = document.getElementById("pagination");
+  
+  if (totalPages <= 1) {
+    pagination.innerHTML = '';
+    return;
+  }
+  
+  let paginationHtml = '<div style="display:flex; gap:0.5rem; justify-content:center; margin-top:2rem;">';
+  
+  if (currentPage > 1) {
+    paginationHtml += `
+      <button onclick="goToPage(${currentPage - 1})" style="padding:0.5rem 1rem; border:1px solid #ddd; background:white; border-radius:4px; cursor:pointer;">
+        <i class="fas fa-chevron-left"></i> Previous
+      </button>
+    `;
+  }
+  
+  // Show first page, current page, and last page
+  const pagesToShow = [1];
+  if (currentPage > 3) pagesToShow.push('...');
+  for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+    pagesToShow.push(i);
+  }
+  if (currentPage < totalPages - 2) pagesToShow.push('...');
+  if (totalPages > 1) pagesToShow.push(totalPages);
+  
+  pagesToShow.forEach(pageNum => {
+    if (pageNum === '...') {
+      paginationHtml += `<span style="padding:0.5rem 1rem;">...</span>`;
+    } else if (pageNum === currentPage) {
+      paginationHtml += `
+        <button style="padding:0.5rem 1rem; border:none; background:#1a3c34; color:white; border-radius:4px;">
+          ${pageNum}
+        </button>
+      `;
+    } else {
+      paginationHtml += `
+        <button onclick="goToPage(${pageNum})" style="padding:0.5rem 1rem; border:1px solid #ddd; background:white; border-radius:4px; cursor:pointer;">
+          ${pageNum}
+        </button>
+      `;
+    }
+  });
+  
+  if (currentPage < totalPages) {
+    paginationHtml += `
+      <button onclick="goToPage(${currentPage + 1})" style="padding:0.5rem 1rem; border:1px solid #ddd; background:white; border-radius:4px; cursor:pointer;">
+        Next <i class="fas fa-chevron-right"></i>
+      </button>
+    `;
+  }
+  
+  paginationHtml += '</div>';
+  pagination.innerHTML = paginationHtml;
+}
+
+// 5. Open chat thread in overlay
+// 5. Open chat thread in overlay - ENHANCED to show topic details
+function openChatThread(topicId) {
+  const topic = allTopics.find(t => t.id === topicId);
+  if (!topic) return;
+  
+  currentOpenTopic = topic;
+  
+  // Calculate stats for this topic
+  let totalLikes = 0;
+  let totalReplies = 0;
+  if (topic.messages) {
+    topic.messages.forEach(msg => {
+      totalLikes += msg.likes || 0;
+      if (msg.replies) {
+        totalReplies += msg.replies.length;
+        msg.replies.forEach(reply => {
+          totalLikes += reply.likes || 0;
+        });
+      }
+    });
+  }
+  
+  const totalMessages = (topic.messages ? topic.messages.length : 0) + totalReplies;
+  
+  // Update chat header with topic details
+  const headerHtml = `
+    <div>
+      <h3 style="margin:0 0 0.3rem 0; color:white; font-size:1.3rem;">
+        <i class="fas fa-comment-dots" style="margin-right:0.5rem;"></i>
+        ${topic.title || 'Chat Topic'}
+      </h3>
+      <div style="display:flex; gap:1rem; font-size:0.85rem; opacity:0.9;">
+        <span><i class="fas fa-user"></i> ${topic.user || 'Anonymous'}</span>
+        <span><i class="fas fa-calendar"></i> ${topic.date ? formatDate(topic.date) : ''}</span>
+        <span><i class="fas fa-comments"></i> ${totalMessages} messages</span>
+        <span><i class="fas fa-fire"></i> ${totalLikes} likes</span>
+      </div>
+      ${topic.description ? `
+        <div style="margin-top:0.5rem; padding:0.5rem; background:rgba(255,255,255,0.1); border-radius:4px; font-size:0.9rem;">
+          <i class="fas fa-info-circle" style="margin-right:0.3rem;"></i>
+          ${topic.description}
+        </div>
+      ` : ''}
+    </div>
+  `;
+  
+  document.getElementById("chatTopicTitle").innerHTML = headerHtml;
+  document.getElementById("chatMessages").scrollTop = 0;
+  
+  // Render messages
+  renderChatMessages(topic.messages || []);
+  
+  // Show overlay
+  document.getElementById("chatOverlay").style.display = "flex";
+  document.body.style.overflow = "hidden";
+  
+  // Focus on reply input
+  setTimeout(() => {
+    document.getElementById("chatReplyInput").focus();
+  }, 300);
+}
+
+// 6. Render chat messages
+function renderChatMessages(messages) {
+  const container = document.getElementById("messagesContainer");
+  
+  if (!messages || messages.length === 0) {
+    container.innerHTML = `
+      <div style="text-align:center; padding:3rem; color:#666;">
+        <i class="fas fa-comment-slash" style="font-size:2.5rem; color:#ccc; margin-bottom:1rem;"></i>
+        <h3 style="margin:0 0 0.5rem 0;">No Messages Yet</h3>
+        <p>Be the first to post a message!</p>
+      </div>
+    `;
+    return;
+  }
+  
+  container.innerHTML = messages.map(msg => renderChatMessage(msg, 0)).join('');
+}
+
+// 7. Render single chat message with limited actions
+function renderChatMessage(msg, depth = 0) {
+  const messageId = msg.id;
+  const userLiked = userLikes[messageId] === true;
+  const likeStyle = userLiked ? 'style="color:#c62828;"' : '';
+  
+  // Check if user can like (only one like per message per user)
+  const canLike = !userLiked;
+  
+  return `
+    <div class="chat-message" style="margin-left:${depth * 20}px; margin-bottom:1rem;">
+      <div style="background:${depth === 0 ? '#f0f7f4' : '#f8f9fa'}; border-radius:8px; padding:1rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem;">
+          <div style="font-weight:600; color:#1a3c34;">
+            ${msg.user || 'Anonymous'}
+          </div>
+          <div style="font-size:0.8rem; color:#888;">
+            ${formatDate(msg.date)}
+          </div>
+        </div>
+        
+        <div style="color:#333; margin-bottom:0.8rem;">
+          ${msg.text}
+        </div>
+        
+        <div style="display:flex; gap:1rem; align-items:center;">
+          <!-- Like button -->
+          <button onclick="${canLike ? `likeChatMessage('${messageId}')` : ''}" 
+            ${!canLike ? 'disabled' : ''}
+            style="background:none; border:none; color:${userLiked ? '#c62828' : '#666'}; cursor:${canLike ? 'pointer' : 'not-allowed'}; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
+            <i class="fas fa-thumbs-up" ${likeStyle}></i>
+            ${msg.likes || 0} Like${msg.likes !== 1 ? 's' : ''}
+            ${userLiked ? ' (You liked)' : ''}
+          </button>
+          
+          <!-- Reply button -->
+          <button onclick="showChatReplyBox('${messageId}')" 
+            style="background:none; border:none; color:#666; cursor:pointer; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
+            <i class="fas fa-reply"></i> Reply
+          </button>
+        </div>
+        
+        <!-- Reply input (hidden by default) -->
+        <div id="chatReplyBox-${messageId}" style="display:none; margin-top:1rem;">
+          <textarea id="chatReplyInput-${messageId}" placeholder="Write your reply..." style="width:100%; padding:0.6rem; border:1px solid #ddd; border-radius:4px; min-height:60px; margin-bottom:0.5rem;"></textarea>
+          <div>
+            <button onclick="submitChatNestedReply('${messageId}')" style="background:#1a3c34; color:white; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; font-size:0.85rem;">
+              Post Reply
+            </button>
+            <button onclick="hideChatReplyBox('${messageId}')" style="background:#666; color:white; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; margin-left:0.5rem; font-size:0.85rem;">
+              Cancel
+            </button>
+          </div>
+        </div>
+        
+        <!-- Nested replies -->
+        <div style="margin-top:1rem;">
+          ${(msg.replies || []).map(reply => renderChatMessage(reply, depth + 1)).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// 8. Like a chat message (with one-like restriction)
+async function likeChatMessage(messageId) {
+  if (userLikes[messageId]) {
+    alert("You have already liked this message!");
+    return;
+  }
+  
+  const topic = currentOpenTopic;
+  if (!topic || !topic.messages) return;
+  
+  // Find and update the message
+  function updateMessageLikes(messages) {
+    for (let msg of messages) {
+      if (msg.id === messageId) {
+        msg.likes = (msg.likes || 0) + 1;
+        return true;
+      }
+      if (msg.replies) {
+        if (updateMessageLikes(msg.replies)) return true;
+      }
+    }
+    return false;
+  }
+  
+  if (updateMessageLikes(topic.messages)) {
+    // Record user's like
+    userLikes[messageId] = true;
+    localStorage.setItem('userLikes', JSON.stringify(userLikes));
+    
+    // Update the topic in allTopics
+    const topicIndex = allTopics.findIndex(t => t.id === topic.id);
+    if (topicIndex !== -1) {
+      allTopics[topicIndex] = topic;
+    }
+    
+    // Save to server
+    await saveTopicsToServer();
+    
+    // Re-render messages
+    renderChatMessages(topic.messages);
+  }
+}
+
+// 9. Show/hide reply box in chat
+function showChatReplyBox(messageId) {
+  document.getElementById(`chatReplyBox-${messageId}`).style.display = 'block';
+  document.getElementById(`chatReplyInput-${messageId}`).focus();
+}
+
+function hideChatReplyBox(messageId) {
+  document.getElementById(`chatReplyBox-${messageId}`).style.display = 'none';
+  document.getElementById(`chatReplyInput-${messageId}`).value = '';
+}
+
+// 10. Submit nested reply in chat
+async function submitChatNestedReply(parentId) {
+  const input = document.getElementById(`chatReplyInput-${parentId}`);
+  const text = input.value.trim();
+  
+  if (!text) {
+    alert("Please enter a reply");
+    return;
+  }
+  
+  const topic = currentOpenTopic;
+  if (!topic) return;
+  
+  // Find parent message and add reply
+  function addReplyToMessage(messages, parentId, newReply) {
+    for (let msg of messages) {
+      if (msg.id === parentId) {
+        if (!msg.replies) msg.replies = [];
+        msg.replies.push(newReply);
+        return true;
+      }
+      if (msg.replies) {
+        if (addReplyToMessage(msg.replies, parentId, newReply)) return true;
+      }
+    }
+    return false;
+  }
+  
+  const newReply = {
+    id: Date.now().toString(),
+    user: "Anonymous",
+    text: text,
+    date: new Date().toLocaleString(),
+    likes: 0,
+    replies: []
+  };
+  
+  if (addReplyToMessage(topic.messages, parentId, newReply)) {
+    // Update allTopics
+    const topicIndex = allTopics.findIndex(t => t.id === topic.id);
+    if (topicIndex !== -1) {
+      allTopics[topicIndex] = topic;
+    }
+    
+    // Save to server
+    await saveTopicsToServer();
+    
+    // Clear input and hide box
+    input.value = '';
+    hideChatReplyBox(parentId);
+    
+    // Re-render messages
+    renderChatMessages(topic.messages);
+  }
+}
+
+// 11. Submit main reply in chat
+async function submitChatReply() {
+  const input = document.getElementById("chatReplyInput");
+  const text = input.value.trim();
+  
+  if (!text) {
+    alert("Please enter a reply");
+    return;
+  }
+  
+  const topic = currentOpenTopic;
+  if (!topic) return;
+  
+  if (!topic.messages) topic.messages = [];
+  
+  topic.messages.push({
+    id: Date.now().toString(),
+    user: "Anonymous",
+    text: text,
+    date: new Date().toLocaleString(),
+    likes: 0,
+    replies: []
+  });
+  
+  // Update allTopics
+  const topicIndex = allTopics.findIndex(t => t.id === topic.id);
+  if (topicIndex !== -1) {
+    allTopics[topicIndex] = topic;
+  }
+  
+  // Save to server
+  await saveTopicsToServer();
+  
+  // Clear input
+  input.value = '';
+  
+  // Re-render messages
+  renderChatMessages(topic.messages);
+  
+  // Scroll to bottom
+  setTimeout(() => {
+    document.getElementById("chatMessages").scrollTop = document.getElementById("chatMessages").scrollHeight;
+  }, 100);
+}
+
+// 12. Close chat thread
+function closeChatThread() {
+  document.getElementById("chatOverlay").style.display = "none";
+  document.body.style.overflow = "auto";
+  currentOpenTopic = null;
+  
+  // Reload topics to reflect any changes
+  loadTopics();
+}
+
+// 13. Admin functionality
+function showAdminLogin() {
+  document.getElementById("adminLoginOverlay").style.display = "flex";
+  document.getElementById("adminPassword").focus();
+}
+
+function closeAdminLogin() {
+  document.getElementById("adminLoginOverlay").style.display = "none";
+  document.getElementById("adminPassword").value = "";
+}
+
+function attemptAdminLogin() {
+  const password = document.getElementById("adminPassword").value;
+  
+  if (password === ADMIN_PASSWORD) {
+    isAdminMode = true;
+    document.getElementById("adminPanel").style.display = "block";
+    closeAdminLogin();
+    loadTopics(); // Re-render with delete buttons
+    alert("Admin mode activated");
+  } else {
+    alert("Incorrect password");
+    document.getElementById("adminPassword").value = "";
+    document.getElementById("adminPassword").focus();
+  }
+}
+
+function toggleAdminMode(enable) {
+  isAdminMode = enable;
+  document.getElementById("adminPanel").style.display = enable ? "block" : "none";
+  loadTopics(); // Re-render with/without delete buttons
+}
+
+// 14. Save topics to server
+async function saveTopicsToServer() {
+  try {
+    const response = await fetch(SAVE_TOPICS_URL, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(allTopics)
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Save failed: ${response.status}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to save topics:", error);
+    alert("Failed to save changes. Please try again.");
+    throw error;
+  }
+}
+
+// 15. Create topic function (updated)
+async function createTopic() {
+  const titleInput = document.getElementById("topicTitle");
+  const bodyInput = document.getElementById("topicBody");
+  
+  const title = titleInput.value.trim();
+  const body = bodyInput.value.trim();
+  
+  if (!title || !body) {
+    alert("Please enter both title and message");
+    return;
+  }
+  
+  try {
+    const createBtn = document.querySelector('button[onclick="createTopic()"]');
+    const originalText = createBtn.innerHTML;
+    createBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+    createBtn.disabled = true;
+    
+    // Get current topics
+    const response = await fetch(GET_TOPICS_URL);
+    let topics = await response.json();
+    
+    if (!Array.isArray(topics)) topics = [];
+    
+    // Create new topic
+    const newTopic = {
+      id: Date.now().toString(),
+      title: title,
+      description: body.substring(0, 100) + (body.length > 100 ? '...' : ''),
+      user: "Anonymous",
+      date: new Date().toLocaleString(),
+      messages: [{
+        id: Date.now().toString() + "-msg",
+        user: "Anonymous",
+        text: body,
+        date: new Date().toLocaleString(),
+        likes: 0,
+        replies: []
+      }]
+    };
+    
+    topics.push(newTopic);
+    allTopics = topics;
+    
+    // Save to server
+    await saveTopicsToServer();
+    
+    // Clear form
+    titleInput.value = "";
+    bodyInput.value = "";
+    
+    // Show success and open chat
+    alert("Topic created successfully!");
+    loadTopics();
+    
+    // Open the new chat
+    setTimeout(() => {
+      openChatThread(newTopic.id);
+    }, 500);
+    
+  } catch (error) {
+    console.error("Failed to create topic:", error);
+    alert("Error: " + error.message);
+  } finally {
+    const createBtn = document.querySelector('button[onclick="createTopic()"]');
+    if (createBtn) {
+      createBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Create Topic';
+      createBtn.disabled = false;
+    }
+  }
+}
+
+// 16. Delete topic (admin only)
+async function deleteTopic(topicId) {
+  if (!isAdminMode) {
+    showAdminLogin();
+    return;
+  }
+  
+  if (!confirm("Delete this topic and all messages?")) return;
+  
+  try {
+    allTopics = allTopics.filter(topic => topic.id !== topicId);
+    
+    await saveTopicsToServer();
+    
+    // If this topic is open, close it
+    if (currentOpenTopic && currentOpenTopic.id === topicId) {
+      closeChatThread();
+    }
+    
+    alert("Topic deleted");
+    loadTopics();
+  } catch (error) {
+    alert("Failed to delete: " + error.message);
+  }
+}
+
+// 17. Helper functions
+function formatDate(dateString) {
+  if (!dateString) return 'Unknown';
+  
+  try {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return dateString;
+    
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+    
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffDays < 7) return `${diffDays}d ago`;
+    
+    return date.toLocaleDateString();
+  } catch {
+    return dateString;
+  }
+}
+
+function goToPage(pageNumber) {
+  const url = new URL(window.location);
+  url.searchParams.set('page', pageNumber);
+  window.location.href = url.toString();
+}
+
+// 18. Initialize
 window.addEventListener('DOMContentLoaded', () => {
   console.log("Chat Center initialized");
   
@@ -477,23 +1216,65 @@ window.addEventListener('DOMContentLoaded', () => {
   userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
   
   // Add admin button to header
-  const adminBtn = document.createElement("button");
-  adminBtn.innerHTML = '<i class="fas fa-user-shield"></i> Admin Login';
-  adminBtn.className = 'admin-btn';
-  adminBtn.style.cssText = "margin-left: 1rem;";
-  adminBtn.onclick = showAdminLogin;
-  document.getElementById('adminButtonContainer').appendChild(adminBtn);
-  
-  // Collapse new topic section by default
-  document.getElementById('newTopicContent').classList.remove('expanded');
+  const header = document.querySelector(".container .page-title") || document.querySelector("header .container");
+  if (header) {
+    const adminBtn = document.createElement("button");
+    adminBtn.innerHTML = '<i class="fas fa-user-shield"></i> Admin';
+    adminBtn.style.cssText = "background:#d4af37; color:white; border:none; padding:0.5rem 1rem; border-radius:4px; cursor:pointer; margin-left:1rem;";
+    adminBtn.onclick = showAdminLogin;
+    header.appendChild(adminBtn);
+  }
   
   // Load topics
   loadTopics();
 });
 
-// 24. Make new functions available globally
-window.toggleNewTopicSection = toggleNewTopicSection;
-window.clearNewTopicForm = clearNewTopicForm;
+// 19. Global functions
+window.loadTopics = loadTopics;
+window.createTopic = createTopic;
+window.deleteTopic = deleteTopic;
+window.openChatThread = openChatThread;
+window.closeChatThread = closeChatThread;
+window.likeChatMessage = likeChatMessage;
+window.submitChatReply = submitChatReply;
+window.submitChatNestedReply = submitChatNestedReply;
+window.showChatReplyBox = showChatReplyBox;
+window.hideChatReplyBox = hideChatReplyBox;
+window.showAdminLogin = showAdminLogin;
+window.closeAdminLogin = closeAdminLogin;
+window.attemptAdminLogin = attemptAdminLogin;
+window.toggleAdminMode = toggleAdminMode;
+window.goToPage = goToPage;
 </script>
+
+</footer>
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>About RaceAnalyst</h4>
+                <p>Your trusted platform for racing analytics, statistics, and insights.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="index.html" style="color:#ccc; text-decoration:none;">Home</a></p>
+                <p><a href="analysis.html" style="color:#ccc; text-decoration:none;">Analysis</a></p>
+                <p><a href="chatcenter.html" style="color:#ccc; text-decoration:none;">Chat Center</a></p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            © 2025 RaceAnalyst. All rights reserved.
+        </div>
+    </footer>
 </body>
 </html>
