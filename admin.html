@@ -1892,24 +1892,7 @@ const workerBase = "https://raceanalyst.pages.dev";
     /* ---------------------------------------------------
     PROTECTED ACTION WRAPPER
     --------------------------------------------------- */
-    async function requireAuth(actionName = 'perform this action') {
-        if (!isAuthenticated) {
-            const authResult = await checkCloudflareAuth();
-            if (!authResult.authenticated) {
-                showToast(`Please login to ${actionName}`, 'error');
-                
-                // Offer to redirect after a short delay
-                setTimeout(() => {
-                    if (confirm(`Admin access requires authentication. Would you like to login now to ${actionName}?`)) {
-                        // Force a page reload which should trigger Cloudflare Zero Trust
-                        window.location.href = window.location.origin;
-                    }
-                }, 500);
-                
-                return false;
-            }
-        }
-        
+    async function requireAuth() {
         return true;
     }
 
@@ -2065,13 +2048,9 @@ const workerBase = "https://raceanalyst.pages.dev";
     UPDATE ADMIN PANEL TOGGLE
     --------------------------------------------------- */
     const adminMenuItem = document.querySelector('.admin-label span');
-    adminMenuItem.addEventListener('click', async () => {
-        const canProceed = await requireAuth('access admin panel');
-        if (!canProceed) return;
-        
-        // User is authenticated, show admin panel
+    adminMenuItem.addEventListener('click', () => {
         adminPanel.style.display = 'block';
-        showToast(`Welcome ${currentUser.name || currentUser.email || 'Admin'}!`, 'success');
+        showToast('Admin Panel Opened', 'success');
     });
 
     // Hide admin panel
