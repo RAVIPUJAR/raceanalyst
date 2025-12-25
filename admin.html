@@ -1177,6 +1177,7 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
             
             const response = await fetch(fetchUrl, {
                 method: 'GET',
+                credentials: 'include',
                 headers: { 
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -1236,6 +1237,7 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
             // Try admin endpoint
             const response = await fetch(workerBase + "/get-all", {
                 method: 'GET',
+                credentials: 'include',
                 headers: { 
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -1265,6 +1267,7 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
             console.log("💾 Saving to KV:", key);
             const response = await fetch(workerBase + "/save", {
                 method: "POST",
+                credentials: 'include',
                 headers: { 
                     "Content-Type": "application/json",
                     "Accept": "application/json"
@@ -1291,6 +1294,7 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
             console.log("🗑️ Deleting from KV:", key);
             const response = await fetch(workerBase + "/delete", {
                 method: "POST",
+                credentials: 'include',
                 headers: { 
                     "Content-Type": "application/json",
                     "Accept": "application/json"
