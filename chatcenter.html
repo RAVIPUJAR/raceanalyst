@@ -387,6 +387,24 @@
         </h2>
 
         <div id="newTopicContent" style="display:none;">
+            <input type="text" id="userNameInput" placeholder="Your Name" style="margin-bottom:1rem; padding:12px; border:2px solid #e6e6e6; border-radius:6px;">
+
+            <div id="avatarGrid" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:1rem;">
+              <img src="https://ui-avatars.com/api/?name=A&background=1a3c34&color=fff&rounded=true" class="avatarOption" style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+              <img src="https://ui-avatars.com/api/?name=B&background=d4af37&color=fff&rounded=true" class="avatarOption" style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+              <img src="https://ui-avatars.com/api/?name=C&background=244e44&color=fff&rounded=true" class="avatarOption" style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+              <img src="https://ui-avatars.com/api/?name=D&background=6a1b9a&color=fff&rounded=true" class="avatarOption" style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+              <img src="https://ui-avatars.com/api/?name=E&background=c62828&color=fff&rounded=true" class="avatarOption" style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+              <img src="https://ui-avatars.com/api/?name=F&background=283593&color=fff&rounded=true" class="avatarOption" style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+              <img src="https://ui-avatars.com/api/?name=G&background=1565c0&color=fff&rounded=true" class="avatarOption" style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+              <img src="https://ui-avatars.com/api/?name=H&background=2e7d32&color=fff&rounded=true" class="avatarOption" style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+              <img src="https://ui-avatars.com/api/?name=I&background=ad1457&color=fff&rounded=true" class="avatarOption" style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+              <img src="https://ui-avatars.com/api/?name=J&background=4e342e&color=fff&rounded=true" class="avatarOption" style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+              <img src="https://ui-avatars.com/api/?name=K&background=00838f&color=fff&rounded=true" class="avatarOption" style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+              <img src="https://ui-avatars.com/api/?name=L&background=37474f&color=fff&rounded=true" class="avatarOption" style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+            </div>
+
+            <input type="hidden" id="selectedAvatar" value="">
             <input type="text" id="topicTitle" placeholder="Topic Title">
             <textarea id="topicBody" placeholder="Write the first message..." style="min-height:120px;"></textarea>
             <button onclick="createTopic()">
@@ -443,6 +461,59 @@
         
         <!-- Reply Input -->
         <div style="padding:1rem; border-top:1px solid #eee;">
+            <input type="text" id="replyUserNameInput" placeholder="Your Name" style="margin-bottom:1rem; padding:12px; border:2px solid #e6e6e6; border-radius:6px;">
+
+            <div id="replyAvatarGrid" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:1rem;">
+                <img src="https://ui-avatars.com/api/?name=A&background=1a3c34&color=fff&rounded=true"
+                    class="replyAvatarOption"
+                    style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+                
+                <img src="https://ui-avatars.com/api/?name=B&background=d4af37&color=fff&rounded=true"
+                    class="replyAvatarOption"
+                    style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+                
+                <img src="https://ui-avatars.com/api/?name=C&background=244e44&color=fff&rounded=true"
+                    class="replyAvatarOption"
+                    style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+                
+                <img src="https://ui-avatars.com/api/?name=D&background=6a1b9a&color=fff&rounded=true"
+                    class="replyAvatarOption"
+                    style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+                
+                <img src="https://ui-avatars.com/api/?name=E&background=c62828&color=fff&rounded=true"
+                    class="replyAvatarOption"
+                    style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+                
+                <img src="https://ui-avatars.com/api/?name=F&background=283593&color=fff&rounded=true"
+                    class="replyAvatarOption"
+                    style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+                
+                <img src="https://ui-avatars.com/api/?name=G&background=1565c0&color=fff&rounded=true"
+                    class="replyAvatarOption"
+                    style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+                
+                <img src="https://ui-avatars.com/api/?name=H&background=2e7d32&color=fff&rounded=true"
+                    class="replyAvatarOption"
+                    style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+                
+                <img src="https://ui-avatars.com/api/?name=I&background=ad1457&color=fff&rounded=true"
+                    class="replyAvatarOption"
+                    style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+                
+                <img src="https://ui-avatars.com/api/?name=J&background=4e342e&color=fff&rounded=true"
+                    class="replyAvatarOption"
+                    style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+                
+                <img src="https://ui-avatars.com/api/?name=K&background=00838f&color=fff&rounded=true"
+                    class="replyAvatarOption"
+                    style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+                
+                <img src="https://ui-avatars.com/api/?name=L&background=37474f&color=fff&rounded=true"
+                    class="replyAvatarOption"
+                    style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+            </div>
+
+            <input type="hidden" id="replySelectedAvatar" value="">
             <textarea id="chatReplyInput" placeholder="Write your reply..." style="width:100%; padding:0.8rem; border:2px solid #e6e6e6; border-radius:6px; min-height:80px; margin-bottom:0.8rem;"></textarea>
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <button onclick="submitChatReply()" style="background:#1a3c34; color:white; border:none; padding:0.6rem 1.2rem; border-radius:6px; cursor:pointer;">
@@ -490,6 +561,51 @@ let allTopics = [];
 let currentOpenTopic = null;
 let isAdminMode = false;
 let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}'); // Track user likes
+
+
+// ===== REPLY AVATAR SELECTION HANDLER =====
+document.addEventListener("DOMContentLoaded", function () {
+    const replyAvatarOptions = document.querySelectorAll(".replyAvatarOption");
+    const replySelectedAvatarInput = document.getElementById("replySelectedAvatar");
+
+    replyAvatarOptions.forEach(avatar => {
+        avatar.addEventListener("click", function () {
+            // Remove highlight from all
+            replyAvatarOptions.forEach(a => a.style.border = "2px solid transparent");
+
+            // Add highlight to selected
+            this.style.border = "2px solid #d4af37";
+
+            // Save selection
+            replySelectedAvatarInput.value = this.src;
+        });
+    });
+});
+
+// ===== NESTED REPLY AVATAR SELECTION HANDLER =====
+document.addEventListener("click", function (event) {
+    if (!event.target.classList.contains("nestedReplyAvatarOption")) return;
+
+    const avatar = event.target;
+    const parentId = avatar.getAttribute("data-parent");
+
+    // All avatars in this nested reply box
+    const avatars = document.querySelectorAll(
+        `.nestedReplyAvatarOption[data-parent="${parentId}"]`
+    );
+
+    // Hidden input for this nested reply
+    const hiddenInput = document.getElementById(`nestedReplySelectedAvatar-${parentId}`);
+
+    // Clear highlight from all avatars
+    avatars.forEach(a => a.style.border = "2px solid transparent");
+
+    // Highlight selected
+    avatar.style.border = "2px solid #d4af37";
+
+    // Save selected avatar
+    hiddenInput.value = avatar.src;
+});
 
 // Helper to get or prompt for user name and cache in localStorage
 function getUserName() {
@@ -905,6 +1021,61 @@ function renderChatMessage(msg, depth = 0) {
           </button>
         </div>
         <div id="chatReplyBox-${messageId}" style="display:none; margin-top:1rem; padding-left:46px;">
+          <input type="text" id="nestedReplyUserNameInput-${messageId}" placeholder="Your Name" 
+                 style="margin-bottom:0.6rem; padding:10px; border:1px solid #ddd; border-radius:4px; width:100%;">
+
+          <div id="nestedReplyAvatarGrid-${messageId}" 
+               style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:0.6rem;">
+              <img src="https://ui-avatars.com/api/?name=A&background=1a3c34&color=fff&rounded=true"
+                  class="nestedReplyAvatarOption" data-parent="${messageId}"
+                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+              
+              <img src="https://ui-avatars.com/api/?name=B&background=d4af37&color=fff&rounded=true"
+                  class="nestedReplyAvatarOption" data-parent="${messageId}"
+                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+              
+              <img src="https://ui-avatars.com/api/?name=C&background=244e44&color=fff&rounded=true"
+                  class="nestedReplyAvatarOption" data-parent="${messageId}"
+                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+              
+              <img src="https://ui-avatars.com/api/?name=D&background=6a1b9a&color=fff&rounded=true"
+                  class="nestedReplyAvatarOption" data-parent="${messageId}"
+                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+              
+              <img src="https://ui-avatars.com/api/?name=E&background=c62828&color=fff&rounded=true"
+                  class="nestedReplyAvatarOption" data-parent="${messageId}"
+                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+
+              <img src="https://ui-avatars.com/api/?name=F&background=283593&color=fff&rounded=true"
+                  class="nestedReplyAvatarOption" data-parent="${messageId}"
+                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+
+              <img src="https://ui-avatars.com/api/?name=G&background=1565c0&color=fff&rounded=true"
+                  class="nestedReplyAvatarOption" data-parent="${messageId}"
+                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+
+              <img src="https://ui-avatars.com/api/?name=H&background=2e7d32&color=fff&rounded=true"
+                  class="nestedReplyAvatarOption" data-parent="${messageId}"
+                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+
+              <img src="https://ui-avatars.com/api/?name=I&background=ad1457&color=fff&rounded=true"
+                  class="nestedReplyAvatarOption" data-parent="${messageId}"
+                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+
+              <img src="https://ui-avatars.com/api/?name=J&background=4e342e&color=fff&rounded=true"
+                  class="nestedReplyAvatarOption" data-parent="${messageId}"
+                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+
+              <img src="https://ui-avatars.com/api/?name=K&background=00838f&color=fff&rounded=true"
+                  class="nestedReplyAvatarOption" data-parent="${messageId}"
+                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+
+              <img src="https://ui-avatars.com/api/?name=L&background=37474f&color=fff&rounded=true"
+                  class="nestedReplyAvatarOption" data-parent="${messageId}"
+                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+          </div>
+
+          <input type="hidden" id="nestedReplySelectedAvatar-${messageId}" value="">
           <textarea id="chatReplyInput-${messageId}" placeholder="Write your reply..." style="width:100%; padding:0.6rem; border:1px solid #ddd; border-radius:4px; min-height:60px; margin-bottom:0.5rem;"></textarea>
           <div>
             <button onclick="submitChatNestedReply('${messageId}')" style="background:#1a3c34; color:white; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; font-size:0.85rem;">
@@ -978,66 +1149,97 @@ function hideChatReplyBox(messageId) {
 }
 
 // 9. Submit nested reply in chat (with user name and avatar)
+// 9. Submit nested reply in chat (with user name and avatar)
+// 9. Submit nested reply in chat (with user name and avatar)
 async function submitChatNestedReply(parentId) {
-  const input = document.getElementById(`chatReplyInput-${parentId}`);
-  const text = input.value.trim();
+    const input = document.getElementById(`chatReplyInput-${parentId}`);
+    const text = input.value.trim();
 
-  if (!text) {
-    alert("Please enter a reply");
-    return;
-  }
-
-  const topic = currentOpenTopic;
-  if (!topic) return;
-
-  function addReplyToMessage(messages, parentId, newReply) {
-    for (let msg of messages) {
-      if (msg.id === parentId) {
-        if (!msg.replies) msg.replies = [];
-        msg.replies.push(newReply);
-        return true;
-      }
-      if (msg.replies) {
-        if (addReplyToMessage(msg.replies, parentId, newReply)) return true;
-      }
-    }
-    return false;
-  }
-
-  const user = getUserName();
-  const newReply = {
-    id: Date.now().toString(),
-    user: user,
-    avatar: '', // optional, can be blank or let renderChatMessage use default
-    text: text,
-    date: new Date().toLocaleString(),
-    likes: 0,
-    replies: []
-  };
-
-  if (addReplyToMessage(topic.messages, parentId, newReply)) {
-    // Update allTopics
-    const topicIndex = allTopics.findIndex(t => t.id === topic.id);
-    if (topicIndex !== -1) {
-      allTopics[topicIndex] = topic;
+    if (!text) {
+        alert("Please enter a reply");
+        return;
     }
 
-    // Save to server
-    await saveTopicsToServer();
+    // Get name + avatar from NESTED reply inputs
+    const userInput = document.getElementById(`nestedReplyUserNameInput-${parentId}`);
+    const avatarInput = document.getElementById(`nestedReplySelectedAvatar-${parentId}`);
 
-    // Clear input and hide box
-    input.value = '';
-    hideChatReplyBox(parentId);
+    const user = (userInput?.value.trim()) || "Anonymous";
+    const avatarSelected = (avatarInput?.value.trim()) || "";
 
-    // Re-render messages
-    renderChatMessages(topic.messages);
-  }
+    // Avatar fallback (initial-letter avatar)
+    const avatar = avatarSelected ||
+        `https://ui-avatars.com/api/?name=${encodeURIComponent(user)}&background=1a3c34&color=fff&rounded=true`;
+
+    const topic = currentOpenTopic;
+    if (!topic) return;
+
+    // Helper to add nested reply to correct message
+    function addReplyToMessage(messages, parentId, newReply) {
+        for (let msg of messages) {
+            if (msg.id === parentId) {
+                if (!msg.replies) msg.replies = [];
+                msg.replies.push(newReply);
+                return true;
+            }
+            if (msg.replies) {
+                if (addReplyToMessage(msg.replies, parentId, newReply)) return true;
+            }
+        }
+        return false;
+    }
+
+    const newReply = {
+        id: Date.now().toString(),
+        user: user,
+        avatar: avatar,
+        text: text,
+        date: new Date().toLocaleString(),
+        likes: 0,
+        replies: []
+    };
+
+    if (addReplyToMessage(topic.messages, parentId, newReply)) {
+        // Update topic in allTopics
+        const topicIndex = allTopics.findIndex(t => t.id === topic.id);
+        if (topicIndex !== -1) {
+            allTopics[topicIndex] = topic;
+        }
+
+        // Save to server
+        await saveTopicsToServer();
+
+        // Clear nested reply inputs
+        input.value = "";
+        if (userInput) userInput.value = "";
+        if (avatarInput) avatarInput.value = "";
+
+        // Clear avatar highlights for this nested box
+        const nestedAvatars = document.querySelectorAll(
+            `.nestedReplyAvatarOption[data-parent="${parentId}"]`
+        );
+        nestedAvatars.forEach(a => a.style.border = "2px solid transparent");
+
+        // Hide reply box
+        hideChatReplyBox(parentId);
+
+        // Re-render messages
+        renderChatMessages(topic.messages);
+    }
 }
 
+// 10. Submit main reply in chat (with user name and avatar)
 // 10. Submit main reply in chat (with user name and avatar)
 async function submitChatReply() {
   const input = document.getElementById("chatReplyInput");
   const text = input.value.trim();
+
+  const userInput = document.getElementById("replyUserNameInput");
+  const avatarInput = document.getElementById("replySelectedAvatar");
+
+  const user = userInput.value.trim() || "Anonymous";
+  const avatar = avatarInput.value.trim() ||
+      `https://ui-avatars.com/api/?name=${encodeURIComponent(user)}&background=1a3c34&color=fff&rounded=true`;
 
   if (!text) {
     alert("Please enter a reply");
@@ -1049,16 +1251,17 @@ async function submitChatReply() {
 
   if (!topic.messages) topic.messages = [];
 
-  const user = getUserName();
-  topic.messages.push({
+  const newMessage = {
     id: Date.now().toString(),
     user: user,
-    avatar: '', // optional, can be blank or let renderChatMessage use default
+    avatar: avatar,
     text: text,
     date: new Date().toLocaleString(),
     likes: 0,
     replies: []
-  });
+  };
+
+  topic.messages.push(newMessage);
 
   // Update allTopics
   const topicIndex = allTopics.findIndex(t => t.id === topic.id);
@@ -1069,15 +1272,24 @@ async function submitChatReply() {
   // Save to server
   await saveTopicsToServer();
 
-  // Clear input
-  input.value = '';
+  // Clear inputs
+  input.value = "";
+  // Optional: keep name for next reply
+  // userInput.value = "";
+  avatarInput.value = "";
+
+  // Remove highlight from avatars
+  document.querySelectorAll(".replyAvatarOption").forEach(a => {
+    a.style.border = "2px solid transparent";
+  });
 
   // Re-render messages
   renderChatMessages(topic.messages);
 
   // Scroll to bottom
   setTimeout(() => {
-    document.getElementById("chatMessages").scrollTop = document.getElementById("chatMessages").scrollHeight;
+    const chatBox = document.getElementById("chatMessages");
+    chatBox.scrollTop = chatBox.scrollHeight;
   }, 100);
 }
 
@@ -1146,76 +1358,64 @@ async function saveTopicsToServer() {
 }
 
 // 14. Create topic function
+// Create a new topic (with user + avatar)
 async function createTopic() {
-  const titleInput = document.getElementById("topicTitle");
-  const bodyInput = document.getElementById("topicBody");
-  
-  const title = titleInput.value.trim();
-  const body = bodyInput.value.trim();
-  
-  if (!title || !body) {
-    alert("Please enter both title and message");
-    return;
-  }
-  
-  try {
-    const createBtn = document.querySelector('button[onclick="createTopic()"]');
-    const originalText = createBtn.innerHTML;
-    createBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
-    createBtn.disabled = true;
-    
-    // Get current topics
-    const response = await fetch(GET_TOPICS_URL);
-    let topics = await response.json();
-    
-    if (!Array.isArray(topics)) topics = [];
-    
-    // Create new topic
+    const titleInput = document.getElementById("newTopicTitle");
+    const title = titleInput.value.trim();
+    const contentInput = document.getElementById("newTopicContentInput");
+    const content = contentInput.value.trim();
+
+    const userInput = document.getElementById("newTopicUserNameInput");
+    const avatarInput = document.getElementById("newTopicSelectedAvatar");
+
+    const user = (userInput?.value.trim()) || "Anonymous";
+    const avatarSelected = (avatarInput?.value.trim()) || "";
+
+    // Avatar fallback (auto-generated from user name)
+    const avatar = avatarSelected ||
+        `https://ui-avatars.com/api/?name=${encodeURIComponent(user)}&background=1a3c34&color=fff&rounded=true`;
+
+    if (!title) {
+        alert("Please enter a topic title");
+        return;
+    }
+
+    if (!content) {
+        alert("Please enter some content");
+        return;
+    }
+
+    // New topic object
     const newTopic = {
-      id: Date.now().toString(),
-      title: title,
-      description: body.substring(0, 100) + (body.length > 100 ? '...' : ''),
-      user: "Anonymous",
-      date: new Date().toLocaleString(),
-      messages: [{
-        id: Date.now().toString() + "-msg",
-        user: "Anonymous",
-        text: body,
+        id: Date.now().toString(),
+        title: title,
+        content: content,
+        user: user,
+        avatar: avatar,
         date: new Date().toLocaleString(),
         likes: 0,
-        replies: []
-      }]
+        messages: []
     };
-    
-    topics.push(newTopic);
-    allTopics = topics;
-    
+
+    // Add to allTopics
+    allTopics.unshift(newTopic);
+
     // Save to server
     await saveTopicsToServer();
-    
-    // Clear form
+
+    // Clear input fields
     titleInput.value = "";
-    bodyInput.value = "";
-    
-    // Show success and open chat
-    alert("Topic created successfully!");
-    loadTopics();
-    
-    // Open the new chat
-    setTimeout(() => {
-      openChatThread(newTopic.id);
-    }, 500);
-    
-  } catch (error) {
-    console.error("Failed to create topic:", error);
-    alert("Error: " + error.message);
-  } finally {
-    const createBtn = document.querySelector('button[onclick="createTopic()"]');
-    if (createBtn) {
-      createBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Create Topic';
-      createBtn.disabled = false;
-    }
-  }
+    contentInput.value = "";
+    if (userInput) userInput.value = "";
+    if (avatarInput) avatarInput.value = "";
+
+    // Clear avatar grid highlight
+    document.querySelectorAll(".avatarOption").forEach(a => {
+        a.style.border = "2px solid transparent";
+    });
+
+    closeNewTopic();  // Hide modal
+    renderTopics();   // Refresh topic list
 }
 
 // 15. Delete topic (admin only)
