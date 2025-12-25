@@ -1116,7 +1116,7 @@
     CONFIGURATION
     --------------------------------------------------- */
 let raceAnalyses = {};
-const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
+const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
     const today = new Date().toISOString().split('T')[0];
 
     /* ---------------------------------------------------
@@ -1172,7 +1172,7 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
             console.log("📡 Loading from Cloudflare KV...");
             
             // Always try to load data, regardless of auth status
-            const fetchUrl = workerBase + "get-all";
+            const fetchUrl = workerBase + "/get-all";
             console.log("Fetching URL:", fetchUrl);
             
             const response = await fetch(fetchUrl, {
