@@ -2295,15 +2295,17 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
     /* ---------------------------------------------------
     UPDATE ADMIN PANEL TOGGLE
     --------------------------------------------------- */
-    const adminMenuItem = document.querySelector('.admin-label span');
-    adminMenuItem.addEventListener('click', async () => {
-        const canProceed = await requireAuth('access admin panel');
-        if (!canProceed) return;
-        
-        // User is authenticated, show admin panel
-        adminPanel.style.display = 'block';
-        showToast(`Welcome ${currentUser.name || currentUser.email || 'Admin'}!`, 'success');
-    });
+    const adminMenuItem = document.getElementById('adminLoginBtn');
+    if (adminMenuItem) {
+        adminMenuItem.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const canProceed = await requireAuth('access admin panel');
+            if (!canProceed) return;
+
+            adminPanel.style.display = 'block';
+            showToast(`Welcome ${currentUser?.name || currentUser?.email || 'Admin'}!`, 'success');
+        });
+    }
 
     // Hide admin panel
     hideAdminBtn.addEventListener('click', () => {
