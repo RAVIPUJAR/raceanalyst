@@ -1089,1042 +1089,517 @@
     <div class="toast" id="toast"></div>
 
     <script>
-    /* ---------------------------------------------------
-    NAVIGATION FUNCTIONS
-    --------------------------------------------------- */
-    function navigateToHome() {
-        window.location.href = 'index.html#home';
-        return false;
-    }
+/* ---------------------------------------------------
+CONFIGURATION
+--------------------------------------------------- */
+let raceAnalyses = {};
+const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
+const today = new Date().toISOString().split('T')[0];
 
-    function navigateToRaceCalendar() {
-        window.location.href = 'index.html#race-calendar';
-        return false;
-    }
+// Global auth state
+let currentUser = null;
+let isAuthenticated = false;
 
-    function navigateToAnalysis() {
-        window.location.href = 'index.html#analysis';
-        return false;
-    }
-
-    function navigateToUpcomingRaces() {
-        window.location.href = 'index.html#upcoming-races';
-        return false;
-    }
+/* ---------------------------------------------------
+HELPER FUNCTIONS
+--------------------------------------------------- */
+function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
     
-    /* ---------------------------------------------------
-    CONFIGURATION
-    --------------------------------------------------- */
-    let raceAnalyses = {};
-    const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
-    const today = new Date().toISOString().split('T')[0];
-    
-    // Global auth state
-    let currentUser = null;
-    let isAuthenticated = false;
+    toast.textContent = message;
+    toast.style.background = type === 'success' ? '#28a745' : 
+                            type === 'error' ? '#dc3545' : 
+                            type === 'info' ? '#17a2b8' : '#28a745';
+    toast.style.display = "block";
+    setTimeout(() => (toast.style.display = "none"), 3000);
+}
 
-    /* ---------------------------------------------------
-    HELPER FUNCTIONS
-    --------------------------------------------------- */
-    function showToast(message, type = 'success') {
-        const toast = document.getElementById('toast');
-        if (!toast) return;
+function generateKey(venue, date, raceNo) {
+    return `${venue}-${date}-${raceNo}`;
+}
+
+/* ---------------------------------------------------
+CLOUDFLARE KV FUNCTIONS
+--------------------------------------------------- */
+async function loadFromKV() {
+    try {
+        console.log("📡 Loading public data from KV...");
         
-        toast.textContent = message;
-        toast.style.background = type === 'success' ? '#28a745' : 
-                                type === 'error' ? '#dc3545' : 
-                                type === 'info' ? '#17a2b8' : '#28a745';
-        toast.style.display = "block";
-        setTimeout(() => (toast.style.display = "none"), 3000);
-    }
-
-    function generateKey(venue, date, raceNo) {
-        return `${venue}-${date}-${raceNo}`;
-    }
-
-    function debugAuthStatus() {
-        console.log("=== DEBUG AUTH STATUS ===");
-        console.log("isAuthenticated:", isAuthenticated);
-        console.log("currentUser:", currentUser);
-        console.log("adminPanel element:", document.getElementById('adminPanel'));
-        console.log("adminLoginBtn element:", document.getElementById('adminLoginBtn'));
-        console.log("adminPanel style.display:", document.getElementById('adminPanel')?.style.display);
-        console.log("=========================");
-    }
-
-    /* ---------------------------------------------------
-    CLOUDFLARE KV FUNCTIONS
-    --------------------------------------------------- */
-    async function loadFromKV() {
-        try {
-            console.log("📡 Loading from Cloudflare KV...");
-            
-            // Always try to load data, regardless of auth status
-            const fetchUrl = workerBase + "get-all";
-            console.log("Fetching URL:", fetchUrl);
-            
-            const response = await fetch(fetchUrl, {
-                method: 'GET',
-                headers: { 
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                cache: 'no-store'
-            });
-            
-            console.log("Response status:", response.status);
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: Failed to load data`);
+        const fetchUrl = workerBase + "get-all";
+        console.log("Fetching from:", fetchUrl);
+        
+        const response = await fetch(fetchUrl, {
+            method: 'GET',
+            headers: { 
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             }
-            
-            const data = await response.json();
-            console.log("✅ KV data loaded:", Object.keys(data).length, "items");
-            
-            if (data && typeof data === 'object') {
-                raceAnalyses = data;
-                const count = Object.keys(data).length;
-                console.log(`✅ Loaded ${count} analyses from Cloudflare KV`);
-                return { success: true, count };
-            } else {
-                raceAnalyses = {};
-                console.log("✅ KV returned empty, starting fresh");
-                return { success: true, count: 0 };
-            }
-        } catch (error) {
-            console.error("❌ KV load error:", error);
-            raceAnalyses = {};
-            showToast('Error loading data', 'error');
-            return { success: false, error: error.message };
-        }
-    }
-
-    /* ---------------------------------------------------
-    UI MANAGEMENT FUNCTIONS
-    --------------------------------------------------- */
-    function initializeDropdowns() {
-        const venueSelect = document.getElementById("venueSelect");
-        if (!venueSelect) return;
-        
-        // Extract unique venues
-        const venues = [...new Set(Object.values(raceAnalyses).map(a => a.venue))];
-        venueSelect.innerHTML = '<option value="">Select Venue</option>' + 
-            venues.map(v => `<option value="${v}">${v}</option>`).join('');
-        
-        updateDateDropdown();
-        updateRaceDropdown();
-    }
-
-    function updateDateDropdown() {
-        const venueSelect = document.getElementById("venueSelect");
-        const dateSelect = document.getElementById("dateSelect");
-        if (!venueSelect || !dateSelect) return;
-        
-        const selectedVenueVal = venueSelect.value;
-        let dates = [];
-        
-        if (selectedVenueVal) {
-            dates = [...new Set(Object.values(raceAnalyses)
-                .filter(a => a.venue === selectedVenueVal)
-                .map(a => a.date)
-                .sort((a, b) => b.localeCompare(a)))];
-        }
-        
-        dateSelect.innerHTML = '<option value="">Select Date</option>' + 
-            dates.map(d => {
-                const dateObj = new Date(d);
-                const formatted = dateObj.toLocaleDateString('en-IN', {
-                    day: '2-digit',
-                    month: 'short',
-                    year: 'numeric'
-                });
-                const isToday = d === today ? ' (Today)' : '';
-                return `<option value="${d}">${formatted}${isToday}</option>`;
-            }).join('');
-        
-        if (dates.length > 0 && !dateSelect.value) {
-            dateSelect.value = dates[0];
-        }
-        
-        updateRaceDropdown();
-    }
-
-    function updateRaceDropdown() {
-        const venueSelect = document.getElementById("venueSelect");
-        const dateSelect = document.getElementById("dateSelect");
-        const raceSelect = document.getElementById("raceSelect");
-        if (!venueSelect || !dateSelect || !raceSelect) return;
-        
-        const selectedVenueVal = venueSelect.value;
-        const selectedDateVal = dateSelect.value;
-        let races = [];
-        
-        if (selectedVenueVal && selectedDateVal) {
-            races = Object.values(raceAnalyses)
-                .filter(a => a.venue === selectedVenueVal && a.date === selectedDateVal)
-                .map(a => ({ number: a.raceNo, key: generateKey(a.venue, a.date, a.raceNo) }))
-                .sort((a, b) => parseInt(a.number) - parseInt(b.number));
-        }
-        
-        raceSelect.innerHTML = '<option value="">Select Race</option>' + 
-            races.map(r => `<option value="${r.key}">Race ${r.number}</option>`).join('');
-        
-        if (races.length > 0 && !raceSelect.value) {
-            raceSelect.value = races[0].key;
-            displayAnalysis(races[0].key);
-        }
-    }
-
-    function displayAnalysis(key) {
-        const analysisContent = document.getElementById("analysisContent");
-        const analysisTitle = document.getElementById("analysisTitle");
-        const raceInfo = document.getElementById("raceInfo");
-        const selectedVenue = document.getElementById("selectedVenue");
-        const selectedDate = document.getElementById("selectedDate");
-        const selectedRace = document.getElementById("selectedRace");
-        
-        if (!analysisContent || !analysisTitle || !raceInfo) return;
-        
-        if (!key || !raceAnalyses[key]) {
-            analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-exclamation-circle"></i><p>No analysis found</p></div>';
-            analysisTitle.textContent = 'Race Analysis';
-            raceInfo.style.display = 'none';
-            return;
-        }
-        
-        const analysis = raceAnalyses[key];
-        
-        // Format the analysis
-        let formattedAnalysis = analysis.analysis
-            .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/g, '<em>$1</em>')
-            .replace(/====+/g, '<hr>')
-            .replace(/\n/g, '<br>');
-        
-        formattedAnalysis = formattedAnalysis.replace(/^- /g, '<br>- ');
-        
-        analysisContent.innerHTML = formattedAnalysis;
-        analysisTitle.textContent = `${analysis.venue} - Race ${analysis.raceNo} Analysis`;
-        
-        // Update race info
-        const dateObj = new Date(analysis.date);
-        const formattedDate = dateObj.toLocaleDateString('en-IN', {
-            weekday: 'long',
-            day: '2-digit',
-            month: 'long',
-            year: 'numeric'
+            // NO credentials: 'include' for public access
         });
         
-        if (selectedVenue) selectedVenue.textContent = analysis.venue;
-        if (selectedDate) selectedDate.textContent = formattedDate;
-        if (selectedRace) selectedRace.textContent = `Race ${analysis.raceNo}`;
-        raceInfo.style.display = 'flex';
+        console.log("Response status:", response.status);
         
-        // Update admin form
-        const adminVenue = document.getElementById("adminVenue");
-        const adminDate = document.getElementById("adminDate");
-        const adminRaceNo = document.getElementById("adminRaceNo");
-        const adminAnalysis = document.getElementById("adminAnalysis");
-        
-        if (adminVenue) adminVenue.value = analysis.venue;
-        if (adminDate) adminDate.value = analysis.date;
-        if (adminRaceNo) adminRaceNo.value = analysis.raceNo;
-        if (adminAnalysis) adminAnalysis.value = analysis.analysis;
-    }
-
-    /* ---------------------------------------------------
-    CALENDAR FUNCTION
-    --------------------------------------------------- */
-    function createCalendar() {
-        const calendarWidget = document.getElementById("calendarWidget");
-        if (!calendarWidget) return;
-        
-        const todayObj = new Date();
-        const currentMonth = todayObj.getMonth();
-        const currentYear = todayObj.getFullYear();
-        
-        const monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
-        
-        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-        const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-        
-        let calendarHTML = `
-            <div class="calendar-header">
-                <h4>${monthNames[currentMonth]} ${currentYear}</h4>
-            </div>
-            <div class="calendar-grid">
-                <div class="calendar-day-header">S</div>
-                <div class="calendar-day-header">M</div>
-                <div class="calendar-day-header">T</div>
-                <div class="calendar-day-header">W</div>
-                <div class="calendar-day-header">T</div>
-                <div class="calendar-day-header">F</div>
-                <div class="calendar-day-header">S</div>
-        `;
-        
-        for (let i = 0; i < firstDay; i++) {
-            calendarHTML += `<div class="calendar-day"></div>`;
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: Failed to load data`);
         }
         
-        const raceDays = [5, 12, 19, 26, 30];
-        for (let day = 1; day <= daysInMonth; day++) {
-            const isToday = day === todayObj.getDate() && currentMonth === todayObj.getMonth();
-            const isRaceDay = raceDays.includes(day);
+        const data = await response.json();
+        console.log("✅ Data loaded:", data.count, "items");
+        console.log("Auth status from server:", data.authenticated);
+        
+        if (data.data && typeof data.data === 'object') {
+            raceAnalyses = data.data;
+            const count = Object.keys(data.data).length;
+            console.log(`✅ Loaded ${count} analyses`);
             
-            let dayClass = 'calendar-day';
-            if (isToday) dayClass += ' today';
-            if (isRaceDay) dayClass += ' race-day';
-            
-            calendarHTML += `<div class="${dayClass}">${day}</div>`;
-        }
-        
-        calendarHTML += `</div>`;
-        calendarWidget.innerHTML = calendarHTML;
-    }
-
-    /* ---------------------------------------------------
-    LOAD UPCOMING RACES FROM GOOGLE SHEETS
-    --------------------------------------------------- */
-    const SHEET_ID = '1fs_DhXWii9a7_XruGo1OuEJ0KIB7iQ3whDmHUOc3SEk';
-    const SHEET_NAME = 'Sheet1';
-
-    async function loadUpcomingRacesFromSheet() {
-        const url = `https://opensheet.elk.sh/${SHEET_ID}/${SHEET_NAME}`;
-        const list = document.getElementById('upcomingRaces');
-
-        if (!list) {
-            console.warn("upcomingRaces element not found");
-            return;
-        }
-
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            // Update auth state if server says we're authenticated
+            if (data.authenticated && data.user) {
+                isAuthenticated = true;
+                currentUser = {
+                    email: data.user,
+                    name: data.user.split('@')[0]
+                };
+                console.log("✅ Server says we're authenticated as:", currentUser.email);
             }
             
-            const races = await response.json();
-            
-            // Clear loading message
-            list.innerHTML = '';
-
-            const todayDate = new Date();
-            todayDate.setHours(0, 0, 0, 0);
-
-            // Filter and sort upcoming races
-            const upcoming = races
-                .filter(r => r.venue && r.date)
-                .filter(r => {
-                    try {
-                        const raceDate = new Date(r.date);
-                        raceDate.setHours(0, 0, 0, 0);
-                        return raceDate >= todayDate;
-                    } catch (e) {
-                        console.error("Error parsing date for race:", r);
-                        return false;
-                    }
-                })
-                .sort((a, b) => new Date(a.date) - new Date(b.date));
-
-            if (upcoming.length === 0) {
-                list.innerHTML = '<li>No upcoming major races</li>';
-                return;
-            }
-
-            // Display upcoming races (limit to 5)
-            upcoming.slice(0, 5).forEach(race => {
-                try {
-                    const dateObj = new Date(race.date);
-                    const formattedDate = dateObj.toLocaleDateString('en-IN', {
-                        day: '2-digit',
-                        month: 'short',
-                        year: 'numeric'
-                    });
-
-                    list.innerHTML += `
-                        <li>
-                            <span class="race-venue">${race.venue}</span>
-                            <span class="race-date">${formattedDate}</span>
-                        </li>
-                    `;
-                } catch (e) {
-                    console.error("Error processing race:", race);
-                }
-            });
-
-        } catch (err) {
-            console.error("Failed to load upcoming races:", err);
-            list.innerHTML = `
-                <li style="color: #dc3545;">
-                    <i class="fas fa-exclamation-circle"></i> Unable to load races
-                </li>
-            `;
-        }
-    }
-
-    /* ---------------------------------------------------
-    ADMIN PAGE NAVIGATION
-    --------------------------------------------------- */
-    function setupNavigationListeners() {
-        const navRaceCalendar = document.getElementById("navRaceCalendar");
-        const navUpcomingRaces = document.getElementById("navUpcomingRaces");
-        const navAnalysis = document.getElementById("navAnalysis");
-        
-        if (navRaceCalendar) {
-            navRaceCalendar.addEventListener("click", function(e) {
-                e.preventDefault();
-                const calendar = document.querySelector('.sidebar-widget h3 i.fas.fa-calendar-alt')?.parentElement?.parentElement;
-                if (calendar) {
-                    calendar.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    showToast('Viewing Race Calendar', 'info');
-                }
-            });
-        }
-        
-        if (navUpcomingRaces) {
-            navUpcomingRaces.addEventListener("click", function(e) {
-                e.preventDefault();
-                const trophyIcon = document.querySelector('.sidebar-widget h3 i.fas.fa-trophy');
-                if (trophyIcon) {
-                    const widget = trophyIcon.closest('.sidebar-widget');
-                    widget.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    showToast('Viewing Upcoming Races', 'info');
-                } else {
-                    showToast('Upcoming Races widget not found', 'error');
-                }
-            });
-        }
-        
-        if (navAnalysis) {
-            navAnalysis.addEventListener("click", function(e) {
-                e.preventDefault();
-                const analysisCard = document.querySelector('.selection-card');
-                if (analysisCard) {
-                    analysisCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    showToast('Viewing Analysis', 'info');
-                }
-            });
-        }
-    }
-
-    /* ---------------------------------------------------
-    CLOUDFLARE ZERO TRUST AUTHENTICATION
-    --------------------------------------------------- */
-    async function checkCloudflareAuth() {
-        try {
-            console.log("🔐 Checking Cloudflare authentication...");
-            
-            // Add a cache-busting parameter
-            const timestamp = new Date().getTime();
-            const response = await fetch(`${workerBase}auth-status?t=${timestamp}`, {
-                method: 'GET',
-                credentials: 'include', // THIS IS CRITICAL - sends cookies
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-            
-            console.log("Auth check response status:", response.status);
-            console.log("Auth check response headers:", [...response.headers.entries()]);
-            
-            if (response.ok) {
-                const data = await response.json();
-                console.log("Auth data received:", data);
-                
-                if (data.authenticated) {
-                    currentUser = {
-                        email: data.email || 'admin@raceanalyst.in',
-                        name: data.name || data.email?.split('@')[0] || 'Admin',
-                        authenticated: true
-                    };
-                    isAuthenticated = true;
-                    
-                    console.log(`✅ Authenticated as: ${currentUser.name || currentUser.email || 'User'}`);
-                    return { 
-                        authenticated: true, 
-                        user: currentUser,
-                        data: data 
-                    };
-                }
-            }
-            
-            // Not authenticated
-            currentUser = null;
-            isAuthenticated = false;
-            console.log("❌ Not authenticated, status:", response.status);
             return { 
-                authenticated: false, 
-                user: null,
-                status: response.status 
+                success: true, 
+                count: count, 
+                authenticated: data.authenticated || false 
             };
-            
-        } catch (error) {
-            console.error("Auth check failed:", error);
-            currentUser = null;
-            isAuthenticated = false;
-            return { 
-                authenticated: false, 
-                user: null, 
-                error: error.message 
-            };
-        }
-    }
-
-    async function loginToCloudflare() {
-        try {
-            console.log("🔑 Initiating Cloudflare login...");
-            
-            // The key is to access a PROTECTED page that Cloudflare Access secures
-            // Cloudflare will automatically redirect unauthenticated users to login
-            
-            showToast('Redirecting to login...', 'info');
-            
-            // Method 1: Try to access the admin page through Cloudflare Access
-            // Cloudflare should intercept and show login if not authenticated
-            const adminPageUrl = 'https://raceanalyst.pages.dev/admin.html';
-            
-            // Add a timestamp to prevent caching
-            const timestamp = new Date().getTime();
-            const loginUrl = `${adminPageUrl}?auth_redirect=${timestamp}`;
-            
-            console.log("Redirecting to:", loginUrl);
-            
-            // Redirect to the admin page - Cloudflare should intercept
-            setTimeout(() => {
-                window.location.href = loginUrl;
-            }, 500);
-            
-            return true;
-            
-        } catch (error) {
-            console.error("Login initiation failed:", error);
-            showToast('Login error: ' + error.message, 'error');
-            return false;
-        }
-    }
-
-    async function logoutFromCloudflare() {
-        try {
-            console.log("🚪 Logging out from Cloudflare...");
-            showToast('Logging out...', 'info');
-            
-            // Cloudflare Access logout URL
-            const logoutUrl = `${workerBase}cdn-cgi/access/logout`;
-            
-            setTimeout(() => {
-                window.location.href = logoutUrl;
-            }, 500);
-            
-            return true;
-            
-        } catch (error) {
-            console.error("Logout failed:", error);
-            showToast('Logout error: ' + error.message, 'error');
-            return false;
-        }
-    }
-
-    /* ---------------------------------------------------
-    UPDATE UI BASED ON AUTH STATUS
-    --------------------------------------------------- */
-    async function updateUIForAuthStatus(authResult) {
-        const adminLoginBtn = document.getElementById('adminLoginBtn');
-        const logoutItem = document.getElementById('logoutItem');
-        const adminPanel = document.getElementById('adminPanel');
-        const adminLabel = document.querySelector('.admin-label');
-        
-        if (authResult.authenticated) {
-            // User is authenticated
-            isAuthenticated = true;
-            currentUser = authResult.user;
-            
-            console.log("✅ User authenticated:", currentUser);
-            
-            // Update login button text
-            if (adminLoginBtn) {
-                adminLoginBtn.innerHTML = `
-                    <i class="fas fa-user-check"></i> 
-                    ${currentUser.name || currentUser.email || 'Admin'}
-                `;
-                adminLoginBtn.style.color = '#4CAF50';
-                adminLoginBtn.style.fontWeight = '600';
-                adminLoginBtn.style.cursor = 'default';
-                adminLoginBtn.onclick = null;
-                adminLoginBtn.href = '#';
-            }
-            
-            // Show logout button
-            if (logoutItem) {
-                logoutItem.style.display = 'block';
-            }
-            
-            // Show admin panel
-            if (adminPanel) {
-                adminPanel.style.display = 'block';
-                console.log("Admin panel should be visible");
-            }
-            
-            // Update admin label in navigation
-            if (adminLabel) {
-                const span = adminLabel.querySelector('span');
-                if (span) {
-                    span.innerHTML = `
-                        <i class="fas fa-user-shield"></i> 
-                        ${currentUser.name || currentUser.email || 'Admin'}
-                    `;
-                    span.style.color = '#4CAF50';
-                }
-            }
-            
-            showToast(`Welcome ${currentUser.name || currentUser.email || 'Admin'}!`, 'success');
-            
         } else {
-            // User is not authenticated
-            isAuthenticated = false;
-            currentUser = null;
+            raceAnalyses = {};
+            console.log("✅ No data found");
+            return { success: true, count: 0, authenticated: false };
+        }
+    } catch (error) {
+        console.error("❌ Load error:", error);
+        raceAnalyses = {};
+        showToast('Error loading race data', 'error');
+        return { success: false, authenticated: false };
+    }
+}
+
+/* ---------------------------------------------------
+AUTHENTICATION FUNCTIONS
+--------------------------------------------------- */
+async function checkCloudflareAuth() {
+    try {
+        console.log("🔐 Checking authentication status...");
+        
+        const timestamp = new Date().getTime();
+        const response = await fetch(`${workerBase}auth-status?t=${timestamp}`, {
+            method: 'GET',
+            credentials: 'include', // Send cookies
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        console.log("Auth check status:", response.status);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log("Auth response:", data);
             
-            console.log("❌ User not authenticated");
-            
-            // Update login button
-            if (adminLoginBtn) {
-                adminLoginBtn.innerHTML = '<i class="fas fa-user-lock"></i> Login as Admin';
-                adminLoginBtn.style.color = '#d4af37';
-                adminLoginBtn.style.fontWeight = '600';
-                adminLoginBtn.href = '#';
-                adminLoginBtn.onclick = async (e) => {
-                    e.preventDefault();
-                    await loginToCloudflare();
+            if (data.authenticated) {
+                return { 
+                    authenticated: true, 
+                    user: {
+                        email: data.email,
+                        name: data.name || data.email?.split('@')[0] || 'Admin'
+                    }
                 };
             }
-            
-            // Hide logout button
-            if (logoutItem) {
-                logoutItem.style.display = 'none';
-            }
-            
-            // Hide admin panel
-            if (adminPanel) {
-                adminPanel.style.display = 'none';
-            }
-            
-            // Reset admin label
-            if (adminLabel) {
-                const span = adminLabel.querySelector('span');
-                if (span) {
-                    span.innerHTML = '<i class="fas fa-user-lock"></i> Login for Admin';
-                    span.style.color = '#d4af37';
-                }
-            }
-            
-            showToast('Login required for admin access', 'info');
         }
+        
+        // Not authenticated
+        console.log("Not authenticated");
+        return { 
+            authenticated: false, 
+            user: null,
+            status: response.status 
+        };
+        
+    } catch (error) {
+        console.error("Auth check failed:", error);
+        return { 
+            authenticated: false, 
+            user: null, 
+            error: error.message 
+        };
     }
+}
 
-    /* ---------------------------------------------------
-    PROTECTED ACTION WRAPPER
-    --------------------------------------------------- */
-    async function requireAuth(actionName = 'perform this action') {
-        if (!isAuthenticated) {
-            const authResult = await checkCloudflareAuth();
-            if (!authResult.authenticated) {
-                showToast(`Please login to ${actionName}`, 'error');
-                
-                setTimeout(() => {
-                    if (confirm(`Admin access requires authentication. Would you like to login now?`)) {
-                        loginToCloudflare();
-                    }
-                }, 500);
-                
-                return false;
-            }
-            
-            updateUIForAuthStatus(authResult);
-        }
+async function loginToCloudflare() {
+    try {
+        console.log("🔑 Redirecting to admin login...");
+        showToast('Redirecting to admin login...', 'info');
+        
+        // Redirect to admin-test endpoint which requires auth
+        // This will trigger Cloudflare Access login
+        const adminTestUrl = workerBase + "admin-test";
+        console.log("Redirecting to:", adminTestUrl);
+        
+        setTimeout(() => {
+            window.location.href = adminTestUrl;
+        }, 500);
         
         return true;
-    }
-
-    /* ---------------------------------------------------
-    ADMIN PANEL EVENT LISTENERS
-    --------------------------------------------------- */
-    function setupAdminEventListeners() {
-        // Setup event listeners for admin buttons
-        const buttons = [
-            { id: 'hideAdminBtn', handler: () => {
-                const adminPanel = document.getElementById('adminPanel');
-                if (adminPanel) {
-                    adminPanel.style.display = 'none';
-                    showToast('Admin panel hidden', 'info');
-                }
-            }},
-            { id: 'saveBtn', handler: async (e) => {
-                e.preventDefault();
-                const canProceed = await requireAuth('save analysis');
-                if (!canProceed) return;
-                
-                const adminVenue = document.getElementById('adminVenue');
-                const adminDate = document.getElementById('adminDate');
-                const adminRaceNo = document.getElementById('adminRaceNo');
-                const adminAnalysis = document.getElementById('adminAnalysis');
-                
-                if (!adminVenue || !adminDate || !adminRaceNo || !adminAnalysis) return;
-                
-                const venue = adminVenue.value.trim();
-                const date = adminDate.value;
-                const raceNo = adminRaceNo.value.trim();
-                const analysis = adminAnalysis.value.trim();
-                
-                if (!venue || !date || !raceNo || !analysis) {
-                    showToast('Please fill all fields', 'error');
-                    return;
-                }
-                
-                const key = generateKey(venue, date, raceNo);
-                const data = { venue, date, raceNo, analysis };
-                
-                try {
-                    const response = await fetch(workerBase + "save", {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ key, data })
-                    });
-                    
-                    if (response.ok) {
-                        raceAnalyses[key] = data;
-                        showToast('✅ Analysis saved!', 'success');
-                        initializeDropdowns();
-                        document.getElementById('venueSelect').value = venue;
-                        updateDateDropdown();
-                        document.getElementById('raceSelect').value = key;
-                        displayAnalysis(key);
-                    } else {
-                        const error = await response.json();
-                        showToast(`❌ Save failed: ${error.error || 'Unknown error'}`, 'error');
-                    }
-                } catch (error) {
-                    showToast(`❌ Save error: ${error.message}`, 'error');
-                }
-            }},
-            { id: 'updateBtn', handler: async (e) => {
-                e.preventDefault();
-                const canProceed = await requireAuth('update analysis');
-                if (!canProceed) return;
-                
-                const raceSelect = document.getElementById('raceSelect');
-                if (!raceSelect || !raceSelect.value || !raceAnalyses[raceSelect.value]) {
-                    showToast('Select a race first', 'error');
-                    return;
-                }
-                
-                const adminVenue = document.getElementById('adminVenue');
-                const adminDate = document.getElementById('adminDate');
-                const adminRaceNo = document.getElementById('adminRaceNo');
-                const adminAnalysis = document.getElementById('adminAnalysis');
-                
-                if (!adminVenue || !adminDate || !adminRaceNo || !adminAnalysis) return;
-                
-                const venue = adminVenue.value.trim();
-                const date = adminDate.value;
-                const raceNo = adminRaceNo.value.trim();
-                const analysis = adminAnalysis.value.trim();
-                
-                if (!venue || !date || !raceNo || !analysis) {
-                    showToast('Please fill all fields', 'error');
-                    return;
-                }
-                
-                const newKey = generateKey(venue, date, raceNo);
-                const data = { venue, date, raceNo, analysis };
-                
-                try {
-                    const saveResponse = await fetch(workerBase + "save", {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ key: newKey, data })
-                    });
-                    
-                    if (!saveResponse.ok) throw new Error('Failed to save');
-                    
-                    // Delete old entry if key changed
-                    if (raceSelect.value !== newKey) {
-                        await fetch(workerBase + "delete", {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ key: raceSelect.value })
-                        });
-                        delete raceAnalyses[raceSelect.value];
-                    }
-                    
-                    raceAnalyses[newKey] = data;
-                    showToast('✅ Analysis updated!', 'success');
-                    initializeDropdowns();
-                    document.getElementById('raceSelect').value = newKey;
-                    displayAnalysis(newKey);
-                    
-                } catch (error) {
-                    showToast(`❌ Update error: ${error.message}`, 'error');
-                }
-            }},
-            { id: 'deleteBtn', handler: async (e) => {
-                e.preventDefault();
-                const canProceed = await requireAuth('delete analysis');
-                if (!canProceed) return;
-                
-                const raceSelect = document.getElementById('raceSelect');
-                if (!raceSelect || !raceSelect.value || !raceAnalyses[raceSelect.value]) {
-                    showToast('Select a race first', 'error');
-                    return;
-                }
-                
-                if (!confirm('Are you sure you want to delete this analysis?')) {
-                    return;
-                }
-                
-                try {
-                    const response = await fetch(workerBase + "delete", {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ key: raceSelect.value })
-                    });
-                    
-                    if (response.ok) {
-                        delete raceAnalyses[raceSelect.value];
-                        showToast('✅ Analysis deleted!', 'success');
-                        initializeDropdowns();
-                        
-                        // Clear display
-                        const analysisContent = document.getElementById('analysisContent');
-                        if (analysisContent) {
-                            analysisContent.innerHTML = `
-                                <div class="no-analysis">
-                                    <i class="fas fa-racing-helmet"></i>
-                                    <p>Select a race to view analysis</p>
-                                </div>
-                            `;
-                        }
-                        
-                        // Clear form
-                        const adminVenue = document.getElementById('adminVenue');
-                        const adminDate = document.getElementById('adminDate');
-                        const adminRaceNo = document.getElementById('adminRaceNo');
-                        const adminAnalysis = document.getElementById('adminAnalysis');
-                        
-                        if (adminVenue) adminVenue.value = '';
-                        if (adminDate) adminDate.value = today;
-                        if (adminRaceNo) adminRaceNo.value = '';
-                        if (adminAnalysis) adminAnalysis.value = '';
-                        
-                    } else {
-                        const error = await response.json();
-                        showToast(`❌ Delete failed: ${error.error || 'Unknown error'}`, 'error');
-                    }
-                } catch (error) {
-                    showToast(`❌ Delete error: ${error.message}`, 'error');
-                }
-            }},
-            { id: 'clearBtn', handler: () => {
-                const adminVenue = document.getElementById('adminVenue');
-                const adminDate = document.getElementById('adminDate');
-                const adminRaceNo = document.getElementById('adminRaceNo');
-                const adminAnalysis = document.getElementById('adminAnalysis');
-                
-                if (adminVenue) adminVenue.value = '';
-                if (adminDate) adminDate.value = today;
-                if (adminRaceNo) adminRaceNo.value = '';
-                if (adminAnalysis) adminAnalysis.value = '';
-                showToast('Form cleared', 'info');
-            }}
-        ];
         
-        buttons.forEach(buttonConfig => {
-            const button = document.getElementById(buttonConfig.id);
-            if (button) {
-                button.addEventListener('click', buttonConfig.handler);
-            } else {
-                console.warn(`Button ${buttonConfig.id} not found`);
-            }
-        });
+    } catch (error) {
+        console.error("Login error:", error);
+        showToast('Login error: ' + error.message, 'error');
+        return false;
     }
+}
 
-    /* ---------------------------------------------------
-    SETUP AUTH EVENT LISTENERS
-    --------------------------------------------------- */
-    function setupAuthEventListeners() {
-        const adminLoginBtn = document.getElementById('adminLoginBtn');
-        const logoutBtn = document.getElementById('logoutBtn');
+async function logoutFromCloudflare() {
+    try {
+        console.log("🚪 Logging out...");
+        showToast('Logging out...', 'info');
         
+        // Cloudflare Access logout URL
+        const logoutUrl = `${workerBase}cdn-cgi/access/logout`;
+        
+        setTimeout(() => {
+            window.location.href = logoutUrl;
+        }, 500);
+        
+        return true;
+        
+    } catch (error) {
+        console.error("Logout failed:", error);
+        showToast('Logout error: ' + error.message, 'error');
+        return false;
+    }
+}
+
+/* ---------------------------------------------------
+UPDATE UI BASED ON AUTH STATUS
+--------------------------------------------------- */
+async function updateUIForAuthStatus(authResult) {
+    const adminLoginBtn = document.getElementById('adminLoginBtn');
+    const logoutItem = document.getElementById('logoutItem');
+    const adminPanel = document.getElementById('adminPanel');
+    
+    if (authResult.authenticated) {
+        // User is authenticated as admin
+        isAuthenticated = true;
+        currentUser = authResult.user;
+        
+        console.log("✅ User authenticated as admin:", currentUser);
+        
+        // Update login button to show admin status
         if (adminLoginBtn) {
-            adminLoginBtn.addEventListener('click', async (e) => {
-                e.preventDefault();
-                if (!isAuthenticated) {
-                    await loginToCloudflare();
-                }
-            });
+            adminLoginBtn.innerHTML = `
+                <i class="fas fa-user-shield"></i> 
+                ${currentUser.name || currentUser.email || 'Admin'}
+            `;
+            adminLoginBtn.style.color = '#4CAF50';
+            adminLoginBtn.style.fontWeight = '600';
+            adminLoginBtn.style.cursor = 'default';
+            adminLoginBtn.onclick = null;
+            adminLoginBtn.href = '#';
         }
         
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', async (e) => {
+        // Show logout button
+        if (logoutItem) {
+            logoutItem.style.display = 'block';
+        }
+        
+        // Show admin panel
+        if (adminPanel) {
+            adminPanel.style.display = 'block';
+            console.log("Admin panel is visible");
+        }
+        
+        showToast(`Welcome Admin ${currentUser.name || currentUser.email}!`, 'success');
+        
+    } else {
+        // User is not authenticated (or is regular user)
+        isAuthenticated = false;
+        currentUser = null;
+        
+        console.log("👤 User not authenticated as admin");
+        
+        // Update login button
+        if (adminLoginBtn) {
+            adminLoginBtn.innerHTML = '<i class="fas fa-user-lock"></i> Admin Login';
+            adminLoginBtn.style.color = '#d4af37';
+            adminLoginBtn.style.fontWeight = '600';
+            adminLoginBtn.href = '#';
+            adminLoginBtn.onclick = async (e) => {
                 e.preventDefault();
-                await logoutFromCloudflare();
-            });
+                await loginToCloudflare();
+            };
+        }
+        
+        // Hide logout button
+        if (logoutItem) {
+            logoutItem.style.display = 'none';
+        }
+        
+        // Hide admin panel
+        if (adminPanel) {
+            adminPanel.style.display = 'none';
+        }
+        
+        // Don't show toast on initial load
+        if (authResult.status !== undefined && authResult.status !== 200) {
+            showToast('Admin login required for management features', 'info');
         }
     }
+}
 
-    /* ---------------------------------------------------
-    SETUP DROPDOWN EVENT LISTENERS
-    --------------------------------------------------- */
-    function setupDropdownListeners() {
-        const venueSelect = document.getElementById("venueSelect");
-        const dateSelect = document.getElementById("dateSelect");
-        const raceSelect = document.getElementById("raceSelect");
-        
-        if (venueSelect) {
-            venueSelect.addEventListener('change', updateDateDropdown);
-        }
-        
-        if (dateSelect) {
-            dateSelect.addEventListener('change', updateRaceDropdown);
-        }
-        
-        if (raceSelect) {
-            raceSelect.addEventListener('change', function() {
-                if (this.value) {
-                    displayAnalysis(this.value);
-                } else {
-                    const analysisContent = document.getElementById("analysisContent");
-                    const analysisTitle = document.getElementById("analysisTitle");
-                    const raceInfo = document.getElementById("raceInfo");
-                    
-                    if (analysisContent) {
-                        analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race to view analysis</p></div>';
-                    }
-                    if (analysisTitle) analysisTitle.textContent = 'Race Analysis';
-                    if (raceInfo) raceInfo.style.display = 'none';
+/* ---------------------------------------------------
+ADMIN ACTION WRAPPER
+--------------------------------------------------- */
+async function requireAdmin(actionName = 'perform this action') {
+    if (!isAuthenticated) {
+        const authResult = await checkCloudflareAuth();
+        if (!authResult.authenticated) {
+            showToast(`Admin login required to ${actionName}`, 'error');
+            
+            setTimeout(() => {
+                if (confirm(`Admin access required. Would you like to login now?`)) {
+                    loginToCloudflare();
                 }
-            });
+            }, 500);
+            
+            return false;
         }
+        
+        // Update UI with new auth status
+        await updateUIForAuthStatus(authResult);
     }
+    
+    return true;
+}
 
-    /* ---------------------------------------------------
-    SINGLE DOMContentLoaded LISTENER
-    --------------------------------------------------- */
-    document.addEventListener('DOMContentLoaded', async function() {
-        console.log("🚀 Initializing RaceAnalyst Admin...");
-
-                // Check if we have auth parameters in URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const hasAuthParam = urlParams.has('auth_redirect') || urlParams.has('CF_ACCESS_TOKEN');
+/* ---------------------------------------------------
+ADMIN OPERATIONS
+--------------------------------------------------- */
+async function saveAnalysis() {
+    const canProceed = await requireAdmin('save analysis');
+    if (!canProceed) return;
+    
+    const adminVenue = document.getElementById('adminVenue');
+    const adminDate = document.getElementById('adminDate');
+    const adminRaceNo = document.getElementById('adminRaceNo');
+    const adminAnalysis = document.getElementById('adminAnalysis');
+    
+    if (!adminVenue || !adminDate || !adminRaceNo || !adminAnalysis) return;
+    
+    const venue = adminVenue.value.trim();
+    const date = adminDate.value;
+    const raceNo = adminRaceNo.value.trim();
+    const analysis = adminAnalysis.value.trim();
+    
+    if (!venue || !date || !raceNo || !analysis) {
+        showToast('Please fill all fields', 'error');
+        return;
+    }
+    
+    const key = generateKey(venue, date, raceNo);
+    const data = { venue, date, raceNo, analysis };
+    
+    try {
+        const response = await fetch(workerBase + "save", {
+            method: 'POST',
+            credentials: 'include', // IMPORTANT for admin endpoints
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key, data })
+        });
         
-        console.log("URL params:", Object.fromEntries(urlParams.entries()));
-        console.log("Has auth param:", hasAuthParam);
-        
-        try {
-            // ===== 1. MOBILE MENU SETUP =====
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const navMenu = document.getElementById('navMenu');
-            const navOverlay = document.getElementById('navOverlay');
-            
-            if (mobileMenuBtn && navMenu && navOverlay) {
-                mobileMenuBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    navMenu.classList.toggle('active');
-                    navOverlay.classList.toggle('active');
-                    
-                    const icon = mobileMenuBtn.querySelector('i');
-                    if (navMenu.classList.contains('active')) {
-                        icon.classList.remove('fa-bars');
-                        icon.classList.add('fa-times');
-                        document.body.style.overflow = 'hidden';
-                    } else {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                        document.body.style.overflow = 'auto';
-                    }
-                });
-                
-                navOverlay.addEventListener('click', function() {
-                    navMenu.classList.remove('active');
-                    navOverlay.classList.remove('active');
-                    const icon = mobileMenuBtn.querySelector('i');
-                    if (icon) {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                    document.body.style.overflow = 'auto';
-                });
-                
-                const navLinks = navMenu.querySelectorAll('a');
-                navLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        navMenu.classList.remove('active');
-                        navOverlay.classList.remove('active');
-                        const icon = mobileMenuBtn.querySelector('i');
-                        if (icon) {
-                            icon.classList.remove('fa-times');
-                            icon.classList.add('fa-bars');
-                        }
-                        document.body.style.overflow = 'auto';
-                    });
-                });
-                
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-                        navMenu.classList.remove('active');
-                        navOverlay.classList.remove('active');
-                        const icon = mobileMenuBtn.querySelector('i');
-                        if (icon) {
-                            icon.classList.remove('fa-times');
-                            icon.classList.add('fa-bars');
-                        }
-                        document.body.style.overflow = 'auto';
-                    }
-                });
-            }
-            
-            // ===== 2. SETUP ALL EVENT LISTENERS =====
-            setupAuthEventListeners();
-            setupAdminEventListeners();
-            setupNavigationListeners();
-            setupDropdownListeners();
-            
-            // ===== 3. DEBUG INITIAL STATE =====
-            debugAuthStatus();
-            
-            // ===== 4. MAIN INITIALIZATION =====
-            // Check authentication
-            console.log("🔐 Checking authentication...");
-            const authResult = await checkCloudflareAuth();
-            
-            // Update UI based on auth status
-            await updateUIForAuthStatus(authResult);
-            
-            // Load race analyses
-            console.log("📡 Loading KV data...");
-            await loadFromKV();
-            
-            // Initialize UI components
+        if (response.ok) {
+            raceAnalyses[key] = data;
+            showToast('✅ Analysis saved!', 'success');
             initializeDropdowns();
-            createCalendar();
-            loadUpcomingRacesFromSheet();
-            
-            console.log("✅ Admin page ready!");
-            console.log("Auth status:", isAuthenticated ? 'Authenticated' : 'Not authenticated');
-            console.log("Analyses loaded:", raceAnalyses ? Object.keys(raceAnalyses).length : 0);
-            
-            // ===== 7. CHECK IF WE JUST LOGGED IN =====
-            if (hasAuthParam && isAuthenticated) {
-                // Clear the URL parameters
-                window.history.replaceState({}, document.title, window.location.pathname);
-                showToast('Login successful!', 'success');
-            }
-
-        } catch (error) {
-            console.error("Initialization error:", error);
-            showToast("Error: " + error.message, "error");
+            document.getElementById('venueSelect').value = venue;
+            updateDateDropdown();
+            document.getElementById('raceSelect').value = key;
+            displayAnalysis(key);
+        } else {
+            const error = await response.json();
+            showToast(`❌ Save failed: ${error.error || 'Unknown error'}`, 'error');
         }
-    });
+    } catch (error) {
+        showToast(`❌ Save error: ${error.message}`, 'error');
+    }
+}
+
+async function updateAnalysis() {
+    const canProceed = await requireAdmin('update analysis');
+    if (!canProceed) return;
+    
+    const raceSelect = document.getElementById('raceSelect');
+    if (!raceSelect || !raceSelect.value || !raceAnalyses[raceSelect.value]) {
+        showToast('Select a race first', 'error');
+        return;
+    }
+    
+    const adminVenue = document.getElementById('adminVenue');
+    const adminDate = document.getElementById('adminDate');
+    const adminRaceNo = document.getElementById('adminRaceNo');
+    const adminAnalysis = document.getElementById('adminAnalysis');
+    
+    if (!adminVenue || !adminDate || !adminRaceNo || !adminAnalysis) return;
+    
+    const venue = adminVenue.value.trim();
+    const date = adminDate.value;
+    const raceNo = adminRaceNo.value.trim();
+    const analysis = adminAnalysis.value.trim();
+    
+    if (!venue || !date || !raceNo || !analysis) {
+        showToast('Please fill all fields', 'error');
+        return;
+    }
+    
+    const newKey = generateKey(venue, date, raceNo);
+    const data = { venue, date, raceNo, analysis };
+    
+    try {
+        // Save new/updated entry
+        const saveResponse = await fetch(workerBase + "save", {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key: newKey, data })
+        });
+        
+        if (!saveResponse.ok) throw new Error('Failed to save');
+        
+        // Delete old entry if key changed
+        if (raceSelect.value !== newKey) {
+            await fetch(workerBase + "delete", {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ key: raceSelect.value })
+            });
+            delete raceAnalyses[raceSelect.value];
+        }
+        
+        raceAnalyses[newKey] = data;
+        showToast('✅ Analysis updated!', 'success');
+        initializeDropdowns();
+        document.getElementById('raceSelect').value = newKey;
+        displayAnalysis(newKey);
+        
+    } catch (error) {
+        showToast(`❌ Update error: ${error.message}`, 'error');
+    }
+}
+
+async function deleteAnalysis() {
+    const canProceed = await requireAdmin('delete analysis');
+    if (!canProceed) return;
+    
+    const raceSelect = document.getElementById('raceSelect');
+    if (!raceSelect || !raceSelect.value || !raceAnalyses[raceSelect.value]) {
+        showToast('Select a race first', 'error');
+        return;
+    }
+    
+    if (!confirm('Are you sure you want to delete this analysis?')) {
+        return;
+    }
+    
+    try {
+        const response = await fetch(workerBase + "delete", {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key: raceSelect.value })
+        });
+        
+        if (response.ok) {
+            delete raceAnalyses[raceSelect.value];
+            showToast('✅ Analysis deleted!', 'success');
+            initializeDropdowns();
+            
+            // Clear display
+            const analysisContent = document.getElementById('analysisContent');
+            if (analysisContent) {
+                analysisContent.innerHTML = `
+                    <div class="no-analysis">
+                        <i class="fas fa-racing-helmet"></i>
+                        <p>Select a race to view analysis</p>
+                    </div>
+                `;
+            }
+            
+            clearAdminForm();
+            
+        } else {
+            const error = await response.json();
+            showToast(`❌ Delete failed: ${error.error || 'Unknown error'}`, 'error');
+        }
+    } catch (error) {
+        showToast(`❌ Delete error: ${error.message}`, 'error');
+    }
+}
+
+function clearAdminForm() {
+    const adminVenue = document.getElementById('adminVenue');
+    const adminDate = document.getElementById('adminDate');
+    const adminRaceNo = document.getElementById('adminRaceNo');
+    const adminAnalysis = document.getElementById('adminAnalysis');
+    
+    if (adminVenue) adminVenue.value = '';
+    if (adminDate) adminDate.value = today;
+    if (adminRaceNo) adminRaceNo.value = '';
+    if (adminAnalysis) adminAnalysis.value = '';
+    showToast('Form cleared', 'info');
+}
+
+/* ---------------------------------------------------
+INITIALIZATION
+--------------------------------------------------- */
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log("🚀 Initializing RaceAnalyst...");
+    
+    try {
+        // Setup mobile menu
+        setupMobileMenu();
+        
+        // Setup all event listeners
+        setupAuthEventListeners();
+        setupAdminEventListeners();
+        setupNavigationListeners();
+        setupDropdownListeners();
+        
+        // Step 1: Load public data FIRST (no auth required)
+        console.log("📡 Loading public race data...");
+        await loadFromKV();
+        
+        // Step 2: Check if user is admin
+        console.log("🔐 Checking admin status...");
+        const authResult = await checkCloudflareAuth();
+        
+        // Step 3: Update UI based on admin status
+        await updateUIForAuthStatus(authResult);
+        
+        // Step 4: Initialize UI components
+        initializeDropdowns();
+        createCalendar();
+        loadUpcomingRacesFromSheet();
+        
+        console.log("✅ RaceAnalyst ready!");
+        console.log("Admin status:", isAuthenticated ? 'Authenticated as Admin' : 'Public User');
+        console.log("Analyses loaded:", raceAnalyses ? Object.keys(raceAnalyses).length : 0);
+        
+    } catch (error) {
+        console.error("Initialization error:", error);
+        showToast("Error: " + error.message, "error");
+    }
+});
+
+// [Keep all your existing UI functions: initializeDropdowns, displayAnalysis, 
+// createCalendar, loadUpcomingRacesFromSheet, setupMobileMenu, etc.]
+// They should work as-is with the loaded raceAnalyses data
 </script>
 </body>
 </html>
