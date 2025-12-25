@@ -982,8 +982,19 @@ function renderChatMessage(msg, depth = 0) {
   const messageId = msg.id;
   const userLiked = userLikes[messageId] === true;
   const canLike = !userLiked;
-
   const avatar = msg.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(msg.user || 'A')}&background=1a3c34&color=fff&rounded=true`;
+
+  // After rendering, we'll dynamically populate the nested avatar grid using JS.
+  // The hidden input is used for the selected avatar.
+  // Remove all hardcoded <img> tags for avatars.
+  // The avatar grid will be rendered after insertion.
+
+  // The reply container will be created with an empty grid, to be populated by renderNestedReplyAvatarGrid.
+  setTimeout(() => {
+    if (typeof renderNestedReplyAvatarGrid === "function") {
+      renderNestedReplyAvatarGrid(messageId);
+    }
+  }, 0);
 
   return `
     <div class="chat-message" style="margin-left:${depth * 20}px; margin-bottom:1rem;">
@@ -1015,42 +1026,7 @@ function renderChatMessage(msg, depth = 0) {
 
           <div id="nestedReplyAvatarGrid-${messageId}" 
                style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:0.6rem;">
-              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Hero"
-                  class="nestedReplyAvatarOption" data-parent="${messageId}"
-                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
-              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Explorer"
-                  class="nestedReplyAvatarOption" data-parent="${messageId}"
-                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
-              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Champion"
-                  class="nestedReplyAvatarOption" data-parent="${messageId}"
-                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
-              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Galaxy"
-                  class="nestedReplyAvatarOption" data-parent="${messageId}"
-                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
-              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Spirit"
-                  class="nestedReplyAvatarOption" data-parent="${messageId}"
-                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
-              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Shadow"
-                  class="nestedReplyAvatarOption" data-parent="${messageId}"
-                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
-              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Nova"
-                  class="nestedReplyAvatarOption" data-parent="${messageId}"
-                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
-              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Echo"
-                  class="nestedReplyAvatarOption" data-parent="${messageId}"
-                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
-              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Blaze"
-                  class="nestedReplyAvatarOption" data-parent="${messageId}"
-                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
-              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Tidal"
-                  class="nestedReplyAvatarOption" data-parent="${messageId}"
-                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
-              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Hawk"
-                  class="nestedReplyAvatarOption" data-parent="${messageId}"
-                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
-              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Zen"
-                  class="nestedReplyAvatarOption" data-parent="${messageId}"
-                  style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">
+            <!-- Avatars will be dynamically populated here -->
           </div>
 
           <input type="hidden" id="nestedReplySelectedAvatar-${messageId}" value="">
@@ -1070,6 +1046,19 @@ function renderChatMessage(msg, depth = 0) {
       </div>
     </div>
   `;
+}
+
+// Dynamically render the nested reply avatar grid for a given messageId
+function renderNestedReplyAvatarGrid(messageId) {
+  const grid = document.getElementById(`nestedReplyAvatarGrid-${messageId}`);
+  if (!grid) return;
+  const avatarSeeds = [
+    "Hero", "Explorer", "Champion", "Galaxy", "Spirit", "Shadow",
+    "Nova", "Echo", "Blaze", "Tidal", "Hawk", "Zen"
+  ];
+  grid.innerHTML = avatarSeeds.map(seed =>
+    `<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=${seed}" class="nestedReplyAvatarOption" data-parent="${messageId}" style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">`
+  ).join('');
 }
 
 // 7. Like a chat message (with one-like restriction)
