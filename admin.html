@@ -1516,17 +1516,18 @@
         try {
             console.log("🔐 Checking Cloudflare authentication...");
             
+            // Add a cache-busting parameter
             const timestamp = new Date().getTime();
             const response = await fetch(`${workerBase}auth-status?t=${timestamp}`, {
                 method: 'GET',
-                credentials: 'include',
+                credentials: 'include', // THIS IS CRITICAL - sends cookies
                 headers: {
-                    'Accept': 'application/json',
-                    'Cache-Control': 'no-cache'
+                    'Accept': 'application/json'
                 }
             });
             
             console.log("Auth check response status:", response.status);
+            console.log("Auth check response headers:", [...response.headers.entries()]);
             
             if (response.ok) {
                 const data = await response.json();
@@ -1535,12 +1536,12 @@
                 if (data.authenticated) {
                     currentUser = {
                         email: data.email || 'admin@raceanalyst.in',
-                        name: data.name || 'Admin',
+                        name: data.name || data.email?.split('@')[0] || 'Admin',
                         authenticated: true
                     };
                     isAuthenticated = true;
                     
-                    console.log(`✅ Authenticated as: ${data.name || data.email || 'User'}`);
+                    console.log(`✅ Authenticated as: ${currentUser.name || currentUser.email || 'User'}`);
                     return { 
                         authenticated: true, 
                         user: currentUser,
@@ -1552,7 +1553,7 @@
             // Not authenticated
             currentUser = null;
             isAuthenticated = false;
-            console.log("❌ Not authenticated");
+            console.log("❌ Not authenticated, status:", response.status);
             return { 
                 authenticated: false, 
                 user: null,
@@ -1575,16 +1576,22 @@
         try {
             console.log("🔑 Initiating Cloudflare login...");
             
-            // Instead of calling protected-endpoint, just reload with a special parameter
-            // Cloudflare Access will intercept this if not authenticated
+            // The key is to access a PROTECTED page that Cloudflare Access secures
+            // Cloudflare will automatically redirect unauthenticated users to login
             
             showToast('Redirecting to login...', 'info');
             
-            // Add a parameter to trigger authentication
-            const loginUrl = window.location.origin + '?auth_required=true';
+            // Method 1: Try to access the admin page through Cloudflare Access
+            // Cloudflare should intercept and show login if not authenticated
+            const adminPageUrl = 'https://raceanalyst.pages.dev/admin.html';
             
-            // Redirect to the same page with auth parameter
-            // Cloudflare will intercept and show login if needed
+            // Add a timestamp to prevent caching
+            const timestamp = new Date().getTime();
+            const loginUrl = `${adminPageUrl}?auth_redirect=${timestamp}`;
+            
+            console.log("Redirecting to:", loginUrl);
+            
+            // Redirect to the admin page - Cloudflare should intercept
             setTimeout(() => {
                 window.location.href = loginUrl;
             }, 500);
@@ -2005,6 +2012,13 @@
     --------------------------------------------------- */
     document.addEventListener('DOMContentLoaded', async function() {
         console.log("🚀 Initializing RaceAnalyst Admin...");
+
+                // Check if we have auth parameters in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const hasAuthParam = urlParams.has('auth_redirect') || urlParams.has('CF_ACCESS_TOKEN');
+        
+        console.log("URL params:", Object.fromEntries(urlParams.entries()));
+        console.log("Has auth param:", hasAuthParam);
         
         try {
             // ===== 1. MOBILE MENU SETUP =====
@@ -2099,6 +2113,13 @@
             console.log("Auth status:", isAuthenticated ? 'Authenticated' : 'Not authenticated');
             console.log("Analyses loaded:", raceAnalyses ? Object.keys(raceAnalyses).length : 0);
             
+            // ===== 7. CHECK IF WE JUST LOGGED IN =====
+            if (hasAuthParam && isAuthenticated) {
+                // Clear the URL parameters
+                window.history.replaceState({}, document.title, window.location.pathname);
+                showToast('Login successful!', 'success');
+            }
+
         } catch (error) {
             console.error("Initialization error:", error);
             showToast("Error: " + error.message, "error");
