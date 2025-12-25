@@ -97,6 +97,18 @@
         button:hover {
             background: #244e44;
         }
+        .avatar-option {
+            font-size: 2rem;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .avatar-option.selected {
+            border-color: #1a3c34;
+            background: #e8f3ef;
+        }
     </style>
 </head>
 <body>
@@ -112,14 +124,55 @@
         <h2 id="topicTitle">Loading topic...</h2>
         <div id="messagesList">Loading messages...</div>
 
+        <div style="margin-bottom:1.2rem;">
+            <label style="font-weight:600;">Your Name</label>
+            <input id="usernameInput" placeholder="Enter your name..." />
+        </div>
+        <div style="margin-bottom:1.2rem;">
+            <label style="font-weight:600;">Choose an Avatar</label>
+            <div id="avatarGrid" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+                <div class="avatar-option" data-avatar="🙂">🙂</div>
+                <div class="avatar-option" data-avatar="😎">😎</div>
+                <div class="avatar-option" data-avatar="🐎">🐎</div>
+                <div class="avatar-option" data-avatar="🔥">🔥</div>
+                <div class="avatar-option" data-avatar="🌟">🌟</div>
+            </div>
+        </div>
         <h3 style="margin-top:2rem;">Add a Reply</h3>
         <textarea id="replyText" placeholder="Write your reply..." style="min-height:120px;"></textarea>
         <button onclick="submitReply()">Reply</button>
     </div>
-</div>
+</div>mo
 
  <script>
 // Global variables
+let username = localStorage.getItem("chatUserName") || "";
+let avatar = localStorage.getItem("chatUserAvatar") || "";
+window.addEventListener("DOMContentLoaded", () => {
+    const nameInput = document.getElementById("usernameInput");
+    if (nameInput) {
+        nameInput.value = username;
+        nameInput.addEventListener("input", () => {
+            username = nameInput.value.trim();
+            localStorage.setItem("chatUserName", username);
+        });
+    }
+    const avatarGrid = document.getElementById("avatarGrid");
+    if (avatarGrid) {
+        const options = avatarGrid.querySelectorAll(".avatar-option");
+        options.forEach(opt => {
+            if (opt.dataset.avatar === avatar) {
+                opt.classList.add("selected");
+            }
+            opt.addEventListener("click", () => {
+                options.forEach(o => o.classList.remove("selected"));
+                opt.classList.add("selected");
+                avatar = opt.dataset.avatar;
+                localStorage.setItem("chatUserAvatar", avatar);
+            });
+        });
+    }
+});
 let topicId = new URLSearchParams(window.location.search).get("topic");
 let allTopics = [];
 let currentTopic = null;
@@ -209,7 +262,7 @@ function renderMessages() {
 function renderMessage(msg) {
   return `
     <div class="message-box" id="msg-${msg.id}">
-      <strong>${msg.user || "Anonymous"}</strong>
+      <strong>${msg.avatar || "🙂"} ${msg.user || "Anonymous"}</strong>
       <p>${msg.text || ""}</p>
       <span class="meta">${msg.date || new Date().toLocaleString()}</span>
 
@@ -315,7 +368,8 @@ async function submitNestedReply(parentId) {
   
   parent.replies.push({
     id: Date.now().toString(),
-    user: "Anonymous",
+    user: username || "Anonymous",
+    avatar: avatar || "🙂",
     text,
     date: new Date().toLocaleString(),
     likes: 0,
@@ -351,7 +405,8 @@ async function submitReply() {
   
   currentTopic.messages.push({
     id: Date.now().toString(),
-    user: "Anonymous",
+    user: username || "Anonymous",
+    avatar: avatar || "🙂",
     text,
     date: new Date().toLocaleString(),
     likes: 0,
