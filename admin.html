@@ -1116,7 +1116,7 @@
     CONFIGURATION
     --------------------------------------------------- */
 let raceAnalyses = {};
-const workerBase = "https://raceanalyst.pages.dev";
+const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
     const today = new Date().toISOString().split('T')[0];
 
     /* ---------------------------------------------------
@@ -2096,11 +2096,11 @@ const workerBase = "https://raceanalyst.pages.dev";
     });
 
 
-    /* ---------------------------------------------------
-    EVENT LISTENERS FOR LOGIN/LOGOUT
+/* ---------------------------------------------------
+    EVENT LISTENERS FOR LOGIN/LOGOUT - SAFE VERSION
     --------------------------------------------------- */
     function setupAuthEventListeners() {
-        // Login button
+        // Login button - check if element exists
         const adminLoginBtn = document.getElementById('adminLoginBtn');
         if (adminLoginBtn) {
             adminLoginBtn.addEventListener('click', async (e) => {
@@ -2110,15 +2110,19 @@ const workerBase = "https://raceanalyst.pages.dev";
                     await loginToCloudflare();
                 }
             });
+        } else {
+            console.warn('adminLoginBtn element not found');
         }
         
-        // Logout button
+        // Logout button - check if element exists
         const logoutBtn = document.getElementById('logoutBtn');
         if (logoutBtn) {
             logoutBtn.addEventListener('click', async (e) => {
                 e.preventDefault();
                 await logoutFromCloudflare();
             });
+        } else {
+            console.log('logoutBtn not found (normal when not logged in)');
         }
     }
     // Update button - with auth check
