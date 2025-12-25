@@ -1981,6 +1981,13 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
     //     }
     // }
 
+    async function loginToCloudflare() {
+        console.log("🔑 Forcing Cloudflare Access login...");
+
+        // This special URL ALWAYS triggers Cloudflare Access login
+        window.location.href = "https://raceanalyst.pages.dev/admin";
+    }
+
     async function logoutFromCloudflare() {
         try {
             console.log("🚪 Logging out from Cloudflare...");
@@ -2088,32 +2095,53 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
         }
     }
 
+    async function requireAuth(actionName = 'perform this action') {
+        const authResult = await checkCloudflareAuth();
+
+        if (!authResult.authenticated) {
+            showToast(`Please login to ${actionName}`, 'error');
+
+            setTimeout(() => {
+                if (confirm(`Admin access requires authentication. Login now?`)) {
+                    loginToCloudflare();
+                }
+            }, 500);
+
+            return false;
+        }
+
+        updateUIForAuthStatus(authResult);
+        return true;
+    }
+
     /* ---------------------------------------------------
     PROTECTED ACTION WRAPPER
     --------------------------------------------------- */
-    async function requireAuth(actionName = 'perform this action') {
-        if (!isAuthenticated) {
-            const authResult = await checkCloudflareAuth();
+    // async function requireAuth(actionName = 'perform this action') {
+    //     if (!isAuthenticated) {
+    //         const authResult = await checkCloudflareAuth();
             
-            if (!authResult.authenticated) {
-                showToast(`Please login to ${actionName}`, 'error');
+    //         if (!authResult.authenticated) {
+    //             showToast(`Please login to ${actionName}`, 'error');
                 
-                // Ask user if they want to login
-                setTimeout(() => {
-                    if (confirm(`Admin access requires authentication. Would you like to login now?`)) {
-                        loginToCloudflare();
-                    }
-                }, 500);
+    //             // Ask user if they want to login
+    //             setTimeout(() => {
+    //                 if (confirm(`Admin access requires authentication. Would you like to login now?`)) {
+    //                     loginToCloudflare();
+    //                 }
+    //             }, 500);
                 
-                return false;
-            }
+    //             return false;
+    //         }
             
-            // Update UI since we just authenticated
-            updateUIForAuthStatus(authResult);
-        }
+    //         // Update UI since we just authenticated
+    //         updateUIForAuthStatus(authResult);
+    //     }
         
-        return true;
-    }
+    //     return true;
+    // }
+
+    
     /* ---------------------------------------------------
     UPDATE EVENT HANDLERS
     --------------------------------------------------- */
