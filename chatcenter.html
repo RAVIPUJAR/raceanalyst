@@ -491,6 +491,16 @@ let currentOpenTopic = null;
 let isAdminMode = false;
 let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}'); // Track user likes
 
+// Helper to get or prompt for user name and cache in localStorage
+function getUserName() {
+  let userName = localStorage.getItem('chatUserName');
+  if (!userName) {
+    userName = prompt("Enter your name:", "Anonymous") || "Anonymous";
+    localStorage.setItem('chatUserName', userName);
+  }
+  return userName;
+}
+
 // Simple admin password (change this in production!)
 const ADMIN_PASSWORD = "raceadmin123";
 
@@ -862,32 +872,26 @@ function renderChatMessages(messages) {
   container.innerHTML = messages.map(msg => renderChatMessage(msg, 0)).join('');
 }
 
-// 6. Render single chat message with limited actions
+// 6. Render single chat message with avatars and user names
 function renderChatMessage(msg, depth = 0) {
   const messageId = msg.id;
   const userLiked = userLikes[messageId] === true;
-  
-  // Check if user can like (only one like per message per user)
   const canLike = !userLiked;
-  
+
+  const avatar = msg.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(msg.user || 'A')}&background=1a3c34&color=fff&rounded=true`;
+
   return `
     <div class="chat-message" style="margin-left:${depth * 20}px; margin-bottom:1rem;">
       <div style="background:${depth === 0 ? '#f0f7f4' : '#f8f9fa'}; border-radius:8px; padding:1rem;">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem;">
-          <div style="font-weight:600; color:#1a3c34;">
-            ${msg.user || 'Anonymous'}
-          </div>
-          <div style="font-size:0.8rem; color:#888;">
-            ${formatDate(msg.date)}
+        <div style="display:flex; align-items:flex-start; gap:10px; margin-bottom:0.5rem;">
+          <img src="${avatar}" alt="avatar" style="width:36px; height:36px; border-radius:50%; object-fit:cover;">
+          <div style="flex:1;">
+            <div style="font-weight:600; color:#1a3c34;">${msg.user || 'Anonymous'}</div>
+            <div style="font-size:0.8rem; color:#888;">${formatDate(msg.date)}</div>
           </div>
         </div>
-        
-        <div style="color:#333; margin-bottom:0.8rem;">
-          ${msg.text}
-        </div>
-        
-        <div style="display:flex; gap:1rem; align-items:center;">
-          <!-- Like button -->
+        <div style="color:#333; margin-bottom:0.8rem; padding-left:46px;">${msg.text}</div>
+        <div style="display:flex; gap:1rem; align-items:center; padding-left:46px;">
           <button onclick="${canLike ? `likeChatMessage('${messageId}')` : ''}" 
             ${!canLike ? 'disabled' : ''}
             style="background:none; border:none; color:${userLiked ? '#e91e63' : '#666'}; cursor:${canLike ? 'pointer' : 'not-allowed'}; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
@@ -895,16 +899,12 @@ function renderChatMessage(msg, depth = 0) {
             ${msg.likes || 0} Like${msg.likes !== 1 ? 's' : ''}
             ${userLiked ? ' (You liked)' : ''}
           </button>
-          
-          <!-- Reply button -->
           <button onclick="showChatReplyBox('${messageId}')" 
             style="background:none; border:none; color:#666; cursor:pointer; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
             <i class="fas fa-reply"></i> Reply
           </button>
         </div>
-        
-        <!-- Reply input (hidden by default) -->
-        <div id="chatReplyBox-${messageId}" style="display:none; margin-top:1rem;">
+        <div id="chatReplyBox-${messageId}" style="display:none; margin-top:1rem; padding-left:46px;">
           <textarea id="chatReplyInput-${messageId}" placeholder="Write your reply..." style="width:100%; padding:0.6rem; border:1px solid #ddd; border-radius:4px; min-height:60px; margin-bottom:0.5rem;"></textarea>
           <div>
             <button onclick="submitChatNestedReply('${messageId}')" style="background:#1a3c34; color:white; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; font-size:0.85rem;">
@@ -915,8 +915,6 @@ function renderChatMessage(msg, depth = 0) {
             </button>
           </div>
         </div>
-        
-        <!-- Nested replies -->
         <div style="margin-top:1rem;">
           ${(msg.replies || []).map(reply => renderChatMessage(reply, depth + 1)).join('')}
         </div>
@@ -979,20 +977,19 @@ function hideChatReplyBox(messageId) {
   document.getElementById(`chatReplyInput-${messageId}`).value = '';
 }
 
-// 9. Submit nested reply in chat
+// 9. Submit nested reply in chat (with user name and avatar)
 async function submitChatNestedReply(parentId) {
   const input = document.getElementById(`chatReplyInput-${parentId}`);
   const text = input.value.trim();
-  
+
   if (!text) {
     alert("Please enter a reply");
     return;
   }
-  
+
   const topic = currentOpenTopic;
   if (!topic) return;
-  
-  // Find parent message and add reply
+
   function addReplyToMessage(messages, parentId, newReply) {
     for (let msg of messages) {
       if (msg.id === parentId) {
@@ -1006,74 +1003,78 @@ async function submitChatNestedReply(parentId) {
     }
     return false;
   }
-  
+
+  const user = getUserName();
   const newReply = {
     id: Date.now().toString(),
-    user: "Anonymous",
+    user: user,
+    avatar: '', // optional, can be blank or let renderChatMessage use default
     text: text,
     date: new Date().toLocaleString(),
     likes: 0,
     replies: []
   };
-  
+
   if (addReplyToMessage(topic.messages, parentId, newReply)) {
     // Update allTopics
     const topicIndex = allTopics.findIndex(t => t.id === topic.id);
     if (topicIndex !== -1) {
       allTopics[topicIndex] = topic;
     }
-    
+
     // Save to server
     await saveTopicsToServer();
-    
+
     // Clear input and hide box
     input.value = '';
     hideChatReplyBox(parentId);
-    
+
     // Re-render messages
     renderChatMessages(topic.messages);
   }
 }
 
-// 10. Submit main reply in chat
+// 10. Submit main reply in chat (with user name and avatar)
 async function submitChatReply() {
   const input = document.getElementById("chatReplyInput");
   const text = input.value.trim();
-  
+
   if (!text) {
     alert("Please enter a reply");
     return;
   }
-  
+
   const topic = currentOpenTopic;
   if (!topic) return;
-  
+
   if (!topic.messages) topic.messages = [];
-  
+
+  const user = getUserName();
   topic.messages.push({
     id: Date.now().toString(),
-    user: "Anonymous",
+    user: user,
+    avatar: '', // optional, can be blank or let renderChatMessage use default
     text: text,
     date: new Date().toLocaleString(),
     likes: 0,
     replies: []
   });
-  
+
   // Update allTopics
   const topicIndex = allTopics.findIndex(t => t.id === topic.id);
   if (topicIndex !== -1) {
     allTopics[topicIndex] = topic;
   }
-  
+
   // Save to server
   await saveTopicsToServer();
-  
+
   // Clear input
   input.value = '';
-  
+
   // Re-render messages
   renderChatMessages(topic.messages);
-  
+
   // Scroll to bottom
   setTimeout(() => {
     document.getElementById("chatMessages").scrollTop = document.getElementById("chatMessages").scrollHeight;
