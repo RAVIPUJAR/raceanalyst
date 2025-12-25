@@ -514,8 +514,8 @@ function loadAvatarGrid(gridId, inputId, optionClass = "replyAvatarOption", avat
     const grid = document.getElementById(gridId);
     if (!grid) return;
     let html = "";
-    avatarList.forEach(seedOrFile => {
-        let src = `avatar/${seedOrFile}`;
+    avatarList.forEach(file => {
+        let src = `avatar/${file}`;
         html += `<img src="${src}" class="${optionClass}" style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">`;
     });
     grid.innerHTML = html;
@@ -1019,10 +1019,6 @@ function renderChatMessage(msg, depth = 0) {
 function renderNestedReplyAvatarGrid(messageId) {
   const grid = document.getElementById(`nestedReplyAvatarGrid-${messageId}`);
   if (!grid) return;
-  const avatarFiles = [
-    "svg-1.svg", "svg-2.svg", "svg-3.svg", "svg-4.svg", "svg-5.svg", "svg-6.svg",
-    "svg-7.svg", "svg-8.svg", "svg-9.svg", "svg-10.svg", "svg-11.svg", "svg-12.svg"
-  ];
   grid.innerHTML = avatarFiles.map(file =>
     `<img src="avatar/${file}" class="nestedReplyAvatarOption" data-parent="${messageId}" style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">`
   ).join('');
@@ -1101,9 +1097,9 @@ async function submitChatNestedReply(parentId) {
     const user = (userInput?.value.trim()) || "Anonymous";
     const avatarSelected = (avatarInput?.value.trim()) || "";
 
-    // Avatar fallback (initial-letter avatar)
+    // Avatar fallback (local default)
     const avatar = avatarSelected ||
-        `https://ui-avatars.com/api/?name=${encodeURIComponent(user)}&background=1a3c34&color=fff&rounded=true`;
+        "avatar/svg-1.svg";
 
     const topic = currentOpenTopic;
     if (!topic) return;
@@ -1173,7 +1169,7 @@ async function submitChatReply() {
 
   const user = userInput.value.trim() || "Anonymous";
   const avatar = avatarInput.value.trim() ||
-      `https://ui-avatars.com/api/?name=${encodeURIComponent(user)}&background=1a3c34&color=fff&rounded=true`;
+      "avatar/svg-1.svg";
 
   if (!text) {
     alert("Please enter a reply");
@@ -1305,9 +1301,9 @@ async function createTopic() {
     const user = (userInput?.value.trim()) || "Anonymous";
     const avatarSelected = (avatarInput?.value.trim()) || "";
 
-    // Avatar fallback (auto-generated from user name)
+    // Avatar fallback (local default)
     const avatar = avatarSelected ||
-        `https://ui-avatars.com/api/?name=${encodeURIComponent(user)}&background=1a3c34&color=fff&rounded=true`;
+        "avatar/svg-1.svg";
 
     if (!title) {
         alert("Please enter a topic title");
