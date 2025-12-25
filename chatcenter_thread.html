@@ -172,6 +172,8 @@ window.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+    console.log("Chat thread initialized with topic ID:", topicId);
+    loadTopics();
 });
 let topicId = new URLSearchParams(window.location.search).get("topic");
 let allTopics = [];
@@ -456,12 +458,6 @@ async function saveTopics() {
     throw error;
   }
 }
-
-// 10. Initialize - FIXED: Changed from loadTopic() to loadTopics()
-window.addEventListener('DOMContentLoaded', () => {
-  console.log("Chat thread initialized with topic ID:", topicId);
-  loadTopics(); // This was calling loadTopic() which didn't exist
-});
 
 // Make functions available globally
 window.loadTopics = loadTopics;
