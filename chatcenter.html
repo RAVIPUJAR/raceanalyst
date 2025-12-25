@@ -505,26 +505,17 @@ let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}'); // Track 
 
 
 // ===== REPLY AVATAR SELECTION HANDLER (Dynamic) =====
-const avatarSeeds = [
-    "Hero", "Explorer", "Champion", "Galaxy", "Spirit", "Shadow",
-    "Nova", "Echo", "Blaze", "Tidal", "Hawk", "Zen"
+const avatarFiles = [
+    "svg-1.svg", "svg-2.svg", "svg-3.svg", "svg-4.svg", "svg-5.svg", "svg-6.svg",
+    "svg-7.svg", "svg-8.svg", "svg-9.svg", "svg-10.svg", "svg-11.svg", "svg-12.svg"
 ];
-// Optionally, if you have avatarFiles array (uncomment and use that instead of avatarSeeds)
-// const avatarFiles = [...]; // e.g. ["avatar1.png", ...]
 
-function loadAvatarGrid(gridId, inputId, optionClass = "replyAvatarOption", avatarList = avatarSeeds) {
+function loadAvatarGrid(gridId, inputId, optionClass = "replyAvatarOption", avatarList = avatarFiles) {
     const grid = document.getElementById(gridId);
     if (!grid) return;
-    // Use avatarList as seeds or filenames
     let html = "";
     avatarList.forEach(seedOrFile => {
-        let src = "";
-        // If it's a file name, use local avatar folder, else DiceBear
-        if (seedOrFile.endsWith(".png") || seedOrFile.endsWith(".jpg") || seedOrFile.endsWith(".svg")) {
-            src = `avatar/${seedOrFile}`;
-        } else {
-            src = `https://api.dicebear.com/7.x/adventurer/svg?seed=${seedOrFile}`;
-        }
+        let src = `avatar/${seedOrFile}`;
         html += `<img src="${src}" class="${optionClass}" style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">`;
     });
     grid.innerHTML = html;
@@ -543,9 +534,9 @@ function loadAvatarGrid(gridId, inputId, optionClass = "replyAvatarOption", avat
 // On DOMContentLoaded, dynamically load both avatar grids (new topic and reply)
 document.addEventListener("DOMContentLoaded", function () {
     // New Topic Avatar Grid
-    loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarSeeds);
+    loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
     // Reply Avatar Grid
-    loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarSeeds);
+    loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
 });
 
 // ===== NESTED REPLY AVATAR SELECTION HANDLER =====
@@ -959,14 +950,13 @@ function renderChatMessage(msg, depth = 0) {
   const messageId = msg.id;
   const userLiked = userLikes[messageId] === true;
   const canLike = !userLiked;
-  const avatar = msg.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(msg.user || 'A')}&background=1a3c34&color=fff&rounded=true`;
+  // Use local avatar folder, fallback to default local avatar if not present
+  let avatarSrc = msg.avatar;
+  // If avatar is not set or not a local file, use default local avatar
+  if (!avatarSrc || !avatarSrc.startsWith("avatar/")) {
+    avatarSrc = "avatar/svg-1.svg";
+  }
 
-  // After rendering, we'll dynamically populate the nested avatar grid using JS.
-  // The hidden input is used for the selected avatar.
-  // Remove all hardcoded <img> tags for avatars.
-  // The avatar grid will be rendered after insertion.
-
-  // The reply container will be created with an empty grid, to be populated by renderNestedReplyAvatarGrid.
   setTimeout(() => {
     if (typeof renderNestedReplyAvatarGrid === "function") {
       renderNestedReplyAvatarGrid(messageId);
@@ -977,7 +967,7 @@ function renderChatMessage(msg, depth = 0) {
     <div class="chat-message" style="margin-left:${depth * 20}px; margin-bottom:1rem;">
       <div style="background:${depth === 0 ? '#f0f7f4' : '#f8f9fa'}; border-radius:8px; padding:1rem;">
         <div style="display:flex; align-items:flex-start; gap:10px; margin-bottom:0.5rem;">
-          <img src="${avatar}" alt="avatar" style="width:36px; height:36px; border-radius:50%; object-fit:cover;">
+          <img src="${avatarSrc}" alt="avatar" style="width:36px; height:36px; border-radius:50%; object-fit:cover;">
           <div style="flex:1;">
             <div style="font-weight:600; color:#1a3c34;">${msg.user || 'Anonymous'}</div>
             <div style="font-size:0.8rem; color:#888;">${formatDate(msg.date)}</div>
@@ -1029,12 +1019,12 @@ function renderChatMessage(msg, depth = 0) {
 function renderNestedReplyAvatarGrid(messageId) {
   const grid = document.getElementById(`nestedReplyAvatarGrid-${messageId}`);
   if (!grid) return;
-  const avatarSeeds = [
-    "Hero", "Explorer", "Champion", "Galaxy", "Spirit", "Shadow",
-    "Nova", "Echo", "Blaze", "Tidal", "Hawk", "Zen"
+  const avatarFiles = [
+    "svg-1.svg", "svg-2.svg", "svg-3.svg", "svg-4.svg", "svg-5.svg", "svg-6.svg",
+    "svg-7.svg", "svg-8.svg", "svg-9.svg", "svg-10.svg", "svg-11.svg", "svg-12.svg"
   ];
-  grid.innerHTML = avatarSeeds.map(seed =>
-    `<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=${seed}" class="nestedReplyAvatarOption" data-parent="${messageId}" style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">`
+  grid.innerHTML = avatarFiles.map(file =>
+    `<img src="avatar/${file}" class="nestedReplyAvatarOption" data-parent="${messageId}" style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">`
   ).join('');
 }
 
