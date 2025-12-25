@@ -1877,61 +1877,104 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
         try {
             console.log("🔐 Checking Cloudflare authentication...");
             
-            // Add timestamp to prevent caching
-            const timestamp = new Date().getTime();
-            const response = await fetch(`${workerBase}/auth-status?t=${timestamp}`, {
-                method: 'GET',
-                credentials: 'include',
-                headers: {
-                    'Accept': 'application/json',
-                    'Cache-Control': 'no-cache'
-                }
-            });
+            // First, check if we have Cloudflare Access headers directly
+            // This works when accessing directly via the domain with Cloudflare Access
+            const cfEmail = document.cookie.match(/(?:^|;\s*)CF_AUTHORIZATION=([^;]*)/)?.[1];
             
-            console.log("Auth check response status:", response.status);
+            if (cfEmail) {
+                console.log("✅ Found Cloudflare Access cookie");
+                currentUser = {
+                    email: cfEmail,
+                    name: cfEmail.split('@')[0],
+                    authenticated: true
+                };
+                isAuthenticated = true;
+                return { authenticated: true, user: currentUser };
+            }
             
-            if (response.ok) {
-                const data = await response.json();
-                console.log("Auth data received:", data);
-                
-                if (data.authenticated) {
-                    currentUser = {
-                        email: data.email || 'admin@raceanalyst.in',
-                        name: data.name || 'Admin',
-                        authenticated: true
-                    };
-                    isAuthenticated = true;
+            // Try to get auth info from multiple possible sources
+            const endpoints = [
+                '/api/auth-status',
+                '/cdn-cgi/access/get-identity'  // Cloudflare Access built-in endpoint
+            ];
+            
+            for (const endpoint of endpoints) {
+                try {
+                    const response = await fetch(endpoint, {
+                        method: 'GET',
+                        credentials: 'include',
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
                     
-                    console.log(`✅ Authenticated as: ${data.name || data.email || 'User'}`);
-                    return { 
-                        authenticated: true, 
-                        user: currentUser,
-                        data: data 
-                    };
+                    console.log(`${endpoint} status:`, response.status);
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log(`${endpoint} data:`, data);
+                        
+                        // Check various possible auth indicators
+                        if (data.authenticated === true || 
+                            data.email || 
+                            data.user?.email ||
+                            data.success === true) {
+                            
+                            currentUser = {
+                                email: data.email || data.user?.email || 'admin@raceanalyst.in',
+                                name: data.name || data.user?.name || 'Admin',
+                                authenticated: true
+                            };
+                            isAuthenticated = true;
+                            
+                            console.log(`✅ Authenticated via ${endpoint}: ${currentUser.email}`);
+                            return { 
+                                authenticated: true, 
+                                user: currentUser,
+                                source: endpoint 
+                            };
+                        }
+                    }
+                } catch (error) {
+                    console.warn(`Endpoint ${endpoint} failed:`, error.message);
                 }
-            } else if (response.status === 401) {
-                console.log("❌ Not authenticated (401)");
+            }
+            
+            // If all else fails, try the direct Worker as last resort
+            try {
+                const directResponse = await fetch('https://broad-sound-fdb7.raceanalyst.workers.dev/auth-status', {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                
+                if (directResponse.ok) {
+                    const data = await directResponse.json();
+                    if (data.authenticated) {
+                        currentUser = {
+                            email: data.email || 'admin@raceanalyst.in',
+                            name: data.name || 'Admin',
+                            authenticated: true
+                        };
+                        isAuthenticated = true;
+                        console.log("✅ Authenticated via direct Worker");
+                        return { authenticated: true, user: currentUser };
+                    }
+                }
+            } catch (error) {
+                console.warn("Direct Worker check failed:", error.message);
             }
             
             // Not authenticated
+            console.log("❌ Not authenticated - no valid auth found");
             currentUser = null;
             isAuthenticated = false;
-            console.log("❌ Not authenticated");
-            return { 
-                authenticated: false, 
-                user: null,
-                status: response.status 
-            };
+            return { authenticated: false, user: null };
             
         } catch (error) {
             console.error("Auth check failed:", error);
             currentUser = null;
             isAuthenticated = false;
-            return { 
-                authenticated: false, 
-                user: null, 
-                error: error.message 
-            };
+            return { authenticated: false, user: null };
         }
     }
 
