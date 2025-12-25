@@ -148,6 +148,9 @@
 // Global variables
 let username = localStorage.getItem("chatUserName") || "";
 let avatar = localStorage.getItem("chatUserAvatar") || "";
+let topicId = new URLSearchParams(window.location.search).get("topic");
+let allTopics = [];
+let currentTopic = null;
 window.addEventListener("DOMContentLoaded", () => {
     const nameInput = document.getElementById("usernameInput");
     if (nameInput) {
@@ -175,9 +178,6 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log("Chat thread initialized with topic ID:", topicId);
     loadTopics();
 });
-let topicId = new URLSearchParams(window.location.search).get("topic");
-let allTopics = [];
-let currentTopic = null;
 
 // Updated endpoint URLs
 const BASE_URL = "https://broad-sound-fdb7.raceanalyst.workers.dev";
