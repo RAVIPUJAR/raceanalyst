@@ -1089,7 +1089,6 @@
     <div class="toast" id="toast"></div>
 
     <script>
-
     /* ---------------------------------------------------
     NAVIGATION FUNCTIONS
     --------------------------------------------------- */
@@ -1112,50 +1111,29 @@
         window.location.href = 'index.html#upcoming-races';
         return false;
     }
+    
     /* ---------------------------------------------------
     CONFIGURATION
     --------------------------------------------------- */
-let raceAnalyses = {};
-const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
+    let raceAnalyses = {};
+    const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
     const today = new Date().toISOString().split('T')[0];
-
-    /* ---------------------------------------------------
-    DOM ELEMENTS
-    --------------------------------------------------- */
-    const adminPanel = document.getElementById("adminPanel");
-    const hideAdminBtn = document.getElementById("hideAdminBtn");
-    const adminVenue = document.getElementById("adminVenue");
-    const adminDate = document.getElementById("adminDate");
-    const adminRaceNo = document.getElementById("adminRaceNo");
-    const adminAnalysis = document.getElementById("adminAnalysis");
-    const saveBtn = document.getElementById("saveBtn");
-    const updateBtn = document.getElementById("updateBtn");
-    const deleteBtn = document.getElementById("deleteBtn");
-    const clearBtn = document.getElementById("clearBtn");
-    const toast = document.getElementById("toast");
-
-    const venueSelect = document.getElementById("venueSelect");
-    const dateSelect = document.getElementById("dateSelect");
-    const raceSelect = document.getElementById("raceSelect");
-    const analysisTitle = document.getElementById("analysisTitle");
-    const analysisContent = document.getElementById("analysisContent");
-    const raceInfo = document.getElementById("raceInfo");
-    const selectedVenue = document.getElementById("selectedVenue");
-    const selectedDate = document.getElementById("selectedDate");
-    const selectedRace = document.getElementById("selectedRace");
-    const calendarWidget = document.getElementById("calendarWidget");
-
-    // Set today's date
-    adminDate.value = today;
+    
+    // Global auth state
+    let currentUser = null;
+    let isAuthenticated = false;
 
     /* ---------------------------------------------------
     HELPER FUNCTIONS
     --------------------------------------------------- */
     function showToast(message, type = 'success') {
+        const toast = document.getElementById('toast');
+        if (!toast) return;
+        
         toast.textContent = message;
         toast.style.background = type === 'success' ? '#28a745' : 
-                            type === 'error' ? '#dc3545' : 
-                            type === 'info' ? '#17a2b8' : '#28a745';
+                                type === 'error' ? '#dc3545' : 
+                                type === 'info' ? '#17a2b8' : '#28a745';
         toast.style.display = "block";
         setTimeout(() => (toast.style.display = "none"), 3000);
     }
@@ -1164,8 +1142,18 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
         return `${venue}-${date}-${raceNo}`;
     }
 
+    function debugAuthStatus() {
+        console.log("=== DEBUG AUTH STATUS ===");
+        console.log("isAuthenticated:", isAuthenticated);
+        console.log("currentUser:", currentUser);
+        console.log("adminPanel element:", document.getElementById('adminPanel'));
+        console.log("adminLoginBtn element:", document.getElementById('adminLoginBtn'));
+        console.log("adminPanel style.display:", document.getElementById('adminPanel')?.style.display);
+        console.log("=========================");
+    }
+
     /* ---------------------------------------------------
-    CLOUDFLARE KV FUNCTIONS (ONLY STORAGE)
+    CLOUDFLARE KV FUNCTIONS
     --------------------------------------------------- */
     async function loadFromKV() {
         try {
@@ -1197,118 +1185,17 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
                 raceAnalyses = data;
                 const count = Object.keys(data).length;
                 console.log(`✅ Loaded ${count} analyses from Cloudflare KV`);
-                showToast(`Loaded ${count} race analyses`, 'success');
                 return { success: true, count };
             } else {
                 raceAnalyses = {};
                 console.log("✅ KV returned empty, starting fresh");
-                showToast('No race analyses found', 'info');
                 return { success: true, count: 0 };
             }
         } catch (error) {
             console.error("❌ KV load error:", error);
-            
-            // Create some sample data for testing
-            raceAnalyses = {
-                "Mumbai-2024-01-15-1": {
-                    venue: "Mumbai",
-                    date: "2024-01-15",
-                    raceNo: "1",
-                    analysis: "**Race 1 Analysis**\n\n1. Horse A - Strong favorite\n2. Horse B - Good value\n3. Horse C - Long shot"
-                },
-                "Bangalore-2024-01-14-5": {
-                    venue: "Bangalore",
-                    date: "2024-01-14",
-                    raceNo: "5",
-                    analysis: "**Race 5 Analysis**\n\nTop picks:\n1. Speedster\n2. Lightning Bolt\n3. Thunder"
-                }
-            };
-            
-            console.log("📋 Using sample data for demonstration");
-            showToast('Using sample data (connect to cloud for real data)', 'warning');
-            return { success: true, count: Object.keys(raceAnalyses).length };
-        }
-    }
-
-    // Fallback function
-    async function loadFromKVWithFallback() {
-        try {
-            // Try admin endpoint
-            const response = await fetch(workerBase + "/get-all", {
-                method: 'GET',
-                headers: { 
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                cache: 'no-store'
-            });
-            
-            if (response.ok) {
-                const data = await response.json();
-                raceAnalyses = data;
-                console.log("✅ Loaded from admin endpoint:", Object.keys(data).length, "items");
-                return { success: true, count: Object.keys(data).length };
-            }
-            
-            // If admin endpoint requires auth, return empty
             raceAnalyses = {};
-            return { success: true, count: 0 };
-            
-        } catch (error) {
-            raceAnalyses = {};
-            return { success: true, count: 0 };
-        }
-    }
-
-    async function saveToKV(key, data) {
-        try {
-            console.log("💾 Saving to KV:", key);
-            const response = await fetch(workerBase + "/save", {
-                method: "POST",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({ key, data })
-            });
-            
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`HTTP ${response.status}: ${errorText}`);
-            }
-            
-            const result = await response.json();
-            console.log("✅ Save successful:", result);
-            return { success: true, result };
-        } catch (error) {
-            console.error("❌ Save error:", error);
-            throw error; // Re-throw to be handled by caller
-        }
-    }
-
-    async function deleteFromKV(key) {
-        try {
-            console.log("🗑️ Deleting from KV:", key);
-            const response = await fetch(workerBase + "/delete", {
-                method: "POST",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({ key })
-            });
-            
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`HTTP ${response.status}: ${errorText}`);
-            }
-            
-            const result = await response.json();
-            console.log("✅ Delete successful:", result);
-            return { success: true, result };
-        } catch (error) {
-            console.error("❌ Delete error:", error);
-            throw error; // Re-throw to be handled by caller
+            showToast('Error loading data', 'error');
+            return { success: false, error: error.message };
         }
     }
 
@@ -1316,6 +1203,9 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
     UI MANAGEMENT FUNCTIONS
     --------------------------------------------------- */
     function initializeDropdowns() {
+        const venueSelect = document.getElementById("venueSelect");
+        if (!venueSelect) return;
+        
         // Extract unique venues
         const venues = [...new Set(Object.values(raceAnalyses).map(a => a.venue))];
         venueSelect.innerHTML = '<option value="">Select Venue</option>' + 
@@ -1326,6 +1216,10 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
     }
 
     function updateDateDropdown() {
+        const venueSelect = document.getElementById("venueSelect");
+        const dateSelect = document.getElementById("dateSelect");
+        if (!venueSelect || !dateSelect) return;
+        
         const selectedVenueVal = venueSelect.value;
         let dates = [];
         
@@ -1350,13 +1244,17 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
         
         if (dates.length > 0 && !dateSelect.value) {
             dateSelect.value = dates[0];
-            updateRaceDropdown();
         }
         
         updateRaceDropdown();
     }
 
     function updateRaceDropdown() {
+        const venueSelect = document.getElementById("venueSelect");
+        const dateSelect = document.getElementById("dateSelect");
+        const raceSelect = document.getElementById("raceSelect");
+        if (!venueSelect || !dateSelect || !raceSelect) return;
+        
         const selectedVenueVal = venueSelect.value;
         const selectedDateVal = dateSelect.value;
         let races = [];
@@ -1378,6 +1276,15 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
     }
 
     function displayAnalysis(key) {
+        const analysisContent = document.getElementById("analysisContent");
+        const analysisTitle = document.getElementById("analysisTitle");
+        const raceInfo = document.getElementById("raceInfo");
+        const selectedVenue = document.getElementById("selectedVenue");
+        const selectedDate = document.getElementById("selectedDate");
+        const selectedRace = document.getElementById("selectedRace");
+        
+        if (!analysisContent || !analysisTitle || !raceInfo) return;
+        
         if (!key || !raceAnalyses[key]) {
             analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-exclamation-circle"></i><p>No analysis found</p></div>';
             analysisTitle.textContent = 'Race Analysis';
@@ -1409,178 +1316,30 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
             year: 'numeric'
         });
         
-        selectedVenue.textContent = analysis.venue;
-        selectedDate.textContent = formattedDate;
-        selectedRace.textContent = `Race ${analysis.raceNo}`;
+        if (selectedVenue) selectedVenue.textContent = analysis.venue;
+        if (selectedDate) selectedDate.textContent = formattedDate;
+        if (selectedRace) selectedRace.textContent = `Race ${analysis.raceNo}`;
         raceInfo.style.display = 'flex';
         
         // Update admin form
-        adminVenue.value = analysis.venue;
-        adminDate.value = analysis.date;
-        adminRaceNo.value = analysis.raceNo;
-        adminAnalysis.value = analysis.analysis;
+        const adminVenue = document.getElementById("adminVenue");
+        const adminDate = document.getElementById("adminDate");
+        const adminRaceNo = document.getElementById("adminRaceNo");
+        const adminAnalysis = document.getElementById("adminAnalysis");
+        
+        if (adminVenue) adminVenue.value = analysis.venue;
+        if (adminDate) adminDate.value = analysis.date;
+        if (adminRaceNo) adminRaceNo.value = analysis.raceNo;
+        if (adminAnalysis) adminAnalysis.value = analysis.analysis;
     }
-
-    /* ---------------------------------------------------
-    EVENT HANDLERS (KV-ONLY)
-    --------------------------------------------------- */
-    // Save button - CREATE NEW
-    saveBtn.addEventListener('click', async function() {
-        const venue = adminVenue.value.trim();
-        const date = adminDate.value;
-        const raceNo = adminRaceNo.value.trim();
-        const analysis = adminAnalysis.value.trim();
-        
-        if (!venue || !date || !raceNo || !analysis) {
-            showToast('Please fill all fields', 'error');
-            return;
-        }
-        
-        const key = generateKey(venue, date, raceNo);
-        const data = { venue, date, raceNo, analysis };
-        
-        // Check if already exists
-        if (raceAnalyses[key]) {
-            if (!confirm('Analysis already exists for this race. Update?')) {
-                return;
-            }
-        }
-        
-        try {
-            // Save to KV
-            await saveToKV(key, data);
-            
-            // Update local state
-            raceAnalyses[key] = data;
-            
-            showToast('✅ Analysis saved to cloud!', 'success');
-            
-            // Refresh UI
-            initializeDropdowns();
-            venueSelect.value = venue;
-            updateDateDropdown();
-            raceSelect.value = key;
-            displayAnalysis(key);
-            
-        } catch (error) {
-            showToast(`❌ Failed to save to cloud: ${error.message}`, 'error');
-            console.error("Save failed:", error);
-        }
-    });
-
-    // Update button - UPDATE EXISTING
-    updateBtn.addEventListener('click', async function() {
-        const selectedKey = raceSelect.value;
-        if (!selectedKey || !raceAnalyses[selectedKey]) {
-            showToast('Select a race first', 'error');
-            return;
-        }
-        
-        const venue = adminVenue.value.trim();
-        const date = adminDate.value;
-        const raceNo = adminRaceNo.value.trim();
-        const analysis = adminAnalysis.value.trim();
-        
-        if (!venue || !date || !raceNo || !analysis) {
-            showToast('Please fill all fields', 'error');
-            return;
-        }
-        
-        const newKey = generateKey(venue, date, raceNo);
-        const data = { venue, date, raceNo, analysis };
-        
-        try {
-            // Save new entry to KV
-            await saveToKV(newKey, data);
-            
-            // Delete old entry if key changed
-            if (selectedKey !== newKey) {
-                await deleteFromKV(selectedKey);
-            }
-            
-            // Update local state
-            if (selectedKey !== newKey) {
-                delete raceAnalyses[selectedKey];
-            }
-            raceAnalyses[newKey] = data;
-            
-            showToast('✅ Analysis updated in cloud!', 'success');
-            
-            // Refresh UI
-            initializeDropdowns();
-            raceSelect.value = newKey;
-            displayAnalysis(newKey);
-            
-        } catch (error) {
-            showToast(`❌ Failed to update in cloud: ${error.message}`, 'error');
-            console.error("Update failed:", error);
-        }
-    });
-
-    // Delete button
-    deleteBtn.addEventListener('click', async function() {
-        const selectedKey = raceSelect.value;
-        if (!selectedKey || !raceAnalyses[selectedKey]) {
-            showToast('Select a race first', 'error');
-            return;
-        }
-        
-        if (!confirm('Are you sure you want to delete this analysis?')) {
-            return;
-        }
-        
-        try {
-            // Delete from KV
-            await deleteFromKV(selectedKey);
-            
-            // Delete from local state
-            delete raceAnalyses[selectedKey];
-            
-            showToast('✅ Analysis deleted from cloud!', 'success');
-            
-            // Refresh UI
-            initializeDropdowns();
-            
-            // Clear analysis display
-            analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race to view analysis</p></div>';
-            analysisTitle.textContent = 'Race Analysis';
-            raceInfo.style.display = 'none';
-            
-        } catch (error) {
-            showToast(`❌ Failed to delete from cloud: ${error.message}`, 'error');
-            console.error("Delete failed:", error);
-        }
-    });
-
-    // Clear button
-    clearBtn.addEventListener('click', function() {
-        adminVenue.value = '';
-        adminDate.value = today;
-        adminRaceNo.value = '';
-        adminAnalysis.value = '';
-        showToast('Form cleared', 'info');
-    });
-
-
-    // (Removed previous hideAdminBtn event listener that redirected to '/')
-
-    // Dropdown events
-    venueSelect.addEventListener('change', updateDateDropdown);
-    dateSelect.addEventListener('change', updateRaceDropdown);
-    raceSelect.addEventListener('change', function() {
-        if (this.value) {
-            displayAnalysis(this.value);
-        } else {
-            analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race to view analysis</p></div>';
-            analysisTitle.textContent = 'Race Analysis';
-            raceInfo.style.display = 'none';
-        }
-    });
 
     /* ---------------------------------------------------
     CALENDAR FUNCTION
     --------------------------------------------------- */
     function createCalendar() {
+        const calendarWidget = document.getElementById("calendarWidget");
+        if (!calendarWidget) return;
+        
         const todayObj = new Date();
         const currentMonth = todayObj.getMonth();
         const currentYear = todayObj.getFullYear();
@@ -1705,50 +1464,60 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
         }
     }
 
-
     /* ---------------------------------------------------
     ADMIN PAGE NAVIGATION
     --------------------------------------------------- */
-    document.getElementById("navRaceCalendar").addEventListener("click", function(e) {
-        e.preventDefault();
-        const calendar = document.querySelector('.sidebar-widget h3 i.fas.fa-calendar-alt').parentElement.parentElement;
-        calendar.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        showToast('Viewing Race Calendar', 'info');
-    });
-
-    document.getElementById("navUpcomingRaces").addEventListener("click", function(e) {
-        e.preventDefault();
-
-        const trophyIcon = document.querySelector('.sidebar-widget h3 i.fas.fa-trophy');
-        if (trophyIcon) {
-            const widget = trophyIcon.closest('.sidebar-widget');
-            widget.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            showToast('Viewing Upcoming Races', 'info');
-        } else {
-            showToast('Upcoming Races widget not found', 'error');
+    function setupNavigationListeners() {
+        const navRaceCalendar = document.getElementById("navRaceCalendar");
+        const navUpcomingRaces = document.getElementById("navUpcomingRaces");
+        const navAnalysis = document.getElementById("navAnalysis");
+        
+        if (navRaceCalendar) {
+            navRaceCalendar.addEventListener("click", function(e) {
+                e.preventDefault();
+                const calendar = document.querySelector('.sidebar-widget h3 i.fas.fa-calendar-alt')?.parentElement?.parentElement;
+                if (calendar) {
+                    calendar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    showToast('Viewing Race Calendar', 'info');
+                }
+            });
         }
-    });
-
-    document.getElementById("navAnalysis").addEventListener("click", function(e) {
-        e.preventDefault();
-        const analysisCard = document.querySelector('.selection-card');
-        analysisCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        showToast('Viewing Analysis', 'info');
-    });
-
+        
+        if (navUpcomingRaces) {
+            navUpcomingRaces.addEventListener("click", function(e) {
+                e.preventDefault();
+                const trophyIcon = document.querySelector('.sidebar-widget h3 i.fas.fa-trophy');
+                if (trophyIcon) {
+                    const widget = trophyIcon.closest('.sidebar-widget');
+                    widget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    showToast('Viewing Upcoming Races', 'info');
+                } else {
+                    showToast('Upcoming Races widget not found', 'error');
+                }
+            });
+        }
+        
+        if (navAnalysis) {
+            navAnalysis.addEventListener("click", function(e) {
+                e.preventDefault();
+                const analysisCard = document.querySelector('.selection-card');
+                if (analysisCard) {
+                    analysisCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    showToast('Viewing Analysis', 'info');
+                }
+            });
+        }
+    }
 
     /* ---------------------------------------------------
     CLOUDFLARE ZERO TRUST AUTHENTICATION
     --------------------------------------------------- */
-
-    // Global auth state
     async function checkCloudflareAuth() {
         try {
             console.log("🔐 Checking Cloudflare authentication...");
             
-            // Add timestamp to prevent caching
             const timestamp = new Date().getTime();
-            const response = await fetch(`${workerBase}/auth-status?t=${timestamp}`, {
+            const response = await fetch(`${workerBase}auth-status?t=${timestamp}`, {
                 method: 'GET',
                 credentials: 'include',
                 headers: {
@@ -1778,8 +1547,6 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
                         data: data 
                     };
                 }
-            } else if (response.status === 401) {
-                console.log("❌ Not authenticated (401)");
             }
             
             // Not authenticated
@@ -1804,34 +1571,25 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
         }
     }
 
-    /* ---------------------------------------------------
-    LOGIN/LOGOUT FUNCTIONS
-    --------------------------------------------------- */
     async function loginToCloudflare() {
         try {
             console.log("🔑 Initiating Cloudflare login...");
             
             // Force Cloudflare to show login by requesting a protected endpoint
-            // This should trigger the Cloudflare Access login flow
-            const loginUrl = `${workerBase}/protected-endpoint`;
+            const loginUrl = `${workerBase}protected-endpoint`;
             
-            // Try to access protected endpoint - Cloudflare will redirect to login
             const response = await fetch(loginUrl, {
                 method: 'GET',
                 credentials: 'include',
-                redirect: 'manual' // Don't follow redirects automatically
+                redirect: 'manual'
             });
             
             console.log("Login response status:", response.status);
             
             if (response.status === 0 || response.status === 302) {
-                // Cloudflare is redirecting to login
                 console.log("Cloudflare redirecting to login page");
-                
-                // Show message to user
                 showToast('Redirecting to login page...', 'info');
                 
-                // Force page reload which should trigger Cloudflare login
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);
@@ -1839,7 +1597,6 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
                 return true;
             }
             
-            // If we get here, something unexpected happened
             showToast('Could not initiate login. Please try again.', 'error');
             return false;
             
@@ -1853,15 +1610,10 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
     async function logoutFromCloudflare() {
         try {
             console.log("🚪 Logging out from Cloudflare...");
-            
-            // Cloudflare Access logout - typically redirects to logout endpoint
-            const logoutUrl = `${workerBase}/cdn-cgi/access/logout`;
-            
             showToast('Logging out...', 'info');
             
-            // Redirect to logout URL
             setTimeout(() => {
-                window.location.href = logoutUrl;
+                window.location.href = `${workerBase}logout`;
             }, 500);
             
             return true;
@@ -1873,9 +1625,8 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
         }
     }
 
-
-/* ---------------------------------------------------
-    UPDATE UI BASED ON AUTH STATUS - FIXED VERSION
+    /* ---------------------------------------------------
+    UPDATE UI BASED ON AUTH STATUS
     --------------------------------------------------- */
     async function updateUIForAuthStatus(authResult) {
         const adminLoginBtn = document.getElementById('adminLoginBtn');
@@ -1899,7 +1650,6 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
                 adminLoginBtn.style.color = '#4CAF50';
                 adminLoginBtn.style.fontWeight = '600';
                 adminLoginBtn.style.cursor = 'default';
-                // Remove click event to prevent re-login
                 adminLoginBtn.onclick = null;
                 adminLoginBtn.href = '#';
             }
@@ -1971,34 +1721,15 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
         }
     }
 
-    // Debug function to check headers
-    async function debugHeaders() {
-        try {
-            const response = await fetch(workerBase + "/debug-headers", {
-                method: 'GET',
-                credentials: 'include'
-            });
-            
-            const data = await response.json();
-            console.log("📋 Headers debug:", data);
-            return data;
-        } catch (error) {
-            console.error("Debug failed:", error);
-            return { error: error.message };
-        }
-    }
-
     /* ---------------------------------------------------
     PROTECTED ACTION WRAPPER
     --------------------------------------------------- */
     async function requireAuth(actionName = 'perform this action') {
         if (!isAuthenticated) {
             const authResult = await checkCloudflareAuth();
-            
             if (!authResult.authenticated) {
                 showToast(`Please login to ${actionName}`, 'error');
                 
-                // Ask user if they want to login
                 setTimeout(() => {
                     if (confirm(`Admin access requires authentication. Would you like to login now?`)) {
                         loginToCloudflare();
@@ -2008,102 +1739,230 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
                 return false;
             }
             
-            // Update UI since we just authenticated
             updateUIForAuthStatus(authResult);
         }
         
         return true;
     }
+
     /* ---------------------------------------------------
-    UPDATE EVENT HANDLERS
+    ADMIN PANEL EVENT LISTENERS
     --------------------------------------------------- */
-    // Save button - with auth check
-    saveBtn.addEventListener('click', async function(e) {
-        e.preventDefault();
+    function setupAdminEventListeners() {
+        // Setup event listeners for admin buttons
+        const buttons = [
+            { id: 'hideAdminBtn', handler: () => {
+                const adminPanel = document.getElementById('adminPanel');
+                if (adminPanel) {
+                    adminPanel.style.display = 'none';
+                    showToast('Admin panel hidden', 'info');
+                }
+            }},
+            { id: 'saveBtn', handler: async (e) => {
+                e.preventDefault();
+                const canProceed = await requireAuth('save analysis');
+                if (!canProceed) return;
+                
+                const adminVenue = document.getElementById('adminVenue');
+                const adminDate = document.getElementById('adminDate');
+                const adminRaceNo = document.getElementById('adminRaceNo');
+                const adminAnalysis = document.getElementById('adminAnalysis');
+                
+                if (!adminVenue || !adminDate || !adminRaceNo || !adminAnalysis) return;
+                
+                const venue = adminVenue.value.trim();
+                const date = adminDate.value;
+                const raceNo = adminRaceNo.value.trim();
+                const analysis = adminAnalysis.value.trim();
+                
+                if (!venue || !date || !raceNo || !analysis) {
+                    showToast('Please fill all fields', 'error');
+                    return;
+                }
+                
+                const key = generateKey(venue, date, raceNo);
+                const data = { venue, date, raceNo, analysis };
+                
+                try {
+                    const response = await fetch(workerBase + "save", {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ key, data })
+                    });
+                    
+                    if (response.ok) {
+                        raceAnalyses[key] = data;
+                        showToast('✅ Analysis saved!', 'success');
+                        initializeDropdowns();
+                        document.getElementById('venueSelect').value = venue;
+                        updateDateDropdown();
+                        document.getElementById('raceSelect').value = key;
+                        displayAnalysis(key);
+                    } else {
+                        const error = await response.json();
+                        showToast(`❌ Save failed: ${error.error || 'Unknown error'}`, 'error');
+                    }
+                } catch (error) {
+                    showToast(`❌ Save error: ${error.message}`, 'error');
+                }
+            }},
+            { id: 'updateBtn', handler: async (e) => {
+                e.preventDefault();
+                const canProceed = await requireAuth('update analysis');
+                if (!canProceed) return;
+                
+                const raceSelect = document.getElementById('raceSelect');
+                if (!raceSelect || !raceSelect.value || !raceAnalyses[raceSelect.value]) {
+                    showToast('Select a race first', 'error');
+                    return;
+                }
+                
+                const adminVenue = document.getElementById('adminVenue');
+                const adminDate = document.getElementById('adminDate');
+                const adminRaceNo = document.getElementById('adminRaceNo');
+                const adminAnalysis = document.getElementById('adminAnalysis');
+                
+                if (!adminVenue || !adminDate || !adminRaceNo || !adminAnalysis) return;
+                
+                const venue = adminVenue.value.trim();
+                const date = adminDate.value;
+                const raceNo = adminRaceNo.value.trim();
+                const analysis = adminAnalysis.value.trim();
+                
+                if (!venue || !date || !raceNo || !analysis) {
+                    showToast('Please fill all fields', 'error');
+                    return;
+                }
+                
+                const newKey = generateKey(venue, date, raceNo);
+                const data = { venue, date, raceNo, analysis };
+                
+                try {
+                    const saveResponse = await fetch(workerBase + "save", {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ key: newKey, data })
+                    });
+                    
+                    if (!saveResponse.ok) throw new Error('Failed to save');
+                    
+                    // Delete old entry if key changed
+                    if (raceSelect.value !== newKey) {
+                        await fetch(workerBase + "delete", {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ key: raceSelect.value })
+                        });
+                        delete raceAnalyses[raceSelect.value];
+                    }
+                    
+                    raceAnalyses[newKey] = data;
+                    showToast('✅ Analysis updated!', 'success');
+                    initializeDropdowns();
+                    document.getElementById('raceSelect').value = newKey;
+                    displayAnalysis(newKey);
+                    
+                } catch (error) {
+                    showToast(`❌ Update error: ${error.message}`, 'error');
+                }
+            }},
+            { id: 'deleteBtn', handler: async (e) => {
+                e.preventDefault();
+                const canProceed = await requireAuth('delete analysis');
+                if (!canProceed) return;
+                
+                const raceSelect = document.getElementById('raceSelect');
+                if (!raceSelect || !raceSelect.value || !raceAnalyses[raceSelect.value]) {
+                    showToast('Select a race first', 'error');
+                    return;
+                }
+                
+                if (!confirm('Are you sure you want to delete this analysis?')) {
+                    return;
+                }
+                
+                try {
+                    const response = await fetch(workerBase + "delete", {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ key: raceSelect.value })
+                    });
+                    
+                    if (response.ok) {
+                        delete raceAnalyses[raceSelect.value];
+                        showToast('✅ Analysis deleted!', 'success');
+                        initializeDropdowns();
+                        
+                        // Clear display
+                        const analysisContent = document.getElementById('analysisContent');
+                        if (analysisContent) {
+                            analysisContent.innerHTML = `
+                                <div class="no-analysis">
+                                    <i class="fas fa-racing-helmet"></i>
+                                    <p>Select a race to view analysis</p>
+                                </div>
+                            `;
+                        }
+                        
+                        // Clear form
+                        const adminVenue = document.getElementById('adminVenue');
+                        const adminDate = document.getElementById('adminDate');
+                        const adminRaceNo = document.getElementById('adminRaceNo');
+                        const adminAnalysis = document.getElementById('adminAnalysis');
+                        
+                        if (adminVenue) adminVenue.value = '';
+                        if (adminDate) adminDate.value = today;
+                        if (adminRaceNo) adminRaceNo.value = '';
+                        if (adminAnalysis) adminAnalysis.value = '';
+                        
+                    } else {
+                        const error = await response.json();
+                        showToast(`❌ Delete failed: ${error.error || 'Unknown error'}`, 'error');
+                    }
+                } catch (error) {
+                    showToast(`❌ Delete error: ${error.message}`, 'error');
+                }
+            }},
+            { id: 'clearBtn', handler: () => {
+                const adminVenue = document.getElementById('adminVenue');
+                const adminDate = document.getElementById('adminDate');
+                const adminRaceNo = document.getElementById('adminRaceNo');
+                const adminAnalysis = document.getElementById('adminAnalysis');
+                
+                if (adminVenue) adminVenue.value = '';
+                if (adminDate) adminDate.value = today;
+                if (adminRaceNo) adminRaceNo.value = '';
+                if (adminAnalysis) adminAnalysis.value = '';
+                showToast('Form cleared', 'info');
+            }}
+        ];
         
-        const canProceed = await requireAuth('save analysis');
-        if (!canProceed) return;
-        
-        // Original save logic
-        const venue = adminVenue.value.trim();
-        const date = adminDate.value;
-        const raceNo = adminRaceNo.value.trim();
-        const analysis = adminAnalysis.value.trim();
-        
-        if (!venue || !date || !raceNo || !analysis) {
-            showToast('Please fill all fields', 'error');
-            return;
-        }
-        
-        const key = generateKey(venue, date, raceNo);
-        const data = { venue, date, raceNo, analysis };
-        
-        // Check if already exists
-        if (raceAnalyses[key]) {
-            if (!confirm('Analysis already exists for this race. Update?')) {
-                return;
+        buttons.forEach(buttonConfig => {
+            const button = document.getElementById(buttonConfig.id);
+            if (button) {
+                button.addEventListener('click', buttonConfig.handler);
+            } else {
+                console.warn(`Button ${buttonConfig.id} not found`);
             }
-        }
-        
-        try {
-            // Save to KV
-            await saveToKV(key, data);
-            
-            // Update local state
-            raceAnalyses[key] = data;
-            
-            showToast('✅ Analysis saved to cloud!', 'success');
-            
-            // Refresh UI
-            initializeDropdowns();
-            venueSelect.value = venue;
-            updateDateDropdown();
-            raceSelect.value = key;
-            displayAnalysis(key);
-            
-        } catch (error) {
-            showToast(`❌ Failed to save: ${error.message}`, 'error');
-            console.error("Save failed:", error);
-        }
-    });
+        });
+    }
 
-
-/* ---------------------------------------------------
-    EVENT LISTENERS FOR LOGIN/LOGOUT - SAFE VERSION
-    --------------------------------------------------- */
-/* ---------------------------------------------------
-    EVENT LISTENERS FOR LOGIN/LOGOUT - SAFE VERSION
+    /* ---------------------------------------------------
+    SETUP AUTH EVENT LISTENERS
     --------------------------------------------------- */
     function setupAuthEventListeners() {
-        // Login button - check if element exists
         const adminLoginBtn = document.getElementById('adminLoginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        
         if (adminLoginBtn) {
             adminLoginBtn.addEventListener('click', async (e) => {
                 e.preventDefault();
-                
                 if (!isAuthenticated) {
                     await loginToCloudflare();
                 }
             });
-        } else {
-            console.warn('adminLoginBtn element not found - will retry');
-            // Try again in case DOM isn't ready
-            setTimeout(() => {
-                const retryBtn = document.getElementById('adminLoginBtn');
-                if (retryBtn) {
-                    retryBtn.addEventListener('click', async (e) => {
-                        e.preventDefault();
-                        if (!isAuthenticated) {
-                            await loginToCloudflare();
-                        }
-                    });
-                    console.log('adminLoginBtn event listener added on retry');
-                }
-            }, 100);
         }
         
-        // Logout button - check if element exists
-        const logoutBtn = document.getElementById('logoutBtn');
         if (logoutBtn) {
             logoutBtn.addEventListener('click', async (e) => {
                 e.preventDefault();
@@ -2111,162 +1970,73 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
             });
         }
     }
-    // Update button - with auth check
-    updateBtn.addEventListener('click', async function(e) {
-        e.preventDefault();
-        
-        const canProceed = await requireAuth('update analysis');
-        if (!canProceed) return;
-        
-        // Original update logic
-        const selectedKey = raceSelect.value;
-        if (!selectedKey || !raceAnalyses[selectedKey]) {
-            showToast('Select a race first', 'error');
-            return;
-        }
-        
-        const venue = adminVenue.value.trim();
-        const date = adminDate.value;
-        const raceNo = adminRaceNo.value.trim();
-        const analysis = adminAnalysis.value.trim();
-        
-        if (!venue || !date || !raceNo || !analysis) {
-            showToast('Please fill all fields', 'error');
-            return;
-        }
-        
-        const newKey = generateKey(venue, date, raceNo);
-        const data = { venue, date, raceNo, analysis };
-        
-        try {
-            // Save new entry to KV
-            await saveToKV(newKey, data);
-            
-            // Delete old entry if key changed
-            if (selectedKey !== newKey) {
-                await deleteFromKV(selectedKey);
-            }
-            
-            // Update local state
-            if (selectedKey !== newKey) {
-                delete raceAnalyses[selectedKey];
-            }
-            raceAnalyses[newKey] = data;
-            
-            showToast('✅ Analysis updated in cloud!', 'success');
-            
-            // Refresh UI
-            initializeDropdowns();
-            raceSelect.value = newKey;
-            displayAnalysis(newKey);
-            
-        } catch (error) {
-            showToast(`❌ Failed to update: ${error.message}`, 'error');
-            console.error("Update failed:", error);
-        }
-    });
-
-    // Delete button - with auth check
-    deleteBtn.addEventListener('click', async function(e) {
-        e.preventDefault();
-        
-        const canProceed = await requireAuth('delete analysis');
-        if (!canProceed) return;
-        
-        const selectedKey = raceSelect.value;
-        if (!selectedKey || !raceAnalyses[selectedKey]) {
-            showToast('Select a race first', 'error');
-            return;
-        }
-        
-        if (!confirm('Are you sure you want to delete this analysis?')) {
-            return;
-        }
-        
-        try {
-            // Delete from KV
-            await deleteFromKV(selectedKey);
-            
-            // Delete from local state
-            delete raceAnalyses[selectedKey];
-            
-            showToast('✅ Analysis deleted from cloud!', 'success');
-            
-            // Refresh UI
-            initializeDropdowns();
-            
-            // Clear analysis display
-            analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race to view analysis</p></div>';
-            analysisTitle.textContent = 'Race Analysis';
-            raceInfo.style.display = 'none';
-            
-        } catch (error) {
-            showToast(`❌ Failed to delete: ${error.message}`, 'error');
-            console.error("Delete failed:", error);
-        }
-    });
 
     /* ---------------------------------------------------
-    UPDATE ADMIN PANEL TOGGLE
+    SETUP DROPDOWN EVENT LISTENERS
     --------------------------------------------------- */
-    const adminMenuItem = document.querySelector('.admin-label span');
-    adminMenuItem.addEventListener('click', async () => {
-        const canProceed = await requireAuth('access admin panel');
-        if (!canProceed) return;
+    function setupDropdownListeners() {
+        const venueSelect = document.getElementById("venueSelect");
+        const dateSelect = document.getElementById("dateSelect");
+        const raceSelect = document.getElementById("raceSelect");
         
-        // User is authenticated, show admin panel
-        adminPanel.style.display = 'block';
-        showToast(`Welcome ${currentUser.name || currentUser.email || 'Admin'}!`, 'success');
-    });
+        if (venueSelect) {
+            venueSelect.addEventListener('change', updateDateDropdown);
+        }
+        
+        if (dateSelect) {
+            dateSelect.addEventListener('change', updateRaceDropdown);
+        }
+        
+        if (raceSelect) {
+            raceSelect.addEventListener('change', function() {
+                if (this.value) {
+                    displayAnalysis(this.value);
+                } else {
+                    const analysisContent = document.getElementById("analysisContent");
+                    const analysisTitle = document.getElementById("analysisTitle");
+                    const raceInfo = document.getElementById("raceInfo");
+                    
+                    if (analysisContent) {
+                        analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race to view analysis</p></div>';
+                    }
+                    if (analysisTitle) analysisTitle.textContent = 'Race Analysis';
+                    if (raceInfo) raceInfo.style.display = 'none';
+                }
+            });
+        }
+    }
 
-    // Hide admin panel
-    hideAdminBtn.addEventListener('click', () => {
-        adminPanel.style.display = 'none';
-    });
-
-/* ---------------------------------------------------
+    /* ---------------------------------------------------
     SINGLE DOMContentLoaded LISTENER
     --------------------------------------------------- */
     document.addEventListener('DOMContentLoaded', async function() {
         console.log("🚀 Initializing RaceAnalyst Admin...");
         
-        // ===== 1. MOBILE MENU SETUP =====
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navMenu = document.getElementById('navMenu');
-        const navOverlay = document.getElementById('navOverlay');
-        
-        if (mobileMenuBtn && navMenu && navOverlay) {
-            mobileMenuBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                navMenu.classList.toggle('active');
-                navOverlay.classList.toggle('active');
+        try {
+            // ===== 1. MOBILE MENU SETUP =====
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+            const navOverlay = document.getElementById('navOverlay');
+            
+            if (mobileMenuBtn && navMenu && navOverlay) {
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    navMenu.classList.toggle('active');
+                    navOverlay.classList.toggle('active');
+                    
+                    const icon = mobileMenuBtn.querySelector('i');
+                    if (navMenu.classList.contains('active')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
                 
-                const icon = mobileMenuBtn.querySelector('i');
-                if (navMenu.classList.contains('active')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                    document.body.style.overflow = 'auto';
-                }
-            });
-            
-            navOverlay.addEventListener('click', function() {
-                navMenu.classList.remove('active');
-                navOverlay.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                if (icon) {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-                document.body.style.overflow = 'auto';
-            });
-            
-            const navLinks = navMenu.querySelectorAll('a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
+                navOverlay.addEventListener('click', function() {
                     navMenu.classList.remove('active');
                     navOverlay.classList.remove('active');
                     const icon = mobileMenuBtn.querySelector('i');
@@ -2276,31 +2046,45 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
                     }
                     document.body.style.overflow = 'auto';
                 });
-            });
-            
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-                    navMenu.classList.remove('active');
-                    navOverlay.classList.remove('active');
-                    const icon = mobileMenuBtn.querySelector('i');
-                    if (icon) {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
+                
+                const navLinks = navMenu.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                        navOverlay.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        if (icon) {
+                            icon.classList.remove('fa-times');
+                            icon.classList.add('fa-bars');
+                        }
+                        document.body.style.overflow = 'auto';
+                    });
+                });
+                
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        navOverlay.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        if (icon) {
+                            icon.classList.remove('fa-times');
+                            icon.classList.add('fa-bars');
+                        }
+                        document.body.style.overflow = 'auto';
                     }
-                    document.body.style.overflow = 'auto';
-                }
-            });
-        }
-        
-        // ===== 2. AUTH & ADMIN EVENT LISTENERS =====
-        setupAuthEventListeners();
-        setupAdminEventListeners();
-        
-        // ===== 3. DEBUG INITIAL STATE =====
-        debugAuthStatus();
-        
-        // ===== 4. MAIN INITIALIZATION =====
-        try {
+                });
+            }
+            
+            // ===== 2. SETUP ALL EVENT LISTENERS =====
+            setupAuthEventListeners();
+            setupAdminEventListeners();
+            setupNavigationListeners();
+            setupDropdownListeners();
+            
+            // ===== 3. DEBUG INITIAL STATE =====
+            debugAuthStatus();
+            
+            // ===== 4. MAIN INITIALIZATION =====
             // Check authentication
             console.log("🔐 Checking authentication...");
             const authResult = await checkCloudflareAuth();
@@ -2326,242 +2110,6 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
             showToast("Error: " + error.message, "error");
         }
     });
-
-/* ---------------------------------------------------
-    DEBUG FUNCTIONS
-    --------------------------------------------------- */
-    function debugAuthStatus() {
-        console.log("=== DEBUG AUTH STATUS ===");
-        console.log("isAuthenticated:", isAuthenticated);
-        console.log("currentUser:", currentUser);
-        console.log("adminPanel element:", document.getElementById('adminPanel'));
-        console.log("adminLoginBtn element:", document.getElementById('adminLoginBtn'));
-        console.log("adminPanel style.display:", document.getElementById('adminPanel')?.style.display);
-        console.log("=========================");
-    }
-    
-    // Call this in your initialization
-    document.addEventListener('DOMContentLoaded', async function() {
-        console.log("🚀 Initializing RaceAnalyst Admin...");
-        debugAuthStatus(); // Add this line
-        
-        // ... rest of your initialization code
-    });
-
-/* ---------------------------------------------------
-    ADMIN PANEL EVENT LISTENERS - SAFE VERSION
-    --------------------------------------------------- */
-    function setupAdminEventListeners() {
-        // Array of button IDs to set up
-        const buttonIds = ['hideAdminBtn', 'saveBtn', 'updateBtn', 'deleteBtn', 'clearBtn'];
-        
-        buttonIds.forEach(buttonId => {
-            const button = document.getElementById(buttonId);
-            if (button) {
-                console.log(`Setting up event listener for ${buttonId}`);
-                
-                switch(buttonId) {
-                    case 'hideAdminBtn':
-                        button.addEventListener('click', () => {
-                            const adminPanel = document.getElementById('adminPanel');
-                            if (adminPanel) {
-                                adminPanel.style.display = 'none';
-                                showToast('Admin panel hidden', 'info');
-                            }
-                        });
-                        break;
-                        
-                    case 'saveBtn':
-                        button.addEventListener('click', async (e) => {
-                            e.preventDefault();
-                            const canProceed = await requireAuth('save analysis');
-                            if (!canProceed) return;
-                            
-                            const venue = document.getElementById('adminVenue')?.value.trim();
-                            const date = document.getElementById('adminDate')?.value;
-                            const raceNo = document.getElementById('adminRaceNo')?.value.trim();
-                            const analysis = document.getElementById('adminAnalysis')?.value.trim();
-                            
-                            if (!venue || !date || !raceNo || !analysis) {
-                                showToast('Please fill all fields', 'error');
-                                return;
-                            }
-                            
-                            const key = generateKey(venue, date, raceNo);
-                            const data = { venue, date, raceNo, analysis };
-                            
-                            try {
-                                const response = await fetch(workerBase + "save", {
-                                    method: 'POST',
-                                    headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify({ key, data })
-                                });
-                                
-                                if (response.ok) {
-                                    raceAnalyses[key] = data;
-                                    showToast('✅ Analysis saved!', 'success');
-                                    initializeDropdowns();
-                                    document.getElementById('venueSelect').value = venue;
-                                    updateDateDropdown();
-                                    document.getElementById('raceSelect').value = key;
-                                    displayAnalysis(key);
-                                } else {
-                                    const error = await response.json();
-                                    showToast(`❌ Save failed: ${error.error || 'Unknown error'}`, 'error');
-                                }
-                            } catch (error) {
-                                showToast(`❌ Save error: ${error.message}`, 'error');
-                            }
-                        });
-                        break;
-                        
-                    case 'updateBtn':
-                        button.addEventListener('click', async (e) => {
-                            e.preventDefault();
-                            await handleUpdate();
-                        });
-                        break;
-                        
-                    case 'deleteBtn':
-                        button.addEventListener('click', async (e) => {
-                            e.preventDefault();
-                            await handleDelete();
-                        });
-                        break;
-                        
-                    case 'clearBtn':
-                        button.addEventListener('click', () => {
-                            document.getElementById('adminVenue').value = '';
-                            document.getElementById('adminDate').value = today;
-                            document.getElementById('adminRaceNo').value = '';
-                            document.getElementById('adminAnalysis').value = '';
-                            showToast('Form cleared', 'info');
-                        });
-                        break;
-                }
-            } else {
-                console.warn(`Button ${buttonId} not found`);
-            }
-        });
-    }
-
-    /* ---------------------------------------------------
-    HANDLER FUNCTIONS FOR UPDATE/DELETE
-    --------------------------------------------------- */
-    async function handleUpdate() {
-        const canProceed = await requireAuth('update analysis');
-        if (!canProceed) return;
-        
-        const selectedKey = document.getElementById('raceSelect').value;
-        if (!selectedKey || !raceAnalyses[selectedKey]) {
-            showToast('Select a race first', 'error');
-            return;
-        }
-        
-        const venue = document.getElementById('adminVenue').value.trim();
-        const date = document.getElementById('adminDate').value;
-        const raceNo = document.getElementById('adminRaceNo').value.trim();
-        const analysis = document.getElementById('adminAnalysis').value.trim();
-        
-        if (!venue || !date || !raceNo || !analysis) {
-            showToast('Please fill all fields', 'error');
-            return;
-        }
-        
-        const newKey = generateKey(venue, date, raceNo);
-        const data = { venue, date, raceNo, analysis };
-        
-        try {
-            // Save new entry
-            const saveResponse = await fetch(workerBase + "save", {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ key: newKey, data })
-            });
-            
-            if (!saveResponse.ok) {
-                throw new Error('Failed to save updated analysis');
-            }
-            
-            // Delete old entry if key changed
-            if (selectedKey !== newKey) {
-                await fetch(workerBase + "delete", {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ key: selectedKey })
-                });
-            }
-            
-            // Update local state
-            if (selectedKey !== newKey) {
-                delete raceAnalyses[selectedKey];
-            }
-            raceAnalyses[newKey] = data;
-            
-            showToast('✅ Analysis updated!', 'success');
-            
-            // Refresh UI
-            initializeDropdowns();
-            document.getElementById('raceSelect').value = newKey;
-            displayAnalysis(newKey);
-            
-        } catch (error) {
-            showToast(`❌ Update error: ${error.message}`, 'error');
-        }
-    }
-    
-    async function handleDelete() {
-        const canProceed = await requireAuth('delete analysis');
-        if (!canProceed) return;
-        
-        const selectedKey = document.getElementById('raceSelect').value;
-        if (!selectedKey || !raceAnalyses[selectedKey]) {
-            showToast('Select a race first', 'error');
-            return;
-        }
-        
-        if (!confirm('Are you sure you want to delete this analysis?')) {
-            return;
-        }
-        
-        try {
-            const response = await fetch(workerBase + "delete", {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ key: selectedKey })
-            });
-            
-            if (response.ok) {
-                delete raceAnalyses[selectedKey];
-                showToast('✅ Analysis deleted!', 'success');
-                initializeDropdowns();
-                
-                // Clear display
-                const analysisContent = document.getElementById('analysisContent');
-                if (analysisContent) {
-                    analysisContent.innerHTML = `
-                        <div class="no-analysis">
-                            <i class="fas fa-racing-helmet"></i>
-                            <p>Select a race to view analysis</p>
-                        </div>
-                    `;
-                }
-                
-                // Clear form
-                document.getElementById('adminVenue').value = '';
-                document.getElementById('adminDate').value = today;
-                document.getElementById('adminRaceNo').value = '';
-                document.getElementById('adminAnalysis').value = '';
-                
-            } else {
-                const error = await response.json();
-                showToast(`❌ Delete failed: ${error.error || 'Unknown error'}`, 'error');
-            }
-        } catch (error) {
-            showToast(`❌ Delete error: ${error.message}`, 'error');
-        }
-    }
-
-    </script>
+</script>
 </body>
 </html>
