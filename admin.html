@@ -1170,17 +1170,35 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
     async function loadFromKV() {
         try {
             console.log("📡 Loading from Cloudflare KV...");
-            const response = await fetch(workerBase + "/get-all", {
+            console.log("Auth status for load:", isAuthenticated);
+            
+            // Use different endpoint based on authentication
+            const endpoint = isAuthenticated ? "/get-all" : "/public/get-all";
+            const fetchUrl = workerBase + endpoint;
+            console.log("Fetching URL:", fetchUrl);
+            
+            const response = await fetch(fetchUrl, {
                 method: 'GET',
-                headers: { 'Accept': 'application/json' },
+                headers: { 
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
                 cache: 'no-store'
             });
             
+            console.log("Response status:", response.status);
+            
             if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: Failed to load from KV`);
+                // If public endpoint fails, try admin endpoint (might be accessible)
+                if (!isAuthenticated && response.status === 404) {
+                    console.log("Public endpoint not found, trying admin endpoint...");
+                    return await loadFromKVWithFallback();
+                }
+                throw new Error(`HTTP ${response.status}: Failed to load data`);
             }
             
             const data = await response.json();
+            console.log("✅ KV data loaded:", Object.keys(data).length, "items");
             
             if (data && typeof data === 'object') {
                 raceAnalyses = data;
@@ -1188,19 +1206,62 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
                 console.log(`✅ Loaded ${count} analyses from Cloudflare KV`);
                 return { success: true, count };
             } else {
-                // If KV returns empty or invalid, start with empty object
                 raceAnalyses = {};
                 console.log("✅ KV returned empty, starting fresh");
                 return { success: true, count: 0 };
             }
         } catch (error) {
             console.error("❌ KV load error:", error);
-            // Start with empty object on error
+            
+            // Try fallback to local storage
+            const localData = localStorage.getItem('raceAnalysesBackup');
+            if (localData) {
+                try {
+                    raceAnalyses = JSON.parse(localData);
+                    console.log("📦 Loaded from local storage backup:", Object.keys(raceAnalyses).length);
+                    showToast('Using local backup (cloud error)', 'warning');
+                    return { success: true, count: Object.keys(raceAnalyses).length };
+                } catch (e) {
+                    console.error("Local storage parse error:", e);
+                }
+            }
+            
             raceAnalyses = {};
-            showToast('Using local storage (cloud error)', 'warning');
+            showToast('Using empty storage (cloud error)', 'warning');
             return { success: false, error: error.message };
         }
     }
+
+    // Fallback function
+    async function loadFromKVWithFallback() {
+        try {
+            // Try admin endpoint
+            const response = await fetch(workerBase + "/get-all", {
+                method: 'GET',
+                headers: { 
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                cache: 'no-store'
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                raceAnalyses = data;
+                console.log("✅ Loaded from admin endpoint:", Object.keys(data).length, "items");
+                return { success: true, count: Object.keys(data).length };
+            }
+            
+            // If admin endpoint requires auth, return empty
+            raceAnalyses = {};
+            return { success: true, count: 0 };
+            
+        } catch (error) {
+            raceAnalyses = {};
+            return { success: true, count: 0 };
+        }
+    }
+
     async function saveToKV(key, data) {
         try {
             console.log("💾 Saving to KV:", key);
@@ -1948,13 +2009,17 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
     /* ---------------------------------------------------
     UPDATE UI BASED ON AUTH STATUS
     --------------------------------------------------- */
-    function updateUIForAuthStatus(authResult) {
+/* ---------------------------------------------------
+    UPDATE UI BASED ON AUTH STATUS
+    --------------------------------------------------- */
+    async function updateUIForAuthStatus(authResult) {
         const adminLoginBtn = document.getElementById('adminLoginBtn');
         const logoutItem = document.getElementById('logoutItem');
-        const adminLabel = document.querySelector('.admin-label');
         
         if (authResult.authenticated) {
             // User is authenticated
+            isAuthenticated = true;
+            
             if (adminLoginBtn) {
                 adminLoginBtn.innerHTML = `
                     <i class="fas fa-user-check"></i> 
@@ -1973,10 +2038,17 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
             // Show admin panel automatically if authenticated
             adminPanel.style.display = 'block';
             
+            // Reload data with admin privileges
+            console.log("🔄 Reloading data with admin access...");
+            await loadFromKV();
+            initializeDropdowns();
+            
             showToast(`Welcome ${authResult.user.name || authResult.user.email || 'Admin'}!`, 'success');
             
         } else {
             // User is not authenticated
+            isAuthenticated = false;
+            
             if (adminLoginBtn) {
                 adminLoginBtn.innerHTML = '<i class="fas fa-user-lock"></i> Login as Admin';
                 adminLoginBtn.style.color = '#d4af37';
@@ -1994,8 +2066,10 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
             // Hide admin panel
             adminPanel.style.display = 'none';
             
-            // Show login prompt
-            showToast('Login required for admin access', 'info');
+            // Load data with public access
+            console.log("📖 Loading data with public access...");
+            await loadFromKV();
+            initializeDropdowns();
         }
     }
 
