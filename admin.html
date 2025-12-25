@@ -2379,6 +2379,97 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
             `;
         }
     });
+
+    async function debugAuthResponse() {
+    try {
+        console.log("🔍 FULL AUTH DEBUG...");
+        
+        // Test 1: Check current page URL and cookies
+        console.log("Current URL:", window.location.href);
+        console.log("Cookies enabled:", navigator.cookieEnabled);
+        console.log("Document cookies:", document.cookie);
+        
+        // Test 2: Try to fetch with different options
+        const timestamp = new Date().getTime();
+        const testUrls = [
+            `${workerBase}/auth-status?t=${timestamp}`,
+            `${workerBase}/auth-status?t=${timestamp}&debug=1`,
+            workerBase // root to see if worker is responding
+        ];
+        
+        for (let url of testUrls) {
+            console.log(`\n--- Testing URL: ${url} ---`);
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    credentials: 'include', // Important for sending cookies
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'cors'
+                });
+                
+                console.log(`Status: ${response.status} ${response.statusText}`);
+                console.log("Headers:");
+                response.headers.forEach((value, key) => {
+                    console.log(`  ${key}: ${value}`);
+                });
+                
+                const text = await response.text();
+                console.log("Response length:", text.length);
+                
+                if (text.length < 1000) {
+                    console.log("Response content:", text);
+                } else {
+                    console.log("Response (first 500 chars):", text.substring(0, 500));
+                }
+                
+                // Try to parse as JSON
+                try {
+                    const json = JSON.parse(text);
+                    console.log("Parsed JSON:", JSON.stringify(json, null, 2));
+                } catch(e) {
+                    console.log("Not valid JSON");
+                }
+                
+            } catch (error) {
+                console.error(`Fetch error for ${url}:`, error.message);
+            }
+        }
+        
+        // Test 3: Try a direct Cloudflare Access check
+        console.log("\n--- Checking Cloudflare Access Headers ---");
+        try {
+            const response = await fetch(`${workerBase}/`, {
+                method: 'GET',
+                credentials: 'include'
+            });
+            
+            // Check for specific Cloudflare Access headers
+            const headers = {};
+            for (let [key, value] of response.headers.entries()) {
+                if (key.toLowerCase().includes('cf-access') || 
+                    key.toLowerCase().includes('cf-connecting') ||
+                    key.toLowerCase().includes('authorization')) {
+                    headers[key] = value;
+                }
+            }
+            
+            console.log("Cloudflare related headers:", headers);
+            
+        } catch (error) {
+            console.error("CF Access check failed:", error);
+        }
+        
+        return "Debug complete";
+        
+    } catch (error) {
+        console.error("Debug function error:", error);
+        return { error: error.message };
+    }
+}
     </script>
 </body>
 </html>
