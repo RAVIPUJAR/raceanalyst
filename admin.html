@@ -1575,30 +1575,21 @@
         try {
             console.log("🔑 Initiating Cloudflare login...");
             
-            // Force Cloudflare to show login by requesting a protected endpoint
-            const loginUrl = `${workerBase}protected-endpoint`;
+            // Instead of calling protected-endpoint, just reload with a special parameter
+            // Cloudflare Access will intercept this if not authenticated
             
-            const response = await fetch(loginUrl, {
-                method: 'GET',
-                credentials: 'include',
-                redirect: 'manual'
-            });
+            showToast('Redirecting to login...', 'info');
             
-            console.log("Login response status:", response.status);
+            // Add a parameter to trigger authentication
+            const loginUrl = window.location.origin + '?auth_required=true';
             
-            if (response.status === 0 || response.status === 302) {
-                console.log("Cloudflare redirecting to login page");
-                showToast('Redirecting to login page...', 'info');
-                
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
-                
-                return true;
-            }
+            // Redirect to the same page with auth parameter
+            // Cloudflare will intercept and show login if needed
+            setTimeout(() => {
+                window.location.href = loginUrl;
+            }, 500);
             
-            showToast('Could not initiate login. Please try again.', 'error');
-            return false;
+            return true;
             
         } catch (error) {
             console.error("Login initiation failed:", error);
@@ -1612,8 +1603,11 @@
             console.log("🚪 Logging out from Cloudflare...");
             showToast('Logging out...', 'info');
             
+            // Cloudflare Access logout URL
+            const logoutUrl = `${workerBase}cdn-cgi/access/logout`;
+            
             setTimeout(() => {
-                window.location.href = `${workerBase}logout`;
+                window.location.href = logoutUrl;
             }, 500);
             
             return true;
