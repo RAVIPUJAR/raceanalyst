@@ -995,7 +995,8 @@
         </div>
         
         <!-- Admin Panel (Hidden by Default, Full Width) -->
-        <div class="admin-panel" id="adminPanel">
+        <!-- Admin Panel (Hidden by Default, Full Width) -->
+        <div class="admin-panel" id="adminPanel" style="display: none;">
             <div class="admin-header">
                 <h3 class="admin-title">
                     <i class="fas fa-lock"></i> Admin Panel
@@ -1024,7 +1025,7 @@
             
             <div class="admin-form-group">
                 <label for="adminAnalysis"><i class="fas fa-edit"></i> Analysis Text</label>
-                <textarea id="adminAnalysis" placeholder="Paste your detailed analysis here..."></textarea>
+                <textarea id="adminAnalysis" placeholder="Paste your detailed analysis here..." rows="10"></textarea>
             </div>
             
             <div class="button-group">
@@ -1042,7 +1043,6 @@
                 </button>
             </div>
         </div>
-    </div>
 
     <!-- Professional Footer -->
     <footer>
@@ -2004,52 +2004,74 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
         }
     }
 
-    /* ---------------------------------------------------
-    UPDATE UI BASED ON AUTH STATUS
-    --------------------------------------------------- */
+
 /* ---------------------------------------------------
-    UPDATE UI BASED ON AUTH STATUS
+    UPDATE UI BASED ON AUTH STATUS - FIXED VERSION
     --------------------------------------------------- */
     async function updateUIForAuthStatus(authResult) {
         const adminLoginBtn = document.getElementById('adminLoginBtn');
         const logoutItem = document.getElementById('logoutItem');
+        const adminPanel = document.getElementById('adminPanel');
+        const adminLabel = document.querySelector('.admin-label');
         
         if (authResult.authenticated) {
             // User is authenticated
             isAuthenticated = true;
+            currentUser = authResult.user;
             
+            console.log("✅ User authenticated:", currentUser);
+            
+            // Update login button text
             if (adminLoginBtn) {
                 adminLoginBtn.innerHTML = `
                     <i class="fas fa-user-check"></i> 
-                    ${authResult.user.name || authResult.user.email || 'Admin'}
+                    ${currentUser.name || currentUser.email || 'Admin'}
                 `;
                 adminLoginBtn.style.color = '#4CAF50';
-                adminLoginBtn.removeAttribute('href');
-                adminLoginBtn.onclick = null;
+                adminLoginBtn.style.fontWeight = '600';
                 adminLoginBtn.style.cursor = 'default';
+                // Remove click event to prevent re-login
+                adminLoginBtn.onclick = null;
+                adminLoginBtn.href = '#';
             }
             
+            // Show logout button
             if (logoutItem) {
                 logoutItem.style.display = 'block';
             }
             
-            // Show admin panel automatically if authenticated
-            adminPanel.style.display = 'block';
+            // Show admin panel
+            if (adminPanel) {
+                adminPanel.style.display = 'block';
+                console.log("Admin panel should be visible");
+            }
             
-            // Reload data with admin privileges
-            console.log("🔄 Reloading data with admin access...");
-            await loadFromKV();
-            initializeDropdowns();
+            // Update admin label in navigation
+            if (adminLabel) {
+                const span = adminLabel.querySelector('span');
+                if (span) {
+                    span.innerHTML = `
+                        <i class="fas fa-user-shield"></i> 
+                        ${currentUser.name || currentUser.email || 'Admin'}
+                    `;
+                    span.style.color = '#4CAF50';
+                }
+            }
             
-            showToast(`Welcome ${authResult.user.name || authResult.user.email || 'Admin'}!`, 'success');
+            showToast(`Welcome ${currentUser.name || currentUser.email || 'Admin'}!`, 'success');
             
         } else {
             // User is not authenticated
             isAuthenticated = false;
+            currentUser = null;
             
+            console.log("❌ User not authenticated");
+            
+            // Update login button
             if (adminLoginBtn) {
                 adminLoginBtn.innerHTML = '<i class="fas fa-user-lock"></i> Login as Admin';
                 adminLoginBtn.style.color = '#d4af37';
+                adminLoginBtn.style.fontWeight = '600';
                 adminLoginBtn.href = '#';
                 adminLoginBtn.onclick = async (e) => {
                     e.preventDefault();
@@ -2057,17 +2079,26 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
                 };
             }
             
+            // Hide logout button
             if (logoutItem) {
                 logoutItem.style.display = 'none';
             }
             
             // Hide admin panel
-            adminPanel.style.display = 'none';
+            if (adminPanel) {
+                adminPanel.style.display = 'none';
+            }
             
-            // Load data with public access
-            console.log("📖 Loading data with public access...");
-            await loadFromKV();
-            initializeDropdowns();
+            // Reset admin label
+            if (adminLabel) {
+                const span = adminLabel.querySelector('span');
+                if (span) {
+                    span.innerHTML = '<i class="fas fa-user-lock"></i> Login for Admin';
+                    span.style.color = '#d4af37';
+                }
+            }
+            
+            showToast('Login required for admin access', 'info');
         }
     }
 
@@ -2314,69 +2345,151 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
     UPDATE INITIALIZATION
     --------------------------------------------------- */
     document.addEventListener('DOMContentLoaded', async function() {
-        console.log("🚀 Initializing RaceAnalyst Admin with Cloudflare Auth...");
+        console.log("🚀 Initializing RaceAnalyst Admin...");
         
         try {
             // Set up event listeners
             setupAuthEventListeners();
+            setupAdminEventListeners(); // Add this line
             
-            // First check authentication
+            // Check authentication
+            console.log("🔐 Checking authentication...");
             const authResult = await checkCloudflareAuth();
             
             // Update UI based on auth status
-            updateUIForAuthStatus(authResult);
+            await updateUIForAuthStatus(authResult);
             
-            // Load race analyses from Cloudflare KV
-            const loadResult = await loadFromKV();
+            // Load race analyses
+            console.log("📡 Loading KV data...");
+            await loadFromKV();
             
             // Initialize UI components
             initializeDropdowns();
             createCalendar();
             loadUpcomingRacesFromSheet();
             
-            // Auto-select the first analysis if available
-            if (raceAnalyses && typeof raceAnalyses === 'object') {
-                const allKeys = Object.keys(raceAnalyses);
-                if (allKeys.length > 0) {
-                    allKeys.sort((a, b) => {
-                        const analysisA = raceAnalyses[a];
-                        const analysisB = raceAnalyses[b];
-                        
-                        if (!analysisA || !analysisB || !analysisA.date || !analysisB.date) {
-                            return 0;
-                        }
-                        
-                        return analysisB.date.localeCompare(analysisA.date);
-                    });
-                    
-                    const latestKey = allKeys[0];
-                    const latest = raceAnalyses[latestKey];
-                    
-                    if (latest && latest.venue) {
-                        venueSelect.value = latest.venue;
-                        updateDateDropdown();
-                        raceSelect.value = latestKey;
-                        displayAnalysis(latestKey);
-                    }
-                }
-            }
-            
             console.log("✅ Admin page ready!");
-            console.log("Auth status:", isAuthenticated ? 'Authenticated' : 'Not authenticated');
+            debugAuthStatus(); // Check final state
             
         } catch (error) {
             console.error("Initialization error:", error);
-            showToast("Error loading page: " + error.message, "error");
-            
-            analysisContent.innerHTML = `
-                <div class="no-analysis">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <p>Error loading data</p>
-                    <p style="font-size: 0.9rem; color: #dc3545;">${error.message}</p>
-                </div>
-            `;
+            showToast("Error: " + error.message, "error");
         }
     });
+
+/* ---------------------------------------------------
+    DEBUG FUNCTIONS
+    --------------------------------------------------- */
+    function debugAuthStatus() {
+        console.log("=== DEBUG AUTH STATUS ===");
+        console.log("isAuthenticated:", isAuthenticated);
+        console.log("currentUser:", currentUser);
+        console.log("adminPanel element:", document.getElementById('adminPanel'));
+        console.log("adminLoginBtn element:", document.getElementById('adminLoginBtn'));
+        console.log("adminPanel style.display:", document.getElementById('adminPanel')?.style.display);
+        console.log("=========================");
+    }
+    
+    // Call this in your initialization
+    document.addEventListener('DOMContentLoaded', async function() {
+        console.log("🚀 Initializing RaceAnalyst Admin...");
+        debugAuthStatus(); // Add this line
+        
+        // ... rest of your initialization code
+    });
+
+    /* ---------------------------------------------------
+    ADMIN PANEL EVENT LISTENERS
+    --------------------------------------------------- */
+    function setupAdminEventListeners() {
+        // Hide admin panel button
+        const hideAdminBtn = document.getElementById('hideAdminBtn');
+        if (hideAdminBtn) {
+            hideAdminBtn.addEventListener('click', () => {
+                const adminPanel = document.getElementById('adminPanel');
+                if (adminPanel) {
+                    adminPanel.style.display = 'none';
+                    showToast('Admin panel hidden', 'info');
+                }
+            });
+        } else {
+            console.warn('hideAdminBtn not found');
+        }
+        
+        // Save button
+        const saveBtn = document.getElementById('saveBtn');
+        if (saveBtn) {
+            saveBtn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                
+                const canProceed = await requireAuth('save analysis');
+                if (!canProceed) return;
+                
+                const venue = document.getElementById('adminVenue').value.trim();
+                const date = document.getElementById('adminDate').value;
+                const raceNo = document.getElementById('adminRaceNo').value.trim();
+                const analysis = document.getElementById('adminAnalysis').value.trim();
+                
+                if (!venue || !date || !raceNo || !analysis) {
+                    showToast('Please fill all fields', 'error');
+                    return;
+                }
+                
+                const key = generateKey(venue, date, raceNo);
+                const data = { venue, date, raceNo, analysis };
+                
+                try {
+                    const response = await fetch(workerBase + "save", {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ key, data })
+                    });
+                    
+                    if (response.ok) {
+                        raceAnalyses[key] = data;
+                        showToast('✅ Analysis saved!', 'success');
+                        initializeDropdowns();
+                        venueSelect.value = venue;
+                        updateDateDropdown();
+                        raceSelect.value = key;
+                        displayAnalysis(key);
+                    } else {
+                        const error = await response.json();
+                        showToast(`❌ Save failed: ${error.error || 'Unknown error'}`, 'error');
+                    }
+                } catch (error) {
+                    showToast(`❌ Save error: ${error.message}`, 'error');
+                }
+            });
+        }
+        
+        // Clear button
+        const clearBtn = document.getElementById('clearBtn');
+        if (clearBtn) {
+            clearBtn.addEventListener('click', () => {
+                document.getElementById('adminVenue').value = '';
+                document.getElementById('adminDate').value = today;
+                document.getElementById('adminRaceNo').value = '';
+                document.getElementById('adminAnalysis').value = '';
+                showToast('Form cleared', 'info');
+            });
+        }
+        
+        // Auto-fill form when a race is selected
+        const raceSelect = document.getElementById('raceSelect');
+        if (raceSelect) {
+            raceSelect.addEventListener('change', function() {
+                if (this.value && raceAnalyses[this.value]) {
+                    const analysis = raceAnalyses[this.value];
+                    document.getElementById('adminVenue').value = analysis.venue;
+                    document.getElementById('adminDate').value = analysis.date;
+                    document.getElementById('adminRaceNo').value = analysis.raceNo;
+                    document.getElementById('adminAnalysis').value = analysis.analysis;
+                }
+            });
+        }
+    }
+
     </script>
 </body>
 </html>
