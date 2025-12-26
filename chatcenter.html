@@ -136,7 +136,6 @@
             font-size: 2rem;
             color: #d4af37;
         }
-        
         /* Footer */
         footer {
             background-color: #1a3c34;
@@ -195,7 +194,19 @@
             font-size: 0.9rem;
         }
         
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
         /* ===== HEADER STYLES ===== */
+        /* Header */
         header {
             background-color: #1a3c34;
             color: white;
@@ -336,79 +347,6 @@
             background:#fff;
         }
 
-        /* Admin Panel Styles */
-        .admin-panel {
-            background: #fff8e1;
-            border: 1px solid #ffc107;
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            display: none;
-        }
-        
-        .admin-panel.active {
-            display: block;
-        }
-        
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        
-        .admin-title {
-            font-size: 1.1rem;
-            color: #856404;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .admin-login-btn {
-            background: #d4af37 !important;
-            color: #1a3c34 !important;
-            padding: 0.5rem 1rem !important;
-            font-size: 0.9rem !important;
-        }
-        
-        .admin-login-btn:hover {
-            background: #e6c244 !important;
-        }
-        
-        .admin-logged-in {
-            background: #28a745 !important;
-            color: white !important;
-            padding: 0.5rem 1rem !important;
-            font-size: 0.9rem !important;
-            cursor: default !important;
-        }
-        
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #28a745;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 6px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            display: none;
-            z-index: 1000;
-            animation: slideIn 0.3s ease;
-        }
-        
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
     </style>
 </head>
 
@@ -417,6 +355,7 @@
     <div class="container header-content">
         <div class="logo">
             <div class="logo-icon">
+                <!-- Horse head icon for RaceAnalyst -->
                 <i class="fas fa-horse-head"></i>
             </div>
             <h1>Race<span>Analyst</span></h1>
@@ -428,42 +367,18 @@
 
         <nav class="nav-menu" id="navMenu">
             <ul>
+                <!-- Links matching index.html structure - using href="#" with onclick handlers -->
                 <li><a href="#" onclick="navigateToHome()"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="#" onclick="navigateToRaceCalendar()"><i class="fas fa-calendar-alt"></i> Race Calendar</a></li>
-                <li><a href="https://raceanalyst.pages.dev/chatcenter"><i class="fas fa-comments"></i> Chat Center</a></li>
+                <li><a href="https://raceanalyst.pages.dev/chatcenter" target="_blank"><i class="fas fa-comments"></i> Chat Center</a></li>
                 <li><a href="#" onclick="navigateToAnalysis()"><i class="fas fa-chart-bar"></i> Analysis</a></li>
                 <li><a href="#" onclick="navigateToUpcomingRaces()"><i class="fas fa-flag-checkered"></i> Upcoming Races</a></li>
-                <li id="adminNavItem" style="display: none;">
-                    <a href="#" onclick="navigateToAdmin()" style="color: #d4af37; font-weight: 600;">
-                        <i class="fas fa-user-shield"></i> Admin
-                    </a>
-                </li>
-                <li id="logoutNavItem" style="display: none;">
-                    <a href="#" id="logoutBtn" style="color: #ff6b6b;">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </a>
-                </li>
             </ul>
         </nav>
     </div>
 </header>
 
 <div class="container">
-    <!-- Admin Panel (Shown only when authenticated) -->
-    <div class="admin-panel" id="adminPanel">
-        <div class="admin-header">
-            <div class="admin-title">
-                <i class="fas fa-user-shield"></i> Admin Mode Active
-            </div>
-            <button class="btn-secondary" onclick="hideAdminPanel()" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;">
-                <i class="fas fa-times"></i> Hide
-            </button>
-        </div>
-        <div style="font-size: 0.9rem; color: #856404;">
-            You can delete topics and messages. Admin status: <span id="adminStatus">Active</span>
-        </div>
-    </div>
-
     <!-- Create New Chat Topic -->
     <div class="card">
         <h2 id="newTopicHeader" style="cursor:pointer; display:flex; align-items:center; gap:12px; font-family:'Montserrat'; font-weight:700; font-size:1.35rem; color:#0f2e25; letter-spacing:0.5px;">
@@ -472,11 +387,6 @@
         </h2>
 
         <div id="newTopicContent" style="display:none;">
-            <input type="text" id="userNameInput" placeholder="Your Name" style="margin-bottom:1rem; padding:12px; border:2px solid #e6e6e6; border-radius:6px;">
-            <div id="avatarGrid" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:1rem;">
-                <!-- Avatars will be dynamically loaded here -->
-            </div>
-            <input type="hidden" id="selectedAvatar" value="">
             <input type="text" id="topicTitle" placeholder="Topic Title">
             <textarea id="topicBody" placeholder="Write the first message..." style="min-height:120px;"></textarea>
             <button onclick="createTopic()">
@@ -487,15 +397,19 @@
 
     <!-- Topics List with Expandable Chats -->
     <div class="card" id="topicsCard">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-            <h2 style="font-family:'Montserrat'; font-weight:700; font-size:1.35rem; color:#0f2e25; letter-spacing:0.5px; display:flex; align-items:center; gap:10px;">
-                <i class="fas fa-comments" style="color:#d4af37;"></i>
-                <span style="background:linear-gradient(90deg,#1a3c34,#4d6f61); -webkit-background-clip:text; background-clip:text; color:transparent;">All Chat Topics</span>
-            </h2>
-            
-            <!-- Admin Status Indicator -->
-            <div id="adminStatusIndicator" class="admin-logged-in" style="display: none;">
-                <i class="fas fa-user-check"></i> <span id="adminUserName">Admin</span>
+        <h2 style="font-family:'Montserrat'; font-weight:700; font-size:1.35rem; color:#0f2e25; letter-spacing:0.5px; display:flex; align-items:center; gap:10px;">
+            <i class="fas fa-comments" style="color:#d4af37;"></i>
+            <span style="background:linear-gradient(90deg,#1a3c34,#4d6f61); -webkit-background-clip:text; background-clip:text; color:transparent;">All Chat Topics</span>
+        </h2>
+        
+        <!-- Admin Toggle (Hidden by default) -->
+        <div id="adminPanel" style="display:none; margin-bottom:1rem; padding:1rem; background:#f0f7f4; border-radius:6px;">
+            <div style="display:flex; align-items:center; gap:1rem;">
+                <i class="fas fa-user-shield" style="color:#1a3c34;"></i>
+                <span style="font-weight:600;">Admin Mode Active</span>
+                <button onclick="toggleAdminMode(false)" style="margin-left:auto; padding:0.3rem 0.8rem; background:#c62828; color:white; border:none; border-radius:4px; cursor:pointer;">
+                    Exit Admin
+                </button> 
             </div>
         </div>
         
@@ -529,13 +443,6 @@
         
         <!-- Reply Input -->
         <div style="padding:1rem; border-top:1px solid #eee;">
-            <input type="text" id="replyUserNameInput" placeholder="Your Name" style="margin-bottom:1rem; padding:12px; border:2px solid #e6e6e6; border-radius:6px;">
-
-            <div id="replyAvatarGrid" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:1rem;">
-                <!-- Avatars will be dynamically loaded here -->
-            </div>
-
-            <input type="hidden" id="replySelectedAvatar" value="">
             <textarea id="chatReplyInput" placeholder="Write your reply..." style="width:100%; padding:0.8rem; border:2px solid #e6e6e6; border-radius:6px; min-height:80px; margin-bottom:0.8rem;"></textarea>
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <button onclick="submitChatReply()" style="background:#1a3c34; color:white; border:none; padding:0.6rem 1.2rem; border-radius:6px; cursor:pointer;">
@@ -549,11 +456,31 @@
     </div>
 </div>
 
-<!-- Toast Notification -->
-<div class="toast" id="toast"></div>
+<!-- Hidden Admin Login -->
+<div id="adminLoginOverlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:2000; justify-content:center; align-items:center;">
+    <div style="background:white; padding:2rem; border-radius:12px; width:90%; max-width:400px;">
+        <h3 style="color:#1a3c34; margin-top:0;"><i class="fas fa-user-shield"></i> Admin Login</h3>
+        <p style="color:#666; margin-bottom:1.5rem;">Enter admin password to access delete options.</p>
+        
+        <input type="password" id="adminPassword" placeholder="Admin Password" style="width:100%; padding:0.8rem; border:2px solid #e6e6e6; border-radius:6px; margin-bottom:1rem;">
+        
+        <div style="display:flex; gap:1rem;">
+            <button onclick="attemptAdminLogin()" style="flex:1; background:#1a3c34; color:white; border:none; padding:0.8rem; border-radius:6px; cursor:pointer;">
+                Login
+            </button>
+            <button onclick="closeAdminLogin()" style="flex:1; background:#666; color:white; border:none; padding:0.8rem; border-radius:6px; cursor:pointer;">
+                Cancel
+            </button>
+        </div>
+        
+        <p style="font-size:0.8rem; color:#888; margin-top:1rem; text-align:center;">
+            <i class="fas fa-info-circle"></i> Default password: "raceadmin123" (Change in code)
+        </p>
+    </div>
+</div>
+
 
 <script>
-// Configuration
 const BASE_URL = "https://broad-sound-fdb7.raceanalyst.workers.dev";
 const GET_TOPICS_URL = `${BASE_URL}/chatcenter/get-topics`;
 const SAVE_TOPICS_URL = `${BASE_URL}/chatcenter/save-topics`;
@@ -561,110 +488,11 @@ const SAVE_TOPICS_URL = `${BASE_URL}/chatcenter/save-topics`;
 // State management
 let allTopics = [];
 let currentOpenTopic = null;
-let isAdminAuthenticated = false;
-let currentAdminUser = null;
-let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
+let isAdminMode = false;
+let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}'); // Track user likes
 
-// ===== SIMPLE LOCALSTORAGE-BASED ADMIN DETECTION =====
-function checkLocalStorageAuth() {
-    console.log("🔐 Checking localStorage for admin flag...");
-    
-    const adminFlag = localStorage.getItem('raceanalyst_admin');
-    const adminUserStr = localStorage.getItem('raceanalyst_admin_user');
-    
-    if (adminFlag === 'true' && adminUserStr) {
-        try {
-            const adminUser = JSON.parse(adminUserStr);
-            // Optional 7-day expiry for basic safety
-            if (adminUser.timestamp && (Date.now() - adminUser.timestamp < 7 * 24 * 60 * 60 * 1000)) {
-                isAdminAuthenticated = true;
-                currentAdminUser = {
-                    name: adminUser.name || adminUser.email?.split('@')[0] || 'Admin',
-                    email: adminUser.email || 'admin@raceanalyst.in'
-                };
-                console.log("✅ Admin access granted via localStorage");
-                return { authenticated: true, user: currentAdminUser };
-            } else {
-                console.log("⏰ Admin session expired");
-                clearAdminFlags();
-            }
-        } catch (e) {
-            console.error("Corrupted admin data in localStorage", e);
-            clearAdminFlags();
-        }
-    }
-    
-    isAdminAuthenticated = false;
-    currentAdminUser = null;
-    console.log("❌ No valid admin session");
-    return { authenticated: false };
-}
-
-function clearAdminFlags() {
-    localStorage.removeItem('raceanalyst_admin');
-    localStorage.removeItem('raceanalyst_admin_user');
-}
-
-// Update UI based on localStorage auth status
-function updateUIForAuthStatus(authResult) {
-    const adminPanel = document.getElementById('adminPanel');
-    const adminStatusIndicator = document.getElementById('adminStatusIndicator');
-    const adminUserName = document.getElementById('adminUserName');
-    const adminNavItem = document.getElementById('adminNavItem');
-    const logoutNavItem = document.getElementById('logoutNavItem');
-    
-    if (authResult.authenticated) {
-        // Show admin features
-        if (adminPanel) adminPanel.classList.add('active');
-        if (adminStatusIndicator) {
-            adminStatusIndicator.style.display = 'flex';
-            if (adminUserName) adminUserName.textContent = currentAdminUser.name;
-        }
-        if (adminNavItem) adminNavItem.style.display = 'block';
-        if (logoutNavItem) logoutNavItem.style.display = 'block';
-        
-        showToast(`Admin mode active: ${currentAdminUser.name}`, 'success');
-    } else {
-        // Hide admin features
-        if (adminPanel) adminPanel.classList.remove('active');
-        if (adminStatusIndicator) adminStatusIndicator.style.display = 'none';
-        if (adminNavItem) adminNavItem.style.display = 'none';
-        if (logoutNavItem) logoutNavItem.style.display = 'none';
-    }
-    
-    // Re-render topics to show/hide delete buttons
-    loadTopics();
-}
-
-// Simple logout: just clear localStorage and reload
-function logoutLocally() {
-    if (confirm("Logout from admin mode?")) {
-        clearAdminFlags();
-        showToast('Logged out from admin mode', 'info');
-        window.location.reload();
-    }
-}
-
-// ===== HELPER FUNCTIONS =====
-function showToast(message, type = 'success') {
-    const toast = document.getElementById('toast');
-    if (!toast) return;
-    
-    toast.textContent = message;
-    toast.style.background = type === 'success' ? '#28a745' : 
-                            type === 'error' ? '#dc3545' : 
-                            type === 'info' ? '#17a2b8' : '#28a745';
-    toast.style.display = "block";
-    setTimeout(() => (toast.style.display = "none"), 3000);
-}
-
-function hideAdminPanel() {
-    const adminPanel = document.getElementById('adminPanel');
-    if (adminPanel) {
-        adminPanel.classList.remove('active');
-        showToast('Admin panel hidden', 'info');
-    }
-}
+// Simple admin password (change this in production!)
+const ADMIN_PASSWORD = "raceadmin123";
 
 // ===== NAVIGATION FUNCTIONS =====
 function navigateToHome() {
@@ -687,460 +515,815 @@ function navigateToUpcomingRaces() {
     return false;
 }
 
-function navigateToAdmin() {
-    window.location.href = 'admin.html';
-    return false;
-}
-
-// ===== AVATAR FUNCTIONS =====
-let avatarFiles = [];
-
-async function loadAllAvatars() {
-    try {
-        const res = await fetch('/chatcenter/avatar-list');
-        
-        if (!res.ok) {
-            throw new Error(`Failed to fetch avatars: ${res.status}`);
-        }
-        
-        avatarFiles = await res.json();
-        console.log("Loaded avatars:", avatarFiles);
-        
-        loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
-        loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
-        
-    } catch (err) {
-        console.error("Avatar loading failed:", err);
-        showToast('Could not load avatars', 'error');
-    }
-}
-
-function loadAvatarGrid(gridId, hiddenInputId, className, files) {
-    const grid = document.getElementById(gridId);
-    if (!grid) return;
+// ===== MOBILE MENU =====
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
     
-    let html = "";
-    files.forEach(file => {
-        const src = `chatcenter/avatar/${file}`;
-        html += `<img src="${src}" class="${className}" data-src="${src}" 
-                 style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent; object-fit:cover;">`;
-    });
-    grid.innerHTML = html;
-    
-    // Add click handlers
-    const avatars = grid.querySelectorAll(`.${className}`);
-    avatars.forEach(avatar => {
-        avatar.addEventListener('click', function() {
-            // Clear previous selection
-            avatars.forEach(a => a.style.border = "2px solid transparent");
-            // Highlight selected
-            this.style.border = "2px solid #d4af37";
-            // Save selection
-            document.getElementById(hiddenInputId).value = this.dataset.src;
+    if (mobileMenuBtn && navMenu) {
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navMenu.classList.toggle('active');
+            // Change icon based on state
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         });
-    });
-}
-
-// ===== TOPIC & MESSAGE RENDERING =====
-async function loadTopics() {
-    try {
-        const response = await fetch(GET_TOPICS_URL);
-        if (!response.ok) throw new Error('Failed to load topics');
-        allTopics = await response.json();
         
-        renderTopicsList();
-    } catch (error) {
-        console.error(error);
-        document.getElementById('topicsList').innerHTML = '<p style="color:red;">Failed to load topics.</p>';
-    }
-}
-
-function renderTopicsList() {
-    const container = document.getElementById('topicsList');
-    if (allTopics.length === 0) {
-        container.innerHTML = '<p>No topics yet. Create the first one!</p>';
-        return;
-    }
-    
-    const topicsHtml = allTopics.map(topic => {
-        const totalMessages = (topic.messages?.length || 0) + (topic.messages?.reduce((sum, m) => sum + (m.replies?.length || 0), 0) || 0);
-        return `
-            <div class="topic-item" onclick="openChatThread('${topic.id}')">
-                <div class="topic-title">${topic.title || 'Untitled'}</div>
-                <div class="topic-meta">
-                    by ${topic.user || 'Anonymous'} • ${formatDate(topic.date)} • ${totalMessages} message${totalMessages !== 1 ? 's' : ''}
-                </div>
-                ${isAdminAuthenticated ? `
-                    <button onclick="deleteTopic('${topic.id}'); event.stopPropagation();" 
-                            style="float:right; background:#dc3545; color:white; border:none; padding:4px 8px; border-radius:4px; font-size:0.8rem; margin-top:-30px;">
-                        Delete Topic
-                    </button>
-                ` : ''}
-            </div>
-        `;
-    }).join('');
-    
-    container.innerHTML = topicsHtml;
-}
-
-// Open full chat thread
-function openChatThread(topicId) {
-    currentOpenTopic = allTopics.find(t => t.id === topicId);
-    if (!currentOpenTopic) return;
-    
-    // Header info
-    const totalReplies = currentOpenTopic.messages?.reduce((sum, m) => sum + (m.replies?.length || 0), 0) || 0;
-    const totalMessages = (currentOpenTopic.messages?.length || 0) + totalReplies;
-    const totalLikes = currentOpenTopic.messages?.reduce((sum, m) => {
-        let likes = (m.likes || 0);
-        if (m.replies) likes += m.replies.reduce((s, r) => s + (r.likes || 0), 0);
-        return sum + likes;
-    }, 0) || 0;
-    
-    const headerHtml = `
-        <div>
-            <h3 style="margin:0 0 0.3rem 0; color:white; font-size:1.3rem;">
-                <i class="fas fa-comment-dots" style="margin-right:0.5rem;"></i>
-                ${currentOpenTopic.title || 'Chat Topic'}
-            </h3>
-            <div style="display:flex; gap:1rem; font-size:0.85rem; opacity:0.9; flex-wrap:wrap;">
-                <span><i class="fas fa-user"></i> ${currentOpenTopic.user || 'Anonymous'}</span>
-                <span><i class="fas fa-calendar"></i> ${formatDate(currentOpenTopic.date)}</span>
-                <span><i class="fas fa-comments"></i> ${totalMessages} messages</span>
-                <span><i class="fas fa-heart"></i> ${totalLikes} likes</span>
-            </div>
-        </div>
-    `;
-    
-    document.getElementById("chatTopicTitle").innerHTML = headerHtml;
-    renderChatMessages(currentOpenTopic.messages || []);
-    
-    document.getElementById("chatOverlay").style.display = "flex";
-    document.body.style.overflow = "hidden";
-}
-
-// Render messages with nested replies and admin delete
-function renderChatMessages(messages) {
-    const container = document.getElementById("messagesContainer");
-    
-    if (!messages || messages.length === 0) {
-        container.innerHTML = `
-            <div style="text-align:center; padding:2rem; color:#777;">
-                <i class="fas fa-comment-slash" style="font-size:2.5rem; color:#ccc;"></i>
-                <p>No messages yet. Start the conversation!</p>
-            </div>`;
-        return;
-    }
-    
-    function renderMessage(msg, depth = 0) {
-        const avatar = msg.avatar || "chatcenter/avatar/svg-1.svg";
-        const userLiked = userLikes[msg.id] === true;
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!navMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                navMenu.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+        });
         
-        return `
-            <div style="margin-left:${depth * 30}px; margin-bottom:1rem;">
-                <div style="background:${depth === 0 ? '#f0f7f4' : '#f8f9fa'}; border-radius:8px; padding:1rem;">
-                    <div style="display:flex; gap:12px; align-items:start;">
-                        <img src="${avatar}" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
-                        <div style="flex:1;">
-                            <div style="font-weight:600; color:#1a3c34;">${msg.user || 'Anonymous'}</div>
-                            <div style="font-size:0.85rem; color:#888; margin-bottom:0.5rem;">${formatDate(msg.date)}</div>
-                            <div style="margin-bottom:0.8rem;">${msg.text}</div>
-                            <div style="display:flex; gap:1rem; font-size:0.9rem;">
-                                <button style="background:none; border:none; color:${userLiked ? '#e91e63' : '#666'}; cursor:pointer;"
-                                        ${userLiked ? 'disabled' : `onclick="likeChatMessage('${msg.id}')"`}>
-                                    <i class="fas fa-heart"></i> ${msg.likes || 0}
-                                </button>
-                                <button style="background:none; border:none; color:#666; cursor:pointer;" onclick="showChatReplyBox('${msg.id}')">
-                                    <i class="fas fa-reply"></i> Reply
-                                </button>
-                                ${isAdminAuthenticated ? `
-                                    <button style="background:none; border:none; color:#d11a2a; cursor:pointer;" onclick="deleteChatMessage('${msg.id}')">
-                                        <i class="fas fa-trash"></i> Delete
-                                    </button>
-                                ` : ''}
-                            </div>
-                            
-                            <!-- Nested reply box -->
-                            <div id="chatReplyBox-${msg.id}" style="display:none; margin-top:1rem;">
-                                <input type="text" id="nestedReplyUserNameInput-${msg.id}" placeholder="Your Name" style="width:100%; padding:8px; margin-bottom:8px;">
-                                <div id="nestedReplyAvatarGrid-${msg.id}" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;"></div>
-                                <input type="hidden" id="nestedReplySelectedAvatar-${msg.id}" value="">
-                                <textarea id="chatReplyInput-${msg.id}" placeholder="Your reply..." style="width:100%; min-height:60px; padding:8px;"></textarea>
-                                <div style="margin-top:8px;">
-                                    <button onclick="submitChatNestedReply('${msg.id}')" style="background:#1a3c34; color:white; padding:6px 12px;">Post</button>
-                                    <button onclick="hideChatReplyBox('${msg.id}')" style="background:#666; color:white; margin-left:8px; padding:6px 12px;">Cancel</button>
-                                </div>
-                            </div>
-                            
-                            <!-- Replies -->
-                            <div style="margin-top:1rem;">
-                                ${(msg.replies || []).map(reply => renderMessage(reply, depth + 1)).join('')}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-    
-    container.innerHTML = messages.map(msg => renderMessage(msg)).join('');
-    
-    // Load nested avatar grids after render
-    setTimeout(() => {
-        messages.forEach(msg => {
-            loadAvatarGrid(`nestedReplyAvatarGrid-${msg.id}`, `nestedReplySelectedAvatar-${msg.id}`, 'nestedReplyAvatarOption', avatarFiles);
-            (msg.replies || []).forEach(reply => {
-                loadAvatarGrid(`nestedReplyAvatarGrid-${reply.id}`, `nestedReplySelectedAvatar-${reply.id}`, 'nestedReplyAvatarOption', avatarFiles);
+        // Close menu when clicking a link
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
             });
         });
-    }, 0);
+    }
+});
+
+// ===== CHAT CENTER FUNCTIONS =====
+document.getElementById("newTopicHeader").onclick = function() {
+    const box = document.getElementById("newTopicContent");
+    const icon = document.getElementById("newTopicToggleIcon");
+
+    if (box.style.display === "none") {
+        box.style.display = "block";
+        icon.textContent = "➖";
+    } else {
+        box.style.display = "none";
+        icon.textContent = "➕";
+    }
+};
+
+// Utility functions
+function isNewTopic(topic) {
+    const created = new Date(topic.date);
+    const now = new Date();
+    const diffHours = (now - created) / (1000 * 60 * 60);
+    return diffHours <= 24;
 }
 
+function topicHasUnread(topic) {
+    return topic.unread === true; // set this field when user has unread messages
+}
+
+// 1. Load all chat topics
+async function loadTopics() {
+  try {
+    const topicsList = document.getElementById("topicsList");
+    topicsList.innerHTML = '<div class="loading">Loading topics...</div>';
+    
+    const response = await fetch(GET_TOPICS_URL);
+    
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    
+    let topics = await response.json();
+    
+    // Ensure topics is an array
+    if (!Array.isArray(topics)) {
+      if (topics && Array.isArray(topics.topics)) {
+        topics = topics.topics;
+      } else if (topics && typeof topics === 'object') {
+        topics = Object.values(topics);
+      } else {
+        topics = [];
+      }
+    }
+    
+    allTopics = topics;
+    renderTopics(topics);
+    
+  } catch (error) {
+    console.error("Failed to load topics:", error);
+    const topicsList = document.getElementById("topicsList");
+    topicsList.innerHTML = `
+      <div class="error" style="background:#ffe6e6; padding:1rem; border-radius:6px;">
+        <h3 style="color:#c62828; margin-top:0;">Error Loading Topics</h3>
+        <p>${error.message}</p>
+        <button onclick="loadTopics()" style="margin-top:0.5rem;">Retry</button>
+      </div>
+    `;
+  }
+}
+
+// 2. Render topics list
+function renderTopics(topics) {
+  const container = document.getElementById("topicsList");
+  const pagination = document.getElementById("pagination");
+  
+  if (!topics || topics.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state" style="text-align:center; padding:2rem; color:#666;">
+        <i class="fas fa-comments" style="font-size:2.5rem; color:#ccc; margin-bottom:1rem;"></i>
+        <h3 style="margin:0 0 0.5rem 0;">No Chat Topics Yet</h3>
+        <p style="margin:0 0 1rem 0;">Be the first to start a conversation!</p>
+      </div>
+    `;
+    pagination.innerHTML = '';
+    return;
+  }
+  
+  // Reverse to show newest first
+  const sortedTopics = [...topics].reverse();
+  
+  // Simple pagination
+  const itemsPerPage = 10;
+  const page = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const pageTopics = sortedTopics.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(sortedTopics.length / itemsPerPage);
+  
+  const topicsHtml = pageTopics.map(topic => {
+    const messageCount = topic.messages ? topic.messages.length : 0;
+    const lastMessage = topic.messages && topic.messages.length > 0 
+      ? topic.messages[topic.messages.length - 1] 
+      : null;
+    
+    // Calculate total likes for this topic
+    let totalLikes = 0;
+    let totalReplies = 0;
+    if (topic.messages) {
+      topic.messages.forEach(msg => {
+        totalLikes += msg.likes || 0;
+        if (msg.replies) {
+          totalReplies += msg.replies.length;
+          msg.replies.forEach(reply => {
+            totalLikes += reply.likes || 0;
+          });
+        }
+      });
+    }
+    
+    return `
+    <div class="topic-item topic-row" onclick="openChatThread('${topic.id}')" 
+        style="background:#f8f9fa; border-left:4px solid #d4af37; padding:1.2rem; margin-bottom:1rem; border-radius:6px; cursor:pointer; transition:0.2s;">
+        
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+                <i class="fas fa-comment-dots" style="color:#d4af37;"></i>
+
+                <h3 style="margin:0; color:#1a3c34; font-size:1.15rem;">
+                    ${topic.title}
+                </h3>
+
+                ${isNewTopic(topic) ? `
+                    <span style="background:red; color:white; padding:2px 6px; border-radius:4px; font-size:0.7rem;">NEW</span>
+                ` : ""}
+                
+                ${topicHasUnread(topic) ? `
+                    <span style="width:9px; height:9px; background:green; border-radius:50%; display:inline-block;"></span>
+                ` : ""}
+            </div>
+
+            <!-- Eye Button -->
+            <button onclick="openChatThread('${topic.id}'); event.stopPropagation();"
+                style="display:flex; align-items:center; gap:5px; background:none; border:none; cursor:pointer; color:#1a3c34; font-size:0.95rem; padding:6px; transition:0.2s;">
+                
+                <i class="fas fa-eye view-icon" style="font-size:1.1rem;"></i>
+                <span style="font-size:0.85rem;">View</span>
+            </button>
+        </div>
+
+        <div style="font-size:0.9rem; color:#444; display:flex; gap:1.5rem; flex-wrap:wrap; margin-top:6px;">
+            <span><i class="fas fa-user"></i> ${topic.user || "Anonymous"}</span>
+            <span><i class="fas fa-calendar"></i> ${formatDate(topic.date)}</span>
+            <span><i class="fas fa-comments" style="color:#25D366;"></i> ${messageCount} message${messageCount !== 1 ? 's' : ''}</span>
+            <span><i class="fas fa-heart" style="color:#e91e63;"></i> ${totalLikes} like${totalLikes !== 1 ? 's' : ''}</span>
+            <span><i class="fas fa-clock"></i> Last activity: ${lastMessage ? formatDate(lastMessage.date) : formatDate(topic.date)}</span>
+        </div>
+    </div>
+    `;
+  }).join('');
+  
+  container.innerHTML = topicsHtml;
+  
+  // Render pagination
+  renderPagination(page, totalPages);
+}
+
+// 3. Pagination helper
+function renderPagination(currentPage, totalPages) {
+  const pagination = document.getElementById("pagination");
+  
+  if (totalPages <= 1) {
+    pagination.innerHTML = '';
+    return;
+  }
+  
+  let paginationHtml = '<div style="display:flex; gap:0.5rem; justify-content:center; margin-top:2rem;">';
+  
+  if (currentPage > 1) {
+    paginationHtml += `
+      <button onclick="goToPage(${currentPage - 1})" style="padding:0.5rem 1rem; border:1px solid #ddd; background:white; border-radius:4px; cursor:pointer;">
+        <i class="fas fa-chevron-left"></i> Previous
+      </button>
+    `;
+  }
+  
+  // Show first page, current page, and last page
+  const pagesToShow = [1];
+  if (currentPage > 3) pagesToShow.push('...');
+  for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+    pagesToShow.push(i);
+  }
+  if (currentPage < totalPages - 2) pagesToShow.push('...');
+  if (totalPages > 1) pagesToShow.push(totalPages);
+  
+  pagesToShow.forEach(pageNum => {
+    if (pageNum === '...') {
+      paginationHtml += `<span style="padding:0.5rem 1rem;">...</span>`;
+    } else if (pageNum === currentPage) {
+      paginationHtml += `
+        <button style="padding:0.5rem 1rem; border:none; background:#1a3c34; color:white; border-radius:4px;">
+          ${pageNum}
+        </button>
+      `;
+    } else {
+      paginationHtml += `
+        <button onclick="goToPage(${pageNum})" style="padding:0.5rem 1rem; border:1px solid #ddd; background:white; border-radius:4px; cursor:pointer;">
+          ${pageNum}
+        </button>
+      `;
+    }
+  });
+  
+  if (currentPage < totalPages) {
+    paginationHtml += `
+      <button onclick="goToPage(${currentPage + 1})" style="padding:0.5rem 1rem; border:1px solid #ddd; background:white; border-radius:4px; cursor:pointer;">
+        Next <i class="fas fa-chevron-right"></i>
+      </button>
+    `;
+  }
+  
+  paginationHtml += '</div>';
+  pagination.innerHTML = paginationHtml;
+}
+
+// 4. Open chat thread in overlay
+function openChatThread(topicId) {
+  const topic = allTopics.find(t => t.id === topicId);
+  if (!topic) return;
+  
+  currentOpenTopic = topic;
+  
+  // Calculate stats for this topic
+  let totalLikes = 0;
+  let totalReplies = 0;
+  if (topic.messages) {
+    topic.messages.forEach(msg => {
+      totalLikes += msg.likes || 0;
+      if (msg.replies) {
+        totalReplies += msg.replies.length;
+        msg.replies.forEach(reply => {
+          totalLikes += reply.likes || 0;
+        });
+      }
+    });
+  }
+  
+  const totalMessages = (topic.messages ? topic.messages.length : 0) + totalReplies;
+  
+  // Update chat header with topic details
+  const headerHtml = `
+    <div>
+      <h3 style="margin:0 0 0.3rem 0; color:white; font-size:1.3rem;">
+        <i class="fas fa-comment-dots" style="margin-right:0.5rem;"></i>
+        ${topic.title || 'Chat Topic'}
+      </h3>
+      <div style="display:flex; gap:1rem; font-size:0.85rem; opacity:0.9;">
+        <span><i class="fas fa-user"></i> ${topic.user || 'Anonymous'}</span>
+        <span><i class="fas fa-calendar"></i> ${topic.date ? formatDate(topic.date) : ''}</span>
+        <span><i class="fas fa-comments" style="color:#25D366;"></i> ${totalMessages} messages</span>
+        <span><i class="fas fa-fire"></i> ${totalLikes} likes</span>
+      </div>
+      ${topic.description ? `
+        <div style="margin-top:0.5rem; padding:0.5rem; background:rgba(255,255,255,0.1); border-radius:4px; font-size:0.9rem;">
+          <i class="fas fa-info-circle" style="margin-right:0.3rem;"></i>
+          ${topic.description}
+        </div>
+      ` : ''}
+    </div>
+  `;
+  
+  document.getElementById("chatTopicTitle").innerHTML = headerHtml;
+  document.getElementById("chatMessages").scrollTop = 0;
+  
+  // Render messages
+  renderChatMessages(topic.messages || []);
+  
+  // Show overlay
+  document.getElementById("chatOverlay").style.display = "flex";
+  document.body.style.overflow = "hidden";
+  
+  // Focus on reply input
+  setTimeout(() => {
+    document.getElementById("chatReplyInput").focus();
+  }, 300);
+}
+
+// 5. Render chat messages
+function renderChatMessages(messages) {
+  const container = document.getElementById("messagesContainer");
+  
+  if (!messages || messages.length === 0) {
+    container.innerHTML = `
+      <div style="text-align:center; padding:3rem; color:#666;">
+        <i class="fas fa-comment-slash" style="font-size:2.5rem; color:#ccc; margin-bottom:1rem;"></i>
+        <h3 style="margin:0 0 0.5rem 0;">No Messages Yet</h3>
+        <p>Be the first to post a message!</p>
+      </div>
+    `;
+    return;
+  }
+  
+  container.innerHTML = messages.map(msg => renderChatMessage(msg, 0)).join('');
+}
+
+// 6. Render single chat message with limited actions
+function renderChatMessage(msg, depth = 0) {
+  const messageId = msg.id;
+  const userLiked = userLikes[messageId] === true;
+  
+  // Check if user can like (only one like per message per user)
+  const canLike = !userLiked;
+  
+  return `
+    <div class="chat-message" style="margin-left:${depth * 20}px; margin-bottom:1rem;">
+      <div style="background:${depth === 0 ? '#f0f7f4' : '#f8f9fa'}; border-radius:8px; padding:1rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem;">
+          <div style="font-weight:600; color:#1a3c34;">
+            ${msg.user || 'Anonymous'}
+          </div>
+          <div style="font-size:0.8rem; color:#888;">
+            ${formatDate(msg.date)}
+          </div>
+        </div>
+        
+        <div style="color:#333; margin-bottom:0.8rem;">
+          ${msg.text}
+        </div>
+        
+        <div style="display:flex; gap:1rem; align-items:center;">
+          <!-- Like button -->
+          <button onclick="${canLike ? `likeChatMessage('${messageId}')` : ''}" 
+            ${!canLike ? 'disabled' : ''}
+            style="background:none; border:none; color:${userLiked ? '#e91e63' : '#666'}; cursor:${canLike ? 'pointer' : 'not-allowed'}; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
+            <i class="fas fa-heart" style="color:#e91e63;"></i>
+            ${msg.likes || 0} Like${msg.likes !== 1 ? 's' : ''}
+            ${userLiked ? ' (You liked)' : ''}
+          </button>
+          
+          <!-- Reply button -->
+          <button onclick="showChatReplyBox('${messageId}')" 
+            style="background:none; border:none; color:#666; cursor:pointer; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
+            <i class="fas fa-reply"></i> Reply
+          </button>
+        </div>
+        
+        <!-- Reply input (hidden by default) -->
+        <div id="chatReplyBox-${messageId}" style="display:none; margin-top:1rem;">
+          <textarea id="chatReplyInput-${messageId}" placeholder="Write your reply..." style="width:100%; padding:0.6rem; border:1px solid #ddd; border-radius:4px; min-height:60px; margin-bottom:0.5rem;"></textarea>
+          <div>
+            <button onclick="submitChatNestedReply('${messageId}')" style="background:#1a3c34; color:white; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; font-size:0.85rem;">
+              Post Reply
+            </button>
+            <button onclick="hideChatReplyBox('${messageId}')" style="background:#666; color:white; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; margin-left:0.5rem; font-size:0.85rem;">
+              Cancel
+            </button>
+          </div>
+        </div>
+        
+        <!-- Nested replies -->
+        <div style="margin-top:1rem;">
+          ${(msg.replies || []).map(reply => renderChatMessage(reply, depth + 1)).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// 7. Like a chat message (with one-like restriction)
+async function likeChatMessage(messageId) {
+  if (userLikes[messageId]) {
+    alert("You have already liked this message!");
+    return;
+  }
+  
+  const topic = currentOpenTopic;
+  if (!topic || !topic.messages) return;
+  
+  // Find and update the message
+  function updateMessageLikes(messages) {
+    for (let msg of messages) {
+      if (msg.id === messageId) {
+        msg.likes = (msg.likes || 0) + 1;
+        return true;
+      }
+      if (msg.replies) {
+        if (updateMessageLikes(msg.replies)) return true;
+      }
+    }
+    return false;
+  }
+  
+  if (updateMessageLikes(topic.messages)) {
+    // Record user's like
+    userLikes[messageId] = true;
+    localStorage.setItem('userLikes', JSON.stringify(userLikes));
+    
+    // Update the topic in allTopics
+    const topicIndex = allTopics.findIndex(t => t.id === topic.id);
+    if (topicIndex !== -1) {
+      allTopics[topicIndex] = topic;
+    }
+    
+    // Save to server
+    await saveTopicsToServer();
+    
+    // Re-render messages
+    renderChatMessages(topic.messages);
+  }
+}
+
+// 8. Show/hide reply box in chat
 function showChatReplyBox(messageId) {
-    document.getElementById(`chatReplyBox-${messageId}`).style.display = 'block';
+  document.getElementById(`chatReplyBox-${messageId}`).style.display = 'block';
+  document.getElementById(`chatReplyInput-${messageId}`).focus();
 }
 
 function hideChatReplyBox(messageId) {
-    document.getElementById(`chatReplyBox-${messageId}`).style.display = 'none';
+  document.getElementById(`chatReplyBox-${messageId}`).style.display = 'none';
+  document.getElementById(`chatReplyInput-${messageId}`).value = '';
 }
 
-// Like message
-async function likeChatMessage(messageId) {
-    if (userLikes[messageId]) return;
-    
-    function incrementLikes(messages) {
-        for (let msg of messages) {
-            if (msg.id === messageId) {
-                msg.likes = (msg.likes || 0) + 1;
-                return true;
-            }
-            if (msg.replies && incrementLikes(msg.replies)) return true;
-        }
-        return false;
-    }
-    
-    if (incrementLikes(currentOpenTopic.messages)) {
-        userLikes[messageId] = true;
-        localStorage.setItem('userLikes', JSON.stringify(userLikes));
-        await saveTopicsToServer();
-        renderChatMessages(currentOpenTopic.messages);
-    }
-}
-
-// Submit nested reply
+// 9. Submit nested reply in chat
 async function submitChatNestedReply(parentId) {
-    const textInput = document.getElementById(`chatReplyInput-${parentId}`);
-    const text = textInput.value.trim();
-    if (!text) return alert("Please write a reply");
-    
-    const user = document.getElementById(`nestedReplyUserNameInput-${parentId}`).value.trim() || "Anonymous";
-    const avatar = document.getElementById(`nestedReplySelectedAvatar-${parentId}`).value || "chatcenter/avatar/svg-1.svg";
-    
-    const newReply = {
-        id: Date.now().toString(),
-        user, avatar, text,
-        date: new Date().toLocaleString(),
-        likes: 0,
-        replies: []
-    };
-    
-    function addReply(messages, parentId) {
-        for (let msg of messages) {
-            if (msg.id === parentId) {
-                if (!msg.replies) msg.replies = [];
-                msg.replies.push(newReply);
-                return true;
-            }
-            if (msg.replies && addReply(msg.replies, parentId)) return true;
-        }
-        return false;
+  const input = document.getElementById(`chatReplyInput-${parentId}`);
+  const text = input.value.trim();
+  
+  if (!text) {
+    alert("Please enter a reply");
+    return;
+  }
+  
+  const topic = currentOpenTopic;
+  if (!topic) return;
+  
+  // Find parent message and add reply
+  function addReplyToMessage(messages, parentId, newReply) {
+    for (let msg of messages) {
+      if (msg.id === parentId) {
+        if (!msg.replies) msg.replies = [];
+        msg.replies.push(newReply);
+        return true;
+      }
+      if (msg.replies) {
+        if (addReplyToMessage(msg.replies, parentId, newReply)) return true;
+      }
+    }
+    return false;
+  }
+  
+  const newReply = {
+    id: Date.now().toString(),
+    user: "Anonymous",
+    text: text,
+    date: new Date().toLocaleString(),
+    likes: 0,
+    replies: []
+  };
+  
+  if (addReplyToMessage(topic.messages, parentId, newReply)) {
+    // Update allTopics
+    const topicIndex = allTopics.findIndex(t => t.id === topic.id);
+    if (topicIndex !== -1) {
+      allTopics[topicIndex] = topic;
     }
     
-    if (addReply(currentOpenTopic.messages, parentId)) {
-        await saveTopicsToServer();
-        textInput.value = "";
-        hideChatReplyBox(parentId);
-        renderChatMessages(currentOpenTopic.messages);
-    }
+    // Save to server
+    await saveTopicsToServer();
+    
+    // Clear input and hide box
+    input.value = '';
+    hideChatReplyBox(parentId);
+    
+    // Re-render messages
+    renderChatMessages(topic.messages);
+  }
 }
 
-// Submit main reply
+// 10. Submit main reply in chat
 async function submitChatReply() {
-    const text = document.getElementById("chatReplyInput").value.trim();
-    if (!text) return alert("Please write a reply");
+  const input = document.getElementById("chatReplyInput");
+  const text = input.value.trim();
+  
+  if (!text) {
+    alert("Please enter a reply");
+    return;
+  }
+  
+  const topic = currentOpenTopic;
+  if (!topic) return;
+  
+  if (!topic.messages) topic.messages = [];
+  
+  topic.messages.push({
+    id: Date.now().toString(),
+    user: "Anonymous",
+    text: text,
+    date: new Date().toLocaleString(),
+    likes: 0,
+    replies: []
+  });
+  
+  // Update allTopics
+  const topicIndex = allTopics.findIndex(t => t.id === topic.id);
+  if (topicIndex !== -1) {
+    allTopics[topicIndex] = topic;
+  }
+  
+  // Save to server
+  await saveTopicsToServer();
+  
+  // Clear input
+  input.value = '';
+  
+  // Re-render messages
+  renderChatMessages(topic.messages);
+  
+  // Scroll to bottom
+  setTimeout(() => {
+    document.getElementById("chatMessages").scrollTop = document.getElementById("chatMessages").scrollHeight;
+  }, 100);
+}
+
+// 11. Close chat thread
+function closeChatThread() {
+  document.getElementById("chatOverlay").style.display = "none";
+  document.body.style.overflow = "auto";
+  currentOpenTopic = null;
+  
+  // Reload topics to reflect any changes
+  loadTopics();
+}
+
+// 12. Admin functionality
+function showAdminLogin() {
+  document.getElementById("adminLoginOverlay").style.display = "flex";
+  document.getElementById("adminPassword").focus();
+}
+
+function closeAdminLogin() {
+  document.getElementById("adminLoginOverlay").style.display = "none";
+  document.getElementById("adminPassword").value = "";
+}
+
+function attemptAdminLogin() {
+  const password = document.getElementById("adminPassword").value;
+  
+  if (password === ADMIN_PASSWORD) {
+    localStorage.setItem("isAdmin", "true");
+    document.getElementById("adminPanel").style.display = "block";
+    closeAdminLogin();
+    loadTopics(); // Re-render with delete buttons
+    alert("Admin mode activated");
+  } else {
+    alert("Incorrect password");
+    document.getElementById("adminPassword").value = "";
+    document.getElementById("adminPassword").focus();
+  }
+}
+
+function toggleAdminMode(enable) {
+  isAdminMode = enable;
+  document.getElementById("adminPanel").style.display = enable ? "block" : "none";
+  loadTopics(); // Re-render with/without delete buttons
+}
+
+// 13. Save topics to server
+async function saveTopicsToServer() {
+  try {
+    const response = await fetch(SAVE_TOPICS_URL, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(allTopics)
+    });
     
-    const user = document.getElementById("replyUserNameInput").value.trim() || "Anonymous";
-    const avatar = document.getElementById("replySelectedAvatar").value || "chatcenter/avatar/svg-1.svg";
+    if (!response.ok) {
+      throw new Error(`Save failed: ${response.status}`);
+    }
     
-    const newMessage = {
-        id: Date.now().toString(),
-        user, avatar, text,
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to save topics:", error);
+    alert("Failed to save changes. Please try again.");
+    throw error;
+  }
+}
+
+// 14. Create topic function
+async function createTopic() {
+  const titleInput = document.getElementById("topicTitle");
+  const bodyInput = document.getElementById("topicBody");
+  
+  const title = titleInput.value.trim();
+  const body = bodyInput.value.trim();
+  
+  if (!title || !body) {
+    alert("Please enter both title and message");
+    return;
+  }
+  
+  try {
+    const createBtn = document.querySelector('button[onclick="createTopic()"]');
+    const originalText = createBtn.innerHTML;
+    createBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+    createBtn.disabled = true;
+    
+    // Get current topics
+    const response = await fetch(GET_TOPICS_URL);
+    let topics = await response.json();
+    
+    if (!Array.isArray(topics)) topics = [];
+    
+    // Create new topic
+    const newTopic = {
+      id: Date.now().toString(),
+      title: title,
+      description: body.substring(0, 100) + (body.length > 100 ? '...' : ''),
+      user: "Anonymous",
+      date: new Date().toLocaleString(),
+      messages: [{
+        id: Date.now().toString() + "-msg",
+        user: "Anonymous",
+        text: body,
         date: new Date().toLocaleString(),
         likes: 0,
         replies: []
+      }]
     };
     
-    currentOpenTopic.messages.push(newMessage);
-    await saveTopicsToServer();
+    topics.push(newTopic);
+    allTopics = topics;
     
-    document.getElementById("chatReplyInput").value = "";
-    document.getElementById("replyUserNameInput").value = "";
-    renderChatMessages(currentOpenTopic.messages);
-}
-
-// Close thread
-function closeChatThread() {
-    document.getElementById("chatOverlay").style.display = "none";
-    document.body.style.overflow = "auto";
-    currentOpenTopic = null;
-    loadTopics();
-}
-
-// Delete topic (admin only)
-async function deleteTopic(topicId) {
-    if (!isAdminAuthenticated) {
-        showToast('Admin access required', 'error');
-        return;
-    }
-    if (!confirm("Delete this entire topic?")) return;
-    
-    allTopics = allTopics.filter(t => t.id !== topicId);
-    await saveTopicsToServer();
-    if (currentOpenTopic && currentOpenTopic.id === topicId) closeChatThread();
-    loadTopics();
-    showToast('Topic deleted', 'success');
-}
-
-// Delete message (admin only)
-async function deleteChatMessage(messageId) {
-    if (!isAdminAuthenticated) {
-        showToast('Admin access required', 'error');
-        return;
-    }
-    if (!confirm("Delete this message?")) return;
-    
-    function removeMessage(messages) {
-        return messages.filter(m => {
-            if (m.id === messageId) return false;
-            if (m.replies) m.replies = removeMessage(m.replies);
-            return true;
-        });
-    }
-    
-    currentOpenTopic.messages = removeMessage(currentOpenTopic.messages);
-    await saveTopicsToServer();
-    renderChatMessages(currentOpenTopic.messages);
-    showToast('Message deleted', 'success');
-}
-
-// Save all topics
-async function saveTopicsToServer() {
-    try {
-        const res = await fetch(SAVE_TOPICS_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(allTopics)
-        });
-        if (!res.ok) throw new Error("Save failed");
-    } catch (err) {
-        console.error(err);
-        showToast('Failed to save', 'error');
-    }
-}
-
-// Create new topic
-async function createTopic() {
-    const title = document.getElementById("topicTitle").value.trim();
-    const body = document.getElementById("topicBody").value.trim();
-    const user = document.getElementById("userNameInput").value.trim() || "Anonymous";
-    const avatar = document.getElementById("selectedAvatar").value || "chatcenter/avatar/svg-1.svg";
-    
-    if (!title || !body) return alert("Title and message are required");
-    
-    const firstMessage = {
-        id: Date.now().toString(),
-        user, avatar, text: body,
-        date: new Date().toLocaleString(),
-        likes: 0, replies: []
-    };
-    
-    const newTopic = {
-        id: Date.now().toString(),
-        title, user, avatar,
-        date: new Date().toLocaleString(),
-        messages: [firstMessage]
-    };
-    
-    allTopics.unshift(newTopic);
+    // Save to server
     await saveTopicsToServer();
     
     // Clear form
-    document.getElementById("topicTitle").value = "";
-    document.getElementById("topicBody").value = "";
-    document.getElementById("userNameInput").value = "";
+    titleInput.value = "";
+    bodyInput.value = "";
     
-    showToast('Topic created!', 'success');
+    // Show success and open chat
+    alert("Topic created successfully!");
     loadTopics();
+    
+    // Open the new chat
+    setTimeout(() => {
+      openChatThread(newTopic.id);
+    }, 500);
+    
+  } catch (error) {
+    console.error("Failed to create topic:", error);
+    alert("Error: " + error.message);
+  } finally {
+    const createBtn = document.querySelector('button[onclick="createTopic()"]');
+    if (createBtn) {
+      createBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Create Topic';
+      createBtn.disabled = false;
+    }
+  }
 }
 
-// Utility
+// 15. Delete topic (admin only)
+async function deleteTopic(topicId) {
+  if (!isAdminMode) {
+    showAdminLogin();
+    return;
+  }
+  
+  if (!confirm("Delete this topic and all messages?")) return;
+  
+  try {
+    allTopics = allTopics.filter(topic => topic.id !== topicId);
+    
+    await saveTopicsToServer();
+    
+    // If this topic is open, close it
+    if (currentOpenTopic && currentOpenTopic.id === topicId) {
+      closeChatThread();
+    }
+    
+    alert("Topic deleted");
+    loadTopics();
+  } catch (error) {
+    alert("Failed to delete: " + error.message);
+  }
+}
+
+// 16. Helper functions
 function formatDate(dateString) {
-    try {
-        const date = new Date(dateString);
-        const now = new Date();
-        const diff = now - date;
-        const mins = Math.floor(diff / 60000);
-        if (mins < 60) return `${mins}m ago`;
-        const hours = Math.floor(mins / 60);
-        if (hours < 24) return `${hours}h ago`;
-        const days = Math.floor(hours / 24);
-        if (days < 7) return `${days}d ago`;
-        return date.toLocaleDateString();
-    } catch {
-        return dateString || 'Just now';
-    }
+  if (!dateString) return 'Unknown';
+  
+  try {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return dateString;
+    
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+    
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffDays < 7) return `${diffDays}d ago`;
+    
+    return date.toLocaleDateString();
+  } catch {
+    return dateString;
+  }
 }
 
-// Toggle new topic form
-document.getElementById('newTopicHeader').addEventListener('click', () => {
-    const content = document.getElementById('newTopicContent');
-    const icon = document.getElementById('newTopicToggleIcon');
-    if (content.style.display === 'none' || !content.style.display) {
-        content.style.display = 'block';
-        icon.textContent = '➖';
-    } else {
-        content.style.display = 'none';
-        icon.textContent = '➕';
+function goToPage(pageNumber) {
+  const url = new URL(window.location);
+  url.searchParams.set('page', pageNumber);
+  window.location.href = url.toString();
+}
+
+// 17. Initialize
+window.addEventListener('DOMContentLoaded', () => {
+  console.log("Chat Center initialized");
+  
+  // Load likes from localStorage
+  userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
+  
+  // Add admin button to header
+  const header = document.querySelector(".container .page-title") || document.querySelector("header .container");
+  if (header) {
+    const adminBtn = document.createElement("button");
+    adminBtn.innerHTML = '<i class="fas fa-user-shield"></i> Admin';
+    adminBtn.style.cssText = "background:#d4af37; color:white; border:none; padding:0.5rem 1rem; border-radius:4px; cursor:pointer; margin-left:1rem;";
+    adminBtn.onclick = showAdminLogin;
+    if (localStorage.getItem("isAdmin") === "true") {
+      header.appendChild(adminBtn);
     }
+  }
+  
+  // Load topics
+  loadTopics();
 });
 
-// Mobile menu toggle
-document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-    document.getElementById('navMenu').classList.toggle('active');
-});
+// 18. Global functions
+window.loadTopics = loadTopics;
+window.createTopic = createTopic;
+window.deleteTopic = deleteTopic;
+window.openChatThread = openChatThread;
+window.closeChatThread = closeChatThread;
+window.likeChatMessage = likeChatMessage;
+window.submitChatReply = submitChatReply;
+window.submitChatNestedReply = submitChatNestedReply;
+window.showChatReplyBox = showChatReplyBox;
+window.hideChatReplyBox = hideChatReplyBox;
+window.showAdminLogin = showAdminLogin;
+window.closeAdminLogin = closeAdminLogin;
+window.attemptAdminLogin = attemptAdminLogin;
+window.toggleAdminMode = toggleAdminMode;
+window.goToPage = goToPage;
 
-// Initialize
-window.addEventListener('DOMContentLoaded', async () => {
-    console.log("Chat Center initialized");
-    
-    document.getElementById('logoutBtn')?.addEventListener('click', (e) => {
-        e.preventDefault();
-        logoutLocally();
-    });
-    
-    userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
-    await loadAllAvatars();
-    
-    const authResult = checkLocalStorageAuth();
-    updateUIForAuthStatus(authResult);
-    
-    await loadTopics();
-});
+// Navigation functions
+window.navigateToHome = navigateToHome;
+window.navigateToRaceCalendar = navigateToRaceCalendar;
+window.navigateToAnalysis = navigateToAnalysis;
+window.navigateToUpcomingRaces = navigateToUpcomingRaces;
 </script>
 
-<footer>
-    <div class="container">
-        <div class="footer-content">
+</footer>
+    <footer>
+        <div class="container footer-content">
             <div class="footer-section">
                 <h4>About RaceAnalyst</h4>
                 <p>Your trusted platform for racing analytics, statistics, and insights.</p>
@@ -1166,7 +1349,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         <div class="copyright">
             © 2025 RaceAnalyst. All rights reserved.
         </div>
-    </div>
-</footer>
+    </footer>
 </body>
 </html>
