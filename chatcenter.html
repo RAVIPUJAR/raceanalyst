@@ -370,7 +370,7 @@
                 <!-- Links matching index.html structure - using href="#" with onclick handlers -->
                 <li><a href="#" onclick="navigateToHome()"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="#" onclick="navigateToRaceCalendar()"><i class="fas fa-calendar-alt"></i> Race Calendar</a></li>
-                <li><a href="https://raceanalyst.pages.dev/chatcenter" target="_blank"><i class="fas fa-comments"></i> Chat Center</a></li>
+                <li><a href="https://raceanalyst.pages.dev/chatcenter"><i class="fas fa-comments"></i> Chat Center</a></li>
                 <li><a href="#" onclick="navigateToAnalysis()"><i class="fas fa-chart-bar"></i> Analysis</a></li>
                 <li><a href="#" onclick="navigateToUpcomingRaces()"><i class="fas fa-flag-checkered"></i> Upcoming Races</a></li>
             </ul>
@@ -1003,6 +1003,12 @@ function renderChatMessage(msg, depth = 0) {
             style="background:none; border:none; color:#666; cursor:pointer; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
             <i class="fas fa-reply"></i> Reply
           </button>
+          ${(isAdminMode || msg.user === localStorage.getItem('chatUserName')) ? `
+            <button onclick="deleteChatMessage('${msg.id}')" 
+              style="background:none; border:none; color:#d11a2a; cursor:pointer; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          ` : ''}
         </div>
         <div id="chatReplyBox-${messageId}" style="display:none; margin-top:1rem; padding-left:46px;">
           <input type="text" id="nestedReplyUserNameInput-${messageId}" placeholder="Your Name" 
@@ -1392,6 +1398,30 @@ async function deleteTopic(topicId) {
   } catch (error) {
     alert("Failed to delete: " + error.message);
   }
+}
+
+// Delete a chat message (admin or owner)
+async function deleteChatMessage(messageId) {
+  if (!(isAdminMode || confirm("Delete your message?"))) return;
+
+  const topic = currentOpenTopic;
+  if (!topic || !topic.messages) return;
+
+  function removeMessage(messages, messageId) {
+    return messages.filter(msg => {
+      if (msg.id === messageId) return false;
+      if (msg.replies) msg.replies = removeMessage(msg.replies, messageId);
+      return true;
+    });
+  }
+
+  topic.messages = removeMessage(topic.messages, messageId);
+
+  const topicIndex = allTopics.findIndex(t => t.id === topic.id);
+  if (topicIndex !== -1) allTopics[topicIndex] = topic;
+
+  await saveTopicsToServer();
+  renderChatMessages(topic.messages);
 }
 
 // 16. Helper functions
