@@ -509,8 +509,8 @@ let avatarFiles = [];
 
 async function loadAllAvatars() {
     try {
-        // Use relative path since this is a Pages Function
-        const res = await fetch('/avatar-list');
+        // Use the correct endpoint based on function location
+        const res = await fetch('/chatcenter/avatar-list');
         
         if (!res.ok) {
             throw new Error(`Failed to fetch avatars: ${res.status}`);
@@ -519,13 +519,14 @@ async function loadAllAvatars() {
         avatarFiles = await res.json();
         console.log("Loaded avatars:", avatarFiles);
         
-        // Load avatar grids dynamically
+        // Load avatar grids
         loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
         loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
+        
     } catch (err) {
         console.error("Avatar loading failed:", err);
         // Fallback to default avatars
-        avatarFiles = ['svg-1.svg', 'svg-2.svg', 'svg-3.svg', 'svg-4.svg'];
+        avatarFiles = ['svg-1.svg', 'svg-2.svg'];
         loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
         loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
     }
