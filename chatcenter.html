@@ -972,6 +972,34 @@ function renderTopics(topics) {
     pagination.innerHTML = '';
     return;
   }
+
+  container.innerHTML = ''; // Clear existing topics
+  
+  topics.forEach(topic => {
+    const topicDiv = document.createElement('div');
+    topicDiv.className = 'topic-item';
+    
+    // Step 1: Add the conditional delete button for Admins
+    const deleteBtn = isAdminAuthenticated ? 
+        `<button class="action-btn delete" onclick="deleteTopic(event, '${topic.id}')" title="Delete Topic">
+            <i class="fas fa-trash"></i>
+         </button>` : '';
+
+    topicDiv.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div onclick="openChatThread('${topic.id}')" style="flex:1;">
+                <div class="topic-title">${topic.title}</div>
+                <div class="topic-meta">
+                    <i class="fas fa-user"></i> ${topic.author} • 
+                    <i class="fas fa-clock"></i> ${new Date(topic.timestamp).toLocaleDateString()}
+                </div>
+            </div>
+            ${deleteBtn}
+        </div>
+    `;
+    container.appendChild(topicDiv);
+  });
+}
   
   // Reverse to show newest first
   const sortedTopics = [...topics].reverse();
@@ -1054,7 +1082,7 @@ function renderTopics(topics) {
   
   // Render pagination
   renderPagination(page, totalPages);
-}
+
 
 // 3. Pagination helper
 function renderPagination(currentPage, totalPages) {
@@ -1177,21 +1205,56 @@ function openChatThread(topicId) {
 }
 
 // 5. Render chat messages with admin delete buttons
-function renderChatMessages(messages) {
-  const container = document.getElementById("messagesContainer");
+function renderChatMessage(msg, depth = 0) {
+  const messageId = msg.id;
+  const userLiked = userLikes[messageId] === true;
+  const canLike = !userLiked;
   
-  if (!messages || messages.length === 0) {
-    container.innerHTML = `
-      <div style="text-align:center; padding:3rem; color:#666;">
-        <i class="fas fa-comment-slash" style="font-size:2.5rem; color:#ccc; margin-bottom:1rem;"></i>
-        <h3 style="margin:0 0 0.5rem 0;">No Messages Yet</h3>
-        <p>Be the first to post a message!</p>
-      </div>
-    `;
-    return;
+  // Use local avatar folder, fallback to default local avatar if not present
+  let avatarSrc = msg.avatar;
+  if (!avatarSrc || !avatarSrc.startsWith("chatcenter/avatar/")) {
+    avatarSrc = "chatcenter/avatar/svg-1.svg";
   }
-  
-  container.innerHTML = messages.map(msg => renderChatMessage(msg, 0)).join('');
+
+  // ... (keep avatar grid logic same) ...
+
+  return `
+    <div class="chat-message" style="margin-left:${depth * 20}px; margin-bottom:1rem;">
+      <div style="background:${depth === 0 ? '#f0f7f4' : '#f8f9fa'}; border-radius:8px; padding:1rem;">
+        <div style="display:flex; align-items:flex-start; gap:10px; margin-bottom:0.5rem;">
+          <img src="${avatarSrc}" alt="avatar" style="width:36px; height:36px; border-radius:50%; object-fit:cover;">
+          <div style="flex:1;">
+            <div style="font-weight:600; color:#1a3c34;">${msg.user || 'Anonymous'}</div>
+            <div style="font-size:0.8rem; color:#888;">${formatDate(msg.date)}</div>
+          </div>
+        </div>
+        <div style="color:#333; margin-bottom:0.8rem; padding-left:46px;">${msg.text}</div>
+        <div style="display:flex; gap:1rem; align-items:center; padding-left:46px;">
+          <button onclick="${canLike ? `likeChatMessage('${messageId}')` : ''}" 
+            ${!canLike ? 'disabled' : ''}
+            style="background:none; border:none; color:${userLiked ? '#e91e63' : '#666'}; cursor:${canLike ? 'pointer' : 'not-allowed'}; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
+            <i class="fas fa-heart" style="color:#e91e63;"></i>
+            ${msg.likes || 0} Like${msg.likes !== 1 ? 's' : ''}
+          </button>
+          <button onclick="showChatReplyBox('${messageId}')" 
+            style="background:none; border:none; color:#666; cursor:pointer; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
+            <i class="fas fa-reply"></i> Reply
+          </button>
+          
+          ${isAdminAuthenticated ? `
+            <button onclick="deleteChatMessage('${msg.id}')" 
+              style="background:none; border:none; color:#d11a2a; cursor:pointer; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          ` : ''}
+        </div>
+        
+        <div style="margin-top:1rem;">
+          ${(msg.replies || []).map(reply => renderChatMessage(reply, depth + 1)).join('')}
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 // 6. Render single chat message with admin controls
