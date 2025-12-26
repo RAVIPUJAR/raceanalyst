@@ -494,11 +494,6 @@
                 <span style="background:linear-gradient(90deg,#1a3c34,#4d6f61); -webkit-background-clip:text; background-clip:text; color:transparent;">All Chat Topics</span>
             </h2>
             
-            <!-- Admin Login Button -->
-            <button id="adminLoginBtn" class="admin-login-btn" style="display: none;">
-                <i class="fas fa-user-shield"></i> Admin Login
-            </button>
-            
             <!-- Admin Status Indicator -->
             <div id="adminStatusIndicator" class="admin-logged-in" style="display: none;">
                 <i class="fas fa-user-check"></i> <span id="adminUserName">Admin</span>
@@ -580,7 +575,7 @@ async function checkCloudflareAuth() {
         const timestamp = new Date().getTime();
         const response = await fetch(`${WORKER_BASE}auth-status?t=${timestamp}`, {
             method: 'GET',
-            credentials: 'include',
+            credentials: 'include', // This sends the Cloudflare cookies
             headers: {
                 'Accept': 'application/json'
             }
@@ -612,6 +607,10 @@ async function checkCloudflareAuth() {
         
     } catch (error) {
         console.error("Auth check failed:", error);
+        // Check if it's a CORS/network error (might mean no cookies)
+        if (error.message.includes('CORS') || error.message.includes('Failed to fetch')) {
+            console.log("Network/CORS error - likely no valid auth cookies");
+        }
         return { 
             authenticated: false, 
             user: null, 
@@ -620,33 +619,19 @@ async function checkCloudflareAuth() {
     }
 }
 
-async function loginToCloudflare() {
-    try {
-        console.log("🔑 Redirecting to Cloudflare Access login...");
-        showToast('Redirecting to login...', 'info');
-        
-        // Redirect to the protected endpoint that will trigger Cloudflare Access
-        const protectedUrl = WORKER_BASE + "protected-endpoint";
-        
-        setTimeout(() => {
-            window.location.href = protectedUrl;
-        }, 500);
-        
-        return true;
-        
-    } catch (error) {
-        console.error("Login error:", error);
-        showToast('Login error: ' + error.message, 'error');
-        return false;
-    }
-}
-
 async function logoutFromCloudflare() {
     try {
         console.log("🚪 Logging out from Cloudflare...");
         showToast('Logging out...', 'info');
         
-        // Cloudflare Access logout URL
+        // Clear local state
+        isAdminAuthenticated = false;
+        currentAdminUser = null;
+        
+        // Hide admin UI
+        updateUIForAuthStatus({ authenticated: false, user: null });
+        
+        // Redirect to Cloudflare Access logout
         const logoutUrl = `${WORKER_BASE}cdn-cgi/access/logout`;
         
         setTimeout(() => {
@@ -664,7 +649,6 @@ async function logoutFromCloudflare() {
 
 // ===== UI UPDATE BASED ON AUTH STATUS =====
 async function updateUIForAuthStatus(authResult) {
-    const adminLoginBtn = document.getElementById('adminLoginBtn');
     const adminStatusIndicator = document.getElementById('adminStatusIndicator');
     const adminPanel = document.getElementById('adminPanel');
     const adminNavItem = document.getElementById('adminNavItem');
@@ -687,11 +671,6 @@ async function updateUIForAuthStatus(authResult) {
             adminStatusIndicator.style.display = 'flex';
             document.getElementById('adminUserName').textContent = 
                 currentAdminUser.name || currentAdminUser.email || 'Admin';
-        }
-        
-        // Hide login button
-        if (adminLoginBtn) {
-            adminLoginBtn.style.display = 'none';
         }
         
         // Show admin nav item
@@ -721,11 +700,6 @@ async function updateUIForAuthStatus(authResult) {
         // Hide admin status indicator
         if (adminStatusIndicator) {
             adminStatusIndicator.style.display = 'none';
-        }
-        
-        // Show login button
-        if (adminLoginBtn) {
-            adminLoginBtn.style.display = 'flex';
         }
         
         // Hide admin nav item
@@ -956,7 +930,7 @@ async function loadTopics() {
   }
 }
 
-// 2. Render topics list
+// 2. Render topics list with admin delete buttons
 function renderTopics(topics) {
   const container = document.getElementById("topicsList");
   const pagination = document.getElementById("pagination");
@@ -1020,10 +994,6 @@ function renderTopics(topics) {
 
                 ${isNewTopic(topic) ? `
                     <span style="background:red; color:white; padding:2px 6px; border-radius:4px; font-size:0.7rem;">NEW</span>
-                ` : ""}
-                
-                ${topicHasUnread(topic) ? `
-                    <span style="width:9px; height:9px; background:green; border-radius:50%; display:inline-block;"></span>
                 ` : ""}
             </div>
 
@@ -1210,6 +1180,35 @@ function renderChatMessage(msg, depth = 0) {
     avatarSrc = "chatcenter/avatar/svg-1.svg";
   }
 
+  // Render nested reply avatar grid dynamically
+  setTimeout(() => {
+    const grid = document.getElementById(`nestedReplyAvatarGrid-${messageId}`);
+    if (grid && avatarFiles.length > 0) {
+      let html = "";
+      avatarFiles.forEach(file => {
+        let src = `chatcenter/avatar/${file}`;
+        html += `<img src="${src}" class="nestedReplyAvatarOption" data-parent="${messageId}" 
+                style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">`;
+      });
+      grid.innerHTML = html;
+      
+      // Add click handlers for nested avatars
+      const avatars = grid.querySelectorAll('.nestedReplyAvatarOption');
+      avatars.forEach(avatar => {
+        avatar.addEventListener('click', function() {
+          // Clear border from all avatars in this group
+          avatars.forEach(a => a.style.border = "2px solid transparent");
+          
+          // Highlight selected avatar
+          this.style.border = "2px solid #d4af37";
+          
+          // Save selected avatar
+          document.getElementById(`nestedReplySelectedAvatar-${messageId}`).value = this.src;
+        });
+      });
+    }
+  }, 0);
+
   return `
     <div class="chat-message" style="margin-left:${depth * 20}px; margin-bottom:1rem;">
       <div style="background:${depth === 0 ? '#f0f7f4' : '#f8f9fa'}; border-radius:8px; padding:1rem;">
@@ -1378,6 +1377,10 @@ async function submitChatNestedReply(parentId) {
         if (userInput) userInput.value = "";
         if (avatarInput) avatarInput.value = "";
 
+        // Clear avatar selection
+        const avatars = document.querySelectorAll(`.nestedReplyAvatarOption[data-parent="${parentId}"]`);
+        avatars.forEach(a => a.style.border = "2px solid transparent");
+
         hideChatReplyBox(parentId);
         renderChatMessages(topic.messages);
     }
@@ -1427,6 +1430,7 @@ async function submitChatReply() {
   userInput.value = "";
   avatarInput.value = "";
 
+  // Clear avatar selection
   document.querySelectorAll(".replyAvatarOption").forEach(a => {
     a.style.border = "2px solid transparent";
   });
@@ -1451,15 +1455,13 @@ function closeChatThread() {
 // 12. Delete topic (admin only)
 async function deleteTopic(topicId) {
   if (!isAdminAuthenticated) {
-    showToast('Please login as admin to delete topics', 'error');
+    showToast('Admin access required to delete topics', 'error');
+    // Try to refresh auth status
     const authResult = await checkCloudflareAuth();
+    await updateUIForAuthStatus(authResult);
+    
     if (!authResult.authenticated) {
-      if (confirm('Admin access required. Would you like to login now?')) {
-        await loginToCloudflare();
-      }
-    } else {
-      await updateUIForAuthStatus(authResult);
-      deleteTopic(topicId);
+      showToast('Please login at admin.html first', 'info');
     }
     return;
   }
@@ -1588,6 +1590,7 @@ async function createTopic() {
     if (userInput) userInput.value = "";
     if (avatarInput) avatarInput.value = "";
 
+    // Clear avatar selection
     document.querySelectorAll(".avatarOption").forEach(a => {
         a.style.border = "2px solid transparent";
     });
@@ -1631,11 +1634,7 @@ function goToPage(pageNumber) {
 window.addEventListener('DOMContentLoaded', async () => {
   console.log("Chat Center initialized");
   
-  // Setup event listeners
-  document.getElementById('adminLoginBtn').addEventListener('click', async () => {
-    await loginToCloudflare();
-  });
-  
+  // Setup logout event listener
   document.getElementById('logoutBtn')?.addEventListener('click', async (e) => {
     e.preventDefault();
     await logoutFromCloudflare();
@@ -1647,10 +1646,12 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Load avatars
   await loadAllAvatars();
   
-  // Check authentication status
+  // Check authentication status FIRST
   console.log("Checking authentication status...");
   const authResult = await checkCloudflareAuth();
   await updateUIForAuthStatus(authResult);
+  
+  console.log("Auth status after check:", isAdminAuthenticated ? "Authenticated" : "Not authenticated");
   
   // Load topics
   loadTopics();
