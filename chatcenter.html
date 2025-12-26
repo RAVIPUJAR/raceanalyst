@@ -569,62 +569,31 @@ let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
 
 // ===== CLOUDFLARE AUTHENTICATION FUNCTIONS =====
 // ===== SIMPLE CLOUDFLARE AUTHENTICATION =====
-async function checkCloudflareAuth() {
+async function checkAuth() {
+    console.log("🔐 Checking authentication...");
+
     try {
-        console.log("🔐 Checking authentication...");
-        
-        // SUPER SIMPLE: Just try to access the worker endpoint
-        // Cloudflare Access will automatically handle authentication
-        const response = await fetch(`${WORKER_BASE}?auth-check=true`, {
-            method: 'GET',
-            credentials: 'include', // IMPORTANT: sends cookies
-            headers: {
-                'Accept': 'application/json'
-            }
+        const res = await fetch(`${workerBase}/auth-status`, {
+            method: "GET",
+            credentials: "include"
         });
-        
-        console.log("Auth response status:", response.status);
-        
-        // Status check logic
-        if (response.status === 200) {
-            try {
-                const data = await response.json();
-                // Check for Cloudflare Access headers
-                if (data.authenticated || data.email) {
-                    return { 
-                        authenticated: true, 
-                        user: {
-                            email: data.email || '',
-                            name: data.name || 'Admin'
-                        }
-                    };
-                }
-            } catch {
-                // If JSON parsing fails, but status is 200, we might be authenticated
-                return { authenticated: true, user: { name: 'Admin' } };
-            }
+
+        const data = await res.json();
+        console.log("Auth response:", data);
+
+        if (data.authenticated) {
+            isAdminAuthenticated = true;
+            console.log("✅ Admin authenticated");
+
+            // RE-RENDER TOPICS WITH ADMIN PERMISSIONS
+            await loadTopics();
+        } else {
+            isAdminAuthenticated = false;
+            console.log("❌ Not authenticated (ChatCenter)");
         }
-        
-        // If we get a 403 or 401, user needs to login
-        if (response.status === 401 || response.status === 403) {
-            return { 
-                authenticated: false, 
-                user: null,
-                status: response.status 
-            };
-        }
-        
-        // Default to not authenticated
-        return { authenticated: false, user: null };
-        
+
     } catch (error) {
         console.error("Auth check failed:", error);
-        // Network errors mean we can't check - treat as not authenticated
-        return { 
-            authenticated: false, 
-            user: null, 
-            error: error.message 
-        };
     }
 }
 
@@ -1684,16 +1653,10 @@ window.addEventListener('DOMContentLoaded', async () => {
   
   // Load avatars
   await loadAllAvatars();
-  
-  // Check authentication status FIRST
-  console.log("Checking authentication status...");
-  const authResult = await checkCloudflareAuth();
-  await updateUIForAuthStatus(authResult);
-  
-  console.log("Auth status after check:", isAdminAuthenticated ? "Authenticated" : "Not authenticated");
-  
-  // Load topics
-  loadTopics();
+
+  // Check authentication before loading topics
+  await checkAuth();
+  await loadTopics();
 });
 
 </script>
