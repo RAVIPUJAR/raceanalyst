@@ -136,6 +136,7 @@
             font-size: 2rem;
             color: #d4af37;
         }
+        
         /* Footer */
         footer {
             background-color: #1a3c34;
@@ -194,19 +195,7 @@
             font-size: 0.9rem;
         }
         
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
         /* ===== HEADER STYLES ===== */
-        /* Header */
         header {
             background-color: #1a3c34;
             color: white;
@@ -347,6 +336,80 @@
             background:#fff;
         }
 
+        /* Admin Panel Styles */
+        .admin-panel {
+            background: #fff8e1;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        
+        .admin-panel.active {
+            display: block;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .admin-title {
+            font-size: 1.1rem;
+            color: #856404;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .admin-login-btn {
+            background: #d4af37 !important;
+            color: #1a3c34 !important;
+            padding: 0.5rem 1rem !important;
+            font-size: 0.9rem !important;
+        }
+        
+        .admin-login-btn:hover {
+            background: #e6c244 !important;
+        }
+        
+        .admin-logged-in {
+            background: #28a745 !important;
+            color: white !important;
+            padding: 0.5rem 1rem !important;
+            font-size: 0.9rem !important;
+            cursor: default !important;
+        }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
     </style>
 </head>
 
@@ -355,7 +418,6 @@
     <div class="container header-content">
         <div class="logo">
             <div class="logo-icon">
-                <!-- Horse head icon for RaceAnalyst -->
                 <i class="fas fa-horse-head"></i>
             </div>
             <h1>Race<span>Analyst</span></h1>
@@ -367,18 +429,42 @@
 
         <nav class="nav-menu" id="navMenu">
             <ul>
-                <!-- Links matching index.html structure - using href="#" with onclick handlers -->
                 <li><a href="#" onclick="navigateToHome()"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="#" onclick="navigateToRaceCalendar()"><i class="fas fa-calendar-alt"></i> Race Calendar</a></li>
                 <li><a href="https://raceanalyst.pages.dev/chatcenter"><i class="fas fa-comments"></i> Chat Center</a></li>
                 <li><a href="#" onclick="navigateToAnalysis()"><i class="fas fa-chart-bar"></i> Analysis</a></li>
                 <li><a href="#" onclick="navigateToUpcomingRaces()"><i class="fas fa-flag-checkered"></i> Upcoming Races</a></li>
+                <li id="adminNavItem" style="display: none;">
+                    <a href="#" onclick="navigateToAdmin()" style="color: #d4af37; font-weight: 600;">
+                        <i class="fas fa-user-shield"></i> Admin
+                    </a>
+                </li>
+                <li id="logoutNavItem" style="display: none;">
+                    <a href="#" id="logoutBtn" style="color: #ff6b6b;">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
 </header>
 
 <div class="container">
+    <!-- Admin Panel (Shown only when authenticated) -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <div class="admin-title">
+                <i class="fas fa-user-shield"></i> Admin Mode Active
+            </div>
+            <button class="btn-secondary" onclick="hideAdminPanel()" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;">
+                <i class="fas fa-times"></i> Hide
+            </button>
+        </div>
+        <div style="font-size: 0.9rem; color: #856404;">
+            You can delete topics and messages. Admin status: <span id="adminStatus">Active</span>
+        </div>
+    </div>
+
     <!-- Create New Chat Topic -->
     <div class="card">
         <h2 id="newTopicHeader" style="cursor:pointer; display:flex; align-items:center; gap:12px; font-family:'Montserrat'; font-weight:700; font-size:1.35rem; color:#0f2e25; letter-spacing:0.5px;">
@@ -402,19 +488,20 @@
 
     <!-- Topics List with Expandable Chats -->
     <div class="card" id="topicsCard">
-        <h2 style="font-family:'Montserrat'; font-weight:700; font-size:1.35rem; color:#0f2e25; letter-spacing:0.5px; display:flex; align-items:center; gap:10px;">
-            <i class="fas fa-comments" style="color:#d4af37;"></i>
-            <span style="background:linear-gradient(90deg,#1a3c34,#4d6f61); -webkit-background-clip:text; background-clip:text; color:transparent;">All Chat Topics</span>
-        </h2>
-        
-        <!-- Admin Toggle (Hidden by default) -->
-        <div id="adminPanel" style="display:none; margin-bottom:1rem; padding:1rem; background:#f0f7f4; border-radius:6px;">
-            <div style="display:flex; align-items:center; gap:1rem;">
-                <i class="fas fa-user-shield" style="color:#1a3c34;"></i>
-                <span style="font-weight:600;">Admin Mode Active</span>
-                <button onclick="toggleAdminMode(false)" style="margin-left:auto; padding:0.3rem 0.8rem; background:#c62828; color:white; border:none; border-radius:4px; cursor:pointer;">
-                    Exit Admin
-                </button> 
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h2 style="font-family:'Montserrat'; font-weight:700; font-size:1.35rem; color:#0f2e25; letter-spacing:0.5px; display:flex; align-items:center; gap:10px;">
+                <i class="fas fa-comments" style="color:#d4af37;"></i>
+                <span style="background:linear-gradient(90deg,#1a3c34,#4d6f61); -webkit-background-clip:text; background-clip:text; color:transparent;">All Chat Topics</span>
+            </h2>
+            
+            <!-- Admin Login Button -->
+            <button id="adminLoginBtn" class="admin-login-btn" style="display: none;">
+                <i class="fas fa-user-shield"></i> Admin Login
+            </button>
+            
+            <!-- Admin Status Indicator -->
+            <div id="adminStatusIndicator" class="admin-logged-in" style="display: none;">
+                <i class="fas fa-user-check"></i> <span id="adminUserName">Admin</span>
             </div>
         </div>
         
@@ -468,48 +555,243 @@
     </div>
 </div>
 
-<!-- Hidden Admin Login -->
-<div id="adminLoginOverlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:2000; justify-content:center; align-items:center;">
-    <div style="background:white; padding:2rem; border-radius:12px; width:90%; max-width:400px;">
-        <h3 style="color:#1a3c34; margin-top:0;"><i class="fas fa-user-shield"></i> Admin Login</h3>
-        <p style="color:#666; margin-bottom:1.5rem;">Enter admin password to access delete options.</p>
-        
-        <input type="password" id="adminPassword" placeholder="Admin Password" style="width:100%; padding:0.8rem; border:2px solid #e6e6e6; border-radius:6px; margin-bottom:1rem;">
-        
-        <div style="display:flex; gap:1rem;">
-            <button onclick="attemptAdminLogin()" style="flex:1; background:#1a3c34; color:white; border:none; padding:0.8rem; border-radius:6px; cursor:pointer;">
-                Login
-            </button>
-            <button onclick="closeAdminLogin()" style="flex:1; background:#666; color:white; border:none; padding:0.8rem; border-radius:6px; cursor:pointer;">
-                Cancel
-            </button>
-        </div>
-        
-        <p style="font-size:0.8rem; color:#888; margin-top:1rem; text-align:center;">
-            <i class="fas fa-info-circle"></i> Default password: "raceadmin123" (Change in code)
-        </p>
-    </div>
-</div>
-
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
 
 <script>
+// Configuration
 const BASE_URL = "https://broad-sound-fdb7.raceanalyst.workers.dev";
 const GET_TOPICS_URL = `${BASE_URL}/chatcenter/get-topics`;
 const SAVE_TOPICS_URL = `${BASE_URL}/chatcenter/save-topics`;
+const WORKER_BASE = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
 
 // State management
 let allTopics = [];
 let currentOpenTopic = null;
-let isAdminMode = false;
-let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}'); // Track user likes
+let isAdminAuthenticated = false;
+let currentAdminUser = null;
+let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
 
+// ===== CLOUDFLARE AUTHENTICATION FUNCTIONS =====
+async function checkCloudflareAuth() {
+    try {
+        console.log("🔐 Checking Cloudflare authentication for Chat Center...");
+        
+        const timestamp = new Date().getTime();
+        const response = await fetch(`${WORKER_BASE}auth-status?t=${timestamp}`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        console.log("Auth check status:", response.status);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log("Auth response data:", data);
+            
+            if (data.authenticated) {
+                return { 
+                    authenticated: true, 
+                    user: {
+                        email: data.email,
+                        name: data.name || data.email?.split('@')[0] || 'Admin'
+                    }
+                };
+            }
+        }
+        
+        // Not authenticated
+        return { 
+            authenticated: false, 
+            user: null,
+            status: response.status 
+        };
+        
+    } catch (error) {
+        console.error("Auth check failed:", error);
+        return { 
+            authenticated: false, 
+            user: null, 
+            error: error.message 
+        };
+    }
+}
 
-// ===== REPLY AVATAR SELECTION HANDLER (Dynamic) =====
+async function loginToCloudflare() {
+    try {
+        console.log("🔑 Redirecting to Cloudflare Access login...");
+        showToast('Redirecting to login...', 'info');
+        
+        // Redirect to the protected endpoint that will trigger Cloudflare Access
+        const protectedUrl = WORKER_BASE + "protected-endpoint";
+        
+        setTimeout(() => {
+            window.location.href = protectedUrl;
+        }, 500);
+        
+        return true;
+        
+    } catch (error) {
+        console.error("Login error:", error);
+        showToast('Login error: ' + error.message, 'error');
+        return false;
+    }
+}
+
+async function logoutFromCloudflare() {
+    try {
+        console.log("🚪 Logging out from Cloudflare...");
+        showToast('Logging out...', 'info');
+        
+        // Cloudflare Access logout URL
+        const logoutUrl = `${WORKER_BASE}cdn-cgi/access/logout`;
+        
+        setTimeout(() => {
+            window.location.href = logoutUrl;
+        }, 500);
+        
+        return true;
+        
+    } catch (error) {
+        console.error("Logout failed:", error);
+        showToast('Logout error: ' + error.message, 'error');
+        return false;
+    }
+}
+
+// ===== UI UPDATE BASED ON AUTH STATUS =====
+async function updateUIForAuthStatus(authResult) {
+    const adminLoginBtn = document.getElementById('adminLoginBtn');
+    const adminStatusIndicator = document.getElementById('adminStatusIndicator');
+    const adminPanel = document.getElementById('adminPanel');
+    const adminNavItem = document.getElementById('adminNavItem');
+    const logoutNavItem = document.getElementById('logoutNavItem');
+    
+    if (authResult.authenticated) {
+        // User is authenticated
+        isAdminAuthenticated = true;
+        currentAdminUser = authResult.user;
+        
+        console.log("✅ User authenticated for Chat Center:", currentAdminUser);
+        
+        // Show admin panel
+        if (adminPanel) {
+            adminPanel.classList.add('active');
+        }
+        
+        // Update admin status indicator
+        if (adminStatusIndicator) {
+            adminStatusIndicator.style.display = 'flex';
+            document.getElementById('adminUserName').textContent = 
+                currentAdminUser.name || currentAdminUser.email || 'Admin';
+        }
+        
+        // Hide login button
+        if (adminLoginBtn) {
+            adminLoginBtn.style.display = 'none';
+        }
+        
+        // Show admin nav item
+        if (adminNavItem) {
+            adminNavItem.style.display = 'block';
+        }
+        
+        // Show logout button
+        if (logoutNavItem) {
+            logoutNavItem.style.display = 'block';
+        }
+        
+        showToast(`Welcome ${currentAdminUser.name || currentAdminUser.email || 'Admin'}!`, 'success');
+        
+    } else {
+        // User is not authenticated
+        isAdminAuthenticated = false;
+        currentAdminUser = null;
+        
+        console.log("❌ User not authenticated for Chat Center");
+        
+        // Hide admin panel
+        if (adminPanel) {
+            adminPanel.classList.remove('active');
+        }
+        
+        // Hide admin status indicator
+        if (adminStatusIndicator) {
+            adminStatusIndicator.style.display = 'none';
+        }
+        
+        // Show login button
+        if (adminLoginBtn) {
+            adminLoginBtn.style.display = 'flex';
+        }
+        
+        // Hide admin nav item
+        if (adminNavItem) {
+            adminNavItem.style.display = 'none';
+        }
+        
+        // Hide logout button
+        if (logoutNavItem) {
+            logoutNavItem.style.display = 'none';
+        }
+    }
+}
+
+// ===== HELPER FUNCTIONS =====
+function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    
+    toast.textContent = message;
+    toast.style.background = type === 'success' ? '#28a745' : 
+                            type === 'error' ? '#dc3545' : 
+                            type === 'info' ? '#17a2b8' : '#28a745';
+    toast.style.display = "block";
+    setTimeout(() => (toast.style.display = "none"), 3000);
+}
+
+function hideAdminPanel() {
+    const adminPanel = document.getElementById('adminPanel');
+    if (adminPanel) {
+        adminPanel.classList.remove('active');
+        showToast('Admin panel hidden', 'info');
+    }
+}
+
+// ===== NAVIGATION FUNCTIONS =====
+function navigateToHome() {
+    window.location.href = 'index.html#home';
+    return false;
+}
+
+function navigateToRaceCalendar() {
+    window.location.href = 'index.html#race-calendar';
+    return false;
+}
+
+function navigateToAnalysis() {
+    window.location.href = 'index.html#analysis';
+    return false;
+}
+
+function navigateToUpcomingRaces() {
+    window.location.href = 'index.html#upcoming-races';
+    return false;
+}
+
+function navigateToAdmin() {
+    window.location.href = 'admin.html';
+    return false;
+}
+
+// ===== AVATAR FUNCTIONS =====
 let avatarFiles = [];
 
 async function loadAllAvatars() {
     try {
-        // Use the correct endpoint based on function location
         const res = await fetch('/chatcenter/avatar-list');
         
         if (!res.ok) {
@@ -538,7 +820,6 @@ function loadAvatarGrid(gridId, inputId, optionClass = "replyAvatarOption", avat
     
     let html = "";
     avatarList.forEach(file => {
-        // Use the correct path to avatars
         let src = `chatcenter/avatar/${file}`;
         html += `<img src="${src}" class="${optionClass}" 
                 style="width:40px; height:40px; border-radius:50%; cursor:pointer; 
@@ -548,71 +829,20 @@ function loadAvatarGrid(gridId, inputId, optionClass = "replyAvatarOption", avat
     
     grid.innerHTML = html;
     
-    // ... rest of the click handler code ...
-}
-
-// On DOMContentLoaded, dynamically load both avatar grids (new topic and reply)
-document.addEventListener("DOMContentLoaded", function () {
-    loadAllAvatars();
-});
-
-// ===== NESTED REPLY AVATAR SELECTION HANDLER =====
-document.addEventListener("click", function (event) {
-    if (!event.target.classList.contains("nestedReplyAvatarOption")) return;
-
-    const avatar = event.target;
-    const parentId = avatar.getAttribute("data-parent");
-
-    // All avatars in this nested reply box
-    const avatars = document.querySelectorAll(
-        `.nestedReplyAvatarOption[data-parent="${parentId}"]`
-    );
-
-    // Hidden input for this nested reply
-    const hiddenInput = document.getElementById(`nestedReplySelectedAvatar-${parentId}`);
-
-    // Clear highlight from all avatars
-    avatars.forEach(a => a.style.border = "2px solid transparent");
-
-    // Highlight selected
-    avatar.style.border = "2px solid #d4af37";
-
-    // Save selected avatar
-    hiddenInput.value = avatar.src;
-});
-
-// Helper to get or prompt for user name and cache in localStorage
-function getUserName() {
-  let userName = localStorage.getItem('chatUserName');
-  if (!userName) {
-    userName = prompt("Enter your name:", "Anonymous") || "Anonymous";
-    localStorage.setItem('chatUserName', userName);
-  }
-  return userName;
-}
-
-// Simple admin password (change this in production!)
-const ADMIN_PASSWORD = "raceadmin123";
-
-// ===== NAVIGATION FUNCTIONS =====
-function navigateToHome() {
-    window.location.href = 'index.html#home';
-    return false;
-}
-
-function navigateToRaceCalendar() {
-    window.location.href = 'index.html#race-calendar';
-    return false;
-}
-
-function navigateToAnalysis() {
-    window.location.href = 'index.html#analysis';
-    return false;
-}
-
-function navigateToUpcomingRaces() {
-    window.location.href = 'index.html#upcoming-races';
-    return false;
+    // Add click handlers for avatar selection
+    const avatars = grid.querySelectorAll('.' + optionClass);
+    avatars.forEach(avatar => {
+        avatar.addEventListener('click', function() {
+            // Clear border from all avatars
+            avatars.forEach(a => a.style.border = "2px solid transparent");
+            
+            // Highlight selected avatar
+            this.style.border = "2px solid #d4af37";
+            
+            // Save selected avatar
+            document.getElementById(inputId).value = this.src;
+        });
+    });
 }
 
 // ===== MOBILE MENU =====
@@ -624,7 +854,6 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenuBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             navMenu.classList.toggle('active');
-            // Change icon based on state
             const icon = mobileMenuBtn.querySelector('i');
             if (navMenu.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
@@ -685,7 +914,7 @@ function isNewTopic(topic) {
 }
 
 function topicHasUnread(topic) {
-    return topic.unread === true; // set this field when user has unread messages
+    return topic.unread === true;
 }
 
 // 1. Load all chat topics
@@ -798,7 +1027,7 @@ function renderTopics(topics) {
                 ` : ""}
             </div>
 
-            <!-- Eye Button -->
+            <!-- View Button -->
             <button onclick="openChatThread('${topic.id}'); event.stopPropagation();"
                 style="display:flex; align-items:center; gap:5px; background:none; border:none; cursor:pointer; color:#1a3c34; font-size:0.95rem; padding:6px; transition:0.2s;">
                 
@@ -813,6 +1042,13 @@ function renderTopics(topics) {
             <span><i class="fas fa-comments" style="color:#25D366;"></i> ${messageCount} message${messageCount !== 1 ? 's' : ''}</span>
             <span><i class="fas fa-heart" style="color:#e91e63;"></i> ${totalLikes} like${totalLikes !== 1 ? 's' : ''}</span>
             <span><i class="fas fa-clock"></i> Last activity: ${lastMessage ? formatDate(lastMessage.date) : formatDate(topic.date)}</span>
+            
+            ${isAdminAuthenticated ? `
+                <button onclick="deleteTopic('${topic.id}'); event.stopPropagation();" 
+                    style="background:#dc3545; color:white; border:none; padding:0.2rem 0.5rem; border-radius:4px; font-size:0.8rem; cursor:pointer;">
+                    <i class="fas fa-trash"></i> Delete Topic
+                </button>
+            ` : ''}
         </div>
     </div>
     `;
@@ -944,7 +1180,7 @@ function openChatThread(topicId) {
   }, 300);
 }
 
-// 5. Render chat messages
+// 5. Render chat messages with admin delete buttons
 function renderChatMessages(messages) {
   const container = document.getElementById("messagesContainer");
   
@@ -962,23 +1198,17 @@ function renderChatMessages(messages) {
   container.innerHTML = messages.map(msg => renderChatMessage(msg, 0)).join('');
 }
 
-// 6. Render single chat message with avatars and user names
+// 6. Render single chat message with admin controls
 function renderChatMessage(msg, depth = 0) {
   const messageId = msg.id;
   const userLiked = userLikes[messageId] === true;
   const canLike = !userLiked;
+  
   // Use local avatar folder, fallback to default local avatar if not present
   let avatarSrc = msg.avatar;
-  // If avatar is not set or not a local file, use default local avatar
   if (!avatarSrc || !avatarSrc.startsWith("chatcenter/avatar/")) {
     avatarSrc = "chatcenter/avatar/svg-1.svg";
   }
-
-  setTimeout(() => {
-    if (typeof renderNestedReplyAvatarGrid === "function") {
-      renderNestedReplyAvatarGrid(messageId);
-    }
-  }, 0);
 
   return `
     <div class="chat-message" style="margin-left:${depth * 20}px; margin-bottom:1rem;">
@@ -1003,7 +1233,7 @@ function renderChatMessage(msg, depth = 0) {
             style="background:none; border:none; color:#666; cursor:pointer; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
             <i class="fas fa-reply"></i> Reply
           </button>
-          ${((isAdminMode || localStorage.getItem("isAdmin") === "true") || msg.user === localStorage.getItem('chatUserName')) ? `
+          ${isAdminAuthenticated ? `
             <button onclick="deleteChatMessage('${msg.id}')" 
               style="background:none; border:none; color:#d11a2a; cursor:pointer; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
               <i class="fas fa-trash"></i> Delete
@@ -1038,16 +1268,7 @@ function renderChatMessage(msg, depth = 0) {
   `;
 }
 
-// Dynamically render the nested reply avatar grid for a given messageId
-function renderNestedReplyAvatarGrid(messageId) {
-  const grid = document.getElementById(`nestedReplyAvatarGrid-${messageId}`);
-  if (!grid) return;
-  grid.innerHTML = avatarFiles.map(file =>
-    `<img src="chatcenter/avatar/${file}" class="nestedReplyAvatarOption" data-parent="${messageId}" style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">`
-  ).join('');
-}
-
-// 7. Like a chat message (with one-like restriction)
+// 7. Like a chat message
 async function likeChatMessage(messageId) {
   if (userLikes[messageId]) {
     alert("You have already liked this message!");
@@ -1101,9 +1322,7 @@ function hideChatReplyBox(messageId) {
   document.getElementById(`chatReplyInput-${messageId}`).value = '';
 }
 
-// 9. Submit nested reply in chat (with user name and avatar)
-// 9. Submit nested reply in chat (with user name and avatar)
-// 9. Submit nested reply in chat (with user name and avatar)
+// 9. Submit nested reply in chat
 async function submitChatNestedReply(parentId) {
     const input = document.getElementById(`chatReplyInput-${parentId}`);
     const text = input.value.trim();
@@ -1113,21 +1332,16 @@ async function submitChatNestedReply(parentId) {
         return;
     }
 
-    // Get name + avatar from NESTED reply inputs
     const userInput = document.getElementById(`nestedReplyUserNameInput-${parentId}`);
-    const avatarInput = document.getElementById(`nestedReplySelectedAvatar-${parentId}`);
-
     const user = (userInput?.value.trim()) || "Anonymous";
+    
+    const avatarInput = document.getElementById(`nestedReplySelectedAvatar-${parentId}`);
     const avatarSelected = (avatarInput?.value.trim()) || "";
-
-    // Avatar fallback (local default)
-    const avatar = avatarSelected ||
-        "chatcenter/avatar/svg-1.svg";
+    const avatar = avatarSelected || "chatcenter/avatar/svg-1.svg";
 
     const topic = currentOpenTopic;
     if (!topic) return;
 
-    // Helper to add nested reply to correct message
     function addReplyToMessage(messages, parentId, newReply) {
         for (let msg of messages) {
             if (msg.id === parentId) {
@@ -1153,36 +1367,23 @@ async function submitChatNestedReply(parentId) {
     };
 
     if (addReplyToMessage(topic.messages, parentId, newReply)) {
-        // Update topic in allTopics
         const topicIndex = allTopics.findIndex(t => t.id === topic.id);
         if (topicIndex !== -1) {
             allTopics[topicIndex] = topic;
         }
 
-        // Save to server
         await saveTopicsToServer();
 
-        // Clear nested reply inputs
         input.value = "";
         if (userInput) userInput.value = "";
         if (avatarInput) avatarInput.value = "";
 
-        // Clear avatar highlights for this nested box
-        const nestedAvatars = document.querySelectorAll(
-            `.nestedReplyAvatarOption[data-parent="${parentId}"]`
-        );
-        nestedAvatars.forEach(a => a.style.border = "2px solid transparent");
-
-        // Hide reply box
         hideChatReplyBox(parentId);
-
-        // Re-render messages
         renderChatMessages(topic.messages);
     }
 }
 
-// 10. Submit main reply in chat (with user name and avatar)
-// 10. Submit main reply in chat (with user name and avatar)
+// 10. Submit main reply in chat
 async function submitChatReply() {
   const input = document.getElementById("chatReplyInput");
   const text = input.value.trim();
@@ -1191,8 +1392,7 @@ async function submitChatReply() {
   const avatarInput = document.getElementById("replySelectedAvatar");
 
   const user = userInput.value.trim() || "Anonymous";
-  const avatar = avatarInput.value.trim() ||
-      "chatcenter/avatar/svg-1.svg";
+  const avatar = avatarInput.value.trim() || "chatcenter/avatar/svg-1.svg";
 
   if (!text) {
     alert("Please enter a reply");
@@ -1216,30 +1416,23 @@ async function submitChatReply() {
 
   topic.messages.push(newMessage);
 
-  // Update allTopics
   const topicIndex = allTopics.findIndex(t => t.id === topic.id);
   if (topicIndex !== -1) {
     allTopics[topicIndex] = topic;
   }
 
-  // Save to server
   await saveTopicsToServer();
 
-  // Clear inputs
   input.value = "";
-  // Optional: keep name for next reply
-  // userInput.value = "";
+  userInput.value = "";
   avatarInput.value = "";
 
-  // Remove highlight from avatars
   document.querySelectorAll(".replyAvatarOption").forEach(a => {
     a.style.border = "2px solid transparent";
   });
 
-  // Re-render messages
   renderChatMessages(topic.messages);
 
-  // Scroll to bottom
   setTimeout(() => {
     const chatBox = document.getElementById("chatMessages");
     chatBox.scrollTop = chatBox.scrollHeight;
@@ -1252,43 +1445,71 @@ function closeChatThread() {
   document.body.style.overflow = "auto";
   currentOpenTopic = null;
   
-  // Reload topics to reflect any changes
   loadTopics();
 }
 
-// 12. Admin functionality
-function showAdminLogin() {
-  document.getElementById("adminLoginOverlay").style.display = "flex";
-  document.getElementById("adminPassword").focus();
-}
-
-function closeAdminLogin() {
-  document.getElementById("adminLoginOverlay").style.display = "none";
-  document.getElementById("adminPassword").value = "";
-}
-
-function attemptAdminLogin() {
-  const password = document.getElementById("adminPassword").value;
+// 12. Delete topic (admin only)
+async function deleteTopic(topicId) {
+  if (!isAdminAuthenticated) {
+    showToast('Please login as admin to delete topics', 'error');
+    const authResult = await checkCloudflareAuth();
+    if (!authResult.authenticated) {
+      if (confirm('Admin access required. Would you like to login now?')) {
+        await loginToCloudflare();
+      }
+    } else {
+      await updateUIForAuthStatus(authResult);
+      deleteTopic(topicId);
+    }
+    return;
+  }
   
-  if (password === ADMIN_PASSWORD) {
-    localStorage.setItem("isAdmin", "true");
-    isAdminMode = true;
-    document.getElementById("adminPanel").style.display = "block";
-    document.getElementById("adminPanel").style.display = "block";
-    closeAdminLogin();
-    loadTopics(); // Re-render with delete buttons
-    alert("Admin mode activated");
-  } else {
-    alert("Incorrect password");
-    document.getElementById("adminPassword").value = "";
-    document.getElementById("adminPassword").focus();
+  if (!confirm("Are you sure you want to delete this topic and all messages?")) return;
+  
+  try {
+    allTopics = allTopics.filter(topic => topic.id !== topicId);
+    
+    await saveTopicsToServer();
+    
+    if (currentOpenTopic && currentOpenTopic.id === topicId) {
+      closeChatThread();
+    }
+    
+    showToast('Topic deleted successfully', 'success');
+    loadTopics();
+  } catch (error) {
+    showToast('Failed to delete: ' + error.message, 'error');
   }
 }
 
-function toggleAdminMode(enable) {
-  isAdminMode = enable;
-  document.getElementById("adminPanel").style.display = enable ? "block" : "none";
-  loadTopics(); // Re-render with/without delete buttons
+// Delete a chat message (admin only)
+async function deleteChatMessage(messageId) {
+  if (!isAdminAuthenticated) {
+    showToast('Admin access required to delete messages', 'error');
+    return;
+  }
+
+  if (!confirm("Delete this message?")) return;
+
+  const topic = currentOpenTopic;
+  if (!topic || !topic.messages) return;
+
+  function removeMessage(messages, messageId) {
+    return messages.filter(msg => {
+      if (msg.id === messageId) return false;
+      if (msg.replies) msg.replies = removeMessage(msg.replies, messageId);
+      return true;
+    });
+  }
+
+  topic.messages = removeMessage(topic.messages, messageId);
+
+  const topicIndex = allTopics.findIndex(t => t.id === topic.id);
+  if (topicIndex !== -1) allTopics[topicIndex] = topic;
+
+  await saveTopicsToServer();
+  renderChatMessages(topic.messages);
+  showToast('Message deleted', 'success');
 }
 
 // 13. Save topics to server
@@ -1307,13 +1528,12 @@ async function saveTopicsToServer() {
     return await response.json();
   } catch (error) {
     console.error("Failed to save topics:", error);
-    alert("Failed to save changes. Please try again.");
+    showToast('Failed to save changes', 'error');
     throw error;
   }
 }
 
 // 14. Create topic function
-// Create a new topic (with user + avatar)
 async function createTopic() {
     const titleInput = document.getElementById("topicTitle");
     const title = titleInput.value.trim();
@@ -1326,7 +1546,6 @@ async function createTopic() {
 
     const user = (userInput?.value.trim()) || "Anonymous";
     const avatarSelected = (avatarInput?.value.trim()) || "";
-
     const avatar = avatarSelected || "chatcenter/avatar/svg-1.svg";
 
     if (!title) {
@@ -1352,7 +1571,7 @@ async function createTopic() {
     const newTopic = {
         id: Date.now().toString(),
         title: title,
-        content: "",  // no standalone content, everything is now a message
+        content: "",
         user: user,
         avatar: avatar,
         date: new Date().toLocaleString(),
@@ -1373,60 +1592,11 @@ async function createTopic() {
         a.style.border = "2px solid transparent";
     });
 
+    showToast('Topic created successfully', 'success');
     loadTopics();
 }
 
-// 15. Delete topic (admin only)
-async function deleteTopic(topicId) {
-  if (!isAdminMode) {
-    showAdminLogin();
-    return;
-  }
-  
-  if (!confirm("Delete this topic and all messages?")) return;
-  
-  try {
-    allTopics = allTopics.filter(topic => topic.id !== topicId);
-    
-    await saveTopicsToServer();
-    
-    // If this topic is open, close it
-    if (currentOpenTopic && currentOpenTopic.id === topicId) {
-      closeChatThread();
-    }
-    
-    alert("Topic deleted");
-    loadTopics();
-  } catch (error) {
-    alert("Failed to delete: " + error.message);
-  }
-}
-
-// Delete a chat message (admin or owner)
-async function deleteChatMessage(messageId) {
-  if (!(isAdminMode || confirm("Delete your message?"))) return;
-
-  const topic = currentOpenTopic;
-  if (!topic || !topic.messages) return;
-
-  function removeMessage(messages, messageId) {
-    return messages.filter(msg => {
-      if (msg.id === messageId) return false;
-      if (msg.replies) msg.replies = removeMessage(msg.replies, messageId);
-      return true;
-    });
-  }
-
-  topic.messages = removeMessage(topic.messages, messageId);
-
-  const topicIndex = allTopics.findIndex(t => t.id === topic.id);
-  if (topicIndex !== -1) allTopics[topicIndex] = topic;
-
-  await saveTopicsToServer();
-  renderChatMessages(topic.messages);
-}
-
-// 16. Helper functions
+// 15. Helper functions
 function formatDate(dateString) {
   if (!dateString) return 'Unknown';
   
@@ -1457,35 +1627,36 @@ function goToPage(pageNumber) {
   window.location.href = url.toString();
 }
 
-// 17. Initialize
-window.addEventListener('DOMContentLoaded', () => {
+// 16. Initialize
+window.addEventListener('DOMContentLoaded', async () => {
   console.log("Chat Center initialized");
-  if (localStorage.getItem("isAdmin") === "true") {
-      isAdminMode = true;
-      const adminPanel = document.getElementById("adminPanel");
-      if (adminPanel) adminPanel.style.display = "block";
-  }
+  
+  // Setup event listeners
+  document.getElementById('adminLoginBtn').addEventListener('click', async () => {
+    await loginToCloudflare();
+  });
+  
+  document.getElementById('logoutBtn')?.addEventListener('click', async (e) => {
+    e.preventDefault();
+    await logoutFromCloudflare();
+  });
   
   // Load likes from localStorage
   userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
   
-  // Add admin button to header
-  const header = document.querySelector(".container .page-title") || document.querySelector("header .container");
-  if (header) {
-    const adminBtn = document.createElement("button");
-    adminBtn.innerHTML = '<i class="fas fa-user-shield"></i> Admin';
-    adminBtn.style.cssText = "background:#d4af37; color:white; border:none; padding:0.5rem 1rem; border-radius:4px; cursor:pointer; margin-left:1rem;";
-    adminBtn.onclick = showAdminLogin;
-
-    // Always show the Admin button
-    header.appendChild(adminBtn);
-}
+  // Load avatars
+  await loadAllAvatars();
+  
+  // Check authentication status
+  console.log("Checking authentication status...");
+  const authResult = await checkCloudflareAuth();
+  await updateUIForAuthStatus(authResult);
   
   // Load topics
   loadTopics();
 });
 
-// 18. Global functions
+// 17. Global functions
 window.loadTopics = loadTopics;
 window.createTopic = createTopic;
 window.deleteTopic = deleteTopic;
@@ -1496,17 +1667,15 @@ window.submitChatReply = submitChatReply;
 window.submitChatNestedReply = submitChatNestedReply;
 window.showChatReplyBox = showChatReplyBox;
 window.hideChatReplyBox = hideChatReplyBox;
-window.showAdminLogin = showAdminLogin;
-window.closeAdminLogin = closeAdminLogin;
-window.attemptAdminLogin = attemptAdminLogin;
-window.toggleAdminMode = toggleAdminMode;
 window.goToPage = goToPage;
+window.hideAdminPanel = hideAdminPanel;
 
 // Navigation functions
 window.navigateToHome = navigateToHome;
 window.navigateToRaceCalendar = navigateToRaceCalendar;
 window.navigateToAnalysis = navigateToAnalysis;
 window.navigateToUpcomingRaces = navigateToUpcomingRaces;
+window.navigateToAdmin = navigateToAdmin;
 </script>
 
 </footer>
