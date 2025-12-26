@@ -539,7 +539,7 @@ function loadAvatarGrid(gridId, inputId, optionClass = "replyAvatarOption", avat
     let html = "";
     avatarList.forEach(file => {
         // Use the correct path to avatars
-        let src = `avatar/${file}`;
+        let src = `chatcenter/avatar/${file}`;
         html += `<img src="${src}" class="${optionClass}" 
                 style="width:40px; height:40px; border-radius:50%; cursor:pointer; 
                        border:2px solid transparent; object-fit:cover;"
@@ -970,8 +970,8 @@ function renderChatMessage(msg, depth = 0) {
   // Use local avatar folder, fallback to default local avatar if not present
   let avatarSrc = msg.avatar;
   // If avatar is not set or not a local file, use default local avatar
-  if (!avatarSrc || !avatarSrc.startsWith("avatar/")) {
-    avatarSrc = "avatar/svg-1.svg";
+  if (!avatarSrc || !avatarSrc.startsWith("chatcenter/avatar/")) {
+    avatarSrc = "chatcenter/avatar/svg-1.svg";
   }
 
   setTimeout(() => {
@@ -1037,7 +1037,7 @@ function renderNestedReplyAvatarGrid(messageId) {
   const grid = document.getElementById(`nestedReplyAvatarGrid-${messageId}`);
   if (!grid) return;
   grid.innerHTML = avatarFiles.map(file =>
-    `<img src="avatar/${file}" class="nestedReplyAvatarOption" data-parent="${messageId}" style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">`
+    `<img src="chatcenter/avatar/${file}" class="nestedReplyAvatarOption" data-parent="${messageId}" style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">`
   ).join('');
 }
 
@@ -1116,7 +1116,7 @@ async function submitChatNestedReply(parentId) {
 
     // Avatar fallback (local default)
     const avatar = avatarSelected ||
-        "avatar/svg-1.svg";
+        "chatcenter/avatar/svg-1.svg";
 
     const topic = currentOpenTopic;
     if (!topic) return;
@@ -1186,7 +1186,7 @@ async function submitChatReply() {
 
   const user = userInput.value.trim() || "Anonymous";
   const avatar = avatarInput.value.trim() ||
-      "avatar/svg-1.svg";
+      "chatcenter/avatar/svg-1.svg";
 
   if (!text) {
     alert("Please enter a reply");
@@ -1319,7 +1319,7 @@ async function createTopic() {
     const user = (userInput?.value.trim()) || "Anonymous";
     const avatarSelected = (avatarInput?.value.trim()) || "";
 
-    const avatar = avatarSelected || "avatar/svg-1.svg";
+    const avatar = avatarSelected || "chatcenter/avatar/svg-1.svg";
 
     if (!title) {
         alert("Please enter a topic title");
