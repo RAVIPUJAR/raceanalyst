@@ -409,7 +409,6 @@
                 opacity: 1;
             }
         }
-
     </style>
 </head>
 
@@ -558,7 +557,6 @@
 const BASE_URL = "https://broad-sound-fdb7.raceanalyst.workers.dev";
 const GET_TOPICS_URL = `${BASE_URL}/chatcenter/get-topics`;
 const SAVE_TOPICS_URL = `${BASE_URL}/chatcenter/save-topics`;
-const WORKER_BASE = "https://broad-sound-fdb7.raceanalyst.workers.dev/";
 
 // State management
 let allTopics = [];
@@ -567,145 +565,83 @@ let isAdminAuthenticated = false;
 let currentAdminUser = null;
 let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
 
-// ===== CLOUDFLARE AUTHENTICATION FUNCTIONS =====
-// ===== SIMPLE CLOUDFLARE AUTHENTICATION =====
-async function checkAuth() {
-    console.log("🔐 Checking authentication...");
-
-    try {
-        const res = await fetch(`${workerBase}/auth-status`, {
-            method: "GET",
-            credentials: "include"
-        });
-
-        const data = await res.json();
-        console.log("Auth response:", data);
-
-        if (data.authenticated) {
-            isAdminAuthenticated = true;
-            console.log("✅ Admin authenticated");
-
-            // RE-RENDER TOPICS WITH ADMIN PERMISSIONS
-            await loadTopics();
-        } else {
-            isAdminAuthenticated = false;
-            console.log("❌ Not authenticated (ChatCenter)");
+// ===== SIMPLE LOCALSTORAGE-BASED ADMIN DETECTION =====
+function checkLocalStorageAuth() {
+    console.log("🔐 Checking localStorage for admin flag...");
+    
+    const adminFlag = localStorage.getItem('raceanalyst_admin');
+    const adminUserStr = localStorage.getItem('raceanalyst_admin_user');
+    
+    if (adminFlag === 'true' && adminUserStr) {
+        try {
+            const adminUser = JSON.parse(adminUserStr);
+            // Optional 7-day expiry for basic safety
+            if (adminUser.timestamp && (Date.now() - adminUser.timestamp < 7 * 24 * 60 * 60 * 1000)) {
+                isAdminAuthenticated = true;
+                currentAdminUser = {
+                    name: adminUser.name || adminUser.email?.split('@')[0] || 'Admin',
+                    email: adminUser.email || 'admin@raceanalyst.in'
+                };
+                console.log("✅ Admin access granted via localStorage");
+                return { authenticated: true, user: currentAdminUser };
+            } else {
+                console.log("⏰ Admin session expired");
+                clearAdminFlags();
+            }
+        } catch (e) {
+            console.error("Corrupted admin data in localStorage", e);
+            clearAdminFlags();
         }
-
-    } catch (error) {
-        console.error("Auth check failed:", error);
     }
+    
+    isAdminAuthenticated = false;
+    currentAdminUser = null;
+    console.log("❌ No valid admin session");
+    return { authenticated: false };
 }
 
-async function loginToCloudflare() {
-    console.log("🔑 Redirecting to login...");
-    showToast('Redirecting to Cloudflare login...', 'info');
-    
-    // SIMPLE: Redirect to a protected endpoint
-    // Cloudflare Access will intercept and show login
-    const loginUrl = `${WORKER_BASE}protected/admin-auth`;
-    
-    setTimeout(() => {
-        window.location.href = loginUrl;
-    }, 500);
-    
-    return true;
+function clearAdminFlags() {
+    localStorage.removeItem('raceanalyst_admin');
+    localStorage.removeItem('raceanalyst_admin_user');
 }
 
-async function logoutFromCloudflare() {
-    try {
-        console.log("🚪 Logging out...");
-        showToast('Logging out...', 'info');
-        
-        // SIMPLE: Redirect to Cloudflare Access logout
-        const logoutUrl = `https://raceanalyst.pages.dev/cdn-cgi/access/logout`;
-        
-        // Clear any local state
-        isAdminAuthenticated = false;
-        currentAdminUser = null;
-        localStorage.removeItem('adminAuth');
-        
-        setTimeout(() => {
-            window.location.href = logoutUrl;
-        }, 500);
-        
-        return true;
-        
-    } catch (error) {
-        console.error("Logout error:", error);
-        // Even if error, clear local state and reload
-        isAdminAuthenticated = false;
-        currentAdminUser = null;
-        window.location.reload();
-        return false;
-    }
-}
-
-
-// ===== UI UPDATE BASED ON AUTH STATUS =====
-async function updateUIForAuthStatus(authResult) {
-    const adminStatusIndicator = document.getElementById('adminStatusIndicator');
+// Update UI based on localStorage auth status
+function updateUIForAuthStatus(authResult) {
     const adminPanel = document.getElementById('adminPanel');
+    const adminStatusIndicator = document.getElementById('adminStatusIndicator');
+    const adminUserName = document.getElementById('adminUserName');
     const adminNavItem = document.getElementById('adminNavItem');
     const logoutNavItem = document.getElementById('logoutNavItem');
     
     if (authResult.authenticated) {
-        // User is authenticated
-        isAdminAuthenticated = true;
-        currentAdminUser = authResult.user;
-        
-        console.log("✅ User authenticated for Chat Center:", currentAdminUser);
-        
-        // Show admin panel
-        if (adminPanel) {
-            adminPanel.classList.add('active');
-        }
-        
-        // Update admin status indicator
+        // Show admin features
+        if (adminPanel) adminPanel.classList.add('active');
         if (adminStatusIndicator) {
             adminStatusIndicator.style.display = 'flex';
-            document.getElementById('adminUserName').textContent = 
-                currentAdminUser.name || currentAdminUser.email || 'Admin';
+            if (adminUserName) adminUserName.textContent = currentAdminUser.name;
         }
+        if (adminNavItem) adminNavItem.style.display = 'block';
+        if (logoutNavItem) logoutNavItem.style.display = 'block';
         
-        // Show admin nav item
-        if (adminNavItem) {
-            adminNavItem.style.display = 'block';
-        }
-        
-        // Show logout button
-        if (logoutNavItem) {
-            logoutNavItem.style.display = 'block';
-        }
-        
-        showToast(`Welcome ${currentAdminUser.name || currentAdminUser.email || 'Admin'}!`, 'success');
-        
+        showToast(`Admin mode active: ${currentAdminUser.name}`, 'success');
     } else {
-        // User is not authenticated
-        isAdminAuthenticated = false;
-        currentAdminUser = null;
-        
-        console.log("❌ User not authenticated for Chat Center");
-        
-        // Hide admin panel
-        if (adminPanel) {
-            adminPanel.classList.remove('active');
-        }
-        
-        // Hide admin status indicator
-        if (adminStatusIndicator) {
-            adminStatusIndicator.style.display = 'none';
-        }
-        
-        // Hide admin nav item
-        if (adminNavItem) {
-            adminNavItem.style.display = 'none';
-        }
-        
-        // Hide logout button
-        if (logoutNavItem) {
-            logoutNavItem.style.display = 'none';
-        }
+        // Hide admin features
+        if (adminPanel) adminPanel.classList.remove('active');
+        if (adminStatusIndicator) adminStatusIndicator.style.display = 'none';
+        if (adminNavItem) adminNavItem.style.display = 'none';
+        if (logoutNavItem) logoutNavItem.style.display = 'none';
+    }
+    
+    // Re-render topics to show/hide delete buttons
+    loadTopics();
+}
+
+// Simple logout: just clear localStorage and reload
+function logoutLocally() {
+    if (confirm("Logout from admin mode?")) {
+        clearAdminFlags();
+        showToast('Logged out from admin mode', 'info');
+        window.location.reload();
     }
 }
 
@@ -770,901 +706,123 @@ async function loadAllAvatars() {
         avatarFiles = await res.json();
         console.log("Loaded avatars:", avatarFiles);
         
-        // Load avatar grids
         loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
         loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
         
     } catch (err) {
         console.error("Avatar loading failed:", err);
-        // Fallback to default avatars
-        avatarFiles = ['svg-1.svg', 'svg-2.svg'];
-        loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
-        loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
+        showToast('Could not load avatars', 'error');
     }
 }
 
-function loadAvatarGrid(gridId, inputId, optionClass = "replyAvatarOption", avatarList = avatarFiles) {
+function loadAvatarGrid(gridId, hiddenInputId, className, files) {
     const grid = document.getElementById(gridId);
     if (!grid) return;
     
     let html = "";
-    avatarList.forEach(file => {
-        let src = `chatcenter/avatar/${file}`;
-        html += `<img src="${src}" class="${optionClass}" 
-                style="width:40px; height:40px; border-radius:50%; cursor:pointer; 
-                       border:2px solid transparent; object-fit:cover;"
-                title="${file.replace('.svg', '')}">`;
+    files.forEach(file => {
+        const src = `chatcenter/avatar/${file}`;
+        html += `<img src="${src}" class="${className}" data-src="${src}" 
+                 style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent; object-fit:cover;">`;
     });
-    
     grid.innerHTML = html;
     
-    // Add click handlers for avatar selection
-    const avatars = grid.querySelectorAll('.' + optionClass);
+    // Add click handlers
+    const avatars = grid.querySelectorAll(`.${className}`);
     avatars.forEach(avatar => {
         avatar.addEventListener('click', function() {
-            // Clear border from all avatars
+            // Clear previous selection
             avatars.forEach(a => a.style.border = "2px solid transparent");
-            
-            // Highlight selected avatar
+            // Highlight selected
             this.style.border = "2px solid #d4af37";
-            
-            // Save selected avatar
-            document.getElementById(inputId).value = this.src;
+            // Save selection
+            document.getElementById(hiddenInputId).value = this.dataset.src;
         });
     });
 }
 
-// ===== MOBILE MENU =====
-document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navMenu = document.getElementById('navMenu');
-    
-    if (mobileMenuBtn && navMenu) {
-        mobileMenuBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            navMenu.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (navMenu.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!navMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
-                navMenu.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                if (icon) {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            }
-        });
-        
-        // Close menu when clicking a link
-        const navLinks = navMenu.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                navMenu.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                if (icon) {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
-        });
-    }
-});
-
-// ===== CHAT CENTER FUNCTIONS =====
-document.getElementById("newTopicHeader").onclick = function() {
-    const box = document.getElementById("newTopicContent");
-    const icon = document.getElementById("newTopicToggleIcon");
-
-    if (box.style.display === "none") {
-        box.style.display = "block";
-        icon.textContent = "➖";
-    } else {
-        box.style.display = "none";
-        icon.textContent = "➕";
-    }
-};
-
-// Utility functions
-function isNewTopic(topic) {
-    const created = new Date(topic.date);
-    const now = new Date();
-    const diffHours = (now - created) / (1000 * 60 * 60);
-    return diffHours <= 24;
-}
-
-function topicHasUnread(topic) {
-    return topic.unread === true;
-}
-
-// 1. Load all chat topics
+// ===== TOPIC & MESSAGE RENDERING =====
 async function loadTopics() {
-  try {
-    const topicsList = document.getElementById("topicsList");
-    topicsList.innerHTML = '<div class="loading">Loading topics...</div>';
-    
-    const response = await fetch(GET_TOPICS_URL);
-    
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    
-    let topics = await response.json();
-    
-    // Ensure topics is an array
-    if (!Array.isArray(topics)) {
-      if (topics && Array.isArray(topics.topics)) {
-        topics = topics.topics;
-      } else if (topics && typeof topics === 'object') {
-        topics = Object.values(topics);
-      } else {
-        topics = [];
-      }
-    }
-    
-    allTopics = topics;
-    renderTopics(topics);
-    
-  } catch (error) {
-    console.error("Failed to load topics:", error);
-    const topicsList = document.getElementById("topicsList");
-    topicsList.innerHTML = `
-      <div class="error" style="background:#ffe6e6; padding:1rem; border-radius:6px;">
-        <h3 style="color:#c62828; margin-top:0;">Error Loading Topics</h3>
-        <p>${error.message}</p>
-        <button onclick="loadTopics()" style="margin-top:0.5rem;">Retry</button>
-      </div>
-    `;
-  }
-}
-
-// 2. Render topics list with admin delete buttons
-function renderTopics(topics) {
-  const container = document.getElementById("topicsList");
-  const pagination = document.getElementById("pagination");
-
-  if (!topics || topics.length === 0) {
-    container.innerHTML = `
-      <div class="empty-state" style="text-align:center; padding:2rem; color:#666;">
-        <i class="fas fa-comments" style="font-size:2.5rem; color:#ccc; margin-bottom:1rem;"></i>
-        <h3 style="margin:0 0 0.5rem 0;">No Chat Topics Yet</h3>
-        <p style="margin:0 0 1rem 0;">Be the first to start a conversation!</p>
-      </div>
-    `;
-    pagination.innerHTML = '';
-    return;
-  }
-
-  const sortedTopics = [...topics].reverse();
-  const itemsPerPage = 10;
-  const page = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
-  const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const pageTopics = sortedTopics.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(sortedTopics.length / itemsPerPage);
-
-  const topicsHtml = pageTopics.map(topic => {
-    const messageCount = topic.messages ? topic.messages.length : 0;
-    const lastMessage = topic.messages && topic.messages.length > 0 ? topic.messages[topic.messages.length - 1] : null;
-
-    let totalLikes = 0;
-    let totalReplies = 0;
-    if (topic.messages) {
-      topic.messages.forEach(msg => {
-        totalLikes += msg.likes || 0;
-        if (msg.replies) {
-          totalReplies += msg.replies.length;
-          msg.replies.forEach(reply => {
-            totalLikes += reply.likes || 0;
-          });
-        }
-      });
-    }
-
-    return `
-      <div class="topic-item topic-row" onclick="openChatThread('${topic.id}')"
-           style="background:#f8f9fa; border-left:4px solid #d4af37; padding:1.2rem; margin-bottom:1rem; border-radius:6px; cursor:pointer; transition:0.2s;">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div style="display:flex; align-items:center; gap:0.5rem;">
-            <i class="fas fa-comment-dots" style="color:#d4af37;"></i>
-            <h3 style="margin:0; color:#1a3c34; font-size:1.15rem;">${topic.title}</h3>
-            ${isNewTopic(topic) ? `<span style="background:red; color:white; padding:2px 6px; border-radius:4px; font-size:0.7rem;">NEW</span>` : ""}
-          </div>
-          <button onclick="openChatThread('${topic.id}'); event.stopPropagation();"
-                  style="display:flex; align-items:center; gap:5px; background:none; border:none; cursor:pointer; color:#1a3c34; font-size:0.95rem; padding:6px; transition:0.2s;">
-            <i class="fas fa-eye view-icon" style="font-size:1.1rem;"></i>
-            <span style="font-size:0.85rem;">View</span>
-          </button>
-        </div>
-        <div style="font-size:0.9rem; color:#444; display:flex; gap:1.5rem; flex-wrap:wrap; margin-top:6px;">
-          <span><i class="fas fa-user"></i> ${topic.user || "Anonymous"}</span>
-          <span><i class="fas fa-calendar"></i> ${formatDate(topic.date)}</span>
-          <span><i class="fas fa-comments" style="color:#25D366;"></i> ${messageCount} message${messageCount !== 1 ? 's' : ''}</span>
-          <span><i class="fas fa-heart" style="color:#e91e63;"></i> ${totalLikes} like${totalLikes !== 1 ? 's' : ''}</span>
-          <span><i class="fas fa-clock"></i> Last activity: ${lastMessage ? formatDate(lastMessage.date) : formatDate(topic.date)}</span>
-          ${isAdminAuthenticated ? `<button onclick="deleteTopic('${topic.id}'); event.stopPropagation();" 
-            style="background:#dc3545; color:white; border:none; padding:0.2rem 0.5rem; border-radius:4px; font-size:0.8rem; cursor:pointer;">
-            <i class="fas fa-trash"></i> Delete Topic
-          </button>` : ''}
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  container.innerHTML = topicsHtml;
-  renderPagination(page, totalPages);
-}
-
-
-// 3. Pagination helper
-function renderPagination(currentPage, totalPages) {
-  const pagination = document.getElementById("pagination");
-  
-  if (totalPages <= 1) {
-    pagination.innerHTML = '';
-    return;
-  }
-  
-  let paginationHtml = '<div style="display:flex; gap:0.5rem; justify-content:center; margin-top:2rem;">';
-  
-  if (currentPage > 1) {
-    paginationHtml += `
-      <button onclick="goToPage(${currentPage - 1})" style="padding:0.5rem 1rem; border:1px solid #ddd; background:white; border-radius:4px; cursor:pointer;">
-        <i class="fas fa-chevron-left"></i> Previous
-      </button>
-    `;
-  }
-  
-  // Show first page, current page, and last page
-  const pagesToShow = [1];
-  if (currentPage > 3) pagesToShow.push('...');
-  for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
-    pagesToShow.push(i);
-  }
-  if (currentPage < totalPages - 2) pagesToShow.push('...');
-  if (totalPages > 1) pagesToShow.push(totalPages);
-  
-  pagesToShow.forEach(pageNum => {
-    if (pageNum === '...') {
-      paginationHtml += `<span style="padding:0.5rem 1rem;">...</span>`;
-    } else if (pageNum === currentPage) {
-      paginationHtml += `
-        <button style="padding:0.5rem 1rem; border:none; background:#1a3c34; color:white; border-radius:4px;">
-          ${pageNum}
-        </button>
-      `;
-    } else {
-      paginationHtml += `
-        <button onclick="goToPage(${pageNum})" style="padding:0.5rem 1rem; border:1px solid #ddd; background:white; border-radius:4px; cursor:pointer;">
-          ${pageNum}
-        </button>
-      `;
-    }
-  });
-  
-  if (currentPage < totalPages) {
-    paginationHtml += `
-      <button onclick="goToPage(${currentPage + 1})" style="padding:0.5rem 1rem; border:1px solid #ddd; background:white; border-radius:4px; cursor:pointer;">
-        Next <i class="fas fa-chevron-right"></i>
-      </button>
-    `;
-  }
-  
-  paginationHtml += '</div>';
-  pagination.innerHTML = paginationHtml;
-}
-
-// 4. Open chat thread in overlay
-function openChatThread(topicId) {
-  const topic = allTopics.find(t => t.id === topicId);
-  if (!topic) return;
-  
-  currentOpenTopic = topic;
-  
-  // Calculate stats for this topic
-  let totalLikes = 0;
-  let totalReplies = 0;
-  if (topic.messages) {
-    topic.messages.forEach(msg => {
-      totalLikes += msg.likes || 0;
-      if (msg.replies) {
-        totalReplies += msg.replies.length;
-        msg.replies.forEach(reply => {
-          totalLikes += reply.likes || 0;
-        });
-      }
-    });
-  }
-  
-  const totalMessages = (topic.messages ? topic.messages.length : 0) + totalReplies;
-  
-  // Update chat header with topic details
-  const headerHtml = `
-    <div>
-      <h3 style="margin:0 0 0.3rem 0; color:white; font-size:1.3rem;">
-        <i class="fas fa-comment-dots" style="margin-right:0.5rem;"></i>
-        ${topic.title || 'Chat Topic'}
-      </h3>
-      <div style="display:flex; gap:1rem; font-size:0.85rem; opacity:0.9;">
-        <span><i class="fas fa-user"></i> ${topic.user || 'Anonymous'}</span>
-        <span><i class="fas fa-calendar"></i> ${topic.date ? formatDate(topic.date) : ''}</span>
-        <span><i class="fas fa-comments" style="color:#25D366;"></i> ${totalMessages} messages</span>
-        <span><i class="fas fa-fire"></i> ${totalLikes} likes</span>
-      </div>
-      ${topic.description ? `
-        <div style="margin-top:0.5rem; padding:0.5rem; background:rgba(255,255,255,0.1); border-radius:4px; font-size:0.9rem;">
-          <i class="fas fa-info-circle" style="margin-right:0.3rem;"></i>
-          ${topic.description}
-        </div>
-      ` : ''}
-    </div>
-  `;
-  
-  document.getElementById("chatTopicTitle").innerHTML = headerHtml;
-  document.getElementById("chatMessages").scrollTop = 0;
-  
-  // Render messages
-  renderChatMessages(topic.messages || []);
-  
-  // Show overlay
-  document.getElementById("chatOverlay").style.display = "flex";
-  document.body.style.overflow = "hidden";
-  
-  // Focus on reply input
-  setTimeout(() => {
-    document.getElementById("chatReplyInput").focus();
-  }, 300);
-}
-
-// 5. Render chat messages with admin delete buttons
-function renderChatMessage(msg, depth = 0) {
-  const messageId = msg.id;
-  const userLiked = userLikes[messageId] === true;
-  const canLike = !userLiked;
-  
-  // Use local avatar folder, fallback to default local avatar if not present
-  let avatarSrc = msg.avatar;
-  if (!avatarSrc || !avatarSrc.startsWith("chatcenter/avatar/")) {
-    avatarSrc = "chatcenter/avatar/svg-1.svg";
-  }
-
-  // ... (keep avatar grid logic same) ...
-
-  return `
-    <div class="chat-message" style="margin-left:${depth * 20}px; margin-bottom:1rem;">
-      <div style="background:${depth === 0 ? '#f0f7f4' : '#f8f9fa'}; border-radius:8px; padding:1rem;">
-        <div style="display:flex; align-items:flex-start; gap:10px; margin-bottom:0.5rem;">
-          <img src="${avatarSrc}" alt="avatar" style="width:36px; height:36px; border-radius:50%; object-fit:cover;">
-          <div style="flex:1;">
-            <div style="font-weight:600; color:#1a3c34;">${msg.user || 'Anonymous'}</div>
-            <div style="font-size:0.8rem; color:#888;">${formatDate(msg.date)}</div>
-          </div>
-        </div>
-        <div style="color:#333; margin-bottom:0.8rem; padding-left:46px;">${msg.text}</div>
-        <div style="display:flex; gap:1rem; align-items:center; padding-left:46px;">
-          <button onclick="${canLike ? `likeChatMessage('${messageId}')` : ''}" 
-            ${!canLike ? 'disabled' : ''}
-            style="background:none; border:none; color:${userLiked ? '#e91e63' : '#666'}; cursor:${canLike ? 'pointer' : 'not-allowed'}; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
-            <i class="fas fa-heart" style="color:#e91e63;"></i>
-            ${msg.likes || 0} Like${msg.likes !== 1 ? 's' : ''}
-          </button>
-          <button onclick="showChatReplyBox('${messageId}')" 
-            style="background:none; border:none; color:#666; cursor:pointer; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
-            <i class="fas fa-reply"></i> Reply
-          </button>
-          
-          ${isAdminAuthenticated ? `
-            <button onclick="deleteChatMessage('${msg.id}')" 
-              style="background:none; border:none; color:#d11a2a; cursor:pointer; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
-              <i class="fas fa-trash"></i> Delete
-            </button>
-          ` : ''}
-        </div>
+    try {
+        const response = await fetch(GET_TOPICS_URL);
+        if (!response.ok) throw new Error('Failed to load topics');
+        allTopics = await response.json();
         
-        <div style="margin-top:1rem;">
-          ${(msg.replies || []).map(reply => renderChatMessage(reply, depth + 1)).join('')}
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-// 6. Render single chat message with admin controls
-function renderChatMessage(msg, depth = 0) {
-  const messageId = msg.id;
-  const userLiked = userLikes[messageId] === true;
-  const canLike = !userLiked;
-  
-  // Use local avatar folder, fallback to default local avatar if not present
-  let avatarSrc = msg.avatar;
-  if (!avatarSrc || !avatarSrc.startsWith("chatcenter/avatar/")) {
-    avatarSrc = "chatcenter/avatar/svg-1.svg";
-  }
-
-  // Render nested reply avatar grid dynamically
-  setTimeout(() => {
-    const grid = document.getElementById(`nestedReplyAvatarGrid-${messageId}`);
-    if (grid && avatarFiles.length > 0) {
-      let html = "";
-      avatarFiles.forEach(file => {
-        let src = `chatcenter/avatar/${file}`;
-        html += `<img src="${src}" class="nestedReplyAvatarOption" data-parent="${messageId}" 
-                style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">`;
-      });
-      grid.innerHTML = html;
-      
-      // Add click handlers for nested avatars
-      const avatars = grid.querySelectorAll('.nestedReplyAvatarOption');
-      avatars.forEach(avatar => {
-        avatar.addEventListener('click', function() {
-          // Clear border from all avatars in this group
-          avatars.forEach(a => a.style.border = "2px solid transparent");
-          
-          // Highlight selected avatar
-          this.style.border = "2px solid #d4af37";
-          
-          // Save selected avatar
-          document.getElementById(`nestedReplySelectedAvatar-${messageId}`).value = this.src;
-        });
-      });
+        renderTopicsList();
+    } catch (error) {
+        console.error(error);
+        document.getElementById('topicsList').innerHTML = '<p style="color:red;">Failed to load topics.</p>';
     }
-  }, 0);
-
-  return `
-    <div class="chat-message" style="margin-left:${depth * 20}px; margin-bottom:1rem;">
-      <div style="background:${depth === 0 ? '#f0f7f4' : '#f8f9fa'}; border-radius:8px; padding:1rem;">
-        <div style="display:flex; align-items:flex-start; gap:10px; margin-bottom:0.5rem;">
-          <img src="${avatarSrc}" alt="avatar" style="width:36px; height:36px; border-radius:50%; object-fit:cover;">
-          <div style="flex:1;">
-            <div style="font-weight:600; color:#1a3c34;">${msg.user || 'Anonymous'}</div>
-            <div style="font-size:0.8rem; color:#888;">${formatDate(msg.date)}</div>
-          </div>
-        </div>
-        <div style="color:#333; margin-bottom:0.8rem; padding-left:46px;">${msg.text}</div>
-        <div style="display:flex; gap:1rem; align-items:center; padding-left:46px;">
-          <button onclick="${canLike ? `likeChatMessage('${messageId}')` : ''}" 
-            ${!canLike ? 'disabled' : ''}
-            style="background:none; border:none; color:${userLiked ? '#e91e63' : '#666'}; cursor:${canLike ? 'pointer' : 'not-allowed'}; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
-            <i class="fas fa-heart" style="color:#e91e63;"></i>
-            ${msg.likes || 0} Like${msg.likes !== 1 ? 's' : ''}
-            ${userLiked ? ' (You liked)' : ''}
-          </button>
-          <button onclick="showChatReplyBox('${messageId}')" 
-            style="background:none; border:none; color:#666; cursor:pointer; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
-            <i class="fas fa-reply"></i> Reply
-          </button>
-          ${isAdminAuthenticated ? `
-            <button onclick="deleteChatMessage('${msg.id}')" 
-              style="background:none; border:none; color:#d11a2a; cursor:pointer; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
-              <i class="fas fa-trash"></i> Delete
-            </button>
-          ` : ''}
-        </div>
-        <div id="chatReplyBox-${messageId}" style="display:none; margin-top:1rem; padding-left:46px;">
-          <input type="text" id="nestedReplyUserNameInput-${messageId}" placeholder="Your Name" 
-                 style="margin-bottom:0.6rem; padding:10px; border:1px solid #ddd; border-radius:4px; width:100%;">
-
-          <div id="nestedReplyAvatarGrid-${messageId}" 
-               style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:0.6rem;">
-            <!-- Avatars will be dynamically populated here -->
-          </div>
-
-          <input type="hidden" id="nestedReplySelectedAvatar-${messageId}" value="">
-          <textarea id="chatReplyInput-${messageId}" placeholder="Write your reply..." style="width:100%; padding:0.6rem; border:1px solid #ddd; border-radius:4px; min-height:60px; margin-bottom:0.5rem;"></textarea>
-          <div>
-            <button onclick="submitChatNestedReply('${messageId}')" style="background:#1a3c34; color:white; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; font-size:0.85rem;">
-              Post Reply
-            </button>
-            <button onclick="hideChatReplyBox('${messageId}')" style="background:#666; color:white; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; margin-left:0.5rem; font-size:0.85rem;">
-              Cancel
-            </button>
-          </div>
-        </div>
-        <div style="margin-top:1rem;">
-          ${(msg.replies || []).map(reply => renderChatMessage(reply, depth + 1)).join('')}
-        </div>
-      </div>
-    </div>
-  `;
 }
 
-// 7. Like a chat message
-async function likeChatMessage(messageId) {
-  if (userLikes[messageId]) {
-    alert("You have already liked this message!");
-    return;
-  }
-  
-  const topic = currentOpenTopic;
-  if (!topic || !topic.messages) return;
-  
-  // Find and update the message
-  function updateMessageLikes(messages) {
-    for (let msg of messages) {
-      if (msg.id === messageId) {
-        msg.likes = (msg.likes || 0) + 1;
-        return true;
-      }
-      if (msg.replies) {
-        if (updateMessageLikes(msg.replies)) return true;
-      }
-    }
-    return false;
-  }
-  
-  if (updateMessageLikes(topic.messages)) {
-    // Record user's like
-    userLikes[messageId] = true;
-    localStorage.setItem('userLikes', JSON.stringify(userLikes));
-    
-    // Update the topic in allTopics
-    const topicIndex = allTopics.findIndex(t => t.id === topic.id);
-    if (topicIndex !== -1) {
-      allTopics[topicIndex] = topic;
-    }
-    
-    // Save to server
-    await saveTopicsToServer();
-    
-    // Re-render messages
-    renderChatMessages(topic.messages);
-  }
-}
-
-// 8. Show/hide reply box in chat
-function showChatReplyBox(messageId) {
-  document.getElementById(`chatReplyBox-${messageId}`).style.display = 'block';
-  document.getElementById(`chatReplyInput-${messageId}`).focus();
-}
-
-function hideChatReplyBox(messageId) {
-  document.getElementById(`chatReplyBox-${messageId}`).style.display = 'none';
-  document.getElementById(`chatReplyInput-${messageId}`).value = '';
-}
-
-// 9. Submit nested reply in chat
-async function submitChatNestedReply(parentId) {
-    const input = document.getElementById(`chatReplyInput-${parentId}`);
-    const text = input.value.trim();
-
-    if (!text) {
-        alert("Please enter a reply");
+function renderTopicsList() {
+    const container = document.getElementById('topicsList');
+    if (allTopics.length === 0) {
+        container.innerHTML = '<p>No topics yet. Create the first one!</p>';
         return;
     }
-
-    const userInput = document.getElementById(`nestedReplyUserNameInput-${parentId}`);
-    const user = (userInput?.value.trim()) || "Anonymous";
     
-    const avatarInput = document.getElementById(`nestedReplySelectedAvatar-${parentId}`);
-    const avatarSelected = (avatarInput?.value.trim()) || "";
-    const avatar = avatarSelected || "chatcenter/avatar/svg-1.svg";
-
-    const topic = currentOpenTopic;
-    if (!topic) return;
-
-    function addReplyToMessage(messages, parentId, newReply) {
-        for (let msg of messages) {
-            if (msg.id === parentId) {
-                if (!msg.replies) msg.replies = [];
-                msg.replies.push(newReply);
-                return true;
-            }
-            if (msg.replies) {
-                if (addReplyToMessage(msg.replies, parentId, newReply)) return true;
-            }
-        }
-        return false;
-    }
-
-    const newReply = {
-        id: Date.now().toString(),
-        user: user,
-        avatar: avatar,
-        text: text,
-        date: new Date().toLocaleString(),
-        likes: 0,
-        replies: []
-    };
-
-    if (addReplyToMessage(topic.messages, parentId, newReply)) {
-        const topicIndex = allTopics.findIndex(t => t.id === topic.id);
-        if (topicIndex !== -1) {
-            allTopics[topicIndex] = topic;
-        }
-
-        await saveTopicsToServer();
-
-        input.value = "";
-        if (userInput) userInput.value = "";
-        if (avatarInput) avatarInput.value = "";
-
-        // Clear avatar selection
-        const avatars = document.querySelectorAll(`.nestedReplyAvatarOption[data-parent="${parentId}"]`);
-        avatars.forEach(a => a.style.border = "2px solid transparent");
-
-        hideChatReplyBox(parentId);
-        renderChatMessages(topic.messages);
-    }
+    const topicsHtml = allTopics.map(topic => {
+        const totalMessages = (topic.messages?.length || 0) + (topic.messages?.reduce((sum, m) => sum + (m.replies?.length || 0), 0) || 0);
+        return `
+            <div class="topic-item" onclick="openChatThread('${topic.id}')">
+                <div class="topic-title">${topic.title || 'Untitled'}</div>
+                <div class="topic-meta">
+                    by ${topic.user || 'Anonymous'} • ${formatDate(topic.date)} • ${totalMessages} message${totalMessages !== 1 ? 's' : ''}
+                </div>
+                ${isAdminAuthenticated ? `
+                    <button onclick="deleteTopic('${topic.id}'); event.stopPropagation();" 
+                            style="float:right; background:#dc3545; color:white; border:none; padding:4px 8px; border-radius:4px; font-size:0.8rem; margin-top:-30px;">
+                        Delete Topic
+                    </button>
+                ` : ''}
+            </div>
+        `;
+    }).join('');
+    
+    container.innerHTML = topicsHtml;
 }
 
-// 10. Submit main reply in chat
-async function submitChatReply() {
-  const input = document.getElementById("chatReplyInput");
-  const text = input.value.trim();
-
-  const userInput = document.getElementById("replyUserNameInput");
-  const avatarInput = document.getElementById("replySelectedAvatar");
-
-  const user = userInput.value.trim() || "Anonymous";
-  const avatar = avatarInput.value.trim() || "chatcenter/avatar/svg-1.svg";
-
-  if (!text) {
-    alert("Please enter a reply");
-    return;
-  }
-
-  const topic = currentOpenTopic;
-  if (!topic) return;
-
-  if (!topic.messages) topic.messages = [];
-
-  const newMessage = {
-    id: Date.now().toString(),
-    user: user,
-    avatar: avatar,
-    text: text,
-    date: new Date().toLocaleString(),
-    likes: 0,
-    replies: []
-  };
-
-  topic.messages.push(newMessage);
-
-  const topicIndex = allTopics.findIndex(t => t.id === topic.id);
-  if (topicIndex !== -1) {
-    allTopics[topicIndex] = topic;
-  }
-
-  await saveTopicsToServer();
-
-  input.value = "";
-  userInput.value = "";
-  avatarInput.value = "";
-
-  // Clear avatar selection
-  document.querySelectorAll(".replyAvatarOption").forEach(a => {
-    a.style.border = "2px solid transparent";
-  });
-
-  renderChatMessages(topic.messages);
-
-  setTimeout(() => {
-    const chatBox = document.getElementById("chatMessages");
-    chatBox.scrollTop = chatBox.scrollHeight;
-  }, 100);
+// Open full chat thread
+function openChatThread(topicId) {
+    currentOpenTopic = allTopics.find(t => t.id === topicId);
+    if (!currentOpenTopic) return;
+    
+    // Header info
+    const totalReplies = currentOpenTopic.messages?.reduce((sum, m) => sum + (m.replies?.length || 0), 0) || 0;
+    const totalMessages = (currentOpenTopic.messages?.length || 0) + totalReplies;
+    const totalLikes = currentOpenTopic.messages?.reduce((sum, m) => {
+        let likes = (m.likes || 0);
+        if (m.replies) likes += m.replies.reduce((s, r) => s + (r.likes || 0), 0);
+        return sum + likes;
+    }, 0) || 0;
+    
+    const headerHtml = `
+        <div>
+            <h3 style="margin:0 0 0.3rem 0; color:white; font-size:1.3rem;">
+                <i class="fas fa-comment-dots" style="margin-right:0.5rem;"></i>
+                ${currentOpenTopic.title || 'Chat Topic'}
+            </h3>
+            <div style="display:flex; gap:1rem; font-size:0.85rem; opacity:0.9; flex-wrap:wrap;">
+                <span><i class="fas fa-user"></i> ${currentOpenTopic.user || 'Anonymous'}</span>
+                <span><i class="fas fa-calendar"></i> ${formatDate(currentOpenTopic.date)}</span>
+                <span><i class="fas fa-comments"></i> ${totalMessages} messages</span>
+                <span><i class="fas fa-heart"></i> ${totalLikes} likes</span>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById("chatTopicTitle").innerHTML = headerHtml;
+    renderChatMessages(currentOpenTopic.messages || []);
+    
+    document.getElementById("chatOverlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
 }
 
-// 11. Close chat thread
-function closeChatThread() {
-  document.getElementById("chatOverlay").style.display = "none";
-  document.body.style.overflow = "auto";
-  currentOpenTopic = null;
-  
-  loadTopics();
-}
-
-// 12. Delete topic (admin only)
-async function deleteTopic(topicId) {
-  if (!isAdminAuthenticated) {
-    showToast('Admin access required to delete topics', 'error');
-    // Try to refresh auth status
-    const authResult = await checkCloudflareAuth();
-    await updateUIForAuthStatus(authResult);
-    
-    if (!authResult.authenticated) {
-      showToast('Please login at admin.html first', 'info');
-    }
-    return;
-  }
-  
-  if (!confirm("Are you sure you want to delete this topic and all messages?")) return;
-  
-  try {
-    allTopics = allTopics.filter(topic => topic.id !== topicId);
-    
-    await saveTopicsToServer();
-    
-    if (currentOpenTopic && currentOpenTopic.id === topicId) {
-      closeChatThread();
-    }
-    
-    showToast('Topic deleted successfully', 'success');
-    loadTopics();
-  } catch (error) {
-    showToast('Failed to delete: ' + error.message, 'error');
-  }
-}
-
-// Delete a chat message (admin only)
-async function deleteChatMessage(messageId) {
-  if (!isAdminAuthenticated) {
-    showToast('Admin access required to delete messages', 'error');
-    return;
-  }
-
-  if (!confirm("Delete this message?")) return;
-
-  const topic = currentOpenTopic;
-  if (!topic || !topic.messages) return;
-
-  function removeMessage(messages, messageId) {
-    return messages.filter(msg => {
-      if (msg.id === messageId) return false;
-      if (msg.replies) msg.replies = removeMessage(msg.replies, messageId);
-      return true;
-    });
-  }
-
-  topic.messages = removeMessage(topic.messages, messageId);
-
-  const topicIndex = allTopics.findIndex(t => t.id === topic.id);
-  if (topicIndex !== -1) allTopics[topicIndex] = topic;
-
-  await saveTopicsToServer();
-  renderChatMessages(topic.messages);
-  showToast('Message deleted', 'success');
-}
-
-// 13. Save topics to server
-async function saveTopicsToServer() {
-  try {
-    const response = await fetch(SAVE_TOPICS_URL, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(allTopics)
-    });
-    
-    if (!response.ok) {
-      throw new Error(`Save failed: ${response.status}`);
-    }
-    
-    return await response.json();
-  } catch (error) {
-    console.error("Failed to save topics:", error);
-    showToast('Failed to save changes', 'error');
-    throw error;
-  }
-}
-
-// 14. Create topic function
-async function createTopic() {
-    const titleInput = document.getElementById("topicTitle");
-    const title = titleInput.value.trim();
-
-    const contentInput = document.getElementById("topicBody");
-    const content = contentInput.value.trim();
-
-    const userInput = document.getElementById("userNameInput");
-    const avatarInput = document.getElementById("selectedAvatar");
-
-    const user = (userInput?.value.trim()) || "Anonymous";
-    const avatarSelected = (avatarInput?.value.trim()) || "";
-    const avatar = avatarSelected || "chatcenter/avatar/svg-1.svg";
-
-    if (!title) {
-        alert("Please enter a topic title");
-        return;
-    }
-
-    if (!content) {
-        alert("Please enter some content");
-        return;
-    }
-
-    const firstMessage = {
-        id: Date.now().toString(),
-        user: user,
-        avatar: avatar,
-        text: content,
-        date: new Date().toLocaleString(),
-        likes: 0,
-        replies: []
-    };
-
-    const newTopic = {
-        id: Date.now().toString(),
-        title: title,
-        content: "",
-        user: user,
-        avatar: avatar,
-        date: new Date().toLocaleString(),
-        likes: 0,
-        messages: [firstMessage]
-    };
-
-    allTopics.unshift(newTopic);
-
-    await saveTopicsToServer();
-
-    titleInput.value = "";
-    contentInput.value = "";
-    if (userInput) userInput.value = "";
-    if (avatarInput) avatarInput.value = "";
-
-    // Clear avatar selection
-    document.querySelectorAll(".avatarOption").forEach(a => {
-        a.style.border = "2px solid transparent";
-    });
-
-    showToast('Topic created successfully', 'success');
-    loadTopics();
-}
-
-// 15. Helper functions
-function formatDate(dateString) {
-  if (!dateString) return 'Unknown';
-  
-  try {
-    const date = new Date(dateString);
-    if (isNaN(date.getTime())) return dateString;
-    
-    const now = new Date();
-    const diffMs = now - date;
-    const diffMins = Math.floor(diffMs / 60000);
-    const diffHours = Math.floor(diffMs / 3600000);
-    const diffDays = Math.floor(diffMs / 86400000);
-    
-    if (diffMins < 1) return 'Just now';
-    if (diffMins < 60) return `${diffMins}m ago`;
-    if (diffHours < 24) return `${diffHours}h ago`;
-    if (diffDays < 7) return `${diffDays}d ago`;
-    
-    return date.toLocaleDateString();
-  } catch {
-    return dateString;
-  }
-}
-
-function goToPage(pageNumber) {
-  const url = new URL(window.location);
-  url.searchParams.set('page', pageNumber);
-  window.location.href = url.toString();
-}
-
-// 16. Initialize
-window.addEventListener('DOMContentLoaded', async () => {
-  console.log("Chat Center initialized");
-  
-  // Setup logout event listener
-  document.getElementById('logoutBtn')?.addEventListener('click', async (e) => {
-    e.preventDefault();
-    await logoutFromCloudflare();
-  });
-  
-  // Load likes from localStorage
-  userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
-  
-  // Load avatars
-  await loadAllAvatars();
-
-  // Check authentication before loading topics
-  await checkAuth();
-  await loadTopics();
-});
-
-</script>
-
-<script>
-function renderChatMessages(messages, topicId) {
+// Render messages with nested replies and admin delete
+function renderChatMessages(messages) {
     const container = document.getElementById("messagesContainer");
-
+    
     if (!messages || messages.length === 0) {
         container.innerHTML = `
             <div style="text-align:center; padding:2rem; color:#777;">
@@ -1673,63 +831,316 @@ function renderChatMessages(messages, topicId) {
             </div>`;
         return;
     }
-
-    container.innerHTML = messages.map((msg, index) => {
-        const repliesHtml = (msg.replies || []).map(reply => `
-            <div class="reply-item" style="margin-left:2.5rem; background:#f1f3f5; padding:0.6rem 1rem; border-radius:6px; margin-top:6px;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <strong>${reply.user || "User"}</strong>
-                    <span style="font-size:0.75rem; color:#777;">${formatDate(reply.date)}</span>
-                </div>
-                <p style="margin:0.3rem 0;">${reply.text}</p>
-                <div style="display:flex; gap:1rem; margin-top:4px;">
-                    <span style="cursor:pointer;" onclick="likeReply('${topicId}', ${index}, ${reply.index}); event.stopPropagation();">
-                        ❤️ ${reply.likes || 0}
-                    </span>
-                </div>
-            </div>
-        `).join("");
-
+    
+    function renderMessage(msg, depth = 0) {
+        const avatar = msg.avatar || "chatcenter/avatar/svg-1.svg";
+        const userLiked = userLikes[msg.id] === true;
+        
         return `
-            <div class="message-item" style="background:white; padding:1rem; border-radius:8px; margin-bottom:1rem; border:1px solid #ddd;">
-                <div style="display:flex; gap:0.8rem;">
-                    <img src="${msg.avatar || 'default-avatar.svg'}" 
-                         style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
-                    <div style="flex-grow:1;">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <strong>${msg.user || "User"}</strong>
-                            <span style="font-size:0.8rem; color:#777;">${formatDate(msg.date)}</span>
-                        </div>
-                        <p style="margin:0.5rem 0;">${msg.text}</p>
-
-                        <div style="display:flex; gap:1rem; margin-top:5px;">
-                            <span style="cursor:pointer;" onclick="likeMessage('${topicId}', ${index}); event.stopPropagation();">
-                                ❤️ ${msg.likes || 0}
-                            </span>
-                            <span style="cursor:pointer;" onclick="startReply('${topicId}', ${index}); event.stopPropagation();">
-                                💬 Reply
-                            </span>
+            <div style="margin-left:${depth * 30}px; margin-bottom:1rem;">
+                <div style="background:${depth === 0 ? '#f0f7f4' : '#f8f9fa'}; border-radius:8px; padding:1rem;">
+                    <div style="display:flex; gap:12px; align-items:start;">
+                        <img src="${avatar}" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+                        <div style="flex:1;">
+                            <div style="font-weight:600; color:#1a3c34;">${msg.user || 'Anonymous'}</div>
+                            <div style="font-size:0.85rem; color:#888; margin-bottom:0.5rem;">${formatDate(msg.date)}</div>
+                            <div style="margin-bottom:0.8rem;">${msg.text}</div>
+                            <div style="display:flex; gap:1rem; font-size:0.9rem;">
+                                <button style="background:none; border:none; color:${userLiked ? '#e91e63' : '#666'}; cursor:pointer;"
+                                        ${userLiked ? 'disabled' : `onclick="likeChatMessage('${msg.id}')"`}>
+                                    <i class="fas fa-heart"></i> ${msg.likes || 0}
+                                </button>
+                                <button style="background:none; border:none; color:#666; cursor:pointer;" onclick="showChatReplyBox('${msg.id}')">
+                                    <i class="fas fa-reply"></i> Reply
+                                </button>
+                                ${isAdminAuthenticated ? `
+                                    <button style="background:none; border:none; color:#d11a2a; cursor:pointer;" onclick="deleteChatMessage('${msg.id}')">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                ` : ''}
+                            </div>
                             
-                            ${isAdminAuthenticated ? `
-                                <span style="cursor:pointer; color:red;" onclick="deleteMessage('${topicId}', ${index}); event.stopPropagation();">
-                                    🗑️ Delete
-                                </span>
-                            ` : ""}
+                            <!-- Nested reply box -->
+                            <div id="chatReplyBox-${msg.id}" style="display:none; margin-top:1rem;">
+                                <input type="text" id="nestedReplyUserNameInput-${msg.id}" placeholder="Your Name" style="width:100%; padding:8px; margin-bottom:8px;">
+                                <div id="nestedReplyAvatarGrid-${msg.id}" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;"></div>
+                                <input type="hidden" id="nestedReplySelectedAvatar-${msg.id}" value="">
+                                <textarea id="chatReplyInput-${msg.id}" placeholder="Your reply..." style="width:100%; min-height:60px; padding:8px;"></textarea>
+                                <div style="margin-top:8px;">
+                                    <button onclick="submitChatNestedReply('${msg.id}')" style="background:#1a3c34; color:white; padding:6px 12px;">Post</button>
+                                    <button onclick="hideChatReplyBox('${msg.id}')" style="background:#666; color:white; margin-left:8px; padding:6px 12px;">Cancel</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Replies -->
+                            <div style="margin-top:1rem;">
+                                ${(msg.replies || []).map(reply => renderMessage(reply, depth + 1)).join('')}
+                            </div>
                         </div>
-
-                        ${repliesHtml}
                     </div>
                 </div>
             </div>
         `;
-    }).join("");
+    }
+    
+    container.innerHTML = messages.map(msg => renderMessage(msg)).join('');
+    
+    // Load nested avatar grids after render
+    setTimeout(() => {
+        messages.forEach(msg => {
+            loadAvatarGrid(`nestedReplyAvatarGrid-${msg.id}`, `nestedReplySelectedAvatar-${msg.id}`, 'nestedReplyAvatarOption', avatarFiles);
+            (msg.replies || []).forEach(reply => {
+                loadAvatarGrid(`nestedReplyAvatarGrid-${reply.id}`, `nestedReplySelectedAvatar-${reply.id}`, 'nestedReplyAvatarOption', avatarFiles);
+            });
+        });
+    }, 0);
 }
-</script>
+
+function showChatReplyBox(messageId) {
+    document.getElementById(`chatReplyBox-${messageId}`).style.display = 'block';
+}
+
+function hideChatReplyBox(messageId) {
+    document.getElementById(`chatReplyBox-${messageId}`).style.display = 'none';
+}
+
+// Like message
+async function likeChatMessage(messageId) {
+    if (userLikes[messageId]) return;
+    
+    function incrementLikes(messages) {
+        for (let msg of messages) {
+            if (msg.id === messageId) {
+                msg.likes = (msg.likes || 0) + 1;
+                return true;
+            }
+            if (msg.replies && incrementLikes(msg.replies)) return true;
+        }
+        return false;
+    }
+    
+    if (incrementLikes(currentOpenTopic.messages)) {
+        userLikes[messageId] = true;
+        localStorage.setItem('userLikes', JSON.stringify(userLikes));
+        await saveTopicsToServer();
+        renderChatMessages(currentOpenTopic.messages);
+    }
+}
+
+// Submit nested reply
+async function submitChatNestedReply(parentId) {
+    const textInput = document.getElementById(`chatReplyInput-${parentId}`);
+    const text = textInput.value.trim();
+    if (!text) return alert("Please write a reply");
+    
+    const user = document.getElementById(`nestedReplyUserNameInput-${parentId}`).value.trim() || "Anonymous";
+    const avatar = document.getElementById(`nestedReplySelectedAvatar-${parentId}`).value || "chatcenter/avatar/svg-1.svg";
+    
+    const newReply = {
+        id: Date.now().toString(),
+        user, avatar, text,
+        date: new Date().toLocaleString(),
+        likes: 0,
+        replies: []
+    };
+    
+    function addReply(messages, parentId) {
+        for (let msg of messages) {
+            if (msg.id === parentId) {
+                if (!msg.replies) msg.replies = [];
+                msg.replies.push(newReply);
+                return true;
+            }
+            if (msg.replies && addReply(msg.replies, parentId)) return true;
+        }
+        return false;
+    }
+    
+    if (addReply(currentOpenTopic.messages, parentId)) {
+        await saveTopicsToServer();
+        textInput.value = "";
+        hideChatReplyBox(parentId);
+        renderChatMessages(currentOpenTopic.messages);
+    }
+}
+
+// Submit main reply
+async function submitChatReply() {
+    const text = document.getElementById("chatReplyInput").value.trim();
+    if (!text) return alert("Please write a reply");
+    
+    const user = document.getElementById("replyUserNameInput").value.trim() || "Anonymous";
+    const avatar = document.getElementById("replySelectedAvatar").value || "chatcenter/avatar/svg-1.svg";
+    
+    const newMessage = {
+        id: Date.now().toString(),
+        user, avatar, text,
+        date: new Date().toLocaleString(),
+        likes: 0,
+        replies: []
+    };
+    
+    currentOpenTopic.messages.push(newMessage);
+    await saveTopicsToServer();
+    
+    document.getElementById("chatReplyInput").value = "";
+    document.getElementById("replyUserNameInput").value = "";
+    renderChatMessages(currentOpenTopic.messages);
+}
+
+// Close thread
+function closeChatThread() {
+    document.getElementById("chatOverlay").style.display = "none";
+    document.body.style.overflow = "auto";
+    currentOpenTopic = null;
+    loadTopics();
+}
+
+// Delete topic (admin only)
+async function deleteTopic(topicId) {
+    if (!isAdminAuthenticated) {
+        showToast('Admin access required', 'error');
+        return;
+    }
+    if (!confirm("Delete this entire topic?")) return;
+    
+    allTopics = allTopics.filter(t => t.id !== topicId);
+    await saveTopicsToServer();
+    if (currentOpenTopic && currentOpenTopic.id === topicId) closeChatThread();
+    loadTopics();
+    showToast('Topic deleted', 'success');
+}
+
+// Delete message (admin only)
+async function deleteChatMessage(messageId) {
+    if (!isAdminAuthenticated) {
+        showToast('Admin access required', 'error');
+        return;
+    }
+    if (!confirm("Delete this message?")) return;
+    
+    function removeMessage(messages) {
+        return messages.filter(m => {
+            if (m.id === messageId) return false;
+            if (m.replies) m.replies = removeMessage(m.replies);
+            return true;
+        });
+    }
+    
+    currentOpenTopic.messages = removeMessage(currentOpenTopic.messages);
+    await saveTopicsToServer();
+    renderChatMessages(currentOpenTopic.messages);
+    showToast('Message deleted', 'success');
+}
+
+// Save all topics
+async function saveTopicsToServer() {
+    try {
+        const res = await fetch(SAVE_TOPICS_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(allTopics)
+        });
+        if (!res.ok) throw new Error("Save failed");
+    } catch (err) {
+        console.error(err);
+        showToast('Failed to save', 'error');
+    }
+}
+
+// Create new topic
+async function createTopic() {
+    const title = document.getElementById("topicTitle").value.trim();
+    const body = document.getElementById("topicBody").value.trim();
+    const user = document.getElementById("userNameInput").value.trim() || "Anonymous";
+    const avatar = document.getElementById("selectedAvatar").value || "chatcenter/avatar/svg-1.svg";
+    
+    if (!title || !body) return alert("Title and message are required");
+    
+    const firstMessage = {
+        id: Date.now().toString(),
+        user, avatar, text: body,
+        date: new Date().toLocaleString(),
+        likes: 0, replies: []
+    };
+    
+    const newTopic = {
+        id: Date.now().toString(),
+        title, user, avatar,
+        date: new Date().toLocaleString(),
+        messages: [firstMessage]
+    };
+    
+    allTopics.unshift(newTopic);
+    await saveTopicsToServer();
+    
+    // Clear form
+    document.getElementById("topicTitle").value = "";
+    document.getElementById("topicBody").value = "";
+    document.getElementById("userNameInput").value = "";
+    
+    showToast('Topic created!', 'success');
+    loadTopics();
+}
+
+// Utility
+function formatDate(dateString) {
+    try {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diff = now - date;
+        const mins = Math.floor(diff / 60000);
+        if (mins < 60) return `${mins}m ago`;
+        const hours = Math.floor(mins / 60);
+        if (hours < 24) return `${hours}h ago`;
+        const days = Math.floor(hours / 24);
+        if (days < 7) return `${days}d ago`;
+        return date.toLocaleDateString();
+    } catch {
+        return dateString || 'Just now';
+    }
+}
+
+// Toggle new topic form
+document.getElementById('newTopicHeader').addEventListener('click', () => {
+    const content = document.getElementById('newTopicContent');
+    const icon = document.getElementById('newTopicToggleIcon');
+    if (content.style.display === 'none' || !content.style.display) {
+        content.style.display = 'block';
+        icon.textContent = '➖';
+    } else {
+        content.style.display = 'none';
+        icon.textContent = '➕';
+    }
+});
+
+// Mobile menu toggle
+document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+    document.getElementById('navMenu').classList.toggle('active');
+});
+
+// Initialize
+window.addEventListener('DOMContentLoaded', async () => {
+    console.log("Chat Center initialized");
+    
+    document.getElementById('logoutBtn')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        logoutLocally();
+    });
+    
+    userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
+    await loadAllAvatars();
+    
+    const authResult = checkLocalStorageAuth();
+    updateUIForAuthStatus(authResult);
+    
+    await loadTopics();
+});
 </script>
 
-</footer>
-    <footer>
-        <div class="container footer-content">
+<footer>
+    <div class="container">
+        <div class="footer-content">
             <div class="footer-section">
                 <h4>About RaceAnalyst</h4>
                 <p>Your trusted platform for racing analytics, statistics, and insights.</p>
@@ -1755,6 +1166,7 @@ function renderChatMessages(messages, topicId) {
         <div class="copyright">
             © 2025 RaceAnalyst. All rights reserved.
         </div>
-    </footer>
+    </div>
+</footer>
 </body>
 </html>
