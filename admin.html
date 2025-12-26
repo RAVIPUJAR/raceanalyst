@@ -1275,10 +1275,6 @@ async function logoutFromCloudflare() {
         console.log("🚪 Logging out from Cloudflare...");
         showToast('Logging out...', 'info');
         
-        // ✅ CLEAR localStorage
-        localStorage.removeItem('raceanalyst_admin');
-        localStorage.removeItem('raceanalyst_admin_user');
-        
         // Cloudflare Access logout URL
         const logoutUrl = `${workerBase}cdn-cgi/access/logout`;
         
@@ -1298,9 +1294,6 @@ async function logoutFromCloudflare() {
 /* ---------------------------------------------------
 UPDATE UI BASED ON AUTH STATUS - UPDATED
 --------------------------------------------------- */
-/* ---------------------------------------------------
-UPDATE UI BASED ON AUTH STATUS - UPDATED
---------------------------------------------------- */
 async function updateUIForAuthStatus(authResult) {
     const adminLoginBtn = document.getElementById('adminLoginBtn');
     const logoutItem = document.getElementById('logoutItem');
@@ -1312,15 +1305,6 @@ async function updateUIForAuthStatus(authResult) {
         currentUser = authResult.user;
         
         console.log("✅ User authenticated:", currentUser);
-        
-        // ✅ SET localStorage FLAG FOR CHATCENTER
-        localStorage.setItem('raceanalyst_admin', 'true');
-        localStorage.setItem('raceanalyst_admin_user', JSON.stringify({
-            email: currentUser.email,
-            name: currentUser.name || currentUser.email?.split('@')[0] || 'Admin',
-            timestamp: Date.now()
-        }));
-        console.log("📝 localStorage admin flag set for chatcenter");
         
         // Update login button
         if (adminLoginBtn) {
@@ -1354,10 +1338,6 @@ async function updateUIForAuthStatus(authResult) {
         currentUser = null;
         
         console.log("❌ User not authenticated");
-        
-        // ✅ CLEAR localStorage FLAG
-        localStorage.removeItem('raceanalyst_admin');
-        localStorage.removeItem('raceanalyst_admin_user');
         
         // Update login button
         if (adminLoginBtn) {
@@ -1501,8 +1481,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Setup all event listeners
         setupAuthEventListeners();
         setupAdminEventListeners();
-        setupNavigationListeners();
-        setupDropdownListeners();
+        // setupNavigationListeners();
+        // setupDropdownListeners();
         
         // Step 1: Check authentication FIRST
         console.log("🔐 Checking authentication...");
@@ -1535,45 +1515,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 });
 
-
-// Mobile menu functionality
-function setupMobileMenu() {
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function() {
-            navMenu.querySelector('ul').classList.toggle('active');
-            navOverlay.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (navMenu.querySelector('ul').classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-    }
-    
-    if (navOverlay) {
-        navOverlay.addEventListener('click', function() {
-            navMenu.querySelector('ul').classList.remove('active');
-            navOverlay.classList.remove('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        });
-    }
-    
-    // Close mobile menu when clicking on links
-    document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('click', function() {
-            navMenu.querySelector('ul').classList.remove('active');
-            navOverlay.classList.remove('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        });
-    });
-}
 /* ---------------------------------------------------
 SETUP AUTH EVENT LISTENERS - UPDATED
 --------------------------------------------------- */
