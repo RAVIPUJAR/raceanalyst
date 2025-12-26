@@ -365,17 +365,6 @@
             gap: 10px;
         }
         
-        .admin-login-btn {
-            background: #d4af37 !important;
-            color: #1a3c34 !important;
-            padding: 0.5rem 1rem !important;
-            font-size: 0.9rem !important;
-        }
-        
-        .admin-login-btn:hover {
-            background: #e6c244 !important;
-        }
-        
         .admin-logged-in {
             background: #28a745 !important;
             color: white !important;
@@ -475,7 +464,7 @@
         <div id="newTopicContent" style="display:none;">
             <input type="text" id="userNameInput" placeholder="Your Name" style="margin-bottom:1rem; padding:12px; border:2px solid #e6e6e6; border-radius:6px;">
             <div id="avatarGrid" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:1rem;">
-                <!-- Avatars will be dynamically loaded here -->
+                <!-- Default avatars will be loaded here -->
             </div>
             <input type="hidden" id="selectedAvatar" value="">
             <input type="text" id="topicTitle" placeholder="Topic Title">
@@ -533,7 +522,7 @@
             <input type="text" id="replyUserNameInput" placeholder="Your Name" style="margin-bottom:1rem; padding:12px; border:2px solid #e6e6e6; border-radius:6px;">
 
             <div id="replyAvatarGrid" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:1rem;">
-                <!-- Avatars will be dynamically loaded here -->
+                <!-- Default avatars will be loaded here -->
             </div>
 
             <input type="hidden" id="replySelectedAvatar" value="">
@@ -575,7 +564,7 @@ async function checkCloudflareAuth() {
         const timestamp = new Date().getTime();
         const response = await fetch(`${WORKER_BASE}auth-status?t=${timestamp}`, {
             method: 'GET',
-            credentials: 'include', // This sends the Cloudflare cookies
+            credentials: 'include',
             headers: {
                 'Accept': 'application/json'
             }
@@ -587,12 +576,13 @@ async function checkCloudflareAuth() {
             const data = await response.json();
             console.log("Auth response data:", data);
             
-            if (data.authenticated) {
+            // Check different possible response structures
+            if (data.authenticated === true || data.status === 'authenticated') {
                 return { 
                     authenticated: true, 
                     user: {
-                        email: data.email,
-                        name: data.name || data.email?.split('@')[0] || 'Admin'
+                        email: data.email || data.user?.email || '',
+                        name: data.name || data.user?.name || 'Admin'
                     }
                 };
             }
@@ -607,10 +597,6 @@ async function checkCloudflareAuth() {
         
     } catch (error) {
         console.error("Auth check failed:", error);
-        // Check if it's a CORS/network error (might mean no cookies)
-        if (error.message.includes('CORS') || error.message.includes('Failed to fetch')) {
-            console.log("Network/CORS error - likely no valid auth cookies");
-        }
         return { 
             authenticated: false, 
             user: null, 
@@ -762,18 +748,21 @@ function navigateToAdmin() {
 }
 
 // ===== AVATAR FUNCTIONS =====
-let avatarFiles = [];
+// Default avatar files (hardcoded since the endpoint doesn't exist)
+const defaultAvatarFiles = [
+    'svg-1.svg',
+    'svg-2.svg',
+    'svg-3.svg',
+    'svg-4.svg',
+    'svg-5.svg'
+];
 
-async function loadAllAvatars() {
+function loadAllAvatars() {
     try {
-        const res = await fetch('/chatcenter/avatar-list');
+        console.log("Loading default avatars...");
         
-        if (!res.ok) {
-            throw new Error(`Failed to fetch avatars: ${res.status}`);
-        }
-        
-        avatarFiles = await res.json();
-        console.log("Loaded avatars:", avatarFiles);
+        // Use default avatars since the endpoint doesn't exist
+        const avatarFiles = defaultAvatarFiles;
         
         // Load avatar grids
         loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
@@ -781,19 +770,20 @@ async function loadAllAvatars() {
         
     } catch (err) {
         console.error("Avatar loading failed:", err);
-        // Fallback to default avatars
-        avatarFiles = ['svg-1.svg', 'svg-2.svg'];
-        loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
-        loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
+        // Use minimal default avatars
+        const minimalAvatars = ['svg-1.svg', 'svg-2.svg'];
+        loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", minimalAvatars);
+        loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", minimalAvatars);
     }
 }
 
-function loadAvatarGrid(gridId, inputId, optionClass = "replyAvatarOption", avatarList = avatarFiles) {
+function loadAvatarGrid(gridId, inputId, optionClass = "replyAvatarOption", avatarList = defaultAvatarFiles) {
     const grid = document.getElementById(gridId);
     if (!grid) return;
     
     let html = "";
     avatarList.forEach(file => {
+        // Use relative path for avatars
         let src = `chatcenter/avatar/${file}`;
         html += `<img src="${src}" class="${optionClass}" 
                 style="width:40px; height:40px; border-radius:50%; cursor:pointer; 
@@ -1174,40 +1164,8 @@ function renderChatMessage(msg, depth = 0) {
   const userLiked = userLikes[messageId] === true;
   const canLike = !userLiked;
   
-  // Use local avatar folder, fallback to default local avatar if not present
-  let avatarSrc = msg.avatar;
-  if (!avatarSrc || !avatarSrc.startsWith("chatcenter/avatar/")) {
-    avatarSrc = "chatcenter/avatar/svg-1.svg";
-  }
-
-  // Render nested reply avatar grid dynamically
-  setTimeout(() => {
-    const grid = document.getElementById(`nestedReplyAvatarGrid-${messageId}`);
-    if (grid && avatarFiles.length > 0) {
-      let html = "";
-      avatarFiles.forEach(file => {
-        let src = `chatcenter/avatar/${file}`;
-        html += `<img src="${src}" class="nestedReplyAvatarOption" data-parent="${messageId}" 
-                style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">`;
-      });
-      grid.innerHTML = html;
-      
-      // Add click handlers for nested avatars
-      const avatars = grid.querySelectorAll('.nestedReplyAvatarOption');
-      avatars.forEach(avatar => {
-        avatar.addEventListener('click', function() {
-          // Clear border from all avatars in this group
-          avatars.forEach(a => a.style.border = "2px solid transparent");
-          
-          // Highlight selected avatar
-          this.style.border = "2px solid #d4af37";
-          
-          // Save selected avatar
-          document.getElementById(`nestedReplySelectedAvatar-${messageId}`).value = this.src;
-        });
-      });
-    }
-  }, 0);
+  // Use avatar from message or default
+  let avatarSrc = msg.avatar || "chatcenter/avatar/svg-1.svg";
 
   return `
     <div class="chat-message" style="margin-left:${depth * 20}px; margin-bottom:1rem;">
@@ -1312,19 +1270,52 @@ async function likeChatMessage(messageId) {
 
 // 8. Show/hide reply box in chat
 function showChatReplyBox(messageId) {
-  document.getElementById(`chatReplyBox-${messageId}`).style.display = 'block';
-  document.getElementById(`chatReplyInput-${messageId}`).focus();
+  const replyBox = document.getElementById(`chatReplyBox-${messageId}`);
+  if (!replyBox) return;
+  
+  replyBox.style.display = 'block';
+  document.getElementById(`chatReplyInput-${messageId}`)?.focus();
+  
+  // Load avatars for this nested reply box
+  setTimeout(() => {
+    const grid = document.getElementById(`nestedReplyAvatarGrid-${messageId}`);
+    if (grid) {
+      let html = "";
+      defaultAvatarFiles.forEach(file => {
+        let src = `chatcenter/avatar/${file}`;
+        html += `<img src="${src}" class="nestedReplyAvatarOption" data-parent="${messageId}" 
+                style="width:32px; height:32px; border-radius:50%; cursor:pointer; border:2px solid transparent;">`;
+      });
+      grid.innerHTML = html;
+      
+      // Add click handlers
+      const avatars = grid.querySelectorAll('.nestedReplyAvatarOption');
+      avatars.forEach(avatar => {
+        avatar.addEventListener('click', function() {
+          avatars.forEach(a => a.style.border = "2px solid transparent");
+          this.style.border = "2px solid #d4af37";
+          document.getElementById(`nestedReplySelectedAvatar-${messageId}`).value = this.src;
+        });
+      });
+    }
+  }, 0);
 }
 
 function hideChatReplyBox(messageId) {
-  document.getElementById(`chatReplyBox-${messageId}`).style.display = 'none';
-  document.getElementById(`chatReplyInput-${messageId}`).value = '';
+  const replyBox = document.getElementById(`chatReplyBox-${messageId}`);
+  if (replyBox) {
+    replyBox.style.display = 'none';
+  }
+  const input = document.getElementById(`chatReplyInput-${messageId}`);
+  if (input) {
+    input.value = '';
+  }
 }
 
 // 9. Submit nested reply in chat
 async function submitChatNestedReply(parentId) {
     const input = document.getElementById(`chatReplyInput-${parentId}`);
-    const text = input.value.trim();
+    const text = input?.value.trim();
 
     if (!text) {
         alert("Please enter a reply");
@@ -1373,7 +1364,7 @@ async function submitChatNestedReply(parentId) {
 
         await saveTopicsToServer();
 
-        input.value = "";
+        if (input) input.value = "";
         if (userInput) userInput.value = "";
         if (avatarInput) avatarInput.value = "";
 
@@ -1389,13 +1380,13 @@ async function submitChatNestedReply(parentId) {
 // 10. Submit main reply in chat
 async function submitChatReply() {
   const input = document.getElementById("chatReplyInput");
-  const text = input.value.trim();
+  const text = input?.value.trim();
 
   const userInput = document.getElementById("replyUserNameInput");
   const avatarInput = document.getElementById("replySelectedAvatar");
 
-  const user = userInput.value.trim() || "Anonymous";
-  const avatar = avatarInput.value.trim() || "chatcenter/avatar/svg-1.svg";
+  const user = (userInput?.value.trim()) || "Anonymous";
+  const avatar = (avatarInput?.value.trim()) || "chatcenter/avatar/svg-1.svg";
 
   if (!text) {
     alert("Please enter a reply");
@@ -1426,9 +1417,9 @@ async function submitChatReply() {
 
   await saveTopicsToServer();
 
-  input.value = "";
-  userInput.value = "";
-  avatarInput.value = "";
+  if (input) input.value = "";
+  if (userInput) userInput.value = "";
+  if (avatarInput) avatarInput.value = "";
 
   // Clear avatar selection
   document.querySelectorAll(".replyAvatarOption").forEach(a => {
@@ -1439,7 +1430,9 @@ async function submitChatReply() {
 
   setTimeout(() => {
     const chatBox = document.getElementById("chatMessages");
-    chatBox.scrollTop = chatBox.scrollHeight;
+    if (chatBox) {
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
   }, 100);
 }
 
@@ -1538,10 +1531,10 @@ async function saveTopicsToServer() {
 // 14. Create topic function
 async function createTopic() {
     const titleInput = document.getElementById("topicTitle");
-    const title = titleInput.value.trim();
+    const title = titleInput?.value.trim();
 
     const contentInput = document.getElementById("topicBody");
-    const content = contentInput.value.trim();
+    const content = contentInput?.value.trim();
 
     const userInput = document.getElementById("userNameInput");
     const avatarInput = document.getElementById("selectedAvatar");
@@ -1585,8 +1578,8 @@ async function createTopic() {
 
     await saveTopicsToServer();
 
-    titleInput.value = "";
-    contentInput.value = "";
+    if (titleInput) titleInput.value = "";
+    if (contentInput) contentInput.value = "";
     if (userInput) userInput.value = "";
     if (avatarInput) avatarInput.value = "";
 
@@ -1643,12 +1636,13 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Load likes from localStorage
   userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
   
-  // Load avatars
-  await loadAllAvatars();
+  // Load default avatars (no API call needed)
+  loadAllAvatars();
   
   // Check authentication status FIRST
   console.log("Checking authentication status...");
   const authResult = await checkCloudflareAuth();
+  console.log("Auth result:", authResult);
   await updateUIForAuthStatus(authResult);
   
   console.log("Auth status after check:", isAdminAuthenticated ? "Authenticated" : "Not authenticated");
