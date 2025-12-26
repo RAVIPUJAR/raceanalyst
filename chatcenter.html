@@ -1003,7 +1003,7 @@ function renderChatMessage(msg, depth = 0) {
             style="background:none; border:none; color:#666; cursor:pointer; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
             <i class="fas fa-reply"></i> Reply
           </button>
-          ${(isAdminMode || msg.user === localStorage.getItem('chatUserName')) ? `
+          ${((isAdminMode || localStorage.getItem("isAdmin") === "true") || msg.user === localStorage.getItem('chatUserName')) ? `
             <button onclick="deleteChatMessage('${msg.id}')" 
               style="background:none; border:none; color:#d11a2a; cursor:pointer; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.9rem;">
               <i class="fas fa-trash"></i> Delete
@@ -1272,6 +1272,8 @@ function attemptAdminLogin() {
   
   if (password === ADMIN_PASSWORD) {
     localStorage.setItem("isAdmin", "true");
+    isAdminMode = true;
+    document.getElementById("adminPanel").style.display = "block";
     document.getElementById("adminPanel").style.display = "block";
     closeAdminLogin();
     loadTopics(); // Re-render with delete buttons
@@ -1458,6 +1460,11 @@ function goToPage(pageNumber) {
 // 17. Initialize
 window.addEventListener('DOMContentLoaded', () => {
   console.log("Chat Center initialized");
+  if (localStorage.getItem("isAdmin") === "true") {
+      isAdminMode = true;
+      const adminPanel = document.getElementById("adminPanel");
+      if (adminPanel) adminPanel.style.display = "block";
+  }
   
   // Load likes from localStorage
   userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
@@ -1469,10 +1476,10 @@ window.addEventListener('DOMContentLoaded', () => {
     adminBtn.innerHTML = '<i class="fas fa-user-shield"></i> Admin';
     adminBtn.style.cssText = "background:#d4af37; color:white; border:none; padding:0.5rem 1rem; border-radius:4px; cursor:pointer; margin-left:1rem;";
     adminBtn.onclick = showAdminLogin;
-    if (localStorage.getItem("isAdmin") === "true") {
-      header.appendChild(adminBtn);
-    }
-  }
+
+    // Always show the Admin button
+    header.appendChild(adminBtn);
+}
   
   // Load topics
   loadTopics();
