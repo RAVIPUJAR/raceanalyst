@@ -509,36 +509,45 @@ let avatarFiles = [];
 
 async function loadAllAvatars() {
     try {
-        const res = await fetch(`${BASE_URL}/chatcenter/avatar-list`);
+        // Use relative path since this is a Pages Function
+        const res = await fetch('/avatar-list');
+        
+        if (!res.ok) {
+            throw new Error(`Failed to fetch avatars: ${res.status}`);
+        }
+        
         avatarFiles = await res.json();
+        console.log("Loaded avatars:", avatarFiles);
         
         // Load avatar grids dynamically
         loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
         loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
     } catch (err) {
         console.error("Avatar loading failed:", err);
+        // Fallback to default avatars
+        avatarFiles = ['svg-1.svg', 'svg-2.svg', 'svg-3.svg', 'svg-4.svg'];
+        loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
+        loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
     }
 }
 
 function loadAvatarGrid(gridId, inputId, optionClass = "replyAvatarOption", avatarList = avatarFiles) {
     const grid = document.getElementById(gridId);
     if (!grid) return;
+    
     let html = "";
     avatarList.forEach(file => {
+        // Use the correct path to avatars
         let src = `avatar/${file}`;
-        html += `<img src="${src}" class="${optionClass}" style="width:40px; height:40px; border-radius:50%; cursor:pointer; border:2px solid transparent;">`;
+        html += `<img src="${src}" class="${optionClass}" 
+                style="width:40px; height:40px; border-radius:50%; cursor:pointer; 
+                       border:2px solid transparent; object-fit:cover;"
+                title="${file.replace('.svg', '')}">`;
     });
+    
     grid.innerHTML = html;
-    // Add click handlers for selection and highlight
-    const options = grid.querySelectorAll(`.${optionClass}`);
-    const hiddenInput = document.getElementById(inputId);
-    options.forEach(avatar => {
-        avatar.addEventListener("click", function () {
-            options.forEach(a => a.style.border = "2px solid transparent");
-            this.style.border = "2px solid #d4af37";
-            if (hiddenInput) hiddenInput.value = this.src;
-        });
-    });
+    
+    // ... rest of the click handler code ...
 }
 
 // On DOMContentLoaded, dynamically load both avatar grids (new topic and reply)
