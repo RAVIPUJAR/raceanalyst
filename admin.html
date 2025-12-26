@@ -1501,8 +1501,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Setup all event listeners
         setupAuthEventListeners();
         setupAdminEventListeners();
-        // setupNavigationListeners();
-        // setupDropdownListeners();
+        setupNavigationListeners();
+        setupDropdownListeners();
         
         // Step 1: Check authentication FIRST
         console.log("🔐 Checking authentication...");
@@ -1535,45 +1535,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 });
 
-
-// Mobile menu functionality
-function setupMobileMenu() {
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function() {
-            navMenu.querySelector('ul').classList.toggle('active');
-            navOverlay.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (navMenu.querySelector('ul').classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-    }
-    
-    if (navOverlay) {
-        navOverlay.addEventListener('click', function() {
-            navMenu.querySelector('ul').classList.remove('active');
-            navOverlay.classList.remove('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        });
-    }
-    
-    // Close mobile menu when clicking on links
-    document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('click', function() {
-            navMenu.querySelector('ul').classList.remove('active');
-            navOverlay.classList.remove('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        });
-    });
-}
 /* ---------------------------------------------------
 SETUP AUTH EVENT LISTENERS - UPDATED
 --------------------------------------------------- */
@@ -1830,6 +1791,150 @@ function clearAdminForm() {
 // [Keep all other functions: displayAnalysis, createCalendar, loadUpcomingRacesFromSheet, 
 // setupMobileMenu, setupNavigationListeners, setupDropdownListeners, etc.]
 // They remain the same as in your original code
+
+/* ... your existing script code ... */
+
+// ===== MISSING FUNCTIONS - ADD THESE =====
+
+function setupMobileMenu() {
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
+    const overlay = document.getElementById('navOverlay');
+
+    if (!mobileBtn || !navMenu || !overlay) return;
+
+    mobileBtn.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+    });
+
+    overlay.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.classList.remove('menu-open');
+    });
+}
+
+function setupNavigationListeners() {
+    // You can add smooth scrolling or other nav behaviors here if needed
+    // Currently, navigation uses onclick="navigateTo..." which is fine
+}
+
+function setupDropdownListeners() {
+    const venueSelect = document.getElementById('venueSelect');
+    const dateSelect = document.getElementById('dateSelect');
+    const raceSelect = document.getElementById('raceSelect');
+
+    if (venueSelect) {
+        venueSelect.addEventListener('change', () => {
+            updateDateDropdown();
+            updateRaceDropdown();
+            clearAnalysisDisplay();
+        });
+    }
+
+    if (dateSelect) {
+        dateSelect.addEventListener('change', () => {
+            updateRaceDropdown();
+            clearAnalysisDisplay();
+        });
+    }
+
+    if (raceSelect) {
+        raceSelect.addEventListener('change', () => {
+            const selectedKey = raceSelect.value;
+            if (selectedKey && raceAnalyses[selectedKey]) {
+                displayAnalysis(selectedKey);
+                populateAdminForm(selectedKey);
+            } else {
+                clearAnalysisDisplay();
+            }
+        });
+    }
+}
+
+function clearAnalysisDisplay() {
+    document.getElementById('analysisTitle').textContent = 'Race Analysis';
+    document.getElementById('raceInfo').style.display = 'none';
+    document.getElementById('analysisContent').innerHTML = `
+        <div class="no-analysis">
+            <i class="fas fa-racing-helmet"></i>
+            <p>Select a race to view analysis</p>
+        </div>
+    `;
+}
+
+function displayAnalysis(key) {
+    const analysis = raceAnalyses[key];
+    if (!analysis) {
+        clearAnalysisDisplay();
+        return;
+    }
+
+    document.getElementById('analysisTitle').textContent = 'Race Analysis';
+    document.getElementById('selectedVenue').textContent = analysis.venue;
+    document.getElementById('selectedDate').textContent = new Date(analysis.date).toLocaleDateString('en-IN', {
+        day: '2-digit', month: 'short', year: 'numeric'
+    });
+    document.getElementById('selectedRace').textContent = `Race ${analysis.raceNo}`;
+    document.getElementById('raceInfo').style.display = 'flex';
+
+    document.getElementById('analysisContent').innerHTML = analysis.analysis
+        .replace(/\n/g, '<br>')
+        .replace(/ /g, '&nbsp;');
+}
+
+function populateAdminForm(key) {
+    const analysis = raceAnalyses[key];
+    if (!analysis) return;
+
+    document.getElementById('adminVenue').value = analysis.venue;
+    document.getElementById('adminDate').value = analysis.date;
+    document.getElementById('adminRaceNo').value = analysis.raceNo;
+    document.getElementById('adminAnalysis').value = analysis.analysis;
+}
+
+function createCalendar() {
+    // Simple placeholder - you can expand this later
+    // Or remove if not needed
+}
+
+function loadUpcomingRacesFromSheet() {
+    // Placeholder - implement if you have a Google Sheet
+    // For now, just leave empty or add static data
+}
+
+// Call setup functions in DOMContentLoaded
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log("🚀 Initializing RaceAnalyst Admin...");
+    
+    try {
+        // These were missing and causing errors
+        setupMobileMenu();
+        setupNavigationListeners();
+        setupDropdownListeners();
+
+        // Rest of your existing init code...
+        const authResult = await checkCloudflareAuth();
+        await updateUIForAuthStatus(authResult);
+
+        if (authResult.authenticated) {
+            await loadFromKV();
+        } else {
+            raceAnalyses = {};
+        }
+
+        initializeDropdowns();
+        createCalendar();
+        loadUpcomingRacesFromSheet();
+
+        console.log("✅ Admin page ready!");
+    } catch (error) {
+        console.error("Initialization error:", error);
+        showToast("Error: " + error.message, "error");
+    }
+});
 </script>
 </body>
 </html>
