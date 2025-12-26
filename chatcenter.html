@@ -1321,15 +1321,25 @@ async function createTopic() {
         return;
     }
 
+    const firstMessage = {
+        id: Date.now().toString(),
+        user: user,
+        avatar: avatar,
+        text: content,
+        date: new Date().toLocaleString(),
+        likes: 0,
+        replies: []
+    };
+
     const newTopic = {
         id: Date.now().toString(),
         title: title,
-        content: content,
+        content: "",  // no standalone content, everything is now a message
         user: user,
         avatar: avatar,
         date: new Date().toLocaleString(),
         likes: 0,
-        messages: []
+        messages: [firstMessage]
     };
 
     allTopics.unshift(newTopic);
