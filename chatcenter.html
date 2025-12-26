@@ -505,10 +505,20 @@ let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}'); // Track 
 
 
 // ===== REPLY AVATAR SELECTION HANDLER (Dynamic) =====
-const avatarFiles = [
-    "svg-1.svg", "svg-2.svg", "svg-3.svg", "svg-4.svg", "svg-5.svg", "svg-6.svg",
-    "svg-7.svg", "svg-8.svg", "svg-9.svg", "svg-10.svg", "svg-11.svg", "svg-12.svg"
-];
+let avatarFiles = [];
+
+async function loadAllAvatars() {
+    try {
+        const res = await fetch(`${BASE_URL}/chatcenter/avatar-list`);
+        avatarFiles = await res.json();
+        
+        // Load avatar grids dynamically
+        loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
+        loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
+    } catch (err) {
+        console.error("Avatar loading failed:", err);
+    }
+}
 
 function loadAvatarGrid(gridId, inputId, optionClass = "replyAvatarOption", avatarList = avatarFiles) {
     const grid = document.getElementById(gridId);
@@ -533,10 +543,7 @@ function loadAvatarGrid(gridId, inputId, optionClass = "replyAvatarOption", avat
 
 // On DOMContentLoaded, dynamically load both avatar grids (new topic and reply)
 document.addEventListener("DOMContentLoaded", function () {
-    // New Topic Avatar Grid
-    loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
-    // Reply Avatar Grid
-    loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
+    loadAllAvatars();
 });
 
 // ===== NESTED REPLY AVATAR SELECTION HANDLER =====
