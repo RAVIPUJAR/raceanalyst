@@ -1297,20 +1297,19 @@ async function saveTopicsToServer() {
 // 14. Create topic function
 // Create a new topic (with user + avatar)
 async function createTopic() {
-    const titleInput = document.getElementById("newTopicTitle");
+    const titleInput = document.getElementById("topicTitle");
     const title = titleInput.value.trim();
-    const contentInput = document.getElementById("newTopicContentInput");
+
+    const contentInput = document.getElementById("topicBody");
     const content = contentInput.value.trim();
 
-    const userInput = document.getElementById("newTopicUserNameInput");
-    const avatarInput = document.getElementById("newTopicSelectedAvatar");
+    const userInput = document.getElementById("userNameInput");
+    const avatarInput = document.getElementById("selectedAvatar");
 
     const user = (userInput?.value.trim()) || "Anonymous";
     const avatarSelected = (avatarInput?.value.trim()) || "";
 
-    // Avatar fallback (local default)
-    const avatar = avatarSelected ||
-        "avatar/svg-1.svg";
+    const avatar = avatarSelected || "avatar/svg-1.svg";
 
     if (!title) {
         alert("Please enter a topic title");
@@ -1322,7 +1321,6 @@ async function createTopic() {
         return;
     }
 
-    // New topic object
     const newTopic = {
         id: Date.now().toString(),
         title: title,
@@ -1334,25 +1332,20 @@ async function createTopic() {
         messages: []
     };
 
-    // Add to allTopics
     allTopics.unshift(newTopic);
 
-    // Save to server
     await saveTopicsToServer();
 
-    // Clear input fields
     titleInput.value = "";
     contentInput.value = "";
     if (userInput) userInput.value = "";
     if (avatarInput) avatarInput.value = "";
 
-    // Clear avatar grid highlight
     document.querySelectorAll(".avatarOption").forEach(a => {
         a.style.border = "2px solid transparent";
     });
 
-    closeNewTopic();  // Hide modal
-    renderTopics();   // Refresh topic list
+    loadTopics();
 }
 
 // 15. Delete topic (admin only)
