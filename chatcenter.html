@@ -409,7 +409,6 @@
                 opacity: 1;
             }
         }
-
     </style>
 </head>
 
@@ -576,7 +575,7 @@ function checkLocalStorageAuth() {
     if (adminFlag === 'true' && adminUserStr) {
         try {
             const adminUser = JSON.parse(adminUserStr);
-            // Optional: add expiry (e.g., 7 days) for basic safety
+            // Optional 7-day expiry for basic safety
             if (adminUser.timestamp && (Date.now() - adminUser.timestamp < 7 * 24 * 60 * 60 * 1000)) {
                 isAdminAuthenticated = true;
                 currentAdminUser = {
