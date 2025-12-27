@@ -783,6 +783,9 @@ function renderTopics(topics) {
       });
     }
     
+// In renderTopics function, find where you generate the topic HTML
+// Replace the button section that currently only has the "View" button:
+
     return `
     <div class="topic-item topic-row" onclick="openChatThread('${topic.id}')" 
         style="background:#f8f9fa; border-left:4px solid #d4af37; padding:1.2rem; margin-bottom:1rem; border-radius:6px; cursor:pointer; transition:0.2s;">
@@ -805,13 +808,25 @@ function renderTopics(topics) {
                 ` : ""}
             </div>
 
-            <!-- Eye Button -->
-            <button onclick="openChatThread('${topic.id}'); event.stopPropagation();"
-                style="display:flex; align-items:center; gap:5px; background:none; border:none; cursor:pointer; color:#1a3c34; font-size:0.95rem; padding:6px; transition:0.2s;">
+            <div style="display:flex; align-items:center; gap:5px;">
+                <!-- Eye Button -->
+                <button onclick="openChatThread('${topic.id}'); event.stopPropagation();"
+                    style="display:flex; align-items:center; gap:5px; background:none; border:none; cursor:pointer; color:#1a3c34; font-size:0.95rem; padding:6px; transition:0.2s;">
+                    
+                    <i class="fas fa-eye view-icon" style="font-size:1.1rem;"></i>
+                    <span style="font-size:0.85rem;">View</span>
+                </button>
                 
-                <i class="fas fa-eye view-icon" style="font-size:1.1rem;"></i>
-                <span style="font-size:0.85rem;">View</span>
-            </button>
+                <!-- DELETE BUTTON (Admin only) -->
+                ${isAdminMode ? `
+                    <button onclick="deleteTopic('${topic.id}'); event.stopPropagation();"
+                        style="display:flex; align-items:center; gap:5px; background:none; border:none; cursor:pointer; color:#d11a2a; font-size:0.95rem; padding:6px; transition:0.2s;">
+                        
+                        <i class="fas fa-trash" style="font-size:1.1rem;"></i>
+                        <span style="font-size:0.85rem;">Delete</span>
+                    </button>
+                ` : ''}
+            </div>
         </div>
 
         <div style="font-size:0.9rem; color:#444; display:flex; gap:1.5rem; flex-wrap:wrap; margin-top:6px;">
@@ -1384,8 +1399,11 @@ async function createTopic() {
 }
 
 // 15. Delete topic (admin only)
+// Ensure deleteTopic function is correctly implemented:
 async function deleteTopic(topicId) {
-  if (!isAdminMode) {
+  // Check if admin mode is active
+  if (!isAdminMode && localStorage.getItem("isAdmin") !== "true") {
+    // If not admin, show login
     showAdminLogin();
     return;
   }
@@ -1393,8 +1411,10 @@ async function deleteTopic(topicId) {
   if (!confirm("Delete this topic and all messages?")) return;
   
   try {
+    // Filter out the topic to delete
     allTopics = allTopics.filter(topic => topic.id !== topicId);
     
+    // Save to server
     await saveTopicsToServer();
     
     // If this topic is open, close it
@@ -1402,10 +1422,12 @@ async function deleteTopic(topicId) {
       closeChatThread();
     }
     
-    alert("Topic deleted");
+    alert("Topic deleted successfully");
+    // Reload the topics list
     loadTopics();
   } catch (error) {
-    alert("Failed to delete: " + error.message);
+    alert("Failed to delete topic: " + error.message);
+    console.error("Delete topic error:", error);
   }
 }
 
