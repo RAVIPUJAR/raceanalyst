@@ -698,6 +698,7 @@ let avatarFiles = [];
 
 async function loadAllAvatars() {
     try {
+        // Use the correct endpoint based on function location
         const res = await fetch('/chatcenter/avatar-list');
         
         if (!res.ok) {
@@ -707,12 +708,16 @@ async function loadAllAvatars() {
         avatarFiles = await res.json();
         console.log("Loaded avatars:", avatarFiles);
         
+        // Load avatar grids
         loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
         loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
         
     } catch (err) {
         console.error("Avatar loading failed:", err);
-        showToast('Could not load avatars', 'error');
+        // Fallback to default avatars
+        avatarFiles = ['svg-1.svg', 'svg-2.svg'];
+        loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
+        loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
     }
 }
 
