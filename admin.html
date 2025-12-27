@@ -1090,6 +1090,8 @@
 
     <script>
 
+
+    const ADMIN_TOKEN = '283efb589b0a95ebfa4490d4819dd2a348ce4a676fd4c95ac75623eb5b45e5de';
     /* ---------------------------------------------------
     NAVIGATION FUNCTIONS
     --------------------------------------------------- */
@@ -1266,8 +1268,8 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
             const response = await fetch(workerBase + "/save", {
                 method: "POST",
                 headers: { 
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
+                "Content-Type": "application/json",
+                "X-Admin-Token": ADMIN_TOKEN  // ← Add this
                 },
                 body: JSON.stringify({ key, data })
             });
@@ -1293,7 +1295,7 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
                 method: "POST",
                 headers: { 
                     "Content-Type": "application/json",
-                    "Accept": "application/json"
+                    "X-Admin-Token": ADMIN_TOKEN
                 },
                 body: JSON.stringify({ key })
             });
