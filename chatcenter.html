@@ -891,7 +891,7 @@ function renderChatMessages(messages) {
     const messagesHtml = messages.map(msg => `
         <div class="thread-message">
             <div style="display:flex; align-items:center; margin-bottom:8px;">
-                <img src="${msg.avatar || '/chatcenter/avatar/default.png'}" 
+                <img src="${msg.avatar || '/chatcenter/avatar-list'}" 
                      style="width:32px; height:32px; border-radius:50%; margin-right:10px; object-fit:cover;">
                 <div>
                     <strong>${msg.user || 'Anonymous'}</strong>
@@ -922,7 +922,7 @@ function renderReplies(replies) {
     return replies.map(reply => `
         <div style="margin-bottom:12px;">
             <div style="display:flex; align-items:center; margin-bottom:6px;">
-                <img src="${reply.avatar || '/chatcenter/avatar/default.png'}" 
+                <img src="${reply.avatar || '/chatcenter/avatar-list'}" 
                      style="width:28px; height:28px; border-radius:50%; margin-right:8px; object-fit:cover;">
                 <div>
                     <strong style="font-size:0.9rem;">${reply.user || 'Anonymous'}</strong>
@@ -956,12 +956,12 @@ async function createTopic() {
         id: 'topic_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
         title: title,
         user: userName || 'Anonymous',
-        avatar: avatar || '/chatcenter/avatar/default.png',
+        avatar: avatar || '/chatcenter/avatar-list',
         date: new Date().toISOString(),
         messages: [{
             id: 'msg_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
             user: userName || 'Anonymous',
-            avatar: avatar || '/chatcenter/avatar/default.png',
+            avatar: avatar || '/chatcenter/avatar-list',
             text: body,
             date: new Date().toISOString(),
             replies: []
@@ -998,7 +998,7 @@ async function submitChatReply() {
     const newMessage = {
         id: 'msg_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
         user: userName || 'Anonymous',
-        avatar: avatar || '/chatcenter/avatar/default.png',
+        avatar: avatar || '/chatcenter/avatar-list',
         text: text,
         date: new Date().toISOString(),
         replies: []
