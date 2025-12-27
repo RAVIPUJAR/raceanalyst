@@ -851,6 +851,46 @@
     </style>
 </head>
 <body>
+    <!-- Login Modal -->
+    <div id="loginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 40px; border-radius: 12px; max-width: 400px; width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <i class="fas fa-shield-alt" style="font-size: 3rem; color: #1a3c34; margin-bottom: 15px;"></i>
+                <h2 style="color: #1a3c34; margin-bottom: 10px;">Admin Authentication</h2>
+                <p style="color: #666; font-size: 0.95rem;">Enter your admin token to continue</p>
+            </div>
+            
+            <form id="loginForm" style="display: flex; flex-direction: column; gap: 20px;">
+                <div>
+                    <label for="adminTokenInput" style="display: block; font-weight: 600; margin-bottom: 8px; color: #495057;">
+                        <i class="fas fa-key"></i> Admin Token
+                    </label>
+                    <input 
+                        type="password" 
+                        id="adminTokenInput" 
+                        placeholder="Enter your admin token"
+                        style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 1rem;"
+                        required
+                    />
+                </div>
+                
+                <button 
+                    type="submit" 
+                    style="background: #1a3c34; color: white; padding: 12px; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s;"
+                >
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                
+                <p style="font-size: 0.85rem; color: #999; text-align: center; margin-top: 10px;">
+                    Token is stored securely in your browser
+                </p>
+            </form>
+            
+            <div id="loginError" style="display: none; background: #fee; color: #c00; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: center;">
+                <i class="fas fa-exclamation-circle"></i> <span id="loginErrorMessage">Invalid token</span>
+            </div>
+        </div>
+    </div>
     <!-- Professional Header with Admin in Menu -->
     <header>
         <div class="container header-content">
@@ -1090,8 +1130,78 @@
 
     <script>
 
+    // ============================================
+// SECURE TOKEN MANAGEMENT - ADD THIS FIRST
+// ============================================
 
-    const ADMIN_TOKEN = '283efb589b0a95ebfa4490d4819dd2a348ce4a676fd4c95ac75623eb5b45e5de';
+    let ADMIN_TOKEN = null;
+
+    function checkLogin() {
+        const storedToken = localStorage.getItem('raceanalyst_admin_token');
+        const loginTime = localStorage.getItem('raceanalyst_admin_login_time');
+        
+        const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
+        const now = Date.now();
+        
+        if (storedToken && loginTime) {
+            const elapsed = now - parseInt(loginTime);
+            
+            if (elapsed < SEVEN_DAYS) {
+                ADMIN_TOKEN = storedToken;
+                hideLoginModal();
+                return true;
+            } else {
+                logout();
+            }
+        }
+        
+        showLoginModal();
+        return false;
+    }
+
+    function showLoginModal() {
+        document.getElementById('loginModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function hideLoginModal() {
+        document.getElementById('loginModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+        updateLoginUI();
+    }
+
+    function updateLoginUI() {
+        const adminLoginBtn = document.getElementById('adminLoginBtn');
+        const logoutItem = document.getElementById('logoutItem');
+        
+        if (ADMIN_TOKEN) {
+            if (adminLoginBtn) {
+                adminLoginBtn.innerHTML = '<i class="fas fa-user-check"></i> Admin (Logged In)';
+                adminLoginBtn.style.color = '#4CAF50';
+                adminLoginBtn.onclick = null;
+            }
+            
+            if (logoutItem) {
+                logoutItem.style.display = 'block';
+            }
+            
+            const adminPanel = document.getElementById('adminPanel');
+            if (adminPanel) {
+                adminPanel.style.display = 'block';
+            }
+        }
+    }
+
+    function logout() {
+        localStorage.removeItem('raceanalyst_admin_token');
+        localStorage.removeItem('raceanalyst_admin_login_time');
+        ADMIN_TOKEN = null;
+        
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+    }
+
     /* ---------------------------------------------------
     NAVIGATION FUNCTIONS
     --------------------------------------------------- */
@@ -1263,13 +1373,20 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
     }
 
     async function saveToKV(key, data) {
+        if (!ADMIN_TOKEN) {
+            showToast('Please login first', 'error');
+            showLoginModal();
+            return;
+        }
+        
         try {
             console.log("💾 Saving to KV:", key);
             const response = await fetch(workerBase + "/save", {
                 method: "POST",
                 headers: { 
-                "Content-Type": "application/json",
-                "X-Admin-Token": ADMIN_TOKEN  // ← Add this
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "X-Admin-Token": ADMIN_TOKEN  // ← Uses stored token
                 },
                 body: JSON.stringify({ key, data })
             });
@@ -1284,18 +1401,25 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
             return { success: true, result };
         } catch (error) {
             console.error("❌ Save error:", error);
-            throw error; // Re-throw to be handled by caller
+            throw error;
         }
     }
 
     async function deleteFromKV(key) {
+        if (!ADMIN_TOKEN) {
+            showToast('Please login first', 'error');
+            showLoginModal();
+            return;
+        }
+        
         try {
             console.log("🗑️ Deleting from KV:", key);
             const response = await fetch(workerBase + "/delete", {
                 method: "POST",
                 headers: { 
                     "Content-Type": "application/json",
-                    "X-Admin-Token": ADMIN_TOKEN
+                    "Accept": "application/json",
+                    "X-Admin-Token": ADMIN_TOKEN  // ← Uses stored token
                 },
                 body: JSON.stringify({ key })
             });
@@ -1310,7 +1434,7 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
             return { success: true, result };
         } catch (error) {
             console.error("❌ Delete error:", error);
-            throw error; // Re-throw to be handled by caller
+            throw error;
         }
     }
 
@@ -1712,6 +1836,68 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
     --------------------------------------------------- */
     document.addEventListener('DOMContentLoaded', async function() {
         console.log("🚀 Initializing RaceAnalyst Admin (KV-Only)...");
+
+            // ✅ ADD THIS CODE FIRST
+        const loginForm = document.getElementById('loginForm');
+        const tokenInput = document.getElementById('adminTokenInput');
+        const loginError = document.getElementById('loginError');
+        const loginErrorMessage = document.getElementById('loginErrorMessage');
+        
+        // Check if already logged in
+        checkLogin();
+        
+        // Login form handler
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const token = tokenInput.value.trim();
+            
+            if (!token) {
+                loginErrorMessage.textContent = 'Please enter a token';
+                loginError.style.display = 'block';
+                return;
+            }
+            
+            try {
+                // Verify token
+                const response = await fetch(workerBase + "/auth-status", {
+                    headers: { 'X-Admin-Token': token }
+                });
+                
+                const data = await response.json();
+                
+                if (data.authenticated) {
+                    ADMIN_TOKEN = token;
+                    localStorage.setItem('raceanalyst_admin_token', token);
+                    localStorage.setItem('raceanalyst_admin_login_time', Date.now().toString());
+                    
+                    hideLoginModal();
+                    showToast('✅ Login successful!', 'success');
+                    
+                    await loadFromKV();
+                    initializeDropdowns();
+                } else {
+                    throw new Error('Invalid token');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                loginErrorMessage.textContent = 'Invalid token. Please check and try again.';
+                loginError.style.display = 'block';
+                tokenInput.value = '';
+                tokenInput.focus();
+            }
+        });
+        
+        // Logout button handler
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm('Are you sure you want to logout?')) {
+                    logout();
+                }
+            });
+        }
         
         try {
             // Load race analyses from Cloudflare KV
