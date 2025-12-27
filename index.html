@@ -1768,6 +1768,13 @@
             console.log("Processed race events:", raceEvents);
             renderCalendar();
         }
+
+        function formatDateString(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
         // Render the calendar
         function renderCalendar() {
             const calendarGrid = document.getElementById('calendarGrid');
@@ -1845,7 +1852,7 @@
                     day
                 );
                 
-                const dateString = date.toISOString().split('T')[0];
+                const dateString = formatDateString(date);
                 const eventsForDay = raceEvents[dateString] || [];
                 
                 // Determine highest priority event for the day
@@ -1891,7 +1898,7 @@
             if (events.length > 0) className += ' has-event';
             
             dayElement.className = className;
-            dayElement.dataset.date = date.toISOString().split('T')[0];
+            dayElement.dataset.date = formatDateString(date);
             
             // Create day number
             const dayNumberSpan = document.createElement('div');
