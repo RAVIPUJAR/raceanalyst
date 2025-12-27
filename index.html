@@ -853,6 +853,59 @@
                 font-size: 0.9rem;
             }
         }
+
+        /* ===== Race Day Modal ===== */
+
+        .race-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.55);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .race-modal {
+            background: white;
+            padding: 20px 25px;
+            width: 90%;
+            max-width: 320px;
+            border-radius: 10px;
+            text-align: center;
+            color: #1a3c34;
+            border: 2px solid #d4af37;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+            animation: fadeIn 0.25s ease;
+        }
+
+        .race-modal-close {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            position: absolute;
+            right: 18px;
+            top: 10px;
+            color: #1a3c34;
+            cursor: pointer;
+        }
+
+        .race-modal h3 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            color: #1a3c34;
+        }
+
+        .race-modal p {
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -1021,6 +1074,14 @@
         </div>
     </div>
 
+    <!-- Race Day Modal -->
+    <div id="raceDayModal" class="race-modal-overlay">
+        <div class="race-modal">
+            <button class="race-modal-close" id="closeRaceModal">&times;</button>
+            <h3 id="modalVenue"></h3>
+            <p id="modalEvent"></p>
+        </div>
+    </div>
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -1342,7 +1403,10 @@
                 if (raceDayMap[dateKey]) classes += " race-day";
 
                 html += `
-                    <div class="${classes}" title="${raceDayMap[dateKey]?.event || ''}">
+                    <div class="${classes}" 
+                        data-date="${dateKey}" 
+                        data-venue="${raceDayMap[dateKey]?.venue || ''}"
+                        data-event="${raceDayMap[dateKey]?.event || ''}">
                         ${day}
                     </div>`;
             }
@@ -1368,6 +1432,20 @@
                 }
                 createCalendar();
             };
+
+            // Add click handler for race days
+            document.querySelectorAll('.race-day').forEach(dayEl => {
+                dayEl.onclick = () => {
+                    const venue = dayEl.dataset.venue;
+                    const event = dayEl.dataset.event;
+
+                    if (!venue && !event) return;
+
+                    document.getElementById('modalVenue').textContent = venue || "";
+                    document.getElementById('modalEvent').textContent = event || "";
+                    document.getElementById('raceDayModal').style.display = 'flex';
+                };
+            });
         }
 
         // Mobile menu functionality
@@ -1721,6 +1799,18 @@
                 console.error("Failed to load race days", e);
             }
         }
+
+        // Close modal
+        document.getElementById('closeRaceModal').onclick = () => {
+            document.getElementById('raceDayModal').style.display = 'none';
+        };
+
+        // Close modal by clicking overlay
+        document.getElementById('raceDayModal').onclick = (e) => {
+            if (e.target.id === 'raceDayModal') {
+                document.getElementById('raceDayModal').style.display = 'none';
+            }
+        };
 
         // Initialize app
         window.addEventListener('DOMContentLoaded', initApp);
