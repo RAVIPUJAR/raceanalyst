@@ -1096,6 +1096,29 @@
             display: block !important;
             z-index: 999999 !important;
         }
+
+        /* FIX: Prevent mobile grid collapse of calendar widget */
+        #race-calendar {
+            display: block !important;
+            height: auto !important;
+            min-height: 200px !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        #race-calendar .calendar-container {
+            display: block !important;
+            height: auto !important;
+            min-height: 200px !important;
+            overflow: visible !important;
+        }
+
+        /* Prevent calendar header from collapsing inside grid */
+        #race-calendar .calendar-header {
+            display: flex !important;
+            height: auto !important;
+            min-height: 45px !important;
+        }
     </style>
 </head>
 <body>
