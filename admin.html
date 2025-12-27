@@ -852,8 +852,19 @@
 </head>
 <body>
     <!-- Login Modal -->
+    <!-- Replace your existing loginModal div with this: -->
     <div id="loginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;">
-        <div style="background: white; padding: 40px; border-radius: 12px; max-width: 400px; width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+        <div style="background: white; padding: 40px; border-radius: 12px; max-width: 400px; width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.3); position: relative;">
+            
+            <!-- ✅ ADD THIS CLOSE BUTTON -->
+            <button 
+                id="closeLoginModal" 
+                style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; color: #999; cursor: pointer; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; transition: color 0.3s;"
+                title="Close"
+            >
+                <i class="fas fa-times"></i>
+            </button>
+            
             <div style="text-align: center; margin-bottom: 30px;">
                 <i class="fas fa-shield-alt" style="font-size: 3rem; color: #1a3c34; margin-bottom: 15px;"></i>
                 <h2 style="color: #1a3c34; margin-bottom: 10px;">Admin Authentication</h2>
@@ -1913,6 +1924,33 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
                 }
             });
         }
+
+            // ✅ ADD THIS: Close button handler
+        const closeLoginBtn = document.getElementById('closeLoginModal');
+        if (closeLoginBtn) {
+            closeLoginBtn.addEventListener('click', function() {
+                // Only allow closing if not on admin page
+                const isAdminPage = window.location.pathname.includes('admin');
+                
+                if (isAdminPage) {
+                    // On admin page - redirect to home instead of closing
+                    if (confirm('You need to login to access the admin panel. Return to home page?')) {
+                        window.location.href = 'index.html';
+                    }
+                } else {
+                    // Not on admin page - can close freely
+                    hideLoginModal();
+                }
+            });
+        }
+        
+        // ✅ ADD THIS: Allow ESC key to close
+        document.addEventListener('keydown', function(e) {
+            const loginModal = document.getElementById('loginModal');
+            if (e.key === 'Escape' && loginModal.style.display === 'flex') {
+                closeLoginBtn.click(); // Trigger same logic as close button
+            }
+        });
         
         try {
             // Load race analyses from Cloudflare KV
