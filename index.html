@@ -403,90 +403,235 @@
             color: #666;
         }
         
-        /* Calendar Widget */
-        .calendar-container {
-            margin-top: 1rem;
+        /* Enhanced Calendar Widget Styles */
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 0 15px 0;
+            padding: 0 5px;
         }
 
-        /* Style the actual prev/next buttons */
-        .calendar-header button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+        .calendar-nav-btn {
             background: #1a3c34;
             color: white;
             border: none;
-            padding: 6px 12px;
-            font-size: 1rem;
-            border-radius: 4px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
             cursor: pointer;
-            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 0.9rem;
         }
 
-        /* Button positions */
-        #prevMonthBtn {
-            left: 8px;
+        .calendar-nav-btn:hover {
+            background: #244e44;
+            transform: scale(1.1);
         }
 
-        #nextMonthBtn {
-            right: 8px;
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            margin-bottom: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #1a3c34;
+            font-size: 0.85rem;
         }
 
-        /* Prevent squeezing: keep text centered */
-        .calendar-header h4 {
-            margin: 0 auto;
-            font-size: 1.2rem;
-            white-space: nowrap;
-            pointer-events: none;
-        }
-
-        /* Mobile improvements */
-        @media (max-width: 480px) {
-            .calendar-header button {
-                padding: 5px 9px;
-                font-size: 0.9rem;
-            }
-
-            .calendar-header h4 {
-                font-size: 1rem;
-            }
-        }
-                
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
+            gap: 2px;
+            margin-bottom: 15px;
         }
-        
+
         .calendar-day {
-            padding: 0.5rem;
-            text-align: center;
+            aspect-ratio: 1;
+            min-height: 36px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 4px 2px;
+            border: 1px solid #e6e6e6;
             border-radius: 4px;
+            background: #f9f9f9;
             cursor: pointer;
-            font-size: 0.9rem;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
         }
-        
+
         .calendar-day:hover {
-            background-color: rgba(212, 175, 55, 0.1);
+            background: #f0f7f4;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            z-index: 10;
         }
-        
-        .calendar-day.race-day {
-            background-color: rgba(212, 175, 55, 0.2);
+
+        .day-number {
             font-weight: 600;
-        }
-        
-        .calendar-day.today {
-            background-color: #d4af37;
-            color: #1a3c34;
-            font-weight: 600;
-        }
-        
-        .calendar-day-header {
-            font-weight: 600;
-            color: #d4af37;
-            padding: 0.5rem;
-            text-align: center;
             font-size: 0.9rem;
+            color: #1a3c34;
+            margin-bottom: 2px;
+        }
+
+        .other-month {
+            color: #aaa !important;
+            background: #f5f5f5 !important;
+        }
+
+        .today {
+            border: 2px solid #d4af37 !important;
+            background: #fff9e6 !important;
+        }
+
+        /* Event Type Badges */
+        .event-badge {
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 2px;
+        }
+
+        .classics {
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            box-shadow: 0 1px 3px rgba(255, 215, 0, 0.3);
+        }
+
+        .sweepstakes {
+            background: linear-gradient(90deg, #C0C0C0, #A9A9A9);
+            box-shadow: 0 1px 3px rgba(192, 192, 192, 0.3);
+        }
+
+        .trophy {
+            background: linear-gradient(90deg, #CD7F32, #8B4513);
+            box-shadow: 0 1px 3px rgba(205, 127, 50, 0.3);
+        }
+
+        .has-event {
+            position: relative;
+        }
+
+        .has-event::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #e91e63;
+        }
+
+        /* Event Tooltip */
+        .event-tooltip {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border: 1px solid #e6e6e6;
+            border-radius: 6px;
+            padding: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            width: 200px;
+            z-index: 100;
+            display: none;
+            text-align: left;
+        }
+
+        .event-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: white;
+        }
+
+        .event-tooltip h5 {
+            margin: 0 0 8px 0;
+            color: #1a3c34;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .event-tooltip p {
+            margin: 5px 0;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .event-type-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            margin-top: 5px;
+        }
+
+        .type-classics {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+        }
+
+        .type-sweepstakes {
+            background: linear-gradient(135deg, #C0C0C0, #A9A9A9);
+        }
+
+        .type-trophy {
+            background: linear-gradient(135deg, #CD7F32, #8B4513);
+        }
+
+        /* Legend */
+        .calendar-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        .legend-color.classics {
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+        }
+
+        .legend-color.sweepstakes {
+            background: linear-gradient(90deg, #C0C0C0, #A9A9A9);
+        }
+
+        .legend-color.trophy {
+            background: linear-gradient(90deg, #CD7F32, #8B4513);
+        }
+
+        .legend-color.today {
+            background: #d4af37;
+            border: 1px solid #b8941f;
         }
         
         /* Newsletter Form */
@@ -871,6 +1016,98 @@
             .main-content {
                 align-items: stretch !important;
             }
+            
+            /* Mobile Calendar Styles */
+            #race-calendar {
+                padding: 1rem;
+            }
+            
+            .calendar-nav {
+                margin: 0 0 12px 0;
+            }
+            
+            .calendar-nav-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 0.8rem;
+            }
+            
+            #currentMonthYear {
+                font-size: 1rem;
+            }
+            
+            .calendar-weekdays {
+                font-size: 0.75rem;
+            }
+            
+            .calendar-day {
+                min-height: 32px;
+                padding: 3px 1px;
+            }
+            
+            .day-number {
+                font-size: 0.8rem;
+            }
+            
+            .event-badge {
+                height: 3px;
+                margin-top: 1px;
+            }
+            
+            /* Event Tooltip for mobile - simpler version */
+            .event-tooltip {
+                width: 160px;
+                padding: 10px;
+                font-size: 0.9em;
+            }
+            
+            .event-tooltip h5 {
+                font-size: 0.85rem;
+                margin-bottom: 6px;
+            }
+            
+            .event-tooltip p {
+                font-size: 0.75rem;
+            }
+            
+            .event-type-badge {
+                padding: 1px 6px;
+                font-size: 0.7rem;
+            }
+            
+            /* Legend - stack vertically on mobile */
+            .calendar-legend {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+                padding-top: 10px;
+            }
+            
+            .legend-item {
+                font-size: 0.75rem;
+            }
+            
+            .legend-color {
+                width: 10px;
+                height: 10px;
+            }
+            
+            /* Mobile-specific touch optimizations */
+            .calendar-day {
+                min-height: 36px;
+            }
+            
+            /* Disable hover effects on touch devices */
+            @media (hover: none) {
+                .calendar-day:hover {
+                    transform: none;
+                    box-shadow: none;
+                }
+                
+                .calendar-nav-btn:hover {
+                    transform: none;
+                }
+            }
         }
         
         @media (max-width: 480px) {
@@ -889,235 +1126,29 @@
                 padding: 12px 20px;
                 font-size: 0.9rem;
             }
-        }
-
-        /* ===== Race Day Modal ===== */
-
-        .race-modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.55);
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .race-modal {
-            background: white;
-            padding: 20px 25px;
-            width: 90%;
-            max-width: 320px;
-            border-radius: 10px;
-            text-align: center;
-            color: #1a3c34;
-            border: 2px solid #d4af37;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.25);
-            animation: fadeIn 0.25s ease;
-        }
-
-        .race-modal-close {
-            background: none;
-            border: none;
-            font-size: 1.6rem;
-            position: absolute;
-            right: 18px;
-            top: 10px;
-            color: #1a3c34;
-            cursor: pointer;
-        }
-
-        .race-modal h3 {
-            margin-bottom: 8px;
-            font-size: 1.2rem;
-            color: #1a3c34;
-        }
-
-        .race-modal p {
-            font-size: 0.95rem;
-            color: #444;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* === FINAL FIX: Calendar Navigation — override everything above === */
-
-        .calendar-header {
-            position: relative !important;
-            width: 100% !important;
-            margin-bottom: 1rem !important;
-            padding: 6px 0 !important;
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-        }
-
-        /* Navigation buttons */
-        #prevMonthBtn,
-        #nextMonthBtn {
-            position: absolute !important;
-            top: 50% !important;
-            transform: translateY(-50%) !important;
-            background: #1a3c34 !important;
-            color: white !important;
-            border: none !important;
-            padding: 6px 12px !important;
-            font-size: 1rem !important;
-            border-radius: 4px !important;
-            cursor: pointer !important;
-            z-index: 5 !important; /* ensure visible */
-        }
-
-        /* POSITION LEFT AND RIGHT */
-        #prevMonthBtn {
-            left: 8px !important;
-        }
-
-        #nextMonthBtn {
-            right: 8px !important;
-        }
-
-        /* Month name — always centered, never squeezed */
-        .calendar-header h4 {
-            margin: 0 auto !important;
-            text-align: center !important;
-            font-size: 1.2rem !important;
-            white-space: nowrap !important;
-            overflow: hidden !important;
-            text-overflow: ellipsis !important;
-            pointer-events: none !important;
-        }
-
-        @media (max-width: 480px) {
-            #prevMonthBtn, #nextMonthBtn {
-                padding: 5px 9px !important;
-                font-size: 0.9rem !important;
+            
+            /* Small mobile devices */
+            .calendar-day {
+                min-height: 28px;
             }
-
-            .calendar-header h4 {
-                font-size: 1rem !important;
+            
+            .day-number {
+                font-size: 0.75rem;
             }
-        }
-
-        /* === FINAL PATCH: Fix mobile visibility of calendar header === */
-
-        .calendar-header {
-            position: relative !important;
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-            width: 100% !important;
-            min-height: 40px !important; /* Force visible height */
-            padding: 5px 0 !important;
-            z-index: 50 !important;
-            background: white !important; /* prevents blending into bg */
-        }
-
-        /* Buttons ALWAYS visible */
-        #prevMonthBtn,
-        #nextMonthBtn {
-            display: inline-block !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-
-            position: absolute !important;
-            top: 50% !important;
-            transform: translateY(-50%) !important;
-
-            background: #1a3c34 !important;
-            color: white !important;
-            border: none !important;
-            border-radius: 4px !important;
-            padding: 6px 12px !important;
-            font-size: 14px !important;
-
-            z-index: 100 !important; /* stay above everything */
-        }
-
-        /* Button positions */
-        #prevMonthBtn { left: 10px !important; }
-        #nextMonthBtn { right: 10px !important; }
-
-        /* Month label */
-        .calendar-header h4 {
-            color: #1a3c34 !important;
-            font-size: 1.1rem !important;
-            font-weight: 700 !important;
-            white-space: nowrap !important;
-            pointer-events: none !important;
-            z-index: 5 !important;
-        }
-
-        /* Prevent mobile styles from hiding it */
-        @media (max-width: 480px) {
-            .calendar-header {
-                min-height: 45px !important;
+            
+            .calendar-weekdays {
+                font-size: 0.7rem;
             }
-            #prevMonthBtn, #nextMonthBtn {
-                padding: 5px 8px !important;
-                font-size: 12px !important;
+            
+            /* Hide tooltips on very small screens, use click only */
+            .event-tooltip {
+                display: none !important;
             }
-            .calendar-header h4 {
-                font-size: 1rem !important;
+            
+            /* Better tap targets */
+            .calendar-day {
+                padding: 4px 2px;
             }
-        }
-
-        #race-calendar.sidebar-widget {
-            overflow: visible !important;
-        }
-
-        /* DEBUG OVERRIDE – forces calendar header to be visible */
-        .calendar-header {
-            background: red !important;
-            color: white !important;
-            min-height: 60px !important;
-            height: auto !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            overflow: visible !important;
-            position: relative !important;
-            z-index: 99999 !important;
-            border: 3px solid blue !important;
-        }
-
-        /* force buttons to be visible and huge */
-        #prevMonthBtn, #nextMonthBtn {
-            background: black !important;
-            color: yellow !important;
-            padding: 15px !important;
-            font-size: 22px !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-            display: block !important;
-            z-index: 999999 !important;
-        }
-
-        /* FIX: Prevent mobile grid collapse of calendar widget */
-        #race-calendar {
-            display: block !important;
-            height: auto !important;
-            min-height: 200px !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-
-        #race-calendar .calendar-container {
-            display: block !important;
-            height: auto !important;
-            min-height: 200px !important;
-            overflow: visible !important;
-        }
-
-        /* Prevent calendar header from collapsing inside grid */
-        #race-calendar .calendar-header {
-            display: flex !important;
-            height: auto !important;
-            min-height: 45px !important;
         }
     </style>
 </head>
@@ -1230,8 +1261,56 @@
             <!-- Race Calendar -->
             <div class="sidebar-widget" id="race-calendar">
                 <h3><i class="fas fa-calendar-alt"></i> Race Calendar</h3>
-                <div class="calendar-container" id="calendarWidget">
-                    <!-- Calendar will be generated by JS -->
+                
+                <!-- Calendar Navigation -->
+                <div class="calendar-nav">
+                    <button class="calendar-nav-btn" id="prevMonthBtn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <h4 id="currentMonthYear" style="margin: 0; color: #1a3c34; text-align: center; flex-grow: 1;">
+                        December 2024
+                    </h4>
+                    
+                    <button class="calendar-nav-btn" id="nextMonthBtn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Day of Week Headers -->
+                <div class="calendar-weekdays">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+                
+                <!-- Calendar Days Grid -->
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Calendar will be generated here -->
+                </div>
+                
+                <!-- Legend -->
+                <div class="calendar-legend">
+                    <div class="legend-item">
+                        <span class="legend-color classics"></span>
+                        <span>Classics</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color sweepstakes"></span>
+                        <span>Sweepstakes</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color trophy"></span>
+                        <span>Trophy/Cup</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color today"></span>
+                        <span>Today</span>
+                    </div>
                 </div>
             </div>
             
@@ -1287,14 +1366,6 @@
         </div>
     </div>
 
-    <!-- Race Day Modal -->
-    <div id="raceDayModal" class="race-modal-overlay">
-        <div class="race-modal">
-            <button class="race-modal-close" id="closeRaceModal">&times;</button>
-            <h3 id="modalVenue"></h3>
-            <p id="modalEvent"></p>
-        </div>
-    </div>
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -1354,8 +1425,11 @@
         const navMenu = document.getElementById('navMenu');
         const navOverlay = document.getElementById('navOverlay');
         
-        // Sidebar elements
-        const calendarWidget = document.getElementById('calendarWidget');
+        // Calendar elements
+        const calendarGrid = document.getElementById('calendarGrid');
+        const prevMonthBtn = document.getElementById('prevMonthBtn');
+        const nextMonthBtn = document.getElementById('nextMonthBtn');
+        const currentMonthYear = document.getElementById('currentMonthYear');
         
         // Admin elements
         const adminPanel = document.getElementById('adminPanel');
@@ -1373,10 +1447,559 @@
         // Today's date in YYYY-MM-DD format
         const today = new Date().toISOString().split('T')[0];
 
-        // ===== CALENDAR GLOBALS =====
-        let calendarMonth = new Date().getMonth();
-        let calendarYear = new Date().getFullYear();
-        let raceDayMap = {};   // yyyy-mm-dd → { venue, event }
+        // Calendar Configuration
+        let currentCalendarDate = new Date();
+        let raceEvents = {}; // Will store events grouped by date
+
+        // Google Sheets Configuration
+        const CALENDAR_SHEET_ID = '1fs_DhXWii9a7_XruGo1OuEJ0KIB7iQ3whDmHUOc3SEk';
+        const CALENDAR_SHEET_NAME = 'Calendar'; // Update to your sheet name
+
+        // Initialize Calendar
+        function initCalendar() {
+            // Setup navigation buttons
+            prevMonthBtn.addEventListener('click', () => {
+                currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
+                renderCalendar();
+            });
+            
+            nextMonthBtn.addEventListener('click', () => {
+                currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
+                renderCalendar();
+            });
+            
+            // Setup mobile touch events
+            setupMobileTouchEvents();
+            
+            // Load race events from Google Sheet
+            loadRaceEvents();
+            
+            // Mobile-specific optimizations
+            if (window.innerWidth <= 768) {
+                const calendarWidget = document.getElementById('race-calendar');
+                if (calendarWidget) {
+                    calendarWidget.style.padding = '1rem';
+                }
+            }
+        }
+
+        // Mobile touch improvements
+        function setupMobileTouchEvents() {
+            if (!calendarGrid) return;
+            
+            // Track touch for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            calendarGrid.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            calendarGrid.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchEndX - touchStartX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        // Swipe right - previous month
+                        currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
+                        renderCalendar();
+                    } else {
+                        // Swipe left - next month
+                        currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
+                        renderCalendar();
+                    }
+                }
+            }
+            
+            // Prevent zoom on double-tap
+            calendarGrid.addEventListener('touchstart', function(e) {
+                if (e.touches.length > 1) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            // Better touch handling for tooltips
+            document.querySelectorAll('.calendar-day.has-event').forEach(day => {
+                let tapTimer;
+                let isTapped = false;
+                
+                day.addEventListener('touchstart', function(e) {
+                    e.stopPropagation();
+                    isTapped = true;
+                    
+                    // Show tooltip on long press (mobile alternative)
+                    tapTimer = setTimeout(() => {
+                        if (isTapped) {
+                            showMobileEventDetails(this);
+                        }
+                    }, 500);
+                });
+                
+                day.addEventListener('touchend', function(e) {
+                    clearTimeout(tapTimer);
+                    if (isTapped) {
+                        // Regular tap - show full details
+                        const events = raceEvents[this.dataset.date] || [];
+                        if (events.length > 0) {
+                            showEventAlert(events, this.dataset.date);
+                        }
+                        isTapped = false;
+                    }
+                });
+                
+                day.addEventListener('touchmove', function() {
+                    clearTimeout(tapTimer);
+                    isTapped = false;
+                });
+            });
+        }
+
+        // Show event details on mobile
+        function showMobileEventDetails(dayElement) {
+            const events = raceEvents[dayElement.dataset.date] || [];
+            if (events.length === 0) return;
+            
+            const tooltip = dayElement.querySelector('.event-tooltip');
+            if (tooltip) {
+                // Position tooltip for mobile
+                tooltip.style.position = 'fixed';
+                tooltip.style.bottom = '20px';
+                tooltip.style.left = '50%';
+                tooltip.style.transform = 'translateX(-50%)';
+                tooltip.style.width = '90%';
+                tooltip.style.maxWidth = '300px';
+                tooltip.style.zIndex = '1000';
+                tooltip.style.display = 'block';
+                
+                // Add close button
+                if (!tooltip.querySelector('.close-tooltip')) {
+                    const closeBtn = document.createElement('button');
+                    closeBtn.className = 'close-tooltip';
+                    closeBtn.innerHTML = '✕';
+                    closeBtn.style.cssText = `
+                        position: absolute;
+                        top: 5px;
+                        right: 5px;
+                        background: none;
+                        border: none;
+                        font-size: 16px;
+                        color: #666;
+                        cursor: pointer;
+                        padding: 0;
+                        width: 20px;
+                        height: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    `;
+                    closeBtn.onclick = function(e) {
+                        e.stopPropagation();
+                        tooltip.style.display = 'none';
+                    };
+                    tooltip.appendChild(closeBtn);
+                }
+                
+                // Close tooltip when tapping outside
+                setTimeout(() => {
+                    const closeTooltipHandler = function(e) {
+                        if (!tooltip.contains(e.target)) {
+                            tooltip.style.display = 'none';
+                            document.removeEventListener('touchstart', closeTooltipHandler);
+                        }
+                    };
+                    document.addEventListener('touchstart', closeTooltipHandler);
+                }, 100);
+            }
+        }
+
+        // Load race events from Google Sheet
+        async function loadRaceEvents() {
+            try {
+                // Construct Google Sheets URL
+                const url = `https://opensheet.elk.sh/${CALENDAR_SHEET_ID}/${CALENDAR_SHEET_NAME}`;
+                
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: Failed to load calendar data`);
+                }
+                
+                const events = await response.json();
+                processRaceEvents(events);
+                
+            } catch (error) {
+                console.error("Failed to load calendar events:", error);
+                
+                // Fallback to sample data if sheet fails
+                raceEvents = {
+                    "2024-12-01": [
+                        { event: "Winter Cup", venue: "Mumbai", type: "trophy" }
+                    ],
+                    "2024-12-07": [
+                        { event: "Indian Sweepstakes", venue: "Delhi", type: "sweepstakes" }
+                    ],
+                    "2024-12-14": [
+                        { event: "Indian Classics", venue: "Bangalore", type: "classics" }
+                    ],
+                    "2024-12-21": [
+                        { event: "Christmas Cup", venue: "Chennai", type: "trophy" }
+                    ],
+                    "2024-12-25": [
+                        { event: "Christmas Classic", venue: "Kolkata", type: "classics" },
+                        { event: "Festival Trophy", venue: "Pune", type: "trophy" }
+                    ],
+                    "2024-12-28": [
+                        { event: "Year-End Sweepstakes", venue: "Hyderabad", type: "sweepstakes" }
+                    ]
+                };
+                
+                renderCalendar();
+            }
+        }
+
+        // Process race events from Google Sheet
+        function processRaceEvents(events) {
+            raceEvents = {};
+            
+            if (!Array.isArray(events)) {
+                console.error("Events data is not an array:", events);
+                return;
+            }
+            
+            events.forEach(item => {
+                if (!item.date || !item.venue || !item.event || !item.type) {
+                    return; // Skip incomplete entries
+                }
+                
+                // Normalize date format (assuming YYYY-MM-DD)
+                let dateStr = item.date;
+                
+                // Try to parse different date formats
+                try {
+                    const date = new Date(item.date);
+                    if (!isNaN(date.getTime())) {
+                        dateStr = date.toISOString().split('T')[0];
+                    }
+                } catch (e) {
+                    console.warn("Could not parse date:", item.date);
+                    return;
+                }
+                
+                // Normalize type (case-insensitive, singular)
+                const type = item.type.toLowerCase().trim();
+                let normalizedType = 'trophy'; // default
+                
+                if (type.includes('classic')) {
+                    normalizedType = 'classics';
+                } else if (type.includes('sweepstake')) {
+                    normalizedType = 'sweepstakes';
+                } else if (type.includes('trophy') || type.includes('cup')) {
+                    normalizedType = 'trophy';
+                }
+                
+                if (!raceEvents[dateStr]) {
+                    raceEvents[dateStr] = [];
+                }
+                
+                raceEvents[dateStr].push({
+                    event: item.event,
+                    venue: item.venue,
+                    type: normalizedType
+                });
+            });
+            
+            console.log("Processed race events:", raceEvents);
+            renderCalendar();
+        }
+
+        // Render the calendar
+        function renderCalendar() {
+            const calendarGrid = document.getElementById('calendarGrid');
+            
+            // Update month/year display
+            const options = { year: 'numeric', month: 'long' };
+            currentMonthYear.textContent = currentCalendarDate.toLocaleDateString('en-US', options);
+            
+            // Clear calendar
+            calendarGrid.innerHTML = '';
+            
+            // Get first day of month
+            const firstDay = new Date(
+                currentCalendarDate.getFullYear(), 
+                currentCalendarDate.getMonth(), 
+                1
+            );
+            
+            // Get last day of month
+            const lastDay = new Date(
+                currentCalendarDate.getFullYear(), 
+                currentCalendarDate.getMonth() + 1, 
+                0
+            );
+            
+            // Get day of week for first day (0 = Sunday)
+            const firstDayIndex = firstDay.getDay();
+            
+            // Get total days in month
+            const totalDays = lastDay.getDate();
+            
+            // Get previous month's last days
+            const prevMonthLastDay = new Date(
+                currentCalendarDate.getFullYear(), 
+                currentCalendarDate.getMonth(), 
+                0
+            ).getDate();
+            
+            // Today's date for highlighting
+            const todayDate = new Date();
+            todayDate.setHours(0, 0, 0, 0);
+            
+            // Check if date is today
+            const isToday = (date) => {
+                const checkDate = new Date(date);
+                checkDate.setHours(0, 0, 0, 0);
+                return checkDate.getTime() === todayDate.getTime();
+            };
+            
+            // Priority order for event types
+            const typePriority = {
+                'classics': 3,
+                'sweepstakes': 2,
+                'trophy': 1
+            };
+            
+            // Create previous month's trailing days
+            for (let i = firstDayIndex - 1; i >= 0; i--) {
+                const day = prevMonthLastDay - i;
+                const date = new Date(
+                    currentCalendarDate.getFullYear(), 
+                    currentCalendarDate.getMonth() - 1, 
+                    day
+                );
+                
+                const dayElement = createDayElement(day, date, true, []);
+                calendarGrid.appendChild(dayElement);
+            }
+            
+            // Create current month's days
+            for (let day = 1; day <= totalDays; day++) {
+                const date = new Date(
+                    currentCalendarDate.getFullYear(), 
+                    currentCalendarDate.getMonth(), 
+                    day
+                );
+                
+                const dateString = date.toISOString().split('T')[0];
+                const eventsForDay = raceEvents[dateString] || [];
+                
+                // Determine highest priority event for the day
+                let highestPriorityEvent = null;
+                let highestPriority = 0;
+                
+                eventsForDay.forEach(event => {
+                    const priority = typePriority[event.type] || 0;
+                    if (priority > highestPriority) {
+                        highestPriority = priority;
+                        highestPriorityEvent = event.type;
+                    }
+                });
+                
+                const dayElement = createDayElement(day, date, false, eventsForDay, highestPriorityEvent, isToday(date));
+                calendarGrid.appendChild(dayElement);
+            }
+            
+            // Create next month's leading days
+            const totalCells = 42; // 6 weeks * 7 days
+            const daysSoFar = firstDayIndex + totalDays;
+            const nextMonthDays = totalCells - daysSoFar;
+            
+            for (let i = 1; i <= nextMonthDays; i++) {
+                const date = new Date(
+                    currentCalendarDate.getFullYear(), 
+                    currentCalendarDate.getMonth() + 1, 
+                    i
+                );
+                
+                const dayElement = createDayElement(i, date, true, []);
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+
+        // Create a day element
+        function createDayElement(dayNumber, date, isOtherMonth, events, eventType = null, isTodayDate = false) {
+            const dayElement = document.createElement('div');
+            
+            let className = 'calendar-day';
+            if (isOtherMonth) className += ' other-month';
+            if (isTodayDate) className += ' today';
+            if (events.length > 0) className += ' has-event';
+            
+            dayElement.className = className;
+            dayElement.dataset.date = date.toISOString().split('T')[0];
+            
+            // Create day number
+            const dayNumberSpan = document.createElement('div');
+            dayNumberSpan.className = 'day-number';
+            dayNumberSpan.textContent = dayNumber;
+            
+            // Create event badge if there's an event
+            let eventBadgeHTML = '';
+            if (eventType) {
+                eventBadgeHTML = `<div class="event-badge ${eventType}"></div>`;
+            }
+            
+            dayElement.innerHTML = `
+                ${dayNumberSpan.outerHTML}
+                ${eventBadgeHTML}
+            `;
+            
+            // Add tooltip for events
+            if (events.length > 0) {
+                // Create tooltip
+                const tooltip = document.createElement('div');
+                tooltip.className = 'event-tooltip';
+                
+                let tooltipContent = `<h5>${events.length} Event${events.length > 1 ? 's' : ''}</h5>`;
+                
+                events.forEach(event => {
+                    const typeClass = `event-type-badge type-${event.type}`;
+                    tooltipContent += `
+                        <p><strong>${event.event}</strong></p>
+                        <p><i class="fas fa-map-marker-alt"></i> ${event.venue}</p>
+                        <span class="${typeClass}">${event.type.toUpperCase()}</span>
+                    `;
+                });
+                
+                tooltip.innerHTML = tooltipContent;
+                dayElement.appendChild(tooltip);
+                
+                // Add hover events for tooltip
+                dayElement.addEventListener('mouseenter', function(e) {
+                    const tooltip = this.querySelector('.event-tooltip');
+                    if (tooltip) {
+                        tooltip.style.display = 'block';
+                    }
+                });
+                
+                dayElement.addEventListener('mouseleave', function(e) {
+                    const tooltip = this.querySelector('.event-tooltip');
+                    if (tooltip) {
+                        tooltip.style.display = 'none';
+                    }
+                });
+                
+                // Add click event to show alert with event details
+                dayElement.addEventListener('click', function() {
+                    const events = raceEvents[this.dataset.date] || [];
+                    if (events.length > 0) {
+                        showEventAlert(events, this.dataset.date);
+                    }
+                });
+            }
+            
+            return dayElement;
+        }
+
+        // Optimized event alert for mobile
+        function showEventAlert(events, dateStr) {
+            const date = new Date(dateStr);
+            const formattedDate = date.toLocaleDateString('en-US', {
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric'
+            });
+            
+            let alertMessage = `<h3 style="color: #1a3c34; margin-bottom: 15px;">${formattedDate}</h3>`;
+            
+            events.forEach((event, index) => {
+                let typeColor = '#CD7F32'; // Trophy default
+                if (event.type === 'classics') typeColor = '#FFD700';
+                if (event.type === 'sweepstakes') typeColor = '#C0C0C0';
+                
+                alertMessage += `
+                    <div style="margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+                            <span style="width: 12px; height: 12px; border-radius: 2px; background: ${typeColor};"></span>
+                            <strong style="color: #1a3c34;">${event.event}</strong>
+                        </div>
+                        <div style="font-size: 0.9em; color: #666;">
+                            <div><i class="fas fa-map-marker-alt"></i> ${event.venue}</div>
+                            <div><span style="text-transform: uppercase; color: ${typeColor}; font-weight: 600;">${event.type}</span></div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Create mobile-friendly modal instead of alert
+            showMobileModal(alertMessage, formattedDate);
+        }
+
+        // Mobile-friendly modal for event details
+        function showMobileModal(content, title) {
+            // Remove existing modal if any
+            const existingModal = document.getElementById('mobileEventModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Create modal
+            const modal = document.createElement('div');
+            modal.id = 'mobileEventModal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                z-index: 10000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            `;
+            
+            // Modal content
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                border-radius: 12px;
+                padding: 20px;
+                width: 100%;
+                max-width: 400px;
+                max-height: 80vh;
+                overflow-y: auto;
+                position: relative;
+            `;
+            
+            modalContent.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="margin: 0; color: #1a3c34;">${title}</h3>
+                    <button id="closeMobileModal" style="background: none; border: none; font-size: 24px; color: #666; cursor: pointer; padding: 0; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">×</button>
+                </div>
+                <div>${content}</div>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Close modal when clicking X or outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal || e.target.id === 'closeMobileModal') {
+                    modal.remove();
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+        }
 
         // Initialize dropdowns and check for today's selections
         function initializeDropdowns() {
@@ -1570,97 +2193,6 @@
             showToast(`Showing today's selections for ${firstToday.venue}`, 'success');
         });
 
-        // Create Calendar Widget
-        function createCalendar() {
-
-            const monthNames = [
-                "January","February","March","April","May","June",
-                "July","August","September","October","November","December"
-            ];
-
-            const firstDay = new Date(calendarYear, calendarMonth, 1).getDay();
-            const daysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
-
-            let html = `
-                <div class="calendar-header">
-                    <button id="prevMonthBtn">◀</button>
-                    <h4>${monthNames[calendarMonth]} ${calendarYear}</h4>
-                    <button id="nextMonthBtn">▶</button>
-                </div>
-
-                <div class="calendar-grid">
-                    <div class="calendar-day-header">S</div>
-                    <div class="calendar-day-header">M</div>
-                    <div class="calendar-day-header">T</div>
-                    <div class="calendar-day-header">W</div>
-                    <div class="calendar-day-header">T</div>
-                    <div class="calendar-day-header">F</div>
-                    <div class="calendar-day-header">S</div>
-            `;
-
-            // empty slots before start of month
-            for (let i = 0; i < firstDay; i++) {
-                html += `<div class="calendar-day empty"></div>`;
-            }
-
-            const today = new Date();
-            const todayKey = today.toISOString().split("T")[0];
-
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dateKey =
-                    `${calendarYear}-${String(calendarMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-
-                let classes = "calendar-day";
-
-                if (dateKey === todayKey) classes += " today";
-                if (raceDayMap[dateKey]) classes += " race-day";
-
-                html += `
-                    <div class="${classes}" 
-                        data-date="${dateKey}" 
-                        data-venue="${raceDayMap[dateKey]?.venue || ''}"
-                        data-event="${raceDayMap[dateKey]?.event || ''}">
-                        ${day}
-                    </div>`;
-            }
-
-            html += `</div>`;
-            calendarWidget.innerHTML = html;
-
-            // Month navigation handlers
-            document.getElementById("prevMonthBtn").onclick = () => {
-                calendarMonth--;
-                if (calendarMonth < 0) {
-                    calendarMonth = 11;
-                    calendarYear--;
-                }
-                createCalendar();
-            };
-
-            document.getElementById("nextMonthBtn").onclick = () => {
-                calendarMonth++;
-                if (calendarMonth > 11) {
-                    calendarMonth = 0;
-                    calendarYear++;
-                }
-                createCalendar();
-            };
-
-            // Add click handler for race days
-            document.querySelectorAll('.race-day').forEach(dayEl => {
-                dayEl.onclick = () => {
-                    const venue = dayEl.dataset.venue;
-                    const event = dayEl.dataset.event;
-
-                    if (!venue && !event) return;
-
-                    document.getElementById('modalVenue').textContent = venue || "";
-                    document.getElementById('modalEvent').textContent = event || "";
-                    document.getElementById('raceDayModal').style.display = 'flex';
-                };
-            });
-        }
-
         // Mobile menu functionality
         function setupMobileMenu() {
             if (mobileMenuBtn) {
@@ -1712,7 +2244,7 @@
             // Race Calendar link - scroll to calendar widget
             raceCalendarLink.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.querySelector('.calendar-container').scrollIntoView({ 
+                document.getElementById('race-calendar').scrollIntoView({ 
                     behavior: 'smooth',
                     block: 'center'
                 });
@@ -1722,7 +2254,7 @@
             // Footer Race Calendar link
             footerRaceCalendar.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.querySelector('.calendar-container').scrollIntoView({ 
+                document.getElementById('race-calendar').scrollIntoView({ 
                     behavior: 'smooth',
                     block: 'center'
                 });
@@ -1917,27 +2449,8 @@
             adminPanel.style.display = 'none';
         });
 
-        // Initialize the app
-        async function initApp() {
-            setupMobileMenu();
-            setupNavigation();
-            await loadFromKV();
-            initializeDropdowns();
-            createCalendar();
-            await loadRaceDays();
-            loadUpcomingRacesFromSheet();
-            syncAnalysisHeight();
-        }
-
-        window.addEventListener('resize', syncAnalysisHeight);
-        window.addEventListener('scroll', function() {
-            if (window.innerWidth <= 768) return; // disable recalculation on mobile scroll
-            syncAnalysisHeight();
-        });
-
         const SHEET_ID = '1fs_DhXWii9a7_XruGo1OuEJ0KIB7iQ3whDmHUOc3SEk';
         const SHEET_NAME = 'Sheet1'; // change if needed
-        const RACE_DATE = 'Sheet2'; // change if needed
 
         async function loadUpcomingRacesFromSheet() {
             const url = `https://opensheet.elk.sh/${SHEET_ID}/${SHEET_NAME}`;
@@ -1989,41 +2502,22 @@
             }
         }
 
-        // Load Race Days from Google Sheet for Calendar Highlighting
-        async function loadRaceDays() {
-            const url = `https://opensheet.elk.sh/${SHEET_ID}/${RACE_DATE}`;
-            try {
-                const response = await fetch(url);
-                const races = await response.json();
-
-                raceDayMap = {};
-
-                races.forEach(r => {
-                    if (!r.date) return;
-                    const d = r.date.trim();
-                    raceDayMap[d] = {
-                        venue: r.venue || "",
-                        event: r.event || ""
-                    };
-                });
-
-                createCalendar(); // Refresh calendar after loading data
-            } catch(e) {
-                console.error("Failed to load race days", e);
-            }
+        // Initialize the app
+        async function initApp() {
+            setupMobileMenu();
+            setupNavigation();
+            await loadFromKV();
+            initializeDropdowns();
+            initCalendar();
+            loadUpcomingRacesFromSheet();
+            syncAnalysisHeight();
         }
 
-        // Close modal
-        document.getElementById('closeRaceModal').onclick = () => {
-            document.getElementById('raceDayModal').style.display = 'none';
-        };
-
-        // Close modal by clicking overlay
-        document.getElementById('raceDayModal').onclick = (e) => {
-            if (e.target.id === 'raceDayModal') {
-                document.getElementById('raceDayModal').style.display = 'none';
-            }
-        };
+        window.addEventListener('resize', syncAnalysisHeight);
+        window.addEventListener('scroll', function() {
+            if (window.innerWidth <= 768) return; // disable recalculation on mobile scroll
+            syncAnalysisHeight();
+        });
 
         // Initialize app
         window.addEventListener('DOMContentLoaded', initApp);
