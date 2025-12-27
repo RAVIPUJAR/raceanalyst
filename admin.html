@@ -2421,7 +2421,16 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
             
             // First check authentication
             const authResult = await checkCloudflareAuth();
-            
+
+            // ✅ SET ADMIN FLAG IN LOCALSTORAGE IF AUTHENTICATED
+            if (authResult.authenticated) {
+                localStorage.setItem("isAdmin", "true");
+                console.log("✅ Admin flag set in localStorage for chatcenter access");
+            } else {
+                localStorage.removeItem("isAdmin");
+                console.log("❌ Admin flag removed from localStorage");
+            }            
+
             // Update UI based on auth status
             updateUIForAuthStatus(authResult);
             
