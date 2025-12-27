@@ -505,19 +505,16 @@ let userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}'); // Track 
 
 
 // ===== REPLY AVATAR SELECTION HANDLER (Dynamic) =====
-let avatarFiles = [];
+// let avatarFiles = [];
+
+let avatarFiles = [
+    'svg-1.svg',
+    'svg-2.svg'
+];
 
 async function loadAllAvatars() {
     try {
-        // Change this line - remove the leading slash
-        const res = await fetch('chatcenter/avatar-list.json');
-        
-        if (!res.ok) {
-            throw new Error(`Failed to fetch avatars: ${res.status}`);
-        }
-        
-        avatarFiles = await res.json();
-        console.log("Loaded avatars:", avatarFiles);
+        console.log("Loading avatars:", avatarFiles);
         
         // Load avatar grids
         loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
@@ -525,10 +522,6 @@ async function loadAllAvatars() {
         
     } catch (err) {
         console.error("Avatar loading failed:", err);
-        // Fallback to default avatars
-        avatarFiles = ['svg-1.svg', 'svg-2.svg'];
-        loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
-        loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
     }
 }
 
@@ -548,7 +541,21 @@ function loadAvatarGrid(gridId, inputId, optionClass = "replyAvatarOption", avat
     
     grid.innerHTML = html;
     
-    // ... rest of the click handler code ...
+    // Click handler for avatar selection
+    const options = grid.querySelectorAll(`.${optionClass}`);
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            // Remove selection from all options
+            options.forEach(opt => opt.style.border = '2px solid transparent');
+            // Highlight selected
+            option.style.border = '2px solid #007bff';
+            // Update hidden input
+            const input = document.getElementById(inputId);
+            if (input) {
+                input.value = option.src;
+            }
+        });
+    });
 }
 
 // On DOMContentLoaded, dynamically load both avatar grids (new topic and reply)
