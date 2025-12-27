@@ -509,8 +509,8 @@ let avatarFiles = [];
 
 async function loadAllAvatars() {
     try {
-        // Use the correct endpoint based on function location
-        const res = await fetch('/chatcenter/avatar-list');
+        // Change this line - remove the leading slash
+        const res = await fetch('chatcenter/avatar-list.json');
         
         if (!res.ok) {
             throw new Error(`Failed to fetch avatars: ${res.status}`);
