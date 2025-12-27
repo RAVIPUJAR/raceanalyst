@@ -1702,7 +1702,7 @@
                 
                 // FIX: Simple date parsing without timezone issues
                         // FIX: Use Indian timezone parsing
-                const dateStr = parseDateIndianTimezone(item.date);
+                let dateStr = parseDateIndianTimezone(item.date);
                 if (!dateStr) {
                     console.warn("Could not parse date:", item.date);
                     return;
