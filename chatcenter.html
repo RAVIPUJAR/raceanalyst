@@ -698,7 +698,6 @@ let avatarFiles = [];
 
 async function loadAllAvatars() {
     try {
-        // Use the correct endpoint based on function location
         const res = await fetch('/chatcenter/avatar-list');
         
         if (!res.ok) {
@@ -708,16 +707,12 @@ async function loadAllAvatars() {
         avatarFiles = await res.json();
         console.log("Loaded avatars:", avatarFiles);
         
-        // Load avatar grids
         loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
         loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
         
     } catch (err) {
         console.error("Avatar loading failed:", err);
-        // Fallback to default avatars
-        avatarFiles = ['svg-1.svg', 'svg-2.svg'];
-        loadAvatarGrid("avatarGrid", "selectedAvatar", "avatarOption", avatarFiles);
-        loadAvatarGrid("replyAvatarGrid", "replySelectedAvatar", "replyAvatarOption", avatarFiles);
+        showToast('Could not load avatars', 'error');
     }
 }
 
@@ -767,348 +762,412 @@ function renderTopicsList() {
         container.innerHTML = '<p>No topics yet. Create the first one!</p>';
         return;
     }
-
+    
     const topicsHtml = allTopics.map(topic => {
-        const totalMessages = (topic.messages?.length || 0) +
-            (topic.messages?.reduce((sum, m) => sum + (m.replies?.length || 0), 0) || 0);
-
+        const totalMessages = (topic.messages?.length || 0) + (topic.messages?.reduce((sum, m) => sum + (m.replies?.length || 0), 0) || 0);
         return `
             <div class="topic-item" onclick="openChatThread('${topic.id}')">
                 <div class="topic-title">${topic.title || 'Untitled'}</div>
                 <div class="topic-meta">
                     by ${topic.user || 'Anonymous'} • ${formatDate(topic.date)} • ${totalMessages} message${totalMessages !== 1 ? 's' : ''}
                 </div>
-                ${
-                    isAdminAuthenticated ? `
-                        <!-- Admin delete button temporarily disabled due to template fix -->
-                    ` : ''
-                }
+                ${isAdminAuthenticated ? `
+                    <button onclick="deleteTopic('${topic.id}'); event.stopPropagation();" 
+                            style="float:right; background:#dc3545; color:white; border:none; padding:4px 8px; border-radius:4px; font-size:0.8rem; margin-top:-30px;">
+                        Delete Topic
+                    </button>
+                ` : ''}
             </div>
         `;
     }).join('');
-
-    container.innerHTML = topicsHtml;   
-  }   
-
-
-// Delete a chat message (admin only) - WITH CONFIRMATION DIALOG
-async function deleteChatMessage(messageId) {
-    if (!isAdminAuthenticated) {
-        showToast('Admin access required to delete messages', 'error');
-        return;
-    }
-
-    const topic = currentOpenTopic;
-    if (!topic) return;
     
-    // Find the message text for confirmation
-    let messageText = "this message";
-    function findMessage(messages) {
-        for (let msg of messages) {
-            if (msg.id === messageId) {
-                messageText = msg.text.substring(0, 50) + (msg.text.length > 50 ? '...' : '');
-                return true;
-            }
-            if (msg.replies && findMessage(msg.replies)) return true;
-        }
-        return false;
-    }
-    findMessage(topic.messages);
-
-    if (!confirm("⚠️ Delete Message?\n\n\"" + messageText + "\"\n\nThis action cannot be undone.\n\nProceed?")) {
-        return;
-    }
-
-    function removeMessage(messages, messageId) {
-        return messages.filter(msg => {
-            if (msg.id === messageId) return false;
-            if (msg.replies) msg.replies = removeMessage(msg.replies, messageId);
-            return true;
-        });
-    }
-
-    topic.messages = removeMessage(topic.messages, messageId);
-
-    const topicIndex = allTopics.findIndex(t => t.id === topic.id);
-    if (topicIndex !== -1) allTopics[topicIndex] = topic;
-
-    await saveTopicsToServer();
-    renderChatMessages(topic.messages);
-    showToast('Message deleted', 'success');
+    container.innerHTML = topicsHtml;
 }
 
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-        month: 'short', 
-        day: 'numeric', 
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    });
-}
-
-// ===== CHAT THREAD FUNCTIONS =====
+// Open full chat thread
 function openChatThread(topicId) {
     currentOpenTopic = allTopics.find(t => t.id === topicId);
     if (!currentOpenTopic) return;
     
-    const overlay = document.getElementById('chatOverlay');
-    const titleDiv = document.getElementById('chatTopicTitle');
+    // Header info
+    const totalReplies = currentOpenTopic.messages?.reduce((sum, m) => sum + (m.replies?.length || 0), 0) || 0;
+    const totalMessages = (currentOpenTopic.messages?.length || 0) + totalReplies;
+    const totalLikes = currentOpenTopic.messages?.reduce((sum, m) => {
+        let likes = (m.likes || 0);
+        if (m.replies) likes += m.replies.reduce((s, r) => s + (r.likes || 0), 0);
+        return sum + likes;
+    }, 0) || 0;
     
-    if (!overlay || !titleDiv) return;
-    
-    titleDiv.innerHTML = `
-        <div style="font-size:1.3rem; font-weight:600; margin-bottom:0.5rem;">${currentOpenTopic.title}</div>
-        <div style="font-size:0.9rem; opacity:0.9;">Created by ${currentOpenTopic.user || 'Anonymous'} on ${formatDate(currentOpenTopic.date)}</div>
+    const headerHtml = `
+        <div>
+            <h3 style="margin:0 0 0.3rem 0; color:white; font-size:1.3rem;">
+                <i class="fas fa-comment-dots" style="margin-right:0.5rem;"></i>
+                ${currentOpenTopic.title || 'Chat Topic'}
+            </h3>
+            <div style="display:flex; gap:1rem; font-size:0.85rem; opacity:0.9; flex-wrap:wrap;">
+                <span><i class="fas fa-user"></i> ${currentOpenTopic.user || 'Anonymous'}</span>
+                <span><i class="fas fa-calendar"></i> ${formatDate(currentOpenTopic.date)}</span>
+                <span><i class="fas fa-comments"></i> ${totalMessages} messages</span>
+                <span><i class="fas fa-heart"></i> ${totalLikes} likes</span>
+            </div>
+        </div>
     `;
     
+    document.getElementById("chatTopicTitle").innerHTML = headerHtml;
     renderChatMessages(currentOpenTopic.messages || []);
-    overlay.style.display = 'flex';
     
-    // Scroll to bottom of messages
-    setTimeout(() => {
-        const messagesContainer = document.getElementById('chatMessages');
-        if (messagesContainer) messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }, 100);
+    document.getElementById("chatOverlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
 }
 
-function closeChatThread() {
-    document.getElementById('chatOverlay').style.display = 'none';
-    currentOpenTopic = null;
-    loadTopics(); // Refresh the topics list
-}
-
+// Render messages with nested replies and admin delete
 function renderChatMessages(messages) {
-    const container = document.getElementById('messagesContainer');
-    if (!container) return;
+    const container = document.getElementById("messagesContainer");
     
     if (!messages || messages.length === 0) {
-        container.innerHTML = '<p style="text-align:center; color:#666; padding:2rem;">No messages yet. Be the first to reply!</p>';
+        container.innerHTML = `
+            <div style="text-align:center; padding:2rem; color:#777;">
+                <i class="fas fa-comment-slash" style="font-size:2.5rem; color:#ccc;"></i>
+                <p>No messages yet. Start the conversation!</p>
+            </div>`;
         return;
     }
     
-    const messagesHtml = messages.map(msg => `
-        <div class="thread-message">
-            <div style="display:flex; align-items:center; margin-bottom:8px;">
-                <img src="${msg.avatar || '/chatcenter/avatar-list'}" 
-                     style="width:32px; height:32px; border-radius:50%; margin-right:10px; object-fit:cover;">
-                <div>
-                    <strong>${msg.user || 'Anonymous'}</strong>
-                    <div style="font-size:0.8rem; color:#666;">${formatDate(msg.date)}</div>
-                </div>
-                ${
-                    isAdminAuthenticated ? 
-                    `<button class="action-btn delete" onclick="deleteChatMessage('${msg.id}')" style="margin-left:auto;">
-                        <i class="fas fa-trash"></i> Delete
-                    </button>` : ''
-                }
-            </div>
-            <div style="margin-left:42px;">${msg.text || ''}</div>
-            ${
-                msg.replies && msg.replies.length > 0 ? `
-                    <div class="reply-thread">
-                        ${renderReplies(msg.replies)}
+    function renderMessage(msg, depth = 0) {
+        const avatar = msg.avatar || "chatcenter/avatar/svg-1.svg";
+        const userLiked = userLikes[msg.id] === true;
+        
+        return `
+            <div style="margin-left:${depth * 30}px; margin-bottom:1rem;">
+                <div style="background:${depth === 0 ? '#f0f7f4' : '#f8f9fa'}; border-radius:8px; padding:1rem;">
+                    <div style="display:flex; gap:12px; align-items:start;">
+                        <img src="${avatar}" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+                        <div style="flex:1;">
+                            <div style="font-weight:600; color:#1a3c34;">${msg.user || 'Anonymous'}</div>
+                            <div style="font-size:0.85rem; color:#888; margin-bottom:0.5rem;">${formatDate(msg.date)}</div>
+                            <div style="margin-bottom:0.8rem;">${msg.text}</div>
+                            <div style="display:flex; gap:1rem; font-size:0.9rem;">
+                                <button style="background:none; border:none; color:${userLiked ? '#e91e63' : '#666'}; cursor:pointer;"
+                                        ${userLiked ? 'disabled' : `onclick="likeChatMessage('${msg.id}')"`}>
+                                    <i class="fas fa-heart"></i> ${msg.likes || 0}
+                                </button>
+                                <button style="background:none; border:none; color:#666; cursor:pointer;" onclick="showChatReplyBox('${msg.id}')">
+                                    <i class="fas fa-reply"></i> Reply
+                                </button>
+                                ${isAdminAuthenticated ? `
+                                    <button style="background:none; border:none; color:#d11a2a; cursor:pointer;" onclick="deleteChatMessage('${msg.id}')">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                ` : ''}
+                            </div>
+                            
+                            <!-- Nested reply box -->
+                            <div id="chatReplyBox-${msg.id}" style="display:none; margin-top:1rem;">
+                                <input type="text" id="nestedReplyUserNameInput-${msg.id}" placeholder="Your Name" style="width:100%; padding:8px; margin-bottom:8px;">
+                                <div id="nestedReplyAvatarGrid-${msg.id}" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;"></div>
+                                <input type="hidden" id="nestedReplySelectedAvatar-${msg.id}" value="">
+                                <textarea id="chatReplyInput-${msg.id}" placeholder="Your reply..." style="width:100%; min-height:60px; padding:8px;"></textarea>
+                                <div style="margin-top:8px;">
+                                    <button onclick="submitChatNestedReply('${msg.id}')" style="background:#1a3c34; color:white; padding:6px 12px;">Post</button>
+                                    <button onclick="hideChatReplyBox('${msg.id}')" style="background:#666; color:white; margin-left:8px; padding:6px 12px;">Cancel</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Replies -->
+                            <div style="margin-top:1rem;">
+                                ${(msg.replies || []).map(reply => renderMessage(reply, depth + 1)).join('')}
+                            </div>
+                        </div>
                     </div>
-                ` : ''
-            }
-        </div>
-    `).join('');
-    
-    container.innerHTML = messagesHtml;
-}
-
-function renderReplies(replies) {
-    return replies.map(reply => `
-        <div style="margin-bottom:12px;">
-            <div style="display:flex; align-items:center; margin-bottom:6px;">
-                <img src="${reply.avatar || '/chatcenter/avatar-list'}" 
-                     style="width:28px; height:28px; border-radius:50%; margin-right:8px; object-fit:cover;">
-                <div>
-                    <strong style="font-size:0.9rem;">${reply.user || 'Anonymous'}</strong>
-                    <div style="font-size:0.75rem; color:#666;">${formatDate(reply.date)}</div>
                 </div>
-                ${
-                    isAdminAuthenticated ? 
-                    `<button class="action-btn delete" onclick="deleteChatMessage('${reply.id}')" style="margin-left:auto; font-size:0.8rem;">
-                        <i class="fas fa-trash"></i>
-                    </button>` : ''
-                }
             </div>
-            <div style="margin-left:36px; font-size:0.9rem;">${reply.text || ''}</div>
-        </div>
-    `).join('');
+        `;
+    }
+    
+    container.innerHTML = messages.map(msg => renderMessage(msg)).join('');
+    
+    // Load nested avatar grids after render
+    setTimeout(() => {
+        messages.forEach(msg => {
+            loadAvatarGrid(`nestedReplyAvatarGrid-${msg.id}`, `nestedReplySelectedAvatar-${msg.id}`, 'nestedReplyAvatarOption', avatarFiles);
+            (msg.replies || []).forEach(reply => {
+                loadAvatarGrid(`nestedReplyAvatarGrid-${reply.id}`, `nestedReplySelectedAvatar-${reply.id}`, 'nestedReplyAvatarOption', avatarFiles);
+            });
+        });
+    }, 0);
 }
 
-// ===== TOPIC CREATION =====
-async function createTopic() {
-    const userName = document.getElementById('userNameInput').value.trim();
-    const avatar = document.getElementById('selectedAvatar').value;
-    const title = document.getElementById('topicTitle').value.trim();
-    const body = document.getElementById('topicBody').value.trim();
+function showChatReplyBox(messageId) {
+    document.getElementById(`chatReplyBox-${messageId}`).style.display = 'block';
+}
+
+function hideChatReplyBox(messageId) {
+    document.getElementById(`chatReplyBox-${messageId}`).style.display = 'none';
+}
+
+// Like message
+async function likeChatMessage(messageId) {
+    if (userLikes[messageId]) return;
     
-    if (!title || !body) {
-        showToast('Please fill in both title and message', 'error');
+    function incrementLikes(messages) {
+        for (let msg of messages) {
+            if (msg.id === messageId) {
+                msg.likes = (msg.likes || 0) + 1;
+                return true;
+            }
+            if (msg.replies && incrementLikes(msg.replies)) return true;
+        }
+        return false;
+    }
+    
+    if (incrementLikes(currentOpenTopic.messages)) {
+        userLikes[messageId] = true;
+        localStorage.setItem('userLikes', JSON.stringify(userLikes));
+        await saveTopicsToServer();
+        renderChatMessages(currentOpenTopic.messages);
+    }
+}
+
+// Submit nested reply
+async function submitChatNestedReply(parentId) {
+    const textInput = document.getElementById(`chatReplyInput-${parentId}`);
+    const text = textInput.value.trim();
+    if (!text) return alert("Please write a reply");
+    
+    const user = document.getElementById(`nestedReplyUserNameInput-${parentId}`).value.trim() || "Anonymous";
+    const avatar = document.getElementById(`nestedReplySelectedAvatar-${parentId}`).value || "chatcenter/avatar/svg-1.svg";
+    
+    const newReply = {
+        id: Date.now().toString(),
+        user, avatar, text,
+        date: new Date().toLocaleString(),
+        likes: 0,
+        replies: []
+    };
+    
+    function addReply(messages, parentId) {
+        for (let msg of messages) {
+            if (msg.id === parentId) {
+                if (!msg.replies) msg.replies = [];
+                msg.replies.push(newReply);
+                return true;
+            }
+            if (msg.replies && addReply(msg.replies, parentId)) return true;
+        }
+        return false;
+    }
+    
+    if (addReply(currentOpenTopic.messages, parentId)) {
+        await saveTopicsToServer();
+        textInput.value = "";
+        hideChatReplyBox(parentId);
+        renderChatMessages(currentOpenTopic.messages);
+    }
+}
+
+// Submit main reply
+async function submitChatReply() {
+    const text = document.getElementById("chatReplyInput").value.trim();
+    if (!text) return alert("Please write a reply");
+    
+    const user = document.getElementById("replyUserNameInput").value.trim() || "Anonymous";
+    const avatar = document.getElementById("replySelectedAvatar").value || "chatcenter/avatar/svg-1.svg";
+    
+    const newMessage = {
+        id: Date.now().toString(),
+        user, avatar, text,
+        date: new Date().toLocaleString(),
+        likes: 0,
+        replies: []
+    };
+    
+    currentOpenTopic.messages.push(newMessage);
+    await saveTopicsToServer();
+    
+    document.getElementById("chatReplyInput").value = "";
+    document.getElementById("replyUserNameInput").value = "";
+    renderChatMessages(currentOpenTopic.messages);
+}
+
+// Close thread
+function closeChatThread() {
+    document.getElementById("chatOverlay").style.display = "none";
+    document.body.style.overflow = "auto";
+    currentOpenTopic = null;
+    loadTopics();
+}
+
+// Delete topic (admin only)
+async function deleteTopic(topicId) {
+    if (!isAdminAuthenticated) {
+        showToast('Admin access required', 'error');
         return;
     }
+    if (!confirm("Delete this entire topic?")) return;
+    
+    allTopics = allTopics.filter(t => t.id !== topicId);
+    await saveTopicsToServer();
+    if (currentOpenTopic && currentOpenTopic.id === topicId) closeChatThread();
+    loadTopics();
+    showToast('Topic deleted', 'success');
+}
+
+// Delete message (admin only)
+async function deleteChatMessage(messageId) {
+    if (!isAdminAuthenticated) {
+        showToast('Admin access required', 'error');
+        return;
+    }
+    if (!confirm("Delete this message?")) return;
+    
+    function removeMessage(messages) {
+        return messages.filter(m => {
+            if (m.id === messageId) return false;
+            if (m.replies) m.replies = removeMessage(m.replies);
+            return true;
+        });
+    }
+    
+    currentOpenTopic.messages = removeMessage(currentOpenTopic.messages);
+    await saveTopicsToServer();
+    renderChatMessages(currentOpenTopic.messages);
+    showToast('Message deleted', 'success');
+}
+
+// Save all topics
+async function saveTopicsToServer() {
+    try {
+        const res = await fetch(SAVE_TOPICS_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(allTopics)
+        });
+        if (!res.ok) throw new Error("Save failed");
+    } catch (err) {
+        console.error(err);
+        showToast('Failed to save', 'error');
+    }
+}
+
+// Create new topic
+async function createTopic() {
+    const title = document.getElementById("topicTitle").value.trim();
+    const body = document.getElementById("topicBody").value.trim();
+    const user = document.getElementById("userNameInput").value.trim() || "Anonymous";
+    const avatar = document.getElementById("selectedAvatar").value || "chatcenter/avatar/svg-1.svg";
+    
+    if (!title || !body) return alert("Title and message are required");
+    
+    const firstMessage = {
+        id: Date.now().toString(),
+        user, avatar, text: body,
+        date: new Date().toLocaleString(),
+        likes: 0, replies: []
+    };
     
     const newTopic = {
-        id: 'topic_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
-        title: title,
-        user: userName || 'Anonymous',
-        avatar: avatar || '/chatcenter/avatar-list',
-        date: new Date().toISOString(),
-        messages: [{
-            id: 'msg_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
-            user: userName || 'Anonymous',
-            avatar: avatar || '/chatcenter/avatar-list',
-            text: body,
-            date: new Date().toISOString(),
-            replies: []
-        }]
+        id: Date.now().toString(),
+        title, user, avatar,
+        date: new Date().toLocaleString(),
+        messages: [firstMessage]
     };
     
     allTopics.unshift(newTopic);
     await saveTopicsToServer();
     
     // Clear form
-    document.getElementById('userNameInput').value = '';
-    document.getElementById('topicTitle').value = '';
-    document.getElementById('topicBody').value = '';
-    document.getElementById('selectedAvatar').value = '';
+    document.getElementById("topicTitle").value = "";
+    document.getElementById("topicBody").value = "";
+    document.getElementById("userNameInput").value = "";
     
-    showToast('Topic created successfully!', 'success');
-    renderTopicsList();
-    closeNewTopicForm();
+    showToast('Topic created!', 'success');
+    loadTopics();
 }
 
-// ===== REPLY SUBMISSION =====
-async function submitChatReply() {
-    if (!currentOpenTopic) return;
-    
-    const userName = document.getElementById('replyUserNameInput').value.trim();
-    const avatar = document.getElementById('replySelectedAvatar').value;
-    const text = document.getElementById('chatReplyInput').value.trim();
-    
-    if (!text) {
-        showToast('Please write a message', 'error');
-        return;
-    }
-    
-    const newMessage = {
-        id: 'msg_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
-        user: userName || 'Anonymous',
-        avatar: avatar || '/chatcenter/avatar-list',
-        text: text,
-        date: new Date().toISOString(),
-        replies: []
-    };
-    
-    currentOpenTopic.messages.push(newMessage);
-    
-    // Update in allTopics array
-    const topicIndex = allTopics.findIndex(t => t.id === currentOpenTopic.id);
-    if (topicIndex !== -1) allTopics[topicIndex] = currentOpenTopic;
-    
-    await saveTopicsToServer();
-    
-    // Clear form
-    document.getElementById('chatReplyInput').value = '';
-    document.getElementById('replyUserNameInput').value = '';
-    document.getElementById('replySelectedAvatar').value = '';
-    
-    showToast('Reply posted!', 'success');
-    renderChatMessages(currentOpenTopic.messages);
-    
-    // Scroll to bottom
-    setTimeout(() => {
-        const messagesContainer = document.getElementById('chatMessages');
-        if (messagesContainer) messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }, 100);
-}
-
-// ===== SAVE TOPICS TO SERVER =====
-async function saveTopicsToServer() {
+// Utility
+function formatDate(dateString) {
     try {
-        const response = await fetch(SAVE_TOPICS_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(allTopics)
-        });
-        
-        if (!response.ok) throw new Error('Failed to save topics');
-        return true;
-    } catch (error) {
-        console.error('Save error:', error);
-        showToast('Failed to save. Please try again.', 'error');
-        return false;
+        const date = new Date(dateString);
+        const now = new Date();
+        const diff = now - date;
+        const mins = Math.floor(diff / 60000);
+        if (mins < 60) return `${mins}m ago`;
+        const hours = Math.floor(mins / 60);
+        if (hours < 24) return `${hours}h ago`;
+        const days = Math.floor(hours / 24);
+        if (days < 7) return `${days}d ago`;
+        return date.toLocaleDateString();
+    } catch {
+        return dateString || 'Just now';
     }
 }
 
-// ===== NEW TOPIC FORM TOGGLE =====
-function toggleNewTopicForm() {
+// Toggle new topic form
+document.getElementById('newTopicHeader').addEventListener('click', () => {
     const content = document.getElementById('newTopicContent');
     const icon = document.getElementById('newTopicToggleIcon');
-    
-    if (content.style.display === 'none' || content.style.display === '') {
+    if (content.style.display === 'none' || !content.style.display) {
         content.style.display = 'block';
         icon.textContent = '➖';
     } else {
         content.style.display = 'none';
         icon.textContent = '➕';
     }
-}
+});
 
-function closeNewTopicForm() {
-    document.getElementById('newTopicContent').style.display = 'none';
-    document.getElementById('newTopicToggleIcon').textContent = '➕';
-}
+// Mobile menu toggle
+document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+    document.getElementById('navMenu').classList.toggle('active');
+});
 
-// ===== INITIALIZATION =====
-document.addEventListener('DOMContentLoaded', async function() {
-    // Check auth status
+// Initialize
+window.addEventListener('DOMContentLoaded', async () => {
+    console.log("Chat Center initialized");
+    
+    document.getElementById('logoutBtn')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        logoutLocally();
+    });
+    
+    userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
+    await loadAllAvatars();
+    
     const authResult = checkLocalStorageAuth();
     updateUIForAuthStatus(authResult);
     
-    // Setup logout button
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', logoutLocally);
-    }
-    
-    // Setup new topic toggle
-    const newTopicHeader = document.getElementById('newTopicHeader');
-    if (newTopicHeader) {
-        newTopicHeader.addEventListener('click', toggleNewTopicForm);
-    }
-    
-    // Load avatars
-    await loadAllAvatars();
-    
-    // Load topics
     await loadTopics();
-    
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navMenu = document.getElementById('navMenu');
-    
-    if (mobileMenuBtn && navMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!mobileMenuBtn.contains(event.target) && !navMenu.contains(event.target)) {
-                navMenu.classList.remove('active');
-            }
-        });
-    }
 });
-// ... rest of your code ...
- 
 </script>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About RaceAnalyst</h4>
+                <p>Your trusted platform for racing analytics, statistics, and insights.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="#" onclick="navigateToHome()" style="color:#ccc; text-decoration:none;">Home</a></p>
+                <p><a href="#" onclick="navigateToAnalysis()" style="color:#ccc; text-decoration:none;">Analysis</a></p>
+                <p><a href="https://raceanalyst.pages.dev/chatcenter" target="_blank" style="color:#ccc; text-decoration:none;">Chat Center</a></p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            © 2025 RaceAnalyst. All rights reserved.
+        </div>
+    </div>
+</footer>
 </body>
 </html>
