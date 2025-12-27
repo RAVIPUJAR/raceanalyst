@@ -1474,19 +1474,7 @@ window.addEventListener('DOMContentLoaded', () => {
   
   // Load likes from localStorage
   userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
-  
-  // Add admin button to header
-  const header = document.querySelector(".container .page-title") || document.querySelector("header .container");
-  if (header) {
-    const adminBtn = document.createElement("button");
-    adminBtn.innerHTML = '<i class="fas fa-user-shield"></i> Admin';
-    adminBtn.style.cssText = "background:#d4af37; color:white; border:none; padding:0.5rem 1rem; border-radius:4px; cursor:pointer; margin-left:1rem;";
-    adminBtn.onclick = showAdminLogin;
-
-    // Always show the Admin button
-    header.appendChild(adminBtn);
-}
-  
+    
   // Load topics
   loadTopics();
 });
