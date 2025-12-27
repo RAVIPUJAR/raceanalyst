@@ -407,14 +407,51 @@
         .calendar-container {
             margin-top: 1rem;
         }
-        
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
+
+        /* Style the actual prev/next buttons */
+        .calendar-header button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #1a3c34;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 2;
         }
-        
+
+        /* Button positions */
+        #prevMonthBtn {
+            left: 8px;
+        }
+
+        #nextMonthBtn {
+            right: 8px;
+        }
+
+        /* Prevent squeezing: keep text centered */
+        .calendar-header h4 {
+            margin: 0 auto;
+            font-size: 1.2rem;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        /* Mobile improvements */
+        @media (max-width: 480px) {
+            .calendar-header button {
+                padding: 5px 9px;
+                font-size: 0.9rem;
+            }
+
+            .calendar-header h4 {
+                font-size: 1rem;
+            }
+        }
+                
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
