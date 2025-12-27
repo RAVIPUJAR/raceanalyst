@@ -1069,6 +1069,33 @@
         #race-calendar.sidebar-widget {
             overflow: visible !important;
         }
+
+        /* DEBUG OVERRIDE – forces calendar header to be visible */
+        .calendar-header {
+            background: red !important;
+            color: white !important;
+            min-height: 60px !important;
+            height: auto !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            overflow: visible !important;
+            position: relative !important;
+            z-index: 99999 !important;
+            border: 3px solid blue !important;
+        }
+
+        /* force buttons to be visible and huge */
+        #prevMonthBtn, #nextMonthBtn {
+            background: black !important;
+            color: yellow !important;
+            padding: 15px !important;
+            font-size: 22px !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+            z-index: 999999 !important;
+        }
     </style>
 </head>
 <body>
