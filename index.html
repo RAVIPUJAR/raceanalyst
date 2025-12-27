@@ -1663,8 +1663,30 @@
             }
         }
 
-        // Process race events from Google Sheet
+        
+        // SIMPLEST FIX: Force Indian timezone
+        function parseDateIndianTimezone(dateString) {
+            try {
+                // Append IST timezone to the date
+                const dateWithIST = new Date(`${dateString}T00:00:00+05:30`);
+                
+                if (isNaN(dateWithIST.getTime())) {
+                    return null;
+                }
+                
+                // Get date in YYYY-MM-DD format
+                const year = dateWithIST.getFullYear();
+                const month = String(dateWithIST.getMonth() + 1).padStart(2, '0');
+                const day = String(dateWithIST.getDate()).padStart(2, '0');
+                
+                return `${year}-${month}-${day}`;
+            } catch (e) {
+                console.warn("Date parsing failed:", dateString);
+                return null;
+            }
+        }
 
+        // Process race events from Google Sheet
         function processRaceEvents(events) {
             raceEvents = {};
             
@@ -1679,7 +1701,12 @@
                 }
                 
                 // FIX: Simple date parsing without timezone issues
-                let dateStr = item.date;
+                        // FIX: Use Indian timezone parsing
+                const dateStr = parseDateIndianTimezone(item.date);
+                if (!dateStr) {
+                    console.warn("Could not parse date:", item.date);
+                    return;
+                }
                 
                 // Check if it's already in YYYY-MM-DD format
                 if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
