@@ -2109,18 +2109,6 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
         }
     });
 
-
-    async function loginToCloudflare() {
-        console.log("🔑 Forcing Cloudflare Access login...");
-
-        // This special URL ALWAYS triggers Cloudflare Access login
-        window.location.href = "https://raceanalyst.pages.dev/admin";
-    }
-
-
-    /* ---------------------------------------------------
-    UPDATE UI BASED ON AUTH STATUS
-    --------------------------------------------------- */
 /* ---------------------------------------------------
     UPDATE UI BASED ON AUTH STATUS
     --------------------------------------------------- */
@@ -2343,23 +2331,104 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
     UPDATE INITIALIZATION
     --------------------------------------------------- */
     document.addEventListener('DOMContentLoaded', async function() {
-        console.log("🚀 Initializing RaceAnalyst Admin with Cloudflare Auth...");
+        console.log("🚀 Initializing RaceAnalyst Admin...");
         
         try {
-            // Set up event listeners
-            setupAuthEventListeners();
+            // ✅ NEW: Check if user has valid token (logged in)
+            const hasValidToken = checkLogin(); // This function we already added
             
-            // First check authentication
-            const authResult = await checkCloudflareAuth();
-
             // ✅ SET ADMIN FLAG IN LOCALSTORAGE IF AUTHENTICATED
-            if (authResult.authenticated) {
+            if (hasValidToken && ADMIN_TOKEN) {
                 localStorage.setItem("isAdmin", "true");
                 console.log("✅ Admin flag set in localStorage for chatcenter access");
             } else {
                 localStorage.removeItem("isAdmin");
                 console.log("❌ Admin flag removed from localStorage");
-            }            
+            }
+            
+            // Setup login form event handlers
+            const loginForm = document.getElementById('loginForm');
+            const tokenInput = document.getElementById('adminTokenInput');
+            const loginError = document.getElementById('loginError');
+            const loginErrorMessage = document.getElementById('loginErrorMessage');
+            
+            // Login form handler
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const token = tokenInput.value.trim();
+                
+                if (!token) {
+                    loginErrorMessage.textContent = 'Please enter a token';
+                    loginError.style.display = 'block';
+                    return;
+                }
+                
+                try {
+                    // Verify token
+                    const response = await fetch(workerBase + "/auth-status", {
+                        headers: { 'X-Admin-Token': token }
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.authenticated) {
+                        ADMIN_TOKEN = token;
+                        localStorage.setItem('raceanalyst_admin_token', token);
+                        localStorage.setItem('raceanalyst_admin_login_time', Date.now().toString());
+                        localStorage.setItem('isAdmin', 'true'); // ✅ Set admin flag
+                        
+                        hideLoginModal();
+                        showToast('✅ Login successful!', 'success');
+                        
+                        await loadFromKV();
+                        initializeDropdowns();
+                    } else {
+                        throw new Error('Invalid token');
+                    }
+                } catch (error) {
+                    console.error('Login error:', error);
+                    loginErrorMessage.textContent = 'Invalid token. Please check and try again.';
+                    loginError.style.display = 'block';
+                    tokenInput.value = '';
+                    tokenInput.focus();
+                }
+            });
+            
+            // Close button handler
+            const closeLoginBtn = document.getElementById('closeLoginModal');
+            if (closeLoginBtn) {
+                closeLoginBtn.addEventListener('click', function() {
+                    const isAdminPage = window.location.pathname.includes('admin');
+                    
+                    if (isAdminPage) {
+                        if (confirm('You need to login to access the admin panel. Return to home page?')) {
+                            window.location.href = 'index.html';
+                        }
+                    } else {
+                        hideLoginModal();
+                    }
+                });
+            }
+            
+            // ESC key to close
+            document.addEventListener('keydown', function(e) {
+                const loginModal = document.getElementById('loginModal');
+                if (e.key === 'Escape' && loginModal.style.display === 'flex') {
+                    closeLoginBtn?.click();
+                }
+            });
+            
+            // Logout button handler
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (confirm('Are you sure you want to logout?')) {
+                        logout();
+                    }
+                });
+            }
             
             // Load race analyses from Cloudflare KV
             const loadResult = await loadFromKV();
@@ -2397,7 +2466,7 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
             }
             
             console.log("✅ Admin page ready!");
-            console.log("Auth status:", isAuthenticated ? 'Authenticated' : 'Not authenticated');
+            console.log("Auth status:", ADMIN_TOKEN ? 'Authenticated' : 'Not authenticated');
             
         } catch (error) {
             console.error("Initialization error:", error);
@@ -2413,96 +2482,6 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
         }
     });
 
-    async function debugAuthResponse() {
-    try {
-        console.log("🔍 FULL AUTH DEBUG...");
-        
-        // Test 1: Check current page URL and cookies
-        console.log("Current URL:", window.location.href);
-        console.log("Cookies enabled:", navigator.cookieEnabled);
-        console.log("Document cookies:", document.cookie);
-        
-        // Test 2: Try to fetch with different options
-        const timestamp = new Date().getTime();
-        const testUrls = [
-            `${workerBase}/auth-status?t=${timestamp}`,
-            `${workerBase}/auth-status?t=${timestamp}&debug=1`,
-            workerBase // root to see if worker is responding
-        ];
-        
-        for (let url of testUrls) {
-            console.log(`\n--- Testing URL: ${url} ---`);
-            
-            try {
-                const response = await fetch(url, {
-                    method: 'GET',
-                    credentials: 'include', // Important for sending cookies
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    mode: 'cors'
-                });
-                
-                console.log(`Status: ${response.status} ${response.statusText}`);
-                console.log("Headers:");
-                response.headers.forEach((value, key) => {
-                    console.log(`  ${key}: ${value}`);
-                });
-                
-                const text = await response.text();
-                console.log("Response length:", text.length);
-                
-                if (text.length < 1000) {
-                    console.log("Response content:", text);
-                } else {
-                    console.log("Response (first 500 chars):", text.substring(0, 500));
-                }
-                
-                // Try to parse as JSON
-                try {
-                    const json = JSON.parse(text);
-                    console.log("Parsed JSON:", JSON.stringify(json, null, 2));
-                } catch(e) {
-                    console.log("Not valid JSON");
-                }
-                
-            } catch (error) {
-                console.error(`Fetch error for ${url}:`, error.message);
-            }
-        }
-        
-        // Test 3: Try a direct Cloudflare Access check
-        console.log("\n--- Checking Cloudflare Access Headers ---");
-        try {
-            const response = await fetch(`${workerBase}/`, {
-                method: 'GET',
-                credentials: 'include'
-            });
-            
-            // Check for specific Cloudflare Access headers
-            const headers = {};
-            for (let [key, value] of response.headers.entries()) {
-                if (key.toLowerCase().includes('cf-access') || 
-                    key.toLowerCase().includes('cf-connecting') ||
-                    key.toLowerCase().includes('authorization')) {
-                    headers[key] = value;
-                }
-            }
-            
-            console.log("Cloudflare related headers:", headers);
-            
-        } catch (error) {
-            console.error("CF Access check failed:", error);
-        }
-        
-        return "Debug complete";
-        
-    } catch (error) {
-        console.error("Debug function error:", error);
-        return { error: error.message };
-    }
-}
     </script>
 </body>
 </html>
