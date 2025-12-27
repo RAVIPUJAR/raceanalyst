@@ -1664,6 +1664,7 @@
         }
 
         // Process race events from Google Sheet
+
         function processRaceEvents(events) {
             raceEvents = {};
             
@@ -1677,19 +1678,41 @@
                     return; // Skip incomplete entries
                 }
                 
-                // Normalize date format (assuming YYYY-MM-DD)
-                let dateStr = item.date;
-                
-                // Try to parse different date formats
+                // FIX 1: Parse date correctly (handling timezone issues)
+                let dateObj;
                 try {
-                    const date = new Date(item.date);
-                    if (!isNaN(date.getTime())) {
-                        dateStr = date.toISOString().split('T')[0];
+                    // Handle different date formats
+                    if (item.date.includes('-')) {
+                        // Handle YYYY-MM-DD format
+                        const parts = item.date.split('-');
+                        if (parts.length === 3) {
+                            // Create date without time to avoid timezone issues
+                            dateObj = new Date(parts[0], parts[1] - 1, parts[2]);
+                        } else {
+                            dateObj = new Date(item.date);
+                        }
+                    } else {
+                        dateObj = new Date(item.date);
                     }
+                    
+                    if (isNaN(dateObj.getTime())) {
+                        console.warn("Invalid date:", item.date);
+                        return;
+                    }
+                    
+                    // FIX: Set to noon to avoid timezone issues
+                    dateObj.setHours(12, 0, 0, 0);
+                    
                 } catch (e) {
                     console.warn("Could not parse date:", item.date);
                     return;
                 }
+                
+                // Format as YYYY-MM-DD (ensuring it's the correct date)
+                const year = dateObj.getFullYear();
+                const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+                const day = String(dateObj.getDate()).padStart(2, '0');
+                const dateStr = `${year}-${month}-${day}`;
                 
                 // Normalize type (case-insensitive, singular)
                 const type = item.type.toLowerCase().trim();
@@ -1717,7 +1740,6 @@
             console.log("Processed race events:", raceEvents);
             renderCalendar();
         }
-
         // Render the calendar
         function renderCalendar() {
             const calendarGrid = document.getElementById('calendarGrid');
@@ -1868,11 +1890,10 @@
                 let tooltipContent = `<h5>${events.length} Event${events.length > 1 ? 's' : ''}</h5>`;
                 
                 events.forEach(event => {
-                    const typeClass = `event-type-badge type-${event.type}`;
+                    // FIX: Removed event type from tooltip
                     tooltipContent += `
                         <p><strong>${event.event}</strong></p>
                         <p><i class="fas fa-map-marker-alt"></i> ${event.venue}</p>
-                        <span class="${typeClass}">${event.type.toUpperCase()}</span>
                     `;
                 });
                 
@@ -1910,11 +1931,13 @@
         function showEventAlert(events, dateStr) {
             const date = new Date(dateStr);
             const formattedDate = date.toLocaleDateString('en-US', {
-                weekday: 'short',
-                month: 'short',
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
                 day: 'numeric'
             });
             
+            // FIX 2: Show date only once, remove event type from display
             let alertMessage = `<h3 style="color: #1a3c34; margin-bottom: 15px;">${formattedDate}</h3>`;
             
             events.forEach((event, index) => {
@@ -1930,18 +1953,17 @@
                         </div>
                         <div style="font-size: 0.9em; color: #666;">
                             <div><i class="fas fa-map-marker-alt"></i> ${event.venue}</div>
-                            <div><span style="text-transform: uppercase; color: ${typeColor}; font-weight: 600;">${event.type}</span></div>
                         </div>
                     </div>
                 `;
             });
             
             // Create mobile-friendly modal instead of alert
-            showMobileModal(alertMessage, formattedDate);
+            showMobileModal(alertMessage);
         }
 
         // Mobile-friendly modal for event details
-        function showMobileModal(content, title) {
+        function showMobileModal(content) {
             // Remove existing modal if any
             const existingModal = document.getElementById('mobileEventModal');
             if (existingModal) {
@@ -1980,7 +2002,7 @@
             
             modalContent.innerHTML = `
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h3 style="margin: 0; color: #1a3c34;">${title}</h3>
+                    <h3 style="margin: 0; color: #1a3c34;">Event Details</h3>
                     <button id="closeMobileModal" style="background: none; border: none; font-size: 24px; color: #666; cursor: pointer; padding: 0; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">×</button>
                 </div>
                 <div>${content}</div>
