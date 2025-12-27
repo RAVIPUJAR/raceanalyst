@@ -943,6 +943,65 @@
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
         }
+
+        /* === FINAL FIX: Calendar Navigation — override everything above === */
+
+        .calendar-header {
+            position: relative !important;
+            width: 100% !important;
+            margin-bottom: 1rem !important;
+            padding: 6px 0 !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        /* Navigation buttons */
+        #prevMonthBtn,
+        #nextMonthBtn {
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            background: #1a3c34 !important;
+            color: white !important;
+            border: none !important;
+            padding: 6px 12px !important;
+            font-size: 1rem !important;
+            border-radius: 4px !important;
+            cursor: pointer !important;
+            z-index: 5 !important; /* ensure visible */
+        }
+
+        /* POSITION LEFT AND RIGHT */
+        #prevMonthBtn {
+            left: 8px !important;
+        }
+
+        #nextMonthBtn {
+            right: 8px !important;
+        }
+
+        /* Month name — always centered, never squeezed */
+        .calendar-header h4 {
+            margin: 0 auto !important;
+            text-align: center !important;
+            font-size: 1.2rem !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            pointer-events: none !important;
+        }
+
+        @media (max-width: 480px) {
+            #prevMonthBtn, #nextMonthBtn {
+                padding: 5px 9px !important;
+                font-size: 0.9rem !important;
+            }
+
+            .calendar-header h4 {
+                font-size: 1rem !important;
+            }
+        }
     </style>
 </head>
 <body>
