@@ -782,8 +782,8 @@ function renderTopicsList() {
         `;
     }).join('');
 
-    container.innerHTML = topicsHtml;   // ✅ REQUIRED
-}   // ✅ CLOSE THE FUNCTION
+    container.innerHTML = topicsHtml;   
+  }   
 
 
 // Delete a chat message (admin only) - WITH CONFIRMATION DIALOG
@@ -832,6 +832,276 @@ async function deleteChatMessage(messageId) {
     showToast('Message deleted', 'success');
 }
 
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+        month: 'short', 
+        day: 'numeric', 
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
+// ===== CHAT THREAD FUNCTIONS =====
+function openChatThread(topicId) {
+    currentOpenTopic = allTopics.find(t => t.id === topicId);
+    if (!currentOpenTopic) return;
+    
+    const overlay = document.getElementById('chatOverlay');
+    const titleDiv = document.getElementById('chatTopicTitle');
+    
+    if (!overlay || !titleDiv) return;
+    
+    titleDiv.innerHTML = `
+        <div style="font-size:1.3rem; font-weight:600; margin-bottom:0.5rem;">${currentOpenTopic.title}</div>
+        <div style="font-size:0.9rem; opacity:0.9;">Created by ${currentOpenTopic.user || 'Anonymous'} on ${formatDate(currentOpenTopic.date)}</div>
+    `;
+    
+    renderChatMessages(currentOpenTopic.messages || []);
+    overlay.style.display = 'flex';
+    
+    // Scroll to bottom of messages
+    setTimeout(() => {
+        const messagesContainer = document.getElementById('chatMessages');
+        if (messagesContainer) messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }, 100);
+}
+
+function closeChatThread() {
+    document.getElementById('chatOverlay').style.display = 'none';
+    currentOpenTopic = null;
+    loadTopics(); // Refresh the topics list
+}
+
+function renderChatMessages(messages) {
+    const container = document.getElementById('messagesContainer');
+    if (!container) return;
+    
+    if (!messages || messages.length === 0) {
+        container.innerHTML = '<p style="text-align:center; color:#666; padding:2rem;">No messages yet. Be the first to reply!</p>';
+        return;
+    }
+    
+    const messagesHtml = messages.map(msg => `
+        <div class="thread-message">
+            <div style="display:flex; align-items:center; margin-bottom:8px;">
+                <img src="${msg.avatar || '/chatcenter/avatar/default.png'}" 
+                     style="width:32px; height:32px; border-radius:50%; margin-right:10px; object-fit:cover;">
+                <div>
+                    <strong>${msg.user || 'Anonymous'}</strong>
+                    <div style="font-size:0.8rem; color:#666;">${formatDate(msg.date)}</div>
+                </div>
+                ${
+                    isAdminAuthenticated ? 
+                    `<button class="action-btn delete" onclick="deleteChatMessage('${msg.id}')" style="margin-left:auto;">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>` : ''
+                }
+            </div>
+            <div style="margin-left:42px;">${msg.text || ''}</div>
+            ${
+                msg.replies && msg.replies.length > 0 ? `
+                    <div class="reply-thread">
+                        ${renderReplies(msg.replies)}
+                    </div>
+                ` : ''
+            }
+        </div>
+    `).join('');
+    
+    container.innerHTML = messagesHtml;
+}
+
+function renderReplies(replies) {
+    return replies.map(reply => `
+        <div style="margin-bottom:12px;">
+            <div style="display:flex; align-items:center; margin-bottom:6px;">
+                <img src="${reply.avatar || '/chatcenter/avatar/default.png'}" 
+                     style="width:28px; height:28px; border-radius:50%; margin-right:8px; object-fit:cover;">
+                <div>
+                    <strong style="font-size:0.9rem;">${reply.user || 'Anonymous'}</strong>
+                    <div style="font-size:0.75rem; color:#666;">${formatDate(reply.date)}</div>
+                </div>
+                ${
+                    isAdminAuthenticated ? 
+                    `<button class="action-btn delete" onclick="deleteChatMessage('${reply.id}')" style="margin-left:auto; font-size:0.8rem;">
+                        <i class="fas fa-trash"></i>
+                    </button>` : ''
+                }
+            </div>
+            <div style="margin-left:36px; font-size:0.9rem;">${reply.text || ''}</div>
+        </div>
+    `).join('');
+}
+
+// ===== TOPIC CREATION =====
+async function createTopic() {
+    const userName = document.getElementById('userNameInput').value.trim();
+    const avatar = document.getElementById('selectedAvatar').value;
+    const title = document.getElementById('topicTitle').value.trim();
+    const body = document.getElementById('topicBody').value.trim();
+    
+    if (!title || !body) {
+        showToast('Please fill in both title and message', 'error');
+        return;
+    }
+    
+    const newTopic = {
+        id: 'topic_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+        title: title,
+        user: userName || 'Anonymous',
+        avatar: avatar || '/chatcenter/avatar/default.png',
+        date: new Date().toISOString(),
+        messages: [{
+            id: 'msg_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+            user: userName || 'Anonymous',
+            avatar: avatar || '/chatcenter/avatar/default.png',
+            text: body,
+            date: new Date().toISOString(),
+            replies: []
+        }]
+    };
+    
+    allTopics.unshift(newTopic);
+    await saveTopicsToServer();
+    
+    // Clear form
+    document.getElementById('userNameInput').value = '';
+    document.getElementById('topicTitle').value = '';
+    document.getElementById('topicBody').value = '';
+    document.getElementById('selectedAvatar').value = '';
+    
+    showToast('Topic created successfully!', 'success');
+    renderTopicsList();
+    closeNewTopicForm();
+}
+
+// ===== REPLY SUBMISSION =====
+async function submitChatReply() {
+    if (!currentOpenTopic) return;
+    
+    const userName = document.getElementById('replyUserNameInput').value.trim();
+    const avatar = document.getElementById('replySelectedAvatar').value;
+    const text = document.getElementById('chatReplyInput').value.trim();
+    
+    if (!text) {
+        showToast('Please write a message', 'error');
+        return;
+    }
+    
+    const newMessage = {
+        id: 'msg_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+        user: userName || 'Anonymous',
+        avatar: avatar || '/chatcenter/avatar/default.png',
+        text: text,
+        date: new Date().toISOString(),
+        replies: []
+    };
+    
+    currentOpenTopic.messages.push(newMessage);
+    
+    // Update in allTopics array
+    const topicIndex = allTopics.findIndex(t => t.id === currentOpenTopic.id);
+    if (topicIndex !== -1) allTopics[topicIndex] = currentOpenTopic;
+    
+    await saveTopicsToServer();
+    
+    // Clear form
+    document.getElementById('chatReplyInput').value = '';
+    document.getElementById('replyUserNameInput').value = '';
+    document.getElementById('replySelectedAvatar').value = '';
+    
+    showToast('Reply posted!', 'success');
+    renderChatMessages(currentOpenTopic.messages);
+    
+    // Scroll to bottom
+    setTimeout(() => {
+        const messagesContainer = document.getElementById('chatMessages');
+        if (messagesContainer) messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }, 100);
+}
+
+// ===== SAVE TOPICS TO SERVER =====
+async function saveTopicsToServer() {
+    try {
+        const response = await fetch(SAVE_TOPICS_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(allTopics)
+        });
+        
+        if (!response.ok) throw new Error('Failed to save topics');
+        return true;
+    } catch (error) {
+        console.error('Save error:', error);
+        showToast('Failed to save. Please try again.', 'error');
+        return false;
+    }
+}
+
+// ===== NEW TOPIC FORM TOGGLE =====
+function toggleNewTopicForm() {
+    const content = document.getElementById('newTopicContent');
+    const icon = document.getElementById('newTopicToggleIcon');
+    
+    if (content.style.display === 'none' || content.style.display === '') {
+        content.style.display = 'block';
+        icon.textContent = '➖';
+    } else {
+        content.style.display = 'none';
+        icon.textContent = '➕';
+    }
+}
+
+function closeNewTopicForm() {
+    document.getElementById('newTopicContent').style.display = 'none';
+    document.getElementById('newTopicToggleIcon').textContent = '➕';
+}
+
+// ===== INITIALIZATION =====
+document.addEventListener('DOMContentLoaded', async function() {
+    // Check auth status
+    const authResult = checkLocalStorageAuth();
+    updateUIForAuthStatus(authResult);
+    
+    // Setup logout button
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', logoutLocally);
+    }
+    
+    // Setup new topic toggle
+    const newTopicHeader = document.getElementById('newTopicHeader');
+    if (newTopicHeader) {
+        newTopicHeader.addEventListener('click', toggleNewTopicForm);
+    }
+    
+    // Load avatars
+    await loadAllAvatars();
+    
+    // Load topics
+    await loadTopics();
+    
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (mobileMenuBtn && navMenu) {
+        mobileMenuBtn.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!mobileMenuBtn.contains(event.target) && !navMenu.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    }
+});
 // ... rest of your code ...
  
 </script>
