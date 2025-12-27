@@ -1517,29 +1517,15 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
         }
     });
 
-    // Delete button - with enhanced confirmation
-    deleteBtn.addEventListener('click', async function(e) {
-        e.preventDefault();
-        
+    // Delete button
+    deleteBtn.addEventListener('click', async function() {
         const selectedKey = raceSelect.value;
         if (!selectedKey || !raceAnalyses[selectedKey]) {
             showToast('Select a race first', 'error');
             return;
         }
         
-        const analysis = raceAnalyses[selectedKey];
-        const venue = analysis.venue || 'Unknown Venue';
-        const date = analysis.date ? new Date(analysis.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Unknown Date';
-        const raceNo = analysis.raceNo || 'Unknown Race';
-
-        const confirmMsg = `⚠️ Delete Analysis?\n\n` +
-                          `Venue: ${venue}\n` +
-                          `Date: ${date}\n` +
-                          `Race: ${raceNo}\n\n` +
-                          `This will permanently delete this race analysis.\n\n` +
-                          `Are you sure you want to proceed?`;
-
-        if (!confirm(confirmMsg)) {
+        if (!confirm('Are you sure you want to delete this analysis?')) {
             return;
         }
         
@@ -1550,7 +1536,7 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
             // Delete from local state
             delete raceAnalyses[selectedKey];
             
-            showToast('✅ Analysis deleted successfully', 'success');
+            showToast('✅ Analysis deleted from cloud!', 'success');
             
             // Refresh UI
             initializeDropdowns();
@@ -1559,12 +1545,6 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
             analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race to view analysis</p></div>';
             analysisTitle.textContent = 'Race Analysis';
             raceInfo.style.display = 'none';
-            
-            // Clear form
-            adminVenue.value = '';
-            adminDate.value = today;
-            adminRaceNo.value = '';
-            adminAnalysis.value = '';
             
         } catch (error) {
             showToast(`❌ Failed to delete: ${error.message}`, 'error');
@@ -1898,7 +1878,6 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
             console.log("🔐 Checking Cloudflare authentication...");
             
             // First, check if we have Cloudflare Access headers directly
-            // This works when accessing directly via the domain with Cloudflare Access
             const cfEmail = document.cookie.match(/(?:^|;\s*)CF_AUTHORIZATION=([^;]*)/)?.[1];
             
             if (cfEmail) {
@@ -1914,8 +1893,8 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
             
             // Try to get auth info from multiple possible sources
             const endpoints = [
-                '/api/auth-status',
-                '/cdn-cgi/access/get-identity'  // Cloudflare Access built-in endpoint
+                '/cdn-cgi/access/get-identity',  // Try Cloudflare Access built-in endpoint first
+                '/api/auth-status'
             ];
             
             for (const endpoint of endpoints) {
@@ -1931,6 +1910,13 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
                     console.log(`${endpoint} status:`, response.status);
                     
                     if (response.ok) {
+                        // Check if response is actually JSON
+                        const contentType = response.headers.get('content-type');
+                        if (!contentType || !contentType.includes('application/json')) {
+                            console.warn(`${endpoint} returned non-JSON content-type: ${contentType}`);
+                            continue; // Skip this endpoint
+                        }
+                        
                         const data = await response.json();
                         console.log(`${endpoint} data:`, data);
                         
@@ -1954,6 +1940,9 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
                                 source: endpoint 
                             };
                         }
+                    } else if (response.status === 401 || response.status === 403) {
+                        // Explicitly not authenticated
+                        console.log(`${endpoint} returned ${response.status} - not authenticated`);
                     }
                 } catch (error) {
                     console.warn(`Endpoint ${endpoint} failed:`, error.message);
@@ -1968,16 +1957,19 @@ const workerBase = "https://broad-sound-fdb7.raceanalyst.workers.dev";
                 });
                 
                 if (directResponse.ok) {
-                    const data = await directResponse.json();
-                    if (data.authenticated) {
-                        currentUser = {
-                            email: data.email || 'admin@raceanalyst.in',
-                            name: data.name || 'Admin',
-                            authenticated: true
-                        };
-                        isAuthenticated = true;
-                        console.log("✅ Authenticated via direct Worker");
-                        return { authenticated: true, user: currentUser };
+                    const contentType = directResponse.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        const data = await directResponse.json();
+                        if (data.authenticated) {
+                            currentUser = {
+                                email: data.email || 'admin@raceanalyst.in',
+                                name: data.name || 'Admin',
+                                authenticated: true
+                            };
+                            isAuthenticated = true;
+                            console.log("✅ Authenticated via direct Worker");
+                            return { authenticated: true, user: currentUser };
+                        }
                     }
                 }
             } catch (error) {
