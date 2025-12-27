@@ -1678,41 +1678,46 @@
                     return; // Skip incomplete entries
                 }
                 
-                // FIX 1: Parse date correctly (handling timezone issues)
-                let dateObj;
-                try {
-                    // Handle different date formats
-                    if (item.date.includes('-')) {
-                        // Handle YYYY-MM-DD format
-                        const parts = item.date.split('-');
-                        if (parts.length === 3) {
-                            // Create date without time to avoid timezone issues
-                            dateObj = new Date(parts[0], parts[1] - 1, parts[2]);
-                        } else {
-                            dateObj = new Date(item.date);
+                // FIX: Simple date parsing without timezone issues
+                let dateStr = item.date;
+                
+                // Check if it's already in YYYY-MM-DD format
+                if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+                    // Already in correct format, use as-is
+                    // This is the best case - no timezone issues
+                } else {
+                    // Try to parse as ISO date
+                    try {
+                        // Parse as ISO date and extract just the date part
+                        const dateObj = new Date(dateStr);
+                        
+                        // Check if date is valid
+                        if (isNaN(dateObj.getTime())) {
+                            console.warn("Invalid date:", dateStr);
+                            return;
                         }
-                    } else {
-                        dateObj = new Date(item.date);
-                    }
-                    
-                    if (isNaN(dateObj.getTime())) {
-                        console.warn("Invalid date:", item.date);
+                        
+                        // Use UTC methods to avoid timezone issues
+                        const year = dateObj.getUTCFullYear();
+                        const month = String(dateObj.getUTCMonth() + 1).padStart(2, '0');
+                        const day = String(dateObj.getUTCDate()).padStart(2, '0');
+                        dateStr = `${year}-${month}-${day}`;
+                        
+                    } catch (e) {
+                        console.warn("Could not parse date:", dateStr);
                         return;
                     }
-                    
-                    // FIX: Set to noon to avoid timezone issues
-                    dateObj.setHours(12, 0, 0, 0);
-                    
-                } catch (e) {
-                    console.warn("Could not parse date:", item.date);
-                    return;
                 }
                 
-                // Format as YYYY-MM-DD (ensuring it's the correct date)
-                const year = dateObj.getFullYear();
-                const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-                const day = String(dateObj.getDate()).padStart(2, '0');
-                const dateStr = `${year}-${month}-${day}`;
+                // FIX: Even better - parse the date string manually
+                // This completely avoids timezone issues
+                const dateParts = dateStr.split('-').map(part => parseInt(part, 10));
+                if (dateParts.length === 3) {
+                    const [year, month, day] = dateParts;
+                    // Create a clean date object in local timezone
+                    const cleanDate = new Date(year, month - 1, day, 12, 0, 0); // Set to noon local time
+                    dateStr = cleanDate.toISOString().split('T')[0];
+                }
                 
                 // Normalize type (case-insensitive, singular)
                 const type = item.type.toLowerCase().trim();
@@ -1735,6 +1740,8 @@
                     venue: item.venue,
                     type: normalizedType
                 });
+                
+                console.log(`Event "${item.event}" on ${dateStr} (from input: ${item.date})`);
             });
             
             console.log("Processed race events:", raceEvents);
