@@ -9,9 +9,271 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Source+Serif+Pro:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* Previous styles remain unchanged until we get to analysis-header */
+        html {
+            scroll-behavior: smooth;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Source Serif Pro', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #1a3c34;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #1a3c34;
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: #d4af37;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: white;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #d4af37;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        nav a:hover {
+            color: #d4af37;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 60, 52, 0.85), rgba(26, 60, 52, 0.9)), url('https://images.unsplash.com/photo-1551128898-fbc65aaf6d6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: white;
+        }
+        
+        .hero p {
+            font-size: 1.05rem;
+            white-space: nowrap;
+            max-width: 100%;
+            margin: 0 auto 1.4rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #d4af37;
+            color: #1a3c34;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 0.6rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #e6c244;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .cta-button:disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2.5rem;
+            padding: 3rem 0;
+            align-items: start;
+        }
+        
+        /* Selection Section */
+        .selection-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .selection-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.7rem;
+            border-bottom: 2px solid #d4af37;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .selection-title i {
+            color: #d4af37;
+        }
+        
+        /* Dropdown Grid */
+        .dropdown-grid {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        
+        .dropdown-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 0;
+        }
+        
+        .venue-dropdown {
+            flex: 1;
+            min-width: 180px;
+            max-width: 200px;
+        }
+        
+        .date-dropdown {
+            flex: 0 0 190px;
+        }
 
-        /* Analysis Header with Action Icons */
+        .race-dropdown {
+            flex: 0 0 130px;
+            margin-left: 10px;
+        }
+        
+        .dropdown-group label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        
+        select {
+            padding: 8px 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            background: white;
+            color: #1a3c34;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: 'Source Serif Pro', serif;
+            width: 100%;
+        }
+        
+        select option {
+            padding: 6px;
+            font-size: 0.95rem;
+        }
+
+        select:hover {
+            border-color: #d4af37;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #1a3c34;
+            box-shadow: 0 0 0 3px rgba(26, 60, 52, 0.1);
+        }
+        
+        /* Analysis Display */
+        .analysis-display {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        /* UPDATED: Analysis Header with Action Icons */
         .analysis-header {
             background-color: #1a3c34;
             color: white;
@@ -19,8 +281,7 @@
             flex-shrink: 0;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            position: relative;
+            align-items: flex-start;
         }
         
         .analysis-header-content {
@@ -35,7 +296,7 @@
         
         .analysis-actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             margin-left: 15px;
         }
         
@@ -81,10 +342,285 @@
             flex-wrap: wrap;
         }
         
-        /* Toast Notification for Copy Action */
-        .copy-toast {
+        .analysis-content {
+            padding: 2rem;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            line-height: 1.8;
+            background: #f8f9fa;
+            flex-grow: 1;
+        }
+        
+        .no-analysis {
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .no-analysis i {
+            font-size: 3rem;
+            color: #e9ecef;
+            margin-bottom: 1rem;
+        }
+        
+        /* Sidebar Widgets */
+        .sidebar-widget {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .sidebar-widget h3 {
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 0.7rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .upcoming-races li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .upcoming-races li:last-child {
+            border-bottom: none;
+        }
+        
+        .race-venue {
+            font-weight: 600;
+            color: #1a3c34;
+        }
+        
+        .race-date {
+            color: #666;
+        }
+        
+        /* Calendar Styles */
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 0 15px 0;
+            padding: 0 5px;
+        }
+
+        .calendar-nav-btn {
+            background: #1a3c34;
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .calendar-nav-btn:hover {
+            background: #244e44;
+            transform: scale(1.1);
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            margin-bottom: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #1a3c34;
+            font-size: 0.85rem;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            margin-bottom: 15px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            min-height: 36px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 4px 2px;
+            border: 1px solid #e6e6e6;
+            border-radius: 4px;
+            background: #f9f9f9;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calendar-day:hover {
+            background: #f0f7f4;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .day-number {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1a3c34;
+            margin-bottom: 2px;
+        }
+
+        .other-month {
+            color: #aaa !important;
+            background: #f5f5f5 !important;
+        }
+
+        .today {
+            border: 2px solid #d4af37 !important;
+            background: #fff9e6 !important;
+        }
+
+        .event-badge {
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 2px;
+        }
+
+        .classics {
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+        }
+
+        .sweepstakes {
+            background: linear-gradient(90deg, #C0C0C0, #A9A9A9);
+        }
+
+        .trophy {
+            background: linear-gradient(90deg, #CD7F32, #8B4513);
+        }
+
+        .has-event {
+            position: relative;
+        }
+
+        .has-event::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #e91e63;
+        }
+
+        .event-tooltip {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border: 1px solid #e6e6e6;
+            border-radius: 6px;
+            padding: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            width: 200px;
+            z-index: 100;
+            display: none;
+            text-align: left;
+        }
+
+        .calendar-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        .legend-color.classics {
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+        }
+
+        .legend-color.sweepstakes {
+            background: linear-gradient(90deg, #C0C0C0, #A9A9A9);
+        }
+
+        .legend-color.trophy {
+            background: linear-gradient(90deg, #CD7F32, #8B4513);
+        }
+
+        .legend-color.today {
+            background: #d4af37;
+            border: 1px solid #b8941f;
+        }
+        
+        /* Toast Notification */
+        .toast {
             position: fixed;
             bottom: 20px;
+            right: 50%;
+            transform: translateX(50%);
+            background: #28a745;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 5000;
+            animation: slideIn 0.3s ease;
+            text-align: center;
+            max-width: 90%;
+            word-wrap: break-word;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(50%) translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(50%) translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        /* NEW: Copy Toast */
+        .copy-toast {
+            position: fixed;
+            bottom: 80px;
             right: 50%;
             transform: translateX(50%);
             background: #1a3c34;
@@ -106,7 +642,7 @@
             color: #d4af37;
         }
         
-        /* PDF Export Styles */
+        /* NEW: PDF Export Modal */
         .pdf-export-overlay {
             position: fixed;
             top: 0;
@@ -244,13 +780,150 @@
             background: #5a6268;
         }
         
-        /* Responsive adjustments for action icons */
+        /* Footer */
+        footer {
+            background-color: #1a3c34;
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            color: #d4af37;
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section p {
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            background-color: #2d5248;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: #d4af37;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #2d5248;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
         @media (max-width: 768px) {
-            .analysis-header {
-                padding: 1rem;
+            .header-content {
+                flex-direction: row;
+                gap: 1rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block !important;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
+                align-items: center;
+                gap: 1.5rem;
+                width: 70%;
+                height: 100vh;
+                background: #1a3c34;
+                padding: 100px 20px 40px;
+                transition: right 0.3s ease-in-out;
+                z-index: 1000;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            
+            nav ul.active {
+                right: 0;
+            }
+            
+            nav ul li {
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav a {
+                display: block;
+                padding: 12px 20px;
+                font-size: 1.1rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .nav-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+            
+            .nav-overlay.active {
+                display: block;
+            }
+
+            .dropdown-grid {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .venue-dropdown, .date-dropdown, .race-dropdown {
+                min-width: 100%;
+                max-width: 100%;
+                flex: 1;
+            }
+            .race-dropdown {
+                margin-left: 0;
+            }
+            
+            /* Analysis header mobile adjustments */
+            .analysis-header {
+                flex-direction: column;
+                gap: 15px;
             }
             
             .analysis-actions {
@@ -258,12 +931,7 @@
                 margin-left: 0;
             }
             
-            .action-icon {
-                width: 32px;
-                height: 32px;
-                font-size: 0.9rem;
-            }
-            
+            /* PDF modal mobile adjustments */
             .pdf-modal-content {
                 padding: 1.5rem;
             }
@@ -279,24 +947,19 @@
             }
             
             .action-icon {
-                width: 30px;
-                height: 30px;
-                font-size: 0.85rem;
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
             }
             
             .pdf-export-modal {
                 margin: 10px;
             }
         }
-        
-        /* Add these new styles after the existing ones */
-
-        /* Previous styles remain unchanged... */
-
     </style>
 </head>
 <body>
-    <!-- Header (unchanged) -->
+    <!-- Header -->
     <header>
         <div class="container header-content">
             <div class="logo">
@@ -320,7 +983,7 @@
         </div>
     </header>
 
-    <!-- Hero Section (unchanged) -->
+    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
             <h2>AI-Powered Indian Horse Racing Analysis</h2>
@@ -331,11 +994,11 @@
         </div>
     </section>
 
-    <!-- Main Content with Sidebar -->
+    <!-- Main Content -->
     <div class="container main-content">
-        <!-- Left Column: Selection Interface -->
+        <!-- Left Column -->
         <div class="left-column">
-            <!-- Race Selection Card (unchanged) -->
+            <!-- Race Selection Card -->
             <div class="selection-card">
                 <h2 class="selection-title">
                     <i class="fas fa-search"></i> Select Race for Analysis
@@ -365,7 +1028,7 @@
                 </div>
             </div>
             
-            <!-- Extended Analysis Display (UPDATED WITH ACTION ICONS) -->
+            <!-- Analysis Display with NEW Action Icons -->
             <div class="analysis-display" id="analysisDisplay">
                 <div class="analysis-header">
                     <div class="analysis-header-content">
@@ -394,8 +1057,8 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Right Column: Sidebar Widgets (unchanged) -->
+
+        <!-- Sidebar -->
         <div class="sidebar">
             <!-- Upcoming Major Races -->
             <div class="sidebar-widget" id="upcoming-races">
@@ -457,14 +1120,9 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Admin Panel (unchanged) -->
-        <div class="admin-panel" id="adminPanel">
-            <!-- Admin panel content remains unchanged -->
-        </div>
     </div>
 
-    <!-- Footer (unchanged) -->
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -497,12 +1155,12 @@
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
     
-    <!-- Copy Toast -->
+    <!-- NEW: Copy Toast -->
     <div class="copy-toast" id="copyToast">
         <i class="fas fa-check-circle"></i> Analysis copied to clipboard!
     </div>
     
-    <!-- PDF Export Modal -->
+    <!-- NEW: PDF Export Modal -->
     <div class="pdf-export-overlay" id="pdfExportOverlay">
         <div class="pdf-export-modal">
             <div class="pdf-modal-header">
@@ -513,7 +1171,7 @@
             </div>
             <div class="pdf-modal-content">
                 <div class="pdf-options">
-                    <div class="pdf-option" id="simplePdfOption">
+                    <div class="pdf-option selected" id="simplePdfOption">
                         <i class="fas fa-file-alt"></i>
                         <div class="pdf-option-text">
                             <h4>Simple PDF</h4>
@@ -540,24 +1198,15 @@
         </div>
     </div>
 
+    <!-- Load jsPDF library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
     <script>
-        // Database simulation and existing variables
+        // Database simulation
         let raceAnalyses = {};
-        let currentPdfType = 'simple'; // 'simple' or 'detailed'
+        let currentPdfType = 'simple';
         
-        // DOM Elements (add new ones)
-        const copyAnalysisBtn = document.getElementById('copyAnalysisBtn');
-        const exportPdfBtn = document.getElementById('exportPdfBtn');
-        const analysisActions = document.getElementById('analysisActions');
-        const copyToast = document.getElementById('copyToast');
-        const pdfExportOverlay = document.getElementById('pdfExportOverlay');
-        const closePdfModal = document.getElementById('closePdfModal');
-        const cancelPdfBtn = document.getElementById('cancelPdfBtn');
-        const generatePdfBtn = document.getElementById('generatePdfBtn');
-        const simplePdfOption = document.getElementById('simplePdfOption');
-        const detailedPdfOption = document.getElementById('detailedPdfOption');
-        
-        // Existing DOM elements remain the same...
+        // DOM Elements
         const venueSelect = document.getElementById('venueSelect');
         const dateSelect = document.getElementById('dateSelect');
         const raceSelect = document.getElementById('raceSelect');
@@ -568,8 +1217,148 @@
         const selectedDate = document.getElementById('selectedDate');
         const selectedRace = document.getElementById('selectedRace');
         const todaysSelectionsBtn = document.getElementById('todaysSelectionsBtn');
+        const analysisActions = document.getElementById('analysisActions');
+        const copyAnalysisBtn = document.getElementById('copyAnalysisBtn');
+        const exportPdfBtn = document.getElementById('exportPdfBtn');
+        const copyToast = document.getElementById('copyToast');
         
-        // PDF Export Functions
+        // PDF Modal elements
+        const pdfExportOverlay = document.getElementById('pdfExportOverlay');
+        const closePdfModal = document.getElementById('closePdfModal');
+        const cancelPdfBtn = document.getElementById('cancelPdfBtn');
+        const generatePdfBtn = document.getElementById('generatePdfBtn');
+        const simplePdfOption = document.getElementById('simplePdfOption');
+        const detailedPdfOption = document.getElementById('detailedPdfOption');
+        
+        // Navigation elements
+        const homeLink = document.getElementById('homeLink');
+        const raceCalendarLink = document.getElementById('raceCalendarLink');
+        const footerRaceCalendar = document.getElementById('footerRaceCalendar');
+        
+        // Mobile menu elements
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        const navOverlay = document.getElementById('navOverlay');
+        
+        // Calendar elements
+        const calendarGrid = document.getElementById('calendarGrid');
+        const prevMonthBtn = document.getElementById('prevMonthBtn');
+        const nextMonthBtn = document.getElementById('nextMonthBtn');
+        const currentMonthYear = document.getElementById('currentMonthYear');
+        
+        // Admin elements (if they exist)
+        const adminPanel = document.getElementById('adminPanel');
+        const toast = document.getElementById('toast');
+        
+        // Today's date
+        const today = new Date().toISOString().split('T')[0];
+        
+        // Calendar Configuration
+        let currentCalendarDate = new Date();
+        let raceEvents = {};
+        
+        // Initialize the app
+        async function initApp() {
+            setupMobileMenu();
+            setupNavigation();
+            setupCopyToClipboard();
+            setupPdfExport();
+            
+            // Load sample data
+            loadSampleData();
+            initializeDropdowns();
+            initCalendar();
+            loadUpcomingRaces();
+            
+            // Add event listeners
+            venueSelect.addEventListener('change', updateDateDropdown);
+            dateSelect.addEventListener('change', updateRaceDropdown);
+            raceSelect.addEventListener('change', function() {
+                if (this.value) {
+                    displayAnalysis(this.value);
+                } else {
+                    clearAnalysis();
+                }
+            });
+            
+            todaysSelectionsBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Find today's analyses
+                const todaysKeys = Object.keys(raceAnalyses).filter(key => {
+                    const analysis = raceAnalyses[key];
+                    return analysis.date === today;
+                });
+                
+                if (todaysKeys.length > 0) {
+                    // Select the first one
+                    const firstKey = todaysKeys[0];
+                    const analysis = raceAnalyses[firstKey];
+                    
+                    // Update dropdowns
+                    venueSelect.value = analysis.venue;
+                    updateDateDropdown();
+                    raceSelect.value = firstKey;
+                    displayAnalysis(firstKey);
+                    
+                    showToast(`Showing today's selections for ${analysis.venue}`, 'success');
+                } else {
+                    showToast('No analyses available for today', 'info');
+                }
+            });
+        }
+        
+        // Setup copy to clipboard
+        function setupCopyToClipboard() {
+            copyAnalysisBtn.addEventListener('click', function() {
+                const selectedKey = raceSelect.value;
+                const analysis = raceAnalyses[selectedKey];
+                
+                if (!analysis) {
+                    showToast('No analysis to copy', 'error');
+                    return;
+                }
+                
+                // Get plain text
+                const cleanText = analysis.analysis.replace(/<\/?[^>]+(>|$)/g, "");
+                
+                // Create text with header
+                const fullText = `Race Analysis: ${analysis.venue} - Race ${analysis.raceNo}\n` +
+                               `Date: ${new Date(analysis.date).toLocaleDateString('en-IN', {
+                                   weekday: 'long',
+                                   day: '2-digit',
+                                   month: 'long',
+                                   year: 'numeric'
+                               })}\n\n` +
+                               `${cleanText}\n\n` +
+                               `--- Generated by RaceAnalyst ---`;
+                
+                // Copy to clipboard
+                navigator.clipboard.writeText(fullText)
+                    .then(() => {
+                        // Show copy success toast
+                        copyToast.style.display = 'block';
+                        setTimeout(() => {
+                            copyToast.style.display = 'none';
+                        }, 2000);
+                        
+                        // Visual feedback
+                        const icon = copyAnalysisBtn.querySelector('i');
+                        icon.classList.remove('far', 'fa-copy');
+                        icon.classList.add('fas', 'fa-check');
+                        
+                        setTimeout(() => {
+                            icon.classList.remove('fas', 'fa-check');
+                            icon.classList.add('far', 'fa-copy');
+                        }, 1000);
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy:', err);
+                        showToast('Failed to copy to clipboard', 'error');
+                    });
+            });
+        }
+        
+        // Setup PDF export
         function setupPdfExport() {
             // PDF option selection
             simplePdfOption.addEventListener('click', function() {
@@ -583,9 +1372,6 @@
                 detailedPdfOption.classList.add('selected');
                 simplePdfOption.classList.remove('selected');
             });
-            
-            // Default selection
-            simplePdfOption.classList.add('selected');
             
             // Open PDF modal
             exportPdfBtn.addEventListener('click', function() {
@@ -630,47 +1416,6 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             
-            // Set up PDF content based on type
-            if (currentPdfType === 'detailed') {
-                generateDetailedPdf(doc, analysis);
-            } else {
-                generateSimplePdf(doc, analysis);
-            }
-            
-            // Generate filename
-            const filename = `RaceAnalyst_${analysis.venue}_${analysis.date}_Race${analysis.raceNo}.pdf`;
-            
-            // Save the PDF
-            doc.save(filename);
-            
-            // Close modal
-            closePdfModalFunc();
-            
-            // Show success message
-            showToast('PDF generated successfully!', 'success');
-        }
-        
-        function generateSimplePdf(doc, analysis) {
-            // Simple PDF with just the text
-            const margin = 20;
-            const pageWidth = doc.internal.pageSize.getWidth();
-            const maxWidth = pageWidth - (margin * 2);
-            
-            // Clean analysis text (remove HTML tags)
-            const cleanText = analysis.analysis.replace(/<\/?[^>]+(>|$)/g, "");
-            
-            // Add text with auto-wrap
-            doc.setFontSize(11);
-            doc.setTextColor(0, 0, 0);
-            doc.text(cleanText, margin, margin + 10, { maxWidth: maxWidth });
-        }
-        
-        function generateDetailedPdf(doc, analysis) {
-            // Detailed PDF with header and formatting
-            const margin = 20;
-            const pageWidth = doc.internal.pageSize.getWidth();
-            const maxWidth = pageWidth - (margin * 2);
-            
             // Format date
             const dateObj = new Date(analysis.date);
             const formattedDate = dateObj.toLocaleDateString('en-IN', {
@@ -680,97 +1425,188 @@
                 year: 'numeric'
             });
             
-            // Title
-            doc.setFontSize(16);
-            doc.setTextColor(26, 60, 52); // #1a3c34
-            doc.setFont(undefined, 'bold');
-            doc.text(`Race Analysis: ${analysis.venue}`, margin, margin + 10);
-            
-            // Subtitle
-            doc.setFontSize(12);
-            doc.setTextColor(100, 100, 100);
-            doc.setFont(undefined, 'normal');
-            doc.text(`Race ${analysis.raceNo} - ${formattedDate}`, margin, margin + 20);
-            
-            // Separator line
-            doc.setDrawColor(212, 175, 55); // #d4af37
-            doc.setLineWidth(0.5);
-            doc.line(margin, margin + 25, pageWidth - margin, margin + 25);
-            
-            // Clean analysis text
-            const cleanText = analysis.analysis.replace(/<\/?[^>]+(>|$)/g, "");
-            
-            // Add analysis content
-            doc.setFontSize(11);
-            doc.setTextColor(0, 0, 0);
-            
-            // Split text into lines that fit within page width
-            const splitText = doc.splitTextToSize(cleanText, maxWidth);
-            
-            // Add text starting after the header
-            doc.text(splitText, margin, margin + 35);
-            
-            // Footer
-            const pageHeight = doc.internal.pageSize.getHeight();
-            doc.setFontSize(10);
-            doc.setTextColor(100, 100, 100);
-            doc.text(`Generated by RaceAnalyst - ${new Date().toLocaleDateString()}`, margin, pageHeight - 10);
-        }
-        
-        // Copy to Clipboard Function
-        function setupCopyToClipboard() {
-            copyAnalysisBtn.addEventListener('click', function() {
-                const selectedKey = raceSelect.value;
-                const analysis = raceAnalyses[selectedKey];
+            if (currentPdfType === 'detailed') {
+                // Detailed PDF
+                const margin = 20;
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const maxWidth = pageWidth - (margin * 2);
                 
-                if (!analysis) {
-                    showToast('No analysis to copy', 'error');
-                    return;
-                }
+                // Title
+                doc.setFontSize(16);
+                doc.setTextColor(26, 60, 52);
+                doc.setFont(undefined, 'bold');
+                doc.text(`Race Analysis: ${analysis.venue}`, margin, margin + 10);
                 
-                // Get plain text from analysis (remove HTML tags)
+                // Subtitle
+                doc.setFontSize(12);
+                doc.setTextColor(100, 100, 100);
+                doc.setFont(undefined, 'normal');
+                doc.text(`Race ${analysis.raceNo} - ${formattedDate}`, margin, margin + 20);
+                
+                // Separator line
+                doc.setDrawColor(212, 175, 55);
+                doc.setLineWidth(0.5);
+                doc.line(margin, margin + 25, pageWidth - margin, margin + 25);
+                
+                // Clean analysis text
                 const cleanText = analysis.analysis.replace(/<\/?[^>]+(>|$)/g, "");
                 
-                // Add header information
-                const fullText = `Race Analysis: ${analysis.venue} - Race ${analysis.raceNo}\n` +
-                               `Date: ${selectedDate.textContent}\n\n` +
-                               `${cleanText}\n\n` +
-                               `--- Generated by RaceAnalyst ---`;
+                // Add analysis content
+                doc.setFontSize(11);
+                doc.setTextColor(0, 0, 0);
                 
-                // Copy to clipboard
-                navigator.clipboard.writeText(fullText)
-                    .then(() => {
-                        // Show copy success toast
-                        copyToast.style.display = 'block';
-                        setTimeout(() => {
-                            copyToast.style.display = 'none';
-                        }, 2000);
-                        
-                        // Add visual feedback to button
-                        const icon = copyAnalysisBtn.querySelector('i');
-                        icon.classList.remove('far', 'fa-copy');
-                        icon.classList.add('fas', 'fa-check');
-                        
-                        setTimeout(() => {
-                            icon.classList.remove('fas', 'fa-check');
-                            icon.classList.add('far', 'fa-copy');
-                        }, 1000);
-                    })
-                    .catch(err => {
-                        console.error('Failed to copy:', err);
-                        showToast('Failed to copy to clipboard', 'error');
-                    });
+                const splitText = doc.splitTextToSize(cleanText, maxWidth);
+                doc.text(splitText, margin, margin + 35);
+                
+                // Footer
+                const pageHeight = doc.internal.pageSize.getHeight();
+                doc.setFontSize(10);
+                doc.setTextColor(100, 100, 100);
+                doc.text(`Generated by RaceAnalyst - ${new Date().toLocaleDateString()}`, margin, pageHeight - 10);
+            } else {
+                // Simple PDF
+                const margin = 20;
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const maxWidth = pageWidth - (margin * 2);
+                
+                // Clean analysis text
+                const cleanText = analysis.analysis.replace(/<\/?[^>]+(>|$)/g, "");
+                
+                // Add text with auto-wrap
+                doc.setFontSize(11);
+                doc.setTextColor(0, 0, 0);
+                doc.text(cleanText, margin, margin + 10, { maxWidth: maxWidth });
+            }
+            
+            // Generate filename and save
+            const filename = `RaceAnalyst_${analysis.venue}_${analysis.date}_Race${analysis.raceNo}.pdf`;
+            doc.save(filename);
+            
+            // Close modal and show success
+            closePdfModalFunc();
+            showToast('PDF generated successfully!', 'success');
+        }
+        
+        // Sample data for testing
+        function loadSampleData() {
+            raceAnalyses = {
+                'Bangalore-2024-12-15-1': {
+                    venue: 'Bangalore',
+                    date: '2024-12-15',
+                    raceNo: '1',
+                    analysis: `**Race 1: The Winter Cup**\n\n**Distance:** 1400m\n**Track:** Good\n**Time:** 2:30 PM\n\n**Top Contenders:**\n1. **Desert Storm** - Excellent recent form\n2. **Midnight Star** - Strong finisher\n3. **Golden Arrow** - Good gate speed\n\n**Analysis:**\nDesert Storm has shown consistent performance with strong finishing speed. Should lead from the start.\n\n**Prediction:**\n1. Desert Storm\n2. Midnight Star\n3. Golden Arrow`
+                },
+                'Mumbai-2024-12-15-3': {
+                    venue: 'Mumbai',
+                    date: '2024-12-15',
+                    raceNo: '3',
+                    analysis: `**Race 3: The Mumbai Derby**\n\n**Distance:** 2400m\n**Track:** Firm\n**Time:** 4:15 PM\n\n**Top Picks:**\n1. **Royal Challenge** - Derby specialist\n2. **Storm Rider** - Improving rapidly\n3. **Ocean Blue** - Distance suits\n\n**Key Factors:**\nRoyal Challenge has excellent pedigree for this distance. Recent workout times are impressive.\n\n**Confidence Level:** High`
+                }
+            };
+        }
+        
+        function loadUpcomingRaces() {
+            const upcomingRacesList = document.getElementById('upcomingRaces');
+            const races = [
+                { venue: 'Bangalore', date: '2024-12-20' },
+                { venue: 'Mumbai', date: '2024-12-22' },
+                { venue: 'Delhi', date: '2024-12-24' },
+                { venue: 'Chennai', date: '2024-12-26' }
+            ];
+            
+            upcomingRacesList.innerHTML = '';
+            races.forEach(race => {
+                const dateObj = new Date(race.date);
+                const formattedDate = dateObj.toLocaleDateString('en-IN', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric'
+                });
+                
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span class="race-venue">${race.venue}</span>
+                    <span class="race-date">${formattedDate}</span>
+                `;
+                upcomingRacesList.appendChild(li);
             });
         }
         
-        // Modify the displayAnalysis function to show/hide action buttons
+        function initializeDropdowns() {
+            // Extract unique venues
+            const venues = [...new Set(Object.values(raceAnalyses).map(a => a.venue))];
+            venueSelect.innerHTML = '<option value="">Select Venue</option>' + 
+                venues.map(v => `<option value="${v}">${v}</option>`).join('');
+            
+            updateDateDropdown();
+        }
+        
+        function updateDateDropdown() {
+            const selectedVenue = venueSelect.value;
+            let dates = [];
+            
+            if (selectedVenue) {
+                dates = [...new Set(Object.values(raceAnalyses)
+                    .filter(a => a.venue === selectedVenue)
+                    .map(a => a.date)
+                    .sort((a, b) => b.localeCompare(a)))];
+            }
+            
+            dateSelect.innerHTML = '<option value="">Select Date</option>' + 
+                dates.map(d => {
+                    const dateObj = new Date(d);
+                    const formatted = dateObj.toLocaleDateString('en-IN', {
+                        day: '2-digit',
+                        month: 'short',
+                        year: 'numeric'
+                    });
+                    const isToday = d === today ? ' (Today)' : '';
+                    return `<option value="${d}">${formatted}${isToday}</option>`;
+                }).join('');
+            
+            if (dates.length > 0 && !dateSelect.value) {
+                dateSelect.value = dates[0];
+                updateRaceDropdown();
+            } else if (!selectedVenue) {
+                dateSelect.innerHTML = '<option value="">Select Venue First</option>';
+            }
+            
+            updateRaceDropdown();
+        }
+        
+        function updateRaceDropdown() {
+            const selectedVenue = venueSelect.value;
+            const selectedDate = dateSelect.value;
+            let races = [];
+            
+            if (selectedVenue && selectedDate) {
+                races = Object.entries(raceAnalyses)
+                    .filter(([key, analysis]) => analysis.venue === selectedVenue && analysis.date === selectedDate)
+                    .map(([key, analysis]) => ({ 
+                        number: analysis.raceNo, 
+                        key: key 
+                    }))
+                    .sort((a, b) => parseInt(a.number) - parseInt(b.number));
+            }
+            
+            raceSelect.innerHTML = '<option value="">Select Race</option>' + 
+                races.map(r => `<option value="${r.key}">Race ${r.number}</option>`).join('');
+            
+            if (races.length > 0 && !raceSelect.value) {
+                raceSelect.value = races[0].key;
+                displayAnalysis(races[0].key);
+            } else if (!selectedVenue || !selectedDate) {
+                raceSelect.innerHTML = '<option value="">Select Venue and Date First</option>';
+                clearAnalysis();
+            }
+        }
+        
         function displayAnalysis(key) {
             if (!key || !raceAnalyses[key]) {
                 analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-exclamation-circle"></i><p>No analysis found for selected race</p></div>';
                 analysisTitle.textContent = 'Race Analysis';
                 raceInfo.style.display = 'none';
-                analysisActions.style.display = 'none'; // Hide action buttons
-                syncAnalysisHeight();
+                analysisActions.style.display = 'none';
                 return;
             }
             
@@ -787,7 +1623,6 @@
                 .replace(/====+/g, '<hr>')
                 .replace(/\n/g, '<br>');
             
-            // Add line breaks for list items
             formattedAnalysis = formattedAnalysis.replace(/^- /g, '<br>- ');
             
             analysisContent.innerHTML = formattedAnalysis;
@@ -806,50 +1641,178 @@
             selectedDate.textContent = formattedDate;
             selectedRace.textContent = `Race ${analysis.raceNo}`;
             raceInfo.style.display = 'flex';
-            
-            // Update admin form with current selection
-            updateAdminForm(key);
         }
         
         function clearAnalysis() {
             analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-racing-helmet"></i><p>Select a race from the dropdowns above to view detailed analysis</p></div>';
             analysisTitle.textContent = 'Race Analysis';
             raceInfo.style.display = 'none';
-            analysisActions.style.display = 'none'; // Hide action buttons
+            analysisActions.style.display = 'none';
         }
         
-        // Initialize the app - add new setup functions
-        async function initApp() {
-            setupMobileMenu();
-            setupNavigation();
-            await loadFromKV();
-            initializeDropdowns();
-            initCalendar();
-            loadUpcomingRacesFromSheet();
-            syncAnalysisHeight();
-            setupCopyToClipboard(); // NEW
-            setupPdfExport(); // NEW
+        function showToast(message, type = 'success') {
+            toast.textContent = message;
+            toast.style.background = type === 'success' ? '#28a745' : 
+                                   type === 'error' ? '#dc3545' : 
+                                   type === 'info' ? '#17a2b8' : '#28a745';
             
-            // Load jsPDF library if not already loaded
-            if (typeof window.jspdf === 'undefined') {
-                await loadJsPdfLibrary();
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Calendar functions
+        function initCalendar() {
+            prevMonthBtn.addEventListener('click', () => {
+                currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
+                renderCalendar();
+            });
+            
+            nextMonthBtn.addEventListener('click', () => {
+                currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
+                renderCalendar();
+            });
+            
+            renderCalendar();
+        }
+        
+        function renderCalendar() {
+            const options = { year: 'numeric', month: 'long' };
+            currentMonthYear.textContent = currentCalendarDate.toLocaleDateString('en-US', options);
+            
+            calendarGrid.innerHTML = '';
+            
+            const firstDay = new Date(
+                currentCalendarDate.getFullYear(), 
+                currentCalendarDate.getMonth(), 
+                1
+            );
+            
+            const lastDay = new Date(
+                currentCalendarDate.getFullYear(), 
+                currentCalendarDate.getMonth() + 1, 
+                0
+            );
+            
+            const firstDayIndex = firstDay.getDay();
+            const totalDays = lastDay.getDate();
+            const prevMonthLastDay = new Date(
+                currentCalendarDate.getFullYear(), 
+                currentCalendarDate.getMonth(), 
+                0
+            ).getDate();
+            
+            // Previous month days
+            for (let i = firstDayIndex - 1; i >= 0; i--) {
+                const day = prevMonthLastDay - i;
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.innerHTML = `<div class="day-number">${day}</div>`;
+                calendarGrid.appendChild(dayElement);
+            }
+            
+            // Current month days
+            const todayDate = new Date();
+            todayDate.setHours(0, 0, 0, 0);
+            
+            for (let day = 1; day <= totalDays; day++) {
+                const date = new Date(
+                    currentCalendarDate.getFullYear(), 
+                    currentCalendarDate.getMonth(), 
+                    day
+                );
+                
+                const dayElement = document.createElement('div');
+                let className = 'calendar-day';
+                const isToday = date.getTime() === todayDate.getTime();
+                
+                if (isToday) {
+                    className += ' today';
+                }
+                
+                dayElement.className = className;
+                dayElement.innerHTML = `<div class="day-number">${day}</div>`;
+                calendarGrid.appendChild(dayElement);
+            }
+            
+            // Next month days
+            const totalCells = 42;
+            const daysSoFar = firstDayIndex + totalDays;
+            const nextMonthDays = totalCells - daysSoFar;
+            
+            for (let i = 1; i <= nextMonthDays; i++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.innerHTML = `<div class="day-number">${i}</div>`;
+                calendarGrid.appendChild(dayElement);
             }
         }
         
-        // Load jsPDF library dynamically
-        async function loadJsPdfLibrary() {
-            return new Promise((resolve, reject) => {
-                const script = document.createElement('script');
-                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-                script.onload = resolve;
-                script.onerror = reject;
-                document.head.appendChild(script);
+        // Mobile menu
+        function setupMobileMenu() {
+            mobileMenuBtn.addEventListener('click', function() {
+                navMenu.querySelector('ul').classList.toggle('active');
+                navOverlay.classList.toggle('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (navMenu.querySelector('ul').classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            navOverlay.addEventListener('click', function() {
+                navMenu.querySelector('ul').classList.remove('active');
+                navOverlay.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+            
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.querySelector('ul').classList.remove('active');
+                    navOverlay.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
             });
         }
         
-        // The rest of your existing JavaScript remains unchanged...
-        // Only the modifications above have been made to add the new functionality
+        // Navigation
+        function setupNavigation() {
+            homeLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                showToast('Welcome to RaceAnalyst!', 'info');
+            });
+            
+            raceCalendarLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('race-calendar').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                showToast('Viewing Race Calendar', 'info');
+            });
+            
+            footerRaceCalendar.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('race-calendar').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                showToast('Viewing Race Calendar', 'info');
+            });
+        }
         
+        // Initialize when page loads
+        window.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 </html>
