@@ -1209,231 +1209,23 @@
             }
         }
 
-        /* Color Text Display in Analysis */
-        .color-text {
-            padding: 2px 4px;
-            border-radius: 3px;
-            font-weight: 600;
-        }
-
-        .color-red {
-            color: #dc3545 !important;
-            background-color: rgba(220, 53, 69, 0.1);
-        }
-
-        .color-green {
-            color: #28a745 !important;
-            background-color: rgba(40, 167, 69, 0.1);
-        }
-
-        .color-blue {
-            color: #17a2b8 !important;
-            background-color: rgba(23, 162, 184, 0.1);
-        }
-
-        .color-yellow {
-            color: #ffc107 !important;
-            background-color: rgba(255, 193, 7, 0.1);
-        }
-
-        .color-orange {
-            color: #fd7e14 !important;
-            background-color: rgba(253, 126, 20, 0.1);
-        }
-
-        .color-purple {
-            color: #6f42c1 !important;
-            background-color: rgba(111, 66, 193, 0.1);
-        }
-
-        .color-pink {
-            color: #e83e8c !important;
-            background-color: rgba(232, 62, 140, 0.1);
-        }
-
-        .color-teal {
-            color: #20c997 !important;
-            background-color: rgba(32, 201, 151, 0.1);
-        }
-
-        .color-gray {
-            color: #6c757d !important;
-            background-color: rgba(108, 117, 125, 0.1);
-        }
-
-        /* Admin Panel Color Picker */
-        .admin-color-picker {
+        .analysis-actions {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 8px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-left: auto;
         }
 
-        .color-option {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            border: 2px solid transparent;
+        .analysis-actions i {
+            font-size: 1.4rem;
+            color: #d4af37;
             cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transition: 0.2s;
         }
 
-        .color-option:hover {
-            transform: scale(1.1);
-            border-color: #333;
+        .analysis-actions i:hover {
+            color: #fff;
+            transform: scale(1.15);
         }
-
-        .color-option.active {
-            border-color: #1a3c34;
-            box-shadow: 0 0 0 2px rgba(26, 60, 52, 0.2);
-        }
-
-        .color-option i {
-            color: white;
-            font-size: 12px;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        .color-option.active i {
-            opacity: 1;
-        }
-
-        /* Analysis Display - Remove edit controls from public view */
-        .analysis-controls {
-            display: flex;
-            gap: 10px;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-            flex-shrink: 0;
-        }
-
-        .control-btn {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 4px;
-            background: white;
-            color: #1a3c34;
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s;
-            border: 1px solid #e9ecef;
-        }
-
-        .control-btn:hover {
-            background: #1a3c34;
-            color: white;
-            transform: translateY(-1px);
-        }
-
-        .control-btn i {
-            font-size: 1rem;
-        }
-
-        /* Enhanced Analysis Content */
-        .analysis-content {
-            padding: 1.5rem;
-            overflow-y: auto;
-            font-family: 'Source Serif Pro', serif;
-            line-height: 1.6;
-            white-space: pre-wrap;
-            background: white;
-            flex-grow: 1;
-            color: #333;
-        }
-
-        .analysis-content h1,
-        .analysis-content h2,
-        .analysis-content h3,
-        .analysis-content h4 {
-            font-family: 'Montserrat', sans-serif;
-            color: #1a3c34;
-            margin: 1.5rem 0 0.8rem 0;
-        }
-
-        .analysis-content h1 { font-size: 1.8rem; }
-        .analysis-content h2 { font-size: 1.5rem; }
-        .analysis-content h3 { font-size: 1.3rem; }
-        .analysis-content h4 { font-size: 1.1rem; }
-
-        .analysis-content p {
-            margin-bottom: 1rem;
-        }
-
-        .analysis-content ul,
-        .analysis-content ol {
-            margin: 0.5rem 0 1rem 1.5rem;
-        }
-
-        .analysis-content li {
-            margin-bottom: 0.5rem;
-        }
-
-        .analysis-content blockquote {
-            border-left: 4px solid #d4af37;
-            padding-left: 1rem;
-            margin: 1rem 0;
-            font-style: italic;
-            color: #666;
-        }
-
-        .analysis-content .race-header {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid #d4af37;
-        }
-
-        .analysis-content .selection-item {
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            background: #f0f7f4;
-            border-radius: 4px;
-            border-left: 3px solid #28a745;
-        }
-
-        .analysis-content .key-point {
-            background: #fff3cd;
-            border-left: 3px solid #ffc107;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border-radius: 4px;
-        }
-
-        /* Admin Formatting Buttons */
-        .format-btn-admin {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background: white;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .format-btn-admin:hover {
-            background: #f8f9fa;
-            border-color: #1a3c34;
-        }
-
-        .format-btn-admin.active {
-            background: #1a3c34;
-            color: white;
-            border-color: #1a3c34;
-        }
-
     </style>
 </head>
 <body>
@@ -1511,24 +1303,20 @@
             </div>
             
             <!-- Extended Analysis Display -->
-            <div class="analysis-display" id="analysisDisplay">
-                <div class="analysis-header">
-                    <h3 id="analysisTitle">Race Analysis</h3>
-                    <div class="race-info" id="raceInfo" style="display: none;">
+            <div class="analysis-header">
+                <h3 id="analysisTitle">Race Analysis</h3>
+
+                <!-- ACTION BUTTONS -->
+                <div class="analysis-actions">
+                    <i class="fas fa-copy" id="copyAnalysis" title="Copy Analysis"></i>
+                    <i class="fas fa-file-pdf" id="exportPDF" title="Download PDF"></i>
+                </div>
+
+                <div class="race-info" id="raceInfo" style="display: none;">
                         <span id="selectedVenue"></span>
                         <span id="selectedDate"></span>
                         <span id="selectedRace"></span>
                     </div>
-                </div>
-                
-                <!-- Analysis Controls (Only Copy and Export for public) -->
-                <div class="analysis-controls" style="display: none;" id="analysisControls">
-                    <button class="control-btn" id="copyBtn">
-                        <i class="fas fa-copy"></i> Copy
-                    </button>
-                    <button class="control-btn" id="exportPdfBtn">
-                        <i class="fas fa-file-pdf"></i> Export PDF
-                    </button>
                 </div>
                 
                 <div class="analysis-content" id="analysisContent">
@@ -1538,6 +1326,7 @@
                     </div>
                 </div>
             </div>
+        </div>
 
         
         <!-- Right Column: Sidebar Widgets -->
@@ -1610,62 +1399,54 @@
         </div>
         
         <!-- Admin Panel (Hidden by Default, Full Width) -->
-        <div class="admin-form-group">
-            <label><i class="fas fa-palette"></i> Text Color (Click to apply to selected text)</label>
-            <div class="admin-color-picker" id="colorPicker">
-                <div class="color-option" data-color="red" style="background-color: #dc3545;" title="Red">
-                    <i class="fas fa-check"></i>
+        <div class="admin-panel" id="adminPanel">
+            <div class="admin-header">
+                <h3 class="admin-title">
+                    <i class="fas fa-lock"></i> Admin Panel
+                </h3>
+                <button class="btn-secondary" id="hideAdminBtn">
+                    <i class="fas fa-times"></i> Hide Panel
+                </button>
+            </div>
+            
+            <div class="admin-form-grid">
+                <div class="admin-form-group">
+                    <label for="adminVenue"><i class="fas fa-map-marker-alt"></i> Venue</label>
+                    <input type="text" id="adminVenue" placeholder="e.g., Bengaluru">
                 </div>
-                <div class="color-option" data-color="green" style="background-color: #28a745;" title="Green">
-                    <i class="fas fa-check"></i>
+                
+                <div class="admin-form-group">
+                    <label for="adminDate"><i class="far fa-calendar-alt"></i> Date</label>
+                    <input type="date" id="adminDate">
                 </div>
-                <div class="color-option" data-color="blue" style="background-color: #17a2b8;" title="Blue">
-                    <i class="fas fa-check"></i>
-                </div>
-                <div class="color-option" data-color="yellow" style="background-color: #ffc107;" title="Yellow">
-                    <i class="fas fa-check"></i>
-                </div>
-                <div class="color-option" data-color="orange" style="background-color: #fd7e14;" title="Orange">
-                    <i class="fas fa-check"></i>
-                </div>
-                <div class="color-option" data-color="purple" style="background-color: #6f42c1;" title="Purple">
-                    <i class="fas fa-check"></i>
-                </div>
-                <div class="color-option" data-color="pink" style="background-color: #e83e8c;" title="Pink">
-                    <i class="fas fa-check"></i>
-                </div>
-                <div class="color-option" data-color="teal" style="background-color: #20c997;" title="Teal">
-                    <i class="fas fa-check"></i>
-                </div>
-                <div class="color-option" data-color="gray" style="background-color: #6c757d;" title="Gray">
-                    <i class="fas fa-check"></i>
-                </div>
-                <div class="color-option" data-color="none" style="background-color: #f8f9fa; border: 1px solid #ddd;" title="Remove Color">
-                    <i class="fas fa-times" style="color: #666;"></i>
+                
+                <div class="admin-form-group">
+                    <label for="adminRaceNo"><i class="fas fa-flag-checkered"></i> Race Number</label>
+                    <input type="text" id="adminRaceNo" placeholder="e.g., 10">
                 </div>
             </div>
-            <small style="color: #666; font-size: 0.85rem;">
-                Tip: Select text in the analysis box above, then click a color to apply it.
-            </small>
-        </div>
-
-        <div class="admin-form-group">
-            <label><i class="fas fa-text-height"></i> Quick Formatting (Click to apply)</label>
-            <div style="display: flex; gap: 8px; margin-top: 8px; margin-bottom: 20px; flex-wrap: wrap;">
-                <button type="button" class="format-btn-admin" data-format="bold">
-                    <i class="fas fa-bold"></i> Bold
+            
+            <div class="admin-form-group">
+                <label for="adminAnalysis"><i class="fas fa-edit"></i> Analysis Text</label>
+                <textarea id="adminAnalysis" placeholder="Paste your detailed analysis here..."></textarea>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn-success" id="saveBtn">
+                    <i class="fas fa-save"></i> Save Analysis
                 </button>
-                <button type="button" class="format-btn-admin" data-format="italic">
-                    <i class="fas fa-italic"></i> Italic
+                <button class="btn-primary" id="updateBtn">
+                    <i class="fas fa-edit"></i> Update Selected
                 </button>
-                <button type="button" class="format-btn-admin" data-format="highlight">
-                    <i class="fas fa-highlighter"></i> Highlight
+                <button class="btn-danger" id="deleteBtn">
+                    <i class="fas fa-trash"></i> Delete
                 </button>
-                <button type="button" class="format-btn-admin" data-format="clear">
-                    <i class="fas fa-eraser"></i> Clear Format
+                <button class="btn-warning" id="clearBtn">
+                    <i class="fas fa-broom"></i> Clear Form
                 </button>
             </div>
         </div>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -2864,8 +2645,6 @@
         async function initApp() {
             setupMobileMenu();
             setupNavigation();
-            setupAnalysisControls(); // For copy and export buttons
-            setupAdminTextEditing(); // For admin color/text editing
             await loadFromKV();
             initializeDropdowns();
             initCalendar();
@@ -2878,528 +2657,48 @@
             if (window.innerWidth <= 768) return; // disable recalculation on mobile scroll
             syncAnalysisHeight();
         });
-        
-        // Admin Panel Text Editing Functions
-        function setupAdminTextEditing() {
-            const textarea = document.getElementById('adminAnalysis');
-            const colorPicker = document.getElementById('colorPicker');
-            
-            // Color picker functionality
-            colorPicker.querySelectorAll('.color-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const color = this.dataset.color;
-                    
-                    // Update active state
-                    colorPicker.querySelectorAll('.color-option').forEach(opt => {
-                        opt.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                    
-                    if (color === 'none') {
-                        // Remove color formatting
-                        removeColorFormatting();
-                    } else {
-                        // Apply color to selected text
-                        applyColorToSelection(color);
-                    }
-                });
-            });
-            
-            // Formatting buttons
-            document.querySelectorAll('.format-btn-admin').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const format = this.dataset.format;
-                    
-                    switch(format) {
-                        case 'bold':
-                            applyFormatting('**', '**');
-                            break;
-                        case 'italic':
-                            applyFormatting('*', '*');
-                            break;
-                        case 'highlight':
-                            applyFormatting('==', '==');
-                            break;
-                        case 'clear':
-                            clearFormatting();
-                            break;
-                    }
-                });
-            });
-            
-            // Listen for text selection in textarea
-            textarea.addEventListener('mouseup', function() {
-                updateActiveColor();
-            });
-            
-            textarea.addEventListener('keyup', function() {
-                updateActiveColor();
-            });
-        }
 
-        // Apply color formatting to selected text
-        function applyColorToSelection(color) {
-            const textarea = document.getElementById('adminAnalysis');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            
-            if (start === end) {
-                // No text selected
-                showToast('Please select text first', 'info');
+        document.getElementById("copyAnalysis").addEventListener("click", () => {
+            const text = document.getElementById("analysisContent").innerText.trim();
+
+            if (!text) {
+                showToast("No analysis to copy", "error");
                 return;
             }
-            
-            const selectedText = textarea.value.substring(start, end);
-            const colorTag = `[COLOR=${color.toUpperCase()}]${selectedText}[/COLOR]`;
-            
-            // Replace selected text with colored version
-            const newValue = textarea.value.substring(0, start) + 
-                            colorTag + 
-                            textarea.value.substring(end);
-            
-            textarea.value = newValue;
-            
-            // Restore cursor position
-            textarea.focus();
-            textarea.setSelectionRange(start + colorTag.length, start + colorTag.length);
-        }
 
-        // Remove color formatting from selected text
-        function removeColorFormatting() {
-            const textarea = document.getElementById('adminAnalysis');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            
-            if (start === end) {
-                showToast('Please select text first', 'info');
+            navigator.clipboard.writeText(text)
+                .then(() => showToast("Analysis copied to clipboard"))
+                .catch(() => showToast("Failed to copy", "error"));
+        });
+
+        document.getElementById("exportPDF").addEventListener("click", async () => {
+            const analysisBox = document.getElementById("analysisContent");
+
+            if (!analysisBox.innerText.trim()) {
+                showToast("No analysis available to export", "error");
                 return;
             }
-            
-            const selectedText = textarea.value.substring(start, end);
-            
-            // Remove color tags if present
-            let newText = selectedText.replace(/\[COLOR=[^\]]+\](.*?)\[\/COLOR\]/g, '$1');
-            
-            // Replace selected text
-            const newValue = textarea.value.substring(0, start) + 
-                            newText + 
-                            textarea.value.substring(end);
-            
-            textarea.value = newValue;
-            
-            // Restore cursor position
-            textarea.focus();
-            textarea.setSelectionRange(start + newText.length, start + newText.length);
-        }
 
-        // Apply simple formatting (bold, italic, highlight)
-        function applyFormatting(startTag, endTag) {
-            const textarea = document.getElementById('adminAnalysis');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            
-            if (start === end) {
-                showToast('Please select text first', 'info');
-                return;
-            }
-            
-            const selectedText = textarea.value.substring(start, end);
-            const formattedText = startTag + selectedText + endTag;
-            
-            const newValue = textarea.value.substring(0, start) + 
-                            formattedText + 
-                            textarea.value.substring(end);
-            
-            textarea.value = newValue;
-            
-            // Restore cursor position
-            textarea.focus();
-            textarea.setSelectionRange(start + formattedText.length, start + formattedText.length);
-        }
+            const { jsPDF } = window.jspdf;
 
-        // Clear formatting from selected text
-        function clearFormatting() {
-            const textarea = document.getElementById('adminAnalysis');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            
-            if (start === end) {
-                showToast('Please select text first', 'info');
-                return;
-            }
-            
-            const selectedText = textarea.value.substring(start, end);
-            
-            // Remove all formatting tags
-            let newText = selectedText
-                .replace(/\*\*(.*?)\*\*/g, '$1')
-                .replace(/\*(.*?)\*/g, '$1')
-                .replace(/==(.*?)==/g, '$1')
-                .replace(/\[COLOR=[^\]]+\](.*?)\[\/COLOR\]/g, '$1')
-                .replace(/\[IMPORTANT\](.*?)\[\/IMPORTANT\]/g, '$1')
-                .replace(/\[SUCCESS\](.*?)\[\/SUCCESS\]/g, '$1')
-                .replace(/\[WARNING\](.*?)\[\/WARNING\]/g, '$1')
-                .replace(/\[INFO\](.*?)\[\/INFO\]/g, '$1');
-            
-            const newValue = textarea.value.substring(0, start) + 
-                            newText + 
-                            textarea.value.substring(end);
-            
-            textarea.value = newValue;
-            
-            // Restore cursor position
-            textarea.focus();
-            textarea.setSelectionRange(start + newText.length, start + newText.length);
-        }
+            const canvas = await html2canvas(analysisBox, { scale: 2 });
+            const imgData = canvas.toDataURL("image/png");
 
-        // Update active color based on selection
-        function updateActiveColor() {
-            const textarea = document.getElementById('adminAnalysis');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            
-            if (start === end) {
-                // Clear all active states
-                document.querySelectorAll('.color-option').forEach(opt => {
-                    opt.classList.remove('active');
-                });
-                return;
-            }
-            
-            const selectedText = textarea.value.substring(start, end);
-            
-            // Check if selected text has a color tag
-            const colorMatch = selectedText.match(/\[COLOR=([^\]]+)\]/);
-            if (colorMatch) {
-                const color = colorMatch[1].toLowerCase();
-                document.querySelectorAll('.color-option').forEach(opt => {
-                    opt.classList.remove('active');
-                    if (opt.dataset.color === color) {
-                        opt.classList.add('active');
-                    }
-                });
-            } else {
-                document.querySelectorAll('.color-option').forEach(opt => {
-                    opt.classList.remove('active');
-                });
-                document.querySelector('.color-option[data-color="none"]').classList.add('active');
-            }
-        }
+            const pdf = new jsPDF("p", "mm", "a4");
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const imgProps = pdf.getImageProperties(imgData);
+            const imgHeight = (imgProps.height * pageWidth) / imgProps.width;
 
-        // Enhanced displayAnalysis function with color support
-        function displayAnalysis(key) {
-            if (!key || !raceAnalyses[key]) {
-                analysisContent.innerHTML = '<div class="no-analysis"><i class="fas fa-exclamation-circle"></i><p>No analysis found for selected race</p></div>';
-                analysisTitle.textContent = 'Race Analysis';
-                raceInfo.style.display = 'none';
-                analysisControls.style.display = 'none';
-                syncAnalysisHeight();
-                return;
-            }
-            
-            const analysis = raceAnalyses[key];
-            
-            // Convert analysis text with color formatting to HTML
-            let formattedAnalysis = convertAnalysisToHTML(analysis.analysis);
-            
-            analysisContent.innerHTML = formattedAnalysis;
-            analysisTitle.textContent = `${analysis.venue} - Race ${analysis.raceNo} Analysis`;
-            
-            // Update race info
-            const dateObj = new Date(analysis.date);
-            const formattedDate = dateObj.toLocaleDateString('en-IN', {
-                weekday: 'long',
-                day: '2-digit',
-                month: 'long',
-                year: 'numeric'
-            });
-            
-            selectedVenue.textContent = analysis.venue;
-            selectedDate.textContent = formattedDate;
-            selectedRace.textContent = `Race ${analysis.raceNo}`;
-            raceInfo.style.display = 'flex';
-            
-            // Show analysis controls (only copy and export)
-            analysisControls.style.display = 'flex';
-            
-            // Update admin form with current selection
-            updateAdminForm(key);
-            syncAnalysisHeight();
-        }
+            pdf.addImage(imgData, "PNG", 0, 0, pageWidth, imgHeight);
+            pdf.save("race-analysis.pdf");
 
-        // Convert analysis text with formatting to HTML
-        function convertAnalysisToHTML(text) {
-            if (!text) return '<div class="no-analysis"><i class="fas fa-exclamation-circle"></i><p>No analysis content</p></div>';
-            
-            // First, convert color tags
-            let html = text.replace(/\[COLOR=([^\]]+)\](.*?)\[\/COLOR\]/g, function(match, color, content) {
-                const colorClass = `color-${color.toLowerCase()}`;
-                return `<span class="color-text ${colorClass}">${content}</span>`;
-            });
-            
-            // Convert other formatting
-            html = html
-                .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                .replace(/==(.*?)==/g, '<span style="background-color: #ffeb3b; padding: 0 2px; border-radius: 2px;">$1</span>')
-                .replace(/\[IMPORTANT\](.*?)\[\/IMPORTANT\]/g, '<span class="color-text color-red">$1</span>')
-                .replace(/\[SUCCESS\](.*?)\[\/SUCCESS\]/g, '<span class="color-text color-green">$1</span>')
-                .replace(/\[WARNING\](.*?)\[\/WARNING\]/g, '<span class="color-text color-yellow">$1</span>')
-                .replace(/\[INFO\](.*?)\[\/INFO\]/g, '<span class="color-text color-blue">$1</span>')
-                .replace(/====+/g, '<hr style="border: none; border-top: 2px solid #d4af37; margin: 1.5rem 0;">')
-                .replace(/\n\n/g, '</p><p>')
-                .replace(/\n/g, '<br>');
-            
-            // Wrap in paragraph tags if not already wrapped
-            if (!html.startsWith('<')) {
-                html = `<p>${html}</p>`;
-            }
-            
-            return html;
-        }
-
-        // Copy analysis to clipboard (plain text version)
-        function copyAnalysisToClipboard() {
-            const analysisContent = document.getElementById('analysisContent');
-            
-            // Get the HTML content
-            const htmlContent = analysisContent.innerHTML;
-            
-            // Convert HTML to plain text while preserving some structure
-            let plainText = htmlContent
-                .replace(/<br\s*\/?>/gi, '\n')
-                .replace(/<p>/gi, '\n')
-                .replace(/<\/p>/gi, '\n')
-                .replace(/<hr[^>]*>/gi, '\n' + '='.repeat(50) + '\n')
-                .replace(/<[^>]*>/g, '') // Remove all other HTML tags
-                .replace(/&nbsp;/g, ' ')
-                .replace(/&amp;/g, '&')
-                .replace(/&lt;/g, '<')
-                .replace(/&gt;/g, '>')
-                .replace(/&quot;/g, '"')
-                .replace(/&#39;/g, "'")
-                .replace(/\n\s*\n/g, '\n\n') // Clean up multiple newlines
-                .trim();
-            
-            // Add header
-            const title = analysisTitle.textContent;
-            const venue = selectedVenue.textContent;
-            const date = selectedDate.textContent;
-            const race = selectedRace.textContent;
-            
-            const fullText = `RACE ANALYSIS\n${'='.repeat(50)}\n${title}\n\nVenue: ${venue}\nDate: ${date}\nRace: ${race}\n\n${'='.repeat(50)}\n\n${plainText}\n\n${'='.repeat(50)}\n\nGenerated by RaceAnalyst - ${new Date().toLocaleDateString()}`;
-            
-            navigator.clipboard.writeText(fullText)
-                .then(() => {
-                    showToast('Analysis copied to clipboard!', 'success');
-                    
-                    // Visual feedback
-                    copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                    copyBtn.style.background = '#28a745';
-                    copyBtn.style.color = 'white';
-                    
-                    setTimeout(() => {
-                        copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
-                        copyBtn.style.background = '';
-                        copyBtn.style.color = '';
-                    }, 2000);
-                })
-                .catch(err => {
-                    console.error('Failed to copy: ', err);
-                    showToast('Failed to copy analysis', 'error');
-                });
-        }
-
-        // Setup admin text editing
-        function setupAdminTextEditing() {
-            const textarea = document.getElementById('adminAnalysis');
-            const colorPicker = document.getElementById('colorPicker');
-            
-            // Color picker functionality
-            colorPicker.querySelectorAll('.color-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const color = this.dataset.color;
-                    
-                    // Update active state
-                    colorPicker.querySelectorAll('.color-option').forEach(opt => {
-                        opt.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                    
-                    if (color === 'none') {
-                        // Remove color formatting
-                        removeColorFormatting();
-                    } else {
-                        // Apply color to selected text
-                        applyColorToSelection(color);
-                    }
-                });
-            });
-            
-            // Formatting buttons
-            document.querySelectorAll('.format-btn-admin').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const format = this.dataset.format;
-                    
-                    switch(format) {
-                        case 'bold':
-                            applyFormatting('**', '**');
-                            break;
-                        case 'italic':
-                            applyFormatting('*', '*');
-                            break;
-                        case 'highlight':
-                            applyFormatting('==', '==');
-                            break;
-                        case 'clear':
-                            clearFormatting();
-                            break;
-                    }
-                });
-            });
-            
-            // Listen for text selection in textarea
-            textarea.addEventListener('mouseup', function() {
-                updateActiveColor();
-            });
-            
-            textarea.addEventListener('keyup', function() {
-                updateActiveColor();
-            });
-        }
-
-        // Export analysis to PDF
-        function exportAnalysisToPDF() {
-            const analysisContent = document.getElementById('analysisContent');
-            const analysisTitle = document.getElementById('analysisTitle').textContent;
-            const venue = selectedVenue.textContent;
-            const date = selectedDate.textContent;
-            const race = selectedRace.textContent;
-            
-            // Create HTML for PDF
-            const pdfHTML = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="utf-8">
-                    <title>${analysisTitle}</title>
-                    <style>
-                        body {
-                            font-family: 'Helvetica', 'Arial', sans-serif;
-                            line-height: 1.6;
-                            color: #333;
-                            margin: 20px;
-                        }
-                        .header {
-                            background: #1a3c34;
-                            color: white;
-                            padding: 20px;
-                            border-radius: 8px;
-                            margin-bottom: 30px;
-                        }
-                        .header h1 {
-                            margin: 0;
-                            font-size: 24px;
-                        }
-                        .race-info {
-                            color: #d4af37;
-                            font-size: 14px;
-                            margin-top: 10px;
-                        }
-                        .content {
-                            padding: 20px;
-                        }
-                        .content h2 {
-                            color: #1a3c34;
-                            border-bottom: 2px solid #d4af37;
-                            padding-bottom: 10px;
-                            margin-top: 30px;
-                        }
-                        .content p {
-                            margin: 15px 0;
-                        }
-                        .content ul, .content ol {
-                            margin: 15px 0 15px 30px;
-                        }
-                        /* Color text styles for PDF */
-                        .color-text {
-                            padding: 2px 4px;
-                            border-radius: 3px;
-                            font-weight: 600;
-                            display: inline-block;
-                            margin: 2px;
-                        }
-                        .color-red { color: #dc3545 !important; background-color: rgba(220, 53, 69, 0.1); }
-                        .color-green { color: #28a745 !important; background-color: rgba(40, 167, 69, 0.1); }
-                        .color-blue { color: #17a2b8 !important; background-color: rgba(23, 162, 184, 0.1); }
-                        .color-yellow { color: #ffc107 !important; background-color: rgba(255, 193, 7, 0.1); }
-                        .color-orange { color: #fd7e14 !important; background-color: rgba(253, 126, 20, 0.1); }
-                        .color-purple { color: #6f42c1 !important; background-color: rgba(111, 66, 193, 0.1); }
-                        .color-pink { color: #e83e8c !important; background-color: rgba(232, 62, 140, 0.1); }
-                        .color-teal { color: #20c997 !important; background-color: rgba(32, 201, 151, 0.1); }
-                        .color-gray { color: #6c757d !important; background-color: rgba(108, 117, 125, 0.1); }
-                        .footer {
-                            text-align: center;
-                            margin-top: 50px;
-                            padding-top: 20px;
-                            border-top: 1px solid #ddd;
-                            color: #666;
-                            font-size: 12px;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="header">
-                        <h1>${analysisTitle}</h1>
-                        <div class="race-info">
-                            ${venue} | ${date} | ${race}
-                        </div>
-                    </div>
-                    <div class="content">
-                        ${analysisContent.innerHTML}
-                    </div>
-                    <div class="footer">
-                        <p>Generated by RaceAnalyst on ${new Date().toLocaleDateString()}</p>
-                        <p>For educational purposes only | © ${new Date().getFullYear()} RaceAnalyst</p>
-                    </div>
-                </body>
-                </html>
-            `;
-            
-            // Use html2pdf library
-            if (typeof html2pdf !== 'undefined') {
-                const opt = {
-                    margin:       10,
-                    filename:     `${analysisTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.pdf`,
-                    image:        { type: 'jpeg', quality: 0.98 },
-                    html2canvas:  { scale: 2 },
-                    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-                };
-                
-                html2pdf().set(opt).from(pdfHTML).save();
-                showToast('PDF export started...', 'info');
-            } else {
-                // Fallback to print if html2pdf is not available
-                const printWindow = window.open('', '_blank');
-                printWindow.document.write(pdfHTML);
-                printWindow.document.close();
-                printWindow.print();
-                showToast('Opening print dialog...', 'info');
-            }
-        }
-
-        // Setup analysis controls (only for public view)
-        function setupAnalysisControls() {
-            // Copy functionality
-            copyBtn.addEventListener('click', copyAnalysisToClipboard);
-            
-            // Export PDF functionality
-            exportPdfBtn.addEventListener('click', exportAnalysisToPDF);
-        }
+            showToast("PDF Downloaded");
+        });
 
         // Initialize app
         window.addEventListener('DOMContentLoaded', initApp);
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
