@@ -298,10 +298,14 @@
             flex-shrink: 0;
         }
         
-        .analysis-header h3 {
+        .analysis-header {
+            background-color: #1a3c34;
             color: white;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
         }
         
         .race-info {
@@ -1215,11 +1219,12 @@
             margin-left: auto;
         }
 
-        .analysis-actions i {
-            font-size: 1.4rem;
-            color: #d4af37;
-            cursor: pointer;
-            transition: 0.2s;
+        .analysis-actions {
+            display: flex;
+            gap: 14px;
+            position: absolute;
+            top: 12px;
+            right: 15px;
         }
 
         .analysis-actions i:hover {
@@ -2691,6 +2696,59 @@
 
             pdf.addImage(imgData, "PNG", 0, 0, pageWidth, imgHeight);
             pdf.save("race-analysis.pdf");
+
+            showToast("PDF Downloaded");
+        });
+
+        document.getElementById("exportPDF").addEventListener("click", async () => {
+            const element = document.getElementById("analysisContent");
+
+            if (!element.innerText.trim()) {
+                showToast("No analysis available to export", "error");
+                return;
+            }
+
+            // Clone the node so scrollbars don't interfere
+            const clone = element.cloneNode(true);
+            clone.style.position = "absolute";
+            clone.style.left = "-9999px";
+            clone.style.maxHeight = "none";
+            clone.style.height = "auto";
+            clone.style.overflow = "visible";
+            document.body.appendChild(clone);
+
+            const { jsPDF } = window.jspdf;
+
+            const canvas = await html2canvas(clone, { scale: 2 });
+            const imgData = canvas.toDataURL("image/png");
+
+            const pdf = new jsPDF("p", "mm", "a4");
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.getHeight();
+
+            const imgProps = pdf.getImageProperties(imgData);
+            const imgHeight = (imgProps.height * pageWidth) / imgProps.width;
+
+            if (imgHeight <= pageHeight) {
+                pdf.addImage(imgData, "PNG", 0, 0, pageWidth, imgHeight);
+            } else {
+                // multi-page PDF
+                let remainingHeight = imgHeight;
+                let position = 0;
+
+                pdf.addImage(imgData, "PNG", 0, position, pageWidth, imgHeight);
+                remainingHeight -= pageHeight;
+
+                while (remainingHeight > 0) {
+                    position -= pageHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, "PNG", 0, position, pageWidth, imgHeight);
+                    remainingHeight -= pageHeight;
+                }
+            }
+
+            pdf.save("race-analysis.pdf");
+            clone.remove();
 
             showToast("PDF Downloaded");
         });
