@@ -2418,6 +2418,12 @@
                     y += lineHeight;
                 } else if (line.trim() === '') {
                     y += lineHeight / 2;
+                } else if (line.match(/^%P%P%P/)) {
+                    // Treat %P dividers as horizontal rules
+                    doc.setLineWidth(0.5);
+                    doc.setDrawColor(212, 175, 55); // Gold
+                    doc.line(leftMargin, y - 2, rightMargin, y - 2);
+                    y += lineHeight * 2; // Extra space 
                 } else {
                     const splitLines = doc.splitTextToSize(line, 180);
                     splitLines.forEach(splitLine => {
