@@ -2347,6 +2347,14 @@
                 return;
             }
 
+            // Get current analysis from the selected race key
+            const currentKey = raceSelect.value;
+            if (!currentKey || !raceAnalyses[currentKey]) {
+                showToast('Unable to determine race details for PDF', 'error');
+                return;
+            }
+            const analysis = raceAnalyses[currentKey];
+
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF({
                 orientation: 'portrait',
@@ -2384,31 +2392,26 @@
                 }
 
                 if (line.trim().startsWith('***') && line.trim().endsWith('***')) {
-                    // Bold italic heading
                     doc.setFont('courier', 'bolditalic');
                     doc.text(line.replace(/\*/g, '').trim(), leftMargin, y);
                     y += lineHeight + 2;
                     doc.setFont('courier', 'normal');
                 } else if (line.trim().startsWith('**') && line.trim().endsWith('**')) {
-                    // Bold
                     doc.setFont('courier', 'bold');
                     doc.text(line.replace(/\*/g, '').trim(), leftMargin, y);
                     y += lineHeight;
                     doc.setFont('courier', 'normal');
                 } else if (line.trim().startsWith('*') && line.trim().endsWith('*')) {
-                    // Italic
                     doc.setFont('courier', 'italic');
                     doc.text(line.replace(/\*/g, '').trim(), leftMargin, y);
                     y += lineHeight;
                     doc.setFont('courier', 'normal');
                 } else if (line.match(/^====+$/)) {
-                    // Horizontal rule
                     doc.setLineWidth(0.5);
-                    doc.setDrawColor(212, 175, 55); // Gold color
+                    doc.setDrawColor(212, 175, 55);
                     doc.line(leftMargin, y - 2, rightMargin, y - 2);
                     y += lineHeight;
                 } else if (line.trim().startsWith('- ') || line.trim().startsWith('• ')) {
-                    // Bullet point
                     const bullet = line.trim().startsWith('• ') ? '• ' : '- ';
                     const text = line.replace(/^- |\• /, '');
                     doc.text(bullet + text, leftMargin + 5, y);
@@ -2416,7 +2419,6 @@
                 } else if (line.trim() === '') {
                     y += lineHeight / 2;
                 } else {
-                    // Regular text
                     const splitLines = doc.splitTextToSize(line, 180);
                     splitLines.forEach(splitLine => {
                         if (y > pageHeight) {
@@ -2429,11 +2431,14 @@
                 }
             });
 
-            const filename = `${venue}-${analysis.date}-Race${race.match(/\d+/)[0]}.pdf`.replace(/[^a-z0-9-]/gi, '_');
+            // Fixed filename using analysis.date
+            const safeDate = analysis.date.replace(/[^0-9]/g, '_');
+            const raceNum = race.match(/\d+/) ? race.match(/\d+/)[0] : 'Unknown';
+            const filename = `${venue}-${safeDate}-Race${raceNum}.pdf`.replace(/[^a-z0-9_-]/gi, '_');
             doc.save(filename);
             showToast('PDF exported successfully!', 'success');
         }
-        
+
         function updateAdminForm(key) {
             if (!key || !raceAnalyses[key]) return;
             
