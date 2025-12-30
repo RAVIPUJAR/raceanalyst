@@ -98,7 +98,7 @@
             background: none;
             padding: 0;
             border-radius: 0;
-            color: #d4af37 !important;
+            color: #d4af37 !important;   /* subtle highlight */
             font-weight: 600;
         }
         
@@ -127,16 +127,16 @@
         }
         
         .hero h2 {
-            font-size: 1.8rem;
+            font-size: 1.8rem;   /* match RaceAnalyst visual weight */
             margin-bottom: 0.8rem;
             color: white;
         }
         
         .hero p {
-            font-size: 1.05rem;
-            white-space: nowrap;
+            font-size: 1.05rem;      /* slightly reduced */
+            white-space: nowrap;    /* FORCE single line */
             max-width: 100%;
-            margin: 0 auto 1.4rem;
+            margin: 0 auto 1.4rem;  /* controls spacing below */
         }
         
         .cta-button {
@@ -175,7 +175,7 @@
             grid-template-columns: 2fr 1fr;
             gap: 2.5rem;
             padding: 3rem 0;
-            align-items: start;
+            align-items: start; /* 🔴 CRITICAL CHANGE */
         }
         
         /* Selection Section */
@@ -202,7 +202,7 @@
             color: #d4af37;
         }
         
-        /* Dropdown Grid */
+        /* Updated Dropdown Grid for Horizontal Alignment */
         .dropdown-grid {
             display: flex;
             gap: 20px;
@@ -215,12 +215,24 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-            min-width: 0;
+            min-width: 0; /* Allow flexbox to shrink */
         }
         
-        .venue-dropdown { flex: 1; min-width: 180px; max-width: 200px; }
-        .date-dropdown { flex: 0 0 190px; }
-        .race-dropdown { flex: 0 0 130px; margin-left: 10px; }
+        /* Specific widths for each dropdown */
+        .venue-dropdown {
+            flex: 1;
+            min-width: 180px; /* Enough for "Bangalore" */
+            max-width: 200px;
+        }
+        
+        .date-dropdown {
+            flex: 0 0 190px; /* wider so full date incl. year is visible */
+        }
+
+        .race-dropdown {
+            flex: 0 0 130px;
+            margin-left: 10px; /* visual breathing space from date */
+        }
         
         .dropdown-group label {
             font-weight: 600;
@@ -230,26 +242,40 @@
         }
         
         select {
-            padding: 8px 12px;
+            padding: 8px 12px;              /* slimmer height */
             border: 2px solid #e9ecef;
             border-radius: 6px;
-            font-size: 0.95rem;
+            font-size: 0.95rem;             /* slightly smaller text */
             background: white;
-            color: #1a3c34;
+            color: #1a3c34;                 /* stronger, cleaner text */
             cursor: pointer;
             transition: all 0.25s ease;
             font-family: 'Source Serif Pro', serif;
             width: 100%;
         }
         
-        select:hover { border-color: #d4af37; }
+        select option {
+            padding: 6px;
+            font-size: 0.95rem;
+        }
+
+        select:hover {
+            border-color: #d4af37;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #1a3c34;
+            box-shadow: 0 0 0 2px rgba(26, 60, 52, 0.12);
+        }
+
         select:focus {
             outline: none;
             border-color: #1a3c34;
             box-shadow: 0 0 0 3px rgba(26, 60, 52, 0.1);
         }
         
-        /* Analysis Display */
+        /* Analysis Display - Stretch to sidebar bottom using grid/flex */
         .analysis-display {
             background: white;
             border-radius: 8px;
@@ -258,6 +284,11 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+        }
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .analysis-header {
@@ -283,69 +314,12 @@
         
         .analysis-content {
             padding: 2rem;
-            overflow-y: auto;
+            overflow-y: auto; /* Enable vertical scrollbar */
             font-family: 'Courier New', monospace;
             white-space: pre-wrap;
             line-height: 1.8;
             background: #f8f9fa;
             flex-grow: 1;
-            position: relative; /* Important for floating buttons */
-            padding-top: 60px; /* Space for floating buttons */
-        }
-        
-        /* Floating Action Buttons (Copy & PDF) */
-        .analysis-actions {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            display: flex;
-            gap: 10px;
-            z-index: 10;
-        }
-        
-        .analysis-action-btn {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.1rem;
-            color: #495057;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.2s ease;
-            backdrop-filter: blur(4px);
-        }
-        
-        .analysis-action-btn:hover {
-            background: #ffffff;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-            color: #1a3c34;
-        }
-        
-        .analysis-action-btn:active {
-            transform: translateY(0);
-        }
-        
-        /* Mobile adjustments */
-        @media (max-width: 768px) {
-            .analysis-actions {
-                top: 8px;
-                right: 8px;
-                gap: 8px;
-            }
-            .analysis-action-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 1rem;
-            }
-            .analysis-content {
-                padding-top: 55px;
-            }
         }
         
         .no-analysis {
@@ -1234,6 +1208,50 @@
                 overflow-x: auto;
             }
         }
+
+        .analysis-actions {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .analysis-action-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: #495057;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+            backdrop-filter: blur(4px);
+        }
+        
+        .analysis-action-btn:hover {
+            background: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+            color: #1a3c34;
+        }
+        
+        .analysis-content {
+            position: relative;
+            padding-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .analysis-actions { top: 8px; right: 8px; gap: 8px; }
+            .analysis-action-btn { width: 36px; height: 36px; font-size: 1rem; }
+            .analysis-content { padding-top: 55px; }
+        }
     </style>
 </head>
 <body>
@@ -1322,6 +1340,15 @@
                 </div>
                 
                 <div class="analysis-content" id="analysisContent">
+                    <div class="analysis-actions" id="analysisActions" style="display: none;">
+                        <div class="analysis-action-btn" id="copyBtn" title="Copy to clipboard">
+                            <i class="fas fa-copy"></i>
+                        </div>
+                        <div class="analysis-action-btn" id="pdfBtn" title="Export to PDF">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                    </div>
+
                     <div class="no-analysis">
                         <i class="fas fa-racing-helmet"></i>
                         <p>Select a race from the dropdowns above to view detailed analysis</p>
@@ -1483,7 +1510,6 @@
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
 
-    <!-- jsPDF for PDF export -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <script>
@@ -2233,6 +2259,8 @@
             }
         }
 
+        let currentAnalysisRawText = ''; // Store raw text for PDF
+
         function displayAnalysis(key) {
             if (!key || !raceAnalyses[key]) {
                 analysisContent.innerHTML = `
@@ -2249,15 +2277,16 @@
             }
             
             const analysis = raceAnalyses[key];
-            
+            currentAnalysisRawText = analysis.analysis; // Save raw text for PDF
+
             let formattedAnalysis = analysis.analysis
                 .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                 .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                .replace(/====+/g, '<hr>')
+                .replace(/====+/g, '<hr style="margin: 1em 0; border: 1px solid #d4af37;">')
                 .replace(/\n/g, '<br>')
-                .replace(/^- /g, '<br>- ');
-            
+                .replace(/^- /g, '<br>• '); // Better bullet
+
             analysisContent.innerHTML = `
                 <div class="analysis-actions" id="analysisActions">
                     <div class="analysis-action-btn" id="copyBtn" title="Copy to clipboard">
@@ -2270,7 +2299,6 @@
                 ${formattedAnalysis}
             `;
             
-            // Attach event listeners
             document.getElementById('copyBtn').addEventListener('click', copyAnalysis);
             document.getElementById('pdfBtn').addEventListener('click', exportToPDF);
             
@@ -2303,45 +2331,109 @@
             `;
             analysisTitle.textContent = 'Race Analysis';
             raceInfo.style.display = 'none';
+            currentAnalysisRawText = '';
         }
 
-        // Copy to clipboard
         function copyAnalysis() {
-            const text = document.getElementById('analysisContent').innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('Analysis copied to clipboard!', 'success');
-            }).catch(() => {
-                showToast('Failed to copy', 'error');
-            });
+            navigator.clipboard.writeText(currentAnalysisRawText || document.getElementById('analysisContent').innerText)
+                .then(() => showToast('Analysis copied to clipboard!', 'success'))
+                .catch(() => showToast('Failed to copy', 'error'));
         }
 
-        // Export to PDF
+
         function exportToPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            const title = document.getElementById('analysisTitle').innerText;
-            const venue = document.getElementById('selectedVenue').innerText;
-            const date = document.getElementById('selectedDate').innerText;
-            const race = document.getElementById('selectedRace').innerText;
-            const content = document.getElementById('analysisContent').innerText;
-            
-            let y = 20;
-            doc.setFontSize(18);
-            doc.text(title, 105, y, { align: 'center' });
-            y += 12;
-            doc.setFontSize(12);
-            doc.text(`${venue} • ${date} • ${race}`, 105, y, { align: 'center' });
-            y += 15;
-            doc.setFontSize(11);
-            const lines = doc.splitTextToSize(content, 180);
-            doc.text(lines, 15, y);
-            
-            const filename = `${venue}-${date.replace(/[^0-9a-z]/gi, '-')}-Race${race.match(/\d+/)[0]}.pdf`;
-            doc.save(filename);
-            showToast('PDF downloaded successfully!', 'success');
-        }
+            if (!currentAnalysisRawText) {
+                showToast('No analysis to export', 'error');
+                return;
+            }
 
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: 'a4'
+            });
+
+            // Header
+            const title = document.getElementById('analysisTitle').innerText;
+            const venue = selectedVenue.textContent;
+            const date = selectedDate.textContent;
+            const race = selectedRace.textContent;
+
+            doc.setFont('courier', 'normal');
+            doc.setFontSize(16);
+            doc.text(title, 105, 20, { align: 'center' });
+
+            doc.setFontSize(12);
+            doc.text(`${venue} • ${date} • ${race}`, 105, 28, { align: 'center' });
+
+            // Content - using raw text with manual formatting
+            const lines = currentAnalysisRawText.split('\n');
+            let y = 40;
+            const lineHeight = 7;
+            const pageHeight = 280;
+            const leftMargin = 15;
+            const rightMargin = 195;
+
+            doc.setFontSize(11);
+
+            lines.forEach(line => {
+                if (y > pageHeight) {
+                    doc.addPage();
+                    y = 20;
+                }
+
+                if (line.trim().startsWith('***') && line.trim().endsWith('***')) {
+                    // Bold italic heading
+                    doc.setFont('courier', 'bolditalic');
+                    doc.text(line.replace(/\*/g, '').trim(), leftMargin, y);
+                    y += lineHeight + 2;
+                    doc.setFont('courier', 'normal');
+                } else if (line.trim().startsWith('**') && line.trim().endsWith('**')) {
+                    // Bold
+                    doc.setFont('courier', 'bold');
+                    doc.text(line.replace(/\*/g, '').trim(), leftMargin, y);
+                    y += lineHeight;
+                    doc.setFont('courier', 'normal');
+                } else if (line.trim().startsWith('*') && line.trim().endsWith('*')) {
+                    // Italic
+                    doc.setFont('courier', 'italic');
+                    doc.text(line.replace(/\*/g, '').trim(), leftMargin, y);
+                    y += lineHeight;
+                    doc.setFont('courier', 'normal');
+                } else if (line.match(/^====+$/)) {
+                    // Horizontal rule
+                    doc.setLineWidth(0.5);
+                    doc.setDrawColor(212, 175, 55); // Gold color
+                    doc.line(leftMargin, y - 2, rightMargin, y - 2);
+                    y += lineHeight;
+                } else if (line.trim().startsWith('- ') || line.trim().startsWith('• ')) {
+                    // Bullet point
+                    const bullet = line.trim().startsWith('• ') ? '• ' : '- ';
+                    const text = line.replace(/^- |\• /, '');
+                    doc.text(bullet + text, leftMargin + 5, y);
+                    y += lineHeight;
+                } else if (line.trim() === '') {
+                    y += lineHeight / 2;
+                } else {
+                    // Regular text
+                    const splitLines = doc.splitTextToSize(line, 180);
+                    splitLines.forEach(splitLine => {
+                        if (y > pageHeight) {
+                            doc.addPage();
+                            y = 20;
+                        }
+                        doc.text(splitLine, leftMargin, y);
+                        y += lineHeight;
+                    });
+                }
+            });
+
+            const filename = `${venue}-${analysis.date}-Race${race.match(/\d+/)[0]}.pdf`.replace(/[^a-z0-9-]/gi, '_');
+            doc.save(filename);
+            showToast('PDF exported successfully!', 'success');
+        }
+        
         function updateAdminForm(key) {
             if (!key || !raceAnalyses[key]) return;
             
