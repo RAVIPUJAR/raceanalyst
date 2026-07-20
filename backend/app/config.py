@@ -13,7 +13,7 @@ load_dotenv()
 # --- Filesystem layout of the existing Kudurebaala pipeline ---
 # Root folder containing one subfolder per race day, e.g.
 #   RACE_DATA_ROOT/BANGALORE-2026-07-19/
-RACE_DATA_ROOT = Path(os.getenv("RACE_DATA_ROOT", "/path/to/race-data")).resolve()
+RACE_DATA_ROOT = os.getenv("RACE_DATA_ROOT", "data")
 
 # Folder containing run_pipeline.py, run_experts.py, run_analysis.py
 PIPELINE_SCRIPTS_ROOT = Path(os.getenv("PIPELINE_SCRIPTS_ROOT", "/path/to/kudurebaala")).resolve()
@@ -53,20 +53,17 @@ RACE_DAY_FILES = {
 # Simple shared-secret auth for now (internal tool). Sent as header
 # `X-API-Key`. Swap for Cloudflare Access / proper auth when this
 # moves behind raceanalyst.com's member area.
-API_KEY = os.getenv("RACEANALYST_API_KEY", "change-me-dev-key")
+API_KEY = os.getenv("API_KEY", "dev-key-change-me")
 
 # --- CORS ---
 # Origins allowed to call this API from a browser. Add your Cloudflare
 # Pages domain(s) here once deployed.
-# ALLOWED_ORIGINS = [
-#     o.strip() for o in os.getenv(
-#         "ALLOWED_ORIGINS",
-#         "http://localhost:8000,https://raceanalyst.com,https://www.raceanalyst.com"
-#     ).split(",") if o.strip()
-# ]
+# CORS allowed origins
+ALLOWED_ORIGINS_STR = os.getenv("ALLOWED_ORIGINS", "http://localhost:8000,https://raceanalyst.com,https://www.raceanalyst.com")
+ALLOWED_ORIGINS = [origin.strip() for origin in ALLOWED_ORIGINS_STR.split(",")]
 
-ALLOWED_ORIGINS = ["*"]  # Allow all origins for public API
-
+# ALLOWED_ORIGINS = ["*"]  # Allow all origins for public API
+Path(RACE_DATA_ROOT).mkdir(parents=True, exist_ok=True)
 # Confirmed expert list + display order, matching ALL_EXPERTS in
 # run_analysis.py exactly. No "expert_" prefix — that's just the
 # LangGraph node naming convention, not the cache filenames.
