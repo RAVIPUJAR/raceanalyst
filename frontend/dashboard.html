@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RaceAnalyst · Live Race Dashboard</title>
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* ----- reset & base ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            height: 100%;
+            background: #b8d4e8;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1a1f2b;
+            line-height: 1.5;
+        }
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #a0c0d8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: hsl(122, 48%, 20%);
+            border-radius: 8px;
+        }
+
+        /* ----- brand palette — sky blue surrounds, dark green header ----- */
+        :root {
+            --bg-primary: oklch(84.676% 0.04185 252.895 / 0.901);
+            --bg-surface: hwb(149 62% 12%);
+            --bg-elevated: #8abdd8;
+            --bg-hover: #7db0cc;
+            --border-subtle: #7aa8c4;
+            --gold: #c8a13f;
+            --gold-soft: #dbb95c;
+            --gold-glow: rgba(200, 161, 63, 0.25);
+            --text-primary: #1a1f2b;
+            --text-secondary: #2a3a4a;
+            --text-muted: #4a5a6a;
+            --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-lift: 0 8px 28px rgba(0, 0, 0, 0.12);
+            
+            /* Dark green for header */
+            --header-bg: #0f2a23;
+            --header-border: #c8a13f;
+            
+            /* Vibrant accents for labels */
+            --accent-blue: #2b6c9e;
+            --accent-teal: #0d9488;
+            --accent-rose: #b81c6a;
+            --accent-amber: #a67c0a;
+            --accent-purple: #7c3aed;
+            --accent-orange: #c9560a;
+            
+            /* Sky blue for dropdowns */
+            --dropdown-bg: #b0d0e6;
+        }
+
+        /* ----- layout containers ----- */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ----- HEADER — dark green background ----- */
+        header {
+            background: var(--header-bg);
+            border-bottom: 3px solid var(--header-border);
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon {
+            background: linear-gradient(145deg, var(--gold), #b8952e);
+            color: #0f2a23;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 0 0 2px rgba(200, 161, 63, 0.3), 0 4px 12px rgba(200, 161, 63, 0.2);
+            transition: transform 0.2s;
+        }
+        .logo-icon:hover {
+            transform: scale(1.05);
+        }
+        .logo h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.7rem;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+        .logo h1 span {
+            color: var(--gold);
+        }
+        .header-tagline {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 1.5rem;
+            overflow: hidden;
+        }
+        .header-tagline strong {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #e8f0ed;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            letter-spacing: -0.01em;
+        }
+        .header-tagline span {
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: #a0b8b0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            margin-top: 2px;
+            letter-spacing: 0.2px;
+        }
+        @media (max-width: 980px) {
+            .header-tagline { display: none; }
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            align-items: center;
+        }
+        nav a {
+            color: #a0b8b0;
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.4rem 0.2rem;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        nav a i { font-size: 0.9rem; }
+        nav a:hover { color: #fff; }
+        nav a.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+
+        /* ----- SELECTION BAR — sky blue background ----- */
+        .selection-bar {
+            background: var(--bg-surface);
+            border-bottom: 2px solid var(--border-subtle);
+            padding: 0.9rem 2rem;
+            display: flex;
+            align-items: flex-end;
+            gap: 2rem;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+        .selection-bar-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 0.4rem;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        .selection-bar-title i {
+            color: var(--accent-amber);
+            font-size: 1rem;
+        }
+        .selection-bar .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .selection-bar label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-amber);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        .selection-bar select,
+        .selection-bar input {
+            background: var(--dropdown-bg);
+            border: 2px solid var(--border-subtle);
+            color: var(--text-primary);
+            border-radius: 10px;
+            padding: 0.55rem 1.8rem 0.55rem 1rem;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            height: 42px;
+            min-width: 130px;
+            transition: border 0.25s, box-shadow 0.25s, background 0.25s;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .selection-bar select:hover,
+        .selection-bar input:hover {
+            border-color: var(--accent-amber);
+            background: #b8d8ee;
+        }
+        .selection-bar select:focus,
+        .selection-bar input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px var(--gold-glow);
+            background: #c0ddf2;
+        }
+        .selection-bar input[type="date"] {
+            min-width: 155px;
+            padding-right: 0.8rem;
+            cursor: pointer;
+        }
+        .selection-bar input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.3);
+            cursor: pointer;
+            padding: 4px;
+        }
+        .selection-bar input[type="date"]::-webkit-datetime-edit {
+            color: var(--text-primary);
+        }
+        .icon-btn {
+            background: linear-gradient(145deg, var(--gold), #b8952e);
+            color: #0f2a23;
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 0 0 1px rgba(200, 161, 63, 0.3), 0 4px 12px rgba(200, 161, 63, 0.15);
+            font-weight: 700;
+        }
+        .icon-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 2px rgba(200, 161, 63, 0.4), 0 6px 20px rgba(200, 161, 63, 0.25);
+        }
+        .icon-btn:active { transform: scale(0.92); }
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-elevated);
+            color: var(--text-secondary);
+            border: 2px solid var(--border-subtle);
+            letter-spacing: 0.03em;
+        }
+        .status-pill.fresh {
+            background: #c8e6d0;
+            color: #1a6e3a;
+            border-color: #2e7d32;
+        }
+        .status-pill.stale {
+            background: #fce0dc;
+            color: #b3261e;
+            border-color: #b3261e;
+        }
+
+        /* ----- LAYOUT (left / center / right) ----- */
+        .layout {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+            background: var(--bg-primary);
+        }
+
+        /* ----- LEFT SIDEBAR — sky blue background ----- */
+        .sidebar-left {
+            width: 240px;
+            flex-shrink: 0;
+            background: var(--bg-surface);
+            border-right: 2px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 0.8rem 0 0.5rem 0;
+        }
+        .sidebar-left .nav-list {
+            list-style: none;
+            padding: 0.2rem 0.6rem;
+        }
+        .sidebar-left .nav-list li button {
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.7rem 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 10px;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            font-weight: 500;
+        }
+        .sidebar-left .nav-list li button:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+        .sidebar-left .nav-list li button.active {
+            background: #8abdd8;
+            color: var(--header-bg);
+            box-shadow: inset 3px 0 0 var(--gold);
+            font-weight: 600;
+        }
+        .sidebar-left .nav-list li button .nav-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border-subtle);
+            flex-shrink: 0;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .nav-dot.present {
+            background: var(--accent-teal);
+            box-shadow: 0 0 12px rgba(13, 148, 136, 0.4);
+        }
+
+        .sidebar-left .sidebar-section {
+            padding: 1.2rem 1rem 0.3rem 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-amber);
+            border-top: 2px solid var(--border-subtle);
+            margin-top: 0.5rem;
+            padding-top: 1rem;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        .sidebar-left .sidebar-section:first-of-type {
+            border-top: 0;
+            margin-top: 0;
+            padding-top: 0.5rem;
+        }
+
+        /* config toggle */
+        .config-toggle {
+            margin-top: auto;
+            padding: 0.8rem 1rem;
+            border-top: 2px solid var(--border-subtle);
+            background: var(--bg-elevated);
+        }
+        .config-toggle summary {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .config-toggle summary:hover { color: var(--text-secondary); }
+        .config-toggle input {
+            width: 100%;
+            background: var(--dropdown-bg);
+            border: 2px solid var(--border-subtle);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 0.5rem 0.7rem;
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            transition: border 0.2s;
+        }
+        .config-toggle input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-glow);
+        }
+        .config-toggle button {
+            margin-top: 0.5rem;
+            width: 100%;
+            padding: 0.5rem;
+            background: linear-gradient(145deg, var(--gold), #b8952e);
+            color: #0f2a23;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.2s;
+        }
+        .config-toggle button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 16px rgba(200, 161, 63, 0.25);
+        }
+
+        /* ----- CENTER MAIN — dark background (unchanged) ----- */
+        main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem 2.5rem;
+            background: #0b0e12;
+            background-image: radial-gradient(ellipse at 30% 20%, rgba(45, 212, 191, 0.02) 0%, transparent 60%);
+        }
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.7rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .content-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+        .content-header .context-meta {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent-teal);
+            background: rgba(13, 148, 136, 0.12);
+            padding: 0.35rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid rgba(13, 148, 136, 0.15);
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+        pre {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: var(--text-primary);
+            background: rgba(22, 28, 38, 0.85);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 1.8rem 2rem;
+            max-width: 920px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.03);
+            margin-top: 0.4rem;
+            color: #e8edf2;
+        }
+        .empty-hint {
+            color: #6a7a8e;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 0.95rem;
+        }
+
+        /* ----- RIGHT SIDEBAR — sky blue background ----- */
+        .sidebar-right {
+            width: 320px;
+            flex-shrink: 0;
+            background: var(--bg-surface);
+            border-left: 2px solid var(--border-subtle);
+            overflow-y: auto;
+            padding: 1.2rem 1rem;
+        }
+        .sidebar-right>label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent-rose);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        .sidebar-right>label i {
+            color: var(--accent-rose);
+        }
+        .rd-item {
+            border: 2px solid var(--border-subtle);
+            border-radius: 12px;
+            margin-bottom: 0.6rem;
+            overflow: hidden;
+            transition: box-shadow 0.25s, border-color 0.25s;
+            background: var(--bg-elevated);
+        }
+        .rd-item.open {
+            border-color: var(--accent-rose);
+            box-shadow: 0 0 30px rgba(184, 28, 106, 0.06);
+        }
+        .rd-item button.rd-toggle {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.7rem 0.9rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: background 0.15s, color 0.15s;
+        }
+        .rd-item button.rd-toggle:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+        .rd-item.open button.rd-toggle {
+            color: var(--accent-rose);
+        }
+        .rd-toggle .chev {
+            transition: transform 0.25s ease;
+            color: var(--accent-rose);
+            font-size: 0.7rem;
+        }
+        .rd-item.open .rd-toggle .chev {
+            transform: rotate(90deg);
+        }
+        .rd-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease;
+        }
+        .rd-item.open .rd-body {
+            max-height: 420px;
+            overflow-y: auto;
+        }
+        .rd-body-inner {
+            padding: 0.4rem 0.9rem 0.9rem 0.9rem;
+            border-top: 2px solid var(--border-subtle);
+        }
+        .rd-body-inner pre {
+            font-size: 0.72rem;
+            padding: 0.7rem 0.9rem;
+            max-width: 100%;
+            background: var(--bg-primary);
+            border-radius: 10px;
+            border: 2px solid var(--border-subtle);
+            margin: 0;
+            box-shadow: none;
+            color: var(--text-secondary);
+        }
+        .rd-body .empty-hint {
+            font-size: 0.75rem;
+            padding: 0.3rem 0;
+            color: var(--text-muted);
+        }
+
+        /* responsiveness */
+        @media (max-width: 1100px) {
+            .sidebar-right { width: 260px; padding: 1rem 0.8rem; }
+            .sidebar-left { width: 200px; }
+            main { padding: 1.5rem; }
+        }
+        @media (max-width: 780px) {
+            .sidebar-left, .sidebar-right { display: none; }
+            .selection-bar { padding: 0.6rem 1rem; gap: 1rem; }
+            header { padding: 0.6rem 1rem; flex-wrap: wrap; gap: 0.5rem; }
+            main { padding: 1rem; }
+            .content-header .context-meta { font-size: 0.7rem; padding: 0.2rem 0.8rem; }
+            .selection-bar select, .selection-bar input { min-width: 100px; }
+            .header-tagline strong { font-size: 0.9rem; }
+            .header-tagline span { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <div class="logo-icon"><i class="fas fa-horse-head"></i></div>
+            <h1>Race<span>Analyst</span></h1>
+        </div>
+        <div class="header-tagline">
+            <strong>AI‑Powered Indian Horse Racing</strong>
+            <span>Data‑driven selections · performance analytics · expert insights</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="chatcenter.html"><i class="fas fa-comments"></i> Chat Center</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- selection bar -->
+    <section class="selection-bar">
+        <span class="selection-bar-title"><i class="fas fa-flag-checkered"></i> Select Race</span>
+        <div class="field-group">
+            <label for="venueSelect"><i class="fas fa-map-pin"></i> Venue</label>
+            <select id="venueSelect"><option value="">Select Venue</option></select>
+        </div>
+        <div class="field-group">
+            <label for="dateInput"><i class="fas fa-calendar-alt"></i> Date</label>
+            <input id="dateInput" type="date" />
+        </div>
+        <div class="field-group">
+            <label for="raceNoSelect"><i class="fas fa-hashtag"></i> Race No.</label>
+            <select id="raceNoSelect"><option value="">Select Venue & Date</option></select>
+        </div>
+        <button id="refreshBtn" class="icon-btn" title="Refresh"><i class="fas fa-sync-alt"></i></button>
+        <span id="statusPill" class="status-pill">—</span>
+    </section>
+
+    <div class="layout">
+        <!-- left sidebar -->
+        <aside class="sidebar-left">
+            <div class="sidebar-section"><i class="fas fa-trophy" style="margin-right:6px;"></i> Final</div>
+            <ul class="nav-list" id="navFinal"></ul>
+            <div class="sidebar-section"><i class="fas fa-users-cog"></i> Expert reports</div>
+            <ul class="nav-list" id="navExperts"></ul>
+
+            <details class="config-toggle">
+                <summary><i class="fas fa-key"></i> API connection</summary>
+                <input id="apiBaseInput" type="text" placeholder="API base URL" />
+                <input id="apiKeyInput" type="password" placeholder="API key" />
+                <button id="saveConfigBtn"><i class="fas fa-save"></i> Save</button>
+            </details>
+        </aside>
+
+        <!-- center -->
+        <main>
+            <div class="content-header">
+                <h2 id="contentTitle">Select an item</h2>
+                <span class="context-meta" id="contextMeta">—</span>
+            </div>
+            <div id="contentBody"><p class="empty-hint">Pick a race, then a report from the left.</p></div>
+        </main>
+
+        <!-- right sidebar -->
+        <aside class="sidebar-right">
+            <label><i class="fas fa-bolt"></i> Race day reports</label>
+            <div id="raceDayAccordion"></div>
+        </aside>
+    </div>
+
+    <script>
+        (function() {
+            // ----- constants with icons & REORDERED RACE DAY FILES -----
+            const EXPERTS = ["ratings", "pedigree", "trackwork", "sweepstakes", "day_results", "medical", "equipment", "connections_form", "competition_form", "field_rivals"];
+            
+            // Reordered as requested: False Rails, Track Condition, Change of Equipments, Body Weights, Amendments, Latest Probable Odds
+            const RACE_DAY_FILES = [
+                "false_rails",
+                "track_condition",
+                "change_of_equipments",
+                "body_weights",
+                "amendments",
+                "live_odds"
+            ];
+            
+            const FINAL_ICON = "\u{1F3C7}"; // 🏇
+            const EXPERT_ICONS = {
+                ratings: "\u{1F4C8}", // 📈
+                pedigree: "\u{1F9EC}", // 🧬
+                trackwork: "\u26A1", // ⚡
+                sweepstakes: "\u{1F3AB}", // 🎟️
+                day_results: "\u{1F4CA}", // 📊
+                medical: "\u{1F48A}", // 💊
+                equipment: "\u2699\uFE0F", // ⚙️
+                connections_form: "\u{1F465}", // 👥
+                competition_form: "\u{1F947}", // 🥇
+                field_rivals: "\u{1F40E}", // 🐎
+            };
+            const RACE_DAY_ICONS = {
+                live_odds: "\u{1F7E2}", // 🟢
+                amendments: "\u{1F7E1}", // 🟡
+                body_weights: "\u{1F535}", // 🔵
+                track_condition: "\u{1F7E2}", // 🟢
+                change_of_equipments: "\u26AA", // ⚪
+                false_rails: "\u{1F534}", // 🔴
+            };
+
+            const AUTO_REFRESH_MS = 30000;
+            const VENUE_CODES = { 'Kolkata': 'KOL', 'Mumbai': 'MUM', 'Bangalore': 'BNG', 'Mysore': 'MYS', 'Pune': 'PUN', 'Hyderabad': 'HYD' };
+
+            let allRaces = [];
+            let activeItem = null;
+            let openRaceDayKeys = new Set();
+            let autoRefreshTimer = null;
+
+            // ----- helpers -----
+            function getConfig() {
+                return { base: localStorage.getItem('ra_api_base') || '', key: localStorage.getItem('ra_api_key') || '' };
+            }
+
+            function setConfig(base, key) {
+                localStorage.setItem('ra_api_base', base);
+                localStorage.setItem('ra_api_key', key);
+            }
+
+            document.getElementById('apiBaseInput').value = getConfig().base;
+            document.getElementById('apiKeyInput').value = getConfig().key;
+
+            document.getElementById('saveConfigBtn').onclick = () => {
+                const base = document.getElementById('apiBaseInput').value.trim().replace(/\/$/, '');
+                const key = document.getElementById('apiKeyInput').value.trim();
+                setConfig(base, key);
+                loadRaces();
+            };
+
+            async function api(path) {
+                const { base, key } = getConfig();
+                if (!base) throw new Error('API base not set');
+                const res = await fetch(base + path, { headers: { 'X-API-Key': key } });
+                if (!res.ok) throw new Error(`${path} → ${res.status}`);
+                return res.json();
+            }
+
+            function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+            function parseRaceId(raceId) {
+                const m = raceId.match(/^([A-Z]+)-(\d{4}-\d{2}-\d{2})-RACE-(\d+)$/);
+                if (!m) return null;
+                return { code: m[1], date: m[2], raceNo: parseInt(m[3], 10) };
+            }
+
+            function currentRaceId() { return document.getElementById('raceNoSelect').value; }
+
+            function getRaceContext(raceId) {
+                const parsed = parseRaceId(raceId);
+                if (!parsed) return { venue: '—', date: '—', raceNo: '—' };
+                const venue = Object.keys(VENUE_CODES).find(k => VENUE_CODES[k] === parsed.code) || parsed.code;
+                return { venue, date: parsed.date, raceNo: parsed.raceNo };
+            }
+
+            // ----- selection controls -----
+            function initSelectionControls() {
+                const venueSelect = document.getElementById('venueSelect');
+                venueSelect.innerHTML = '<option value="">Select Venue</option>' +
+                    Object.keys(VENUE_CODES).map(v => `<option value="${v}">${v}</option>`).join('');
+                const dateInput = document.getElementById('dateInput');
+                dateInput.value = new Date().toISOString().slice(0, 10);
+                venueSelect.addEventListener('change', updateRaceNoOptions);
+                dateInput.addEventListener('change', updateRaceNoOptions);
+                document.getElementById('raceNoSelect').addEventListener('change', (e) => loadForRace(e.target.value));
+            }
+
+            function updateRaceNoOptions() {
+                const venueSelect = document.getElementById('venueSelect');
+                const dateInput = document.getElementById('dateInput');
+                const raceNoSelect = document.getElementById('raceNoSelect');
+                const code = VENUE_CODES[venueSelect.value];
+                const date = dateInput.value;
+                if (!code || !date) {
+                    raceNoSelect.innerHTML = '<option value="">Select Venue & Date</option>';
+                    return;
+                }
+                const prefix = `${code}-${date}-RACE-`;
+                const matches = allRaces
+                    .map(r => ({ ...r, parsed: parseRaceId(r.race_id) }))
+                    .filter(r => r.race_id.startsWith(prefix) && r.parsed)
+                    .sort((a, b) => a.parsed.raceNo - b.parsed.raceNo);
+                if (!matches.length) {
+                    raceNoSelect.innerHTML = '<option value="">No races for this date</option>';
+                    return;
+                }
+                const prev = raceNoSelect.value;
+                raceNoSelect.innerHTML = matches.map(r =>
+                    `<option value="${r.race_id}">Race ${r.parsed.raceNo}${r.has_outputs ? ' ✓' : ''}</option>`
+                ).join('');
+                if (matches.some(r => r.race_id === prev)) raceNoSelect.value = prev;
+                else raceNoSelect.value = matches[0].race_id;
+                loadForRace(raceNoSelect.value);
+            }
+
+            // ----- left nav -----
+            function renderLeftNav() {
+                document.getElementById('navFinal').innerHTML = `
+                        <li><button data-kind="final" data-key="final">
+                            <span class="nav-label">${FINAL_ICON} Final Selection</span>
+                            <span class="nav-dot" data-dot="final:final"></span>
+                        </button></li>`;
+                document.getElementById('navExperts').innerHTML = EXPERTS.map(name => `
+                        <li><button data-kind="expert" data-key="${name}">
+                            <span class="nav-label">${EXPERT_ICONS[name] || '📄'} ${name.replace(/_/g, ' ')}</span>
+                            <span class="nav-dot" data-dot="expert:${name}"></span>
+                        </button></li>`).join('');
+
+                document.querySelectorAll('#navFinal button, #navExperts button').forEach(btn => {
+                    btn.onclick = () => selectItem(btn.dataset.kind, btn.dataset.key);
+                });
+            }
+
+            function setActiveButton() {
+                document.querySelectorAll('#navFinal button, #navExperts button').forEach(b => b.classList.remove('active'));
+                if (!activeItem) return;
+                const btn = document.querySelector(`#navFinal button[data-key="${activeItem.key}"], #navExperts button[data-key="${activeItem.key}"]`);
+                if (btn) btn.classList.add('active');
+            }
+
+            async function selectItem(kind, key) {
+                const raceId = currentRaceId();
+                if (!raceId) {
+                    document.getElementById('contentBody').innerHTML = '<p class="empty-hint">Select a race first.</p>';
+                    document.getElementById('contentTitle').textContent = 'No race selected';
+                    document.getElementById('contextMeta').textContent = '—';
+                    return;
+                }
+
+                const context = getRaceContext(raceId);
+                const displayName = key === 'final' ? 'Final Selection' : key.replace(/_/g, ' ');
+                const icon = key === 'final' ? FINAL_ICON : (EXPERT_ICONS[key] || '📄');
+
+                activeItem = { kind, key };
+                setActiveButton();
+
+                document.getElementById('contentTitle').innerHTML = `${icon} ${displayName}`;
+                document.getElementById('contextMeta').textContent =
+                    `${context.venue} · ${context.date} · Race ${context.raceNo}`;
+
+                const body = document.getElementById('contentBody');
+                body.innerHTML = '<p class="empty-hint">Loading…</p>';
+
+                try {
+                    const text = kind === 'final' ?
+                        (await api(`/api/races/${raceId}/analysis`)).text :
+                        (await api(`/api/races/${raceId}/experts/${key}`)).text;
+                    body.innerHTML = `<pre>${escapeHtml(text)}</pre>`;
+                } catch (e) {
+                    body.innerHTML = `<p class="empty-hint">Not available for this race yet.</p>`;
+                }
+            }
+
+            // ----- right sidebar (race day) with reordered tabs -----
+            function renderRaceDayAccordion() {
+                const el = document.getElementById('raceDayAccordion');
+                el.innerHTML = RACE_DAY_FILES.map(key => {
+                    const displayMap = {
+                        'false_rails': 'False Rails',
+                        'track_condition': 'Track Condition',
+                        'change_of_equipments': 'Change of Equipments',
+                        'body_weights': 'Body Weights',
+                        'amendments': 'Amendments',
+                        'live_odds': 'Latest Probable Odds'
+                    };
+                    const displayName = displayMap[key] || key.replace(/_/g, ' ');
+                    return `
+                            <div class="rd-item" data-rd="${key}">
+                                <button class="rd-toggle" data-key="${key}">
+                                    <span><span class="nav-dot" data-dot="raceday:${key}"></span>&nbsp; ${RACE_DAY_ICONS[key] || '📋'} ${displayName}</span>
+                                    <i class="fas fa-chevron-right chev"></i>
+                                </button>
+                                <div class="rd-body"><div class="rd-body-inner"><p class="empty-hint">Not posted yet.</p></div></div>
+                            </div>
+                        `;
+                }).join('');
+                el.querySelectorAll('.rd-toggle').forEach(btn => {
+                    btn.onclick = () => toggleRaceDay(btn.dataset.key);
+                });
+            }
+
+            async function toggleRaceDay(key) {
+                const item = document.querySelector(`.rd-item[data-rd="${key}"]`);
+                const isOpen = item.classList.toggle('open');
+                if (isOpen) { openRaceDayKeys.add(key);
+                    await loadRaceDayContent(key); } else { openRaceDayKeys.delete(key); }
+            }
+
+            async function loadRaceDayContent(key) {
+                const raceId = currentRaceId();
+                const item = document.querySelector(`.rd-item[data-rd="${key}"]`);
+                if (!item) return;
+                const inner = item.querySelector('.rd-body-inner');
+                if (!raceId) { inner.innerHTML = '<p class="empty-hint">Select a race first.</p>'; return; }
+                try {
+                    const { text } = await api(`/api/races/${raceId}/race-day-files/${key}`);
+                    inner.innerHTML = `<pre>${escapeHtml(text)}</pre>`;
+                } catch (e) {
+                    inner.innerHTML = '<p class="empty-hint">Not posted yet.</p>';
+                }
+            }
+
+            // ----- dots & refresh -----
+            async function refreshDots(raceId) {
+                try {
+                    const { experts } = await api(`/api/races/${raceId}/experts`);
+                    for (const [name, present] of Object.entries(experts)) {
+                        const dot = document.querySelector(`[data-dot="expert:${name}"]`);
+                        if (dot) dot.classList.toggle('present', !!present);
+                    }
+                } catch (e) {}
+                try {
+                    const { files } = await api(`/api/races/${raceId}/race-day-files`);
+                    for (const [key, present] of Object.entries(files)) {
+                        const dot = document.querySelector(`[data-dot="raceday:${key}"]`);
+                        if (dot) dot.classList.toggle('present', !!present);
+                    }
+                } catch (e) {}
+                try {
+                    await api(`/api/races/${raceId}/analysis`);
+                    const dot = document.querySelector('[data-dot="final:final"]');
+                    if (dot) dot.classList.add('present');
+                } catch (e) {
+                    const dot = document.querySelector('[data-dot="final:final"]');
+                    if (dot) dot.classList.remove('present');
+                }
+            }
+
+            async function loadForRace(raceId) {
+                if (!raceId) return;
+                await refreshDots(raceId);
+                if (activeItem) await selectItem(activeItem.kind, activeItem.key);
+                for (const key of openRaceDayKeys) await loadRaceDayContent(key);
+                setStatus('fresh');
+            }
+
+            function setStatus(status) {
+                const pill = document.getElementById('statusPill');
+                pill.textContent = status === 'fresh' ? new Date().toLocaleTimeString() : 'not connected';
+                pill.className = 'status-pill ' + status;
+            }
+
+            async function loadRaces() {
+                try {
+                    const { races } = await api('/api/races');
+                    allRaces = races;
+                    updateRaceNoOptions();
+                } catch (e) {
+                    document.getElementById('raceNoSelect').innerHTML = '<option value="">Set API base + key</option>';
+                    setStatus('stale');
+                }
+            }
+
+            document.getElementById('refreshBtn').onclick = () => loadRaces();
+
+            function startAutoRefresh() {
+                if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+                autoRefreshTimer = setInterval(loadRaces, AUTO_REFRESH_MS);
+            }
+
+            // ----- init -----
+            renderLeftNav();
+            renderRaceDayAccordion();
+            initSelectionControls();
+            activeItem = { kind: 'final', key: 'final' };
+            setTimeout(() => {
+                const raceId = currentRaceId();
+                if (raceId) {
+                    const context = getRaceContext(raceId);
+                    document.getElementById('contextMeta').textContent =
+                        `${context.venue} · ${context.date} · Race ${context.raceNo}`;
+                }
+                selectItem('final', 'final');
+            }, 100);
+            loadRaces();
+            startAutoRefresh();
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+*.log
+
+# Environment variables
+.env
+*.local
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Frontend copies (keep only main files)
+frontend/*.copy*.html
+frontend/*.copy.html
+frontend/dashboard\ copy*.html
+
+# Backend
+backend/app/__pycache__/
+*.pyc
