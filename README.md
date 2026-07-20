@@ -12,6 +12,8 @@ cd backend
 pip install -r requirements.txt
 python -m app.main
 
+
+
 ### Frontend
 Open frontend/dashboard.html in browser
 
