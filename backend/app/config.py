@@ -58,12 +58,14 @@ API_KEY = os.getenv("RACEANALYST_API_KEY", "change-me-dev-key")
 # --- CORS ---
 # Origins allowed to call this API from a browser. Add your Cloudflare
 # Pages domain(s) here once deployed.
-ALLOWED_ORIGINS = [
-    o.strip() for o in os.getenv(
-        "ALLOWED_ORIGINS",
-        "http://localhost:8000,https://raceanalyst.com,https://www.raceanalyst.com"
-    ).split(",") if o.strip()
-]
+# ALLOWED_ORIGINS = [
+#     o.strip() for o in os.getenv(
+#         "ALLOWED_ORIGINS",
+#         "http://localhost:8000,https://raceanalyst.com,https://www.raceanalyst.com"
+#     ).split(",") if o.strip()
+# ]
+
+ALLOWED_ORIGINS = ["*"]  # Allow all origins for public API
 
 # Confirmed expert list + display order, matching ALL_EXPERTS in
 # run_analysis.py exactly. No "expert_" prefix — that's just the
