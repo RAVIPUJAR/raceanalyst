@@ -899,12 +899,20 @@
             // }
 
             // In index.html - no API key needed now
+            // In index.html
             const API_BASE = 'https://raceanalyst.com';  // or https://api.raceanalyst.com
 
             async function api(path) {
-                const res = await fetch(API_BASE + path);
-                if (!res.ok) throw new Error(`${path} → ${res.status}`);
-                return res.json();
+                try {
+                    const res = await fetch(API_BASE + path);
+                    if (!res.ok) {
+                        throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+                    }
+                    return await res.json();
+                } catch (error) {
+                    console.error('API Error:', error);
+                    throw error;
+                }
             }
 
             function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }

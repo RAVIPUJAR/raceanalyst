@@ -11,34 +11,35 @@ paid LLM calls, since there's nothing here that can.
 """
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+import os
+import sys
 
 from . import config, expert_cache
 
 app = FastAPI(title="RaceAnalyst API (read-only)")
 
-# CORS - allow all origins for public access, or keep your allowed list
+# CORS - allow all origins for public access
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=config.ALLOWED_ORIGINS,  # Or use ["*"] for public access
+    allow_origins=config.ALLOWED_ORIGINS,
     allow_methods=["GET"],
     allow_headers=["*"],
 )
-
 
 # Health check endpoint - no auth required
 @app.get("/api/health")
 def health():
     return {"status": "ok"}
 
-
 # List all available races - public
 @app.get("/api/races")
 def races():
     try:
-        return {"races": expert_cache.list_races()}
+        races_list = expert_cache.list_races()
+        return {"races": races_list}
     except Exception as e:
+        print(f"Error in /api/races: {e}", file=sys.stderr)
         raise HTTPException(status_code=500, detail=str(e))
-
 
 # List experts for a specific race - public
 @app.get("/api/races/{race_id}/experts")
@@ -46,8 +47,8 @@ def race_experts(race_id: str):
     try:
         return {"experts": expert_cache.list_expert_outputs(race_id)}
     except Exception as e:
+        print(f"Error in /api/races/{race_id}/experts: {e}", file=sys.stderr)
         raise HTTPException(status_code=500, detail=str(e))
-
 
 # Get specific expert output - public
 @app.get("/api/races/{race_id}/experts/{expert_name}")
@@ -59,8 +60,8 @@ def expert_output(race_id: str, expert_name: str):
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
+        print(f"Error in /api/races/{race_id}/experts/{expert_name}: {e}", file=sys.stderr)
         raise HTTPException(status_code=500, detail=str(e))
-
 
 # Get final analysis - public
 @app.get("/api/races/{race_id}/analysis")
@@ -70,8 +71,8 @@ def final_analysis(race_id: str):
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Not yet available")
     except Exception as e:
+        print(f"Error in /api/races/{race_id}/analysis: {e}", file=sys.stderr)
         raise HTTPException(status_code=500, detail=str(e))
-
 
 # List race day files - public
 @app.get("/api/races/{race_id}/race-day-files")
@@ -79,8 +80,8 @@ def race_day_files(race_id: str):
     try:
         return {"files": expert_cache.list_race_day_files(race_id)}
     except Exception as e:
+        print(f"Error in /api/races/{race_id}/race-day-files: {e}", file=sys.stderr)
         raise HTTPException(status_code=500, detail=str(e))
-
 
 # Get specific race day file - public
 @app.get("/api/races/{race_id}/race-day-files/{key}")
@@ -92,4 +93,5 @@ def race_day_file(race_id: str, key: str):
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
+        print(f"Error in /api/races/{race_id}/race-day-files/{key}: {e}", file=sys.stderr)
         raise HTTPException(status_code=500, detail=str(e))
