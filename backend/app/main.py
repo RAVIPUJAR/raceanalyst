@@ -95,3 +95,52 @@ def race_day_file(race_id: str, key: str):
     except Exception as e:
         print(f"Error in /api/races/{race_id}/race-day-files/{key}: {e}", file=sys.stderr)
         raise HTTPException(status_code=500, detail=str(e))
+    
+
+@app.get("/api/debug")
+def debug():
+    """Comprehensive debug endpoint"""
+    import os
+    import sys
+    from pathlib import Path
+    
+    debug_info = {
+        "cwd": os.getcwd(),
+        "sys_path": sys.path[:5],
+        "RENDER": os.getenv("RENDER"),
+        "RACE_DATA_ROOT_env": os.getenv("RACE_DATA_ROOT"),
+        "RACE_DATA_PATH": str(config.RACE_DATA_PATH),
+        "path_exists": config.RACE_DATA_PATH.exists(),
+        "path_is_dir": config.RACE_DATA_PATH.is_dir() if config.RACE_DATA_PATH.exists() else False,
+        "contents_at_path": [],
+        "contents_at_cwd": [],
+        "contents_at_project_root": [],
+    }
+    
+    # Check what's at RACE_DATA_PATH
+    if config.RACE_DATA_PATH.exists():
+        for item in config.RACE_DATA_PATH.iterdir():
+            debug_info["contents_at_path"].append({
+                "name": item.name,
+                "is_dir": item.is_dir()
+            })
+    
+    # Check what's at current working directory
+    cwd = Path(os.getcwd())
+    if cwd.exists():
+        for item in cwd.iterdir():
+            if item.is_dir():
+                debug_info["contents_at_cwd"].append(item.name)
+    
+    # Check what's at potential project root
+    for parent in [Path("/opt/render/project/src"), Path("/app"), Path(".")]:
+        if parent.exists():
+            for item in parent.iterdir():
+                if item.is_dir() and item.name == "data":
+                    debug_info["contents_at_project_root"].append({
+                        "path": str(parent),
+                        "has_data": True,
+                        "data_contents": [x.name for x in item.iterdir() if x.is_dir()][:5]
+                    })
+    
+    return debug_info

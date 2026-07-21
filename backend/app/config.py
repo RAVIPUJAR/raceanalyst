@@ -9,34 +9,65 @@ try:
 except ImportError:
     pass
 
-# Determine if running on Render
-IS_RENDER = os.getenv("RENDER") is not None
-
-# Find the data directory
 def find_data_path():
-    """Find the data directory in multiple possible locations"""
-    # List of possible paths to check
-    possible_paths = [
-        Path("./data"),                    # Current directory
-        Path("../data"),                   # Parent directory
-        Path("/opt/render/project/src/data"),  # Render's typical path
-        Path("/app/data"),                 # Docker path
-        Path(os.getcwd()) / "data",        # Current working directory
-    ]
+    """Find the data directory by searching aggressively"""
     
-    # Also check if RACE_DATA_ROOT is set in environment
+    # Get current working directory
+    cwd = Path(os.getcwd())
+    print(f"Current working directory: {cwd}")
+    
+    # List of possible paths to check
+    possible_paths = []
+    
+    # 1. Check environment variable first
     env_path = os.getenv("RACE_DATA_ROOT")
     if env_path:
-        possible_paths.insert(0, Path(env_path))
+        possible_paths.append(Path(env_path))
+    
+    # 2. Check common Render paths
+    possible_paths.extend([
+        Path("/opt/render/project/src/data"),
+        Path("/app/data"),
+        Path("/data"),
+    ])
+    
+    # 3. Check relative paths from cwd
+    possible_paths.extend([
+        cwd / "data",
+        cwd / "src/data",
+        cwd / "backend/data",
+        cwd.parent / "data",
+    ])
+    
+    # 4. Check if there's a data folder in any subdirectory
+    # Walk up to 3 levels
+    for level in range(3):
+        base = cwd
+        for _ in range(level):
+            base = base.parent
+        possible_paths.append(base / "data")
     
     # Try each path
     for path in possible_paths:
-        if path.exists() and path.is_dir():
-            print(f"✅ Found data at: {path}")
-            return path
+        try:
+            if path.exists() and path.is_dir():
+                # Check if it contains race folders
+                has_race = any(
+                    item.is_dir() and item.name.startswith(("BNG-", "MUM-", "KOL-", "HYD-", "PUN-", "MYS-"))
+                    for item in path.iterdir()
+                )
+                if has_race:
+                    print(f"✅ Found data with races at: {path}")
+                    return path
+                else:
+                    print(f"⚠️ Found data folder but no races at: {path}")
+                    # Still use it even if no races yet
+                    return path
+        except PermissionError:
+            pass
     
-    # If no path found, create a default
-    default_path = Path("./data")
+    # If none found, create default
+    default_path = cwd / "data"
     print(f"⚠️ No data path found. Using default: {default_path}")
     default_path.mkdir(parents=True, exist_ok=True)
     return default_path
@@ -45,12 +76,14 @@ def find_data_path():
 RACE_DATA_PATH = find_data_path()
 
 # Debug prints
-print(f"IS_RENDER: {IS_RENDER}")
 print(f"RACE_DATA_PATH: {RACE_DATA_PATH.absolute()}")
 print(f"Path exists: {RACE_DATA_PATH.exists()}")
 if RACE_DATA_PATH.exists():
-    contents = [item.name for item in RACE_DATA_PATH.iterdir() if item.is_dir()]
-    print(f"Found directories: {contents[:10]}")
+    all_items = list(RACE_DATA_PATH.iterdir())
+    dirs = [item.name for item in all_items if item.is_dir()]
+    print(f"Directories: {dirs}")
+    race_dirs = [d for d in dirs if d.startswith(("BNG-", "MUM-", "KOL-", "HYD-", "PUN-", "MYS-"))]
+    print(f"Race directories: {race_dirs}")
 
 # CORS settings
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:8000,https://raceanalyst.com,https://www.raceanalyst.com").split(",")
