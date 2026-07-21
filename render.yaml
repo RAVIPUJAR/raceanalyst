@@ -11,4 +11,4 @@ services:
       - key: RACE_DATA_ROOT
         value: ./data
       - key: ALLOWED_ORIGINS
-        value: https://raceanalyst.com,https://www.raceanalyst.com,https://raceanalyst.onrender.com
+        value: https://raceanalyst.com,https://www.raceanalyst.com,https://raceanalyst-api.onrender.com
