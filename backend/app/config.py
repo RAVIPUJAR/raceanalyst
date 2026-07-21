@@ -1,73 +1,60 @@
-"""
-Central config for the RaceAnalyst webapp backend.
-Everything is overridable via a .env file (see .env.example) so this
-same code works unchanged whether it's running on your laptop today
-or on a real server later.
-"""
+# backend/app/config.py
 import os
 from pathlib import Path
-from dotenv import load_dotenv
 
-load_dotenv()
+# Load .env for local development
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
-# --- Filesystem layout of the existing Kudurebaala pipeline ---
-# Root folder containing one subfolder per race day, e.g.
-#   RACE_DATA_ROOT/BANGALORE-2026-07-19/
-RACE_DATA_ROOT = os.getenv("RACE_DATA_ROOT", "data")
+# Determine if running on Render
+IS_RENDER = os.getenv("RENDER") is not None
 
-# Folder containing run_pipeline.py, run_experts.py, run_analysis.py
-PIPELINE_SCRIPTS_ROOT = Path(os.getenv("PIPELINE_SCRIPTS_ROOT", "/path/to/kudurebaala")).resolve()
+# Find the data directory
+def find_data_path():
+    """Find the data directory in multiple possible locations"""
+    # List of possible paths to check
+    possible_paths = [
+        Path("./data"),                    # Current directory
+        Path("../data"),                   # Parent directory
+        Path("/opt/render/project/src/data"),  # Render's typical path
+        Path("/app/data"),                 # Docker path
+        Path(os.getcwd()) / "data",        # Current working directory
+    ]
+    
+    # Also check if RACE_DATA_ROOT is set in environment
+    env_path = os.getenv("RACE_DATA_ROOT")
+    if env_path:
+        possible_paths.insert(0, Path(env_path))
+    
+    # Try each path
+    for path in possible_paths:
+        if path.exists() and path.is_dir():
+            print(f"✅ Found data at: {path}")
+            return path
+    
+    # If no path found, create a default
+    default_path = Path("./data")
+    print(f"⚠️ No data path found. Using default: {default_path}")
+    default_path.mkdir(parents=True, exist_ok=True)
+    return default_path
 
-# Python interpreter to invoke the pipeline scripts with (use the venv
-# that already has LangGraph / Azure OpenAI / GraphDB deps installed)
-PIPELINE_PYTHON = os.getenv("PIPELINE_PYTHON", "python3")
+# Set RACE_DATA_PATH
+RACE_DATA_PATH = find_data_path()
 
-# Subfolder name (inside each race-day folder) where experts write
-# their plain ASCII .txt outputs
-EXPERT_CACHE_DIRNAME = os.getenv("EXPERT_CACHE_DIRNAME", "expert_cache")
+# Debug prints
+print(f"IS_RENDER: {IS_RENDER}")
+print(f"RACE_DATA_PATH: {RACE_DATA_PATH.absolute()}")
+print(f"Path exists: {RACE_DATA_PATH.exists()}")
+if RACE_DATA_PATH.exists():
+    contents = [item.name for item in RACE_DATA_PATH.iterdir() if item.is_dir()]
+    print(f"Found directories: {contents[:10]}")
 
-# race_id (e.g. "BNG-2026-07-04-RACE-1") is both the race folder name
-# AND the suffix of the GraphDB named graph URI.
-GRAPH_URI_PREFIX = os.getenv("GRAPH_URI_PREFIX", "urn:race-day:")
+# CORS settings
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:8000,https://raceanalyst.com,https://www.raceanalyst.com").split(",")
+ALLOWED_ORIGINS = [origin.strip() for origin in ALLOWED_ORIGINS]
 
-# run_analysis.py doesn't cache its synthesis to disk (console only) —
-# the webapp captures its stdout and writes this file itself so the
-# result survives across page loads without re-running the LLM call.
-FINAL_ANALYSIS_FILENAME = "final_analysis.txt"
-
-# Race-day artifact files that live as siblings of expert_cache/, each
-# in their own subfolder, e.g. {race_folder}/live_odds/live_odds.txt.
-# key -> (subfolder_name, filename). The dashboard shows whichever of
-# these exist for a race and re-polls for new ones (e.g. live_odds
-# typically only appears close to post time).
-RACE_DAY_FILES = {
-    "live_odds": ("live_odds", "live_odds.txt"),
-    "amendments": ("amendments", "amendments.txt"),
-    "body_weights": ("body_weights", "body_weights.txt"),
-    "track_condition": ("track_condition", "track_condition.txt"),
-    "change_of_equipments": ("change_of_equipments", "change_of_equipments.txt"),
-    "false_rails": ("false_rails", "false_rails.txt"),
-}
-
-# --- Auth ---
-# Simple shared-secret auth for now (internal tool). Sent as header
-# `X-API-Key`. Swap for Cloudflare Access / proper auth when this
-# moves behind raceanalyst.com's member area.
-API_KEY = os.getenv("API_KEY", "dev-key-change-me")
-
-# --- CORS ---
-# Origins allowed to call this API from a browser. Add your Cloudflare
-# Pages domain(s) here once deployed.
-# CORS allowed origins
-ALLOWED_ORIGINS_STR = os.getenv("ALLOWED_ORIGINS", "http://localhost:8000,https://raceanalyst.com,https://www.raceanalyst.com")
-ALLOWED_ORIGINS = [origin.strip() for origin in ALLOWED_ORIGINS_STR.split(",")]
-
-# ALLOWED_ORIGINS = ["*"]  # Allow all origins for public API
-Path(RACE_DATA_ROOT).mkdir(parents=True, exist_ok=True)
-# Confirmed expert list + display order, matching ALL_EXPERTS in
-# run_analysis.py exactly. No "expert_" prefix — that's just the
-# LangGraph node naming convention, not the cache filenames.
-EXPERT_NAMES = [
-    "ratings", "pedigree", "trackwork", "sweepstakes", "day_results",
-    "medical", "equipment", "connections_form", "competition_form", "field_rivals",
-]
+# Keep API_KEY for compatibility but not used
+API_KEY = os.getenv("RACEANALYST_API_KEY", "")
