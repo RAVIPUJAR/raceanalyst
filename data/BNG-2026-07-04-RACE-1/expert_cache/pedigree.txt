@@ -1,0 +1,66 @@
+SECTION 1 - PER-HORSE PEDIGREE ASSESSMENT
+
+FORTISSIMA
+Sire / Dam        : Be Safe / Striking View
+Dosage            : DI 1.40, CD 0.25, DP 1-3-6-2-0; balanced with a slight speed lean, stamina under the bonnet
+Dam produce       : Multiple same-sire siblings by Be Safe with Cup/Trophy form: Legendary Striker a multiple Cup/Trophy winner and placed; Southern Lad Cup/Trophy placed; See It Thru a minor earner — importantly, these are same-sire to today’s runner
+Distance read     : 1400m looks right in the sweet spot for this profile; should stretch to a mile in time
+Synthesis note    : Proven same-sire cross with Cup/Trophy performers and a balanced 1.40 DI make 1400m a suitable test of her inherited ability
+
+GARZIAN
+Sire / Dam        : Fiero[JPN] / Running Glory
+Dosage            : DI 0.82, CD 0.00, DP 1-1-5-3-0; stamina-leaning, neutral CD
+Dam produce       : No racing siblings noted; only a (no return) entry by Baratti[GB]
+Distance read     : Pedigree leans to needing more ground than 1400m unless the race is run at a strong clip
+Synthesis note    : Stamina-biased dosage (DI 0.82) hints she may be better when stepped up in trip from 1400m
+
+MYSTIC DEW
+Sire / Dam        : Gusto(GB) / Monasada(GB)
+Dosage            : Not available (no DI/CD/DP provided)
+Dam produce       : Not available in the supplied data
+Distance read     : Cannot assess trip bias from the given data; treat as unquantified for 1400m
+Synthesis note    : No dosage or produce cues provided — distance and class read is a data gap
+
+ON THE RISE
+Sire / Dam        : Saamidd[GB] / Star Ranking
+Dosage            : DI 1.29, CD 0.25, DP 1-0-7-0-0; balanced with a mild speed tilt, classic middle influence
+Dam produce       : Two unnamed same-sire foals (Saamidd); no performance data provided
+Distance read     : 1400m should suit on dosage; likely effective 7f–mile
+Synthesis note    : Solid, versatile dosage (DI 1.29) points to 1400m suitability, but the female line lacks proven runners in the file
+
+SHINING DAWN
+Sire / Dam        : Plumatic(GB) / Mea Culpa
+Dosage            : Not available (no DI/CD/DP provided)
+Dam produce       : Not available in the supplied data
+Distance read     : No pedigree metrics supplied; trip suitability for 1400m cannot be gauged from this file
+Synthesis note    : Missing dosage and produce evidence — keep pedigree impact neutral pending race evidence
+
+YARRA YARRA
+Sire / Dam        : Win Legend[JPN] / Stimulate
+Dosage            : Not available (no DI/CD/DP provided)
+Dam produce       : Deep female line with black-type: full sibling Moon’s Blessing (by Win Legend) placed Gr.2 and is a multiple Cup/Trophy winner; half-siblings by Dreamfield include Circle of Dreams (Gr.1 placed, multiple Cup/Trophy wins) and Nyx (Gr.1/Gr.2 placed, Cup/Trophy winner)
+Distance read     : Without dosage, lean on produce — full sibling’s graded performance and overall quality of the family suggest 1400m maiden is well within scope
+Synthesis note    : Full-sibling graded performer under the same sire is a strong class signal for today’s 1400m
+
+
+SECTION 2 - PEDIGREE STRENGTH RANKING
+
+1. YARRA YARRA -- strong
+   Full sibling Moon’s Blessing (same sire and dam) with Gr.2 placing plus a damline producing multiple graded performers signals high class suited to a 1400m maiden.
+2. FORTISSIMA -- strong
+   Same-sire siblings have delivered multiple Cup/Trophy results and her balanced DI 1.40 fits 1400m well.
+3. ON THE RISE -- moderate
+   Dosage (DI 1.29, CD 0.25) suits 1400m, but there is no confirmed sibling performance to bolster the female-line strength.
+4. GARZIAN -- weak
+   Stamina-skewed dosage (DI 0.82) suggests this test may be on the sharp side at 1400m, with no produce support in the file.
+5. MYSTIC DEW -- unranked
+   No dosage or produce data provided.
+6. SHINING DAWN -- unranked
+   No dosage or produce data provided.
+
+
+SECTION 3 - FLAGS FOR SYNTHESISER
+
+- GARZIAN: Dosage conflict flag — DI 0.82 (stamina-leaning) in a 1400m race may prove a bit sharp.
+- YARRA YARRA: Same-sire sibling black-type flag — full sibling Moon’s Blessing (Win Legend x Stimulate) placed at Gr.2 level.
+- YARRA YARRA: Dam fertility signal — three barren entries by Win Legend noted for dam Stimulate.

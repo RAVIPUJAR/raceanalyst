@@ -1,0 +1,79 @@
+SECTION 1 - PER-HORSE EQUIPMENT ASSESSMENT
+
+SHINING DAWN
+- Today's equipment: Tongue Strap
+- Changes: ADDED
+  - Tongue Strap (prevents tongue over the bit; can aid breathing/bit acceptance)
+    First time (debut). Likely a precaution from schooling to manage tongue play; outcome uncertain.
+    Signal: UNCERTAIN
+- Synthesis note: Debutant with a first-time tongue strap — watch for settling and breathing; impact is unpredictable.
+
+FORTISSIMA
+- Today's equipment: Blinkers, Tongue Strap
+- Changes: ADDED
+  - Blinkers (strong vision restriction to improve focus and straightness)
+    First time (debut). Strong ask on a first start; signals trainer concern about focus/tractability.
+    Signal: CONCERN
+  - Tongue Strap (prevents tongue over the bit; can aid breathing/bit acceptance)
+    First time (debut). Precaution from schooling; effectiveness unknown.
+    Signal: UNCERTAIN
+- Synthesis note: Two control aids on debut (blinkers + tongue strap) make this profile volatile — could sharpen or backfire; handle with care.
+
+GARZIAN
+- Today's equipment: None
+- Changes: NONE
+- Synthesis note: No gear required — a stable, straightforward equipment profile for a debutant.
+
+MYSTIC DEW
+- Today's equipment: Tongue Strap
+- Changes: ADDED
+  - Tongue Strap (prevents tongue over the bit; can aid breathing/bit acceptance)
+    First time (debut). Precaution from trackwork/trials; outcome uncertain.
+    Signal: UNCERTAIN
+- Synthesis note: First-time tongue strap on debut — manageable issue if it works, but not a guaranteed positive.
+
+ON THE RISE
+- Today's equipment: Cross Nose Band, Tongue Strap
+- Changes: ADDED
+  - Cross Nose Band (controls mouth opening/pulling; helps rider rate the horse)
+    First time (debut). Suggests busy mouth or tendency to pull; may help, but horse could fight early.
+    Signal: UNCERTAIN
+  - Tongue Strap (prevents tongue over the bit; can aid breathing/bit acceptance)
+    First time (debut). Added as a precaution; uncertain benefit on day one.
+    Signal: UNCERTAIN
+- Synthesis note: Two-piece control setup (CNB + TS) aims to manage mouth and breathing — potential help to steering, but risk of resistance.
+
+YARRA YARRA
+- Today's equipment: Cross Nose Band, Tongue Strap
+- Changes: ADDED
+  - Cross Nose Band (controls mouth opening/pulling; helps rider rate the horse)
+    First time (debut). Indicates mouth/pulling management; might improve tractability, but no guarantees.
+    Signal: UNCERTAIN
+  - Tongue Strap (prevents tongue over the bit; can aid breathing/bit acceptance)
+    First time (debut). Precautionary; effectiveness unknown.
+    Signal: UNCERTAIN
+- Synthesis note: CNB + TS on debut — management profile suggests potential to pull; rider’s ability to settle early is key.
+
+
+SECTION 2 - EQUIPMENT CHANGE RANKING
+1. GARZIAN — STABLE
+   No changes and no gear — straightforward profile; no behavioral red flags.
+2. SHINING DAWN — UNCERTAIN
+   First-time tongue strap on debut; precautionary breathing/bit management with unpredictable effect.
+3. MYSTIC DEW — UNCERTAIN
+   First-time tongue strap on debut; similar precautionary signal, outcome not assured.
+4. ON THE RISE — UNCERTAIN
+   CNB + TS on debut to manage mouth and breathing; could help control but may cause early fighting.
+5. YARRA YARRA — UNCERTAIN
+   CNB + TS debut setup mirrors a puller/busy mouth profile; steering aid with uncertain payoff.
+6. FORTISSIMA — CONCERN
+   Blinkers plus tongue strap on debut points to significant focus/breathing management — high-variance profile.
+
+
+SECTION 3 - FLAGS FOR SYNTHESISER
+- First-time vision equipment: FORTISSIMA adds Blinkers — debut with strong headgear is unpredictable.
+- First-time tongue strap added: SHINING DAWN, FORTISSIMA, MYSTIC DEW, ON THE RISE, YARRA YARRA — all precautionary on debut; monitor parade ring and market.
+- Bit changes affecting draw/steering: None declared.
+- Horses with 3+ equipment items: None.
+- Surgical shoeing: None noted (all appear in aluminium plates).
+- STABLE (no changes): GARZIAN — often a quiet positive in maidens.

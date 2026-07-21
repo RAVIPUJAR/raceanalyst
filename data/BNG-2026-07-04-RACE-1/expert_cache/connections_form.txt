@@ -1,0 +1,97 @@
+SECTION 1 - PER-HORSE TRIO ASSESSMENT
+
+- SHINING DAWN (No.1)
+  Trio            : Trainer Darius Byramji + Owners DT Racing & Breeding LLP, Mukul A. Sonawala, Chetan Shantilal Shah + Jockey A Sandesh
+  Combo quality   : OWNER+JOCKEY PUSH
+  T+J pair record : 0 rides, 0 wins (0%)
+  Trio record     : no historical data
+  Jockey signal   : UNKNOWN — prev: none; current: A Sandesh (0%)
+  T+J winners     : None
+  Claim           : No claim (race condition: no allowance permitted)
+  Synthesis note  : Big owner with a big jockey for a small stable signals owner-driven intent, but the stable element is the weak link.
+
+- FORTISSIMA (No.2)
+  Trio            : Trainer Irfan Ghatala + Owners Arun Alagappan Racing LLP, Sans Craintes Stud Farm (P) Ltd + Jockey Pavan
+  Combo quality   : TRAINER+JOCKEY
+  T+J pair record : 0 rides, 0 wins (0%)
+  Trio record     : no historical data
+  Jockey signal   : UNKNOWN — prev: none; current: Pavan (0%)
+  T+J winners     : None
+  Claim           : No claim (race condition: no allowance permitted)
+  Synthesis note  : Big trainer with a big jockey is a clear go signal despite small owners; part of a split stable, so watch the yard’s other runner.
+
+- GARZIAN (No.3)
+  Trio            : Trainer V Lokanath + Owners Rakesh Kumar, B Vijay + Jockey V R Jagadeesh
+  Combo quality   : JOCKEY ONLY
+  T+J pair record : 0 rides, 0 wins (0%)
+  Trio record     : no historical data
+  Jockey signal   : UNKNOWN — prev: none; current: V R Jagadeesh (0%)
+  T+J winners     : None
+  Claim           : No claim (race condition: no allowance permitted)
+  Synthesis note  : Only the jockey is a big element; trainer and owners are small, so connections signal is modest.
+
+- MYSTIC DEW (No.4)
+  Trio            : Trainer Aravind Ganapathy + Owners Daulat Chhabria, S Ganapathy + Jockey Neeraj Rawal
+  Combo quality   : OWNER+JOCKEY PUSH
+  T+J pair record : 0 rides, 0 wins (0%)
+  Trio record     : no historical data
+  Jockey signal   : UNKNOWN — prev: none; current: Neeraj Rawal (0%)
+  T+J winners     : None
+  Claim           : No claim (race condition: no allowance permitted)
+  Synthesis note  : Big owner and big jockey suggest a push, but the small stable tempers confidence.
+
+- ON THE RISE (No.5)
+  Trio            : Trainer Irfan Ghatala + Owners Mohd. Javeed Ghatala, Dhruv Kumar Futnani, V Kaviya + Jockey N Arvind Kumar
+  Combo quality   : TRAINER+JOCKEY
+  T+J pair record : 0 rides, 0 wins (0%)
+  Trio record     : no historical data
+  Jockey signal   : UNKNOWN — prev: none; current: N Arvind Kumar (0%)
+  T+J winners     : None
+  Claim           : No claim (race condition: no allowance permitted)
+  Synthesis note  : Another strong big trainer-big jockey signal from the same yard; split stable dynamics in play.
+
+- YARRA YARRA (No.6)
+  Trio            : Trainer Arjun Mangalorkar + Owners Sarainaga Racing Pvt Ltd, The Rajagiri Rubber & Produce Company Ltd, Tegbir Singh Brar, and Mrs. Dilip Thomas + Jockey Antony Raj S
+  Combo quality   : TRAINER+JOCKEY
+  T+J pair record : 0 rides, 0 wins (0%)
+  Trio record     : no historical data
+  Jockey signal   : UNKNOWN — prev: none; current: Antony Raj S (0%)
+  T+J winners     : None
+  Claim           : No claim (race condition: no allowance permitted)
+  Synthesis note  : Clean big trainer-big jockey combination with no split-stable noise points to straightforward intent.
+
+
+SECTION 2 - SPLIT STABLE ANALYSIS
+
+- Trainer: Irfan Ghatala (runners: FORTISSIMA, ON THE RISE)
+  Assessment: Both have big jockeys, small-owner profiles, and identical zero T+J records. Using the provided criteria (jockey tier, owner tier, T+J wins), there is no separation.
+  Real target: No clear target identified; treat FORTISSIMA and ON THE RISE as co-primary.
+  Filler: None clearly indicated by connections alone.
+
+If no other trainers with 2+ runners: No other split stables today.
+
+
+SECTION 3 - CONNECTIONS RANKING
+
+1. YARRA YARRA — TRAINER+JOCKEY | T+J wins=0 | Trio wins=0
+   Clear big trainer-big jockey signal without split-stable ambiguity suggests straightforward intent.
+2. FORTISSIMA — TRAINER+JOCKEY | T+J wins=0 | Trio wins=0
+   Strong big trainer-big jockey combo; part of a split stable but still a primary signal.
+3. ON THE RISE — TRAINER+JOCKEY | T+J wins=0 | Trio wins=0
+   Same strong combo from the same yard; co-primary within the split stable.
+4. SHINING DAWN — OWNER+JOCKEY PUSH | T+J wins=0 | Trio wins=0
+   Big owner and big jockey indicate a push, but small stable reduces confidence.
+5. MYSTIC DEW — OWNER+JOCKEY PUSH | T+J wins=0 | Trio wins=0
+   Similar owner+jockey push from a small stable; intent present but weaker than trainer-led signals.
+6. GARZIAN — JOCKEY ONLY | T+J wins=0 | Trio wins=0
+   Only the jockey is a strong element; minimal connections intent otherwise.
+
+
+SECTION 4 - FLAGS FOR SYNTHESISER
+
+- PREMIER combo present: None.
+- CONFIDENCE CLAIM (big trainer + big owner + apprentice): None (no allowances permitted in race).
+- Split stable resolution: Trainer Irfan Ghatala — no clear target; FORTISSIMA and ON THE RISE are co-primary on connections.
+- Owner with multiple runners in this race: None.
+- Jockey suspensions affecting bookings: None.
+- Cold trainer-jockey combos (0 wins from 5+ rides): None in provided data.

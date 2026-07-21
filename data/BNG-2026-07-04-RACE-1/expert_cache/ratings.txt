@@ -1,0 +1,83 @@
+SECTION 1 - RACE-DAY RIVALRY ANALYSIS
+
+SHINING DAWN
+- DEBUTANT — no prior runs, no rivalry data.
+
+FORTISSIMA
+- 2026-06-07 Bangalore 1200m [Cup/Classic], Pos 7, dfw 25.25L:
+  - No race-day rivals within 5.0L. Field context gives no like-for-like benchmarks from that run.
+
+GARZIAN
+- 2026-06-14 Bangalore 1100m [Maiden], Pos 2, dfw 2.5L:
+  - LOST TO Ravishing Queen by 2.5L. Current ratings: subject 30 vs rival 40. Weight gap 0.0kg (level weights). Losing by 2.5L to a currently higher-rated rival at level weights is a respectable effort and consistent with a solid peak.
+  - BEAT Auspicious King by 2.0L. Current ratings: subject 30 vs rival 30. Weight gap favored subject by 1.5kg (subject 54.5kg vs rival 56.0kg). Beating a same-rated rival while getting 1.5kg corroborates the current level; clear superiority in the finish.
+- 2026-05-24 Bangalore 1100m [Maiden], Pos 2:
+  - No race-day rivals within 5.0L. The wide separation suggests the race sorted itself without close benchmarks inside 5L.
+
+MYSTIC DEW
+- 2026-05-17 Bangalore 1400m [Maiden], Pos 7, dfw 17L:
+  - DEAD-HEAT with Theos (0.0L). Current ratings: subject 0 vs rival 30. Weight gap favored subject by 1.5kg (54.5kg vs 56.0kg). STRONG SIGNAL: matching a now-30-rated horse despite only 1.5kg pull hints the subject’s true level is above 0, even though the overall finishing margin to the winner was large.
+  - LOST TO Portieux by 4.0L. Current ratings: subject 0 vs rival 27. Level weights. STRONG SIGNAL: only 4L down to a now-27-rated rival at level weights; suggests latent ability better than the current mark.
+
+ON THE RISE
+- 2026-06-20 Bangalore 1400m [Cup/Classic], Pos 5, dfw 8.75L:
+  - BEAT Waves Of Wonder by 3.25L. Current ratings: 27 vs 27. Weight gap favored subject by 1.5kg (54.5kg vs 56.0kg). Solid result with a pull in the weights; confirms competitiveness around current rating.
+  - LOST TO Edison by 4.75L. Current ratings: 27 vs 0 (as of that date). Weight gap favored subject by 1.5kg. Being beaten under a pull isn’t ideal, but this was a Cup/Classic; the overall 8.75L deficit suggests the rise in class tested limits.
+- 2026-05-23 Bangalore 1200m [Maiden], Pos 3, dfw 7L:
+  - BEAT Spark Of Life by 2.0L. Current ratings: 27 vs 0. Level weights. Assertive superiority over a lesser-rated rival at equal weights; positive baseline.
+
+YARRA YARRA
+- 2026-01-21 Mumbai 1200m [Cup/Classic], Pos 5, dfw 2.75L:
+  - LOST TO Queen Of Beauties by 2.75L. Current ratings both 0. Level weights. Close-up finish in a Cup/Classic; competent run.
+  - LOST TO Minari by 0.75L. Current ratings both 0. Level weights. Narrow margin; credible effort.
+  - DEAD-HEAT with Youremyeyesbaby (0.0L). Current ratings both 0. Level weights. Benchmarks lateral to peers.
+  - BEAT Avante by 3.75L. Current ratings both 0. Level weights. Clear superiority to that rival on the day.
+
+SECTION 2 - CLASS DROP AND PEAK RATING TABLE
+- GARZIAN | peak_R=30 curr_R=30 drop=0 | FLAT | No drop — not applicable for engineered/degradation.
+- ON THE RISE | peak_R=27 curr_R=27 drop=0 | FLAT | No drop — not applicable for engineered/degradation.
+- FORTISSIMA | peak_R=0 curr_R=0 drop=0 | FLAT | No drop — not applicable for engineered/degradation.
+- MYSTIC DEW | peak_R=0 curr_R=0 drop=0 | FLAT | No drop — not applicable for engineered/degradation.
+- YARRA YARRA | peak_R=0 curr_R=0 drop=0 | FLAT | No drop — not applicable for engineered/degradation.
+- SHINING DAWN: DEBUTANT — no peak rating, drop not applicable.
+
+SECTION 3 - EFFECTIVE RATING TABLE
+Top weight today: 56.0kg
+
+- SHINING DAWN | DEBUTANT — no EffRating
+- FORTISSIMA | peak_R=0 | EffWt=54.5 | EffRating=3
+- GARZIAN | peak_R=30 | EffWt=54.5 | EffRating=33
+- MYSTIC DEW | peak_R=0 | EffWt=54.5 | EffRating=3
+- ON THE RISE | peak_R=27 | EffWt=54.5 | EffRating=30
+- YARRA YARRA | peak_R=0 | EffWt=54.5 | EffRating=3
+
+SECTION 4 - AGE AND VALIDITY FLAGS
+- Prime-age (3-4yo) count: 6 (all are 3yo).
+- Veterans (6yo+): none.
+- DEBUTANT: SHINING DAWN — no rating history; class drop and effective rating cannot be assessed.
+- Rating unreliable — fewer than 3 runs: FORTISSIMA, GARZIAN, MYSTIC DEW, ON THE RISE, YARRA YARRA.
+
+SECTION 5 - LAST RUN FILTER
+- SHINING DAWN | No last run to filter — first start. Status: OUTSIDER by default (debutant).
+- FORTISSIMA | Last pos=7 | Margin=25.25L | Incident=No. Status: ELIMINATED — 10L+ defeat last run without incident.
+- GARZIAN | Last pos=2 | Margin=2.5L | Incident=No. Status: CONTENDER — strong placing in maiden.
+- MYSTIC DEW | Last pos=7 | Margin=17L | Incident=No. Status: ELIMINATED — 10L+ defeat last run without incident (despite some positive in-race comparisons).
+- ON THE RISE | Last pos=5 | Margin=8.75L | Incident=No. Status: OUTSIDER — acceptable Cup/Classic effort, but beaten >5L (not same race conditions as today).
+- YARRA YARRA | Last pos=5 | Margin=2.75L | Incident=No. Status: CONTENDER — close finish in Cup/Classic.
+
+SECTION 6 - TODAY'S FIELD HEAD-TO-HEAD
+- None found. No prior meetings among today’s field in the provided data.
+
+SECTION 7 - RATINGS RANKING
+1. GARZIAN — Drop=0 EffR=33 [FLAT]
+   Trend=IMPROVING — two runner-up finishes, latest close 2.5L second in maiden; highest EffRating in field.
+2. ON THE RISE — Drop=0 EffR=30 [FLAT]
+   Trend=STATIC — maiden third then fair Cup/Classic fifth; EffRating clear second best.
+3. YARRA YARRA — Drop=0 EffR=3 [FLAT]
+   Trend=STATIC — only one run but close 2.75L fifth in Cup/Classic suggests competitiveness; best of the low EffR group on recent evidence.
+4. FORTISSIMA — Drop=0 EffR=3 [FLAT]
+   Trend=STATIC — only one start and was well beaten; included here but note last-run elimination risk.
+5. MYSTIC DEW — Drop=0 EffR=3 [FLAT]
+   Trend=STATIC — big overall defeat last run (elimination on filter), though ran close to higher-rated rivals mid-race; needs to prove it on the clock.
+6. SHINING DAWN — Drop=NA EffR=NA [DEBUTANT]
+   Trend=STATIC — debutant with no race data; unranked by ratings method and placed last by default.

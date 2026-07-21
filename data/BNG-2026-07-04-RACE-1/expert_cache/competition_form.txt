@@ -1,0 +1,72 @@
+SECTION 1 - PER-HORSE FORM VALIDATION (post-filtering)
+
+FORTISSIMA
+Races used      : 0 (of 1)
+Rating quality  : No in-window rivals (no valid shared races).
+Beaten rivals   : None
+Beaters         : None
+Incidents noted : None
+Validation      : NEUTRAL
+Sample note     : THIN SAMPLE
+Synthesis note  : No valid competition data after filtering; young horse, pedigree cross-reference required, verdict strictly provisional.
+
+GARZIAN
+Races used      : 1 (of 2)
+Rating quality  : Mixed/low; maiden-only evidence (0.5x). One beater showed R:40, otherwise unrated.
+Beaten rivals   : Auspicious King — best subsequent: 5th [MAIDEN], 2026-06-28 BANGALORE (R:30)
+Beaters         : Ravishing Queen — best subsequent: 1st [MAIDEN], 2026-06-14 BANGALORE (R:40)
+Incidents noted : None
+Validation      : NEUTRAL
+Sample note     : THIN SAMPLE
+Synthesis note  : Only a single maiden line and limited subsequent evidence; no clear validation signal; young horse, pedigree cross-reference required.
+
+MYSTIC DEW
+Races used      : 0 (of 1)
+Rating quality  : No in-window rivals (no valid shared races).
+Beaten rivals   : None
+Beaters         : None
+Incidents noted : None
+Validation      : NEUTRAL
+Sample note     : THIN SAMPLE
+Synthesis note  : No valid competition data after filtering; young horse, pedigree cross-reference required, verdict strictly provisional.
+
+ON THE RISE
+Races used      : 2 (of 2)
+Rating quality  : Mostly unrated; one Trophy/Cup (2.0x) and one Maiden (0.5x), but no meaningful subsequent franking.
+Beaten rivals   : Waves Of Wonder — best subsequent: 6th [TROPHY/CUP], 2026-06-20 BANGALORE
+                  Spark Of Life — best subsequent: 4th [MAIDEN], 2026-05-23 BANGALORE
+Beaters         : Edison — best subsequent: 4th [TROPHY/CUP], 2026-06-20 BANGALORE
+Incidents noted : None
+Validation      : NEUTRAL
+Sample note     : THIN SAMPLE
+Synthesis note  : Cup line present but rivals have not franked the form yet; no upgrade or downgrade; young horse, pedigree cross-reference required.
+
+YARRA YARRA
+Races used      : 1 (of 1)
+Rating quality  : Unrated at time, but subsequent Open and Classic placings by in-window beaters indicate solid quality.
+Beaten rivals   : Avante — best subsequent: 5th [OPEN], 2026-03-07 MUMBAI
+Beaters         : Minari — best subsequent: 2nd [OPEN], 2026-03-07 MUMBAI
+                  Queen Of Beauties — best subsequent: 2nd [CLASSIC/GRADED], 2026-03-15 MUMBAI
+Incidents noted : None
+Validation      : MILD UPGRADE
+Sample note     : 
+Synthesis note  : Strong Trophy line with beaters later placing in Open and Classic company; form credibly validated; young horse, pedigree cross-reference required.
+
+
+SECTION 2 - FORM VALIDATION RANKING
+1. Yarra Yarra — MILD UPGRADE | Trophy line franked by subsequent Open and Classic placings from in-window beaters; best-validated profile.
+2. Garzian — NEUTRAL | Single maiden line (0.5x) with limited subsequent evidence; nothing to upgrade or deflate.
+3. On The Rise — NEUTRAL | Has Cup and maiden lines but no subsequent franking from rivals; thin sample keeps verdict neutral.
+4. Fortissima — NEUTRAL | All shared races filtered out; no usable competition data.
+5. Mystic Dew — NEUTRAL | All shared races filtered out; no usable competition data.
+
+
+SECTION 3 - FLAGS FOR SYNTHESISER
+- STRONG UPGRADE horses: None
+- STRONG DOWNGRADE horses: None
+- Horses with all shared races filtered out: Fortissima; Mystic Dew
+- Horses with THIN SAMPLE: Garzian; On The Rise
+- Classic/Trophy lines that survived filtering: 
+  - On The Rise — The D. Kumar Siddanna Memorial Cup (BANGALORE, 1400m, 2026-06-20)
+  - Yarra Yarra — The Nadia Mary Homi Wadia Trophy (MUMBAI, 1200m, 2026-01-21)
+- Cross-centre discounts applied: Yarra Yarra (form line from MUMBAI, now at BANGALORE)

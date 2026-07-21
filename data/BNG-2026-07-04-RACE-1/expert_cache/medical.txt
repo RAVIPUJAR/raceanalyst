@@ -1,0 +1,158 @@
+SECTION 1 - PER-HORSE MEDICAL ASSESSMENT
+
+SHINING DAWN
+  Overall risk       : CRITICAL
+  Key conditions     : - Splint Fracture — 27/01/2026 — HISTORICAL (structural; high re-injury relevance)
+                       - Infection (unclassified) — 23/04/2026 — HISTORICAL — WATCH (single-day; likely mild systemic issue)
+                       - Injury — 11/05/2026 to 12/05/2026 — RECENT — WATCH (single-day window)
+                       - Sore Back — 27/05/2026 — RECENT — WATCH (single-day)
+                       - Physiotherapy — 27/05/2026 to 02/06/2026 — RECENT — TREATMENT (multi-day course; active management)
+                       - Laser Therapy — 04/06/2026 — RECENT — TREATMENT (single session)
+  Recurring flag     : None
+  Race incident link : None
+  Synthesis note     : Structural fracture history plus recent back soreness and active treatment indicate a managed but vulnerable profile; treat as high risk for stress under race pressure.
+
+FORTISSIMA
+  Overall risk       : LOW RISK
+  Key conditions     : None in medical records
+  Recurring flag     : None
+  Race incident link : None
+  Synthesis note     : No veterinary entries found; absence of record does not confirm a clean bill — handle as baseline low medical risk with typical maiden uncertainty.
+
+GARZIAN
+  Overall risk       : CRITICAL
+  Key conditions     : None in medical records
+  Recurring flag     : None
+  Race incident link : CORROBORATES — Stewards flagged POST-RACE LAMENESS on 14/06/2026 (RECENT); treat as a significant musculoskeletal concern despite no clinic entry.
+  Synthesis note     : Recent post-race lameness is a major red flag for a 3yo maiden stepping to 1400m; high re-occurrence risk under race stress.
+
+MYSTIC DEW
+  Overall risk       : MODERATE
+  Key conditions     : - Injury — 07/04/2026 to 08/04/2026 — HISTORICAL — WATCH (single-day)
+                       - Injury — 13/06/2026 — RECENT — WATCH (single-day)
+                       - Sore Back — 23/06/2026 — VERY RECENT — WATCH (single-day; back issues can impair stride)
+  Recurring flag     : RECURRING — Injury, 2 times
+  Race incident link : None
+  Synthesis note     : Very recent sore back plus repeated minor injury flags suggest a manageable but current issue; monitor parade action and warm-up closely.
+
+ON THE RISE
+  Overall risk       : CRITICAL
+  Key conditions     : - Tendon — 12/11/2025 to 13/11/2025 — OLD (structural; high re-injury risk, especially on firm)
+                       - Injury — 10/05/2026 — RECENT — WATCH (single-day)
+                       - Injury — 23/05/2026 — RECENT — WATCH (single-day)
+                       - Injury — 06/06/2026 — RECENT — WATCH (single-day)
+  Recurring flag     : RECURRING — Injury, 3 times
+  Race incident link : None
+  Synthesis note     : Prior tendon injury is a chronic structural vulnerability; multiple recent minor setbacks further increase risk of flare-up at pace.
+
+YARRA YARRA
+  Overall risk       : WATCH
+  Key conditions     : - Oedema (unclassified) — 02/06/2026 — RECENT — WATCH (single-day; likely peripheral swelling; monitor limb filling)
+  Recurring flag     : None
+  Race incident link : None
+  Synthesis note     : Single-date oedema likely superficial but warrants paddock check for any residual limb swelling or bandaging.
+
+
+SECTION 2 - RAW STEWARDS REPORTS ANALYSIS
+
+SHINING DAWN
+  No race incidents on record.
+
+FORTISSIMA
+  No race incidents on record.
+
+GARZIAN
+  Extracted entries:
+    - Race date: 14-Jun-2026 | Bangalore | 1100M
+      "Approaching 800 meters GARZIAN (Vivek..."
+      "Near the 500 meters ATMAN (Antony Raj S.) and GARZIAN (Vivek..."
+  Pattern flags:
+    - POST-RACE LAMENESS — escalate to CRITICAL medical concern (RECENT; 20 days before today).
+    - SLOWLY AWAY — gate/launch concern; monitor barrier behavior today.
+
+MYSTIC DEW
+  No race incidents on record.
+
+ON THE RISE
+  No race incidents on record.
+
+YARRA YARRA
+  No race incidents on record.
+
+
+SECTION 3 - MEDICAL RISK RANKING
+
+1. GARZIAN — CRITICAL | Recent post-race lameness (14-Jun-2026) flagged by stewards; high immediate risk despite no clinic record.
+2. ON THE RISE — CRITICAL | Prior tendon injury (structural, chronic risk) plus three recent injury notes; vulnerable under race stress.
+3. SHINING DAWN — CRITICAL | Splint fracture history plus RECENT back soreness and active treatment; managed but fragile.
+4. MYSTIC DEW — MODERATE | VERY RECENT sore back (11 days) and repeated minor injuries; performance may be limited if back discomfort persists.
+5. YARRA YARRA — WATCH | Single-date RECENT oedema; likely superficial but requires parade check.
+6. FORTISSIMA — LOW RISK | No medical entries; standard uncertainty for a maiden with no history.
+
+
+SECTION 4 - FLAGS FOR SYNTHESISER
+
+- VERY RECENT condition: MYSTIC DEW — Sore Back on 23/06/2026 (11 days ago); inspect action in parade and at canter-past.
+- Stewards corroboration: GARZIAN — POST-RACE LAMENESS on 14/06/2026; treat as critical even without medical log entry.
+- Structural CRITICAL cases: ON THE RISE (tendon) and SHINING DAWN (splint fracture) — elevated re-injury risk at race pace, especially if ground is firm.
+- Treatment-active profile: SHINING DAWN — Physiotherapy (27/05–02/06) plus Laser (04/06); ongoing back management indicates a real, not theoretical, issue.
+- Horses with NO medical history: FORTISSIMA and GARZIAN — lack of clinic entries does not equal clean bill; GARZIAN has concerning stewards flags.
+- Roarer check: No laryngeal abnormality entries found; distance 1400m would have been a significant negative if present.
+- Fitness certificate: None mentioned; no clearance checks required from provided reports.
+
+
+SECTION 5 - BODY WEIGHT ASSESSMENT
+
+SHINING DAWN
+  Trend           : INSUFFICIENT DATA
+  Latest weight   : 440 kg  HEALTHY
+  Signal          : NEUTRAL
+  Cross-check     : Healthy range but medical profile is high risk (fracture history; RECENT back management); weight gives no offsetting positive signal.
+  Synthesis note  : Treat weight as baseline OK; rely on parade movement and back suppleness rather than scale.
+
+FORTISSIMA
+  Trend           : INSUFFICIENT DATA
+  Latest weight   : 419 kg  UNDERWEIGHT
+  Signal          : WATCH
+  Cross-check     : Underweight for an Indian TB; no medical history provided. Could be immature/furnishing or hard training; inspect topline and condition.
+  Synthesis note  : If looks tucked-up in parade, downgrade stamina expectations at 1400m; if well-muscled with good coat, treat as trainer trimming.
+
+GARZIAN
+  Trend           : INSUFFICIENT DATA
+  Latest weight   : 406 kg  UNDERWEIGHT
+  Signal          : CONCERN
+  Cross-check     : Underweight combined with RECENT post-race lameness is a negative health signal; limited reserves if an issue recurs mid-race.
+  Synthesis note  : Require an exceptionally fluent parade and strong warm-up to forgive; otherwise, risk of underperforming or not finishing off.
+
+MYSTIC DEW
+  Trend           : INSUFFICIENT DATA
+  Latest weight   : 449 kg  HEALTHY
+  Signal          : NEUTRAL
+  Cross-check     : Healthy weight aligns with a manageable medical profile, but VERY RECENT sore back tempers enthusiasm.
+  Synthesis note  : If back looks free and strides are even in prelims, weight supports a fair run at 1400m.
+
+ON THE RISE
+  Trend           : INSUFFICIENT DATA
+  Latest weight   : 425 kg  HEALTHY
+  Signal          : NEUTRAL
+  Cross-check     : Healthy-ish low-end weight with chronic tendon history and recent minor injuries; weight does not alleviate structural risk.
+  Synthesis note  : Look for tight bandaging or restricted range; if evident, downgrade despite acceptable scale figure.
+
+YARRA YARRA
+  Trend           : INSUFFICIENT DATA
+  Latest weight   : 443 kg  HEALTHY
+  Signal          : NEUTRAL
+  Cross-check     : Healthy weight; only a single-date RECENT oedema on file; ensure no residual swelling today.
+  Synthesis note  : If legs present clean and horse walks freely, weight is a mild positive.
+
+WEIGHT RANKING (most positive to most concerning):
+  1. MYSTIC DEW — Healthy 449 kg; neutral-to-positive if back looks free.
+  2. YARRA YARRA — Healthy 443 kg; only minor prior flag.
+  3. SHINING DAWN — Healthy 440 kg; medical risk remains the dominant factor.
+  4. ON THE RISE — Healthy 425 kg; neutral weight but structural risk persists.
+  5. FORTISSIMA — Underweight 419 kg; watch for conditioning.
+  6. GARZIAN — Underweight 406 kg; concern given RECENT post-race lameness.
+
+No READY TO STRIKE signals identified due to absent historical weight trends.
+
+Remind synthesiser: verify the official paddock weigh-in notes and visual condition. With no prior weight history, any late-reported spike up (>10 kg) or sharp drop (>8 kg) from last run cannot be assessed here; rely on parade visuals and betting drift/firming as secondary confirmation.
