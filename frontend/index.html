@@ -877,13 +877,13 @@
                 false_rails: "\u{1F534}",
             };
 
-            const AUTO_REFRESH_MS = 30000;
+            // const AUTO_REFRESH_MS = 30000;
             const VENUE_CODES = { 'Kolkata': 'KOL', 'Mumbai': 'MUM', 'Bangalore': 'BNG', 'Mysore': 'MYS', 'Pune': 'PUN', 'Hyderabad': 'HYD' };
 
             let allRaces = [];
             let activeItem = null;
             let openRaceDayKeys = new Set();
-            let autoRefreshTimer = null;
+            // let autoRefreshTimer = null;
 
             // ----- API Configuration - Public (No Key Required) -----
             // Set your public API base URL here
@@ -902,9 +902,22 @@
             // In index.html
             const API_BASE = 'https://raceanalyst-api.onrender.com';  // or https://api.raceanalyst.com
 
+            // async function api(path) {
+            //     const res = await fetch(API_BASE + path);
+            //     return await res.json();
+            // }
+
             async function api(path) {
-                const res = await fetch(API_BASE + path);
-                return await res.json();
+                try {
+                    const res = await fetch(API_BASE + path);
+                    if (!res.ok) {
+                        throw new Error(`HTTP ${res.status}`);
+                    }
+                    return await res.json();
+                } catch (error) {
+                    console.error('API Error:', error);
+                    throw error;
+                }
             }
 
             function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
@@ -1184,12 +1197,27 @@
 
             document.getElementById('refreshBtn').onclick = () => loadRaces();
 
-            function startAutoRefresh() {
-                if (autoRefreshTimer) clearInterval(autoRefreshTimer);
-                autoRefreshTimer = setInterval(loadRaces, AUTO_REFRESH_MS);
-            }
+            // function startAutoRefresh() {
+            //     if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+            //     autoRefreshTimer = setInterval(loadRaces, AUTO_REFRESH_MS);
+            // }
 
             // ----- init -----
+            // renderLeftNav();
+            // renderRaceDayAccordion();
+            // initSelectionControls();
+            // activeItem = { kind: 'final', key: 'final' };
+            // setTimeout(() => {
+            //     const raceId = currentRaceId();
+            //     if (raceId) {
+            //         const context = getRaceContext(raceId);
+            //         document.getElementById('contextMeta').textContent =
+            //             `${context.venue} · ${context.date} · Race ${context.raceNo}`;
+            //     }
+            //     selectItem('final', 'final');
+            // }, 100);
+            // loadRaces();
+            // startAutoRefresh();
             renderLeftNav();
             renderRaceDayAccordion();
             initSelectionControls();
@@ -1204,8 +1232,8 @@
                 selectItem('final', 'final');
             }, 100);
             loadRaces();
-            startAutoRefresh();
 
+            document.getElementById('refreshBtn').onclick = () => loadRaces();
             // Set initial API status
             setTimeout(() => updateApiStatus(true), 1000);
         })();
