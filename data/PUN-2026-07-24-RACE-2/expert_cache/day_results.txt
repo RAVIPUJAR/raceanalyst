@@ -1,0 +1,129 @@
+SECTION 4 - RANKING
+SECTION 4 - RANKING
+
+1. BISHOP -- STRONG SIGNAL, ABOVE current rating (weight-adjusted win matches ULTIMO, rated 100, and sits within 1s of CHRISTOPHANY 102 and ATAASH 101; also beat LORD MURPHY, 35, by 1.60s)
+2. ENCINO -- STRONG SIGNAL, ABOVE current rating (Bangalore win, weight-adjusted, beats N R I ACE, rated 72, by ~0.70s and AZAADI, rated 42, by ~1.4s)
+3. SCARAMOUCHE -- STRONG SIGNAL, ABOVE current rating (competitive with LADY SCARLET, 66, and BEAST MODE, 57, and PALOMA, 39, despite lighter historical weights)
+4. FIGHTON -- STRONG SIGNAL, ABOVE current rating (1.14s faster than two Pune winners rated 36 and 31 carrying equal/more weight)
+5. CELLINI -- STRONG SIGNAL, ABOVE current rating (consistently within 0.3-1.1s or faster than horses rated 24-39 across three runs)
+6. SON OF A GUN -- STRONG SIGNAL, ABOVE current rating (within 0.19-0.47s of horses rated 24-32 despite poor own finishing positions)
+7. BEE MAGICAL -- AT current rating (raw closeness to higher-rated peers largely negated once weight-adjusted)
+
+# DAY RESULTS EXPERT -- PUN-2026-07-24-RACE-2 (The Atomic Prince Plate)
+
+Note: All seven runners show CURRENT rating = 0 (today's declared rating field), i.e. no confirmed current handicap mark is on file for any of them. All historical form below is Mumbai/Pune/Bangalore -- full 1.0x reliability centres throughout, so no centre-discounting is needed for any horse in this field.
+
+---
+
+## FIGHTON (current rating: 0)
+
+**Run 1 (2026-03-29 MUMBAI, 1200m, Pos 2):** Weight then 50.0kg eff vs today 61.5kg eff (+11.5kg / ~+23pt burden today -- much heavier now).
+Same-time peers: UNDERCOVER (rated 46, HIGHER-RATED) Δ0.58s -- subject faster in raw time, but UNDERCOVER carried 57kg vs subject's 50kg (7kg/~1.4s weight adjustment) -- once adjusted, subject is ~0.82s slower equivalent -- BELOW UNDERCOVER's true level.
+Comparable winner AEON FLUX (rated 32, HIGHER-RATED) time 1:11.20 (5.5kg lighter margin, ~1.1s adjustment) -- subject still ~0.23s faster after adjustment -- mild STRONG SIGNAL, all-out winning effort by AEON FLUX so signal is trustworthy.
+
+**Run 2 (2026-01-10 MUMBAI, 1000m, Pos 6):** Distance mismatch (-200m) makes raw time comparison unreliable; no same-time peers at 1000m. Weight unchanged vs today. Modest finish (beaten 2.75L) -- weak, neutral evidence.
+
+**Run 3 (2025-10-19 PUNE, 1200m, Pos 2):** Weight then 60.0kg eff vs today 61.5kg (+1.5kg/+3pt, negligible). No same-time peers, but comparable winners MOONLIGHT KISS (rated 36, HIGHER-RATED, 1:08.90) and ESTEBAN (rated 31, HIGHER-RATED, 1:08.90) were BOTH beaten on raw time by FIGHTON's 1:07.76 -- a 1.14s advantage over both, carrying equal/heavier weight than ESTEBAN. Both winners ran full efforts ("surging ahead," "late headway to finish first"). This is a clear STRONG SIGNAL.
+
+**Section 2 (incidents):** No HIGH/MEDIUM incidents flagged on subject or cited peers/winners in any run.
+
+**Verdict:** STRONG SIGNAL: FIGHTON -- demonstrated effective class ABOVE current rating -- ran 1.14s faster than two Pune winners (Moonlight Kiss 36, Esteban 31) carrying equal/more weight, and was weight-adjusted-competitive with AEON FLUX (32) at Mumbai.
+
+---
+
+## SCARAMOUCHE (current rating: 0)
+
+**Run 1 (2026-03-21 MUMBAI, 1200m, Pos 1 -- won):** Weight then 56.5kg eff vs today 60.0kg (+3.5kg/+7pt burden today).
+Comparable winner KEY WEST (rated 29, HIGHER-RATED, 1:11.76) beaten by subject's 1:10.09 by 1.67s (subject slightly lighter, minor). Same-time peer PALOMA (rated 39, HIGHER-RATED) Δ0.90s -- subject faster despite similar weight (2kg diff, minor) -- STRONG SIGNAL.
+
+**Run 2 (2026-02-01 MUMBAI, 1200m, Pos 2):** Weight then 52.5kg vs today 60.0kg (+7.5kg/+15pt burden today -- significant). LADY SCARLET (rated 66, HIGHER-RATED) beat subject by only 0.20s (minor weight diff) -- extremely close to a 66-rated horse. Same-time peer BEAST MODE (rated 57, HIGHER-RATED) Δ0.52s slower than subject (minor weight diff, 3.5kg) -- subject faster than a 57-rated horse. Two clear STRONG SIGNALS here.
+
+**Run 3 (2025-12-21 MUMBAI, 1400m, Pos 4):** Weight then 53.0kg vs today 60.0kg (+7.0kg/+14pt burden today). Same-time peer AMERICAN EAGLE (rated 57, HIGHER-RATED) Δ0.73s slower than subject (minor weight diff) -- competitive but subject on the losing side of the gap here; consistent with, not contradicting, the overall high assessment given the current weight increase.
+
+**Section 2 (incidents):** No incidents flagged in any cited run.
+
+**Verdict:** STRONG SIGNAL: SCARAMOUCHE -- demonstrated effective class ABOVE current rating -- repeatedly ran within 0.2-0.9s of, or faster than, horses currently rated 39-66 at Mumbai across three separate runs, despite carrying markedly less weight historically than declared today (which further understates the historical performances).
+
+---
+
+## ENCINO (current rating: 0)
+
+**Run 1 (2026-07-05 BANGALORE, 1200m, Pos 1 -- won, prioritised centre):** Weight then 61.0kg eff vs today 57.0kg (-4.0kg/-8pt, lighter today). Comparable winner N R I ACE (rated 72, HIGHER-RATED, 1:12.36) beaten by 2.30s raw; even after adjusting for subject's heavier weight then (61kg vs 53kg, 8kg/~1.6s), subject still ~0.70s faster after adjustment. AZAADI (rated 42, HIGHER-RATED) similarly beaten by ~1.4s after weight adjustment. Both are major STRONG SIGNALS from a Bangalore win.
+
+**Run 2 (2025-11-02 PUNE, 1400m, Pos 1 -- won):** Distance window comparisons only (no exact-distance winner); direct time comparison not reliable. Weight then 51.5kg vs today 57.0kg (+5.5kg/+11pt burden today). Dominant 5.75L win supports class but not directly quantifiable against today's weight.
+
+**Run 3 (2025-09-14 PUNE, 1600m, Pos 5/9 -- inconsistent record, poor result):** No time recorded; DistFromWinner 9.75L. Cannot be timed-compared -- weak/uninformative evidence.
+
+**Section 2 (incidents):** No incidents flagged.
+
+**Verdict:** STRONG SIGNAL: ENCINO -- demonstrated effective class ABOVE current rating -- Bangalore win beat two current-72 and current-42 rated horses even after weight-adjustment, the strongest single piece of evidence in this field given Bangalore's premium centre status.
+
+---
+
+## SON OF A GUN (current rating: 0)
+
+**Run 1 (2026-03-21 MUMBAI, 1200m, Pos 6, beaten 13.25L in own race):** Weight then 59.0kg vs today 55.0kg eff 50.0kg (-9.0kg/-18pt, much lighter today via allowance). Same-time peers: JAGGER (rated 26, HIGHER-RATED) Δ0.19s, AEON FLUX (rated 32, HIGHER-RATED) Δ0.39s, KEY WEST (rated 29, HIGHER-RATED) Δ0.47s -- subject's raw pace was within half a second of three horses currently rated 26-32, despite finishing well behind in its own (differently-paced) race. STRONG SIGNAL given the ≥20pt gaps and sub-0.5s times.
+
+**Run 2 (2026-03-15 MUMBAI, 1600m, Pos 7, beaten 22L):** Only same-time peer MENORCA (rated 0) Δ0.57s -- not higher-rated, no signal. Poor run overall.
+
+**Run 3 (2026-03-08 MUMBAI, 1400m, Pos 7, beaten 16.75L):** BEYOND STARS (rated 25, HIGHER-RATED) Δ0.30s, CASSAT (rated 24, HIGHER-RATED) Δ0.45s -- both within half a second despite subject's poor own-race finish -- consistent STRONG SIGNAL pattern.
+
+**Section 2 (incidents):** No incidents flagged; note the recurring pattern of poor own-race placings alongside close absolute times to higher-rated runners from other races on the same card -- suggests the horse's own races were exceptionally strongly run, not that the horse itself is slow.
+
+**Verdict:** STRONG SIGNAL: SON OF A GUN -- demonstrated effective class ABOVE current rating -- across all three runs, raw times sat within 0.19-0.47s of same-day runners currently rated 24-32, despite consistently poor finishing positions in its own (faster-paced) races.
+
+---
+
+## CELLINI (current rating: 0)
+
+**Run 1 (2026-03-21 MUMBAI, 1200m, Pos 5, beaten 8L):** Weight then eff 53.0kg vs today eff 49.5kg (-3.5kg/-7pt, lighter today). Same-time peers PALOMA (rated 39, HIGHER-RATED) Δ0.38s and KEY WEST (rated 29, HIGHER-RATED) Δ0.39s -- both close, weight diffs minor -- STRONG SIGNAL.
+
+**Run 2 (2026-03-07 MUMBAI, 1000m, Pos 3):** Weight then eff 50.5kg vs today eff 49.5kg (-1kg, negligible). Comparable winner SAMSON (rated 24, HIGHER-RATED, 0:58.76) beaten by subject's 0:57.68 by 1.08s, minor weight diff -- clear STRONG SIGNAL, winner effort description ("narrow margin") suggests fair effort so gap is trustworthy.
+
+**Run 3 (2026-02-15 MUMBAI, 1000m, Pos 4, beaten 9.75L):** Same-time peers ARBITRAGE (rated 32, HIGHER-RATED) Δ0.34s and VIENNOISE (rated 39, HIGHER-RATED) Δ0.34s -- both close, minor weight diffs -- STRONG SIGNAL repeated.
+
+**Section 2 (incidents):** None flagged.
+
+**Verdict:** STRONG SIGNAL: CELLINI -- demonstrated effective class ABOVE current rating -- consistently close (0.3-1.1s) or faster raw times than horses currently rated 24-39 across all three Mumbai runs, this is aged 10 but the underlying pace evidence is repeated and weight-neutral.
+
+---
+
+## BEE MAGICAL (current rating: 0)
+
+**Run 1 (2026-03-30 MUMBAI, 1400m, Pos 6, beaten 8.25L):** No exact-distance same-time peers; window comparisons all mismatched distances (1200m/1600m/1100m) -- raw time comparison not reliable, flagged explicitly. Weak/neutral evidence given poor finish.
+
+**Run 2 (2026-03-08 MUMBAI, 1400m, Pos 2):** Weight then eff 49.5kg vs today 50.0kg (+0.5kg, negligible). Same-time peer ZAYYAN (rated 47, HIGHER-RATED) Δ0.68s; but ZAYYAN carried 56kg vs subject's 49.5kg (6.5kg/~1.3s adjustment) -- once adjusted, subject is ~0.63s slower equivalent -- roughly AT, not clearly above, ZAYYAN's level. ZAYYAN's "dominating, decisive 6L" win description suggests possible ease, meaning the true gap may be larger than the clock shows -- tempering this signal further.
+
+**Run 3 (2026-02-01 MUMBAI, 1200m, Pos 6, beaten 4L):** Same-time peer BEAST MODE (rated 57, HIGHER-RATED) Δ0.06s raw, but BEAST MODE carried 56kg vs subject's 50kg (6kg/~1.2s adjustment) -- adjusted, subject ~1.14s slower -- BELOW level. LADY SCARLET (66, HIGHER-RATED) Δ0.66s (weight diff below 5kg threshold) is a moderate positive but not decisive.
+
+**Section 2 (incidents):** None flagged, but note effort-adjustment caution applied to ZAYYAN's dominant win.
+
+**Verdict:** BEE MAGICAL -- demonstrated effective class AT current rating -- mixed evidence; raw closeness to higher-rated peers is largely negated once weight-adjusted, and finishing positions (6th, 2nd, 6th) are unremarkable.
+
+---
+
+## BISHOP (current rating: 0)
+
+**Run 1 (2026-03-08 MUMBAI, 1400m, Pos 5, beaten 4.25L):** Weight then 50.0kg vs today eff 44.0kg (-6.0kg/-12pt, much lighter today). Same-time peer ZAYYAN (rated 47, HIGHER-RATED) Δ0.01s raw (virtually tied), but ZAYYAN carried 56kg vs subject's 50kg (6kg/~1.2s adjustment) -- adjusted subject is ~1.2s slower equivalent -- BELOW level here; ZAYYAN's "dominating, decisive 6L" win may also understate true effort, worsening the read for BISHOP in this instance.
+
+**Run 2 (2026-02-08 MUMBAI, 1400m, Pos 1 -- won):** Weight then eff 55.5kg vs today eff 44.0kg (-11.5kg/-23pt, huge weight relief today). Same-time peers: CHRISTOPHANY (rated 102, HIGHER-RATED) Δ0.36s (minor weight diff, 4kg), ATAASH (rated 101, HIGHER-RATED) Δ0.64s (minor weight diff), IRISH GOLD (rated 92, HIGHER-RATED) Δ0.92s (equal weight) -- all within 1 second of subject's WINNING time despite the huge rating gaps. Comparable winner ULTIMO (rated 100) ran 1:22.05 carrying 50kg vs subject's 55.5kg (5.5kg/~1.1s adjustment) -- weight-adjusted, subject's own winning time becomes ~1:22.00, virtually matching ULTIMO's winning time. This is an exceptional STRONG SIGNAL -- BISHOP's own win effectively matched a field containing three horses currently rated 92-102.
+
+**Run 3 (2026-01-21 MUMBAI, 1400m, Pos 2):** Weight then eff 54.5kg vs today eff 44.0kg (-10.5kg/-21pt, much lighter today). Comparable winner LORD MURPHY (rated 35, HIGHER-RATED, 1:24.01) beaten by subject's 1:22.41 by 1.60s, similar weight -- clear STRONG SIGNAL.
+
+**Section 2 (incidents):** None flagged. Note effort-adjustment caution on ZAYYAN's Run 1 win (possibly eased), which if anything makes BISHOP's Run 1 read even weaker, not stronger.
+
+**Verdict:** STRONG SIGNAL: BISHOP -- demonstrated effective class ABOVE current rating -- Run 2's win, weight-adjusted, matches the winning time of ULTIMO (currently rated 100) and sits within 1 second of CHRISTOPHANY (102) and ATAASH (101) on the same card; combined with a 1.60s beating of LORD MURPHY (35) in Run 3, this is the strongest overall signal in the field, despite one below-level run (Run 1).
+
+---
+
+# SUMMARY TABLE
+
+| Horse | Verdict |
+|---|---|
+| FIGHTON | STRONG SIGNAL -- ABOVE current rating |
+| SCARAMOUCHE | STRONG SIGNAL -- ABOVE current rating |
+| ENCINO | STRONG SIGNAL -- ABOVE current rating (Bangalore evidence) |
+| SON OF A GUN | STRONG SIGNAL -- ABOVE current rating |
+| CELLINI | STRONG SIGNAL -- ABOVE current rating |
+| BEE MAGICAL | AT current rating |
+| BISHOP | STRONG SIGNAL -- ABOVE current rating (strongest single piece of evidence, vs 100+ rated horses) |

@@ -1,0 +1,236 @@
+SECTION 7 - RATINGS RANKING
+1. FIGHTON -- Drop=0 EffR=85 FLAT -- Trend=IMPROVING -- Veteran but recent rivalry evidence is elite-class (beat 92-112 rated rivals conceding weight), last run a clean 4.25L defeat to a 112-rated winner, and dominates Cellini across multiple meetings.
+
+2. SCARAMOUCHE -- Drop=0 EffR=85 FLAT -- Trend=IMPROVING -- Won last start outright, repeatedly matched or beat 87-112 rated rivals in prior runs, and holds the strongest and most recent head-to-head in the field (won R165 beating today's Cellini and Son of a Gun decisively).
+
+3. ENCINO -- Drop=0 EffR=89 FLAT -- Trend=STATIC -- Two clean wins in last two starts (no close rivals to assess), highest raw effective rating in the field, but limited rivalry context and a slightly vulnerable older run against lesser-rated horses.
+
+4. BISHOP -- Drop=0 EffR=95 FLAT (largely allowance-inflated) -- Trend=IMPROVING -- Only remaining contender after last-run filter besides top three, encouraging last-run form losing narrowly to 84- and 81-rated rivals while conceding weight, though modest peak rating (60) and prime-age filly status offer less proven ceiling than the top three.
+
+5. SON OF A GUN -- ELIMINATED -- Trend=DECLINING -- Last run beaten 13.25L without incident (fails last-run filter), veteran with no rivalry signal of hidden ability across last three starts, confirms clear decline.
+
+6. CELLINI -- ELIMINATED -- Trend=DECLINING -- Last run beaten 8.0L without incident (fails last-run filter), very old for class (10yo), consistently dominated by Fighton and beaten by moderate rivals across recent runs.
+
+7. BEE MAGICAL -- ELIMINATED -- Trend=DECLINING -- Last run beaten 8.25L without incident (fails last-run filter), competitive but consistently second-best even against elite company, and beaten by today's Scaramouche head-to-head.
+
+=== SECTION 1 - RACE-DAY RIVALRY ANALYSIS ===
+
+FIGHTON
+
+Run 1 (2026-03-29 MUMBAI, Pos:2, dfw=4.25L):
+- LOST TO SOCIAL BUTTERFLY (pos1) by 4.25L. Rival current rating 112 (STRONG SIGNAL - 112 pts above subject). Subject conceded weight was actually in subject's favour here (subject 50.0kg vs rival 58.0kg, -8kg/-16pt lighter). Losing by only 4.25L to a 112-rated horse while much lighter is a modest result, not alarming.
+- BEAT DREAM SELLER (pos5) by 1.75L. Rival current 112 (STRONG SIGNAL). Subject was 10.5kg lighter (-21pt) yet still beat this elite-rated rival outright - excellent form indicator.
+- BEAT MARKET KING (pos3) by 1.25L. Rival current 102 (STRONG SIGNAL). Subject 10kg lighter (-20pt), beat comfortably.
+- BEAT CREDENCE (pos6) by 1.75L. Rival current 99 (STRONG SIGNAL). Subject 5.5kg lighter (-11pt), beat.
+- BEAT IRISH GOLD (pos4) by 1.75L. Rival current 92 (STRONG SIGNAL). Subject 5.5kg lighter (-11pt), beat.
+Overall: Fighton beat four rivals now rated 92-112 (albeit with weight concessions in his favour) and only lost narrowly to the highest of them. Genuinely top-class form.
+
+Run 2 (2026-01-10 MUMBAI, Pos:6, dfw=2.75L):
+- LOST TO FONTANA (pos1) by 2.75L. Rival current 87 (STRONG SIGNAL). Subject carried 4kg MORE (+8pt) than Fontana, so this loss is more excusable - conceding weight to a well-rated winner.
+- BEAT LIBAN (pos7) by 1.5L. Rival current 66 (STRONG SIGNAL, lower quality). Subject +4.5kg heavier, still beat.
+- LOST TO CELLINI (pos5) by 0.75L. Rival is today's own CELLINI (current rating shown as 0/unrated declared). Subject carried 8.5kg MORE (+17pt) weight than Cellini that day and lost by just 0.75L - a strong performance under a big weight burden.
+Overall: solid, no alarm; losses came while conceding significant weight.
+
+Run 3 (2025-10-19 PUNE, Pos:2, dfw=0.5L):
+- LOST TO ATAASH (pos1) by 0.5L. Rival current 101 (STRONG SIGNAL). Subject carried 7kg MORE (+14pt) than Ataash and still lost by only half a length - excellent effort conceding weight to a very highly rated horse.
+- BEAT BASHIR (pos3) by 3.0L. Rival current 70. Subject +8kg heavier, still beat.
+- BEAT EMPEROR RODERIC (pos4) by 4.25L. Rival current 58. Subject +6.5kg heavier, beat easily.
+- BEAT CELLINI (pos5) by 4.25L. Rival is today's CELLINI, subject +1.5kg heavier, beat comfortably.
+Overall: Outstanding run - nearly beat a 101-rated rival while conceding 7kg, and thrashed Cellini head-to-head.
+
+Fighton's last three runs are all genuinely strong when weight-adjusted; his true ceiling looks well above his most recent nominal level.
+
+SCARAMOUCHE
+
+Run 1 (2026-03-21 MUMBAI, Pos:1 win):
+- BEAT BIG BAY (pos3) by 4.5L. Rival current 71. Subject 0.5kg lighter, comfortable win.
+- BEAT ART COLLECTOR (pos2) by 3.75L. Rival current 66. Subject 2kg heavier, still won well.
+Overall: clear-cut winning performance.
+
+Run 2 (2026-02-01 MUMBAI, Pos:2, dfw=1.25L):
+- LOST TO SOCIAL BUTTERFLY (pos1) by 1.25L. Rival current 112 (STRONG SIGNAL). Subject 3kg lighter (-6pt), narrow loss to an elite horse.
+- BEAT WESTERN STAR (pos5) by 1.5L. Rival current 105 (STRONG SIGNAL). Subject 3.5kg lighter (-7pt), beat a 105-rated rival.
+- BEAT FONTANA (pos3) by 1.0L. Rival current 87 (STRONG SIGNAL). Subject 5.5kg lighter (-11pt, large allowance), beat.
+- BEAT ESPERANZA (pos4) by 1.0L. Rival current 87 (STRONG SIGNAL). Subject 6.5kg lighter (-13pt), beat.
+- BEAT BEE MAGICAL (pos6) by 2.75L. Rival is today's BEE MAGICAL, subject 2.5kg heavier (+5pt), beat comfortably - directly relevant to today's race.
+Overall: Exceptional run - beat multiple 87-105 rated rivals and lost narrowly to a 112-rated one. Strongly suggests true ability far exceeds current level, though much of the win margin is aided by weight allowances.
+
+Run 3 (2025-12-21 MUMBAI, Pos:4, dfw=2.5L):
+- BEAT ULTIMO (pos5) by 1.25L. Rival current 100. Subject 8kg lighter (-16pt), beat.
+- LOST TO EARTH (pos1) by 2.5L. Rival current 76. Subject 5.5kg heavier (+11pt) - conceded weight, narrow loss.
+- LOST TO OPUS DEI (pos3) by 2.0L. Rival current 72. Subject 4.5kg heavier (+9pt) - conceded weight, narrow loss.
+- BEAT SINGER SARGENT (pos6) by 1.25L. Rival current 72. Subject 1.5kg lighter, beat.
+- BEAT ALPINE STAR (pos7) by 2.25L. Rival current 59. Subject 3.5kg heavier, beat.
+- BEAT EMPEROR RODERIC (pos8) by 3.0L. Rival current 58. Subject 1kg heavier, beat.
+Overall: Mixed but respectable - losses came while conceding weight to modestly-rated rivals; still beat a 100-rated horse.
+
+Scaramouche's recent-run rivalry data is the strongest in the field - repeatedly matching or beating horses rated 80-112.
+
+ENCINO
+
+Run 1 (2026-07-05 BANGALORE, Pos:1 win): No race-day rivals within 5L found. Field was either much weaker than Encino or data doesn't capture close rivals - cannot draw a rivalry-based conclusion, but the win itself (dfw=0L) is a clean positive result.
+
+Run 2 (2025-11-02 PUNE, Pos:1 win): No race-day rivals within 5L found. Same caveat - clean winning result but no rivalry context available.
+
+Run 3 (2025-09-14 PUNE, Pos:5, dfw=9.75L):
+- LOST TO GUNSMOKE (pos3) by 3.75L. Rival current 67. Subject 3kg lighter (-6pt), lost - modest.
+- BEAT ICE OF FIRE (pos6) by 0.75L. Rival current 67. Subject 3.5kg lighter, narrow beat.
+- LOST TO WAITARA (pos4) by 0.5L. Rival current only 44 (lower-rated than subject at the time) - subject 1kg lighter, lost narrowly to an inferior rival. This is a mild concern.
+- BEAT BISHOP (pos7) by 4.75L. Rival is today's BISHOP, subject 1.5kg lighter, beat by 4.75L - directly relevant, Encino has history over Bishop.
+Overall: this older run (not last-run) shows some vulnerability to lesser-rated horses, but Encino's two most recent starts (both wins, no close rivals) are the more telling recent evidence.
+
+SON OF A GUN
+
+Run 1 (2026-03-21 MUMBAI, Pos:6): No race-day rivals within 5L found - field was clearly much stronger or SOG well beaten; consistent with the poor overall run (dfw=13.25L).
+
+Run 2 (2026-03-15 MUMBAI, Pos:7): No race-day rivals within 5L found - again consistent with a well-beaten run (dfw=22L).
+
+Run 3 (2026-03-08 MUMBAI, Pos:7, dfw=16.75L):
+- LOST TO ALPINE STAR (pos6) by 2.0L. Rival current only 59 - well below SOG's peak (72). Subject carried 7kg MORE (+14pt) than Alpine Star, so some excuse, but still a loss to a moderate rival within a heavily beaten field overall.
+Overall: consistently poor rivalry evidence across all three runs - no signal of hidden ability, and confirms clear decline.
+
+CELLINI
+
+Run 1 (2026-03-21 MUMBAI, Pos:5, dfw=8L):
+- LOST TO BIG BAY (pos3) by 3.5L. Rival current 71. Subject 4kg lighter (-8pt), lost.
+- LOST TO ART COLLECTOR (pos2) by 4.25L. Rival current 66. Subject 1.5kg lighter, lost.
+- LOST TO LIBAN (pos4) by 0.5L. Rival current 66. Subject 3kg lighter, narrow loss.
+Overall: lost to all three rivals despite light weight in most cases - modest form.
+
+Run 2 (2026-03-07 MUMBAI, Pos:3, dfw=2.5L):
+- BEAT YOUR UNFORGETTABLE (pos4) by 0.5L. Rival current 79. Subject 8.5kg lighter (-17pt, big allowance), narrow beat.
+- LOST TO FOXY (pos1) by 2.5L. Rival current 71. Subject 2.5kg heavier (+5pt), lost while conceding weight.
+- LOST TO STORM CLOUD (pos2) by 0.5L. Rival current only 57 - a modest rival - subject 0.5kg heavier, narrow loss. This is a mild red flag (losing to a much lesser-rated rival at level weight).
+Overall: mixed, one concerning loss to a low-rated rival.
+
+Run 3 (2026-02-15 MUMBAI, Pos:4, dfw=9.75L):
+- LOST TO LIBAN (pos3) by 3.25L. Rival current 66. Subject 0.5kg lighter, lost.
+Overall: consistently below-par vs moderate rivals across all three runs; no strong hidden-ability signal, and last run margin already breaches the elimination threshold (see Section 5).
+
+BEE MAGICAL
+
+Run 1 (2026-03-30 MUMBAI, Pos:6, dfw=8.25L):
+- LOST TO CHAGALL (pos4) by 2.25L. Rival current 79 (STRONG SIGNAL). Subject 4kg lighter (-8pt, allowance), narrow loss to a much higher-rated horse - decent effort.
+- BEAT ART COLLECTOR (pos7) by 1.75L. Rival current 66. Subject 2kg lighter, beat.
+- LOST TO RAMBLER (pos5) by 0.5L. Rival current only 55. Subject 3.5kg heavier (+7pt) - conceded weight, narrow loss to a modest rival - mild concern.
+Overall: this is also the last run; overall dfw=8.25L is beyond the elimination threshold (see Section 5).
+
+Run 2 (2026-03-08 MUMBAI, Pos:2): No race-day rivals within 5L found. A clean runner-up effort (beaten a short margin) but no rivalry context.
+
+Run 3 (2026-02-01 MUMBAI, Pos:6, dfw=4L):
+- LOST TO SOCIAL BUTTERFLY (pos1) by 4.0L. Rival current 112 (STRONG SIGNAL). Subject 5.5kg lighter (-11pt), respectable given the enormous rating gap.
+- LOST TO WESTERN STAR (pos5) by 1.25L. Rival current 105 (STRONG SIGNAL). Subject 6kg lighter (-12pt), narrow loss to a very highly rated rival - encouraging underlying form.
+- LOST TO FONTANA (pos3) by 1.75L. Rival current 87. Subject 8kg lighter, lost.
+- LOST TO ESPERANZA (pos4) by 1.75L. Rival current 87. Subject 9kg lighter, lost.
+- LOST TO SCARAMOUCHE (pos2) by 2.75L. Rival is today's SCARAMOUCHE, subject 2.5kg lighter, lost - directly relevant, Scaramouche has the wood on Bee Magical here.
+Overall: competitive against elite company despite weight allowances, but consistently beaten, including by today's rival Scaramouche.
+
+BISHOP
+
+Run 1 (2026-03-08 MUMBAI, Pos:5, dfw=4.25L):
+- LOST TO ARDAKAN (pos4) by 0.75L. Rival current 84 (STRONG SIGNAL). Subject 8kg lighter (-16pt), narrow loss to an 84-rated horse - very strong hidden form indicator.
+- LOST TO FOURTH WING (pos1) by 4.25L. Rival current 81 (STRONG SIGNAL). Subject 6kg lighter (-12pt), respectable margin to the winner.
+- LOST TO EARTH (pos3) by 3.75L. Rival current 76. Subject 3.5kg lighter, lost.
+Overall: this is Bishop's last run - a genuinely encouraging effort against much higher-rated rivals, losses all within 5L (see Section 5, no elimination).
+
+Run 2 (2026-02-08 MUMBAI, Pos:1 win):
+- BEAT AMAZING RULER (pos2) by 0.5L. Rival current 70. Subject 3.5kg lighter, won.
+- BEAT RAMBLER (pos3) by 2.0L. Rival current 55. Subject 1.5kg heavier, won comfortably.
+- BEAT SENECA (pos4) by 2.5L. Rival current 53. Subject 1.5kg heavier, won.
+Overall: dominant winning performance.
+
+Run 3 (2026-01-21 MUMBAI, Pos:2): No race-day rivals within 5L found. Close runner-up (beaten 1.25L) with no rivalry context available.
+
+Bishop's rivalry data (nearly beating an 84-rated and an 81-rated rival on a big weight concession) is a notable positive, especially given his modest peak rating of only 60.
+
+=== SECTION 2 - CLASS DROP AND PEAK RATING TABLE ===
+
+Note: Field table shows "CurR" as 0 for every horse (a data placeholder, not a real current rating). For this analysis, curr_rating is instead taken as the rating recorded after each horse's most recent run (the right-hand value of the last R->R transition in its history), which is the only defensible proxy for "current official rating" in this dataset.
+
+  FIGHTON       | peak_R=85 curr_R=85 drop=0  | FLAT
+  SCARAMOUCHE   | peak_R=82 curr_R=82 drop=0  | FLAT
+  ENCINO        | peak_R=80 curr_R=80 drop=0  | FLAT
+  SON OF A GUN  | peak_R=72 curr_R=72 drop=0  | FLAT
+  CELLINI       | peak_R=71 curr_R=71 drop=0  | FLAT
+  BEE MAGICAL   | peak_R=62 curr_R=62 drop=0  | FLAT
+  BISHOP        | peak_R=60 curr_R=60 drop=0  | FLAT
+
+All seven horses are running at their demonstrated peak (their most recent run was also their career-best rating). There is no class-drop scenario in this field at all - no ENGINEERED DROP and no FORM DEGRADATION applies, since drop=0 for everyone. This is a genuine "true form" race rather than a class-relief race.
+
+=== SECTION 3 - EFFECTIVE RATING TABLE ===
+
+Top weight in today's race = 61.5kg (FIGHTON).
+
+  FIGHTON       | peak_R=85 EffWt=61.5kg | EffRating = 85 + (61.5-61.5)x2 = 85
+  SCARAMOUCHE   | peak_R=82 EffWt=60.0kg | EffRating = 82 + (61.5-60.0)x2 = 85
+  ENCINO        | peak_R=80 EffWt=57.0kg | EffRating = 80 + (61.5-57.0)x2 = 89
+  SON OF A GUN  | peak_R=72 EffWt=50.0kg (55.0-5.0 allow) | EffRating = 72 + (61.5-50.0)x2 = 95
+  CELLINI       | peak_R=71 EffWt=49.5kg (54.5-5.0 allow) | EffRating = 71 + (61.5-49.5)x2 = 95
+  BEE MAGICAL   | peak_R=62 EffWt=50.0kg | EffRating = 62 + (61.5-50.0)x2 = 85
+  BISHOP        | peak_R=60 EffWt=44.0kg (49.0-5.0 allow) | EffRating = 60 + (61.5-44.0)x2 = 95
+
+Today's class ceiling is 86 (Class 2, rated 60-86). Every horse's weight-adjusted effective rating clusters at or above this ceiling (85-95), which is consistent with a genuinely competitive, evenly-matched Class 2 field. SON OF A GUN, CELLINI and BISHOP show the highest effective ratings, but this is substantially inflated by their declared -5.0kg allowances - the value/executability of those claims is a matter for the connections-form expert, not assessed here.
+
+=== SECTION 4 - AGE AND VALIDITY FLAGS ===
+
+Prime (3-4yo) horses: ENCINO (4g), BEE MAGICAL (4f), BISHOP (4f) = 3 horses.
+
+Veterans (6yo+): 
+- FIGHTON (6g) - recent form is excellent (Section 1/5: multiple wins/places against elite rivals), fully justifies inclusion despite veteran status.
+- SON OF A GUN (7h) - recent form is poor (well-beaten last three runs, no rivalry signal), does NOT justify inclusion on current physical/form evidence.
+- CELLINI (10g) - very old for this class, recent form modest-to-poor (also eliminated, see Section 5), does NOT justify inclusion.
+
+With 3 prime-age horses in the field, the 3 veterans (Fighton, Son of a Gun, Cellini) are physically disadvantaged per the age-hierarchy rule; only Fighton's superior recent form evidence offsets this.
+
+Debutants: none in this field.
+
+Run-count reliability: all seven horses have run_count >= 5 (Fighton 6, Scaramouche 12, Encino 5, Son of a Gun 17, Cellini 15, Bee Magical 14, Bishop 12) - all ratings are considered reliable (>= 3 runs).
+
+Sex note: BEE MAGICAL and BISHOP are fillies competing in a rated handicap (no sex allowance in Class 2). At equal adjusted weight, colts/geldings have a slight physical edge; neither filly currently outrates the colts/geldings, so no EXCEPTIONAL flag applies.
+
+=== SECTION 5 - LAST RUN FILTER ===
+
+  FIGHTON       | Last pos=2 | Margin=4.25L behind winner | Incident=N
+    Status: CONTENDER (under 5L threshold; lost to an elite 112-rated winner while conceding no weight disadvantage of note)
+
+  SCARAMOUCHE   | Last pos=1 (won) | Margin=0L | Incident=N
+    Status: CONTENDER (won outright)
+
+  ENCINO        | Last pos=1 (won) | Margin=0L | Incident=N
+    Status: CONTENDER (won outright)
+
+  SON OF A GUN  | Last pos=6 | Margin=13.25L behind winner | Incident=N (none documented)
+    Status: ELIMINATED (lost more than 5L, in fact more than 10L, without incident - fails last-run filter)
+
+  CELLINI       | Last pos=5 | Margin=8.0L behind winner | Incident=N (none documented)
+    Status: ELIMINATED (lost more than 5L without incident)
+
+  BEE MAGICAL   | Last pos=6 | Margin=8.25L behind winner | Incident=N (none documented)
+    Status: ELIMINATED (lost more than 5L without incident)
+
+  BISHOP        | Last pos=5 | Margin=4.25L behind winner | Incident=N
+    Status: CONTENDER (under 5L threshold; competitive vs an 84-rated rival while conceding 8kg)
+
+=== SECTION 6 - TODAY'S FIELD HEAD-TO-HEAD ===
+
+  2025-03-23 MUMBAI R161 (1400m): CELLINI pos4, SON OF A GUN pos3 - SOG finished marginally ahead of Cellini at 1400m historically; both are eliminated on current form, limited relevance today.
+
+  2025-07-25 PUNE R14 (1200m): CELLINI pos6, FIGHTON pos2 - Fighton clearly superior to Cellini at this trip/track, consistent with Fighton's much higher current peak rating.
+
+  2025-08-16 PUNE R49 (1400m): BISHOP pos4, ENCINO pos3 - Encino narrowly ahead of Bishop; consistent with Encino's higher peak rating (80 vs 60), though Bishop was competitive.
+
+  2025-08-31 PUNE R65 (1200m): CELLINI pos8, FIGHTON pos3 - Fighton again well clear of Cellini, reinforcing Fighton's dominance in this matchup.
+
+  2025-09-14 PUNE R86 (1600m): BISHOP pos7, ENCINO pos5 - Encino again finished ahead of Bishop, though at a longer trip than today's 1200m; Encino's edge over Bishop appears repeatable across distances.
+
+  2025-09-14 PUNE R83 (1200m): CELLINI pos4, SON OF A GUN pos5 - Cellini finished ahead of SOG this time (reverse of the March 2025 meeting), suggesting their head-to-head form is inconsistent/interchangeable, though both are eliminated today regardless.
+
+  2025-10-19 PUNE R130 (1200m): CELLINI pos5, FIGHTON pos2 - Fighton superior again, extending his dominance over Cellini across multiple meetings at 1200m.
+
+  2026-01-10 MUMBAI R61 (1000m): CELLINI pos5, FIGHTON pos6 - Notable reversal: Cellini finished ahead of Fighton this time, though per Section 1 rivalry data Fighton was conceding a large weight burden (+8.5kg) that day and lost by only 0.75L - the underlying form still favours Fighton once weight is accounted for.
+
+  2026-02-01 MUMBAI R97 (1200m): BEE MAGICAL pos6, CELLINI pos8, SCARAMOUCHE pos2 - Scaramouche clearly the best of these three, comfortably beating both Bee Magical and Cellini; strong supporting evidence for Scaramouche's class edge over both in today's field.
+
+  2026-03-08 MUMBAI R143 (1400m): BEE MAGICAL pos2, BISHOP pos5, SON OF A GUN pos7 - Bee Magical finished clearly best of the three, with Bishop mid-pack and Son of a Gun worst; suggests Bee Magical currently holds an edge over Bishop and SOG at this longer trip, though today is 1200m.
+
+  2026-03-21 MUMBAI R165 (1200m): CELLINI pos5, SCARAMOUCHE pos1, SON OF A GUN pos6 - Scaramouche won this race outright, beating both Cellini and Son of a Gun decisively; this is the strongest and most recent head-to-head evidence in the field, confirming Scaramouche's clear superiority over both at today's exact trip (1200m).

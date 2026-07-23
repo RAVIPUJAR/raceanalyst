@@ -1,0 +1,176 @@
+SECTION 3 - MEDICAL RISK RANKING
+SECTION 3 - MEDICAL RISK RANKING
+
+1. SON OF A GUN — SERIOUS | Confirmed chronic roarer (tieback x2 + Hobday), old back surgery, plus recent (27-day) intra-articular injection and barrier gate incident history — most complex cumulative medical picture.
+2. CELLINI — CRITICAL (structural) | Old lag screw fixation for fracture; permanent structural implant always flagged, compounded by overweight/volatile condition today.
+3. BEE MAGICAL — SERIOUS | Confirmed EIPH via endoscopy (28-Dec-2025) plus gate incident, a genuine unresolved respiratory red flag despite clean medical file.
+4. FIGHTON — CRITICAL (respiratory/vascular) | Stewards-reported blood vessel incident (~117 days) absent from medical file — effective epistaxis event, HISTORICAL but critical-class.
+5. SCARAMOUCHE — MODERATE | Stewards-flagged gum injury (~174 days), likely resolved, minor performance-relevant history.
+6. ENCINO — WATCH | Old gait issue (313 days) at longer distance, today's shorter 1200m reduces relevance.
+7. BISHOP — LOW RISK | Clean medical file, stewards incident formally cleared by post-race vet exam — most reassuring profile.
+
+SECTION 1 - PER-HORSE MEDICAL ASSESSMENT
+
+HORSE: FIGHTON
+  Overall risk       : LOW RISK (medical file clear) — BUT see Section 2 cross-reference
+  Key conditions     : No entries in medical report.
+  Recurring flag     : None
+  Race incident link : CORROBORATES — stewards report 29-Mar-2026 (Mumbai, 1200m) carries a BLOOD VESSEL flag associated with FIGHTON. This is effectively an epistaxis-type event and should be treated as CRITICAL despite the clean medical file (~117 days pre-race, HISTORICAL band but critical-class events are never fully discounted).
+  Synthesis note     : Medical file shows nothing, but the stewards record reveals a blood vessel incident — treat as a real respiratory/vascular red flag, not a clean bill of health.
+
+HORSE: SCARAMOUCHE
+  Overall risk       : MODERATE (upgraded from CLEAR medical file due to stewards finding)
+  Key conditions     : Gum injury, stewards report 01-Feb-2026 (~174 days pre-race, HISTORICAL).
+  Recurring flag     : None
+  Race incident link : CORROBORATES — teeth/gum related issue flagged in stewards report; no matching medical file entry, meaning the medical record is incomplete.
+  Synthesis note     : Dental/gum issue noted historically — likely resolved but confirms the medical file is not a complete picture; classify as MODERATE, low current relevance given recency.
+
+HORSE: ENCINO
+  Overall risk       : WATCH
+  Key conditions     : No medical file entries. Stewards report 14-Sep-2025 (Pune, 1600m) flagged GAIT ISSUE (~313 days pre-race, OLD).
+  Recurring flag     : None
+  Race incident link : CORROBORATES — gait issue at 1600m; today's race is shorter (1200m), which reduces cardiovascular/respiratory-pace stress somewhat, but a gait abnormality is still relevant to soundness.
+  Synthesis note     : Old gait issue noted only in stewards data, not medical file — treat as low-moderate residual risk; likely low impact given time elapsed and shorter today's distance.
+
+HORSE: SON OF A GUN
+  Overall risk       : SERIOUS (escalated from LOW RISK label)
+  Key conditions     :
+    - Intra Articular Injection 27/06/2026 — RECENT (~27 days pre-race). Active joint management, joint not specified.
+    - HOBDAY procedure 22/04/2024 — surgical treatment for laryngeal hemiplegia (roarer). OLD but structurally significant.
+    - TIEBACK surgery 22/04/2024 & 16/04/2025 — recurring tie-back procedure (x2) for roarer condition. CONFIRMED CHRONIC ROARER, surgically managed.
+    - Back Surgery 29/04/2025 — CRITICAL structural history, ~15 months pre-race (OLD but always flagged).
+  Recurring flag     : RECURRING — Tieback surgery, 2 times = CONFIRMED CHRONIC roarer condition (surgically corrected).
+  Race incident link : CORROBORATES — GATE INCIDENT flagged 18-Jan-2026; multiple "lost shoe at start" entries also suggest gate/foot sensitivity, though not medical per se.
+  Synthesis note     : This horse carries a genuinely complex medical background — chronic (surgically corrected) roarer, back surgery, and a recent joint injection. Even though today's 1200m sprint reduces roarer impact, the combination of joint injection + past back surgery + tie-back history warrants real caution; not a truly "LOW RISK" horse despite the label.
+
+HORSE: CELLINI
+  Overall risk       : CRITICAL (structural, old)
+  Key conditions     : LAG SCREW FIXATION 29/01/2020 — surgical fracture fixation, CRITICAL by definition, OLD (6+ years) but structural implants remain permanently relevant under race stress.
+  Recurring flag     : None
+  Race incident link : None direct — stewards reports show only interference incidents (not medical).
+  Synthesis note     : Long-healed fracture fixation; low immediate red flag given the age, but any Class 2 sprint stress on a screw-fixed structure should be weighed, especially combined with today's OVERWEIGHT status (see Section 5).
+
+HORSE: BEE MAGICAL
+  Overall risk       : SERIOUS (escalated from CLEAR medical file)
+  Key conditions     : No medical file entries. Stewards report 28-Dec-2025: endoscopy performed post-race, found EIPH (exercise-induced pulmonary hemorrhage), grade unspecified. ~208 days pre-race, OLD but CRITICAL-class respiratory finding.
+  Recurring flag     : None (single documented EIPH event)
+  Race incident link : CORROBORATES — GATE INCIDENT 18-Jan-2026 (shifted in/drifted) and EIPH endoscopy finding at an earlier date; suggests possible bleeder tendency under exertion.
+  Synthesis note     : A confirmed EIPH finding is a genuine red flag despite a clean medical file — this must be weighed against the strong "READY TO STRIKE" weight signal (Section 5); physical readiness does not cancel out bleeding risk.
+
+HORSE: BISHOP
+  Overall risk       : LOW RISK
+  Key conditions     : No medical file entries. Stewards report 08-Mar-2026: carried wide in traffic, examined at stables 9-Mar-2026, found sound (CLEARED).
+  Recurring flag     : None
+  Race incident link : CLEARED — post-incident vet exam found no abnormality.
+  Synthesis note     : Clean profile with a formally documented clearance; among the more medically reassuring runners today.
+
+SECTION 2 - RAW STEWARDS REPORTS ANALYSIS
+
+FIGHTON
+  - 29-Mar-2026, Mumbai, 1200m: incident involving interference, flagged BLOOD VESSEL — SERIOUS respiratory/vascular incident, treat as effective epistaxis event.
+  - 19-Oct-2025: whip use in excess — NOT medical, ignore.
+
+SCARAMOUCHE
+  - 01-Feb-2026, Mumbai, 1200m: "observed to have a gum injury" — teeth/gum-related performance-impacting issue, MODERATE.
+  - 30-Nov-2025: interference (shifted in) — NOT medical, ignore.
+
+ENCINO
+  - 05-Jul-2026, Bangalore, 1200m: routine sample taken from winner — administrative, ignore for medical assessment.
+  - 14-Sep-2025, Pune, 1600m: flagged GAIT ISSUE — cross-check against today's going/distance (1200m, shorter, less strain).
+
+SON OF A GUN
+  - 21-Mar-2026, Mumbai, 1200m: lost left hind shoe at start — gate/equipment issue, not medical.
+  - 15-Mar-2026, Mumbai, 1600m: lost right hind shoe at start — same pattern, not medical.
+  - 08-Mar-2026, Mumbai, 1400m: interference (shifted in onto) — not medical.
+  - 18-Jan-2026, Mumbai, 1200m: flagged GATE INCIDENT — potential injury risk at the barrier, relevant given the horse's back surgery/tieback history; flag as barrier concern for today.
+
+CELLINI
+  - 21-Mar-2026, 07-Mar-2026, 01-Feb-2026: all interference-type entries (carried out/shifted) — NOT medical, ignore.
+
+BEE MAGICAL
+  - 08-Mar-2026, Mumbai, 1400m: steadied due to interference — not medical directly, but occurred alongside BISHOP.
+  - 18-Jan-2026, Mumbai, 1200m: flagged GATE INCIDENT (shifted in, went across rival) — barrier behaviour concern.
+  - 28-Dec-2025, Mumbai, 1200m: endoscopy performed post-race, EIPH found — SERIOUS respiratory finding, CORROBORATES potential bleeder status; must be flagged prominently.
+
+BISHOP
+  - 08-Mar-2026, Mumbai, 1400m: carried out in traffic; examined at stables 9-Mar-2026 and found SOUND — CLEARED, note date and context.
+  - 08-Feb-2026: shifted out under whip use, stewards inquiry — NOT medical, ignore.
+
+SECTION 4 - FLAGS FOR SYNTHESISER
+
+- SON OF A GUN: Intra Articular Injection only 27 days pre-race (RECENT) — active joint management; confirm which joint and monitor for stiffness/soundness today.
+- SON OF A GUN: CONFIRMED CHRONIC ROARER — Tieback surgery performed twice (2024 and 2025) plus a Hobday procedure; today's race is only 1200m (sprint), which is the most manageable distance for a roarer, partially mitigating concern, but the surgical history itself signals a genuinely compromised airway history.
+- SON OF A GUN: also carries a Back Surgery history (CRITICAL, old) — cumulative medical complexity is higher than the "LOW RISK" label implies.
+- CELLINI: Old (2020) lag screw fixation — CRITICAL structural history; always flagged regardless of age; combine with today's OVERWEIGHT status for fitness assessment.
+- FIGHTON: Stewards-reported BLOOD VESSEL incident (29-Mar-2026) not present in medical file — CRITICAL-class event, ~117 days old; flag prominently since medical file alone would show FIGHTON as clean.
+- BEE MAGICAL: Stewards-confirmed EIPH via endoscopy (28-Dec-2025) — CRITICAL respiratory finding not in the medical file; this must be weighed directly against the strong positive weight-trend signal (READY TO STRIKE) — physical readiness does not negate bleeding risk.
+- GATE INCIDENTS flagged for SON OF A GUN (18-Jan-2026) and BEE MAGICAL (18-Jan-2026) — both should be watched at the barrier today.
+- BISHOP: post-incident veterinary exam found sound (9-Mar-2026) — formally CLEARED, most reassuring documented case today.
+- SCARAMOUCHE: gum injury (01-Feb-2026) not in medical file — MODERATE, likely resolved given recency (~174 days).
+- ENCINO: gait issue flagged at 1600m (14-Sep-2025); today's shorter 1200m distance reduces likely impact, but note uncertainty.
+- No horse shows a "fitness certificate required" entry in the provided reports.
+- LOW RISK / CLEAR medical file horses (FIGHTON, SCARAMOUCHE, ENCINO, BEE MAGICAL, BISHOP) should NOT be read as clean — in three of these five cases (FIGHTON, SCARAMOUCHE, BEE MAGICAL) the stewards reports reveal real medical events absent from the official medical file. Treat "no medical history" as an incomplete record, not confirmed health.
+
+SECTION 5 - BODY WEIGHT ASSESSMENT
+
+HORSE: FIGHTON
+  Trend           : STABLE
+  Latest weight   : 481 kg (today's declared) — prior graph baseline ~474kg — OVERWEIGHT-band border, HEALTHY overall but +7kg vs last graph run (472/479kg range), within normal drift, not a spike-flag (>10kg) trigger from most recent prior run.
+  Signal          : NEUTRAL
+  Cross-check     : Stable weight history; but medical cross-check reveals the previously unflagged BLOOD VESSEL stewards incident — weight itself is not concerning, but do not read stability as full health clearance.
+  Synthesis note  : Weight is a non-issue; the real flag for this horse is the stewards-report blood vessel event, not body condition. Verify today's 481kg at weigh-in.
+
+HORSE: SCARAMOUCHE
+  Trend           : STABLE
+  Latest weight   : 438 kg (today's declared) vs last graph run 438kg — no change, HEALTHY.
+  Signal          : NEUTRAL
+  Cross-check     : Aligns with stable historical pattern; gum injury history unrelated to weight trend.
+  Synthesis note  : No weight-based signal; treat purely on form/medical grounds.
+
+HORSE: ENCINO
+  Trend           : REVERSE TREND DOWN (graph) — today's declared 473kg vs last graph run 472kg, essentially flat/+1kg — the reversal-down trend has stabilized rather than continued dropping.
+  Latest weight   : 473 kg — HEALTHY
+  Signal          : WATCH (per graph), but today's actual figure suggests the down-trend has arrested.
+  Cross-check     : Gait issue noted historically at 1600m; weight pattern volatile in past runs (+21/-28kg swings) — data quality/consistency should be treated cautiously.
+  Synthesis note  : Today's weight (473kg) does not show the sharp drop the trend implied — reassess vs last actual run; no strong weight-based alarm today.
+
+HORSE: SON OF A GUN
+  Trend           : VOLATILE — today's declared 468kg vs last graph run 452kg = +16kg spike, exceeding the >10kg "came back heavy" threshold.
+  Latest weight   : 468 kg — HEALTHY range but a SPIKE UP concern flag (+16kg vs last run).
+  Signal          : WATCH/CONCERN — spike up combined with volatile history and recent joint injection raises fitness/conditioning questions.
+  Cross-check     : Volatile weight pattern already noted; recent intra-articular injection (27 days ago) could indicate reduced training load, consistent with weight gain from inactivity rather than positive conditioning.
+  Synthesis note  : Flag the +16kg spike explicitly — combined with recent joint injection, this looks more like enforced rest/idle weight gain than peak conditioning; treat cautiously despite improving form trend.
+
+HORSE: CELLINI
+  Trend           : VOLATILE, OVERWEIGHT band already.
+  Latest weight   : 508 kg (today's declared) vs last graph run 504kg = +4kg, within normal variation, but overall still OVERWEIGHT.
+  Signal          : WATCH
+  Cross-check     : Overweight and volatile pattern aligns with declining performance trend; combined with old lag-screw fixation, raises fitness/soundness question under Class 2 sprint conditions.
+  Synthesis note  : Persistent overweight condition plus structural surgical history — treat as a lower-confidence runner today from a physical-condition standpoint.
+
+HORSE: BEE MAGICAL
+  Trend           : REVERSE TREND UP — *** READY TO STRIKE ***
+  Latest weight   : 460 kg (today's declared) vs last graph run 472kg = -12kg, which is a SHARP DROP (>8kg) from the last recorded run — this contradicts the "reverse trend up / ready to strike" reading from the graph and needs urgent reconciliation.
+  Signal          : CONFLICTING — graph shows recovery/positive peak signal, but today's actual declared weight shows a sharp drop versus last run.
+  Cross-check     : This is important — the graph-based "READY TO STRIKE" call was built on prior runs trending up (472/459/469/462/457kg), but today's actual 460kg is well below the most recent 472kg figure. Combined with the previously flagged EIPH history and GATE INCIDENT, this discrepancy must be resolved before treating the horse as peaking.
+  Synthesis note  : Do NOT automatically treat as READY TO STRIKE — today's actual weigh-in shows a sharp drop from the last run, conflicting with the historical reversal-up pattern. Verify weigh-in carefully; if confirmed, this drop combined with EIPH history could indicate an unresolved health issue rather than peak fitness.
+
+HORSE: BISHOP
+  Trend           : STABLE
+  Latest weight   : 432 kg (today's declared) vs last graph run 433kg — essentially flat, HEALTHY (borderline low end of range).
+  Signal          : NEUTRAL
+  Cross-check     : Consistent with stable trend; aligns with the clean/cleared medical profile.
+  Synthesis note  : No weight-based concern; among the most stable and reassuring profiles today, both medically and physically.
+
+WEIGHT RANKING (most positive to most concerning):
+  1. BISHOP — stable, healthy, cleared medically.
+  2. SCARAMOUCHE — stable, no change, no major cross-check conflict.
+  3. FIGHTON — stable, but note separate medical (blood vessel) concern.
+  4. ENCINO — down-trend appears to have arrested; borderline WATCH.
+  5. CELLINI — volatile/overweight, declining performance, old structural history.
+  6. SON OF A GUN — spike up +16kg vs last run, volatile history, recent joint injection.
+  7. BEE MAGICAL — CONFLICTING signal: graph suggested READY TO STRIKE, but today's actual weight shows a sharp -12kg drop from last run; flag for urgent reconciliation at weigh-in, especially given EIPH history.
+
+READY TO STRIKE: Provisionally flagged for BEE MAGICAL by the historical graph pattern, but TODAY'S DECLARED WEIGHT (460kg) contradicts this with a sharp drop from the last run — treat as CONFLICTING, not confirmed positive, until weigh-in is verified.
+
+Reminder to synthesiser: All "today's declared weights" above have been compared to the last graphed run per horse. Verify all figures again at paddock weigh-in, particularly SON OF A GUN (+16kg spike) and BEE MAGICAL (-12kg drop vs last run, conflicting with graph trend).

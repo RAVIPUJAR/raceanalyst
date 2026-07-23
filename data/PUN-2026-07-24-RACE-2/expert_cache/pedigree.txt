@@ -1,0 +1,47 @@
+SECTION 2 - PEDIGREE STRENGTH RANKING
+SECTION 2 - PEDIGREE STRENGTH RANKING
+
+1. BEE MAGICAL -- unranked
+No dosage or dam produce data available to support any ranking.
+
+1. BISHOP -- unranked
+No dosage or dam produce data available to support any ranking.
+
+1. ENCINO -- unranked
+No dosage or dam produce data available to support any ranking.
+
+# SECTION 1 - PER-HORSE PEDIGREE ASSESSMENT
+
+**BEE MAGICAL (f, 4)**
+Sire / Dam: Moonlight Magic(GB) / Bee Quick
+Dosage: No dosage data available.
+Dam produce: No pedigree/produce data available -- not yet bridged to pedigree graph.
+Distance read: Sire/dam names known but no dosage or produce evidence to translate into a distance/class read for today's 1200m.
+Synthesis note: Breeding identity is known but there is no usable dosage or produce data -- treat as a data gap, not a negative.
+
+**BISHOP (f, 4)**
+Sire / Dam: Deauville(IRE) / Winds Of Fortune
+Dosage: No dosage data available.
+Dam produce: No pedigree/produce data available -- not yet bridged to pedigree graph.
+Distance read: No basis to assess trip suitability from the data provided.
+Synthesis note: Sire and dam are named but no dosage or sibling data exists to inform today's 1200m assessment -- pure data gap.
+
+**ENCINO (g, 4)**
+Sire / Dam: Gusto(GB) / Choice House(USA)
+Dosage: No dosage data available.
+Dam produce: No pedigree/produce data available -- not yet bridged to pedigree graph.
+Distance read: No basis to assess trip suitability from the data provided.
+Synthesis note: Sire and dam are named but no dosage or produce data exists -- treat as unresolved rather than unsuited.
+
+**EXCLUDED (age 5+, fully exposed on form -- no pedigree block produced):**
+CELLINI (10), FIGHTON (6), SCARAMOUCHE (5), SON OF A GUN (7)
+
+# SECTION 3 - FLAGS FOR SYNTHESISER
+
+- BEE MAGICAL: no pedigree data available -- dosage and dam produce both missing (data gap, not a form gap).
+- BISHOP: no pedigree data available -- dosage and dam produce both missing (data gap, not a form gap).
+- ENCINO: no pedigree data available -- dosage and dam produce both missing (data gap, not a form gap).
+- No dosage-vs-distance conflicts can be flagged since dosage data is absent for all eligible runners.
+- No same-sire black-type siblings can be identified due to absence of produce data.
+- No dam non-runner/fertility signals can be assessed due to absence of produce data.
+- CELLINI, FIGHTON, SCARAMOUCHE, SON OF A GUN excluded from pedigree assessment as aged 5+ and fully exposed on form; no pedigree data should be inferred or guessed for these runners.

@@ -1,0 +1,111 @@
+SECTION 2 - FORM VALIDATION RANKING
+SECTION 2 - FORM VALIDATION RANKING
+
+1. SCARAMOUCHE — STRONG UPGRADE | Two separate rivals (SOCIAL BUTTERFLY, ULTIMO) won subsequently at markedly higher ratings, across all 3 shared races.
+2. BISHOP — STRONG UPGRADE | Both a beaten rival (AMAZING RULER) and a beater (ARDAKAN) won subsequent starts in solid Trophy/Cup company.
+3. BEE MAGICAL — STRONG UPGRADE | Beater SOCIAL BUTTERFLY won subsequently at TROPHY/CUP R112, though sample slightly thinner than Bishop's.
+4. FIGHTON — MILD UPGRADE | Multiple beaten rivals placed at high rating bands (92-112) next time, but none actually won at higher class.
+5. ENCINO — NEUTRAL | Only one race yielded usable rivals with mixed subsequent results; PEDIGREE CROSS-REFERENCE REQUIRED adds uncertainty.
+6. CELLINI — MILD DOWNGRADE | Two rivals who beat or matched Cellini subsequently regressed, softening the form line.
+7. SON OF A GUN — NEUTRAL (no valid data) | All shared races excluded by Rule 2, leaving no competitive form to assess.
+
+# SECTION 1 - PER-HORSE FORM VALIDATION (post-filtering)
+
+---
+**BEE MAGICAL**
+Races used      : 2 of 3 shared races survived filtering (11 earlier races excluded by Rule 1; 1 of these 3 excluded by Rule 2)
+Rating quality  : Mixed — RATED company (R55-79) in first race, stronger TROPHY/CUP field (R87-112) in second
+Beaten rivals   : ART COLLECTOR (+1.8L behind) — no genuine forward subsequent data (repeat of same race date)
+Beaters         : SOCIAL BUTTERFLY (-4.0L ahead) subsequently WON at TROPHY/CUP, R112 (2026-03-29, genuine future date); WESTERN STAR (-1.2L ahead) placed 3rd RATED R105 (2026-07-17); CHAGALL/RAMBLER data circular (same date as shared race, discounted)
+Incidents noted : None flagged
+Validation      : STRONG UPGRADE
+Sample note     : Adequate sample (4 in-window rivals across 2 races)
+Synthesis note  : SOCIAL BUTTERFLY's subsequent TROPHY/CUP win at R112 strongly validates the depth of Bee Magical's Coromandel Gromor form.
+
+---
+**BISHOP**
+Races used      : 2 of 3 shared races survived filtering (9 earlier excluded by Rule 1; 1 of these 3 excluded by Rule 2)
+Rating quality  : Strong — TROPHY/CUP fields both races, rivals rated 53-84
+Beaten rivals   : AMAZING RULER (+0.5L behind) subsequently WON RATED R62 (2026-02-26, genuine); SENECA (+2.5L) placed 2nd TROPHY/CUP R53; RAMBLER (+2.0L) modest pos5
+Beaters         : ARDAKAN (-0.8L ahead) subsequently WON RATED R84 (2026-03-30, genuine); EARTH (-3.8L ahead) placed 2nd RATED R76; FOURTH WING same-date circular data (discounted)
+Incidents noted : None flagged
+Validation      : STRONG UPGRADE
+Sample note     : Solid sample, multiple genuine subsequent results
+Synthesis note  : Both a beaten rival (AMAZING RULER) and a beater (ARDAKAN) went on to win next starts, strongly validating Bishop's Trophy/Cup form.
+
+---
+**CELLINI**
+Races used      : 3 of 3 shared races survived filtering (12 earlier excluded by Rule 1)
+Rating quality  : Solid TROPHY/CUP and RATED company (R58-71)
+Beaten rivals   : YOUR UNFORGETTABLE (+0.5L behind) modest 3rd RATED R79 (genuine future)
+Beaters         : ART COLLECTOR (-4.2L ahead) subsequently ran poorly, pos7 RATED R66 (genuine future); STORM CLOUD (-0.5L ahead) ran very poorly, pos11 RATED R57 (genuine future); BIG BAY/FOXY/LIBAN data circular (same date, discounted)
+Incidents noted : None flagged
+Validation      : MILD DOWNGRADE
+Sample note     : Adequate sample but genuine forward data limited to 3 rivals
+Synthesis note  : Two rivals who beat or matched Cellini subsequently regressed (poor finishes), suggesting the form line is softer than it looks, though no clear race-winner regression to confirm a stronger downgrade.
+
+---
+**ENCINO**
+Races used      : 1 of 3 shared races had valid in-window rivals (2 races had NO rivals survive the +/-5L filter — no valid competition data from those two races)
+Rating quality  : Mixed — CLASSIC/GRADED field (weight 3x) in the one valid race
+Beaten rivals   : None within window (GUNSMOKE and WAITARA were ahead, ICE OF FIRE was behind)
+Beaters         : GUNSMOKE (-3.8L ahead) subsequently placed 3rd CLASSIC/GRADED R67 (genuine future, maintained class); WAITARA (-0.5L ahead) subsequently placed 3rd TROPHY/CUP R44 (dropped in class); ICE OF FIRE (+0.8L behind) subsequently placed 2nd TROPHY/CUP R67 (improved)
+Incidents noted : None flagged
+Validation      : NEUTRAL
+Sample note     : THIN SAMPLE — only 1 of 3 shared races produced usable rivals
+Synthesis note  : Only the Poonawalla Million (Classic/Graded) provided usable rivals, with mixed subsequent results — one held class, one dropped, one improved; PEDIGREE CROSS-REFERENCE REQUIRED flag should also be checked given the two empty windows.
+
+---
+**FIGHTON**
+Races used      : 3 of 3 shared races survived filtering (3 earlier excluded by Rule 1)
+Rating quality  : Strong — rivals rated in the 92-114 range in the Hyderabad Race Club Trophy, TROPHY/CUP weight throughout
+Beaten rivals   : MARKET KING (+1.2L behind) subsequently pos4 RATED R102 (genuine, high band); IRISH GOLD (+1.8L behind) subsequently pos5 RATED R92 (genuine); DREAM SELLER (+1.8L behind) subsequently placed 2nd TROPHY/CUP R112 (genuine, higher band)
+Beaters         : ATAASH (-0.5L ahead) subsequently pos4 TROPHY/CUP R101 (genuine); FONTANA (-2.8L ahead) subsequently placed 2nd TROPHY/CUP R87 (genuine)
+Incidents noted : None flagged
+Validation      : MILD UPGRADE
+Sample note     : Good sample across 3 races
+Synthesis note  : Several rivals beaten by Fighton have since competed and placed at very high rating bands (92-112), indicating the underlying form is deeper than the raw finishing positions suggest, though none actually won at higher class.
+
+---
+**SCARAMOUCHE**
+Races used      : 3 of 3 shared races survived filtering (9 earlier excluded by Rule 1)
+Rating quality  : Strong TROPHY/CUP company (R58-112) across all three races
+Beaten rivals   : FONTANA (+1.0L behind) placed 2nd TROPHY/CUP R87 (genuine); WESTERN STAR (+1.5L) placed 3rd RATED R105 (genuine); ULTIMO (+1.2L) subsequently WON TROPHY/CUP R100 (genuine, big upgrade)
+Beaters         : SOCIAL BUTTERFLY (-1.2L ahead) subsequently WON TROPHY/CUP R112 (genuine); EARTH (-2.5L ahead) placed 2nd RATED R76 (genuine)
+Incidents noted : None flagged
+Validation      : STRONG UPGRADE
+Sample note     : Ample sample with multiple genuine subsequent results
+Synthesis note  : Two separate rivals within 3L of Scaramouche (SOCIAL BUTTERFLY and ULTIMO) both went on to win at markedly higher ratings (R112, R100), giving strong confirmation of Scaramouche's competitive merit.
+
+---
+**SON OF A GUN**
+Races used      : 0 of 3 shared races survived filtering (all 3 excluded by Rule 2, our horse >10L off the winner in each; 14 earlier races also excluded by Rule 1)
+Rating quality  : No valid data
+Beaten rivals   : None available
+Beaters         : None available
+Incidents noted : None flagged
+Validation      : NEUTRAL (no valid competition data)
+Sample note     : THIN SAMPLE — effectively no usable data
+Synthesis note  : All shared races were run more than 10L behind the winner, meaning there is no valid competitive form to assess; cannot upgrade or downgrade.
+
+# SECTION 3 - FLAGS FOR SYNTHESISER
+
+- STRONG UPGRADE horses:
+  - BEE MAGICAL — beater SOCIAL BUTTERFLY won subsequently at TROPHY/CUP R112.
+  - BISHOP — beaten rival AMAZING RULER and beater ARDAKAN both won subsequent starts at higher/similar rated company.
+  - SCARAMOUCHE — two separate rivals (SOCIAL BUTTERFLY, ULTIMO) won subsequently at much higher ratings (R112, R100); strongest validated form in the field.
+
+- STRONG DOWNGRADE horses: None identified (Cellini's downgrade signal is mild, not from a race-winner regression).
+
+- Horses with all shared races filtered out (no valid competition data):
+  - SON OF A GUN — all 3 shared races excluded by Rule 2 (>10L off winner).
+
+- Horses with THIN SAMPLE:
+  - ENCINO — only 1 of 3 shared races produced any in-window rivals.
+  - SON OF A GUN — no usable data at all.
+
+- Classic/Trophy lines that survived filtering:
+  - ENCINO — S A Poonawalla Million (CLASSIC/GRADED, weight 3x) survived filtering, but only 1 of 3 races usable; PEDIGREE CROSS-REFERENCE REQUIRED should be checked given young-horse uncertainty and thin data.
+  - BEE MAGICAL, BISHOP, CELLINI, FIGHTON, SCARAMOUCHE — all have TROPHY/CUP (2x) lines forming the bulk of their validated form.
+
+- Cross-centre discounts applied: None explicit (all races Mumbai/Pune/Bangalore data used as provided; no cross-centre adjustment beyond standard prestige weighting).
