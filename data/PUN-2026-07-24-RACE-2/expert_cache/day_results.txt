@@ -1,5 +1,4 @@
-SECTION 4 - RANKING
-SECTION 4 - RANKING
+DAY_RESULT RANKING
 
 1. BISHOP -- STRONG SIGNAL, ABOVE current rating (weight-adjusted win matches ULTIMO, rated 100, and sits within 1s of CHRISTOPHANY 102 and ATAASH 101; also beat LORD MURPHY, 35, by 1.60s)
 2. ENCINO -- STRONG SIGNAL, ABOVE current rating (Bangalore win, weight-adjusted, beats N R I ACE, rated 72, by ~0.70s and AZAADI, rated 42, by ~1.4s)
