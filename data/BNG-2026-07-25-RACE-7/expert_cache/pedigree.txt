@@ -1,0 +1,77 @@
+
+
+SECTION 1 - PER-HORSE PEDIGREE ASSESSMENT
+
+AGRIMA (4f) -- Sire: Fiero(JPN) / Dam: Aspenglow(USA)
+  Dosage          : not available
+  Dam produce     : no produce record available
+  Distance read   : cannot be determined from pedigree
+  Synthesis note  : Sire and dam known but no dosage or sibling data to inform today's read; treat as a data gap, not a negative.
+
+APPROVAL (3c) -- Sire: Fiero[JPN] / Dam: Missing You
+  Dosage          : DI 3, CD +0.67, DP 3-6-9-0-0 -- balanced-to-speed with a mild speed lean; versatile profile.
+  Dam produce     : Dam Missing You has produced Cup/Trophy winner Resplendence (by Leitir Mor) and Gr.3 placed Running Star (by Excellent Art). No same-sire Fiero black-type siblings appear in the record. Dam's produce list is heavy with negative entries (not covered, aborted, barren, destroyed, died since birth) relative to live foals -- a notable fertility/soundness signal in the female line.
+  Distance read   : Balanced-to-speed dosage is well-suited to 1500M.
+  Synthesis note  : Dam has reached Cup/Trophy and Gr.3 level but through other sire lines; balanced dosage fits today's trip.
+
+BIG B (4g) -- Sire: Dreamfield(GB) / Dam: Everybreakingwave
+  Dosage          : not available
+  Dam produce     : no produce record available
+  Distance read   : cannot be determined from pedigree
+  Synthesis note  : Sire and dam known but no dosage or sibling data; treat as a data gap, not a negative.
+
+FREDERIKA (4g) -- Sire: Fiero(JPN) / Dam: Little Treasure(FR)
+  Dosage          : not available
+  Dam produce     : no produce record available
+  Distance read   : cannot be determined from pedigree
+  Synthesis note  : Sire and dam known but no dosage or sibling data; treat as a data gap, not a negative.
+
+HANIEL (3f) -- Sire: Plumatic(GB) / Dam: Angel Grace
+  Dosage          : not available
+  Dam produce     : no produce record available
+  Distance read   : cannot be determined from pedigree
+  Synthesis note  : Sire and dam known but no dosage or sibling data; treat as a data gap, not a negative.
+
+IMPERADOR (4g) -- Sire: Gusto(GB) / Dam: Castanea
+  Dosage          : not available
+  Dam produce     : no produce record available
+  Distance read   : cannot be determined from pedigree
+  Synthesis note  : Sire and dam known but no dosage or sibling data; treat as a data gap, not a negative.
+
+SHUTTERFLY (3f) -- Sire: Leitir Mor[IRE] / Dam: Isn't She Special
+  Dosage          : not available
+  Dam produce     : Isn't She Special is a prolific Cup/Trophy producer: Scaramouche (by Roderic O'Connor, 4 Cup/Trophy wins), Tuscany (by Roderic O'Connor, 2 Cup/Trophy wins), Live By Night (by Arazan, 2 Cup/Trophy wins), Dubai Flame (by Excellent Art). Same-sire sibling Tropical Paradise (by Leitir Mor) carries stakes of 4,29,085. Dam record shows a high non-runner ratio (~9 of ~16 entries are negative/empty) -- possible fertility flag, but quality when live foals arrive is consistently high.
+  Distance read   : Siblings have won across middle-distance and Cup-style trips; family reads versatile.
+  Synthesis note  : Female line has a habit of producing multiple Cup/Trophy winners; same-sire sibling adds modest same-pattern reinforcement.
+
+YARRA YARRA (3f) -- Sire: Win Legend[JPN] / Dam: Stimulate
+  Dosage          : not available
+  Dam produce     : Stimulate is a top-tier producer: Circle of Dreams (by Dreamfield) 2nd in Poonawalla Breeders' Multi-Million Gr.1 plus 4 Cup/Trophy placings; Moon's Blessing (by Win Legend -- SAME SIRE as today's runner) 2nd in Bangalore 1000 Guineas Gr.2 plus 5 Cup/Trophy wins including the Royal Calcutta Turf Cup; Nyx (by Dreamfield) Gr.1 placed multiple times and Gr.2 placed. Same-sire (Win Legend) sibling Moon's Blessing is the standout signal -- a Gr.2 performer over middle distances. Dam also shows a high non-runner ratio (3 consecutive barren seasons to Win Legend plus aborted and died-since-birth entries) but produces elite types when live foals arrive.
+  Distance read   : Top siblings have handled sprint to middle-distance and 1600m-plus (Guineas, Derby, Oaks, Turf Cup); family reads versatile but with proven middle-distance class.
+  Synthesis note  : Strongest pedigree in this field -- elite-class dam with a same-sire Gr.2-class sibling; the clearest pedigree signal in the race.
+
+
+SECTION 2 - PEDIGREE STRENGTH RANKING
+
+  1. YARRA YARRA -- strong. Dam Stimulate is a Gr.1/Gr.2-producing mare and the same-sire Win Legend sibling Moon's Blessing is itself a Gr.2 placed multiple Cup winner; highest-quality female line in the field.
+  2. SHUTTERFLY -- moderate. Dam Isn't She Special repeatedly produces Cup/Trophy winners across multiple sire lines, and a same-sire (Leitir Mor) sibling has earned meaningfully; quality female line but no same-sire black-type strike.
+  3. APPROVAL -- moderate. Balanced-to-speed dosage suits 1500M and dam has reached Cup/Trophy and Gr.3 level via other sires; no same-sire (Fiero) reinforcement in the produce record.
+  4. AGRIMA -- unranked. Sire/dam known but neither dosage nor produce data available to rank on.
+  5. BIG B -- unranked. Sire/dam known but neither dosage nor produce data available to rank on.
+  6. FREDERIKA -- unranked. Sire/dam known but neither dosage nor produce data available to rank on.
+  7. HANIEL -- unranked. Sire/dam known but neither dosage nor produce data available to rank on.
+  8. IMPERADOR -- unranked. Sire/dam known but neither dosage nor produce data available to rank on.
+
+
+SECTION 3 - FLAGS FOR SYNTHESISER
+
+  - No strong dosage/distance mismatch to flag today: APPROVAL is the only runner with dosage data and its DI 3 / CD +0.67 balanced-to-speed profile is appropriate for 1500M.
+  - Same-sire black-type/earnings siblings worth weighting:
+      YARRA YARRA -- Moon's Blessing (Win Legend) is Gr.2 placed in the Bangalore 1000 Guineas and a multiple Cup winner; same-sire signal is the clearest in the race.
+      SHUTTERFLY -- Tropical Paradise (Leitir Mor) carries 4,29,085 in stakes; not formal black-type but a same-sire earnings marker.
+      APPROVAL -- no same-sire Fiero siblings at any black-type level in the produce record.
+  - High non-runner ratio in dams (possible female-line fertility/soundness flag, not a form signal for today):
+      Stimulate (YARRA YARRA) -- 6+ non-runner/empty entries out of ~12, including three consecutive barren seasons to Win Legend.
+      Isn't She Special (SHUTTERFLY) -- ~9 non-runner/empty entries out of ~16.
+      Missing You (APPROVAL) -- 7 non-runner/empty entries out of ~9 (only 2 live foals recorded).
+  - No pedigree data available (data gap, not a form gap): AGRIMA, BIG B, FREDERIKA, HANIEL, IMPERADOR -- sire and dam known but neither dosage nor dam produce data supplied; synthesiser must not read these as "weak" or "empty," only as unranked.

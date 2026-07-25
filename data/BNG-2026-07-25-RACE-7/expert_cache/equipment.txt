@@ -1,0 +1,105 @@
+SECTION 1 - PER-HORSE EQUIPMENT ASSESSMENT
+
+IMPERADOR
+Today's equipment : None
+Changes           : REMOVED: BB (Basket Bit), CNB (Cross Nose Band), HOOD (Hood), TS (Tongue Strap)
+  - BB removed: directional steering issue resolved. Signal: POSITIVE.
+  - CNB removed: mouth/pulling issue resolved. Signal: POSITIVE.
+  - HOOD removed: trainer satisfied horse has mentally settled. Signal: POSITIVE.
+  - TS removed: breathing/tongue issue resolved. Signal: POSITIVE.
+  - Note: Multiple items removed at once. This is an aggressive signal from the trainer. Likely the horse has been racing free of these problems and the trainer is trying to see if it can perform without aids. However, this could also be experimentation if the horse has been uncompetitive.
+Synthesis note: The removal of four pieces of equipment is a strong message of confidence or desperation; treat the horse's behavioural profile as highly uncertain for today.
+
+AGRIMA
+Today's equipment : None
+Changes           : REMOVED: BLK (Blinkers)
+  - BLK removed: focus/distraction issue resolved; horse now tractable without vision restriction. Signal: POSITIVE.
+Synthesis note: Removal of blinkers suggests this horse has settled mentally; a positive development.
+
+YARRA YARRA
+Today's equipment : None
+Changes           : REMOVED: CNB (Cross Nose Band), TS (Tongue Strap)
+  - CNB removed: mouth/pulling issue resolved. Signal: POSITIVE.
+  - TS removed: breathing/tongue issue resolved. Signal: POSITIVE.
+Synthesis note: Clean slate gear profile, trainer believes past issues are behind this horse.
+
+SHUTTERFLY
+Today's equipment : None
+Changes           : REMOVED: CNB (Cross Nose Band), TS (Tongue Strap)
+  - CNB removed: mouth/pulling issue resolved. Signal: POSITIVE.
+  - TS removed: breathing/tongue issue resolved. Signal: POSITIVE.
+Synthesis note: Clean slate gear profile, trainer believes past issues are behind this horse.
+
+FREDERIKA
+Today's equipment : None
+Changes           : REMOVED: TS (Tongue Strap)
+  - TS removed: breathing/tongue issue resolved. Signal: POSITIVE.
+Synthesis note: Trainer satisfied tongue issue no longer present; neutral to positive move.
+
+SASSY
+Today's equipment : None
+Changes           : REMOVED: TS (Tongue Strap)
+  - TS removed: breathing/tongue issue resolved. Signal: POSITIVE.
+Synthesis note: Trainer satisfied tongue issue no longer present; neutral to positive move.
+
+SHAHENSHAAH
+Today's equipment : None
+Changes           : REMOVED: CNB (Cross Nose Band), TS (Tongue Strap)
+  - CNB removed: mouth/pulling issue resolved. Signal: POSITIVE.
+  - TS removed: breathing/tongue issue resolved. Signal: POSITIVE.
+Synthesis note: Clean slate gear profile, trainer believes past issues are behind this horse.
+
+MICHIKO
+Today's equipment : None
+Changes           : REMOVED: TS (Tongue Strap)
+  - TS removed: breathing/tongue issue resolved. Signal: POSITIVE.
+Synthesis note: Trainer satisfied tongue issue no longer present; neutral to positive move.
+
+APPROVAL
+Today's equipment : None
+Changes           : REMOVED: TS (Tongue Strap)
+  - TS removed: breathing/tongue issue resolved. Signal: POSITIVE.
+Synthesis note: Trainer satisfied tongue issue no longer present; neutral to positive move.
+
+BIG B
+Today's equipment : None
+Changes           : NONE (same as last race)
+  - Signal: STABLE. No equipment flags from connections.
+Synthesis note: Stable gear profile; no behavioural concerns indicated by equipment.
+
+HANIEL
+Today's equipment : None
+Changes           : REMOVED: BB (Basket Bit), HOOD (Hood), TS (Tongue Strap)
+  - BB removed: directional steering issue resolved. Signal: POSITIVE.
+  - HOOD removed: trainer satisfied horse has mentally settled. Signal: POSITIVE.
+  - TS removed: breathing/tongue issue resolved. Signal: POSITIVE.
+  - Note: Multiple items removed at once. Similar aggressive signal to Imperador.
+Synthesis note: The removal of three pieces of equipment is a strong message of confidence or desperation; treat the horse's behavioural profile as highly uncertain for today.
+
+STAR SYMPHONY
+Today's equipment : None
+Changes           : REMOVED: BLK (Blinkers)
+  - BLK removed: focus/distraction issue resolved; horse now tractable without vision restriction. Signal: POSITIVE.
+Synthesis note: Removal of blinkers suggests this horse has settled mentally; a positive development.
+
+SECTION 2 - EQUIPMENT CHANGE RANKING
+1. IMPERADOR — POSITIVE but HIGH RISK. Aggressive removal of 4 items (BB, CNB, HOOD, TS) signals either major confidence in the horse's current mental state or experimentation; unpredictable outcome.
+2. HANIEL — POSITIVE but HIGH RISK. Aggressive removal of 3 items (BB, HOOD, TS) signals either major confidence or experimentation; unpredictable outcome.
+3. AGRIMA — POSITIVE. Removal of blinkers suggests the horse has settled and does not require vision restriction to focus.
+4. STAR SYMPHONY — POSITIVE. Removal of blinkers suggests the horse has settled and does not require vision restriction to focus.
+5. YARRA YARRA — POSITIVE. Removal of CNB and TS suggests trainer believes both mouth and tongue issues are resolved.
+6. SHUTTERFLY — POSITIVE. Removal of CNB and TS suggests trainer believes both mouth and tongue issues are resolved.
+7. SHAHENSHAAH — POSITIVE. Removal of CNB and TS suggests trainer believes both mouth and tongue issues are resolved.
+8. FREDERIKA — POSITIVE. Removal of TS suggests tongue issue is resolved.
+9. SASSY — POSITIVE. Removal of TS suggests tongue issue is resolved.
+10. MICHIKO — POSITIVE. Removal of TS suggests tongue issue is resolved.
+11. APPROVAL — POSITIVE. Removal of TS suggests tongue issue is resolved.
+12. BIG B — STABLE. No equipment change; horse running in familiar, unremarkable gear.
+
+SECTION 3 - FLAGS FOR SYNTHESISER
+- IMPERADOR and HANIEL are flagged for aggressive multi-item removal. This is a bipolar signal: either the horse has outgrown its behavioural issues entirely (major positive), or the trainer is experimenting due to poor form (major risk). Treat as UNCERTAIN for performance prediction.
+- No first-time vision equipment or tongue strap additions to check for in this race.
+- No bit changes (all removals) to affect draw suitability.
+- No horse has 3+ pieces of equipment today; most have none.
+- No surgical shoeing noted.
+- All horses in this race have had equipment REMOVED, except Big B which is STABLE. This is unusual. Every other runner's gear is being reduced. This could be a race where multiple horses are expected to run more tractably, or it could be a group of trainers collectively removing gear that was not effective. Weigh this in assessing the overall race pattern.

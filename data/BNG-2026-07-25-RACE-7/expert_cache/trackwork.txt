@@ -1,0 +1,150 @@
+SECTION 1 - PER-HORSE TRACKWORK SUMMARY
+
+IMPERADOR
+Fitness level      : SHARP
+Recency            : STALE RISK (39 days)
+Gate Practice flag : CLEAR
+Inner Sand flag    : MODERATE (1)
+Mock Race          : None
+Jockey continuity  : DIFFERENT JOCKEY (worked: Vishal Bunde)
+Swimming           : NO SIGNAL
+Key observation    : Exceptional timing (-9s) inside Inner Sand suggests raw fitness is high, but the 39-day gap is a significant concern for race-readiness.
+
+AGRIMA
+Fitness level      : SHARP
+Recency            : VERY FRESH (3 days)
+Gate Practice flag : MONITOR (2 sessions)
+Inner Sand flag    : HIGH INTENSITY (2)
+Mock Race          : YES — Won by 1 1/4 lengths over Knightsbridge, Pole Star, Glaze, Sai Princess, Estelle, Ebotse
+Jockey continuity  : DIFFERENT JOCKEY (worked: R.N.Darshan)
+Swimming           : NO SIGNAL
+Key observation    : Raced impressively in a Mock Race with -14s timing and has continued to show sharp form (gate work), indicating top-tier preparation.
+
+YARRA YARRA
+Fitness level      : SHARP
+Recency            : IDEAL WINDOW (7 days)
+Gate Practice flag : CLEAR
+Inner Sand flag    : None
+Mock Race          : None
+Jockey continuity  : SAME JOCKEY (Antony Raj)
+Swimming           : NO SIGNAL
+Key observation    : Solid Outer Sand work with -6s timing, showing consistent speed ahead of the 1500m journey.
+
+SHUTTERFLY
+Fitness level      : SHARP
+Recency            : IDEAL WINDOW (8 days)
+Gate Practice flag : CLEAR
+Inner Sand flag    : None
+Mock Race          : None
+Jockey continuity  : SAME JOCKEY (Trevor)
+Swimming           : NO SIGNAL
+Key observation    : Improved trend with sharp -7s timing in the lead, indicating excellent race readiness.
+
+FREDERIKA
+Fitness level      : STANDARD
+Recency            : STALE RISK (104 days)
+Gate Practice flag : CLEAR
+Inner Sand flag    : None
+Mock Race          : None
+Jockey continuity  : DIFFERENT JOCKEY (worked: R.B)
+Swimming           : NO SIGNAL
+Key observation    : Last seen 3+ months ago with only standard timing; a major fitness concern for a competitive Class 4 handicap.
+
+SASSY
+Fitness level      : SHARP
+Recency            : VERY FRESH (3 days)
+Gate Practice flag : CLEAR
+Inner Sand flag    : MODERATE (1)
+Mock Race          : None
+Jockey continuity  : DIFFERENT JOCKEY (worked: Akshay Kumar)
+Swimming           : NO SIGNAL
+Key observation    : Strong sharp work inside Inner Sand suggests a fresh run-up with no obvious fatigue issues.
+
+SHAHENSHAAH
+Fitness level      : SHARP
+Recency            : STALE RISK (74 days)
+Gate Practice flag : MONITOR (1 session)
+Inner Sand flag    : None
+Mock Race          : None
+Jockey continuity  : DIFFERENT JOCKEY (worked: M Naveen)
+Swimming           : NO SIGNAL
+Key observation    : Impressive recent timing averages (-2.7s) masked by a large gap between work and race; trainer confidence is unverified.
+
+MICHIKO
+Fitness level      : SHARP
+Recency            : STALE RISK (39 days)
+Gate Practice flag : BARRIER RISK (3 sessions, no recent improvement noted)
+Inner Sand flag    : HIGH INTENSITY (2)
+Mock Race          : None
+Jockey continuity  : DIFFERENT JOCKEY (worked: Kiran Rai P)
+Swimming           : NO SIGNAL
+Key observation    : High-intensity Inner Sand work shows fitness, but the persistent barrier schooling count is a major red flag.
+
+APPROVAL
+Fitness level      : SHARP
+Recency            : VERY FRESH (3 days)
+Gate Practice flag : MONITOR (2 sessions)
+Inner Sand flag    : None
+Mock Race          : None
+Jockey continuity  : SAME JOCKEY (R N Darshan)
+Swimming           : NO SIGNAL
+Key observation    : Strong sharp timing in the lead with the race jockey onboard, indicating a confident run-up.
+
+BIG B
+Fitness level      : SHARP
+Recency            : IDEAL WINDOW (11 days)
+Gate Practice flag : CLEAR
+Inner Sand flag    : HIGH INTENSITY (4)
+Mock Race          : None
+Jockey continuity  : SAME JOCKEY (M Rajesh Kumar)
+Swimming           : NO SIGNAL
+Key observation    : Two high-intensity Inner Sand sessions in the last week point to a serious, hard-pressed preparation.
+
+HANIEL
+Fitness level      : SHARP
+Recency            : IDEAL WINDOW (7 days)
+Gate Practice flag : BARRIER RISK (3 sessions, no recent improvement noted)
+Inner Sand flag    : None
+Mock Race          : None
+Jockey continuity  : SAME JOCKEY (J H Arul)
+Swimming           : NO SIGNAL
+Key observation    : Has shown sharp timing in recent work, but the frequency of barrier schooling raises significant doubts about breaking cleanly.
+
+STAR SYMPHONY
+Fitness level      : SHARP
+Recency            : STALE RISK (39 days)
+Gate Practice flag : CLEAR
+Inner Sand flag    : None
+Mock Race          : YES — Won by 1 1/4 lengths over Superstar, Black Irish, Mandate, Gold Empire, Lex Luthor
+Jockey continuity  : DIFFERENT JOCKEY (worked: Anish Hangal)
+Swimming           : RECOVERY/MANAGEMENT — Absent ground work for 39 days and recent swimming suggests maintenance rather than peak intensity.
+Key observation    : Won a Mock Race with exceptional timing (-10s), but a switch in rider and swim-focused preparation raises questions about current fitness levels.
+
+SECTION 2 - RELATIVE TRACKWORK RANKING
+
+1. AGRIMA — SHARP | VERY FRESH | Mock Race winner with exceptional timing indicates race fitness is currently the highest in the field.
+2. APPROVAL — SHARP | VERY FRESH | Sharp timing and jockey continuity signal a confident, well-prepared runner.
+3. SHUTTERFLY — SHARP | IDEAL WINDOW | Consistent sharp work over the last two weeks puts this horse in prime condition.
+4. YARRA YARRA — SHARP | IDEAL WINDOW | Solid sharp work in the ideal window suggests readiness.
+5. BIG B — SHARP | IDEAL WINDOW | High-intensity Inner Sand prep indicates a serious trainer commitment to fitness.
+6. SASSY — SHARP | VERY FRESH | Strong sharp work despite the barrier clash earlier in the week.
+7. IMPERADOR — SHARP | STALE RISK | Exceptional raw timing but the long layoff is a major handicap risk.
+8. SHAHENSHAAH — SHARP | STALE RISK | Good timing averages but the large gap between work and race is concerning.
+9. MICHIKO — SHARP | STALE RISK | High fitness but persistent barrier issues and jockey change are distinct negatives.
+10. STAR SYMPHONY — SHARP | STALE RISK | Won a Mock Race but lacks recent real race-like work and has a jockey switch.
+11. HANIEL — SHARP | IDEAL WINDOW | Excellent timing but the barrier schooling count and jockey switch suggest caution.
+12. FREDERIKA — STANDARD | STALE RISK | Standard timing 3+ months ago with no recent signs of fitness improvement.
+
+SECTION 3 - FLAGS AND ALERTS
+
+- BARRIER RISK: MICHIKO and HANIEL have each appeared in 3 Gate Practice sessions, indicating potential starting issues despite sharp timing.
+- PEAK TIMING: YARRA YARRA (7 days ago), SHUTTERFLY (8 days ago), and HANIEL (7 days ago) have all recorded sharp final gallops in the 6-10 day window, suggesting peak fitness.
+- MOCK RACE WINNERS: AGRIMA won a simulated race cleanly with significant superiority, and STAR SYMPHONY also won a Mock Race with sharp timing.
+- JOCKEY CHANGES: IMPERADOR, AGRIMA, SASSY, SHAHENSHAAH, MICHIKO, and STAR SYMPHONY are working with different riders than those listed for today's race.
+- RECOVERY/MANAGEMENT SWIMMING: STAR SYMPHONY's recent swimming (2 sessions in 2 days) combined with a 39-day gap in trackwork and a history of sore backs suggests the training focus may be on recovery rather than ground-speed fitness.
+
+SECTION 4 - TRACK CONDITIONS ASSESSMENT
+
+Going quality: Firm (3.4 cm Penetrometer) — The surface is fast and firm, which generally favours speed and front-running types in 1500m races.
+Bias: The bias note confirms a preference for front-runners and early speed, and warns that the hard surface will impact joint health. Horses with recent sharp timing (e.g., Shutterfly, Agrima) are well-suited to this pace.
+False Rails: The rail is fixed at 5.5m from the 1600m mark, which alters the effective draw positions for horses attempting to lead from the outside. The "True" rail position is inside the fixed rail, potentially creating a tactical advantage for those who can cross or sit on the pace inside the barrier line.

@@ -1,0 +1,132 @@
+ SECTION 1 - RACE-DAY RIVALRY ANALYSIS
+
+IMPERADOR
+  2026-06-28 (1600m, pos 1, 0L): Beat PLEDGE (now R45) by 2.5L while carrying 5.0kg less; beat REGAL ARISTOCRACY (now R38) by 1.25L while giving 0.5kg. Beating two higher-rated rivals, including a current R45 horse, is a strong signal that his true ability is at least at that level.
+  2026-06-07 (1600m, pos 2, 6.5L): Beat PLEDGE (now R45) by 1.75L while carrying 9.5kg less. Another strong signal against the same higher-rated rival despite finishing 6.5L behind the winner that day.
+  2026-05-24 (1200m, pos 5, 7.25L): Lost to JADE MOUNTAIN (now R43) by 5.0L while carrying 3.0kg less; beat ZAYANA (now R36) by 3.5L while giving 2.0kg; lost to SCENT OF RAIN (now R35) by 2.5L at level weights; lost to MNEMOSYNE (now R35) by 1.5L at level weights. Competitive with higher-rated horses but conceding ground to lower-rated rivals at level weights tempers the record.
+
+AGRIMA
+  2026-07-11 (1600m, withdrawn): No race-day rivals within 5L -- withdrawn by vet before start.
+  2026-06-13 (1400m, pos 1, 0L): No race-day rivals within 5L -- won clear of the field.
+  2026-05-31 (1200m, pos 4, 5.0L): Lost to STEFFEN (now R47) by 5.0L while giving 2.5kg; lost to DASADYU (now R25) by 3.75L while carrying 3.0kg less (rival had AWKWARD_JUMP[MEDIUM]); dead-heated VALENCIA (now R23) while carrying 2.0kg less; lost to CARTER (now R22) by 1.0L while giving 3.5kg (rival had JOCKEY_REPRIMAND[LOW]); beat WHITE SECRET (now R21) by 0.75L while carrying 0.5kg less (rival SLOWLY_AWAY[HIGH]); beat SUPERNAL (now R20) by 1.25L while carrying 1.5kg less. Consistently close finishes while conceding weight across the board; losses to lower-rated rivals are mitigated by weight gaps and rival incidents.
+
+YARRA YARRA
+  2026-07-04 (1400m, Maiden, pos 1, 0L): Beat GARZIAN (now R30) by 3.25L at level weights; beat MYSTIC DEW (now R27) by 5.0L at level weights. Both rivals are now rated higher; winning at level weights against colts as a filly is EXCEPTIONAL.
+  2026-01-21 (1200m, Cup/Classic, pos 5, 2.75L): Beat AVANTE (now R24) by 3.75L at level weights; lost to QUEEN OF BEAUTIES (unrated) by 2.75L; lost to MINARI (unrated) by 0.75L; dead-heated YOUREMYEYESBABY (unrated). Competitive but against largely unrated opposition.
+
+SHUTTERFLY
+  2026-06-20 (1400m, Cup/Classic, pos 1, 0L): Beat SEIZE THE GREY (now R42) by 3.5L while carrying 1.5kg less; beat ROYAL LEGACY (now R33) by 0.5L at level weights -- EXCEPTIONAL for a filly beating a colt at equal weight; beat EDISON (now R30) by 4.0L while carrying 1.5kg less. Strong signals against higher-rated rivals.
+  2026-05-24 (1400m, Maiden, pos 3, 18L): Beat IBADATH (now R30) by 5.0L while carrying 1.5kg less; beat BELLUCCI (now R27) by 5.0L at level weights (rival had JOCKEY_FINE[LOW]); lost to VALOR QUEEN (unrated) by 3.75L at level weights. Well behind the winner but passed beaten rivals late.
+
+FREDERIKA
+  2026-05-01 (1300m, pos 1, 0L): Beat VIBRANT QUEEN (now R57) by 4.75L while carrying 1.0kg less; beat QUEENDOM (now R35) by 2.25L while giving 1.5kg. Beating a rival now rated 57 (and giving only 1kg) is a standout signal that his peak may be conservative.
+
+SASSY
+  2026-07-05 (1800m, pos 4, 9L): Lost to STENTORIAN (now R37) by 2.5L while giving 0.5kg; beat THEOS (now R30) by 4.0L while giving 4.0kg. Stayed on close to a higher-rated rival but was 9L behind the winner.
+  2026-06-07 (1400m, pos 5, 9L): Lost to DYNAMIC FORCE (now R42) by 1.0L while giving 1.5kg; beat EL ALAMEIN (now R41) by 0.75L while giving 3.5kg; beat SUPER KIND (now R30) by 0.75L while giving 7.0kg; lost to ELVEDEN (now R29) by 5.0L while giving 7.5kg; beat SUNLIT PATH (now R26) by 0.75L while giving 4.0kg; beat SEA DIAMOND (now R24) by 4.25L while giving 6.5kg; beat PERIDOT (now R22) by 3.5L while giving 7.0kg; beat BRUCE ALMIGHTY (now R16) by 2.25L while giving 7.0kg. Competitive with higher-rated rivals despite conceding large weights to the back markers.
+  2026-05-24 (1200m, pos 6, 7.5L): Lost to SOUTHERN FORCE (now R42) by 3.25L while carrying 1.5kg less; beat STAR COMET (now R40) by 0.5L while giving 6.5kg; lost to EBOTSE (now R36) by 4.25L while giving 4.5kg; lost to SUPER KIND (now R30) by 0.75L while giving 2.0kg; beat CHISOX (now R20) by 2.5L while giving 11.0kg. Again stayed on close to some higher-rated runners while giving weight.
+
+SHAHENSHAAH
+  2026-07-11 (1400m, pos 4, 4.75L): Lost to RAVISHING QUEEN (now R41) by 2.25L while carrying 3.0kg less; lost to SOLARA (now R40) by 4.25L while carrying 1.5kg less; beat DARRINGTON (now R39) by 3.0L while carrying 1.0kg less; lost to LOTS OF LUCK (now R35) by 4.75L while giving 4.5kg; beat QUANNAH (now R27) by 2.0L while giving 3.5kg; beat ESTELLE (now R25) by 3.0L while giving 3.5kg; beat ROYAL JEWEL (now R24) by 3.0L while giving 4.0kg; dead-heated ABSOLUTE THUNDER (now R23) while giving 4.5kg; dead-heated MICHIKO while giving 1.0kg. Solid run giving weight to the lower-rated section of the field.
+  2026-07-05 (1400m, pos 3, 4L): Lost to ABSOLUTE FORCE (now R48) by 4.0L while carrying 1.0kg less; beat DOUBLE VISION (now R42) by 2.0L while giving 4.5kg; beat ACANTHA (now R37) by 2.0L while giving 2.0kg; beat EBOTSE (now R36) by 0.75L while giving 1.5kg; beat BREEZE BLUSTER (now R36) by 3.5L while giving 1.0kg; lost to MY SOLITAIRE (now R29) by 2.5L while giving 5.5kg. Handy performance with weight concessions to most.
+  2026-06-28 (1600m, pos 8, 18L): Lost to LUCA (now R40) by 1.5L while giving 2.5kg; lost to RAZZMATAZZ (now R32) by 1.0L while giving 3.0kg; lost to ART OF ROMANCE (now R24) by 3.5L while giving 5.5kg. Margins to individual rivals were reasonable, but overall he was 18L behind the winner on the same card.
+
+MICHIKO
+  2026-07-11 (1400m, pos 6, 4.75L): Same meeting as SHAHENSHAAH above. Lost to RAVISHING QUEEN by 2.25L while carrying 4.0kg less; lost to SOLARA by 4.25L while carrying 2.5kg less; beat DARRINGTON by 3.0L while carrying 2.0kg less; lost to LOTS OF LUCK by 4.75L while giving 3.5kg; beat QUANNAH, ESTELLE, ROYAL JEWEL while giving weight; dead-heated ABSOLUTE THUNDER while giving 3.5kg; dead-heated SHAHENSHAAH while carrying 1.0kg less. Performance was almost identical to SHAHENSHAAH but at slightly lower effective weights.
+  2026-06-28 (1600m, pos 1, 0L): Beat SEA DIAMOND (now R24) by 4.25L while giving 3.0kg; beat RISING FORM (now R16) by 4.75L while giving 1.5kg. Won readily against lower-rated and lightly raced horses.
+  2026-06-14 (1600m, withdrawn): No race-day rivals within 5L -- withdrawn.
+
+APPROVAL
+  2026-07-11 (1200m, pos 7, 9.25L): Lost to WANGANUI (now R27) by 4.5L while giving 1.5kg; lost to FLAVIANUS (now R27) by 2.75L while giving 1.5kg; lost to MONSTERA (now R27) by 1.25L while giving 1.5kg; beat GOLDEN HUES (now R27) by 3.75L while giving 1.5kg; beat ENERGETIC GIRL (unrated) by 4.75L while giving 1.5kg. Consistently lost to rivals now rated 27 while conceding 1.5kg across the board.
+  2026-06-14 (1100m, Maiden, pos 6, 10.5L): Lost to ATMAN (now R30) by 1.25L at level weights (rival had VETERINARY_EXAM[LOW]); beat IBADATH (now R30) by 0.5L at level weights; lost to PORTIEUX (now R27) by 1.25L while giving 1.5kg. Close to rivals but 10.5L behind the winner.
+
+BIG B
+  2026-07-12 (1200m, pos 2, 0.5L): Lost to POWER OF THE SEA (now R36) by 0.5L while carrying 1.0kg less; beat BLIND FAITH (now R27) by 4.5L while giving 4.0kg; beat SD GOOD SAM (now R22) by 3.75L while giving 1.5kg. Narrow loss to a higher-rated rival while receiving a 1kg weight break is a strong signal.
+  2026-06-27 (1300m, withdrawn): No race-day rivals within 5L -- withdrawn by vet.
+  2026-05-16 (1200m, pos 7, 8.75L): Beat FIERY LOVE (now R28) by 3.75L while giving 1.5kg (rival had INJURY_SUSTAINED[HIGH]); lost to LIGHTNING BLITZ (now R26) by 3.5L while carrying 0.5kg less (rival had JOCKEY_REPRIMAND[LOW]); lost to KHAZANA (now R20) by 3.5L while giving 2.5kg; lost to DIESEL (now R19) by 1.0L while giving 1.0kg; beat GLAZE (now R19) by 1.0L while giving 2.0kg. Beaten 8.75L but largely close to individual rivals.
+
+HANIEL
+  2026-06-28 (1200m, Maiden, pos 6, 9.25L): Lost to AUSPICIOUS KING (now R30) by 1.5L while carrying 1.5kg less.
+  2026-05-30 (1200m, Maiden, pos 4, 7L): Lost to EVOLVITA (now R27) by 1.75L at level weights (rival had VETERINARY_EXAM[LOW]).
+
+STAR SYMPHONY
+  2026-06-21 (1200m, pos 11, 45L): No race-day rivals within 5L -- finished tailed off, 45L behind.
+  2025-10-26 (1400m, Cup/Classic, pos 3, 4.5L): Lost to TEFILLAH (now R40) by 4.5L while giving 0.5kg; beat BREEZE BLUSTER (now R36) by 5.0L while giving 1.0kg; beat NOBLE PURSUIT (now R22) by 3.0L while giving 2.5kg; lost to PURPLE MARTINI (now R21) by 2.25L while giving 2.0kg. Good effort at a higher level.
+  2025-10-17 (1600m, Cup/Classic, pos 7, 12L): Lost to SELMA (now R44) by 4.0L while carrying 5.0kg less; lost to BREEZE BLUSTER (now R36) by 0.75L while carrying 5.0kg less; lost to STAR HONOUR (now R29) by 2.25L while carrying 5.0kg less (rival had AWKWARD_JUMP[MEDIUM]); lost to STRIKING VIKING (now R27) by 0.75L while carrying 5.0kg less; beat PURPLE MARTINI (now R21) by 4.25L while carrying 4.0kg less. Consistently lost to higher-rated rivals while receiving large weight concessions.
+
+SECTION 2 - CLASS DROP AND PEAK RATING TABLE
+
+Sorted by drop highest first:
+
+SHAHENSHAAH    | peak_R=42 curr_R=34 drop=8  | TARGET | [ENGINEERED DROP]
+STAR SYMPHONY  | peak_R=29 curr_R=22 drop=7  | TARGET | [ENGINEERED DROP]
+SASSY          | peak_R=40 curr_R=36 drop=4  | RELIEF | [ENGINEERED DROP]
+IMPERADOR      | peak_R=44 curr_R=44 drop=0  | FLAT   |
+AGRIMA         | peak_R=40 curr_R=40 drop=0  | FLAT   |
+YARRA YARRA    | peak_R=40 curr_R=40 drop=0  | FLAT   |
+SHUTTERFLY     | peak_R=37 curr_R=37 drop=0  | FLAT   |
+FREDERIKA      | peak_R=36 curr_R=36 drop=0  | FLAT   |
+MICHIKO        | peak_R=32 curr_R=32 drop=0  | FLAT   |
+APPROVAL       | peak_R=30 curr_R=30 drop=0  | FLAT   |
+BIG B          | peak_R=29 curr_R=29 drop=0  | FLAT   |
+HANIEL         | peak_R=27 curr_R=27 drop=0  | FLAT   |
+
+SECTION 3 - EFFECTIVE RATING TABLE
+
+IMPERADOR      | peak_R=44 EffWt=59.5 EffRating=49
+AGRIMA         | peak_R=40 EffWt=55.0 EffRating=54
+YARRA YARRA    | peak_R=40 EffWt=60.0 EffRating=44
+SHUTTERFLY     | peak_R=37 EffWt=58.5 EffRating=44
+FREDERIKA      | peak_R=36 EffWt=58.0 EffRating=44
+SASSY          | peak_R=40 EffWt=58.0 EffRating=48
+SHAHENSHAAH    | peak_R=42 EffWt=57.0 EffRating=52
+MICHIKO        | peak_R=32 EffWt=56.0 EffRating=44
+APPROVAL       | peak_R=30 EffWt=55.0 EffRating=44
+BIG B          | peak_R=29 EffWt=54.5 EffRating=44
+HANIEL         | peak_R=27 EffWt=53.5 EffRating=44
+STAR SYMPHONY  | peak_R=29 EffWt=51.0 EffRating=51
+
+SECTION 4 - AGE AND VALIDITY FLAGS
+
+Prime (3-4yo) count: 7 horses -- IMPERADOR, AGRIMA, YARRA YARRA, SHUTTERFLY, FREDERIKA, BIG B, HANIEL.
+Veterans (6yo+): SASSY (6yo) and SHAHENSHAAH (7yo). With seven prime horses in the race, veterans are physically disadvantaged. Neither veteran has exceptional recent form to overcome this.
+Rating unreliable - fewer than 3 runs: YARRA YARRA (2), SHUTTERFLY (2), FREDERIKA (1), APPROVAL (2), HANIEL (2).
+DEBUTANT: None in this field.
+
+SECTION 5 - LAST RUN FILTER
+
+IMPERADOR      | Last pos=1 | Margin=0L | Incident=N | Status: CONTENDER
+AGRIMA         | Last pos=W | Margin=--- | Incident=Y -- WITHDRAWAL_VET[HIGH] | Status: CONTENDER (forgiven)
+YARRA YARRA    | Last pos=1 | Margin=0L | Incident=N | Status: CONTENDER
+SHUTTERFLY     | Last pos=1 | Margin=0L | Incident=N | Status: CONTENDER
+FREDERIKA      | Last pos=1 | Margin=0L | Incident=N | Status: CONTENDER
+SASSY          | Last pos=4 | Margin=9L | Incident=N | Status: ELIMINATED (lost more than 5L without incident)
+SHAHENSHAAH    | Last pos=4 | Margin=4.75L | Incident=N | Status: ELIMINATED (lost by 18L within last 3 runs without incident)
+MICHIKO        | Last pos=6 | Margin=4.75L | Incident=N | Status: CONTENDER
+APPROVAL       | Last pos=7 | Margin=9.25L | Incident=N | Status: ELIMINATED (lost more than 5L without incident; also lost by 10.5L two runs back)
+BIG B          | Last pos=2 | Margin=0.5L | Incident=N | Status: CONTENDER
+HANIEL         | Last pos=6 | Margin=9.25L | Incident=N | Status: ELIMINATED (lost more than 5L without incident)
+STAR SYMPHONY  | Last pos=11 | Margin=45L | Incident=N | Status: ELIMINATED (lost by 45L without incident; also lost by 12L three runs back)
+
+SECTION 6 - TODAY'S FIELD HEAD-TO-HEAD
+
+2026-05-01 BANGALORE R2 (1300m): FREDERIKA finished first and IMPERADOR finished fourth, beaten 7 lengths. On that day FREDERIKA proved decisively superior to IMPERADOR, though both have raced only sparingly since and FREDERIKA's rating remains unreliable.
+
+2026-06-28 BANGALORE R123 (1600m): IMPERADOR won; SHAHENSHAAH finished eighth, beaten 18 lengths. IMPERADOR holds a commanding form line over SHAHENSHAAH from this meeting.
+
+2026-07-11 BANGALORE R139 (1400m): SHAHENSHAAH finished fourth and MICHIKO finished sixth, both beaten 4.75 lengths. SHAHENSHAAH finished ahead of MICHIKO in their most recent direct clash.
+
+SECTION 7 - RATINGS RANKING
+
+1. AGRIMA -- Drop=0 EffR=54 FLAT -- Trend=IMPROVING -- Draws the highest effective rating via a 5.0kg claim and was winning before a veterinary withdrawal.
+2. IMPERADOR -- Drop=0 EffR=49 FLAT -- Trend=IMPROVING -- Last-start winner with strong race-day rivalry form against higher-rated horses.
+3. FREDERIKA -- Drop=0 EffR=44 FLAT -- Trend=STATIC -- Only career start produced a commanding win over a rival now rated 57, but rating unreliable with just one run.
+4. YARRA YARRA -- Drop=0 EffR=44 FLAT -- Trend=IMPROVING -- Unbeaten in two starts including a maiden win at level weights against colts, though rating unreliable.
+5. BIG B -- Drop=0 EffR=44 FLAT -- Trend=IMPROVING -- Just missed last start and brings solid, consistent form against rated rivals.
+6. SHUTTERFLY -- Drop=0 EffR=44 FLAT -- Trend=IMPROVING -- Unbeaten in two starts and beat higher-rated rivals last time, though rating unreliable.
+7. MICHIKO -- Drop=0 EffR=44 FLAT -- Trend=STATIC -- Effective rating matches many rivals but is a mature 5yo and has not faced this level recently.
+8. SASSY -- Drop=4 EffR=48 RELIEF [ENGINEERED DROP] -- Trend=DECLINING -- Eliminated by last-run filter (9L loss) and is a veteran physically disadvantaged against seven prime rivals.
+9. SHAHENSHAAH -- Drop=8 EffR=52 TARGET [ENGINEERED DROP] -- Trend=DECLINING -- Eliminated by an 18L loss within the last three runs; also a veteran against younger field.
+10. STAR SYMPHONY -- Drop=7 EffR=51 TARGET [ENGINEERED DROP] -- Trend=DECLINING -- Eliminated by a 45L last-run demolition and 12L loss before that.
+11. APPROVAL -- Drop=0 EffR=44 FLAT -- Trend=DECLINING -- Eliminated after two consecutive big-margin defeats (9.25L and 10.5L); rating unreliable.
+12. HANIEL -- Drop=0 EffR=44 FLAT -- Trend=DECLINING -- Eliminated after a 9.25L maiden defeat; rating unreliable.

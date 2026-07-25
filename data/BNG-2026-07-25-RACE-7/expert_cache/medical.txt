@@ -1,0 +1,321 @@
+SECTION 1 - PER-HORSE MEDICAL ASSESSMENT
+
+HORSE: IMPERADOR
+  Overall risk       : SERIOUS
+  Key conditions     : Interspinous Ligament Desmotomy 01/08/25 | CRITICAL | OLD
+  Recurring flag     : None
+  Race incident link : CORROBORATES — fitness certificate required (28-Jun-2026). This aligns with the surgical history; the horse required vet clearance to race after surgery.
+  Synthesis note     : Has undergone desmotomy surgery for interspinous ligament; this is a structural spinal procedure. While old, the condition is permanent and may affect flexibility under load; treat as high-risk for back-related issues under race stress.
+
+HORSE: AGRIMA
+  Overall risk       : SERIOUS
+  Key conditions     : Lameness 11/07/26 | SERIOUS | VERY RECENT; intra Articular Inj. (15/05/26, 02/06/26, 17/06/26) | TREATMENT | RECENT; capped elbow 11/07/26 | MODERATE | VERY RECENT; cellulitis 14/06/26-18/06/26 | MODERATE | RECENT
+  Recurring flag     : RECURRING — Intra Articular Injections, 3 times in 2 months
+  Race incident link : CORROBORATES — "Eshwer to withdraw AGRIMA" (11-Jul-2026) on fitness certificate grounds; this aligns with the serious lameness and capped elbow entry on the same date.
+  Synthesis note     : Multiple joint injections, recent lameness, and a race withdrawal due to lameness indicate active, unresolved lameness — a very serious concern for today.
+
+HORSE: YARRA YARRA
+  Overall risk       : WATCH
+  Key conditions     : Oedema 02/06/26, 03/07/26 | MODERATE (fluid retention/swelling) | RECENT
+  Recurring flag     : RECURRING — Oedema, 2 times
+  Race incident link : None — stewards report shows a green-running comment and withdrawal on veterinary grounds (21-Jan-2026), but no recent incidents.
+  Synthesis note     : Recurring oedema may indicate a systemic issue (e.g., allergic, circulatory). Recency is moderate; monitor for any pre-race swelling.
+
+HORSE: SHUTTERFLY
+  Overall risk       : SERIOUS
+  Key conditions     : Lameness 24/04/26 | SERIOUS | HISTORICAL; intra Articular Inj. 24/04/26 | TREATMENT | HISTORICAL
+  Recurring flag     : None
+  Race incident link : None — only a routine sample flag on record.
+  Synthesis note     : Lameness and a joint injection on the same date 3 months ago; if this was a single uncomplicated event, risk may be lower, but the pairing signals a joint issue that could recur.
+
+HORSE: FREDERIKA
+  Overall risk       : CRITICAL
+  Key conditions     : Fracture 02/07/25, 03/05/26 | CRITICAL | OLD; Lameness 02/05/26 | SERIOUS | HISTORICAL
+  Recurring flag     : RECURRING — Fracture, 2 times
+  Race incident link : None — stewards report only shows clearance and a gait issue flag (01-May-2026).
+  Synthesis note     : Two fracture entries on different dates and locations suggest a structural fragility or poor bone density. Do not overlook; the most recent fracture is over a year old but the recurrence is a strong red flag.
+
+HORSE: SASSY
+  Overall risk       : CRITICAL
+  Key conditions     : Tendon 11/12/23 | CRITICAL | OLD; Suspensory Desmitis 27/11/24 | CRITICAL | OLD; Injury 07/06/26-08/06/26 | WATCH | RECENT
+  Recurring flag     : RECURRING — Tendon + Suspensory = two distinct critical structural conditions
+  Race incident link : CORROBORATES — "SASSY sustained abrasion on left hock" (22-Nov-2025) confirms injury history.
+  Synthesis note     : CHRONIC TENDON and suspensory damage — even if old, the horse carries a high re-injury risk, especially on firm ground. The recent injury entry is a possible re-aggravation.
+
+HORSE: SHAHENSHAAH
+  Overall risk       : WATCH
+  Key conditions     : Sore Back 05/06/26-06/06/26 | MODERATE | RECENT; Physiotherapy 05/06/26-06/06/26 | TREATMENT | RECENT
+  Recurring flag     : None
+  Race incident link : None — stewards report only shows a tightening incident (05-Jul-2026).
+  Synthesis note     : Sore back treated with physiotherapy 50 days ago; likely resolved if the horse has raced since (it has). Risk is low but monitor for any pre-race stiffness.
+
+HORSE: MICHIKO
+  Overall risk       : CRITICAL
+  Key conditions     : Suspensory Desmitis 19/06/24 | CRITICAL | OLD
+  Recurring flag     : None
+  Race incident link : CORROBORATES — "very fractious in the stall and withdrawn on veterinary grounds" (14-Jun-2026) + "jumped out awkwardly" (28-Jun-2026). Gate behaviour is a major recurring concern.
+  Synthesis note     : Suspensory desmitis is a permanent structural weakness. Combined with severe, recurring gate fractiousness and a veterinary withdrawal, this horse is a high-risk elimination candidate.
+
+HORSE: APPROVAL
+  Overall risk       : CRITICAL
+  Key conditions     : Tendon 17/03/25 | CRITICAL | OLD; cellulitis 16/07/26-18/07/26 | SERIOUS | VERY RECENT; Phlebitis 17/03/25 | MODERATE | OLD; Injury 16/07/26-18/07/26 | WATCH | VERY RECENT
+  Recurring flag     : None
+  Race incident link : CORROBORATES — "tightened between APPROVAL" and "replaced the indisposed jockey" (14-Jun-2026, 11-Jul-2026) indicate racing incidents.
+  Synthesis note     : Tendon history plus very recent cellulitis (systemic infection/inflammation) on the same leg is a major concern — the horse may not be fully recovered for this race.
+
+HORSE: BIG B
+  Overall risk       : CRITICAL
+  Key conditions     : Fracture 07/07/25 | CRITICAL | OLD; Lameness 26/06/26 | SERIOUS | RECENT
+  Recurring flag     : None
+  Race incident link : CORROBORATES — "withdrawn on veterinary grounds...found to be lame on right fore" (27-Jun-2026). This aligns exactly with the lameness medical entry.
+  Synthesis note     : Fracture history plus a very recent veterinary withdrawal for lameness on the same leg suggests a chronic issue; treat as high-risk for re-injury.
+
+HORSE: HANIEL
+  Overall risk       : CRITICAL
+  Key conditions     : Injury 31/05/26-04/06/26 | MODERATE | RECENT; splint 31/05/26-01/06/26 | MODERATE | RECENT; Lameness 30/04/26 | SERIOUS | HISTORICAL; intra Articular Inj. 30/04/26, 29/06/26 | TREATMENT | RECENT
+  Recurring flag     : RECURRING — Intra Articular Injections, 2 times; Injury/splint, multi-day
+  Race incident link : CORROBORATES — stewards report (30-May-2026) contains all flags: gate incident, withdrawn on veterinary grounds, post-race lameness, fitness certificate required. This confirms a serious recent health crisis.
+  Synthesis note     : MULTIPLE recent issues: lameness, joint injections, a splint injury, and a stewards report showing withdrawal on veterinary grounds and post-race lameness — one of the highest-risk horses in the field.
+
+HORSE: STAR SYMPHONY
+  Overall risk       : WATCH
+  Key conditions     : Gastric ulcers 24/06/26 | MODERATE | RECENT; Sore Back 24/06/26 | MODERATE | RECENT
+  Recurring flag     : None
+  Race incident link : None — stewards report only shows a slowly-away comment and a riding enquiry from 2025.
+  Synthesis note     : Gastric ulcers are manageable but can affect performance if active; sore back on the same date suggests a combined tension/stress issue. Monitor for pre-race signs of discomfort.
+
+SECTION 2 - RAW STEWARDS REPORTS ANALYSIS
+
+HORSE: IMPERADOR
+    Race date: 28-Jun-2026 | BANGALORE | 1600M
+    The tongue strap of IMPERADOR (Vishal N Bunde) came undone before the start which was refastened by the handlers. Approaching 1500 meters SHAHENSHAAH (Abdul Fazal) steadied from IMPERADOR (Vishal N Bunde). Routine Sample was taken for analysis from the winner b g IMPERADOR.
+    Flags: FITNESS CERTIFICATE REQUIRED, BLOOD VESSEL
+    Race date: 22-Nov-2025 | BANGALORE | 1100M
+    Routine Sample was taken for analysis from the winner b g IMPERADOR.
+    Note: The "blood vessel" flag from the 28-Jun-2026 race is a steward's default marker; no explicit burst blood vessel text. The fitness certificate required flag is a concern — cross-check medical history (surgery). The tongue strap issue is a minor equipment concern.
+
+HORSE: AGRIMA
+    Race date: 11-Jul-2026 | BANGALORE | 1600M
+    Eshwer to withdraw AGRIMA (S.
+    Note: Incomplete text but clearly a withdrawal. Combined with medical history of lameness same date = major concern.
+    Race date: 13-Jun-2026 | BANGALORE | 1400M
+    Paswan) and stumbled, thereby dislodging jockey Vishal and giving him a harmless fall, Routine Sample was taken for analysis from the winner b (mtg) f AGRIMA.
+    Race date: 31-May-2026 | BANGALORE | 1200M
+    As the gates were released AGRIMA (Aditya Waydande) turned its head to the left side and lost ground.
+    Flags: CLEARED ON EXAM, GAIT ISSUE, SLOWLY AWAY
+    Note: Stumbled and dislodged jockey is a serious incident. Gate behaviour issue. Combined with medical lameness = very concerning.
+
+HORSE: YARRA YARRA
+    Race date: 04-Jul-2026 | BANGALORE | 1400M
+    Routine Sample was taken for analysis from the winner b f YARRA YARRA.
+    Flags: FITNESS CERTIFICATE REQUIRED
+    Race date: 21-Jan-2026 | MUMBAI | 1200M
+    Ajinkya) shifted out and carried YARRA YARRA (C. Umesh (YARRA YARRA) reported that his mount was running green in the straight.
+    Flags: GATE INCIDENT, WITHDRAWN ON VETERINARY GROUNDS
+    Note: Withdrawn on veterinary grounds Jan 2026 is historical but indicates a past health crisis. Running green comment suggests inexperience or discomfort. Oedema entries align with possible fluid/swelling issues.
+
+HORSE: SHUTTERFLY
+    Race date: 20-Jun-2026 | BANGALORE | 1400M
+    Routine Sample was taken for analysis from the winner b f SHUTTERFLY.
+    Flags: GATE INCIDENT
+    Note: Only a routine sample flag. No race incidents of medical concern on record.
+
+HORSE: FREDERIKA
+    Race date: 01-May-2026 | BANGALORE | 1300M
+    Routine Sample was taken for analysis from the winner b g FREDERIKA.
+    Flags: CLEARED ON EXAM, GAIT ISSUE
+    Note: Gait issue flag is notable given the fracture history. Corroborates medical concern.
+
+HORSE: SASSY
+    Race date: 05-Jul-2026 | BANGALORE | 1800M
+    Prabhakaran) was pulling hard had to be check avoid the heels of SASSY (Kiran Rai P) then shifted "out" bumping MANDATE (Aleemuddin).
+    Flags: SLOWLY AWAY
+    Race date: 13-Jun-2026 | BANGALORE | 1600M
+    G) shifted out bumping SASSY SARAH (Akshay Kumar).
+    Flags: CLEARED ON EXAM
+    Race date: 22-Nov-2025 | BANGALORE | 1600M
+    Jockey Abhishek Mhatre, the rider of LIVE THE DREAM was reprimanded for shifting 'in' and inconveniencing SASSY (Angad) on his inside approaching the 1400 Metres. SASSY (Angad) sustained abrasion on left hock.
+    Flags: CLEARED ON EXAM, SLOWLY AWAY
+    Note: Sustained abrasion on left hock confirms injury. No recent serious incidents.
+
+HORSE: SHAHENSHAAH
+    Race date: 05-Jul-2026 | BANGALORE | 1400M
+    Approaching 1000 metres ELVEDEN (Aleemuddin) was tightened by SHAHENSHAAH (Faizan Khan).
+    Flags: GATE INCIDENT
+    Note: Only a tightening incident. No medical flags.
+
+HORSE: MICHIKO
+    Race date: 11-Jul-2026 | BANGALORE | 1400M
+    An enquiry was conducted by the Stipendiary Stewards into the riding of MICHIKO (A. Sandesh, the rider of MICHIKO was found gulity under Rule 161(ii) of BTC Rules of Racing for Careless Riding in thet he shifted"in" and caused jockey Y. Srinath, to check and his mount clipped the heels of the front running MICHIKO and stumbled.
+    Race date: 28-Jun-2026 | BANGALORE | 1600M
+    At the start MICHIKO (Kiran Rai P) jumped out awkwardly and bumped the hindquarters of MAGNA CARTA (S. Kiran Rai P, the rider of MICHIKO reported that he accidentally lost his whip passing the 200 Meters. Routine Sample was taken for analysis from the winner b g MICHIKO.
+    Flags: FITNESS CERTIFICATE REQUIRED, BLOOD VESSEL
+    Race date: 14-Jun-2026 | BANGALORE | 1600M
+    MICHIKO (Rajesh Kumar M) was very fractious in the stall and thereby was withdrawn by order of the Stewards acting on Veterinary advice at 2:01 p.m. Rajesh Babu was informed that MICHIKO must complete a satisfactory gate practice before accepting again.
+    Flags: GATE INCIDENT, WITHDRAWN ON VETERINARY GROUNDS, SLOWLY AWAY
+    Note: RECURRING GATE FRACTIOUSNESS leading to veterinary withdrawal — this is a major pattern. Combined with suspensory history, this horse is extremely high-risk.
+
+HORSE: APPROVAL
+    Race date: 11-Jul-2026 | BANGALORE | 1200M
+    Shortly after eased when tightened between APPROVAL (Darshan R. Near the 950 meters APPROVAL (R.
+    Flags: SLOWLY AWAY
+    Race date: 14-Jun-2026 | BANGALORE | 1100M
+    Vikrant, the rider of APPROVAL replaced the indisposed jockey Siddaraju. APPROVAL (A.
+    Flags: POST-RACE LAMENESS, SLOWLY AWAY
+    Note: Post-race lameness flag is a serious concern. Corroborates medical history of cellulitis and tendon.
+
+HORSE: BIG B
+    Race date: 27-Jun-2026 | BANGALORE | 1300M
+    Narayana Gowda V.to withdraw BIG B (Kiran Rai P) on veterinary grounds at 5:12 p.m on 26/06/2026, as it was found to be lame on right fore.
+    Flags: FITNESS CERTIFICATE REQUIRED
+    Note: Explicit veterinary withdrawal for lameness on right fore — direct corroboration of medical lameness entry. Very recent.
+    Race date: 21-Mar-2026 | MUMBAI | 1200M
+    On arrival at the starting gates, on a request from Jockey P. Trevor, ART COLLECTOR was examined by the Club's Chief V.O., who certified him fit to race.BIG BAY (Yash Narredu, dr.7) was reluctant to be stalled. As such, Trainer M. Narredu has been asked to give his charge more gate practice and show
+    Note: This entry is about BIG BAY, not BIG B. Ignore.
+
+HORSE: HANIEL
+    Race date: 30-May-2026 | BANGALORE | 1200M
+    HANIEL (Arul J.
+    Flags: GATE INCIDENT, WITHDRAWN ON VETERINARY GROUNDS, POST-RACE LAMENESS, FITNESS CERTIFICATE REQUIRED, CLEARED ON EXAM, SLOWLY AWAY
+    Note: ALL major flags triggered on a single race date. This is a crisis point — withdrawn on veterinary grounds, post-race lameness, fitness certificate required. Extremely concerning.
+
+HORSE: STAR SYMPHONY
+    Race date: 21-Jun-2026 | BANGALORE | 1200M
+    STAR SYMPHONY (L.
+    Flags: SLOWLY AWAY
+    Race date: 19-Sep-2025 | MYSORE | 1400M
+    An enquiry is being held into the manner of riding of Jockey Afsar, on his mount STAR SYMPHONY (Trained by Mr.
+    Flags: CLEARED ON EXAM
+    Note: Only a slowly-away flag. No recent medical incidents.
+
+SECTION 3 - MEDICAL RISK RANKING
+
+1. HANIEL — CRITICAL | Multiple recent issues: lameness, joint injections, splint injury, stewards withdrawal on veterinary grounds, post-race lameness, fitness certificate required. Highest risk profile in the field.
+2. MICHIKO — CRITICAL | Suspensory desmitis + recurring severe gate fractiousness leading to veterinary withdrawal. Structural + behavioural risk.
+3. AGRIMA — SERIOUS | Three joint injections in 2 months, very recent lameness and capped elbow, race withdrawal due to lameness on the same date.
+4. BIG B — CRITICAL | Fracture history + very recent veterinary withdrawal for lameness on right fore. Direct corroboration.
+5. APPROVAL — CRITICAL | Tendon history + very recent cellulitis + post-race lameness flag in stewards report.
+6. FREDERIKA — CRITICAL | Two fracture entries indicate structural fragility. Though old, the recurrence is a strong red flag.
+7. SASSY — CRITICAL | Chronic tendon + suspensory damage. Old but structural condition. Recent injury entry is a watch.
+8. IMPERADOR — SERIOUS | Interspinous ligament surgery is permanent. Fitness certificate required flag corroborates.
+9. SHUTTERFLY — SERIOUS | Lameness paired with joint injection 3 months ago. Single event, no recurrence, but the pairing signals a joint issue.
+10. STAR SYMPHONY — WATCH | Gastric ulcers and sore back on same date. Manageable but note recency.
+11. YARRA YARRA — WATCH | Recurring oedema. Systemic issue possible. Historical veterinary withdrawal is a past concern.
+12. SHAHENSHAAH — WATCH | Sore back treated with physio 50 days ago. Likely resolved. Lowest risk in the field.
+
+SECTION 4 - FLAGS FOR SYNTHESISER
+
+- VERY RECENT conditions (last 14 days): AGRIMA (lameness 11/07/26), APPROVAL (cellulitis 16/07/26-18/07/26). Both are serious and may not be fully recovered.
+- HORSE WITH STEWARDS CORROBORATION OF MEDICAL HISTORY:
+  * AGRIMA: Lameness + capped elbow medical entry on 11/07/26, same date stewards show withdrawal.
+  * BIG B: Lameness medical entry 26/06/26, stewards show withdrawal on veterinary grounds for lameness on 27/06/26.
+  * HANIEL: Lameness, injury, joint injections medical entries; stewards show post-race lameness, withdrawal on veterinary grounds, fitness certificate required on 30/05/26.
+  * APPROVAL: Tendon cellulitis medical; stewards show post-race lameness flag.
+- ROARER ASSESSMENT: No horse has Laryngeal Abnormality entries in the medical report. Today's distance is 1500M (middle distance). No Roarer flags to assess.
+- HORSES WITH TREATMENT-ONLY HISTORY:
+  * SHAHENSHAAH: Physiotherapy 50 days ago for sore back. Likely resolved. Positive — treatment was administered and the horse has raced since.
+- HORSES WITH NO MEDICAL HISTORY: None. All horses have at least one entry in the medical report. YARRA YARRA, SHAHENSHAAH, and STAR SYMPHONY have the lowest-severity profiles.
+- HORSES REQUIRING FITNESS CERTIFICATE: IMPERADOR and AGRIMA have been flagged in stewards reports for fitness certificates. Confirm on the day's declarations whether clearance has been issued.
+
+SECTION 5 - BODY WEIGHT ASSESSMENT
+
+HORSE: IMPERADOR
+  Trend           : VOLATILE  [HEALTHY]
+  Latest weight   : 431 kg  [HEALTHY]
+  Signal          : WATCH
+  Cross-check     : Medical history shows spinal surgery — volatile weight may reflect inconsistent management due to recovery periods. Performance is improving despite weight swings.
+  Synthesis note  : Volatile weight pattern. No clear positive or negative signal. Verify today's weight — a large swing either way would confirm instability.
+
+HORSE: AGRIMA
+  Trend           : REVERSE TREND UP  [HEALTHY]
+  Latest weight   : 456 kg  [HEALTHY]
+  Signal          : POSITIVE
+  Cross-check     : Medical history is very poor (lameness, injections). Weight signal says the horse is physically recovering, but medical data warns of active lameness. This is a CONTRADICTION. The weight signal may reflect steroid/anti-inflammatory treatment masking the issue.
+  Synthesis note  : READY TO STRIKE weight signal, but medical profile is SERIOUS. Do not let weight reversal alone override the strong medical red flags. This is a classic "looks good but is hiding a problem" scenario.
+
+HORSE: YARRA YARRA
+  Trend           : VOLATILE  [HEALTHY]
+  Latest weight   : 473 kg  [HEALTHY]
+  Signal          : WATCH
+  Cross-check     : Oedema entries may explain weight swings (fluid accumulation/retention). Performance declining.
+  Synthesis note  : Volatile weight aligns with oedema risk. A large positive swing could be fluid retention, not genuine condition gain.
+
+HORSE: SHUTTERFLY
+  Trend           : STABLE  [OVERWEIGHT]
+  Latest weight   : 488 kg  [OVERWEIGHT]
+  Signal          : NEUTRAL
+  Cross-check     : Medical history is historical (3 months ago). Stable weight is neutral, but overweight by 13 kg may indicate lack of race fitness.
+  Synthesis note  : Overweight — may be carrying excess condition. Decline in performance trend aligns with this. Check trackwork for fitness signals.
+
+HORSE: FREDERIKA
+  Trend           : INSUFFICIENT DATA  [HEALTHY]
+  Latest weight   : 462 kg  [HEALTHY]
+  Signal          : NEUTRAL
+  Cross-check     : Only one run recorded. Cannot assess trend. Medical history (fracture) is critical but weight data does not help.
+  Synthesis note  : No weight trend to analyse. Do not factor weight into assessment for this horse.
+
+HORSE: SASSY
+  Trend           : STABLE  [HEALTHY]
+  Latest weight   : 452 kg  [HEALTHY]
+  Signal          : NEUTRAL
+  Cross-check     : Stable weight despite chronic structural history. No weight concern either way.
+  Synthesis note  : Neutral weight. Medical history is the primary concern, not weight.
+
+HORSE: SHAHENSHAAH
+  Trend           : VOLATILE  [HEALTHY]
+  Latest weight   : 434 kg  [HEALTHY]
+  Signal          : WATCH
+  Cross-check     : Performance improving despite volatile weight. Medical history is low-risk.
+  Synthesis note  : Volatile but improving performance. May be being trained hard (weight fluctuating with training load). Verify today's weight.
+
+HORSE: MICHIKO
+  Trend           : VOLATILE  [HEALTHY]
+  Latest weight   : 475 kg  [HEALTHY (upper bound)]
+  Signal          : WATCH
+  Cross-check     : Gate fractiousness and suspensory history — weight volatility may reflect stress or inconsistent training.
+  Synthesis note  : Volatile weight. At upper healthy bound. A large spike could indicate a return to racing after a rest due to gate withdrawal.
+
+HORSE: APPROVAL
+  Trend           : STABLE  [HEALTHY]
+  Latest weight   : 454 kg  [HEALTHY]
+  Signal          : NEUTRAL
+  Cross-check     : Medical history is critical (cellulitis, tendon). Stable weight is neutral but does not rule out health issues.
+  Synthesis note  : Stable weight does not contradict medical concerns. Medical risk is primary.
+
+HORSE: BIG B
+  Trend           : STABLE  [OVERWEIGHT]
+  Latest weight   : 489 kg  [OVERWEIGHT]
+  Signal          : NEUTRAL
+  Cross-check     : Medical history is critical (fracture, lameness withdrawal). Overweight and performance declining = double concern.
+  Synthesis note  : Overweight by 14 kg, performance declining, veterinary withdrawal for lameness. The weight gain is likely due to enforced rest from lameness — a NEGATIVE signal.
+
+HORSE: HANIEL
+  Trend           : STABLE  [HEALTHY]
+  Latest weight   : 422 kg  [HEALTHY (lower bound)]
+  Signal          : NEUTRAL
+  Cross-check     : Medical history is critical. At the low end of healthy weight may reflect illness/treatment stress.
+  Synthesis note  : Stable at low healthy bound. The medical crisis (late May/early June) may have caused weight loss that has now stabilised. Verify today's weight for any further decline.
+
+HORSE: STAR SYMPHONY
+  Trend           : VOLATILE  [HEALTHY]
+  Latest weight   : 441 kg  [HEALTHY]
+  Signal          : WATCH
+  Cross-check     : Gastric ulcers could explain weight volatility (appetite fluctuation). Performance improving.
+  Synthesis note  : Volatile weight may be linked to gastric ulcer management. Verify today's weight for sign of continued instability.
+
+WEIGHT RANKING: most positive weight signal to most concerning.
+
+1. AGRIMA — REVERSE TREND UP | HEALTHY | POSITIVE (but contradicted by medical profile — note caution)
+2. APPROVAL — STABLE | HEALTHY | NEUTRAL
+3. SASSY — STABLE | HEALTHY | NEUTRAL
+4. HANIEL — STABLE | HEALTHY | NEUTRAL
+5. SHAHENSHAAH — VOLATILE | HEALTHY | WATCH
+6. STAR SYMPHONY — VOLATILE | HEALTHY | WATCH
+7. IMPERADOR — VOLATILE | HEALTHY | WATCH
+8. MICHIKO — VOLATILE | HEALTHY (upper bound) | WATCH
+9. YARRA YARRA — VOLATILE | HEALTHY | WATCH (fluid retention risk)
+10. FREDERIKA — INSUFFICIENT DATA | HEALTHY | NEUTRAL
+11. SHUTTERFLY — STABLE | OVERWEIGHT | NEUTRAL (negative due to excess condition)
+12. BIG B — STABLE | OVERWEIGHT | NEUTRAL (negative — weight gain likely due to injury rest)
+
+READY TO STRIKE horses: AGRIMA (weight signal positive, but medical profile contradicts — treat with extreme caution, do not endorse as a confident pick).
