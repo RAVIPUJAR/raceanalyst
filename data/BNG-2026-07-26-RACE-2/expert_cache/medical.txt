@@ -1,0 +1,12 @@
+PER-HORSE MEDICAL ASSESSMENT
+
+HORSE: VALIANT STREAM
+Overall risk       : CRITICAL
+Key conditions     : Tendon 03/01/25 (OLD, CRITICAL); Chip Fracture knee 15/03/25 (OLD, CRITICAL); Arthroscopy 31/03/25 (OLD, WATCH)
+Recurring flag     : None — each structural issue only appears once, but two distinct CRITICAL conditions.
+Race incident link : None direct. Note: on 31-May-2026, a fitness certificate was required and a blood vessel flag appears — cross-reference with a possible race incident not fully detailed here. No direct medical link.
+Synthesis note     : Has a history of tendon injury and a chip fracture in the knee, both over a year old, but the horse is currently racing; the tendon history elevates re-injury risk under race stress despite the time elapsed.
+
+HORSE: JOONDALUP
+Overall risk       : SERIOUS
+Key conditions     : Lameness (SERIOUS) on 08/06/26, 09/06/26, and 11/06/26 (RECENT, 45-48 days ago); Intra Articular Injection 11/06/26

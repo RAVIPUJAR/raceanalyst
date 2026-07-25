@@ -1,0 +1,10 @@
+MEDICAL RISK RANKING
+
+1. QUALIFY - CRITICAL | Historical tendon injury (CRITICAL condition, even if old); highest risk of catastrophic re-injury.
+2. COMO - SERIOUS | Recurring lameness strongly corroborated by two stewards withdrawals for tendon/limb soreness; documented structural unsoundness.
+3. IRON FLAME - SERIOUS | Recurring lameness (2 entries) plus recent infection; pattern of physical issues.
+4. SPARK OF LIFE - MODERATE | Ongoing active management for sore back with multi-session laser therapy very recently (within 30 days).
+5. SINDOOR - MODERATE/WATCH | Recent intra articular injection (27 days ago) for sore back; may not be fully recovered.
+6. BAY VIEW - WATCH | Historical infection only; very low concern.
+7. DARRINGER - LOW RISK | No medical history.
+8. ACT OF KINDNESS - LOW RISK | No medical history.
