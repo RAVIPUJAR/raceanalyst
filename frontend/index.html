@@ -841,402 +841,494 @@
         </aside>
     </div>
 
-    <script>
-        (function() {
-            // ----- constants with icons & REORDERED RACE DAY FILES -----
-            const EXPERTS = ["ratings", "pedigree", "trackwork", "sweepstakes", "day_results", "medical", "equipment", "connections_form", "competition_form", "field_rivals"];
-            
-            const RACE_DAY_FILES = [
-                "false_rails",
-                "track_condition",
-                "change_of_equipments",
-                "body_weights",
-                "amendments",
-                "live_odds"
-            ];
-            
-            const FINAL_ICON = "\u{1F3C7}";
-            const EXPERT_ICONS = {
-                ratings: "\u{1F4C8}",
-                pedigree: "\u{1F9EC}",
-                trackwork: "\u26A1",
-                sweepstakes: "\u{1F3AB}",
-                day_results: "\u{1F4CA}",
-                medical: "\u{1F48A}",
-                equipment: "\u2699\uFE0F",
-                connections_form: "\u{1F465}",
-                competition_form: "\u{1F947}",
-                field_rivals: "\u{1F40E}",
-            };
-            const RACE_DAY_ICONS = {
-                live_odds: "\u{1F7E2}",
-                amendments: "\u{1F7E1}",
-                body_weights: "\u{1F535}",
-                track_condition: "\u{1F7E2}",
-                change_of_equipments: "\u26AA",
-                false_rails: "\u{1F534}",
-            };
+<script>
+    (function() {
+        // ----- constants with icons & REORDERED RACE DAY FILES -----
+        const EXPERTS = ["ratings", "pedigree", "trackwork", "sweepstakes", "day_results", "medical", "equipment", "connections_form", "competition_form", "field_rivals"];
+        
+        const RACE_DAY_FILES = [
+            "false_rails",
+            "track_condition",
+            "change_of_equipments",
+            "body_weights",
+            "amendments",
+            "live_odds"
+        ];
+        
+        const FINAL_ICON = "\u{1F3C7}";
+        const EXPERT_ICONS = {
+            ratings: "\u{1F4C8}",
+            pedigree: "\u{1F9EC}",
+            trackwork: "\u26A1",
+            sweepstakes: "\u{1F3AB}",
+            day_results: "\u{1F4CA}",
+            medical: "\u{1F48A}",
+            equipment: "\u2699\uFE0F",
+            connections_form: "\u{1F465}",
+            competition_form: "\u{1F947}",
+            field_rivals: "\u{1F40E}",
+        };
+        const RACE_DAY_ICONS = {
+            live_odds: "\u{1F7E2}",
+            amendments: "\u{1F7E1}",
+            body_weights: "\u{1F535}",
+            track_condition: "\u{1F7E2}",
+            change_of_equipments: "\u26AA",
+            false_rails: "\u{1F534}",
+        };
 
-            // const AUTO_REFRESH_MS = 30000;
-            const VENUE_CODES = { 'Kolkata': 'KOL', 'Mumbai': 'MUM', 'Bangalore': 'BNG', 'Mysore': 'MYS', 'Pune': 'PUN', 'Hyderabad': 'HYD' };
+        const VENUE_CODES = { 'Kolkata': 'KOL', 'Mumbai': 'MUM', 'Bangalore': 'BNG', 'Mysore': 'MYS', 'Pune': 'PUN', 'Hyderabad': 'HYD' };
 
-            let allRaces = [];
-            let activeItem = null;
-            let openRaceDayKeys = new Set();
-            // let autoRefreshTimer = null;
+        let allRaces = [];
+        let activeItem = null;
+        let openRaceDayKeys = new Set();
 
-            // ----- API Configuration - Public (No Key Required) -----
-            // Set your public API base URL here
-            // const API_BASE = 'https://api.raceanalyst.com'; // Replace with your actual API URL
-            
-            // // Remove API key requirement - public access
-            // async function api(path) {
-            //     const base = API_BASE;
-            //     if (!base) throw new Error('API base not set');
-            //     const res = await fetch(base + path);
-            //     if (!res.ok) throw new Error(`${path} → ${res.status}`);
-            //     return res.json();
-            // }
+        // ----- API Configuration - Public (No Key Required) -----
+        const API_BASE = 'https://raceanalyst-api.onrender.com';
 
-            // In index.html - no API key needed now
-            // In index.html
-            const API_BASE = 'https://raceanalyst-api.onrender.com';  // or https://api.raceanalyst.com
-
-            // async function api(path) {
-            //     const res = await fetch(API_BASE + path);
-            //     return await res.json();
-            // }
-
-            async function api(path) {
-                try {
-                    const res = await fetch(API_BASE + path);
-                    if (!res.ok) {
-                        throw new Error(`HTTP ${res.status}`);
-                    }
-                    return await res.json();
-                } catch (error) {
-                    console.error('API Error:', error);
-                    throw error;
+        async function api(path) {
+            try {
+                const res = await fetch(API_BASE + path);
+                if (!res.ok) {
+                    throw new Error(`HTTP ${res.status}`);
                 }
+                return await res.json();
+            } catch (error) {
+                console.error('API Error:', error);
+                throw error;
             }
+        }
 
-            function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+        function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
-            function parseRaceId(raceId) {
-                const m = raceId.match(/^([A-Z]+)-(\d{4}-\d{2}-\d{2})-RACE-(\d+)$/);
-                if (!m) return null;
-                return { code: m[1], date: m[2], raceNo: parseInt(m[3], 10) };
-            }
+        function parseRaceId(raceId) {
+            const m = raceId.match(/^([A-Z]+)-(\d{4}-\d{2}-\d{2})-RACE-(\d+)$/);
+            if (!m) return null;
+            return { code: m[1], date: m[2], raceNo: parseInt(m[3], 10) };
+        }
 
-            function currentRaceId() { return document.getElementById('raceNoSelect').value; }
+        function currentRaceId() { return document.getElementById('raceNoSelect').value; }
 
-            function getRaceContext(raceId) {
-                const parsed = parseRaceId(raceId);
-                if (!parsed) return { venue: '—', date: '—', raceNo: '—' };
-                const venue = Object.keys(VENUE_CODES).find(k => VENUE_CODES[k] === parsed.code) || parsed.code;
-                return { venue, date: parsed.date, raceNo: parsed.raceNo };
-            }
+        function getRaceContext(raceId) {
+            const parsed = parseRaceId(raceId);
+            if (!parsed) return { venue: '—', date: '—', raceNo: '—' };
+            const venue = Object.keys(VENUE_CODES).find(k => VENUE_CODES[k] === parsed.code) || parsed.code;
+            return { venue, date: parsed.date, raceNo: parsed.raceNo };
+        }
 
-            // ----- Hamburger Menu -----
-            const hamburgerBtn = document.getElementById('hamburgerBtn');
-            const sidebarLeft = document.getElementById('sidebarLeft');
-            const mobileOverlay = document.getElementById('mobileOverlay');
+        // ===== NEW: Auto-load current/future races =====
+        function isTodayOrFuture(dateStr) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const checkDate = new Date(dateStr);
+            checkDate.setHours(0, 0, 0, 0);
+            return checkDate >= today;
+        }
 
-            function toggleMobileMenu() {
-                const isOpen = sidebarLeft.classList.toggle('open');
-                mobileOverlay.classList.toggle('active');
-                hamburgerBtn.classList.toggle('active');
-                document.body.style.overflow = isOpen ? 'hidden' : '';
-            }
-
-            function closeMobileMenu() {
-                sidebarLeft.classList.remove('open');
-                mobileOverlay.classList.remove('active');
-                hamburgerBtn.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-
-            hamburgerBtn.addEventListener('click', toggleMobileMenu);
-            mobileOverlay.addEventListener('click', closeMobileMenu);
-
-            // Close menu on window resize to desktop
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 780) {
-                    closeMobileMenu();
+        function findNextRaceDate() {
+            const dates = new Set();
+            allRaces.forEach(race => {
+                const parsed = parseRaceId(race.race_id);
+                if (parsed) {
+                    dates.add(parsed.date);
                 }
             });
-
-            // Close menu when a nav item is clicked (mobile)
-            document.addEventListener('click', (e) => {
-                if (window.innerWidth <= 780) {
-                    const navBtn = e.target.closest('#navFinal button, #navExperts button');
-                    if (navBtn) {
-                        setTimeout(closeMobileMenu, 300);
-                    }
-                }
-            });
-
-            // ----- selection controls -----
-            function initSelectionControls() {
-                const venueSelect = document.getElementById('venueSelect');
-                venueSelect.innerHTML = '<option value="">Select Venue</option>' +
-                    Object.keys(VENUE_CODES).map(v => `<option value="${v}">${v}</option>`).join('');
-                const dateInput = document.getElementById('dateInput');
-                dateInput.value = new Date().toISOString().slice(0, 10);
-                venueSelect.addEventListener('change', updateRaceNoOptions);
-                dateInput.addEventListener('change', updateRaceNoOptions);
-                document.getElementById('raceNoSelect').addEventListener('change', (e) => loadForRace(e.target.value));
-            }
-
-            function updateRaceNoOptions() {
-                const venueSelect = document.getElementById('venueSelect');
-                const dateInput = document.getElementById('dateInput');
-                const raceNoSelect = document.getElementById('raceNoSelect');
-                const code = VENUE_CODES[venueSelect.value];
-                const date = dateInput.value;
-                if (!code || !date) {
-                    raceNoSelect.innerHTML = '<option value="">Select Venue & Date</option>';
-                    return;
-                }
-                const prefix = `${code}-${date}-RACE-`;
-                const matches = allRaces
-                    .map(r => ({ ...r, parsed: parseRaceId(r.race_id) }))
-                    .filter(r => r.race_id.startsWith(prefix) && r.parsed)
-                    .sort((a, b) => a.parsed.raceNo - b.parsed.raceNo);
-                if (!matches.length) {
-                    raceNoSelect.innerHTML = '<option value="">No races for this date</option>';
-                    return;
-                }
-                const prev = raceNoSelect.value;
-                raceNoSelect.innerHTML = matches.map(r =>
-                    `<option value="${r.race_id}">Race ${r.parsed.raceNo}${r.has_outputs ? ' ✓' : ''}</option>`
-                ).join('');
-                if (matches.some(r => r.race_id === prev)) raceNoSelect.value = prev;
-                else raceNoSelect.value = matches[0].race_id;
-                loadForRace(raceNoSelect.value);
-            }
-
-            // ----- left nav -----
-            function renderLeftNav() {
-                document.getElementById('navFinal').innerHTML = `
-                        <li><button data-kind="final" data-key="final">
-                            <span class="nav-label">${FINAL_ICON} Final Selection</span>
-                            <span class="nav-dot" data-dot="final:final"></span>
-                        </button></li>`;
-                document.getElementById('navExperts').innerHTML = EXPERTS.map(name => `
-                        <li><button data-kind="expert" data-key="${name}">
-                            <span class="nav-label">${EXPERT_ICONS[name] || '📄'} ${name.replace(/_/g, ' ')}</span>
-                            <span class="nav-dot" data-dot="expert:${name}"></span>
-                        </button></li>`).join('');
-
-                document.querySelectorAll('#navFinal button, #navExperts button').forEach(btn => {
-                    btn.onclick = () => selectItem(btn.dataset.kind, btn.dataset.key);
-                });
-            }
-
-            function setActiveButton() {
-                document.querySelectorAll('#navFinal button, #navExperts button').forEach(b => b.classList.remove('active'));
-                if (!activeItem) return;
-                const btn = document.querySelector(`#navFinal button[data-key="${activeItem.key}"], #navExperts button[data-key="${activeItem.key}"]`);
-                if (btn) btn.classList.add('active');
-            }
-
-            async function selectItem(kind, key) {
-                const raceId = currentRaceId();
-                if (!raceId) {
-                    document.getElementById('contentBody').innerHTML = '<p class="empty-hint">Select a race first.</p>';
-                    document.getElementById('contentTitle').textContent = 'No race selected';
-                    document.getElementById('contextMeta').textContent = '—';
-                    return;
-                }
-
-                const context = getRaceContext(raceId);
-                const displayName = key === 'final' ? 'Final Selection' : key.replace(/_/g, ' ');
-                const icon = key === 'final' ? FINAL_ICON : (EXPERT_ICONS[key] || '📄');
-
-                activeItem = { kind, key };
-                setActiveButton();
-
-                document.getElementById('contentTitle').innerHTML = `${icon} ${displayName}`;
-                document.getElementById('contextMeta').textContent =
-                    `${context.venue} · ${context.date} · Race ${context.raceNo}`;
-
-                const body = document.getElementById('contentBody');
-                body.innerHTML = '<p class="empty-hint">Loading…</p>';
-
-                try {
-                    const text = kind === 'final' ?
-                        (await api(`/api/races/${raceId}/analysis`)).text :
-                        (await api(`/api/races/${raceId}/experts/${key}`)).text;
-                    body.innerHTML = `<pre>${escapeHtml(text)}</pre>`;
-                    updateApiStatus(true);
-                } catch (e) {
-                    body.innerHTML = `<p class="empty-hint">Not available for this race yet.</p>`;
-                    updateApiStatus(false);
+            
+            const sortedDates = Array.from(dates).sort();
+            for (const date of sortedDates) {
+                if (isTodayOrFuture(date)) {
+                    return date;
                 }
             }
+            return null;
+        }
 
-            // ----- right sidebar (race day) with reordered tabs -----
-            function renderRaceDayAccordion() {
-                const el = document.getElementById('raceDayAccordion');
-                el.innerHTML = RACE_DAY_FILES.map(key => {
-                    const displayMap = {
-                        'false_rails': 'False Rails',
-                        'track_condition': 'Track Condition',
-                        'change_of_equipments': 'Change of Equipments',
-                        'body_weights': 'Body Weights',
-                        'amendments': 'Amendments',
-                        'live_odds': 'Latest Probable Odds'
-                    };
-                    const displayName = displayMap[key] || key.replace(/_/g, ' ');
-                    return `
-                            <div class="rd-item" data-rd="${key}">
-                                <button class="rd-toggle" data-key="${key}">
-                                    <span><span class="nav-dot" data-dot="raceday:${key}"></span>&nbsp; ${RACE_DAY_ICONS[key] || '📋'} ${displayName}</span>
-                                    <i class="fas fa-chevron-right chev"></i>
-                                </button>
-                                <div class="rd-body"><div class="rd-body-inner"><p class="empty-hint">Not posted yet.</p></div></div>
-                            </div>
-                        `;
-                }).join('');
-                el.querySelectorAll('.rd-toggle').forEach(btn => {
-                    btn.onclick = () => toggleRaceDay(btn.dataset.key);
-                });
-            }
+        function getRacesForDate(date) {
+            return allRaces
+                .map(r => ({ ...r, parsed: parseRaceId(r.race_id) }))
+                .filter(r => r.parsed && r.parsed.date === date)
+                .sort((a, b) => a.parsed.raceNo - b.parsed.raceNo);
+        }
 
-            async function toggleRaceDay(key) {
-                const item = document.querySelector(`.rd-item[data-rd="${key}"]`);
-                const isOpen = item.classList.toggle('open');
-                if (isOpen) { openRaceDayKeys.add(key);
-                    await loadRaceDayContent(key); } else { openRaceDayKeys.delete(key); }
-            }
-
-            async function loadRaceDayContent(key) {
-                const raceId = currentRaceId();
-                const item = document.querySelector(`.rd-item[data-rd="${key}"]`);
-                if (!item) return;
-                const inner = item.querySelector('.rd-body-inner');
-                if (!raceId) { inner.innerHTML = '<p class="empty-hint">Select a race first.</p>'; return; }
-                try {
-                    const { text } = await api(`/api/races/${raceId}/race-day-files/${key}`);
-                    inner.innerHTML = `<pre>${escapeHtml(text)}</pre>`;
-                    updateApiStatus(true);
-                } catch (e) {
-                    inner.innerHTML = '<p class="empty-hint">Not posted yet.</p>';
-                    updateApiStatus(false);
-                }
-            }
-
-            // ----- API Status -----
-            function updateApiStatus(connected) {
-                const dot = document.getElementById('apiStatusDot');
-                const text = document.getElementById('apiStatusText');
-                if (connected) {
-                    dot.className = 'dot online';
-                    text.textContent = 'Connected';
-                } else {
-                    dot.className = 'dot offline';
-                    text.textContent = 'Offline';
-                }
-            }
-
-            // ----- dots & refresh -----
-            async function refreshDots(raceId) {
-                try {
-                    const { experts } = await api(`/api/races/${raceId}/experts`);
-                    for (const [name, present] of Object.entries(experts)) {
-                        const dot = document.querySelector(`[data-dot="expert:${name}"]`);
-                        if (dot) dot.classList.toggle('present', !!present);
-                    }
-                } catch (e) {}
-                try {
-                    const { files } = await api(`/api/races/${raceId}/race-day-files`);
-                    for (const [key, present] of Object.entries(files)) {
-                        const dot = document.querySelector(`[data-dot="raceday:${key}"]`);
-                        if (dot) dot.classList.toggle('present', !!present);
-                    }
-                } catch (e) {}
-                try {
-                    await api(`/api/races/${raceId}/analysis`);
-                    const dot = document.querySelector('[data-dot="final:final"]');
-                    if (dot) dot.classList.add('present');
-                    updateApiStatus(true);
-                } catch (e) {
-                    const dot = document.querySelector('[data-dot="final:final"]');
-                    if (dot) dot.classList.remove('present');
-                    updateApiStatus(false);
-                }
-            }
-
-            async function loadForRace(raceId) {
-                if (!raceId) return;
-                await refreshDots(raceId);
-                if (activeItem) await selectItem(activeItem.kind, activeItem.key);
-                for (const key of openRaceDayKeys) await loadRaceDayContent(key);
-                setStatus('fresh');
-            }
-
-            function setStatus(status) {
-                const pill = document.getElementById('statusPill');
-                pill.textContent = status === 'fresh' ? new Date().toLocaleTimeString() : 'not connected';
-                pill.className = 'status-pill ' + status;
-            }
-
-            async function loadRaces() {
-                try {
-                    const { races } = await api('/api/races');
-                    allRaces = races;
-                    updateRaceNoOptions();
-                    updateApiStatus(true);
-                } catch (e) {
-                    document.getElementById('raceNoSelect').innerHTML = '<option value="">API unavailable</option>';
-                    setStatus('stale');
-                    updateApiStatus(false);
-                }
-            }
-
-            document.getElementById('refreshBtn').onclick = () => loadRaces();
-
-            // function startAutoRefresh() {
-            //     if (autoRefreshTimer) clearInterval(autoRefreshTimer);
-            //     autoRefreshTimer = setInterval(loadRaces, AUTO_REFRESH_MS);
-            // }
-
-            // ----- init -----
-            // renderLeftNav();
-            // renderRaceDayAccordion();
-            // initSelectionControls();
-            // activeItem = { kind: 'final', key: 'final' };
-            // setTimeout(() => {
-            //     const raceId = currentRaceId();
-            //     if (raceId) {
-            //         const context = getRaceContext(raceId);
-            //         document.getElementById('contextMeta').textContent =
-            //             `${context.venue} · ${context.date} · Race ${context.raceNo}`;
-            //     }
-            //     selectItem('final', 'final');
-            // }, 100);
-            // loadRaces();
-            // startAutoRefresh();
-            renderLeftNav();
-            renderRaceDayAccordion();
-            initSelectionControls();
-            activeItem = { kind: 'final', key: 'final' };
-            setTimeout(() => {
-                const raceId = currentRaceId();
-                if (raceId) {
-                    const context = getRaceContext(raceId);
-                    document.getElementById('contextMeta').textContent =
+        function loadDefaultRace() {
+            const venueSelect = document.getElementById('venueSelect');
+            const dateInput = document.getElementById('dateInput');
+            const raceNoSelect = document.getElementById('raceNoSelect');
+            
+            const nextDate = findNextRaceDate();
+            
+            if (nextDate) {
+                dateInput.value = nextDate;
+                const races = getRacesForDate(nextDate);
+                
+                if (races.length > 0) {
+                    const venue = Object.keys(VENUE_CODES).find(k => 
+                        VENUE_CODES[k] === races[0].parsed.code
+                    ) || Object.keys(VENUE_CODES)[0];
+                    
+                    venueSelect.value = venue;
+                    
+                    raceNoSelect.innerHTML = races.map(r =>
+                        `<option value="${r.race_id}">Race ${r.parsed.raceNo}${r.has_outputs ? ' ✓' : ''}</option>`
+                    ).join('');
+                    
+                    const firstRace = races[0].race_id;
+                    raceNoSelect.value = firstRace;
+                    
+                    loadForRace(firstRace);
+                    setStatus('fresh');
+                    
+                    const context = getRaceContext(firstRace);
+                    document.getElementById('contextMeta').textContent = 
                         `${context.venue} · ${context.date} · Race ${context.raceNo}`;
+                    
+                    return;
                 }
-                selectItem('final', 'final');
-            }, 100);
-            loadRaces();
+            }
+            
+            // No current/future races found
+            document.getElementById('contentBody').innerHTML = `
+                <div style="text-align: center; padding: 3rem 1rem;">
+                    <i class="fas fa-calendar-day" style="font-size: 3rem; color: #c8a13f; display: block; margin-bottom: 1.5rem;"></i>
+                    <h3 style="color: #fff; margin-bottom: 0.5rem; font-family: 'Space Grotesk', sans-serif;">No Upcoming Races</h3>
+                    <p style="color: #9aabbb; max-width: 500px; margin: 0 auto; line-height: 1.6;">
+                        There are no current or future races available. 
+                        Please select a venue and date from the options above to view past races.
+                    </p>
+                    <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+                        <span style="background: rgba(200, 161, 63, 0.1); color: #c8a13f; padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.8rem;">
+                            <i class="fas fa-map-pin"></i> Venue
+                        </span>
+                        <span style="background: rgba(200, 161, 63, 0.1); color: #c8a13f; padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.8rem;">
+                            <i class="fas fa-calendar-alt"></i> Date
+                        </span>
+                        <span style="background: rgba(200, 161, 63, 0.1); color: #c8a13f; padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.8rem;">
+                            <i class="fas fa-hashtag"></i> Race No.
+                        </span>
+                    </div>
+                </div>
+            `;
+            document.getElementById('contentTitle').textContent = 'No Upcoming Races Available';
+            document.getElementById('contextMeta').textContent = '—';
+            document.getElementById('statusPill').textContent = 'No races';
+            document.getElementById('statusPill').className = 'status-pill stale';
+        }
 
-            document.getElementById('refreshBtn').onclick = () => loadRaces();
-            // Set initial API status
-            setTimeout(() => updateApiStatus(true), 1000);
-        })();
-    </script>
+        // ----- Hamburger Menu -----
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const sidebarLeft = document.getElementById('sidebarLeft');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function toggleMobileMenu() {
+            const isOpen = sidebarLeft.classList.toggle('open');
+            mobileOverlay.classList.toggle('active');
+            hamburgerBtn.classList.toggle('active');
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        }
+
+        function closeMobileMenu() {
+            sidebarLeft.classList.remove('open');
+            mobileOverlay.classList.remove('active');
+            hamburgerBtn.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        hamburgerBtn.addEventListener('click', toggleMobileMenu);
+        mobileOverlay.addEventListener('click', closeMobileMenu);
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 780) {
+                closeMobileMenu();
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 780) {
+                const navBtn = e.target.closest('#navFinal button, #navExperts button');
+                if (navBtn) {
+                    setTimeout(closeMobileMenu, 300);
+                }
+            }
+        });
+
+        // ----- selection controls -----
+        function initSelectionControls() {
+            const venueSelect = document.getElementById('venueSelect');
+            venueSelect.innerHTML = '<option value="">Select Venue</option>' +
+                Object.keys(VENUE_CODES).map(v => `<option value="${v}">${v}</option>`).join('');
+            const dateInput = document.getElementById('dateInput');
+            dateInput.value = new Date().toISOString().slice(0, 10);
+            venueSelect.addEventListener('change', updateRaceNoOptions);
+            dateInput.addEventListener('change', updateRaceNoOptions);
+            document.getElementById('raceNoSelect').addEventListener('change', (e) => {
+                if (e.target.value) {
+                    loadForRace(e.target.value);
+                }
+            });
+        }
+
+        function updateRaceNoOptions() {
+            const venueSelect = document.getElementById('venueSelect');
+            const dateInput = document.getElementById('dateInput');
+            const raceNoSelect = document.getElementById('raceNoSelect');
+            const code = VENUE_CODES[venueSelect.value];
+            const date = dateInput.value;
+            
+            if (!code || !date) {
+                raceNoSelect.innerHTML = '<option value="">Select Venue & Date</option>';
+                document.getElementById('contentBody').innerHTML = `
+                    <div style="text-align: center; padding: 3rem 1rem;">
+                        <i class="fas fa-search" style="font-size: 3rem; color: #c8a13f; display: block; margin-bottom: 1.5rem;"></i>
+                        <h3 style="color: #fff; margin-bottom: 0.5rem; font-family: 'Space Grotesk', sans-serif;">Select a Race</h3>
+                        <p style="color: #9aabbb; max-width: 500px; margin: 0 auto; line-height: 1.6;">
+                            Choose a venue and date from the options above to view race details and expert analysis.
+                        </p>
+                    </div>
+                `;
+                document.getElementById('contentTitle').textContent = 'Select a Race';
+                document.getElementById('contextMeta').textContent = '—';
+                return;
+            }
+            
+            const prefix = `${code}-${date}-RACE-`;
+            const matches = allRaces
+                .map(r => ({ ...r, parsed: parseRaceId(r.race_id) }))
+                .filter(r => r.race_id.startsWith(prefix) && r.parsed)
+                .sort((a, b) => a.parsed.raceNo - b.parsed.raceNo);
+            
+            if (!matches.length) {
+                raceNoSelect.innerHTML = '<option value="">No races for this date</option>';
+                document.getElementById('contentBody').innerHTML = `
+                    <div style="text-align: center; padding: 3rem 1rem;">
+                        <i class="fas fa-calendar-times" style="font-size: 3rem; color: #c8a13f; display: block; margin-bottom: 1.5rem;"></i>
+                        <h3 style="color: #fff; margin-bottom: 0.5rem; font-family: 'Space Grotesk', sans-serif;">No Races Available</h3>
+                        <p style="color: #9aabbb; max-width: 500px; margin: 0 auto; line-height: 1.6;">
+                            No races found for <strong style="color: #e8edf2;">${venueSelect.value}</strong> on <strong style="color: #e8edf2;">${date}</strong>
+                        </p>
+                        <p style="color: #7a8a9e; font-size: 0.9rem; margin-top: 0.5rem;">
+                            Try selecting a different venue or date.
+                        </p>
+                    </div>
+                `;
+                document.getElementById('contentTitle').textContent = 'No Races Found';
+                document.getElementById('contextMeta').textContent = '—';
+                return;
+            }
+            
+            raceNoSelect.innerHTML = matches.map(r =>
+                `<option value="${r.race_id}">Race ${r.parsed.raceNo}${r.has_outputs ? ' ✓' : ''}</option>`
+            ).join('');
+            
+            const defaultRace = matches[0].race_id;
+            raceNoSelect.value = defaultRace;
+            loadForRace(defaultRace);
+            setStatus('fresh');
+        }
+
+        // ----- left nav -----
+        function renderLeftNav() {
+            document.getElementById('navFinal').innerHTML = `
+                    <li><button data-kind="final" data-key="final">
+                        <span class="nav-label">${FINAL_ICON} Final Selection</span>
+                        <span class="nav-dot" data-dot="final:final"></span>
+                    </button></li>`;
+            document.getElementById('navExperts').innerHTML = EXPERTS.map(name => `
+                    <li><button data-kind="expert" data-key="${name}">
+                        <span class="nav-label">${EXPERT_ICONS[name] || '📄'} ${name.replace(/_/g, ' ')}</span>
+                        <span class="nav-dot" data-dot="expert:${name}"></span>
+                    </button></li>`).join('');
+
+            document.querySelectorAll('#navFinal button, #navExperts button').forEach(btn => {
+                btn.onclick = () => selectItem(btn.dataset.kind, btn.dataset.key);
+            });
+        }
+
+        function setActiveButton() {
+            document.querySelectorAll('#navFinal button, #navExperts button').forEach(b => b.classList.remove('active'));
+            if (!activeItem) return;
+            const btn = document.querySelector(`#navFinal button[data-key="${activeItem.key}"], #navExperts button[data-key="${activeItem.key}"]`);
+            if (btn) btn.classList.add('active');
+        }
+
+        async function selectItem(kind, key) {
+            const raceId = currentRaceId();
+            if (!raceId) {
+                document.getElementById('contentBody').innerHTML = '<p class="empty-hint">Select a race first.</p>';
+                document.getElementById('contentTitle').textContent = 'No race selected';
+                document.getElementById('contextMeta').textContent = '—';
+                return;
+            }
+
+            const context = getRaceContext(raceId);
+            const displayName = key === 'final' ? 'Final Selection' : key.replace(/_/g, ' ');
+            const icon = key === 'final' ? FINAL_ICON : (EXPERT_ICONS[key] || '📄');
+
+            activeItem = { kind, key };
+            setActiveButton();
+
+            document.getElementById('contentTitle').innerHTML = `${icon} ${displayName}`;
+            document.getElementById('contextMeta').textContent =
+                `${context.venue} · ${context.date} · Race ${context.raceNo}`;
+
+            const body = document.getElementById('contentBody');
+            body.innerHTML = '<p class="empty-hint">Loading…</p>';
+
+            try {
+                const text = kind === 'final' ?
+                    (await api(`/api/races/${raceId}/analysis`)).text :
+                    (await api(`/api/races/${raceId}/experts/${key}`)).text;
+                body.innerHTML = `<pre>${escapeHtml(text)}</pre>`;
+                updateApiStatus(true);
+            } catch (e) {
+                body.innerHTML = `<p class="empty-hint">Not available for this race yet.</p>`;
+                updateApiStatus(false);
+            }
+        }
+
+        // ----- right sidebar (race day) with reordered tabs -----
+        function renderRaceDayAccordion() {
+            const el = document.getElementById('raceDayAccordion');
+            el.innerHTML = RACE_DAY_FILES.map(key => {
+                const displayMap = {
+                    'false_rails': 'False Rails',
+                    'track_condition': 'Track Condition',
+                    'change_of_equipments': 'Change of Equipments',
+                    'body_weights': 'Body Weights',
+                    'amendments': 'Amendments',
+                    'live_odds': 'Latest Probable Odds'
+                };
+                const displayName = displayMap[key] || key.replace(/_/g, ' ');
+                return `
+                        <div class="rd-item" data-rd="${key}">
+                            <button class="rd-toggle" data-key="${key}">
+                                <span><span class="nav-dot" data-dot="raceday:${key}"></span>&nbsp; ${RACE_DAY_ICONS[key] || '📋'} ${displayName}</span>
+                                <i class="fas fa-chevron-right chev"></i>
+                            </button>
+                            <div class="rd-body"><div class="rd-body-inner"><p class="empty-hint">Not posted yet.</p></div></div>
+                        </div>
+                    `;
+            }).join('');
+            el.querySelectorAll('.rd-toggle').forEach(btn => {
+                btn.onclick = () => toggleRaceDay(btn.dataset.key);
+            });
+        }
+
+        async function toggleRaceDay(key) {
+            const item = document.querySelector(`.rd-item[data-rd="${key}"]`);
+            const isOpen = item.classList.toggle('open');
+            if (isOpen) { openRaceDayKeys.add(key);
+                await loadRaceDayContent(key); } else { openRaceDayKeys.delete(key); }
+        }
+
+        async function loadRaceDayContent(key) {
+            const raceId = currentRaceId();
+            const item = document.querySelector(`.rd-item[data-rd="${key}"]`);
+            if (!item) return;
+            const inner = item.querySelector('.rd-body-inner');
+            if (!raceId) { inner.innerHTML = '<p class="empty-hint">Select a race first.</p>'; return; }
+            try {
+                const { text } = await api(`/api/races/${raceId}/race-day-files/${key}`);
+                inner.innerHTML = `<pre>${escapeHtml(text)}</pre>`;
+                updateApiStatus(true);
+            } catch (e) {
+                inner.innerHTML = '<p class="empty-hint">Not posted yet.</p>';
+                updateApiStatus(false);
+            }
+        }
+
+        // ----- API Status -----
+        function updateApiStatus(connected) {
+            const dot = document.getElementById('apiStatusDot');
+            const text = document.getElementById('apiStatusText');
+            if (connected) {
+                dot.className = 'dot online';
+                text.textContent = 'Connected';
+            } else {
+                dot.className = 'dot offline';
+                text.textContent = 'Offline';
+            }
+        }
+
+        // ----- dots & refresh -----
+        async function refreshDots(raceId) {
+            try {
+                const { experts } = await api(`/api/races/${raceId}/experts`);
+                for (const [name, present] of Object.entries(experts)) {
+                    const dot = document.querySelector(`[data-dot="expert:${name}"]`);
+                    if (dot) dot.classList.toggle('present', !!present);
+                }
+            } catch (e) {}
+            try {
+                const { files } = await api(`/api/races/${raceId}/race-day-files`);
+                for (const [key, present] of Object.entries(files)) {
+                    const dot = document.querySelector(`[data-dot="raceday:${key}"]`);
+                    if (dot) dot.classList.toggle('present', !!present);
+                }
+            } catch (e) {}
+            try {
+                await api(`/api/races/${raceId}/analysis`);
+                const dot = document.querySelector('[data-dot="final:final"]');
+                if (dot) dot.classList.add('present');
+                updateApiStatus(true);
+            } catch (e) {
+                const dot = document.querySelector('[data-dot="final:final"]');
+                if (dot) dot.classList.remove('present');
+                updateApiStatus(false);
+            }
+        }
+
+        async function loadForRace(raceId) {
+            if (!raceId) return;
+            await refreshDots(raceId);
+            if (activeItem) await selectItem(activeItem.kind, activeItem.key);
+            for (const key of openRaceDayKeys) await loadRaceDayContent(key);
+            setStatus('fresh');
+        }
+
+        function setStatus(status) {
+            const pill = document.getElementById('statusPill');
+            pill.textContent = status === 'fresh' ? new Date().toLocaleTimeString() : 'not connected';
+            pill.className = 'status-pill ' + status;
+        }
+
+        async function loadRaces() {
+            try {
+                const { races } = await api('/api/races');
+                allRaces = races;
+                loadDefaultRace();  // Auto-load current/future races
+                updateApiStatus(true);
+            } catch (e) {
+                document.getElementById('raceNoSelect').innerHTML = '<option value="">API unavailable</option>';
+                setStatus('stale');
+                updateApiStatus(false);
+                document.getElementById('contentBody').innerHTML = `
+                    <div style="text-align: center; padding: 3rem 1rem;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #b3261e; display: block; margin-bottom: 1.5rem;"></i>
+                        <h3 style="color: #fff; margin-bottom: 0.5rem; font-family: 'Space Grotesk', sans-serif;">Connection Error</h3>
+                        <p style="color: #9aabbb; max-width: 500px; margin: 0 auto; line-height: 1.6;">
+                            Unable to connect to the server. Please check your internet connection or try again later.
+                        </p>
+                    </div>
+                `;
+                document.getElementById('contentTitle').textContent = 'Connection Error';
+                document.getElementById('contextMeta').textContent = '—';
+            }
+        }
+
+        // ----- init -----
+        renderLeftNav();
+        renderRaceDayAccordion();
+        initSelectionControls();
+        
+        // Manual refresh button
+        document.getElementById('refreshBtn').onclick = () => loadRaces();
+        
+        // Load initial data (auto-loads current/future races)
+        loadRaces();
+        
+        // Set initial API status
+        setTimeout(() => updateApiStatus(true), 1000);
+    })();
+</script>
 </body>
 </html>
