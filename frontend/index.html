@@ -975,6 +975,7 @@
                     const firstRace = races[0].race_id;
                     raceNoSelect.value = firstRace;
                     
+                    // This will auto-select Final Selection
                     loadForRace(firstRace);
                     setStatus('fresh');
                     
@@ -1008,10 +1009,14 @@
                     </div>
                 </div>
             `;
-            document.getElementById('contentTitle').textContent = 'No Upcoming Races Available';
+            document.getElementById('contentTitle').textContent = 'No Upcoming Races';
             document.getElementById('contextMeta').textContent = '—';
             document.getElementById('statusPill').textContent = 'No races';
             document.getElementById('statusPill').className = 'status-pill stale';
+            
+            // Reset active item
+            activeItem = null;
+            document.querySelectorAll('#navFinal button, #navExperts button').forEach(b => b.classList.remove('active'));
         }
 
         // ----- Hamburger Menu -----
@@ -1067,6 +1072,7 @@
             });
         }
 
+        // ----- Updated updateRaceNoOptions -----
         function updateRaceNoOptions() {
             const venueSelect = document.getElementById('venueSelect');
             const dateInput = document.getElementById('dateInput');
@@ -1121,7 +1127,7 @@
             
             const defaultRace = matches[0].race_id;
             raceNoSelect.value = defaultRace;
-            loadForRace(defaultRace);
+            loadForRace(defaultRace);  // This will auto-select Final Selection
             setStatus('fresh');
         }
 
@@ -1279,9 +1285,22 @@
 
         async function loadForRace(raceId) {
             if (!raceId) return;
+            
+            // Refresh dots (expert availability indicators)
             await refreshDots(raceId);
-            if (activeItem) await selectItem(activeItem.kind, activeItem.key);
-            for (const key of openRaceDayKeys) await loadRaceDayContent(key);
+            
+            // Set active item to 'final' by default
+            activeItem = { kind: 'final', key: 'final' };
+            setActiveButton();
+            
+            // Load the Final Selection content
+            await selectItem('final', 'final');
+            
+            // Load any open race day reports
+            for (const key of openRaceDayKeys) {
+                await loadRaceDayContent(key);
+            }
+            
             setStatus('fresh');
         }
 
