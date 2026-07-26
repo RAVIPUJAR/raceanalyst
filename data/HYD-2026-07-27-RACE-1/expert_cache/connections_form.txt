@@ -1,0 +1,40 @@
+CONNECTIONS RANKING
+
+  1. YALI — OWNER+JOCKEY PUSH | T+J wins=0 | Trio wins=0
+     Combination of a BIG owner and a rider with 23% win rate; jockey upgrade signals strong intent, making this the most powerful connection signal in the race.
+
+  2. SPEEDY QUEEN — JOCKEY ONLY | T+J wins=0 | Trio wins=0
+     Jockey only but Akshay Kumar (25% win, 89 rides) is the most in-form rider in the field; the upgrade to him is a clear positive intent.
+
+  3. N R I SUNPOWER — TRAINER+JOCKEY | T+J wins=0 | Trio wins=0
+     Both trainer and jockey carry BIG labels despite no recent wins; the double element gives theoretical strength, though no proven record.
+
+  4. STAR LIT — TRAINER+JOCKEY | T+J wins=0 | Trio wins=0
+     Similar big-name combo but jockey change is lateral; lacks the upgrade signal of others.
+
+  5. ASHWA JAFFNA — JOCKEY ONLY | T+J wins=0 | Trio wins=0
+     Jockey only, but the target of the split stable with a mild upgrade to B Nikhil (10%); reasonable intent for a race lacking strong connections.
+
+  6. OJAS MAXIMUS — JOCKEY ONLY | T+J wins=0 | Trio wins=0
+     Jockey A A Vikrant has 9 recent rides without a win; cold jockey, lateral change from last run.
+
+  7. BELGIUM WAFFLE — JOCKEY ONLY | T+J wins=0 | Trio wins=0
+     Same jockey retained with 0% win rate; no new signal, little encouragement.
+
+  8. EVAN SVILLE — JOCKEY ONLY | T+J wins=0 | Trio wins=0
+     First run, unknown jockey change; P Sai Kumar has no recent form.
+
+  9. GACCHANMANASVIN — JOCKEY ONLY | T+J wins=0 | Trio wins=0
+     Lateral jockey move to another 0%-win rider; no intent evident.
+
+  10. LOVE IN PARIS — JOCKEY ONLY | T+J wins=0 | Trio wins=0
+     Lateral jockey change; all connection elements are without wins.
+
+  11. MISS LOVELY ANGEL — JOCKEY ONLY | T+J wins=0 | Trio wins=0
+     Cold jockey Rafique Sk (0/18); worst recent record in the field, no other positives.
+
+  12. TREND SETTER — JOCKEY ONLY | T+J wins=0 | Trio wins=0
+     Debutant with no connection data; jockey Abhay Singh winless.
+
+  13. ASHWA VIVEGAM — JOCKEY ONLY | T+J wins=0 | Trio wins=0
+     Split stable filler; lateral jockey booking to Gaurav Singh (0%); weakest signal in the race.
