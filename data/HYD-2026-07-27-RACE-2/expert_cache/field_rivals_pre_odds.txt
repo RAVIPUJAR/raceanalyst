@@ -1,0 +1,236 @@
+ **1. HEAD-TO-HEAD**
+
+| Date | Venue | Dist | Result (today’s runners) | Margin / Context |
+|------|-------|------|--------------------------|------------------|
+| 2026-04-05 | Hyderabad | 1400M | **ARABESKA** 2nd, **EXCLUSIVE BLACK** 3rd, **STAR FOREVER** 9th | ARABESKA (fav) clearly best; same trip/track/going, EXCLUSIVE BLACK 3rd at 20s, STAR FOREVER beaten 7L+. ARABESKA form line strongest. |
+| 2026-03-28 | Hyderabad | 1200M | **RAGNAROK** 6th, **ROMANTIC GREY** W | ROMANTIC GREY withdrawn before start (gate incident); no meaningful comparison. |
+| 2026-03-17 | Hyderabad | 1400M | **ROMANTIC GREY** 7th, **STAR FOREVER** 10th | Both well beaten; minimal edge to ROMANTIC GREY but neither form-positive. |
+| 2026-03-10 | Hyderabad | 1200M | **EXCLUSIVE BLACK** 8th, **RAGNAROK** 11th | EXCLUSIVE BLACK slightly closer; both out of the money. |
+| 2025-02-23 | Hyderabad | 1200M | **EXCLUSIVE BLACK** W, **KNIGHT CRUSADER** 3rd | EXCLUSIVE BLACK withdrawn; race excluded. |
+| 2025-02-09 | Hyderabad | 1400M | **ANNHILATOR** 1st, **KNIGHT CRUSADER** 2nd, **STAR FOREVER** 3rd | ANNHILATOR proved best at the trip; KNIGHT CRUSADER closed strongly for 2nd; STAR FOREVER 3rd. **Caveat:** 17 months old. |
+| 2025-01-27 | Hyderabad | 1200M | **EXCLUSIVE BLACK** 1st, **STAR FOREVER** 2nd | EXCLUSIVE BLACK edged out STAR FOREVER over 1200m (not today’s 1400m). |
+| 2025-01-19 | Hyderabad | 1200M | **ROMANTIC GREY** 1st, **PERCEPTION** 2nd | ROMANTIC GREY led all the way; PERCEPTION closed from 7th at 4f. Over 1200m. |
+
+**2. RUNNING STYLES**
+
+*Classifications (based on bolRunDescription PACE_POS / TRAJECTORY tags):*
+- **ANNHILATOR** – Stalker / Mid-pack closer (settles 3rd–8th, fires late)
+- **ARABESKA** – Deep Closer (regularly 6th–10th at 4f/6f, makes wide/late runs)
+- **DETECTIVE** – Deep Closer (6th–8th at four furlongs, late headway, but often too far back)
+- **EXCLUSIVE BLACK** – Adaptable Stalker (can sit 2nd and go, or lead at furlong pole; generally mid-pack at 1400m)
+- **KNIGHT CRUSADER** – Stalker / Tractable closer (4th–6th early, strong straight finishing)
+- **PERCEPTION** – Deep Closer (7th at 4f on only start; needs pace to chase)
+- **RAGNAROK** – Mid-field / Inconsistent stalker (5th at 4f when winning; drops out when not)
+- **ROMANTIC GREY** – 1200m Front-runner / 1400m uncertain (won from start at 1200m; at 1400m settled 13th and made mild late headway). **Downgraded for pace-push** after rearing/gate withdrawal.
+- **SILVER ACT** – Stalker / Mid-pack (5th–7th at 6f/4f, one-paced late)
+- **STAR FOREVER** – Deep Closer (8th–12th at four furlongs; reliant on fast pace)
+
+*Likely pace scenario:*  
+There is **no verified 1400m front-runner** in the field. ROMANTIC GREY has 1200m gate-speed but is unreliable at 1400m and coming off a rearing/withdrawal incident. With **Whips Not Allowed**, pure deep closers (DETECTIVE, STAR FOREVER, PERCEPTION) are structurally disadvantaged because they cannot be hard-ridden when gaps appear. Expect a **moderate, compressed pace** with a bunched field turning for home. This strongly favours **tractable stalkers** who can travel 3rd–5th and unleash without needing the whip.
+
+*Key Runs (every run provided in context; historical draw unknown for all):*
+
+**ANNHILATOR** (Today Gate 1 — last known draw unavailable)
+- 24-Feb-2025 | 1400m | Pos1 | Odds 6/10 | Draw ? | [TOTE FAV] Settled third approaching the final bend before making a decisive shot
+- 09-Feb-2025 | 1400m | Pos1 | Odds 4 | Draw ? | Settled fourth at four furlongs before making a stunning late surge to win
+- 05-Jan-2025 | 1400m | Pos4 | Odds 6 | Draw ? | Settled eighth until the final bend before making late headway to finish fourth
+
+**ARABESKA** (Today Gate 5 — last known draw unavailable)
+- 16-Mar-2025 | 1600m | Pos5 | Odds 16 | Draw ? | [no in-running description]
+- 06-Apr-2025 | 1600m | Pos6 | Odds 25 | Draw ? | Settled seventh at six furlongs before making late headway to finish sixth
+- 28-Sep-2025 | 2000m | Pos2 | Odds 1 1/2 | Draw ? | [no in-running description]
+- 03-Sep-2025 | 1800m | Pos1 | Odds 9/10 | Draw ? | [TOTE FAV] Settled third at one and a half furlongs before making late headway to win
+- 26-Feb-2025 | 1400m | Pos3 | Odds 6/4 | Draw ? | [TOTE FAV] Settled seventh at four furlongs before improving to fourth approaching straight
+- 17-Mar-2026 | 1400m | Pos4 | Odds 8 | Draw ? | Settled sixth until four furlongs before making late headway to finish fourth
+- 05-Apr-2026 | 1400m | Pos2 | Odds 3 | Draw ? | [TOTE FAV] Settled tenth at four furlongs before making late headway to finish second
+
+**DETECTIVE** (Today Gate 4 — last known draw unavailable)
+- 26-Feb-2025 | 1400m | Pos3 | Odds 7 | Draw ? | Settled sixth until the final bend before making late headway, ultimately finishing third
+- 16-Mar-2026 | 1400m | Pos9 | Odds 20 | Draw ? | Settled eighth until the final bend before making late headway to finish ninth
+- 06-Jan-2025 | 2400m | Pos4 | Odds 7 | Draw ? | Settled fifth approaching the final bend before making late headway to finish fourth
+
+**EXCLUSIVE BLACK** (Today Gate 10 — last known draw unavailable)
+- 27-Jan-2025 | 1200m | Pos1 | Odds 20 | Draw ? | Settled second at four furlongs before making a late surge to lead and win
+- 23-Feb-2025 | 1200m | Pos W | Odds ? | Draw ? | [WITHDRAWAL — excluded from form]
+- 19-Jan-2025 | 1200m | Pos13 | Odds 20 | Draw ? | Settled last approaching the final bend before making late headway to finish thirteenth
+- 10-Mar-2026 | 1200m | Pos8 | Odds 20 | Draw ? | Settled ninth until the final bend before making late headway to finish eighth
+- 05-Apr-2026 | 1400m | Pos3 | Odds 20 | Draw ? | Led at furlong before making late headway to finish third, beaten by four and a half lengths
+- 31-May-2025 | 1200m | Pos6 | Odds 20 | Draw ? | Finished fourth at four furlongs before dropping back and fading to sixth
+- 21-Jun-2025 | 1400m | Pos12 | Odds 25 | Draw ? | Settled fifth at four furlongs before making late headway to finish twelfth
+
+**KNIGHT CRUSADER** (Today Gate 8 — last known draw unavailable)
+- 31-Mar-2026 | 1200m | Pos2 | Odds 5/4 | Draw ? | [TOTE FAV] Settled fifth at four furlongs, made late headway to finish second, beaten
+- 23-Feb-2025 | 1200m | Pos3 | Odds 9/10 | Draw ? | [TOTE FAV] Settled fourth at two furlongs before making late headway to finish third
+- 09-Mar-2026 | 1200m | Pos2 | Odds 9/2 | Draw ? | Settled sixth at the start of the straight before making late headway to finish second
+- 09-Feb-2025 | 1400m | Pos2 | Odds 11/10 | Draw ? | [TOTE FAV] Settled sixth at the start before making late headway to finish second
+
+**PERCEPTION** (Today Gate 3 — last known draw unavailable)
+- 19-Jan-2025 | 1200m | Pos2 | Odds 92 | Draw ? | Settled seventh at four furlongs before making strong late headway to finish second
+
+**RAGNAROK** (Today Gate 9 — last known draw unavailable)
+- 28-Mar-2026 | 1200m | Pos6 | Odds 20 | Draw ? | Finished sixth at the final bend after dropping back from third, ultimately finishing sixth
+- 24-Feb-2025 | 1200m | Pos1 | Odds 6 | Draw ? | Settled fifth at four furlongs before making late headway to finish first
+- 10-Mar-2026 | 1200m | Pos11 | Odds 20 | Draw ? | Settled sixth until the final bend before folding back, ultimately finishing eleventh
+- 05-Jan-2025 | 1200m | Pos7 | Odds 10 | Draw ? | Settled third at two furlongs before dropping back, ultimately finishing seventh
+
+**ROMANTIC GREY** (Today Gate 2 — last known draw unavailable)
+- 28-Mar-2026 | 1200m | Pos W | Odds ? | Draw ? | [WITHDRAWAL — excluded from form]
+- 23-Feb-2025 | 1200m | Pos2 | Odds 4 | Draw ? | Settled third at two and a half furlongs before making late headway to finish second
+- 19-Jan-2025 | 1200m | Pos1 | Odds 13/10 | Draw ? | [TOTE FAV] Won from start to finish, this horse dominated the 800m distance
+- 17-Mar-2026 | 1400m | Pos7 | Odds 20 | Draw ? | Settled thirteenth until the final bend before making late headway to finish seventh
+- 16-Feb-2025 | 1200m | Pos1 | Odds 5/2 | Draw ? | [no in-running description]
+
+**SILVER ACT** (Today Gate 7 — last known draw unavailable)
+- 24-Mar-2026 | 1600m | Pos5 | Odds 20 | Draw ? | Settled fifth at six furlongs before making late headway to finish fifth
+- 24-Feb-2025 | 1800m | Pos8 | Odds 5 | Draw ? | Settled tenth until the final bend before making late headway to finish eighth
+- 10-Feb-2025 | 1600m | Pos1 | Odds 5/2 | Draw ? | [no in-running description]
+- 04-Apr-2026 | 1200m | Pos8 | Odds 20 | Draw ? | Settled seventh at four furlongs before making late headway to finish eighth
+
+**STAR FOREVER** (Today Gate 6 — last known draw unavailable)
+- 27-Jan-2025 | 1200m | Pos2 | Odds 5 | Draw ? | Settled ninth at four furlongs, made late headway to finish second, beaten
+- 17-Mar-2026 | 1400m | Pos10 | Odds 15 | Draw ? | Settled twelfth approaching the final bend before making late headway to finish tenth
+- 17-Feb-2025 | 1400m | Pos7 | Odds 4 | Draw ? | Settled eighth until the final bend before making late headway to finish seventh
+- 12-Jan-2025 | 1400m | Pos5 | Odds 20 | Draw ? | Finished fifth, beaten eight and three-quarter lengths
+- 09-Feb-2025 | 1400m | Pos3 | Odds 8 | Draw ? | Settled eighth until the final bend before making late headway to finish third
+- 05-Apr-2026 | 1400m | Pos9 | Odds 20 | Draw ? | Finishing ninth at the 800m mark, this horse made gradual improvement
+
+---
+
+**3. DISTANCE FORM (today’s trip 1400M ±100m)**
+
+| Horse | 1400m Record (most recent first) | Trend / Notes |
+|-------|----------------------------------|---------------|
+| **ANNHILATOR** | 1st (Feb 2025), 1st (Feb 2025), 4th (Jan 2025) | Proven; but **last 1400m run 17 months ago**. |
+| **ARABESKA** | 2nd (Apr 2026), 4th (Mar 2026), 3rd (Feb 2025) | **Trending up** at the trip; 2nd last start strong reference. |
+| **DETECTIVE** | 9th (Mar 2026), 3rd (Feb 2025) | Trending sharply down; recent 1400m effort poor. |
+| **EXCLUSIVE BLACK** | 3rd (Apr 2026), 12th (Jun 2025) | Mixed; capable of boards but inconsistent. |
+| **KNIGHT CRUSADER** | 2nd (Feb 2025) | Single recent 1400m placing (good) but only one look at trip since. |
+| **PERCEPTION** | — | **Unproven at 1400m.** Only start 1200m (Jan 2025). Major risk. |
+| **RAGNAROK** | — | **Unproven at 1400m.** All form 1200m. Trip query. |
+| **ROMANTIC GREY** | 7th (Mar 2026) | Single poor 1400m effort; wins all at 1200m or shorter. |
+| **SILVER ACT** | — | **Unproven at 1400m.** Form between 1200–1800m. |
+| **STAR FOREVER** | 9th (Apr 2026), 10th (Mar 2026), 7th (Feb 2025), 5th (Jan 2025), 3rd (Feb 2025) | Has placed in past but **recent 1400m form poor**. |
+
+---
+
+**4. SECTIONALS — who can quicken late?**
+
+*Method:* Last-400m / last-200m splits derived from cumulative 200m sectionals. Withdrawn runs excluded. Interpreted as closing speed only when the horse was not leading at the sectional point and finished in the placings (2nd–4th).
+
+- **ANNHILATOR**
+  - 24-Feb-2025 (1400m, won): last 400m **23.52s**, last 200m **11.90s**. (Sub-24, leading turn-of-foot.)
+  - 09-Feb-2025 (1400m, won): last 400m **23.63s**, last 200m **11.70s**. (Sub-24.)
+  - 05-Jan-2025 (1400m, 4th): last 400m **24.15s**; outside the money, less relevant.
+- **ARABESKA**
+  - 05-Apr-2026 (1400m, 2nd): last 400m **24.18s**, last 200m **12.05s**. (Settled 10th at 4f; genuine closer in the money.)
+  - 26-Feb-2025 (1400m, 3rd): last 400m **23.94s**, last 200m **11.98s**. (Sub-24 closing from 7th at 4f.)
+- **DETECTIVE**
+  - 26-Feb-2025 (1400m, 3rd): last 400m **23.79s**, last 200m **11.67s**. (Sub-24, but 17 months old.)
+  - 16-Mar-2026 (1400m, 9th): last 400m **24.12s**; ran on from 8th but still finished last — speed not effective.
+- **EXCLUSIVE BLACK**
+  - 05-Apr-2026 (1400m, 3rd): last 400m **24.18s**; same race as ARABESKA, finished 1L+ behind her.
+  - 21-Jun-2025 (1400m, 12th): sectional data incomplete (only 6 splits recorded).
+- **KNIGHT CRUSADER**
+  - 09-Feb-2025 (1400m, 2nd): last 400m **23.63s**, last 200m **11.70s**. (Same race as ANNHILATOR; strong sub-24 closing from 6th at the start.)
+- **PERCEPTION**
+  - 19-Jan-2025 (1200m, 2nd): last 400m **23.63s**, last 200m **11.74s**. (Sub-24, but at 1200m and 18 months ago.)
+- **RAGNAROK**
+  - 24-Feb-2025 (1200m, 1st): last 400m **23.80s**, last 200m **11.83s**. (Sub-24 win.)
+  - 28-Mar-2026 (1200m, 6th): last 400m **22.92s**, last 200m **10.81s**. (Lightning on paper, but from too far back and only managed 6th.)
+- **ROMANTIC GREY** — No sectionals provided in data.
+- **SILVER ACT** — No sectionals provided in data.
+- **STAR FOREVER** — No sectionals provided in data.
+
+**Summary:** **ANNHILATOR**, **ARABESKA**, **KNIGHT CRUSADER** and **RAGNAROK** have genuine sub-24 last-400m speed. DETECTIVE’s closing speed is not translating into effective finishes now.
+
+---
+
+**4B. COMPETITION FORM VALIDATION**
+
+- The vast majority of close rivals are **UNVALIDATED** (no subsequent runs within 90 days). This is treated as **neutral** — neither validates nor discounts the form line.
+- **DETECTIVE** lost to **NONPARIEL** by 0.67s on 16-Mar-2026. NONPARIEL subsequently ran 6th in Group 1400m on 2026-07-12. This offers only weak validation that NONPARIEL was genuinely rated; it does not upgrade DETECTIVE’s own prospects.
+- Absence of close rivals is **not penalised**; several horses won by comfortable margins or were beaten far, naturally producing no near rivals.
+
+---
+
+**5. BODY WEIGHT TRENDS**
+
+- **Today’s body weights have not been published** — no trend assessment is possible against historical figures.
+- Last known recorded body weights from context:
+  - ANNHILATOR: 442 (Feb 2025)
+  - ARABESKA: 457 (Mar 2025), 456 (Apr 2025)
+  - DETECTIVE: 489 (Feb 2025), 492 (Jan 2025)
+  - EXCLUSIVE BLACK: 433 (May 2025), 428 (Jun 2025), 408 (Feb 2025), 407 (Jan 2025)
+  - KNIGHT CRUSADER: 424 (Feb 2025), 421 (Feb 2025)
+  - RAGNAROK: 462 (Jan 2025), 458 (Feb 2025)
+  - SILVER ACT: 410 (Feb 2025), 408 (Feb 2025)
+  - STAR FOREVER: 469 (Feb 2025), 465 (Jan 2025)
+- **Flag:** Without today’s scales, fitness deductions are speculative. A weight spike off a layoff would signal a needing-the-run effort.
+
+---
+
+**6. GOING PREFERENCES**
+
+- Today’s going / penetrometer reading is **not available**.
+- Historical penetrometer history is almost exclusively **Good** (3.4–4.0) for all runners except:
+  - **EXCLUSIVE BLACK** hasrun on **Good to Soft** (4.6–4.8) and **Soft** (penetro 4.6) and handled it (won on Firm too). If today eases, he is the most tested on softer surface.
+  - **ARABESKA** and **DETECTIVE** have one Firm run each (3.44 / 3.0–3.5 range) and performed creditably.
+- No strong surface aversion is evident for the majority; they are **Good-ground horses**.
+
+---
+
+**7. STRUCTURED RACE INCIDENTS**
+
+**A) PACE-RELEVANT / MEDICAL INCIDENTS**
+- **ROMANTIC GREY** — 2026-03-28: **WITHDRAWAL_GATES** (reared in stalls, jockey dislodged). **Run excluded from form.** Speed map impact: cannot be trusted for early speed; fractious barrier manners downgrade front-run assumptions.
+- **EXCLUSIVE BLACK** — 2025-02-23: **WITHDRAWAL_GATES** (excluded from form).
+- **DETECTIVE** — 2026-06-28 (Bangalore 1600m): **BLOOD VESSEL (Grade II)** + FITNESS CERTIFICATE REQUIRED. Severe medical flag; very recent bleed (4 weeks) makes short-term repeat high-risk.
+- **ANNHILATOR** — 2025-02-09: Raw stewards flag **WITHDRAWN ON VET GROUNDS** (post-race). No subsequent runs for 17 months; treat as fitness query.
+- **ARABESKA** — 2026-03-17: **STUMBLED** and suffered interference (HANGING IN/OUT by others). Lost momentum but still ran on to 4th.
+- **STAR FOREVER** — 2025-02-17: Did not show initial speed, unable to take close position.
+
+**B) DISCIPLINE INCIDENTS (count summary)**
+- **2 jockey reprimands** (RAGNAROK for lack of vigour; ANNHILATOR for shifting in)
+- **1 jockey fine** (ARABESKA jockey fined on 28-Sep-2025, amount undisclosed)
+- Multiple fines against *other* riders for interference caused to today’s runners — these are not held against the field.
+
+---
+
+**8. RAW STEWARDS REPORTS**
+
+- **STAR FOREVER:** *“Naresh (STAR FOREVER) that his instructions were to sit close, but as his mount did not show initial speed, he was unable to position as instructed in the initial stages of the race and in the straight he did his best.”* (17-Feb-2025)
+- **ARABESKA:** *“2000/- for shifting in at about the 400 mtrs in the process causing inconvenience to ARABESKA ( Akshay Kumar) racing on the rails. 5000/- for shifting out soon after the start in the process crowding the runners drawn on his outside resulting in, interference to ARABESKA (Akshay Kumar) SECRET SAINT (P.”* (17-Mar-2026). *“Akshay Kumar (ARABESKA) was fined a sum of Rs.”* (28-Sep-2025)
+- **DETECTIVE:** *“It was reported after the race that DETECTIVE CONAN burst its blood vessels ( Endoscopy - Grade II ). Flags: FITNESS CERTIFICATE REQUIRED, BLOOD VESSEL”* (28-Jun-2026)
+- **ROMANTIC GREY:** *“ROMANTIC GREY (Abhay Singh) was very fractious and reared up inside the stalls resulting in Jockey dislodged from the mount and got injured, as such the mare was permitted to be withdrawn before coming under starters orders…”* (28-Mar-2026)
+- **ANNHILATOR:** *“Jockey Suraj Narredu (ANNHILATOR) was cautioned for shifting in soon after the start in the process forcing in CLARA (Kuldeep Singh (Sr).”* (05-Jan-2025)
+- **KNIGHT CRUSADER:** *“Explanation of Jockey Antony Raj S (KNIGHT CRUSADER) … his mount did not show any turn of foot inspite of his best efforts.”* (09-Feb-2025)
+
+No horse shows recurrent **SLOWLY AWAY** phrasing, but **STAR FOREVER** and **ROMANTIC GREY** have gate-speed / temperament question marks.
+
+---
+
+**FIELD ASSESSMENT**
+
+**A) Likely pace scenario**  
+No dedicated 1400m speedster. ROMANTIC GREY is the only natural 1200m front-runner but is temperamentally unreliable and has not shown the stamina to control a 1400m. Expect a **tactical, moderately run race** with the field bunched at the 800m. The turn into the straight will be congested; outside runners from gates 8–10 will need to weave or swing very wide. **Whips Not Allowed** means horses must possess natural momentum — stalkers who can travel into the race without hard riding are favoured over deep closers that need a gap and a reminder.
+
+**B) Winner profile**  
+A **proven 1400m stalker** with a sub-24.0 last-400m sectional when closing into the placings, drawn inside 6 to save ground, and with race-fitness evidence in 2026. Must be tractable enough to avoid the whip.
+
+**C) Field Ranking (Top 5)**
+
+1. **ARABESKA** — Sole horse with **recent, progressive 1400m form** (4th → 2nd last two starts), a **sub-24 closing sectional** at the trip (23.94s), and a **head-to-head** advantage over several rivals (beat EXCLUSIVE BLACK and STAR FOREVER on identical going/distance Apr 2026). Drawn gate 5, she can slot in midfield and use the bend.  
+2. **KNIGHT CRUSADER** — **Sub-24 closer at 1400m** (23.63s) when 2nd to ANNHILATOR in same track/conditions. Two recent 1200m placings (Mar 2026) prove current fitness. Stalker style is perfect for whip-free, moderate-pace scenario. Gate 8 is awkward but he has the tactical speed to overcome it.  
+3. **EXCLUSIVE BLACK** — **3rd at this trip** just 3.5 months ago behind ARABESKA; raw last-400m of 24.18s confirms he can close. Gate 10 is the big negative — he will be forced wide or must burn energy to cross. Respect the course-and-distance placing.  
+4. **RAGNAROK** — Lightning-fast **sub-23.0** closing splits at 1200m, but no 1400m evidence and recent form patchy (6th, 11th). Gate 9 makes life harder on a likely slow pace. Include on raw speed but vulnerable at the trip.  
+5. **ANNHILATOR** — **Class-marquee**: dual 1400m Hyderabad winner with outstanding sub-24 sectionals. However, **last run was 17 months ago (Feb 2025)** and he carries a **vet-withdrawal flag** from that campaign. Without body-weight or barrier-trial data, he is impossible to trust as a betting proposition despite top-class historical numbers. Ranked 5th on “if-fit” upside only.
+
+**D) Danger outside the top 5**  
+- **STAR FOREVER** — If the pace unexpectedly collapses into a sprint from the 600m, his deep-closer profile could sweep wide late. Historically placed at 1400m (3rd Feb 2025), but recent 2026 efforts suggest he has lost his turn of foot.  
+- **SILVER ACT** — 1600m winner in 2025; if the race becomes a staying test he could outlast, but there is **no 1400m form data** to support the case.
+
+**E) Horses to oppose (and why)**  
+- **DETECTIVE** — **Grade II blood vessel bleed on 28-Jun-2026** (just four weeks ago); entered again far too quickly. Also finished 9th of 9 at 1400m in Mar 2026. Welfare and performance both negative.  
+- **PERCEPTION** — Only one career run (Jan 2025, 1200m); **no 1400m experience**; 18-month layoff with no form updates. Cannot recommend in a Class 2 handicap.  
+- **ROMANTIC GREY** — **Reared and withdrew** last start; 1400m record is 7th; pure 1200m front-runner unlikely to get loose at the longer trip. Gate 2 helps only if he behaves — the risk/reward is poor.  
+- **ANNHILATOR** — **Oppose on fitness grounds**. Seventeen months off the track with a vet withdrawal on record. If stable support materialises in Phase 2 markets, reassess; on data alone he is a risky short-priced commodity.

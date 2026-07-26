@@ -1,0 +1,12 @@
+FORM VALIDATION RANKING
+[1]. DETECTIVE — MILD UPGRADE | Multiple rivals within 3L subsequently placed or won in 80+ company; strongest validation.
+[2]. ARABESKA — MILD UPGRADE | Two high-class rivals (including a Classic winner) later won/placed at same level.
+[3]. KNIGHT CRUSADER — MILD UPGRADE | Winners of his races later placed, validating marginal form.
+[4]. RAGNAROK — MILD UPGRADE | Rivals WALKING THUNDER and THE THUNDER placed at same class, mild positive signal.
+[5]. ROMANTIC GREY — MILD UPGRADE (THIN SAMPLE) | Only one rival, but that one went on to win a Trophy; thin confidence.
+[6]. PERCEPTION — NEUTRAL | No valid competition data; cannot assess.
+[7]. STAR FOREVER — NEUTRAL | All races eliminated by Rule 2; no data.
+[8]. EXCLUSIVE BLACK — MILD DOWNGRADE | Rivals uniformly failed to progress; form looks hollow.
+[9]. SILVER ACT — MILD DOWNGRADE | Every in-window rival flattered in subsequent starts.
+[10]. ANNHILATOR — STRONG DOWNGRADE | Winner of shared race regressed badly; no rival validated form.
+

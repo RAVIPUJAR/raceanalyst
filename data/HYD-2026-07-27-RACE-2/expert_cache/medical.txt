@@ -1,0 +1,26 @@
+MEDICAL RISK RANKING
+
+1. DETECTIVE — CRITICAL | Recent Grade II epistaxis (blood vessel burst) is a structural respiratory injury; risk of recurrence high under race stress. Fitness certificate required — confirm clearance.
+2. ROMANTIC GREY — SERIOUS | Historical gate fractiousness (reared, jockey dislodged) is a behavioural safety concern; may affect barrier performance today.
+3. SILVER ACT — WATCH | Bandages on hind legs (single-date, UNCLASSIFIED) plus UNDERWEIGHT status (408kg) warrant monitoring.
+4. RAGNAROK — LOW RISK | No history found.
+5. PERCEPTION — LOW RISK | No history found.
+6. ARABESKA — LOW RISK | No history found.
+7. ANNHILATOR — LOW RISK | No history found.
+8. KNIGHT CRUSADER — LOW RISK | No history found.
+9. EXCLUSIVE BLACK — LOW RISK | No history found.
+10. STAR FOREVER — LOW RISK | No history found.
+
+
+WEIGHT RANKING (most positive weight signal to most concerning):
+  1. RAGNAROK        — STABLE/HEALTHY | NEUTRAL
+  2. ARABESKA        — STABLE/HEALTHY | NEUTRAL
+  3. ANNHILATOR      — STABLE/HEALTHY | NEUTRAL
+  4. KNIGHT CRUSADER — STABLE/HEALTHY | NEUTRAL
+  5. STAR FOREVER    — STABLE/HEALTHY | NEUTRAL
+  6. SILVER ACT      — STABLE/UNDERWEIGHT | WATCH
+  7. EXCLUSIVE BLACK — VOLATILE/HEALTHY | WATCH
+  8. DETECTIVE       — STABLE/OVERWEIGHT | WATCH
+  9. PERCEPTION      — INSUFFICIENT DATA | WATCH
+  10. ROMANTIC GREY   — INSUFFICIENT DATA | WATCH
+
