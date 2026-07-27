@@ -1,0 +1,22 @@
+RATINGS RANKING
+
+1. WALKING THUNDER   -- Drop=2 EffR=78 FLAT. Trend=STATIC
+   Prime 4yo with peak rating matched last start; head-to-head wins over CALISTA GIRL at the distance and consistent competitiveness against higher-rated foes.
+
+2. N R I HIGH POWER  -- Drop=2 EffR=78 FLAT. Trend=IMPROVING
+   Progressive 4yo filly who reached a new peak of 70 with a last-start win; narrowly beaten in maidens before that and looks to still be on the upgrade.
+
+3. BRILLIANT LAD     -- Drop=2 EffR=72 FLAT. Trend=IMPROVING
+   Prime 4yo gelding who has won his last two starts and risen to a 72 peak; carries top weight which caps his effective rating but his current trajectory is positive.
+
+4. CALISTA GIRL      -- Drop=2 EffR=82 FLAT. Trend=DECLINING
+   Veteran mare whose effective rating is inflated by weight relief, but she has twice been comfortably beaten by WALKING THUNDER and has an erratic 2026 pattern.
+
+5. D MINCHU          -- Drop=2 EffR=100 FLAT. Trend=STATIC
+   Holds the highest peak and effective rating in the race, but she is a 7yo veteran with no 2026 racing and is physically disadvantaged against three younger, fitter rivals.
+
+6. BORN BRAVE        -- Drop=2 EffR=70 FLAT. Trend=STATIC
+   Rating unreliable with only two career starts and a long absence from the track; mature age is not enough to offset the data deficiency.
+
+7. PROUD MARY        -- Drop=2 EffR=89 [FORM DEGRADATION]. Trend=DECLINING
+   Eliminated by last-run filter after a 20.75L beating without incident; rating is falling and she is the bottom-rated contender by recent racecourse evidence.

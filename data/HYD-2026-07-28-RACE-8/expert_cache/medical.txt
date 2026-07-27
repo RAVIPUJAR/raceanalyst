@@ -1,0 +1,26 @@
+MEDICAL RISK RANKING
+
+1. RIVAL — WATCH | Withdrawn on veterinary grounds on 17-Jul-2026 for unsoundness in hinds; no medical history gives false sense of safety — the unsoundness claim is a real red flag.
+2. COLT PISTOL — WATCH | Bandages on hind legs plus stewards reports of hanging in and lack of fluent gallop suggests possible hind-limb issue being managed.
+3. CALISTOGA — WATCH | RSWT treatment indicates active management of an underlying issue; previous stewards withdrawal on veterinary grounds (jockey substitution) adds concern.
+4. FLYING FURY — MODERATE | Historical splint bone surgery (12+ months ago) — structural vulnerability, though not recent.
+5. SEE THE LIGHT — LOW RISK | Historical fitness certificate required but cleared; no active medical history.
+6. BEST BUDDY — LOW RISK | No medical history and no race incidents.
+7. AYUSHMAN — LOW RISK | No medical history; stewards withdrawal was jockey-related, not horse.
+8. FOXY GIRL — LOW RISK | Clean medical record and no horse-related medical incidents.
+9. JURAMENTO — LOW RISK | Clean medical record; performance issue only.
+10. FEEL THE MAGIC — LOW RISK | Clean medical record and no medical incidents.
+
+
+WEIGHT RANKING (most positive to most concerning):
+1. JURAMENTO — REVERSE TREND UP | READY TO STRIKE — weight reversal up with improving form; strong positive signal.
+2. COLT PISTOL — STABLE | Healthy weight range; no weight concern.
+3. FOXY GIRL — STABLE | Healthy weight range.
+4. AYUSHMAN — INSUFFICIENT DATA | Healthy weight point.
+5. FEEL THE MAGIC — INSUFFICIENT DATA | Healthy weight point.
+6. FLYING FURY — INSUFFICIENT DATA | No weight data.
+7. CALISTOGA — STABLE | Overweight (478kg) — stable but heavy; may lack sharpness.
+8. BEST BUDDY — INSUFFICIENT DATA | Overweight (507kg) — heavy horse, no trend.
+9. SEE THE LIGHT — VOLATILE | Large weight swings — concern for underlying health management.
+10. RIVAL — VOLATILE | +21kg spike after unsoundness withdrawal — likely rest-related, but still a concern.
+

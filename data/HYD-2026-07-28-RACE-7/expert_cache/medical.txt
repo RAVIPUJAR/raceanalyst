@@ -1,0 +1,39 @@
+ MEDICAL RISK RANKING
+
+1. TOROBRAVO — CRITICAL | Recent surgery for chip fracture in carpal joint. Highest structural risk in the field.
+2. GLORIOUS POWER — SERIOUS | Withdrawn on veterinary grounds in last start. No medical follow-up.
+3. GOLDEN GAZELLE — SERIOUS | Recent colic event corroborated by a recent veterinary withdrawal.
+4. WOLF CREEK — SERIOUS | Very recent colic episode (22 days ago). Systemic stress.
+5. PERFECT LIGHT — SERIOUS | Recent post-race lameness and gate "planting" incident.
+6. N R I RANGE — SERIOUS | Historical lameness withdrawal, but no medical record of it.
+7. BLACK DUST — WATCH | Single old post-race lameness that was cleared. No medical history.
+8. CLARA — MODERATE | Active treatment (bandages on hind legs) indicates ongoing management.
+9. BLUE PANTHERESS — MODERATE | Confirmed dental issue (sharp molars) found post-race.
+10. ARMSTRONG — WATCH | Unclassified condition. Cannot escalate.
+11. CORINTHIAN — WATCH | No medical history. Stewards report shows gate slowness.
+12. LIFES JOURNEY — WATCH | No medical history. One gate awkwardness incident.
+13. TORCHBEARER — LOW RISK | No medical history.
+14. CHINA TOWN — LOW RISK | No medical history.
+15. CLEFAIRY — LOW RISK | No medical history.
+16. EMPERORS CHARM — LOW RISK | No medical history.
+
+
+WEIGHT RANKING: most positive to most concerning.
+
+1. BLACK DUST — REVERSE TREND UP, HEALTHY, POSITIVE SIGNAL. FLAGGED READY TO STRIKE.
+2. GLORIOUS POWER — STABLE, UNDERWEIGHT, NEUTRAL.
+3. TORCHBEARER — STABLE, HEALTHY, NEUTRAL.
+4. CHINA TOWN — STABLE, HEALTHY, NEUTRAL.
+5. CLARA — STABLE, HEALTHY, NEUTRAL.
+6. BLUE PANTHERESS — STABLE, HEALTHY, NEUTRAL.
+7. EMPERORS CHARM — STABLE, HEALTHY, NEUTRAL.
+8. WOLF CREEK — STABLE, HEALTHY, NEUTRAL.
+9. ARMSTRONG — STABLE, OVERWEIGHT, NEUTRAL.
+10. LIFES JOURNEY — INSUFFICIENT DATA, HEALTHY, NEUTRAL.
+11. PERFECT LIGHT — INSUFFICIENT DATA, UNKNOWN, NEUTRAL.
+12. N R I RANGE — INSUFFICIENT DATA, UNKNOWN, NEUTRAL.
+13. TOROBRAVO — INSUFFICIENT DATA, OVERWEIGHT, NEUTRAL.
+14. CORINTHIAN — VOLATILE, HEALTHY, WATCH.
+15. CLEFAIRY — VOLATILE, UNDERWEIGHT, WATCH.
+16. GOLDEN GAZELLE — REVERSE TREND DOWN, UNDERWEIGHT, WATCH.
+

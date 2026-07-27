@@ -1,0 +1,21 @@
+MEDICAL RISK RANKING
+
+1. BORN BRAVE — SERIOUS | Tendon surgery history combined with a vet scratch incident provides strong evidence of a chronic structural weakness.
+2. BRILLIANT LAD — MODERATE | Two vet scratch incidents, one with a specific lameness diagnosis. Despite no medical history, the stewards reports are themselves strong evidence of a recurring issue.
+3. D MINCHU — MODERATE | Very recent (22-day) colic episode is a significant concern for this race.
+4. CALISTA GIRL — LOW RISK | No medical or stewards flags related to horse health.
+5. N R I HIGH POWER — LOW RISK | No medical or stewards flags related to horse health.
+6. PROUD MARY — LOW RISK | No medical or stewards flags related to horse health.
+7. WALKING THUNDER — LOW RISK | No medical or stewards flags related to horse health.
+
+
+
+WEIGHT RANKING (most positive to most concerning):
+1. D MINCHU — REVERSE TREND UP (SIGNAL ERODED BY COLIC — see caveat above)
+2. BORN BRAVE — STABLE
+3. N R I HIGH POWER — STABLE
+4. PROUD MARY — STABLE
+5. WALKING THUNDER — STABLE
+6. BRILLIANT LAD — INSUFFICIENT DATA
+7. CALISTA GIRL — STABLE (but UNDERWEIGHT — a chronic limitation)
+

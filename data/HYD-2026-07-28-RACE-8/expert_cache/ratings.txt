@@ -1,0 +1,31 @@
+RATINGS RANKING
+
+  1. FOXY GIRL -- Drop=2 EffR=72 FLAT/ENGINEERED
+     Trend=IMPROVING -- Filly receives 2.5kg allowance producing the highest effective rating in the race; strong prior efforts against elite rivals under big weight offsets mark her the ratings selection.
+
+  2. AYUSHMAN -- Drop=2 EffR=67 FLAT/ENGINEERED
+     Trend=IMPROVING -- Progressive in three starts with a win and a close second giving weight; Group 3 form and prime age give him scope to outrun his current rating.
+
+  3. RIVAL -- Drop=2 EffR=67 FLAT/ENGINEERED
+     Trend=STATIC -- Consistently competitive at his peak rating and dead-heated with Best Buddy while receiving weight; veteran but valid on pure numbers against this field.
+
+  4. FEEL THE MAGIC -- Drop=2 EffR=67 FLAT/ENGINEERED
+     Trend=STATIC -- Two recent good runs at a light weight of 50kg, though prior opposition was weaker than the top pair.
+
+  5. CALISTOGA -- Drop=2 EffR=67 FLAT
+     Trend=DECLINING -- Eliminated by the last-run filter due to a 17.25L defeat in her last three runs; peak 67 offers a ceiling but recent reliability is gone.
+
+  6. SEE THE LIGHT -- Drop=0 EffR=65 FLAT
+     Trend=DECLINING -- Eliminated by the last-run filter after an 11.25L loss in her last three starts; effective rating sits below the main cluster.
+
+  7. BEST BUDDY -- Drop=2 EffR=67 FLAT/DEGRADATION
+     Trend=DECLINING -- Eliminated by the last-run filter; multiple 10+ length defeats confirm form has degraded from his peak of 62.
+
+  8. COLT PISTOL -- Drop=2 EffR=67 FLAT/DEGRADATION
+     Trend=DECLINING -- Eliminated by the last-run filter; back-to-back 10+ length defeats show peak 53 is no longer within reach.
+
+  9. JURAMENTO -- Drop=2 EffR=67 FLAT/DEGRADATION
+     Trend=DECLINING -- Eliminated by the last-run filter; beaten by huge margins in every recent start and offers no ratings-based hope.
+
+  10. FLYING FURY -- DEBUTANT
+      Trend=UNKNOWN -- No rating history; class drop, effective rating and last-run assessment cannot be applied. Unranked by this method unless external trial or pedigree evidence becomes available.
