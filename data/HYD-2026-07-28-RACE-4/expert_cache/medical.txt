@@ -1,0 +1,19 @@
+ MEDICAL RISK RANKING
+
+1. YUVRAJ — WATCH | Single unclassified medical entry plus historical gate fractiousness; no active concern but barrier behaviour unknown.
+2. LA FLEURIERE — WATCH | Running with bandages on hind legs; may be precautionary, but purpose unclear.
+3. ONLY MY WAY — LOW RISK | Historical fever withdrawal 18 months ago; no recurrence.
+4. PRIDE ASIDE — LOW RISK | No medical history.
+5. ORIONVALE — LOW RISK | No medical history.
+6. MOUNTAIN TOUCH — LOW RISK | No medical history.
+7. DIVINE TIGER — LOW RISK | No medical history.
+
+WEIGHT RANKING (most positive to most concerning):
+1. YUVRAJ — STABLE, improving performance — neutral to positive.
+2. PRIDE ASIDE — STABLE, declining performance — neutral.
+3. LA FLEURIERE — STABLE, declining performance — neutral.
+4. ORIONVALE — INSUFFICIENT DATA — unknown.
+5. MOUNTAIN TOUCH — INSUFFICIENT DATA — unknown.
+6. DIVINE TIGER — INSUFFICIENT DATA — unknown.
+7. ONLY MY WAY — INSUFFICIENT DATA — unknown.
+

@@ -1,0 +1,194 @@
+ **1. HEAD-TO-HEAD**
+
+| Date | Venue | Dist | Result (today’s runners) | Margin / Context |
+|------|-------|------|--------------------------|------------------|
+| 24-Mar-2026 | Hyderabad | 1200M MAIDEN | **ADVAIT 2nd** vs WIND CASTLE 6th vs KINSHIP 9th vs WESEETHESAMESUN 10th | ADVAIT was beaten by a length; the other three were 4½L–14¾L behind him. Same track/trip as today. |
+| 10-Mar-2026 | Hyderabad | 1200M MAIDEN | **MASTER CLASS 2nd** vs ADVAIT 5th | MASTER CLASS surged late to beat Advait by roughly 2½ lengths over this C&D. |
+| 16-Mar-2026 | Hyderabad | 1400M MAIDEN | **NORTHERN SKY 4th** vs TWILIGHT KING 6th | NORTHERN SKY finished 2 lengths ahead of TWILIGHT KING in a longer race. |
+| 09-Mar-2026 | Hyderabad | 1100M MAIDEN | **WIND CASTLE 7th** vs KINSHIP 10th | WIND CASTLE 3¼ lengths ahead of KINSHIP. |
+
+**Reading the form reversals:**  
+ADVAIT was beaten by MASTER CLASS on 10-Mar, then turned the tables on the same track/trip on 24-Mar (2nd of 10). That later race also included WIND CASTLE, KINSHIP and WESEETHESAMESUN, all of whom ADVAIT left behind with ease. NORTHERN SKY has clearly out-performed TWILIGHT KING over 1400m and brings superior acceleration sectionals.
+
+---
+
+**2. RUNNING STYLES**
+
+*Default whip rules apply (not stated otherwise).*
+
+| Runner | Style | Key Runs ( DATE \| DISTm \| PosN \| OddsX \| DrawY \| description ) |
+|--------|-------|---------------------------------------------------------------------|
+| **ADVAIT** | Stalker / Mid-pack closer | 24-Mar-2026 \| 1200m \| Pos2 \| Odds8/10 \| Draw? \| Settled third at half-furlong before making late headway to finish sec<br>10-Mar-2026 \| 1200m \| Pos5 \| Odds10 \| Draw? \| Settled ninth at four furlongs before making late headway to finish fi |
+| **ANEMARA** | Mid-field / Closer | 17-Mar-2026 \| 1100m \| Pos4 \| Odds5 \| Draw? \| Finished fourth, made late headway to finish just over a length behind |
+| **KINSHIP** | Deep Closer | 24-Mar-2026 \| 1200m \| Pos9 \| Odds20 \| Draw? \| Finished ninth, beaten by sixteen and three-quarters of a length after<br>09-Mar-2026 \| 1100m \| Pos10 \| Odds20 \| Draw? \| Ran last till the final bend, made late headway to finish tenth, beate |
+| **MASTER CLASS** | Deep Closer | 28-Mar-2026 \| 1400m \| Pos4 \| Odds6 \| Draw? \| Settled ninth at four furlongs before making late headway to finish fo<br>10-Mar-2026 \| 1200m \| Pos2 \| Odds7/2 \| Draw? \| Settled eighth at four furlongs before making a late surge to lead fro |
+| **N R I MEGA POWER** | Mid-field / Erratic | 05-Apr-2026 \| 1100m \| Pos6 \| Odds2 \| Draw? \| Finished sixth, made late headway to be beaten by 20.5 lengths. |
+| **NORTHERN SKY** | Stalker / Presser (versatile forward) | 16-Mar-2026 \| 1400m \| Pos4 \| Odds5 \| Draw? \| Settled fourth approaching the final bend before making late headway t<br>04-Apr-2026 \| 1600m \| Pos3 \| Odds3 \| Draw? \| Led at one and seven furlongs before making late headway to finish thi |
+| **TWILIGHT KING** | Deep Closer | 16-Mar-2026 \| 1400m \| Pos6 \| Odds12 \| Draw? \| Settled eighth at four furlongs before making late headway to finish s<br>06-Jun-2026 \| 1400m \| Pos6 \| Odds30 \| Draw4 \| Settled fifth approaching the final bend before making late headway to |
+| **WESEETHESAMESUN** | Deep Closer (ineffective) | 24-Mar-2026 \| 1200m \| Pos10 \| Odds15 \| Draw? \| Settled tenth from the start before making late headway to finish 10th |
+| **WIND CASTLE** | Deep Closer / Mid-field | 24-Mar-2026 \| 1200m \| Pos6 \| Odds15 \| Draw? \| Settled seventh at four furlongs before improving a few places to fini<br>09-Mar-2026 \| 1100m \| Pos7 \| Odds6 \| Draw? \| Settled tenth until the final bend before making late headway to finis |
+| **PHOEBUS** | Unknown | No runs shown in supplied context |
+| **SMASHING GREY** | Unknown | No runs shown in supplied context |
+| **VIDYUTPRABHAVA** | Unknown | No runs shown in supplied context |
+| **LOVE ALL** | Unknown | No runs shown in supplied context |
+| **VELVERA** | Unknown | No runs shown in supplied context |
+
+**Pace scenario:**  
+There is no pure burn-up merchant. **NORTHERN SKY** (Gate 1) is the only confirmed forward type and should elect to lead or sit a close 2nd from the inside draw. **ADVAIT** (Gate 8) will likely slot in 3rd–5th, handy to the speed. The remainder are either deep closers or debutants. With a 14-runner field and only one natural presser, the early fractions should be moderate. That sets up a 600m sprint where stalkers with turn-of-foot advantage over deep closers who will be swimming against a compact pack.
+
+---
+
+**3. DISTANCE FORM (today’s trip = 1200m; band = 1100m–1300m)**
+
+| Runner | Runs in band | Record | Assessment |
+|--------|--------------|--------|------------|
+| **ADVAIT** | 2 (both 1200m) | 5th → 2nd | **Proven & trending up.** Clear best form at the trip in this field. |
+| **ANEMARA** | 1 (1100m) | 4th | Within band; unexposed but no win yet. |
+| **KINSHIP** | 2 (1200m, 1100m) | 9th, 10th | **Flatlining / exposed.** Beaten heavily both times. |
+| **MASTER CLASS** | 1 (1200m) + 1 (1400m) | 2nd at 1200m, 4th at 1400m | **Proven at trip.** His best effort came at this distance. |
+| **N R I MEGA POWER** | 1 (1100m) | 6th (beaten 20½L) | In band but non-competitive. |
+| **NORTHERN SKY** | 0 | — | **Unproven at 1100–1300m.** Risk factor, though dropping from 1600m he should see it out strongly. |
+| **TWILIGHT KING** | 0 | — | **Unproven at trip.** Only 1400m form on page. |
+| **WESEETHESAMESUN** | 1 (1200m) | 10th | Exposed, no threat. |
+| **WIND CASTLE** | 2 (1200m, 1100m) | 6th, 7th | Exposed, always beaten. |
+| **Debutants** | 0 | — | PHOEBUS, SMASHING GREY, VIDYUTPRABHAVA, LOVE ALL, VELVERA are unproven distance risks. |
+
+---
+
+**4. SECTIONALS — who can quicken late?**
+
+*(Splits calculated from supplied 200m cumulative timings. Sub-24.0s last-400m is the benchmark for a genuine finishing kick when competitive.)*
+
+| Runner | Last 400m | Last 200m | Finish Position | Context |
+|--------|-----------|-----------|-----------------|---------|
+| **ADVAIT** (24-Mar) | ~24.27s (12.15 / 12.12) | ~12.12s | 2nd | Strong, not buried; settled handy and sustained run. |
+| **MASTER CLASS** (10-Mar) | ~24.26s (12.13 / 12.13) | ~12.13s | 2nd | Good closing speed; same race splits as Advait. |
+| **MASTER CLASS** (28-Mar) | ~24.24s | ~12.14s | 4th | Same benchmark at 1400m, confirming stamina on his side. |
+| **NORTHERN SKY** (16-Mar) | **~23.58s** (11.77 / 11.81) | **~11.81s** | 4th | **Best in field.** Outstanding late sectional at 1400m; acceleration is elite. |
+| **NORTHERN SKY** (04-Apr) | ~24.49s | ~12.27s | 3rd | Still strong sustaining splits at 1600m. |
+| **TWILIGHT KING** (06-Jun) | **~23.78s** (11.95 / 11.83) | ~11.83s | 6th | Fast on the clock, but achieved while finishing 6th of 8 (clear-air effect). |
+| **ANEMARA** (17-Mar) | ~24.24s (est.) | ~12.14s | 4th | Moderate; competitive but not electrifying. |
+| **Shared field** (24-Mar) | ~24.27s | ~12.12s | — | WIND CASTLE, KINSHIP, WESEETHESAMESUN recorded same race splits but were 6th, 9th, 10th. Their sectionals were padded by running in detached clear air and are **not** considered valid threat indicators. |
+
+**Verdict:** ADVAIT and MASTER CLASS have produced near-identical, competitive 1200m splits. **NORTHERN SKY** owns the best raw numbers and is dropping in trip. TWILIGHT KING’s splits look fast but were registered in a 6th-place finish and should be treated with caution.
+
+---
+
+**4B. COMPETITION FORM VALIDATION**
+
+| Horse | Close Rival(s) | Subsequent Form | Validation |
+|-------|----------------|-----------------|------------|
+| **ADVAIT** | THE LAST AVTAR (lost 0.33s); EXCALIBUR (beat 0.46s); TOSHIRO (lost 0.59s); etc. | All **UNVALIDATED** (no subsequent runs found). | Neutral. No evidence the race was weak or strong. |
+| **MASTER CLASS** | **DARDANUS** (lost 0.18s on 10-Mar) | Subsequently **won** a Rated 20-45 over 1800m. | **VALIDATED.** The horse that narrowly beat Master Class progressed into a handicap winner. |
+| **MASTER CLASS** | **DIGITAL EMPRESS** (lost 0.22s on 28-Mar) | Subsequently placed 2nd (1600m) and 4th (1600m). | **VALIDATED.** Rival has remained competitive. |
+| **NORTHERN SKY** | GRIT ’N’ GRACE; GOLD TOUCH; TOSHIRO; EXCALIBUR | All **UNVALIDATED.** | Neutral. |
+| **TWILIGHT KING** | ROYAL NAVY; GARFUNKLE | Both **UNVALIDATED.** | Neutral. |
+| **Others** | — | Close rivals largely unvalidated or none found. | No negative signal from absence of close rivals for minor place-getters. |
+
+---
+
+**5. BODY WEIGHT TRENDS**
+
+Today’s declared body weights: **Not yet published** for any runner.  
+Historical context body weights: Only **TWILIGHT KING** has a prior weight on record (464 kg on 06-Jun-2026). No historical body-weight sequence exists for any other contender in the supplied data.
+
+**Conclusion:** No weight trends can be established. Re-assess when declarations are published.
+
+---
+
+**6. GOING PREFERENCES**
+
+Penetrometer readings from performance history:
+
+| Runner | Going history |
+|--------|---------------|
+| ADVAIT | Good (3.84, 3.96) |
+| MASTER CLASS | Good (3.56) |
+| ANEMARA | Firm (3.43) |
+| WIND CASTLE | Good (3.84) |
+| N R I MEGA POWER | Good (3.78) |
+| NORTHERN SKY | Good (3.78) |
+| TWILIGHT KING | Good (3.50, 3.90) |
+| Others | No data |
+
+Today’s going: **Not available.**  
+No runner shows an established aversion to Good/Firm. Given the universal “Good” readings across the Hyderabad meetings, assume an in-between surface. No going-based selection bias is justified.
+
+---
+
+**7. STRUCTURED RACE INCIDENTS**
+
+**A) PACE-RELEVANT / FORM-EXCUSING INCIDENTS**
+
+| Horse | Incident | Date | Implication for today |
+|-------|----------|------|-----------------------|
+| **MASTER CLASS** | SLOWLY_AWAY | 10-Mar-2026 | “slow into stride soon after the start, in the process lost about 1 or 2 lengths…” Downgrade any front-running assumptions; must be ridden to settle. |
+| **WIND CASTLE** | SLOWLY_AWAY | 09-Mar-2026 | “jumped out slowly losing about 1 or 2 lengths.” Poor gate reliability; not expected to break sharply from Gate 9. |
+| **WESEETHESAMESUN** | AWKWARD / ERRATIC | 24-Mar-2026 | “ran erratic in the initial stages of the race…” Early tractability issues. |
+| **KINSHIP** | SHIED / DRIFTED | 09-Mar-2026 | “shied and drifted out soon after the start for no apparent reason.” Start-line temperament concern. |
+| **N R I MEGA POWER** | HANGING OUT / WAYWARD | 05-Apr-2026 | “trying to run out throughout the race in the process veered out on to outer track at about the 300 mtrs…” Severe straightness issue on turns; hard to trust under pressure. |
+| **WIND CASTLE** | WITHDRAWAL ON VET GROUNDS flag | 09-Mar-2026 | Flag noted in raw stewards; however the horse carries a finishing position (7th) in that race and no structured WITHDRAWAL_VET incident is recorded. **Run retained** but physical soundness should be monitored. |
+| **KINSHIP** | WITHDRAWAL ON VET GROUNDS flag | 09-Mar-2026 | Same as above; finished 10th in the race itself. Flag noted. |
+
+**B) DISCIPLINE INCIDENTS**
+
+Across the field: **1 jockey fine** (ADVAIT / Antony Raj S and Ajeeth Kumar fined for interference in the 24-Mar race).  
+No trainer fines or jockey reprimands extracted from the supplied reports.
+
+---
+
+**8. RAW STEWARDS REPORTS**
+
+*(Full sentences extracted only where they contain slowly away, hanging, stumbling, or medical flags.)*
+
+- **ADVAIT:** *“Ajeeth Kumar (EXCALIBUR) placed 3rd and Jockey Antony Raj S (ADVAIT) placed 2nd that 'my horse was full of running, Jockeys P. Ajeeth Kumar (EXCALIBUR) and Antony Raj S (ADVAIT) were fined Rs.”*  
+  *(No medical or gate flag — fine only.)*
+
+- **MASTER CLASS:** *“MASTER CLASS (Imran Chisty) was slow into stride soon after the start, in the process lost about 1 or 2 lengths and thereafter colt ran green throughout the race.”*  
+  **→ Recurrent “green” / slow-away note.**
+
+- **WESEETHESAMESUN:** *“Ajeeth Kumar) and WESEETHESAMESUN (B R Kumar) ran erratic in the initial stages of the race inspite of respective Jockeys' efforts.”*  
+  **→ Recurrent early erratic behaviour.**
+
+- **WIND CASTLE:** *“WIND CASTLE (Yash Narredu) jumped out slowly losing about 1 or 2 lengths.”*  
+  **→ Recurrent slowly away.**
+
+- **KINSHIP:** *“KINSHIP (Dhanu S Deora) shied and drifted out soon after the start for no apparent reason.”*  
+  **→ Start-line hang / drift.**
+
+- **N R I MEGA POWER:** *“Jockey Mukesh Kumar (N R I MEGA POWER) reported that his mount was trying to run out throughout the race in the process veered out on to outer track at about the 300 mtrs inspite of his best efforts, noted.”*  
+  **→ Recurrent hanging out / waywardness.**
+
+- **TWILIGHT KING:** Incomplete steward extract; no actionable sentence available.
+
+*(No slowly-away, hanging, or medical extracts for ANEMARA, NORTHERN SKY, PHOEBUS, SMASHING GREY, VIDYUTPRABHAVA, LOVE ALL, VELVERA.)*
+
+---
+
+# FIELD ASSESSMENT
+
+**A) Likely pace scenario**  
+With **NORTHERN SKY** (Gate 1) the only confirmed forward runner and a dozen others wanting to settle midfield or deeper, expect a **moderate, compressing tempo** early. ADVAIT (Gate 8) should sit 3rd–5th outside the leader. The deep closers—MASTER CLASS (11), KINSHIP (6), TWILIGHT KING (7), WESEETHESAMESUN (13), WIND CASTLE (9)—will be dropping 6–10 lengths off the pace. Because the tempo is unlikely to be brutal, the deep closers will need real traffic luck to weave through a bunched straight. The profile that wins is a **tractable stalker with late dash** rather than a pure back-marker.
+
+**B) Winner profile that fits today**  
+A 3yo with **prior Hyderabad 1200m form**, gate versatility (able to sit 3rd–5th), and a sustained sectional in the low-24s or faster late. Tractability is important because the straight will be crowded.
+
+**C) Field ranking — top 5**
+
+1. **ADVAIT** — The most proven 1200m performer in the race. He confirmed superiority over the majority of this deep-closing bunch on 24-Mar (2nd, beaten only a length) and his sectionals sit right on the benchmark. From Gate 8 he can settle handily and get first run on the deep closers.  
+2. **NORTHERN SKY** — Drawn ideally in Gate 1 and owns the **best sectionals in the race** (23.58 last 400m). His 1600m–1400m form suggests he will relish the drop to a strongly-run 1200m. The only caveat is he is unproven at the trip, but the way he finishes suggests he will be roaring home.  
+3. **MASTER CLASS** — Solid 2nd-over-this-C&D form and a validated competition line (beaten by a subsequent handicap winner). However the **wide Gate 11**, greenness, and confirmed slow-start tendency mean he will give the principals a start. Classy but vulnerable to traffic.  
+4. **ANEMARA** — Debuted 4th at 1100m with genuine late headway. Unexposed 3yo who should strip fitter for the 1200m step. Draw 10 is awkward but not fatal in a moderate pace.  
+5. **TWILIGHT KING** — Has the raw sectional speed (23.78) but is exposed as a 6th-place horse twice. He can sweep into a minor cheque if the leaders implode and he stays straight.
+
+**D) Danger horses outside top 5**  
+**LOVE ALL** (Gate 2) and **VELVERA** (Gate 3) are complete mysteries. If either is a precocious maiden with tactical speed from an inside draw, they could sit nearer the lead than the market expects and pinch a place. No data supports a stronger case.
+
+**E) Horses to oppose (and why)**
+
+- **KINSHIP** — Shied and drifted at the start, carries a vet-grounds flag, and was beaten 16¾ lengths by Advait in a race where he had every chance. No corrective evidence since.  
+- **WESEETHESAMESUN** — Ran erratic early and finished last of 10 in the Rising Star Plate. Sectionals flattered by detached clear air. Likely non-competitive again.  
+- **WIND CASTLE** — Slowly away at his last start and beaten 6th in the same 24-Mar race where Advait was finishing 2nd. No upward pointer.  
+- **N R I MEGA POWER** — Veered out uncontrollably at the 300m last time and was beaten 20½ lengths. Behavioural relapse risk makes him impossible to trust.  
+
+*(PHOEBUS, SMASHING GREY and VIDYUTPRABHAVA are not opposed because they are unraced; they are simply unassessed risks rather than negative-profile bets.)*

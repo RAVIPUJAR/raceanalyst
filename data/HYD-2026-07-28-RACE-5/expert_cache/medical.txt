@@ -1,0 +1,23 @@
+MEDICAL RISK RANKING
+
+1. FAIZAH — WATCH | Two veterinary withdrawals + hind leg bandaging (active treatment) suggest a chronic hind-limb issue.
+2. ZINDABAD — WATCH | RSWT treatment + gate incident + veterinary withdrawal point to a possible musculoskeletal problem affecting starts.
+3. LA QUINTA — WATCH | Veterinary withdrawal (Mar 2026) + an unclassified medical entry — minor unknown risk.
+4. MY HONEY — LOW RISK | No medical history but a recent veterinary withdrawal — possible minor issue, now resolved.
+5. EK — LOW RISK | No current medical history but a historical fitness certificate requirement — verify clearance.
+6. DREAM TO FLY — LOW RISK | No medical history; historical veterinary withdrawal (2025) is now low concern.
+7. HONEY LUNA — LOW RISK | No medical history; historical slow-start (2025) is low concern.
+8. RATE OF INTEREST — LOW RISK | No medical history found.
+9. VALLEDONNA — LOW RISK | No medical history found.
+
+
+WEIGHT RANKING (most positive signal to most concerning):
+  1. MY HONEY                — CONTINUOUS DECLINE but form improving (TRAINER TRIMMING — positive)
+  2. LA QUINTA               — STABLE healthy
+  3. DREAM TO FLY            — STABLE (underweight)
+  4. HONEY LUNA              — STABLE (underweight)
+  5. FAIZAH                  — STABLE healthy
+  6. EK                      — INSUFFICIENT DATA
+  7. VALLEDONNA              — INSUFFICIENT DATA
+  8. ZINDABAD                — INSUFFICIENT DATA
+  9. RATE OF INTEREST        — INSUFFICIENT DATA

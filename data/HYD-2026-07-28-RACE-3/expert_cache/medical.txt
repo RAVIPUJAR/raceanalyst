@@ -1,0 +1,25 @@
+ MEDICAL RISK RANKING
+
+1. KALKI — WATCH | Withdrawn on veterinary grounds (10-Mar-2026) + gate incident (awkward jump, 28-Mar-2026). Unresolved vet withdrawal is the highest concern.
+2. ARION ONE — MODERATE | Colic (date unclear) + RSWT treatment for prior structural injury + slow gate break (19-Jan-2025) corroborating possible discomfort. Two conditions.
+3. DUBAI TOUCH — LOW RISK | No medical history. Absence of record = uncertainty.
+4. GREIF — LOW RISK | No medical history.
+5. ARTHISHA — LOW RISK | No medical history.
+6. TURIYA — LOW RISK | No medical history.
+7. DASHING CHARM — LOW RISK | No medical history.
+8. FIRST LADY — LOW RISK | No medical history.
+9. SWEET DANCER — LOW RISK | No medical history.
+
+
+
+WEIGHT RANKING (most positive signal to most concerning):
+1. DUBAI TOUCH — READY TO STRIKE (REVERSE TREND UP) — highest positive signal in the field
+2. SWEET DANCER — STABLE (HEALTHY, improving form)
+3. TURIYA — STABLE (HEALTHY, stable form)
+4. ARION ONE — STABLE (OVERWEIGHT, medical history)
+5. ARTHISHA — INSUFFICIENT DATA
+6. DASHING CHARM — INSUFFICIENT DATA (HEALTHY weight)
+7. FIRST LADY — INSUFFICIENT DATA (HEALTHY weight)
+8. GREIF — INSUFFICIENT DATA
+9. KALKI — INSUFFICIENT DATA (medical concern adds negative context)
+

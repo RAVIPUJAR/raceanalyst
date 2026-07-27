@@ -1,0 +1,10 @@
+FORM VALIDATION RANKING
+  1. ARION ONE      — MILD UPGRADE | Trophy/Cup rival placed in same class; highest prestige signal among mild upgrades.
+  2. GREIF          — MILD UPGRADE | Two strong placed/win performances from ±3L rivals, both in Class 3.
+  3. FIRST LADY     — MILD UPGRADE | Two separate rivals placed at same class, confirming form from dual lines.
+  4. TURIYA         — MILD UPGRADE | One rival placed within ±3L, though offset by a lower-class placing from a Classic rival.
+  5. DASHING CHARM  — MILD UPGRADE (weak) | Only qualifying placement comes from a maiden race (0.5× weight); positive non-placed wins present but not protocol upgrades.
+  6. ARTHISHA       — NEUTRAL | No ±3L rival placed at same class; RED HOT PUNCH won from 3.5L behind (outside upgrade window).
+  7. DUBAI TOUCH    — NEUTRAL | STAR OF OPERA’s win from ±3L cannot be confirmed as higher class; no qualifying placed rivals.
+  8. KALKI          — NEUTRAL (no valid competition data)
+  9. SWEET DANCER   — NEUTRAL (no valid competition data)

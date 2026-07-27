@@ -1,0 +1,236 @@
+ **1. HEAD-TO-HEAD**
+
+- **2026-04-05 | HYDERABAD 1100M HANDICAP** – EK finished **3rd**, RATE OF INTEREST finished **10th**. EK was dramatically superior on the same card over 1100m; RATE OF INTEREST was tailed off and gives no reason to reverse that form at 1200m.
+- **2026-03-31 | HYDERABAD 1200M HANDICAP** – ZINDABAD finished **6th**, FAIZAH finished **12th** (last). Neither hit the frame, but ZINDABAD at least made late ground while FAIZAH folded. At 1200m ZINDABAD is the stronger of the two on this evidence.
+- **2026-03-28 | HYDERABAD 1400M HANDICAP** – LA QUINTA was **W** (WITHDRAWAL_VET), MY HONEY finished **9th**. The withdrawal run is excluded from form; no meaningful H2H.
+- **2026-03-17 | HYDERABAD 1100M HANDICAP** – EK **2nd**, FAIZAH **6th**, MY HONEY **3rd**. EK beat both rivals decisively on the same day. MY HONEY narrowly beat FAIZAH by three places, confirming MY HONEY’s superiority over FAIZAH at 1100m.
+- **2026-03-31 and 2026-03-17 form lines are run on winter Hyderabad tracks (penetro 3.43–3.68, Good/Firm), very similar to likely conditions today. The 1100m cutback form of EK and MY HONEY reads reliably at 1200m; FAIZAH has shown no aptitude to bridge the gap.**
+
+---
+
+**2. RUNNING STYLES**
+
+*Historical gate draws are recorded as “?” in the dataset for every runner; performance impact is assessed on today’s declared gates versus disclosed trajectory tags only.*
+
+**DREAM TO FLY** — **DEEP CLOSER**
+- 31-Mar-2026 | 1400m | Pos2 | Odds 9/2 | Draw ? | Settled seventh until the final bend before making late headway to finish second
+- 17-Mar-2026 | 1200m | Pos3 | Odds 4 | Draw ? | Settled twelfth approaching the final bend before making late headway
+- 09-Mar-2026 | 1200m | Pos3 | Odds 20 | Draw ? | Settled ninth at four furlongs before making late headway to finish third
+- 26-Feb-2025 | 1200m | Pos5 | Odds 3 | Draw ? | Settled fourth at four furlongs before making late headway to finish fifth
+- 28-Jan-2025 | 1400m | Pos3 | Odds 4/10 | Draw ? | [TOTE FAV] Settled sixth until the final bend before making late headway
+- 05-Jan-2025 | 1400m | Pos2 | Odds 6/4 | Draw ? | [TOTE FAV] Settled fifth until the final bend before making late headway  
+→ Trajectory is identical in every run: settled well back (5th–12th early) and stays on through the straight. From gate 6 today likely repeats midfield-to-rear path.
+
+**EK** — **FRONT-RUNNER / PACE PRESSER** *(downgraded reliability after recent STUMBLED / FITNESS CERTIFICATE flags)*
+- 05-Apr-2026 | 1100m | Pos3 | Odds 5 | Draw ? | Led at furlong, made late headway to finish third, beaten by 6.0 lengths
+- 17-Mar-2026 | 1100m | Pos2 | Odds 8 | Draw ? | Settled first at 800m, led until halfway, made late headway to finish second  
+→ Shows early speed to cross and lead or press from gate 2, but the July 2026 Bangalore stumble raises questions about gate soundness.
+
+**FAIZAH** — **MID-FIELD / FADER**
+- 31-Mar-2026 | 1200m | Pos12 | Odds 20 | Draw ? | Settled ninth at four furlongs before making late headway to finish twelfth
+- 26-Feb-2025 | 1400m | Pos7 | Odds 15 | Draw ? | Settled seventh at 2.5 furlongs before fading out to finish last
+- 17-Mar-2026 | 1100m | Pos6 | Odds 12 | Draw ? | Finished sixth after dropping back from a promising position in second
+- 16-Feb-2025 | 1100m | Pos9 | Odds 20 | Draw ? | Settled tenth approaching the final bend before making late headway  
+→ Frequently drops out from a tracking position; not a genuine deep closer because the fade is terminal. Gate 3 should give a rails alley but temperament/turn of foot is suspect.
+
+**HONEY LUNA** — **DEEP CLOSER / STALKER** *(downgraded due to “took time to get into stride” note)*
+- 28-Jan-2025 | 1200m | Pos4 | Odds 14/10 | Draw ? | [TOTE FAV] Settled sixth until the final bend before making late headway
+- 06-Jan-2025 | 1200m | Pos4 | Odds 9/2 | Draw ? | Settled sixth until the final bend before making late headway  
+→ Same pattern both runs, but 18-month absence and historically sluggish initial acceleration from gate 9 reduce reliability.
+
+**LA QUINTA** — **STALKER**
+- 28-Mar-2026 | 1400m | W | Odds ? | Draw ? | WITHDRAWAL_VET — run excluded from form
+- 17-Mar-2026 | 1100m | Pos4 | Odds 11/10 | Draw ? | [TOTE FAV] Settled sixth until the final bend before making late headway
+- 12-Jan-2025 | 1400m | Pos11 | Odds 15 | Draw ? | No in-running description available
+- 10-Mar-2026 | 1200m | Pos2 | Odds 8 | Draw ? | Settled second at three furlongs before making late headway to finish second
+- 21-Jun-2025 | 1200m | Pos8 | Odds 15 | Draw ? | Finished eighth, never threatened in a dominant performance
+- 07-Jun-2025 | 1400m | Pos6 | Odds 30 | Draw ? | Settled sixth until the final bend before weakening and fading  
+→ Capable of sitting handy (2nd at 3f) and sustaining, but can also weaken if too far back. Gate 4 suits a stalking trip.
+
+**MY HONEY** — **STALKER / MID-FIELD CLOSER**
+- 24-Aug-2025 | 1200m | Pos11 | Odds 12 | Draw ? | Settled eleventh from the back, made late headway to finish eleventh
+- 15-Aug-2025 | 1000m | W | Odds ? | Draw ? | WITHDRAWN ON VET GROUNDS — run excluded from form
+- 28-Mar-2026 | 1400m | Pos9 | Odds 10 | Draw ? | Settled deep back in ninth before making late headway
+- 17-Mar-2026 | 1100m | Pos3 | Odds 6 | Draw ? | Settled fourth approaching the final bend before making late headway to finish third
+- 26-Jul-2025 | 1100m | Pos2 | Odds 10 | Draw ? | Settled fourth until the final bend before improving to make late headway
+- 20-Jul-2025 | 1200m | Pos4 | Odds 20 | Draw ? | Settled at this place before making late headway to finish fourth
+- 15-Jun-2025 | 1100m | Pos6 | Odds 15 | Draw ? | Finished sixth at the final bend, made late headway to finish strongly
+- 06-Jul-2025 | 1200m | Pos3 | Odds 20 | Draw ? | Settled fifth approaching the final bend before making late headway  
+→ Preferred pattern is 4th–5th early, rolling finish. Proven at 1100m–1200m. Gate 5 allows this.
+
+**VALLEDONNA** — **UNKNOWN / UNEXPOSED**
+- No historical runs available in the provided context.  
+→ Drawn gate 1. Could land handy by default, but no pace data to classify.
+
+**ZINDABAD** — **STALKER** *(downgraded front-running assumptions: AWKWARD_JUMP / did not take a proper jump)*
+- 31-Mar-2026 | 1200m | Pos6 | Odds 9/10 | Draw ? | [TOTE FAV] Settled eighth at four furlongs before making late headway to finish sixth
+- 16-Mar-2026 | 1200m | Pos4 | Odds 7 | Draw ? | Settled third at four furlongs, made late headway to finish fourth  
+→ Tracks midfield but cannot be asked to lead after poor jumps. Gate 8 is a negative; must push across or accept a wide 3-wide trip.
+
+**RATE OF INTEREST** — **DEEP CLOSER**
+- 24-Mar-2026 | 1200m | Pos9 | Odds 20 | Draw ? | Settled thirteenth approaching the final bend before making late headway
+- 10-Mar-2026 | 1100m | Pos11 | Odds 20 | Draw ? | Settled last until the final bend before making late headway to finish eleventh
+- 05-Apr-2026 | 1100m | Pos10 | Odds 20 | Draw ? | Settled thirteenth approaching the final bend before improving gradually  
+→ Always deep (last/13th) at the final bend. Needs a hot pace and a wide straight; 1200m at Hyderabad rarely gives enough time from gate 7 if the tempo is only moderate.
+
+**Likely pace scenario:** EK is the sole declared pace horse and should cross from gate 2 to lead or sit outside an unknown VALLEDONNA (gate 1). LA QUINTA (4), MY HONEY (5) and FAIZAH (3) will stalk 3rd–5th. DREAM TO FLY (6) will be midfield-to-rear. ZINDABAD (8) must hustle from a wide draw; RATE OF INTEREST (7) and HONEY LUNA (9) will settle deepest. With only one genuine leader the pace is likely to be *moderate and compressed*, favouring stalkers with turn of foot over deep closers who need a genuine early tempo.
+
+---
+
+**3. DISTANCE FORM (1100m–1300m band)**
+
+- **DREAM TO FLY:** 1200m — 3rd, 3rd, 5th (three runs, two placings). Drops from winning 1400m form; proven at 1200m. Trend: consistent placegetter.
+- **EK:** No exposed 1200m runs. Two strong 1100m placings (2nd, 3rd) suggest the extra furlong is a question mark.
+- **FAIZAH:** 1200m — 12th (only recent). 1100m — 6th, 9th. Flatlining; no evidence of improvement at 1200m.
+- **HONEY LUNA:** 1200m — two 4ths (Jan 2025). Placed, but 18-month gap makes the form historical only.
+- **LA QUINTA:** 1200m — 2nd (Mar 2026), 8th (Jun 2025). Recent place validates the trip; mixed overall.
+- **MY HONEY:** 1200m — 4th, 3rd, 4th (Jul–Aug 2025) plus an 11th at Pune. Strong local 1200m form. 1100m — 3rd, 2nd, 6th. Best distance profile in the race.
+- **VALLEDONNA:** Unproven; no data.
+- **ZINDABAD:** 1200m — 4th, 6th. Two attempts, placed in one. Solid enough.
+- **RATE OF INTEREST:** 1200m — 9th; 1100m — 10th, 11th. Consistently well beaten at the trip.
+
+---
+
+**4. SECTIONALS — who can quicken late?**
+
+Calculated closing splits from races where the horse finished into the placings; beaten/tailed-off finishes are noted as unreliable regardless of raw numbers.
+
+- **DREAM TO FLY**
+  - *09-Mar-2026 | 1200m (3rd from 9th at 4f):* last 400m **~23.54s**, last 200m **~11.64s**. Genuine closing burst into the frame.
+  - *31-Mar-2026 | 1400m (2nd from 7th at final bend):* last 400m **~23.94s**, last 200m **~12.06s**. Sustained run through the line off a longer trip.
+- **EK**
+  - *17-Mar-2026 | 1100m (2nd, led until halfway):* last 400m **~23.31s**, last 200m **~11.09s**. These are *sustaining* splits under pressure rather than a deep close.
+- **MY HONEY**
+  - *17-Mar-2026 | 1100m (3rd, settled 4th):* last 400m **~23.31s** (same race/chronos as EK). Shows capable finishing kick from a stalking spot.
+- **LA QUINTA**
+  - *10-Mar-2026 | 1200m (2nd, settled 2nd at 3f):* last 400m **~23.83s**, last 200m **~11.92s**. Strong sustain/close from a handy position.
+- **HONEY LUNA**
+  - *06-Jan-2025 | 1200m (4th):* last 400m **~23.79s**, last 200m **~11.68s**. Respectable, but 18 months old.
+- **FAIZAH** — 31-Mar-2026 last 400m ~24.27s while finishing 12th; sectionals invalid as a closing threat because the race position context is terminal.
+- **RATE OF INTEREST / ZINDABAD / VALLEDONNA** — No sectional data available.
+
+*Summary:* Dream To Fly owns the strongest deep-close sectional over 1200m in this field. EK and My Honey share fast 1100m sustaining figures (~23.3s last 400m). La Quinta also hovers around the 23.8s mark from a stalking berth.
+
+---
+
+**4B. COMPETITION FORM VALIDATION**
+
+Every close rival (within 0.70s) across the last 3 starts for every runner is listed as **UNVALIDATED** — no subsequent runs found in the 90-day window.  
+- **Interpretation:** There is **no positive or negative external validation** available for any form line in this field.  
+- **Action:** Treat all form as neutral; judge entirely on margins, sectional quality, and in-running trajectory described in the stewards comments. Do **not** downgrade a horse simply because its opposition has not reappeared.
+
+---
+
+**5. BODY WEIGHT TRENDS**
+
+Today’s body weights are **not yet published**.
+
+Historical last-known BWs from context:
+- **DREAM TO FLY:** 406–409 kg
+- **EK:** No data
+- **FAIZAH:** 449–458 kg (heavy type)
+- **HONEY LUNA:** 408–410 kg
+- **LA QUINTA:** 432–442 kg
+- **MY HONEY:** 454–468 kg (heavy type)
+- **ZINDABAD / RATE OF INTEREST / VALLEDONNA:** No data
+
+Without today’s figures, no spike/drop trend can be calculated. Historical note: MY HONEY and FAIZAH are the highest disclosed weights; if either regresses toward the top of their band, mobility over 1200m may be compromised.
+
+---
+
+**6. GOING PREFERENCES**
+
+Penetrometer readings in the dataset cluster tightly in the **GOOD** range (3.4–3.96) for Hyderabad winter tracks.
+- **MY HONEY** has additionally raced on **GOOD TO SOFT** (4.5–4.7) at Pune and **FIRM** (3.2) at Hyderabad — the most surface-versatile exposed runner.
+- **LA QUINTA** has one **GOOD TO SOFT** run (Bangalore 4.80) resulting in 8th, but recent Hyderabad GOOD form is superior.
+- The remainder have only seen GOOD/FIRM.
+
+With today’s going unavailable, default to a **no-bias** assumption: most of the field is proven on standard Hyderabad GOOD, and none are tied to extremes.
+
+---
+
+**7. STRUCTURED RACE INCIDENTS**
+
+**A) PACE-RELEVANT INCIDENTS**
+
+- **LA QUINTA:** **[HUNG]** — 2025-06-07 Bangalore 1400m. Implication: straightness/waywardness in the straight. Single occurrence over a year old, but note if hanging recurs under pressure today.
+- **EK:** **STUMBLED** (2026-07-19 Bangalore 1200m); **FITNESS CERTIFICATE REQUIRED** (2026-07-18 Bangalore). Implication: very recent soundness/gate concerns downgrade front-running reliability despite prior gate 2 advantage.
+- **ZINDABAD:** **AWKWARD_JUMP / did not take a proper jump** — 2026-03-31 Hyderabad 1200m. Implication: cannot be relied upon to lead or break cleanly; likely to settle worse than ideal from gate 8.
+- **HONEY LUNA:** **Slow to stride** — 2025-01-28 Hyderabad 1200m (Raw: “took time to get into stride”). Implication: likely slowly away, compounding wide draw (gate 9).
+- **MY HONEY:** Caused interference shifting in soon after start — 2026-03-17. Implication: gate concentration lapse; needs a clean break today from gate 5.
+- **LA QUINTA:** **WITHDRAWAL_VET** — 2026-03-28 Hyderabad 1400m. Run excluded from form.
+- **MY HONEY:** **WITHDRAWAL_VET** — 2025-08-15 Hyderabad 1000m. Run excluded from form.
+
+**B) DISCIPLINE INCIDENTS**
+
+- **3 jockey fines** across the field (all involving Kuldeep Singh, Sr): Rs. 10,000 and Rs. 2,000 on MY HONEY; Rs. 5,000 on DILIGENCE for interference to LA QUINTA.  
+- **0 reprimands.**  
+No direct bearing on today unless Kuldeep Singh is re-engaged on the same horses; noted as a cluster of handler/jockey issues in prior races.
+
+---
+
+**8. RAW STEWARDS REPORTS**
+
+*Extracted sentences naming today’s horse (chronological). Recurrent issues flagged.*
+
+- **DREAM TO FLY**
+  - 05-Jan-2025: *“Ismail (DREAM TO FLY) in the presence of Trainer K.”* [Flag: WITHDRAWN ON VET GROUNDS]
+  - 17-Mar-2026: *“DREAM TO FLY (G.”* (report truncated in data)
+
+- **EK**
+  - 19-Jul-2026: **Flag STUMBLED.** (Raw sentence naming EK not fully extracted; reports relate to replacement rider permissions.)
+  - 18-Jul-2026: **Flag FITNESS CERTIFICATE REQUIRED.** (Race-date stewards text names other runners; EK carried the flag.)
+
+- **HONEY LUNA**
+  - 28-Jan-2025: *“Explanation of Jockey Akshay Kumar (HONEY LUNA) that his mount took time to get into stride in the straight inspite of his best efforts.”*  
+  **Flag:** Single-instance slow-away / sluggish air.
+
+- **LA QUINTA**
+  - 28-Mar-2026: *“LA QUINTA (App.”* [Flag: WITHDRAWN ON VET GROUNDS]
+  - 17-Mar-2026: *“Jockey Kuldeep Singh (Sr) (DILIGENCE) was fined Rs.5000/- for shifting out at about the 650 mtrs in the process causing inconvenience to LA QUINTA (Suraj Narredu) and again shifting out while negotiating the final bend i.e.”*
+
+- **MY HONEY**
+  - 28-Mar-2026: *“Explanation of Jockey Kuldeep Singh (Sr( (MY HONEY) in the presence of Trainer D Netto that his instructions were to sit close 2nd but his mount was denied a clear run soon after the start due to clipping of front horses and in the straight he did his best was not accepted and the Jockey was fined Rs.10,000/- for failing to follow the given instructions by the Trainer.”*
+  - 17-Mar-2026: *“Jockey Kuldeep Singh (Sr) (MY HONEY) was fined Rs.2000/- for shifting in soon after the start in the process causing interference to VICTORY RUN (Surya Prakash).”*
+
+- **ZINDABAD**
+  - 31-Mar-2026: *“Explanation of Jockey Akshay Kumar (ZINDABAD) in the presence of Trainer R H Sequiera that his instructions were to sit 3rd/4th, but as mount did not take a proper jump, he could not follow the instructions in the initial stages of the race and in the straight when asked for an efforts, his mount did not show any turn of foot inspite of his best efforts. ZINDABAD (Akshay Kumar) placed 6th in the race is sampled.”*  
+  **Flag:** Recurrent gate trouble (awkward jump).
+  - 16-Mar-2026: *“The Stewards of the Club viewing the replay of the race on CCTV and acting on their own observations of the race and noting that Jockey Afroz Khan (KITSUNE) made no efforts to prevent his mount from shifting in, in the process causing inconvenience to ZINDABAD (Santosh Raj N R ) at about the 1100 mtrs and thereafter shifted in again when he was not sufficiently clear of DUBBLE BUBBLE (App. 9    ZINDABAD (Santosh raj N R) placed 4thH.”*  
+  **Flag:** Gate incident / traffic.
+
+- **FAIZAH**
+  - 31-Mar-2026: *“Deshmukh to saddle FAIZAH (P.”* [Flag: WITHDRAWN ON VET GROUNDS]
+  - 26-Feb-2025: *“FAIZAH (H M Akshay) dropped back from about the 400 mtrs whilst traveling with front runner and finished the course at the rear end of the field.”*
+
+- **RATE OF INTEREST**
+  - 05-Apr-2026: *“RATE OF INTEREST (G.”* (report truncated)
+
+- **VALLEDONNA**
+  - No stewards reports found.
+
+---
+
+**FIELD ASSESSMENT**
+
+**A) Likely pace scenario**
+EK is the only runner with demonstrated early speed and should control the front from gate 2, likely clearing to a 1–2 length lead. VALLEDONNA (1) is an unknown quantity but from the rail may press or tuck in behind EK. LA QUINTA (4), FAIZAH (3) and MY HONEY (5) will form a stalking tier 3–4 lengths off the lead. DREAM TO FLY (6) will sit midfield-to-rear. ZINDABAD (8) is drawn wide and must hustle early to avoid a 3-wide trip; RATE OF INTEREST (7) and HONEY LUNA (9) will settle last. Because EK lacks a dedicated pace foil, the tempo is likely to be *honest but not brutal* — a compressed field entering the straight. That scenario favours stalkers who can slot into the slipstream and unleash a short, sharp turn of foot, whereas deep closers may run out of metres before the leaders fold.
+
+**B) Winner profile that fits today’s conditions**
+A stalker with a **proven 1200m placing**, gate manners to sit 3rd–5th early, and a last-400m sectional in the **23.5s–24.0s bracket**. The winner does not need to be a deep closer; tactical middle speed from gates 4–6 is ideal.
+
+**C) Field ranking — top 5**
+
+1. **MY HONEY** — Strongest exposed 1200m record (3rd/4th local, 2nd/3rd at 1100m). Shared the same 1100m sectional as EK (23.31s last 400m) when finishing 3rd on 17-Mar-2026. Stalking style from gate 5 fits the compressed-pace scenario best. Weight is historically high but form is franked.  
+2. **EK** — Clear H2H dominance over My Honey and Faizah at 1100m, fastest sustaining sectional (23.31s), and gate 2 secures the lead. Downgraded to 2nd only because the 1200m trip is untested in this dataset and **very recent stumble + fitness certificate (July 18–19)** create soundness risk that is hard to ignore.  
+3. **LA QUINTA** — Beaten only a neck/short head when 2nd over 1200m on 10-Mar-2026 (sectional 23.83s) and was tote favourite last start. Gate 4 is perfect for a stalking trip. Concerns: historical hanging and a 1400m withdrawal.  
+4. **DREAM TO FLY** — Consistent 1200m/1400m placegetter with the sharpest deep-close sectional (23.54s last 400m at 1200m). Must rely on a genuine pace and gaps; from gate 6 a compressed bunch may limit sweeping room.  
+5. **ZINDABAD** — Solid 1200m placing (4th) and H2H edge over Faizah. Drawn 8, however, and his awkward-jump history makes a wide, interrupted trip probable. Needs luck in running.
+
+**D) Danger horses outside top 5**
+- **VALLEDONNA** — Totally unexposed maiden from gate 1. If she possesses tactical speed, the rail can land her in a stalking position that this scenario favours. With zero data she is a complete unknown and must be respected in exotics.
+
+**E) Horses to oppose**
+- **RATE OF INTEREST** — Consistently beaten double-digits at 1100m and 1200m, no H2H hope against EK, settles too deep on a likely moderate tempo, and shows no sectionals or form to suggest a sudden reversal. **Oppose.**  
+- **FAIZAH** — Finished last of 12 at this trip, H2H inferior to EK, My Honey and Zindabad, and stewards reports document a habit of dropping out from promising positions. No validated closing burst. **Oppose.**  
+- **HONEY LUNA** — Last raced January 2025 (18-month absence), historically only placed 4th in maidens, and stewards noted she “took time to get into stride.” Wide draw (9) compounds the fitness doubt. **Oppose** on recency and reliability grounds.

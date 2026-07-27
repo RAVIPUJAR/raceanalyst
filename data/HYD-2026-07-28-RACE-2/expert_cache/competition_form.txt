@@ -1,0 +1,9 @@
+
+
+- STRONG UPGRADE horse        : MASTER CLASS (DARDANUS won Rated Cl3 at Bangalore; this cross‑centre form may need discounting for Hyderabad).
+- STRONG DOWNGRADE horses     : None.
+- No valid competition data   : KINSHIP, N R I MEGA POWER, TWILIGHT KING, WESEETHESAMESUN.
+- THIN SAMPLE                : None (all horses with data have ≥2 rivals showing subsequent runs).
+- Classic/Trophy lines surviving filtering : MASTER CLASS rival DIGITAL EMPRESS competed in a Classic/Graded race (unplaced) – indicates class but no direct win to trigger upgrade.
+- Cross‑centre discounts apply : MASTER CLASS rival DARDANUS won at Bangalore (higher centre); discount should be considered when evaluating Hyderabad form. DIGITAL EMPRESS’s Classic run also at Bangalore. Other horses’ rivals all raced at Hyderabad.
+- All form is from MAIDEN races (weight 0.5x); all horses are 3‑year‑olds – PEDIGREE CROSS‑REFERENCE REQUIRED for every runner.
