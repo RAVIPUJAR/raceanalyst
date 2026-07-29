@@ -1,0 +1,69 @@
+{
+  "ratings": {
+    "cached_at": "2026-07-28T18:26:21.717704",
+    "chars": 20967,
+    "graph_uri": "urn:race-day:MYS-2026-07-29-RACE-2"
+  },
+  "pedigree": {
+    "cached_at": "2026-07-28T18:26:31.236767",
+    "chars": 1954,
+    "graph_uri": "urn:race-day:MYS-2026-07-29-RACE-2"
+  },
+  "trackwork": {
+    "cached_at": "2026-07-28T18:28:58.415095",
+    "chars": 9845,
+    "graph_uri": "urn:race-day:MYS-2026-07-29-RACE-2"
+  },
+  "sweepstakes": {
+    "cached_at": "2026-07-28T18:29:39.761365",
+    "chars": 2371,
+    "graph_uri": "urn:race-day:MYS-2026-07-29-RACE-2"
+  },
+  "day_results": {
+    "cached_at": "2026-07-28T18:37:51.722348",
+    "chars": 40720,
+    "graph_uri": "urn:race-day:MYS-2026-07-29-RACE-2"
+  },
+  "medical": {
+    "cached_at": "2026-07-28T18:47:09.222628",
+    "chars": 11844,
+    "graph_uri": "urn:race-day:MYS-2026-07-29-RACE-2"
+  },
+  "equipment": {
+    "cached_at": "2026-07-28T18:49:28.264213",
+    "chars": 5843,
+    "graph_uri": "urn:race-day:MYS-2026-07-29-RACE-2"
+  },
+  "connections_form": {
+    "cached_at": "2026-07-28T18:51:17.282902",
+    "chars": 11263,
+    "graph_uri": "urn:race-day:MYS-2026-07-29-RACE-2"
+  },
+  "competition_form": {
+    "cached_at": "2026-07-28T18:54:29.718667",
+    "chars": 8110,
+    "graph_uri": "urn:race-day:MYS-2026-07-29-RACE-2"
+  },
+  "field_rivals": {
+    "cached_at": "2026-07-28T19:14:50.477173",
+    "chars": 29947,
+    "graph_uri": "urn:race-day:MYS-2026-07-29-RACE-2"
+  },
+  "_last_run": {
+    "timestamp": "2026-07-28T19:14:50.477604",
+    "graph_uri": "urn:race-day:MYS-2026-07-29-RACE-2",
+    "elapsed_s": 4146.3,
+    "experts_run": [
+      "ratings",
+      "pedigree",
+      "trackwork",
+      "sweepstakes",
+      "day_results",
+      "medical",
+      "equipment",
+      "connections_form",
+      "competition_form",
+      "field_rivals"
+    ]
+  }
+}

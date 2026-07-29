@@ -1,0 +1,44 @@
+
+ MEDICAL RISK RANKING
+
+  1. NATURAL ONE       — SERIOUS (MONITOR) | Colic 15/06/2026 (~44 days ago,
+                          RECENT); single-date entry but colic is a serious
+                          gastrointestinal event — confirm full recovery.
+  2. ROYAL FALCON      — SERIOUS (MONITOR) | Lameness 07/05/2026 (~83 days ago,
+                          HISTORICAL); performance DECLINING — cross-check
+                          possible residual issue.
+  3. AMAZING ARISE     — MODERATE | Recurring urticaria (2 episodes in 4 days,
+                          ~37-41 days ago); allergic tendency; resolved but
+                          recurrence risk on race day. Insufficient weight data.
+  4. SAIGON            — WATCH | Unspecified injury 18/06/2026 (~41 days ago,
+                          RECENT); plus prior "not raise a fluent gallop" gate
+                          behaviour; single-date injury entry.
+  5. GAJABO GRANDE     — WATCH | Skin infection 29/05/2026 (HISTORICAL); plus
+                          fractious gate incident with rider injury (behavioural).
+                          No weight data.
+  6. STAR OF LIGHT     — LOW RISK | Clean medical record; underweight flag
+                          warrants wellness check.
+  7. ALPHA DOMINO      — LOW RISK | Clean medical record; weight healthy,
+                          performance improving.
+  8. THEOS             — LOW RISK | Clean medical record; pre-race vet
+                          clearance noted; overweight at 483 kg.
+  9. SHEER ELEGANCE    — LOW RISK | Clean medical record; overweight at 486 kg.
+  10. HIGHER LOVE      — LOW RISK | Clean medical record; weight healthy.
+
+──────────────────────────────────────────────────────────────
+
+
+WEIGHT RANKING (most positive to most concerning):
+
+  1. ALPHA DOMINO        — STABLE + IMPROVING perf     [HEALTHY]    READY TO STRIKE candidate
+  2. NATURAL ONE         — STABLE                       [HEALTHY]    Neutral but clean
+  3. SAIGON              — STABLE                       [HEALTHY]    Supports recovery
+  4. HIGHER LOVE         — STABLE                       [HEALTHY]    Neutral
+  5. ROYAL FALCON        — STABLE                       [HEALTHY]    Neutral; perf declining (medical-driven)
+  6. STAR OF LIGHT       — REVERSE TREND DOWN           [UNDERWEIGHT] Possible peaking OR wellness concern; verify
+  7. SHEER ELEGANCE      — STABLE                       [OVERWEIGHT] Distance fitness watch
+  8. THEOS               — STABLE                       [OVERWEIGHT] Perf declining; distance watch
+  9. AMAZING ARISE       — INSUFFICIENT DATA            [OVERWEIGHT] Major data gap
+  10. GAJABO GRANDE      — INSUFFICIENT DATA            [UNKNOWN]    No data at all
+
+ 

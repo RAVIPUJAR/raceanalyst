@@ -1,0 +1,9 @@
+RATINGS RANKING
+
+1. PILOT OFFICER -- Drop=0 EffR=41 FLAT -- Trend=STATIC -- Only horse with a reliable, established peak rating in the field; effective rating towers above the Class 5 ceiling and two prior placings against higher-rated rivals confirm solid class.
+2. THE KILLER -- Drop=0 EffR=38 FLAT -- Trend=DECLINING -- Eliminated by last-run filter (13.25L defeat without incident); only two career runs make the rating unreliable and two prior meetings prove inferiority to PO.
+3. MYSORE PAK -- Drop=0 EffR=11 FLAT -- Trend=UNKNOWN -- Eliminated by last-run filter (withdrawn); single-run rating is unreliable and offers no measurable form.
+4. GIVE A SPIN -- DEBUTANT -- Trend=UNKNOWN -- No rating or race history; unranked by this method.
+5. AZKABAN -- DEBUTANT -- Trend=UNKNOWN -- No rating or race history; unranked by this method.
+6. CRAZY LOVE -- DEBUTANT -- Trend=UNKNOWN -- No rating or race history; unranked by this method.
+7. TIMOCLEA -- DEBUTANT -- Trend=UNKNOWN -- No rating or race history; unranked by this method.

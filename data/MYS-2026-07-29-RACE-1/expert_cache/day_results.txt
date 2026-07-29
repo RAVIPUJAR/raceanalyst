@@ -1,0 +1,15 @@
+RANKING
+
+Horses with prior race-form evidence, ranked by demonstrated effective class:
+
+1. PILOT OFFICER - current rating 41, demonstrated class ABOVE 41 (estimated 45-55). Carries 57kg today, same as the most relevant 1400m run on 2026-07-08.
+
+2. THE KILLER - current rating 30, demonstrated class SLIGHTLY ABOVE 30 (estimated 32-40). Carries 53kg today, 4kg lighter than the 2026-07-08 1400m run, which should independently improve time by roughly 0.8s.
+
+DEBUTANTS / NO-FORM HORSES (unrated by this method, listed separately rather than omitted):
+
+3. MYSORE PAK (effectively debutant; only prior entry is a vet withdrawal with no recorded time)
+4. GIVE A SPIN (debutant)
+5. AZKABAN (debutant)
+6. CRAZY LOVE (debutant)
+7. TIMOCLEA (debutant)

@@ -1,0 +1,37 @@
+RATINGS RANKING
+
+1. LOOKING FOR LADOO -- Drop=6 EffR=41 RELIEF [ENGINEERED DROP]
+   Trend=IMPROVING -- Last-start winner dropping from R30 to R24 with a HIGH-incident excuse in the prior defeat; weight-adjusted ceiling is the highest in the field.
+
+2. KING CARLOS -- Drop=0 EffR=25 FLAT
+   Trend=STATIC -- Rating unreliable (2 runs); survived last-run filter but lacks verified form; appears outclassed on ratings.
+
+3. KALLIPOS -- Drop=4 EffR=39 RELIEF [ENGINEERED DROP]
+   Trend=DECLINING -- Won at R26 in Sep 2025 but last two runs beaten 21L and 23L; eliminated by last-run filter.
+
+4. ALWAYS FOR YOU -- Drop=7 EffR=37 TARGET [FORM DEGRADATION]
+   Trend=DECLINING -- Last three runs at R26 all 10+ defeats; recent form even at R19 is poor (14L, 12.25L); eliminated by last-run filter.
+
+5. KALLANIA -- Drop=10 EffR=35 TARGET [FORM DEGRADATION]
+   Trend=DECLINING -- Steady decline from R41 to R20; multiple 10+ defeats at higher and current levels; eliminated by last-run filter.
+
+6. ARMAMENT -- Drop=4 EffR=34 RELIEF [FORM DEGRADATION]
+   Trend=IMPROVING -- Two excellent thirds last two starts, but third-last run was 15.5L at R20 without incident; eliminated by last-run filter.
+
+7. OCEAN OF GRACE -- Drop=8 EffR=33 TARGET [ENGINEERED DROP]
+   Trend=STATIC -- Peak R32 likely out of reach but won at R24 two starts ago; last run 11.25L without incident eliminates.
+
+8. DAVIDS DELIGHT -- Drop=8 EffR=33 TARGET [ENGINEERED DROP]
+   Trend=DECLINING -- Long decline from R31 peak to R15; last two runs 11.5L and 15.75L with only LOW incidents; eliminated by last-run filter.
+
+9. ARIES CELESTIAL -- Drop=8 EffR=33 TARGET [FORM DEGRADATION]
+   Trend=DECLINING -- Both career runs at peak R24 were beaten 16.5L and 22.75L; clearly regressed; eliminated by last-run filter.
+
+10. STARLIGHT WHISPER -- Drop=2 EffR=32 FLAT
+    Trend=DECLINING -- Peak only 2 pts above current but beaten 15.5L, 28.25L and 22.75L recently; eliminated by last-run filter.
+
+11. MIRACLE HONEY -- Drop=5 EffR=30 RELIEF [ENGINEERED DROP]
+    Trend=IMPROVING -- Placed 3rd last two starts at long odds, but third-last run was 18L without incident; eliminated by last-run filter.
+
+12. DAKSHA -- Drop=0 EffR=25 FLAT
+    Trend=STATIC -- Rating unreliable (2 runs); beaten 10.5L last start without incident; eliminated by last-run filter.

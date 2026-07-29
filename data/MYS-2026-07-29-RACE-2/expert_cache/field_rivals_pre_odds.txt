@@ -1,0 +1,336 @@
+ 1. HEAD-TO-HEAD  
+Confirmed meetings between today’s runners (withdrawn horses noted but excluded from form inference per protocol):
+
+- **2026-07-08 | MYSORE 1200M** – EMPIRE OF DREAMS 9th vs O MANCHALI 7th. O Manchali beat Empire Of Dreams by approx. 2 lengths in a shorter dash; trip difference makes it only mildly relevant.  
+- **2026-07-01 | MYSORE 1400M** – O MANCHALI 7th vs **WALTER 2nd**. Walter clearly superior in same class/trip, beating O Manchali by a wide margin. Strong Walter mark.  
+- **2026-06-24 | MYSORE 1200M** – ANNALISA 7th vs AUTHENTIC BELL 8th vs EMPIRE OF DREAMS 11th. Annalisa beat Authentic Bell by ~1 length and Empire Of Dreams by ~4 lengths. Marginal relevance (short trip).  
+- **2026-06-10 | MYSORE 1400M** – O MANCHALI 7th vs POLAR WIND 10th. Both well beaten; O Manchali ran on better from similar mid-race positions.  
+- **2025-11-19 | MYSORE 1400M** – **POLAR WIND 3rd vs WALTER 4th**. Polar Wind narrowly prevailed in this trip/class on Firm. A valid form line suggesting Polar Wind can shade Walter when both are fully right.  
+- **2025-10-09 | MYSORE 1200M** – MARENAD BEAUTY 9th vs O MANCHALI 5th. O Manchali comfortably superior at the short trip.  
+- **2025-06-18 | MYSORE 1200M** – AUTHENTIC BELL 7th vs **WALTER 6th**. Walter turned over Authentic Bell by a length in a lower-class sprint.  
+- **2025-03-23 | CHENNAI 1200M** – MARENAD BEAUTY 5th vs AUTHENTIC BELL 6th vs EMPIRE OF DREAMS 7th. Marenad Beauty best of the trio, but vastly different course/trip and older form.  
+
+Meetings involving withdrawals (no form inference drawn):  
+- 2026-07-15 MARZGOVEL=W vs POLAR WIND=5 (Marzgovel withdrawn)  
+- 2026-06-03 MARENAD BEAUTY=8 vs POLAR WIND=W (Polar Wind withdrawn)  
+- 2025-12-03 AUTHENTIC BELL=W vs O MANCHALI=6  
+- 2025-09-19 AUTHENTIC BELL=5 vs TRUTH IN WINE=W  
+- 2025-06-05 POLAR WIND=2 vs WALTER=W  
+
+---
+
+2. RUNNING STYLES  
+**Default whip rules apply** (no “Whips Not Allowed” stated for today).  
+
+**ANNALISA** – Mid-field / Deep Closer  
+Key runs:  
+- 24-Jun-2026 | 1200M | Pos7 | Odds7 | Draw3 | Ended seventh at a distance of 12.0 lengths behind the leader after ma…  
+- 20-Feb-2025 | 1400M | Pos5 | Odds10 | Draw? | [HANDICAP (00-25) -- The Ganges River Handicap]  
+- 13-Jan-2025 | 1200M | Pos12 | Odds12 | Draw? | [HANDICAP (00-25) -- The Delhi Race Club (1940) Ltd Trophy]  
+*Gate impact:* Drawn 1 today, a clear improvement on last-drawn 3; can save ground but has shown no early speed to exploit the rail.
+
+**AUTHENTIC BELL** – Deep Closer  
+Key runs:  
+- 24-Jun-2026 | 1200M | Pos8 | Odds12 | Draw12 | Settled seventh until the final bend before making late headway to fin…  
+- 19-Sep-2025 | 1600M | Pos5 | Odds15 | Draw? | Settled last approaching the final bend before making late headway to …  
+- 19-Nov-2025 | 1200M | Pos4 | Odds5 | Draw? | Settled eighth at four furlongs before making late headway to finish f…  
+- 18-Jun-2025 | 1200M | Pos7 | Odds20 | Draw? | Settled eighth until the final bend before making late headway to fini…  
+- 12-Sep-2025 | 1600M | Pos6 | Odds20 | Draw? | Settled fourth at six furlongs, made late headway to finish sixth, bea…  
+- 09-Oct-2025 | 1200M | Pos1 | Odds13/10 | Draw? | [TOTE FAV] Made late headway to finish first, beating rivals by a decisive two an…  
+- 03-Dec-2025 | 1100M | PosW | Odds? | Draw? | [Run excluded: WITHDRAWAL_VET]  
+- 23-Mar-2025 | 1200M | Pos6 | Odds15 | Draw? | [HANDICAP (20-45) -- The Adamile Handicap]  
+- 20-Feb-2025 | 1200M | Pos2 | Odds15/2 | Draw? | [HANDICAP (20-45) -- The Champion Jockey Trophy]  
+- 18-Jan-2025 | 1200M | Pos2 | Odds6 | Draw? | [HANDICAP -- The Navy Trophy [DIV-II]]  
+- 15-Feb-2025 | 1400M | Pos3 | Odds10 | Draw? | [HANDICAP -- The Fair Play Handicap]  
+- 03-Feb-2025 | 1200M | Pos5 | Odds10 | Draw? | [HANDICAP (20-45) -- The Deep Impact Handicap]  
+- 01-Mar-2025 | 1200M | Pos11 | Odds30 | Draw? | [HANDICAP (20-45) -- The Delhi Race Club (1940) Ltd Million]  
+*Gate impact:* Drawn 8 today after being drawn 12 last time. Slightly better, but still mid-to-outside; must accept wide run or expend energy crossing. Confirmed deep closer—AWKWARD_JUMP on 18-Jun-2025 further confirms he is not a pace-maker.
+
+**EMPIRE OF DREAMS** – Deep Closer / Mid-field  
+Key runs:  
+- 24-Jun-2026 | 1200M | Pos11 | Odds7 | Draw11 | Settled tenth until the final bend before making late headway, ultimat…  
+- 08-Jul-2026 | 1200M | Pos9 | Odds10 | Draw1 | Settled fourth at two furlongs before making late headway to finish ni…  
+- 30-Aug-2025 | 1200M | Pos3 | Odds17/2 | Draw? | [HANDICAP (20-45) -- The Red Rufus Handicap]  
+- 23-Mar-2025 | 1200M | Pos7 | Odds11/2 | Draw? | [HANDICAP (20-45) -- The Adamile Handicap]  
+- 22-Sep-2025 | 1200M | Pos6 | Odds2 | Draw? | [HANDICAP (20-45) -- The Own Opinion Handicap]  
+- 18-Jan-2025 | 1100M | Pos3 | Odds3 | Draw? | [HANDICAP -- The Police Trophy]  
+- 15-Feb-2025 | 1200M | Pos1 | Odds1 | Draw? | [TOTE FAV] [HANDICAP -- The Cauvery River Handicap]  
+- 08-Mar-2025 | 1400M | Pos5 | Odds4 | Draw? | [TOTE FAV] [HANDICAP (20-45) -- The Shahrastani Handicap [DIV-II]]  
+- 03-Feb-2025 | 1200M | Pos2 | Odds7/2 | Draw? | [TOTE FAV] [HANDICAP (00-25) -- The Dubawi Handicap]  
+- 01-Jan-2025 | 1400M | Pos4 | Odds15/2 | Draw? | [HANDICAP (20-45) -- The Charenzaccio Handicap]  
+*Gate impact:* Drawn 7 today after drawing 1 last time; midfield gate suits his stalking style but recent 1400m efforts are stale.
+
+**HASTING SUNRISE** – Stalker / Mid-field (versatile, often handy at short trips but fades late over 1400m)  
+Key runs:  
+- 25-Jun-2025 | 1400M | Pos7 | Odds20 | Draw? | Settled sixth until the final bend before made late headway to finish …  
+- 19-Sep-2025 | 1200M | Pos5 | Odds12 | Draw? | Settled seventh at four furlongs before making late headway to finish …  
+- 16-Jul-2025 | 1100M | Pos5 | Odds7 | Draw? | Settled sixth until the final bend before making late headway, ultimat…  
+- 15-Jul-2026 | 1100M | Pos2 | Odds5 | Draw8 | Settled second at half-furlong before making late headway to finish se…  
+- 10-Jun-2026 | 1100M | Pos2 | Odds10 | Draw10 | Settled third until the final bend before making late headway to finis…  
+- 06-Aug-2025 | 1200M | Pos9 | Odds10 | Draw? | Settled tenth until the final bend before making late headway to finis…  
+- 05-Sep-2025 | 1400M | Pos5 | Odds20 | Draw? | Settled ninth until the final bend before making late headway to finis…  
+- 01-Jul-2026 | 1200M | Pos2 | Odds7 | Draw9 | Settled fourth approaching the final bend before dropping back, ultima…  
+- 18-Jan-2025 | 1200M | Pos9 | Odds20 | Draw? | [RATED (20-45) -- The Abbey Falls Plate [DIV-I]]  
+- 15-Feb-2025 | 1100M | Pos6 | Odds20 | Draw? | Settled seventh at four furlongs before making late headway to finish …  
+- 08-Mar-2025 | 1200M | Pos8 | Odds20 | Draw? | Settled eighth until two furlongs before fading out to finish eighth, …  
+- 04-Jan-2025 | 1100M | Pos9 | Odds40 | Draw? | [RATED (20-45) -- The Sardar Sarovar Plate [DIV-I]]  
+*Gate impact:* Drawn 2 today, much better than recent wide draws (8, 9, 10). Can tuck in and save ground over the 1400m, though his 1400m record suggests he may not finish it off strongly.
+
+**MARENAD BEAUTY** – Deep Closer  
+Key runs:  
+- 30-Jul-2025 | 1400M | Pos9 | Odds10 | Draw? | Settled tenth approaching the final bend before making late headway to…  
+- 25-Oct-2025 | 1400M | Pos10 | Odds10 | Draw? | Settled third at four furlongs before making late headway to finish fi…  
+- 17-Jun-2026 | 1600M | Pos10 | Odds10 | Draw4 | Settled ninth at six furlongs before making late headway, ultimately f…  
+- 09-Oct-2025 | 1200M | Pos9 | Odds10 | Draw? | Settled sixth until the final bend before making late headway, ultimat…  
+- 03-Jun-2026 | 1400M | Pos8 | Odds10 | Draw6 | Finished eighth, beaten by thirty-eight lengths, after making late hea…  
+- 23-Mar-2025 | 1200M | Pos5 | Odds10 | Draw? | [HANDICAP (20-45) -- The Adamile Handicap]  
+- 20-Feb-2025 | 1400M | Pos6 | Odds14 | Draw? | [HANDICAP (20-45) -- The Champion Trainer Trophy]  
+- 18-Jan-2025 | 1100M | Pos3 | Odds12 | Draw? | [HANDICAP -- The Air Force Trophy [DIV-II]]  
+- 16-Mar-2025 | 1400M | Pos5 | Odds12 | Draw? | [HANDICAP (40-65) -- The K N Subbiah Cup [DIV-II]]  
+- 08-Feb-2025 | 1400M | Pos7 | Odds20 | Draw? | [HANDICAP (40-65) -- The Enable Handicap]  
+*Gate impact:* Drawn 3 today (similar to recent 4 and 6). SLOWLY_AWAY on 03-Jun-2026 downgrades any notion she can lead or break well.
+
+**MARZGOVEL** – Unknown / Deep Closer (scarce valid form)  
+Key runs:  
+- 24-Jun-2026 | 1400M | PosW | Odds? | Draw? | [Run excluded: WITHDRAWAL_VET]  
+- 18-Jun-2025 | 1100M | Pos5 | Odds10 | Draw? | Settled tenth at four furlongs before making late headway to finish fi…  
+- 15-Jul-2026 | 1400M | PosW | Odds? | Draw9 | [Run excluded: WITHDRAWAL_VET]  
+*Gate impact:* Drawn 9 today; no reliable form to assess.
+
+**NATURAL QUEEN** – Stalker / Presser (proven turn of foot from the leading division)  
+Key runs:  
+- 26-Sep-2025 | 1400M | Pos3 | Odds10 | Draw? | Settled fourth approaching the final bend before making late headway t…  
+- 26-Nov-2025 | 1400M | Pos1 | Odds6 | Draw? | Settled third at four furlongs before making a late surge to go ahead …  
+- 15-Jan-2025 | 1600M | Pos5 | Odds19/4 | Draw? | Settled fifth approaching the final bend before dropping back and fadi…  
+- 12-Sep-2025 | 1400M | Pos2 | Odds9/10 | Draw? | [TOTE FAV] Settled well, always in second, made late headway to finish second, be…  
+- 12-Feb-2025 | 1400M | Pos2 | Odds8 | Draw? | Settled fourth approaching the final bend before making late headway t…  
+- 09-Jul-2025 | 1600M | Pos8 | Odds12 | Draw? | Settled sixth until the final bend before making slight improvement, u…  
+- 08-Jul-2026 | 1600M | Pos3 | Odds12 | Draw9 | Settled second until the final bend before dropping back and fading to…  
+- 04-Jun-2025 | 1400M | Pos3 | Odds13/2 | Draw? | [RATED (00-25) -- The Balamuri Plate]  
+- 03-Jun-2026 | 1400M | Pos1 | Odds11/2 | Draw8 | Settled in second at four furlongs before making a strong late surge t…  
+- 01-Jul-2026 | 1600M | Pos5 | Odds10 | Draw4 | Settled third until six furlongs, then faded, made late headway to fin…  
+*Gate impact:* Drawn 4 today; matches her last 1600m draw and should allow a stalking trip in the leading quartet.
+
+**O MANCHALI** – Stalker / Mid-field (inconsistent position profile; sometimes handy, sometimes buried)  
+Key runs:  
+- 30-Jul-2025 | 1200M | Pos3 | Odds7/2 | Draw? | Settled in second until the final bend before making late headway, ult…  
+- 19-Nov-2025 | 1400M | Pos11 | Odds10 | Draw? | Settled sixth until the final bend before dropping back and fading out…  
+- 18-Sep-2025 | 1400M | Pos6 | Odds9 | Draw? | Settled fifth until the final bend before making late headway to finis…  
+- 18-Jun-2025 | 1200M | Pos4 | Odds15 | Draw? | Settled ninth until the final bend before making late headway to finis…  
+- 16-Oct-2025 | 1200M | Pos7 | Odds17/10 | Draw? | [TOTE FAV] Ran a disappointing race, weakening from third at four furlongs to be …  
+- 10-Jun-2026 | 1400M | Pos7 | Odds13/2 | Draw5 | Finished seventh at the final bend after dropping back from third, ult…  
+- 09-Oct-2025 | 1200M | Pos5 | Odds10 | Draw? | Held third at the half-furlong mark before making a late surge to fini…  
+- 08-Jul-2026 | 1200M | Pos7 | Odds13/2 | Draw5 | Settled seventh at four furlongs before making late headway to finish …  
+- 05-Jun-2025 | 1400M | Pos5 | Odds17/2 | Draw? | Finished fourth at two and a half furlongs before making late headway …  
+- 03-Dec-2025 | 1100M | Pos6 | Odds10 | Draw? | Settled seventh until the final bend before making late headway to fin…  
+- 02-Jul-2025 | 1200M | Pos5 | Odds15 | Draw? | Settled fifth at four furlongs before making late headway to finish fi…  
+- 01-Jul-2026 | 1400M | Pos7 | Odds10 | Draw9 | Settled eighth until the final bend before making late headway to fini…  
+*Gate impact:* Drawn 12 today after drawing 5 and 9 recently. Wide alley will force him to push forward or concede ground; neither suits his stalking style.
+
+**POLAR WIND** – Stalker / Presser  
+Key runs:  
+- 29-Jan-2025 | 1600M | Pos9 | Odds10 | Draw? | [RATED (40-65) -- The Cochin Plate]  
+- 25-Jun-2025 | 1600M | Pos2 | Odds7/2 | Draw? | Settled second at the furlong before making late headway to finish sec…  
+- 19-Nov-2025 | 1400M | Pos3 | Odds2 | Draw? | Settled third at four furlongs, made late headway to finish second, be…  
+- 16-Oct-2025 | 1400M | Pos2 | Odds7 | Draw? | [RATED (20-45) -- The H.H.Sri Chamaraja Wadiyar Memorial C]  
+- 16-Jul-2025 | 1400M | Pos2 | Odds6 | Draw? | Ran in futile pursuit of the victor, fading from contention over the f…  
+- 15-Jul-2026 | 1400M | Pos5 | Odds6 | Draw10 | Settled fourth at two furlongs before making late headway to finish fi…  
+- 12-Feb-2025 | 1400M | Pos3 | Odds12 | Draw? | [RATED (20-45) -- The Charmudi Ghat Plate [DIV-I]]  
+- 11-Sep-2025 | 1400M | Pos8 | Odds15 | Draw? | Settled fourth at four furlongs before making late headway to finish t…  
+- 10-Jun-2026 | 1400M | Pos10 | Odds10 | Draw8 | Finished tenth at the final bend after being outpaced throughout and n…  
+- 06-Aug-2025 | 1400M | Pos4 | Odds9 | Draw? | Settled fourth until the final furlong before making late headway to f…  
+- 05-Jun-2025 | 1400M | Pos2 | Odds20 | Draw? | Settled well in second place approaching the final bend before making …  
+- 03-Oct-2025 | 1400M | Pos9 | Odds15 | Draw? | Settled sixth until the final bend before making late headway to finis…  
+- 03-Jun-2026 | 1400M | PosW | Odds? | Draw7 | [Run excluded: WITHDRAWAL_VET]  
+- 03-Dec-2025 | 1400M | Pos3 | Odds8 | Draw? | Settled second until two furlongs, made late headway to lead at 50m be…  
+- 03-Jan-2025 | 1600M | Pos10 | Odds10 | Draw? | [RATED -- The Taj Mahal Plate]  
+*Gate impact:* Drawn 6 today after 8 and 10 in last two 1400m runs. Slight improvement, but still needs to be assertive early to hold a forward position.
+
+**TRUTH IN WINE** – Deep Closer  
+Key runs:  
+- 27-May-2026 | 1400M | Pos5 | Odds10 | Draw5 | Settled sixth at four furlongs before making late headway to finish fi…  
+- 19-Sep-2025 | 1600M | PosW | Odds? | Draw? | [Run excluded: WITHDRAWAL_VET]  
+- 17-Jun-2026 | 1100M | Pos2 | Odds9 | Draw7 | Settled eighth at four furlongs before making late headway to finish s…  
+- 11-Sep-2025 | 1400M | Pos11 | Odds12 | Draw? | Settled tenth until the final bend before making late headway to finis…  
+- 14-Jan-2025 | 1400M | Pos8 | Odds5/2 | Draw? | [TOTE FAV] [HANDICAP (20-45) -- The Royal Calcutta Turf Club Trophy]  
+*Gate impact:* Drawn 10 today; wide and deep closer means risks being buried without enough pace to run at.
+
+**WALTER** – Stalker / Versatile Closer  
+Key runs:  
+- 25-Oct-2025 | 1400M | Pos7 | Odds6 | Draw? | Held fourth approaching the final bend before dropping back, ultimatel…  
+- 19-Nov-2025 | 1400M | Pos4 | Odds6 | Draw? | Settled eleventh approaching the final bend before making late headway…  
+- 18-Sep-2025 | 1400M | Pos6 | Odds12 | Draw? | Settled seventh until the final bend before making late headway to fin…  
+- 18-Jun-2025 | 1200M | Pos6 | Odds16/10 | Draw? | [TOTE FAV] Finished sixth, made late headway to finish 6th, beaten by 8.25 length…  
+- 10-Jun-2026 | 1400M | Pos2 | Odds11/2 | Draw12 | Settled second at two furlongs before making late headway to finish se…  
+- 09-Jul-2025 | 1200M | Pos7 | Odds12 | Draw? | Settled seventh at four furlongs before making late headway to finish …  
+- 05-Sep-2025 | 1400M | Pos6 | Odds10 | Draw? | Settled eighth at four furlongs before making late headway to finish s…  
+- 05-Jun-2025 | 1400M | PosW | Odds? | Draw? | [Run excluded: WITHDRAWAL_VET]  
+- 03-Oct-2025 | 1400M | Pos3 | Odds7 | Draw? | Settled sixth until the final bend before making late headway to finis…  
+- 01-Jul-2026 | 1400M | Pos2 | Odds18/10 | Draw5 | [TOTE FAV] Settled sixth until the final bend before making late headway to finis…  
+- 26-Feb-2025 | 1200M | Pos2 | Odds19/4 | Draw? | [TOTE FAV] Settled second at the 1.7 furlongs mark before making late headway to …  
+- 23-Jan-2025 | 1200M | Pos7 | Odds8 | Draw? | Finished seventh at 4.0 lengths to the winner after making late headwa…  
+- 16-Feb-2025 | 1400M | Pos1 | Odds78/100 | Draw? | [TOTE FAV] Ran third at three furlongs before making a late surge to overtake the…  
+- 05-Jan-2025 | 1200M | Pos5 | Odds6 | Draw? | Settled ninth approaching the final bend before making late headway to…  
+*Gate impact:* Drawn 5 today, identical to his last winning platform (01-Jul-2026). Ideal zone to sit 3rd–5th and pounce.
+
+**SNEHA LATHA** – No in-running data available. Unproven in this data set.
+
+*Likely pace scenario:* No dedicated front-runner declared. WALTER, POLAR WIND and NATURAL QUEEN all want to sit 2nd–4th. O MANCHALI and HASTING SUNRISE can also be handy. The field shapes for an **honest but compressed pace** with most runners hunting the same stalking positions. Deep closers (AUTHENTIC BELL, TRUTH IN WINE, EMPIRE OF DREAMS, MARENAD BEAUTY) need that pace to fully extend, but a 12-runner field over 1400m at Mysore rarely produces a burn-up.
+
+---
+
+3. DISTANCE FORM (today’s trip 1400m ±100m = 1300m–1500m)  
+
+| Runner | Runs in band | Best / Key placings | Trend |
+|---|---|---|---|
+| **ANNALISA** | 1 (1400m) | 5th Feb-25 (00-25 Hcp) | Sparse; unproven at this trip in current class |
+| **AUTHENTIC BELL** | 1 (1400m) | 3rd Feb-25 | Only one 1400m run on record; risk at trip |
+| **EMPIRE OF DREAMS** | 2 (1400m) | 4th Jan-25, 5th Mar-25 | Both in early 2025; no recent 1400m form |
+| **HASTING SUNRISE** | 2 (1400m) | 5th Sep-25, 7th Jun-25 | Modest; short-trip form sharper |
+| **MARENAD BEAUTY** | 4 (1400m) | 5th Mar-25, 6th Feb-25, 8th Jun-26, 9th Jul-25 | Flatlining / regressing at distance |
+| **MARZGOVEL** | 0 valid | — | No valid 1400m form (two withdrawals) |
+| **NATURAL QUEEN** | 6 (1400m) | Won Nov-25, Jun-26; 2nd Sep-25, Feb-25; 3rd Sep-25, Jun-25 | **Excellent** 1400m profile; proven surger |
+| **O MANCHALI** | 4 (1400m) | 5th Jun-25; 6th Sep-25; 7th Jun-26, Jul-26 | Mediocre; rarely threatens at this trip |
+| **POLAR WIND** | 8 (1400m) | 2nd May-25, Jul-25, Oct-25; 3rd Nov-25, Dec-25, Feb-25 | Historically strong; recent 5th, 10th mixed |
+| **TRUTH IN WINE** | 3 (1400m) | 5th May-26; 8th Jan-25; 11th Sep-25 | Weak at distance |
+| **WALTER** | 7 (1400m) | **Won** Feb-25; 2nd Jun-26 (×2); 3rd Oct-25; 4th Nov-25 | **Excellent**; trending up with two recent 2nds |
+| **SNEHA LATHA** | — | — | Unproven |
+
+---
+
+4. SECTIONALS — who can quicken late?  
+*Note:* Cumulative splits are interpreted where formatting permits; emphasis is on finish context.
+
+- **EMPIRE OF DREAMS** (08-Jul-2026, 1200m, Pos9): final 400m approx. **23.93s** — sub-24.0 raw speed. However, he was buried in 9th place and this was at 1200m, not 1400m. Fast sectional in defeat but “buried” status means it is not a reliable winning threat indicator today.  
+- **HASTING SUNRISE** (25-Jun-2025, 1400m, Pos7): final 400m approx. **26.21s**, final 200m approx. 13.61s — moderate at best when finishing 7th; not a genuine sectional threat.  
+- **MARENAD BEAUTY** (03-Jun-2026, 1400m, Pos8): final 400m approx. **25.38s** — steady, but beaten 38 lengths; closing speed came in empty space.  
+- **AUTHENTIC BELL** / **ANNALISA** — Last-400m data from their shared 24-Jun-2026 1200m race (finished 8th / 7th) is not indicative of a winning turn of foot.  
+
+No other runners have usable sectionals in the context. The key practical message: **Walter, Natural Queen and Polar Wind** have shown their best acceleration in 1400m *placings* rather than on the clock from beaten positions.
+
+4B. COMPETITION FORM VALIDATION (last 3 runs)  
+
+- **WALTER**: Close rival **Choice** (beaten by Walter then won in 20-45 1100m subsequently) validates the line. **Absolute Conquerer** and **Golden Bird**, however, have run poorly since, partially discounting those margins. Overall mixed validation.  
+- **POLAR WIND**: Beat **Natural One** in Jun-25; that rival has since won and placed multiple times in 20-45 (won 1600m Jul-26, placed 1400m). Strong validation. Also beat **Choice** (subsequently won). Form lines hold up.  
+- **AUTHENTIC BELL**: Close rival **Sinatra** (beaten by Authentic Bell in Jun-26) **won** next start (Jul-08 1200m). **Biometric** (beaten in Nov-25) placed 2nd/2nd/4th after. Mild validation.  
+- **NATURAL QUEEN**: **Pette’s Choice** (beaten Nov-25) subsequently won (Jul-01 1200m). **Brocston** (beaten Nov-25) placed 2nd twice since. Strong validation of her 1400m win/place form.  
+- **O MANCHALI**: Rivals since the shared races have largely performed poorly or not at all. No strong validation for his 1400m efforts.  
+- **TRUTH IN WINE**: Lost narrowly to **Cloudy Hills** in May-26; Cloudy Hills subsequently ran 2nd twice in similar company. That validates Truth In Wine’s placing, but he was still only 5th.  
+- **HASTING SUNRISE**: Close rivals have not franked the form since. Not validated, but not penalised because he has won/placed on margins.  
+- **EMPIRE OF DREAMS**: Lost narrowly to **Sinatra** (subsequently won). Mild validation for his sprint form; none for 1400m.  
+- **MARZGOVEL**: Lost narrowly to **Falcon Fury** in Jun-25; that rival has since placed 2nd twice (40-65). Mild validation at short trip.  
+- **ANNALISA**: Beat **Sinatra** (subsequently won) in same Jun-26 race. Mild validation.  
+
+---
+
+5. BODY WEIGHT TRENDS  
+*Today’s body weights are not yet published.* Historical snapshots only:
+
+- **ANNALISA**: 450 kg (Jun-26) — only recent data point; no trend.  
+- **AUTHENTIC BELL**: 444 kg (Jun-26) — single recent point.  
+- **EMPIRE OF DREAMS**: 438 kg (Jun-26) → 435 kg (Jul-08). Small drop (-3 kg) with no corresponding form lift; perhaps trying to peak.  
+- **HASTING SUNRISE**: 454 kg (Jun-10) → 442 kg (Jul-15). Drop of 12 kg coinciding with back-to-back 2nd placings — **fitness signal**.  
+- **MARENAD BEAUTY**: 458 kg (Jun-03 & Jun-17). Static.  
+- **MARZGOVEL**: 441 kg (Jul-15) — lone point.  
+- **TRUTH IN WINE**: 445 kg (May-26) → 446 kg (Jun-26). Static.  
+- **WALTER**: 421 kg (Jan-25) → 423 kg (Feb-25) → 420 kg (Jun-26) → 422 kg (Jul-26). Very consistent band (420–423 kg); light, fit racing weight.  
+
+*Note:* NATURAL QUEEN, O MANCHALI, POLAR WIND, SNEHA LATHA have no recent BW data in the supplied context.
+
+---
+
+6. GOING PREFERENCES  
+Penetrometer history across the field is overwhelmingly **Firm** (2.4–3.5), with sporadic **Good** readings (3.5–4.4) for Annalisas, Empire Of Dreams and Truth In Wine. No runner shows a significant history on soft surfaces. If today’s Mysore going is Firmer than Good, the entire field is equally conversant; if it softens beyond Good, there is no positive pointer for any runner, and deep closers with high action (e.g., Authentic Bell) may be inconvenienced more than stalkers.
+
+---
+
+7. STRUCTURED RACE INCIDENTS  
+
+**A) PACE-RELEVANT / FORM-EXCLUSION INCIDENTS**  
+- **WALTER**: 2025-10-25 – INJURY_SUSTAINED (left hind cannon). Fully recovered since but note old medical flag. 2025-07-09 – AWKWARD_JUMP at start (downgrades front-running assumption for that race only).  
+- **MARENAD BEAUTY**: 2026-06-17 – DETACHED @RACE (pace description from that run unreliable). 2026-06-03 – SLOWLY_AWAY @AT_START + DETACHED @RACE (run compromised; exclude from pace assumptions).  
+- **AUTHENTIC BELL**: 2025-12-03 – WITHDRAWAL_VET @PRE_RACE. Run excluded from form.  
+- **NATURAL QUEEN**: 2026-06-03 – HUNG @RACE (straightness issue in the straight).  
+- **MARZGOVEL**: 2026-06-24 – WITHDRAWAL_VET @PRE_RACE (run excluded). 2026-07-15 – WITHDRAWAL_VET @PRE_RACE (run excluded).  
+- **O MANCHALI**: 2026-07-01 – JOCKEY_FINE for shifting in + recorded bruises (hind fetlocks); not pace-defining but welfare note.  
+- **TRUTH IN WINE**: 2025-09-19 – WITHDRAWAL_VET @PRE_RACE. Run excluded from form.  
+- **HASTING SUNRISE**: 2026-07-01 – not maintaining straight course (cutting across field before Red Marker Post).  
+- **EMPIRE OF DREAMS**: 2025-02-15 – WITHDRAWAL_VET flagged in raw stewards (routine sample from winner), but structured block shows no withdrawal incident.
+
+**B) DISCIPLINE INCIDENTS SUMMARY**  
+Across the field: **7 jockey reprimands**, **2 jockey fines**.  
+No trainer fines recorded. Highest counts: Truth In Wine (2 reprimands), Hasting Sunrise (3 reprimands), Authentic Bell (1 fine), O Manchali (1 fine).
+
+---
+
+8. RAW STEWARDS REPORTS (sentences containing SLOWLY AWAY / HANGING / STUMBLED / medical flags)
+
+- **WALTER**  
+  — “Jockey Inayat, the rider of AVIOTHIC was fined Rs.1,000/- for shifting ‘in’ and causing interference to WALTER (S. … Flags: SLOWLY AWAY” *(01-Jul-2026)*  
+  — “WALTER (R N Darshan) sustained injury inside left hind cannon.” *(25-Oct-2025)*
+
+- **MARENAD BEAUTY**  
+  — “MARENAD BEAUTY (H. … Flags: FITNESS CERTIFICATE REQUIRED, HANGING IN/OUT” *(17-Jun-2026)*  
+  — “It was observed that MARENAD BEAUTY (S. … Flags: GATE INCIDENT, WITHDRAWN ON VET GROUNDS, FITNESS CERTIFICATE REQUIRED, SLOWLY AWAY, HANGING IN/OUT” *(03-Jun-2026)*
+
+- **POLAR WIND**  
+  — “Jockey Faiz, the rider of POLAR WIND reported to the Starter, once the horse reached Starting Gates, that the saddle on his mount was not fastened properly. … Flags: GATE INCIDENT, WITHDRAWN ON VET GROUNDS, FITNESS CERTIFICATE REQUIRED, SLOWLY AWAY, HANGING IN/OUT” *(03-Jun-2026)*
+
+- **AUTHENTIC BELL**  
+  — “AUTHENTIC BELL (M J Gautam Raj Urs) jumped out awkwardly thereby losing few lengths at the start. Flags: GATE INCIDENT” *(18-Jun-2025)*  
+  — “Flags: WITHDRAWN ON VET GROUNDS, CLEARED ON EXAM, GAIT ISSUE” *(09-Oct-2025)*
+
+- **NATURAL QUEEN**  
+  — “Flags: HANGING IN/OUT” *(01-Jul-2026)*  
+  — “Flags: GAIT ISSUE” *(08-Jul-2026)*
+
+- **MARZGOVEL**  
+  — “to withdraw MARZGOVEL on veterinary grounds as it was suffering from infection. … Flags: FITNESS CERTIFICATE REQUIRED, BLOOD VESSEL” *(24-Jun-2026)*  
+  — “MARZGOVEL (K. … Flags: GATE INCIDENT, WITHDRAWN ON VET GROUNDS, POST-RACE LAMENESS, FITNESS CERTIFICATE REQUIRED” *(15-Jul-2026)*
+
+- **O MANCHALI**  
+  — “Flags: SLOWLY AWAY” *(01-Jul-2026)*  
+  — “O MANCHALI (Koshi Kumar) sustained bruises on both hind back of fetlock.” *(01-Jul-2026)*  
+  — “O MANCHALI (Koshi Kumar) sustained bleeding injury on right fore coronet.” *(08-Jul-2026)*  
+  — “O MANCHALI (Koshi Kumar) sustained small bleeding injury inside left fore fetlock.” *(10-Jun-2026)*
+
+- **TRUTH IN WINE**  
+  — “Flags: SLOWLY AWAY, STUMBLED” *(27-May-2026)*  
+  — “Flags: WITHDRAWN ON VET GROUNDS, FITNESS CERTIFICATE REQUIRED, GAIT ISSUE” *(17-Jun-2026)*  
+  — “Aditya K to withdraw TRUTH IN WINE on veterinary grounds as it was found to be suffering from systemic infection. … Flags: FITNESS CERTIFICATE REQUIRED” *(19-Sep-2025)*
+
+- **HASTING SUNRISE**  
+  — “Jockey Anish Anamo Hangal, the rider of HASTING SUNRISE was reprimanded for not maintaining a straight course thereby cutting across the field sharply before passing the Red Marker Post. … Flags: FITNESS CERTIFICATE REQUIRED, CLEARED ON EXAM, HANGING IN/OUT” *(01-Jul-2026)*
+
+- **EMPIRE OF DREAMS**  
+  — “Flags: WITHDRAWN ON VET GROUNDS” *(15-Feb-2025)* (raw stewards note associated with routine sample from winner; no subsequent medical issue recorded).
+
+- **ANNALISA**  
+  — No specific SLOWLY AWAY / HANGING / medical sentence beyond truncated jockey mention.
+
+---
+
+FIELD ASSESSMENT  
+
+**A) Likely pace scenario**  
+There is **no true front-runner**. Walter, Polar Wind and Natural Queen will all hunt the leading group from gates 5, 6 and 4, while O Manchali (12) and Authentic Bell (8) are unlikely to force matters from wide or deep. The pace should be **honest but tactical rather than extreme**. Deep closers need a genuine burn-up to avoid being out-sprinted by the stalkers; that burn-up is unlikely with this configuration. The lack of pace pressure benefits horses who can accelerate from the 400m in the 2nd–4th bracket.
+
+**B) Winner profile that fits**  
+A **stalking-type** with proven 1400m form in Class 4 (20-45), gate reliability, and a turn of foot from the 400m. Light, consistent body weight is a bonus.
+
+**C) Field ranking (top 5)**  
+1. **WALTER** — Two consecutive 2nd-place 1400m efforts in this class (10-Jun, 01-Jul); gate 5 identical to his latest strong run; sound weight profile (420–422 kg); knows how to finish at the trip.  
+2. **NATURAL QUEEN** — Proven 1400m winner (3 wins from 6 starts at trip) dropping from 1600m where she placed in this grade; stalking style matches likely pace; draw 4 is ideal.  
+3. **POLAR WIND** — Strong historical 1400m placegetter in this class; gate 6 is fair; competition form validated by subsequent wins of rivals he beat. Recent 5th and 10th temper enthusiasm slightly.  
+4. **HASTING SUNRISE** — Back-to-back seconds in July at 1100m/1200m; body weight down 12 kg coinciding with improved efforts; draw 2 should let him slot in and save energy. Concern is whether he stays the 1400m strongly enough.  
+5. **AUTHENTIC BELL** — Course 1200m winner and deep closer; gate 8 is not ideal and he is unproven at 1400m, but if the pace collapses he has the class to pick up slices.  
+
+**D) Danger horses outside top 5**  
+**O MANCHALI** — Has the class to win on best form, but gate 12 over 1400m at Mysore is a major handicap; he will need a perfect ride from a wide alley to figure.  
+
+**E) Horses to oppose**  
+- **MARZGOVEL** — Two consecutive VET withdrawals (Jun and Jul 2026), post-race lameness and blood-vessel flags; no valid recent form.  
+- **MARENAD BEAUTY** — SLOWLY_AWAY + DETACHED last start, beaten 38 lengths at the trip; recurrent hanging issues; cannot recommend.  
+- **EMPIRE OF DREAMS** — No 1400m form since early 2025; recent 1400m attempts absent; deep closer in a race lacking pace; sectional speed came when buried in 9th.  
+- **TRUTH IN WINE** — Recurrent medical flags (systemic infection, gait issue, lameness), slowly away/stumbled last summer run; reliability is poor.  
+- **SNEHA LATHA** — Zero form data in the supplied context; impossible to assess positively.

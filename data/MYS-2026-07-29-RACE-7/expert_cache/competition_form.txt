@@ -1,0 +1,17 @@
+
+------------------------------------------------------------
+ FORM VALIDATION RANKING
+------------------------------------------------------------
+1. MIND GAMES            — MILD UPGRADE | Two within-3L rivals won at same class; strongest upgrade signals.
+2. OPUS ONE              — MILD UPGRADE | Rival won at same class; trophy win adds weight.
+3. SINGER SARGENT        — MILD UPGRADE | Scaramouche won at same class; two trophy lines survived.
+4. SMILES OF FORTUNE     — MILD UPGRADE | Mother's Grace won at same class within 3L; positive validation.
+5. CONSTANT VARIABLE     — MILD UPGRADE | King's Battalion placed at same class, Rise Again placed higher.
+6. GOLD KITE             — MILD UPGRADE | Rise Again placed at same class; multiple trophy wins.
+7. BLUEMED               — NEUTRAL | Mixed signals; one mild placing but most rivals regressed.
+8. COEUR DE LION         — NEUTRAL | No valid competition data after filtering.
+9. GOLD RIDE             — MILD DOWNGRADE | All in-window rivals continued running poorly.
+10. KINGS WALK            — MILD DOWNGRADE | Only one valid race; all rivals poor thereafter.
+11. VANDHIYATHEVAN       — MILD DOWNGRADE | Single valid race with beaten rivals that regressed.
+12. WINTER AGENDA         — MILD DOWNGRADE | Two races but most rivals performed poorly subsequently.
+

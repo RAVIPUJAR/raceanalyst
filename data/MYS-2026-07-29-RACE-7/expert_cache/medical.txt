@@ -1,0 +1,30 @@
+MEDICAL RISK RANKING
+
+1. BLUEMED — SERIOUS | Confirmed suspensory desmitis (Jan 2025) plus colic (Apr 2026); highest structural injury risk in the field.
+2. COEUR DE LION — SERIOUS | History of eye ulcer and fetlock injury in race incidents; shows recurrent injury pattern.
+3. SMILES OF FORTUNE — SERIOUS | Multiple recent health issues (ear, eye, gastric) — eye infection is a racing safety concern.
+4. WINTER AGENDA — MODERATE | Prior veterinary withdrawal due to colic; gate behaviour concern; recovered but risk of colic recurrence.
+5. OPUS ONE — MODERATE | Superficial gum injury in race incident; minor but structural.
+6. KINGS WALK — WATCH | Single recent injury entry of unknown nature; monitor paddock.
+7. VANDHIYATHEVAN — WATCH | Urticaria (hives) noted 44 days ago; gate behaviour concern.
+8. GOLD KITE — LOW RISK | No medical history.
+9. CONSTANT VARIABLE — LOW RISK | No medical history.
+10. GOLD RIDE — LOW RISK | No medical history.
+11. MIND GAMES — LOW RISK | No medical history.
+12. SINGER SARGENT — LOW RISK | No medical history.
+
+
+
+WEIGHT RANKING (most positive to most concerning):
+1. SMILES OF FORTUNE      STABLE  [HEALTHY]  — Stable weight despite multiple health issues; connections maintaining condition.
+2. WINTER AGENDA          STABLE  [HEALTHY]  — Recovered from colic, weight stable.
+3. CONSTANT VARIABLE      STABLE  [HEALTHY]
+4. SINGER SARGENT         STABLE  [HEALTHY]
+5. GOLD RIDE              STABLE  [HEALTHY]
+6. OPUS ONE               STABLE  [HEALTHY]
+7. MIND GAMES             STABLE  [HEALTHY]
+8. KINGS WALK             STABLE  [HEALTHY]
+9. BLUEMED                STABLE  [HEALTHY (low end)]
+10. VANDHIYATHEVAN        STABLE  [OVERWEIGHT]
+11. GOLD KITE             STABLE  [UNDERWEIGHT]
+12. COEUR DE LION         VOLATILE  [HEALTHY]  — Sharpest concern due to volatile pattern and injury history.

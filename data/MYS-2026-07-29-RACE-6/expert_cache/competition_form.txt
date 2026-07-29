@@ -1,0 +1,9 @@
+FORM VALIDATION RANKING
+
+1. ECHOES OF TIME — STRONG UPGRADE | Classic-form rivals won or placed in subsequent highest-class races.
+2. PROKOFIEV — MILD UPGRADE | Key ahead rival placed 2nd in same class, providing mild validation.
+3. EFFICACY — NEUTRAL | Mixed outcomes with no dominant directional signal.
+4. CROWN DRIVE — NEUTRAL | Rivals largely regressed or have no subsequent data; no upgrade evidence.
+5. TOM CRUISER — MILD DOWNGRADE | Majority of within-window rivals ran poorly thereafter, deflating the form.
+6. SEEKING ALPHA — MILD DOWNGRADE | Only one valid race, where rivals succeeded only at a lower level and an ahead rival regressed.
+

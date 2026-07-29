@@ -1,0 +1,32 @@
+MEDICAL RISK RANKING
+
+1. AR SPRINT QUEEN — SERIOUS | Lambness with veterinary withdrawal (03-Jun-2026), confirmed by stewards. Even if resolved, recurrence risk at 1400M is elevated. Most recent, most corroborated concern.
+2. SHEER ROCKS — CRITICAL | Withdrawn on veterinary grounds for forelimb lameness (Mar 2025). No subsequent runs to demonstrate soundness. Risk of unresolved structural issue.
+3. DIAMOND AND PEARLS — SERIOUS | Eye injury (27-May) followed by immediate veterinary ban (03-Jun). Active eye condition risk at racing pace.
+4. NEVADA GOLD — SERIOUS | Recurring eye infection (June 2026) - recent and unresolved. Vision risk at 1400M.
+5. NATURAL TORNADO — SERIOUS | Eye injury (04-Jun-2026). History of jockey performance concerns. Eye injury alone warrants SERIOUS.
+6. METZINGER — WATCH | Sore back + two post-race lameness events with fitness certificates (May/Jun 2026). Pattern suggests chronic back/lameness issue being managed.
+7. ROYAL BARON — WATCH | Injury/lameness (17-Jun) requiring fitness certificate. Historical withdrawal on vet grounds (Aug 2025).
+8. SILVER QUEST — WATCH | Recent gate fractiousness (head throwing, 01-Jul). Urticaria resolved. Gate behaviour is a safety concern.
+9. CLOUDY HILLS — WATCH | Single-date injury (10-Apr) - old, not corroborated. Low concern.
+10. DOCTOR DOLLY — LOW RISK | No medical flags. Stewards confirmed sound in Jan 2026.
+11. TAQDEER — LOW RISK | No medical flags. Subtle gait report at 1200M — monitor for distance step up.
+12. SAPPHIRE — LOW RISK | No medical history. Gate issues only.
+
+
+
+WEIGHT RANKING (most positive signal to most concerning):
+
+1. CLOUDY HILLS — STABLE, HEALTHY, improving perf. Best weight profile.
+2. TAQDEER — STABLE, HEALTHY. Neutral.
+3. NATURAL TORNADO — STABLE, HEALTHY. Neutral. Eye injury is separate.
+4. SAPPHIRE — STABLE, HEALTHY. Neutral.
+5. DIAMOND AND PEARLS — STABLE, HEALTHY. Neutral. Eye injury is separate.
+6. METZINGER — REVERSE TREND DOWN, HEALTHY. WATCH — weight reversing down amid lameness pattern.
+7. DOCTOR DOLLY — CONTINUOUS DECLINE, UNDERWEIGHT (415kg). Health/stress concern.
+8. SILVER QUEST — VOLATILE, HEALTHY. Erratic pattern warrants paddock check.
+9. ROYAL BARON — STABLE, UNDERWEIGHT (385kg). Chronically underweight — serious concern.
+10. AR SPRINT QUEEN — INSUFFICIENT DATA, OVERWEIGHT (489kg). Excess weight + recent lameness.
+11. NEVADA GOLD — INSUFFICIENT DATA, UNDERWEIGHT (419kg). Underweight + eye infection.
+12. SHEER ROCKS — INSUFFICIENT DATA, HEALTHY (424kg). No trend. CRITICAL lameness history overrides weight.
+

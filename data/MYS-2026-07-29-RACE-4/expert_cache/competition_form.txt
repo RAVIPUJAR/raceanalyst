@@ -1,0 +1,15 @@
+FORM VALIDATION RANKING
+
+ 1. HABIBTI — MILD UPGRADE | Multiple in-window rivals won or placed next out; strongest validation.
+ 2. ROYAL CHIVALRY — MILD UPGRADE | Several beaten rivals won or placed, including class-3 placing.
+ 3. SUPER STRIDE — MILD UPGRADE | RED HILLS won and BALGOWNIE placed in higher class, both within 3L.
+ 4. TIME FOR VICTORY — MILD UPGRADE | Two beaten rivals placed in class 3, one in a Trophy race.
+ 5. BLUE ORIGIN — MILD UPGRADE | ISABELLE’s subsequent win at same class validates.
+ 6. GOLDEN BIRD — MILD UPGRADE | Same ISABELLE win, but other two races lacked improvers.
+ 7. SINATRA — MILD UPGRADE | BLAZING STAR placed; NATURAL DIAMOND’s class-3 win outside 3L not directly triggering.
+ 8. SAPIENT — NEUTRAL | FLASHING FAMOUS won but >3L behind; no direct upgrade within 3L.
+ 9. EXCELLENT STAR — NEUTRAL | No valid data after filtering.
+10. REIGN OF TERROR — NEUTRAL | No valid data after filtering.
+11. BOLD SHOW — MILD DOWNGRADE | All in-window rivals failed to place; no upgrade signal.
+12. CLOUD JUMPER — MILD DOWNGRADE | Single race, no rival improved.
+

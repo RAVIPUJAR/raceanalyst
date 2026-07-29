@@ -1,0 +1,32 @@
+
+MEDICAL RISK RANKING
+
+ 1. DAVIDS DELIGHT       — CRITICAL     | Three post-race lameness flags including one 14 days ago; verify fitness certificate cleared
+ 2. KALLIPOS             — CRITICAL     | Recurring EIPH (2025) plus two 2026 injury entries; elimination candidate
+ 3. ARMAMENT             — SERIOUS      | EIPH 28 days ago at RECENT; colic 113 days ago; today's 1600M stresses respiratory system
+ 4. ARIES CELESTIAL      — SERIOUS      | Post-race lameness 14 days ago + mouth injury 29 days ago + injury 48 days ago
+ 5. MIRACLE HONEY        — SERIOUS      | Eye injury 34 days ago + post-race lameness 14 days ago; compound concern
+ 6. ALWAYS FOR YOU       — SERIOUS      | Post-race lameness + vet withdrawal 35 days ago; overweight, possible idle period
+ 7. DAKSHA               — SERIOUS      | Eye injury 41 days ago + lameness 20 days ago; two distinct serious conditions
+ 8. OCEAN OF GRACE       — SERIOUS      | Bilateral fore-knee injury 63 days ago (withdrew on vet grounds) + historical EIPH
+ 9. KING CARLOS          — WATCH        | Old dry cough (107 days) only; no recent medical flag
+10. STARLIGHT WHISPER    — LOW RISK     | No medical record; gate behaviour only
+11. KALLANIA             — LOW RISK     | No medical record; interference incidents only
+12. LOOKING FOR LADOO    — LOW RISK     | No medical record; historical vet withdrawal only
+
+
+
+WEIGHT RANKING (most positive to most concerning):
+ 1. OCEAN OF GRACE          — CONTINUOUS DECLINE (TRAINER TRIMMING, form improving) [POSITIVE]
+ 2. KALLIPOS                — STABLE [HEALTHY]
+ 3. KALLANIA                — STABLE [HEALTHY]
+ 4. ARMAMENT                — STABLE [HEALTHY]
+ 5. DAKSHA                  — STABLE [HEALTHY]
+ 6. DAVIDS DELIGHT          — STABLE [HEALTHY]
+ 7. STARLIGHT WHISPER       — REVERSE TREND DOWN [HEALTHY]  [WATCH]
+ 8. KING CARLOS             — STABLE [UNDERWEIGHT]
+ 9. MIRACLE HONEY           — STABLE [UNDERWEIGHT]
+10. ALWAYS FOR YOU          — STABLE [OVERWEIGHT]
+11. ARIES CELESTIAL         — INSUFFICIENT DATA [UNDERWEIGHT]
+12. LOOKING FOR LADOO       — INSUFFICIENT DATA [UNKNOWN]
+

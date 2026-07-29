@@ -1,0 +1,338 @@
+ **1. HEAD-TO-HEAD**
+
+Confirmed prior meetings between today’s runners (ordered by recency):
+
+* **2026-07-08 | MYSORE 1600M (RATED 20-45)** — **NATURAL ONE = 1st** · ALPHA DOMINO = 7th. Natural One dominated late; Alpha Domino never threatened.  
+* **2026-07-01 | MYSORE 1600M (RATED 20-45)** — **STAR OF LIGHT = 3rd** · ROYAL FALCON = 7th · ALPHA DOMINO = 8th · SAIGON = 10th. Star Of Light finished best of this quartet by 4+ places.  
+* **2026-07-01 | MYSORE 1400M (RATED 20-45)** — **NATURAL ONE = 3rd** · SHEER ELEGANCE = 4th. Natural One a neck/length in front; both closed from off the pace.  
+* **2026-06-10 | MYSORE 1400M (RATED 20-45)** — **SHEER ELEGANCE = 4th** · ROYAL FALCON = 10th. Sheer Elegance well clear.  
+* **2026-05-27 | MYSORE 1400M (RATED 20-45)** — **NATURAL ONE = 2nd** · SAIGON = 10th · ROYAL FALCON = 11th. Natural One ran on strongly; Saigon and Royal Falcon were tailed off.  
+* **2025-10-26 | MYSORE 1400M (RATED)** — **NATURAL ONE = 3rd** · HIGHER LOVE = 9th. Natural One on the podium; Higher Love outpaced.  
+* **2025-03-01 | CHENNAI 1800M (HANDICAP 40-65)** — ALPHA DOMINO = 16th · SAIGON = 15th. Both well beaten in higher class; little relevance today.  
+* **2025-02-12 | MYSORE 1400M (RATED 40-65)** — **SAIGON = 5th** · AMAZING ARISE = 9th. Saigon finished off strongly; Amazing Arise weakened.  
+* **2025-02-08 | CHENNAI 1400M (HANDICAP 40-65)** — **ALPHA DOMINO = 6th** · SHEER ELEGANCE = 10th. Alpha Domino in the frame; Sheer Elegance eased.  
+* **2025-01-01 | CHENNAI 1400M (HANDICAP 20-45)** — **SHEER ELEGANCE = 2nd** · ROYAL FALCON = 7th. Sheer Elegance placed; Royal Falcon midfield.  
+
+**Contextual notes:** The majority of these clashes occurred at 1400m–1600m in similar Class 4 / 20-45 company on firm/good Mysore tracks. NATURAL ONE has the strongest head-to-head record versus this field (beaten Alpha Domino, Sheer Elegance, Higher Love, Saigon, Royal Falcon). STAR OF LIGHT also holds winning margins over the Alpha Domino/Royal Falcon/Saigon trio from 01-Jul-2026. Step to 2000m is uncharted for most of these match-ups; SAIGON is the only one to have raced at 2000m in this company.
+
+---
+
+**2. RUNNING STYLES**
+
+*Default whip rules apply (whips allowed); no stalker-vs-closer bias introduced.*
+
+**ALPHA DOMINO** — **Deep Closer / Mid-field drifter**  
+*Trajectory:* Settled 6th–8th at the 4f–6f pole in every recent start; makes “late headway” but flattens out into 5th–8th. No early speed.  
+*Key runs:*  
+- 17-Jun-2026 | 1600m | Pos5 | Odds10 | Draw12 | Settled eighth approaching the final bend before making late headway to finish fifth  
+- 08-Jul-2026 | 1600m | Pos7 | Odds10 | Draw11 | Settled seventh at six furlongs before making late headway to finish seventh  
+- 01-Jul-2026 | 1600m | Pos8 | Odds9 | Draw9 | Settled sixth at four furlongs before making late headway to finish eighth  
+- 30-Aug-2025 | 1400m | Pos9 | Odds18 | Draw? |  
+- 27-Sep-2025 | 1600m | Pos2 | Odds12 | Draw? |  
+- 25-Jan-2025 | 1600m | Pos11 | Odds10 | Draw? |  
+- 14-Jan-2025 | 1600m | Pos6 | Odds15 | Draw? |  
+- 08-Mar-2025 | 1600m | Pos11 | Odds? | Draw? |  
+- 08-Feb-2025 | 1400m | Pos6 | Odds20 | Draw? |  
+- 04-Oct-2025 | 1800m | Pos4 | Odds40 | Draw? |  
+- 01-Mar-2025 | 1800m | Pos16 | Odds30 | Draw? |  
+*Gate note:* Drawn 4 today vs 9–12 recently. Inside draw saves ground but still requires a forward settle to avoid being swamped by the pack.
+
+**AMAZING ARISE** — **Deep Closer (unreliable jump)**  
+*Trajectory:* Consistently 8th–11th at the turn before staying on weakly or tiring. Two documented slowly-away incidents reduce any chance of a forward role.  
+*Key runs:*  
+- 30-Jul-2025 | 1200m | Pos4 | Odds10 | Draw? | Finished eighth at the turn before making late headway to finish fourth  
+- 29-Jan-2025 | 1600m | Pos10 | Odds10 | Draw? |  
+- 12-Sep-2025 | 1200m | Pos7 | Odds10 | Draw? | Settled seventh approaching the final bend before making late headway  
+- 12-Feb-2025 | 1400m | Pos9 | Odds20 | Draw? | Finished eighth at the turn before making late headway to finish ninth  
+- 11-Jun-2025 | 1200m | Pos7 | Odds10 | Draw? | Finished seventh at the final bend after weakening, beaten by 17.25 lengths  
+- 10-Jun-2026 | 1400m | Pos6 | Odds11/2 | Draw9 | Held fifth approaching the final bend before dropping back thereafter  
+- 04-Sep-2025 | 1400m | Pos11 | Odds12 | Draw? | Finished eighth at the final bend before dropping back, ultimately finishing eleventh  
+- 04-Jun-2025 | 1400m | Pos9 | Odds10 | Draw? |  
+- 02-Jul-2025 | 1200m | Pos9 | Odds20 | Draw? | Settled eleventh approaching the final bend before making late headway  
+*Gate note:* Drawn 10 today vs 9 last time; wide gate acceptable for a deep closer but must jump cleanly (historically does not).
+
+**GAJABO GRANDE** — **Unknown / Ex-sprinter**  
+*Trajectory:* No usable recent trajectory. Last run (26-Nov-2025, 1600m) was a **WITHDRAWAL_VET**; prior form is 1100m–1200m in 20-45 handicaps, finishing well beaten. Likely to settle wherever the gates leave him.  
+*Key runs:*  
+- 26-Nov-2025 | 1600m | PosW | Odds? | Draw? | **Run excluded from form (WITHDRAWAL_VET)**  
+- 15-Mar-2025 | 1100m | Pos6 | Odds50 | Draw? |  
+- 01-Mar-2025 | 1200m | Pos12 | Odds50 | Draw? |  
+*Gate note:* Drawn 1 today. Saves ground but no historical gate data to infer advantage.
+
+**HIGHER LOVE** — **Deep Closer**  
+*Trajectory:* Perpetual backmarker (10th–12th at 4f) who produces a single explosive turn of foot. Won last start with a brilliant late charge at 1400m after being detached early.  
+*Key runs:*  
+- 27-May-2026 | 1200m | Pos3 | Odds12 | Draw3 | Settled tenth approaching the final bend before making late headway to finish third  
+- 26-Oct-2025 | 1400m | Pos9 | Odds10 | Draw? | Settled twelfth at four furlongs before making late headway to finish ninth  
+- 08-Jul-2026 | 1400m | Pos1 | Odds18/10 | Draw9 | [TOTE FAV] Settled tenth at four furlongs before making a brilliant turn of foot to win  
+- 01-Feb-2025 | 1200m | Pos6 | Odds25 | Draw? | Settled eleventh at four furlongs before making late headway to finish sixth  
+*Gate note:* Drawn 2 today vs 3 and 9 recently. Inside gate suits a closer who can shuffle to the fence and save ground.
+
+**NATURAL ONE** — **Deep Closer (dangerous late sprint)**  
+*Trajectory:* Invariably 7th–10th at 4f–6f, then hammers the fence late. Won a 1600m hitting the front from 10th at 4f; repeatedly places 2nd–4th from the same pattern.  
+*Key runs:*  
+- 27-May-2026 | 1400m | Pos2 | Odds4 | Draw4 | Settled seventh approaching the final bend before making late headway  
+- 26-Oct-2025 | 1400m | Pos3 | Odds10 | Draw? | Settled seventh at four furlongs before making late headway to finish third  
+- 25-Jun-2025 | 1600m | Pos4 | Odds6 | Draw? | Settled eighth at six furlongs before making late headway to finish fourth  
+- 15-Jul-2026 | 1400m | Pos2 | Odds6 | Draw8 | Settled ninth until the final bend before making late headway to finish second  
+- 15-Jan-2025 | 1600m | Pos6 | Odds10 | Draw? | Settled sixth at six furlongs, made late headway to finish sixth, beaten by winner  
+- 11-Jun-2025 | 1600m | Pos5 | Odds7 | Draw? | Settled seventh at four furlongs before improving slightly into the fifth  
+- 08-Jul-2026 | 1600m | Pos1 | Odds14/10 | Draw4 | [TOTE FAV] Raced tenth at four furlongs before making late headway to hit the front  
+- 06-Feb-2025 | 1100m | Pos6 | Odds10 | Draw? | Settled sixth until the final bend before making late headway to finish sixth  
+- 05-Sep-2025 | 1400m | Pos5 | Odds12 | Draw? | Ran seventh at four furlongs before making late headway to finish fifth  
+- 03-Oct-2025 | 1400m | Pos3 | Odds15 | Draw? | Finished third after making late headway in the final bend, ultimately behind the winner  
+- 01-Jul-2026 | 1400m | Pos3 | Odds5 | Draw12 | Settled ninth at four furlongs, made late headway to finish third, beaten by winner  
+*Gate note:* Drawn 7 today vs 4, 8, 12 recently. Middle-wide; will need to angle in or accept a three-wide loop.
+
+**ROYAL FALCON** — **Deep Closer (detached risk)**  
+*Trajectory:* Perpetually 8th–11th at 4f, stays on late without ever reaching the placings. One documented DETACHED incident and a saddle-shift incident.  
+*Key runs:*  
+- 27-May-2026 | 1400m | Pos11 | Odds17/2 | Draw7 | Settled eighth at four furlongs before making late headway to finish eleventh  
+- 24-Jun-2026 | 1400m | Pos8 | Odds10 | Draw7 | Settled eleventh at four furlongs before making late headway to finish eighth  
+- 15-Jul-2026 | 1400m | Pos7 | Odds10 | Draw3 | Settled eleventh at four furlongs before making late headway to finish seventh  
+- 10-Jun-2026 | 1400m | Pos10 | Odds10 | Draw10 | Settled last entering the final bend before making late headway to finish tenth  
+- 01-Jul-2026 | 1600m | Pos7 | Odds10 | Draw7 | Settled ninth at four furlongs before making late headway to finish seventh  
+- 27-Sep-2025 | 1400m | Pos5 | Odds17/2 | Draw? |  
+- 13-Jan-2025 | 1600m | Pos5 | Odds20 | Draw? |  
+- 03-Feb-2025 | 1800m | Pos5 | Odds7 | Draw? |  
+- 01-Jan-2025 | 1400m | Pos7 | Odds10 | Draw? |  
+*Gate note:* Drawn 8 today vs 3–10 recently. Wide gate suits a deep closer but must avoid being checked wide on the bend.
+
+**SAIGON** — **Mid-field / Stalking Closer**  
+*Trajectory:* Generally races 8th–11th but occasionally takes a forward position (led at 1.2f out in a 2000m race). Not as deeply buried as some rivals.  
+*Key runs:*  
+- 27-May-2026 | 1400m | Pos10 | Odds7 | Draw12 | Settled eleventh approaching the final bend before gaining place to finish tenth  
+- 17-Oct-2025 | 2000m | Pos4 | Odds25 | Draw? | Settled eighth approaching the final bend before dropping back, never nearer  
+- 12-Feb-2025 | 1400m | Pos5 | Odds4 | Draw? | Settled sixth until the final bend before making late headway to finish fifth  
+- 04-Jun-2025 | 1400m | Pos6 | Odds8/10 | Draw? | [TOTE FAV]  
+- 02-Jul-2025 | 2000m | Pos2 | Odds7/10 | Draw? | [TOTE FAV] Led at 1.2 furlongs before making late headway to finish second, beaten by winner  
+- 01-Jul-2026 | 1600m | Pos10 | Odds10 | Draw11 | Settled eleventh at four furlongs before making late headway to finish tenth  
+- 01-Mar-2025 | 1800m | Pos15 | Odds12 | Draw? |  
+- 20-Jul-2025 | 2800m | Pos6 | Odds60 | Draw? | Finished sixth, a backmarker that never threatened, dropped back after  
+*Gate note:* Drawn 5 today vs 11–12 recently. Much improved alley; should be able to sit midfield within striking distance.
+
+**SHEER ELEGANCE** — **Stalker / Mid-Pack**  
+*Trajectory:* Only horse in the field who routinely sits 3rd at 4f and maintains that position into the finish. Does not need to plough through from the tail.  
+*Key runs:*  
+- 10-Jun-2026 | 1400m | Pos4 | Odds7 | Draw7 | Settled third at four furlongs before making late headway to finish fourth  
+- 01-Jul-2026 | 1400m | Pos4 | Odds9 | Draw2 | Settled third at two and a half furlongs before making late headway to finish fourth  
+- 08-Feb-2025 | 1400m | Pos10 | Odds12 | Draw? |  
+- 01-Jan-2025 | 1400m | Pos2 | Odds3 | Draw? | [TOTE FAV]  
+*Gate note:* Drawn 6 today vs 2 and 7 recently. Comfortable; should land in the first 4–5 horses.
+
+**STAR OF LIGHT** — **Deep Closer**  
+*Trajectory:* 8th–10th at the turn; closes in a rattle over the final 300m. Won a 1400m from off the pace and placed 3rd at 1600m.  
+*Key runs:*  
+- 27-May-2026 | 1200m | Pos8 | Odds15 | Draw12 | Finished eighth at the final bend after making improved headway, ultimately eighth  
+- 24-Jun-2026 | 1400m | Pos1 | Odds15 | Draw10 | Settled tenth approaching the final bend before making a rattle run to win  
+- 01-Jul-2026 | 1600m | Pos3 | Odds5 | Draw10 | Settled seventh at six furlongs before making late headway to finish third  
+- 15-Mar-2025 | 1400m | Pos5 | Odds25 | Draw? |  
+- 13-Sep-2025 | 1100m | Pos10 | Odds12 | Draw? |  
+- 03-Feb-2025 | 1200m | Pos6 | Odds15 | Draw? |  
+*Gate note:* Drawn 3 today vs 10–12 recently. Major positive; can slot in from a handy gate without burning early energy.
+
+**THEOS** — **Mid-pack / Stayer**  
+*Trajectory:* 8th at 4f in 1400m; improved to 3rd at 1600m maiden; stayed on to 5th at 1800m rated. Not a deep bury, but lacks a winning turn of foot.  
+*Key runs:*  
+- 17-May-2026 | 1400m | Pos6 | Odds20 | Draw4 | Settled eighth at four furlongs before making late headway to finish sixth  
+- 13-Jun-2026 | 1600m | Pos3 | Odds12 | Draw4 |  
+- 05-Jul-2026 | 1800m | Pos5 | Odds10 | Draw5 | Finished fifth, made late headway to finish 9.25 lengths behind the winner  
+*Gate note:* Drawn 9 today vs 4–5 recently. Slightly wider; must hustle to avoid being shuffled to the rear of a paceless race.
+
+*Likely pace scenario:* There is **no natural front-runner** in this field. Every declared runner prefers to settle mid-to-rear and close. The danger is a **crawl-and-sprint** — a slow first 1200m followed by a chaotic 400m scramble. Horses that are 10th at the 800m mark risk running out of room because the pack will fan 5–6 wide. SHEER ELEGANCE and SAIGON (if jumping cleanly) are best placed to sit 4th–5th, while NATURAL ONE, STAR OF LIGHT, HIGHER LOVE and THEOS will be banking on a genuine pace that almost certainly will not materialise.
+
+---
+
+**3. DISTANCE FORM (1900m–2100m band)**
+
+| Horse | Runs 1900m–2100m | Placings | Notes |
+|---|---|---|---|
+| **NATURAL ONE** | 0 | — | Best distance 1400m–1600m. Step to 2000m is a 25% increase in trip. Unproven but stays on strong at 1600m. |
+| **STAR OF LIGHT** | 0 | — | Range appears to be 1200m–1600m. Won at 1400m; 3rd at 1600m. 2000m is an unknown. |
+| **AMAZING ARISE** | 0 | — | One 1600m run (Jan 2025, 10th). No stamina evidence. |
+| **SHEER ELEGANCE** | 0 | — | Ceiling looks 1400m; two recent 4ths at that trip. 2000m debut. |
+| **ALPHA DOMINO** | 0 | — | 1800m runs (4th Oct 2025, 16th Mar 2025). Outside the band and patchy. |
+| **GAJABO GRANDE** | 0 | — | Ex-sprinter. No form beyond 1200m. |
+| **HIGHER LOVE** | 0 | — | 1400m win last time; 1200m/1400m proven. 2000m a bold step. |
+| **SAIGON** | **2** | **2nd (2000m), 4th (2000m)** | **Only proven 2000m horse in the field.** 2nd in Class 4 2000m Jul 2025; 4th in OPEN 2000m Oct 2025. Also ran in Grade-III 2800m (6th). Stamina is verified. |
+| **THEOS** | 0 | — | Nearest 1800m (5th, 9.25L behind). Strictly outside the ±100m band. Unproven at 2000m. |
+| **ROYAL FALCON** | 0 | — | 1800m 5th in Feb 2025. Outside band. |
+
+**Trend:** Only **SAIGON** arrives with genuine 2000m credentials. The remaining nine are stretching from 1200m–1600m. In a race likely to be slowly run, the “unknown stayer” tag is less of a negative than it would be in a strongly run 2000m, but horses with no record beyond 1400m are still a risky betting proposition at the trip.
+
+---
+
+**4. SECTIONALS — who can quicken late?**
+
+*Note:* The supplied 200m cumulative times appear to be race-level sectionals (identical across horses in the same race). Individual closing fractions cannot be isolated, but race-level final-400m times give a guide to overall late pace.
+
+| Horse | Reference race | Last 400m (race time)* | Context |
+|---|---|---|---|
+| **NATURAL ONE** | 15-Jul-2026 1400m | ~24.53s | Race won in 84.2s. Horse finished 2nd from 9th at 4f. |
+| **NATURAL ONE** | 27-May-2026 1400m | ~26.07s | Race moderately run; closed from 7th. |
+| **HIGHER LOVE** | 08-Jul-2026 1400m | ~24.98s | Race won in 86.9s. Horse won from 10th at 4f. |
+| **ALPHA DOMINO** | 08-Jul-2026 1600m | ~25.15s | Race run in 101.3s. Finished 7th; sectional reflects overall race pace, not a personal burst. |
+| **AMAZING ARISE** | 10-Jun-2026 1400m | ~25.31s | Race run in 86.5s. Finished 6th after dropping back. |
+
+*Calculated from cumulative 200m markers.*
+
+**Interpretation:** No horse in this dataset has demonstrated a **sub-24.0** final 400m sectional. The race-level finishing splits sit in the 24.5s–26.0s bracket, indicating “honest” rather than electrifying late pace. In a slowly run, paceless 2000m, raw sectionals become less meaningful; positioning and energy conservation will outweigh a one-off 400m burst. The genuine late threats (on run description rather than pure sectional) are **NATURAL ONE**, **HIGHER LOVE** and **STAR OF LIGHT**, all of whom have produced肉眼可见 acceleration from the rear in recent starts.
+
+---
+
+**4B. COMPETITION FORM VALIDATION**
+
+*Validated lines (rivals subsequently won/placed in similar or stronger company):*
+
+- **NATURAL ONE** — Beat **SUPREME SUCCESS** (subsequently won at 00-25 and placed 3x at 20-45); lost to **BELLAVITA** (subsequently won twice, including at 40-65). This validates Natural One’s 2025-10-26 3rd as a genuinely competitive run.
+- **SHEER ELEGANCE** — Lost by only 0.37L to **NATURAL DIAMOND** (subsequently won two races including a strong 40-65 1800m event); beat **SINATRA** (subsequently won a 20-45 1200m). This is the strongest validated form line in the race — Sheer Elegance was narrowly beaten by a high-class rival.
+- **SAIGON** — Lost to **WORLDLY WISE** (subsequently placed 2nd at 40-65 1800m and competitive at 40-65). Validates the 2025-02-12 line.
+- **STAR OF LIGHT** — Beat **NATURAL QUEEN** (subsequently 3rd at 20-45 1600m). Mild validation.
+- **ROYAL FALCON** — Lost narrowly to **SELMA** (subsequently won at 20-45 1200m) and **GOLD FAME** (subsequently 4th). Weak positive.
+
+*Discounted / neutral lines:*
+- **AMAZING ARISE** — Rivals from close finishes (O Manchali, D Roman Power, Bountiful Beauty, Sparkling Night) have since run poorly or moderately in the same class. Does not frank the form.
+- **ALPHA DOMINO** — Close rivals in recent races are largely unvalidated or have since run poorly (D Roman Power, The Sizable). The 7-8-5 sequence looks “genuine” but not high-class.
+- **HIGHER LOVE** — Close rivals in the 2026-07-08 win (Brocston, Armament, King Carlos) are lowly unvalidated types; win was visually good but against weak opposition.
+- **THEOS** — Rivals unvalidated or maidens; neutral.
+
+*No close rivals found:* Not penalised. Several horses (e.g., GAJABO GRANDE, HIGHER LOVE in previous wins) were beaten by wide margins or won by wide margins, so no close rivals appear.
+
+---
+
+**5. BODY WEIGHT TRENDS**
+
+*Today’s body weights: NOT YET PUBLISHED.*
+
+Historical trends vs last known weights:
+
+| Horse | Last Known BW | Previous | Trend / Flag |
+|---|---|---|---|
+| **ALPHA DOMINO** | 469 (Jul 8) | 468 → 473 → 469 | Stable band (468–473). No red flag. |
+| **AMAZING ARISE** | 479 (Jun 10) | — | Single data point only. |
+| **GAJABO GRANDE** | — | — | No BW data available. |
+| **HIGHER LOVE** | 449 (Jul 8) | 461 (Feb) → 457 (May) → **449 (Jul)** | **–12kg from Feb peak.** Drop coincided with career-best win. Strong fitness signal, but any further drop today would trigger a health watch. |
+| **NATURAL ONE** | 432 (Jul 15) | 437 (May) → 444 (Jul 8) → **432 (Jul 15)** | **–12kg from Jul 8 win.** Very light for a 2000m test. Suggests peaking or light-framed fitness; if repeated today, confirms he’s stripped fit. |
+| **ROYAL FALCON** | 438 (Jul 15) | 442 (Jun) → 441 (Jul 1) → 440 (Jun 24) → 445 (May) | Narrow 438–445 band. Stable. |
+| **SAIGON** | 479 (Jul 1) | 468 (May 27) | **+11kg spike in five weeks.** Came back heavy from the break. May have needed that run; if still near 470s today, suspect stamina under duress. |
+| **SHEER ELEGANCE** | 486 (Jul 1) | 486 (Jun 10) | Dead-level. Metronomic weight; likely at optimal fitness. |
+| **STAR OF LIGHT** | 392 (Jul 1) | 407 (May) → 398 (Jun) → **392 (Jul)** | **–15kg decline over 5 weeks.** Extremely light. Could indicate peak condition for a light-framed sprinter-miler, but at 2000m this is a concern — may not have the physical reserves. |
+| **THEOS** | 483 (Jul 5) | 485 (Jun) → 483 (May) | Flat (483–485). No trend. |
+
+**Key takeout:** **STAR OF LIGHT** and **NATURAL ONE** are both race-fit at very light weights; Natural One’s drop followed a win, Star Of Light’s is more prolonged. **SAIGON** arrives with a weight spike that tempers enthusiasm. **SHEER ELEGANCE** and **THEOS** show rock-solid consistency.
+
+---
+
+**6. GOING PREFERENCES**
+
+Penetrometer history (Mysore summer 2025–2026 = predominantly FIRM 2.4–3.0; occasional GOOD 3.5–4.2).
+
+| Horse | Going History | Preference |
+|---|---|---|
+| **NATURAL ONE** | Multiple runs on FIRM (2.4–3.0) | Clearly comfortable on firm/good. No soft. |
+| **STAR OF LIGHT** | FIRM/GOOD (2.7–3.5) | No issue expected. |
+| **AMAZING ARISE** | All FIRM (2.6–3.0) | Firm-track horse. |
+| **SHEER ELEGANCE** | FIRM/GOOD (2.8–3.8) | Versatile. |
+| **ALPHA DOMINO** | FIRM and GOOD (2.7–4.2) | Versatile; won on GOOD Sep 2025. |
+| **GAJABO GRANDE** | All FIRM (3.0) | Firm-track preference. |
+| **HIGHER LOVE** | FIRM and GOOD (2.7–4.0) | Versatile. |
+| **SAIGON** | Mostly FIRM; one GOOD TO SOFT (4.7) at Bangalore 2800m where he was well beaten | **Suspect on slower than Good.** Best on firm. |
+| **THEOS** | FIRM (3.0) and GOOD TO SOFT (4.9) at Bangalore | Handled soft okay in maiden company; no bias either way yet. |
+| **ROYAL FALCON** | FIRM/GOOD (2.9–4.0) | No issue expected. |
+
+**Outlook:** Mysore is likely to race on firm/good. All horses have raced on firm; none are confirmed “mudlarks.” **SAIGON** has a slight negative on softer going, but that is unlikely to be tested today.
+
+---
+
+**7. STRUCTURED RACE INCIDENTS**
+
+**A) PACE-RELEVANT INCIDENTS**
+
+- **AMAZING ARISE** — **SLOWLY_AWAY** @ 2025-07-02 MYS 1200m. Lost lengths at the start; downgrades any hope of settling forward today.
+- **AMAZING ARISE** — **DETACHED** @ 2025-06-04 MYS 1400m. Ran detached after the 300m; ignore the pace picture from that run entirely.
+- **GAJABO GRANDE** — **WITHDRAWAL_VET** @ 2025-11-26 MYS 1600m. **Run excluded from form.** No race since; long lay-off plus sprint breeding makes 2000m a major question.
+- **ROYAL FALCON** — **DETACHED** @ 2026-06-10 MYS 1400m. Ran detached after the bend; ignore pace position from that run.
+- **SAIGON** — **SLOWLY_AWAY + STUMBLED** @ 2026-05-27 MYS 1400m. Lost lengths at the start and failed to raise a gallop. If repeated today, will be buried at a trip where deep closers struggle.
+- **SHEER ELEGANCE** — **SLOWLY_AWAY** @ 2026-07-01 MYS 1400m. Took a fly jump at the start; nevertheless settled 3rd. Gate reliability concern slightly, but mitigated by his ability to recover.
+- **THEOS** — **SLOWLY_AWAY** @ 2026-07-05 BANG 1800m. Flags weak initial getaway.
+
+**B) DISCIPLINE INCIDENTS**
+
+Across the field: **4 jockey fines, 1 jockey reprimand.**  
+Fines: STAR OF LIGHT (shifting out & bumping), AMAZING ARISE (bumping), SHEER ELEGANCE (shifting in & interference), ALPHA DOMINO (shifting in & interference).  
+Reprimand: HIGHER LOVE (traveling wide throughout, Oct 2025).
+
+---
+
+**8. RAW STEWARDS REPORTS**
+
+**NATURAL ONE**
+- *15-Jul-2026 | MYS 1400m:* “Jockey Faiz, the rider of POLAR WIND was reprimanded for shifting ‘in’ and inconveniencing NATURAL ONE (Ankit Pal) on his inside, which in turn passed it onto SWAGHATHAM…” **Flags:** GATE INCIDENT, WITHDRAWN ON VET GROUNDS, POST-RACE LAMENESS, FITNESS CERTIFICATE REQUIRED. *(Note: Despite the raw flag, the horse ran and finished 2nd; likely a race-level or mis-parsed entry.)*
+- *03-Oct-2025 | MYS 1400m:* “Jockey L Alex Rozario, the rider of CHISOX was reprimanded for shifting in and inconveniencing NATURAL ONE (Ankit Pal) on his inside approaching the 1200 Metres.” **Flags:** FITNESS CERTIFICATE REQUIRED.
+
+**STAR OF LIGHT**
+- *01-Jul-2026 | MYS 1600m:* “Jockey Sah Farid Ansari, the rider of STAR OF LIGHT was fined Rs.2,000/- for shifting out and bumping the horses on his outside, viz; SAIGON…” **Flags:** HANGING IN/OUT.
+- *24-Jun-2026 | MYS 1400m:* “Routine sample was taken for analysis from the winner b g STAR OF LIGHT.” **Flags:** FITNESS CERTIFICATE REQUIRED, BLOOD VESSEL.
+
+**AMAZING ARISE**
+- *12-Sep-2025 | MYS 1200m:* “AMAZING ARISE (Afsar Khan) planted and lost many lengths at the start.” **Flags:** POST-RACE LAMENESS, FITNESS CERTIFICATE REQUIRED, CLEARED ON EXAM, HANGING IN/OUT.
+- *02-Jul-2025 | MYS 1200m:* “AMAZING ARISE (Vishwa V) was slowly away and lost few lengths at the start.” **Flags:** SLOWLY AWAY.
+- *04-Jun-2025 | MYS 1400m:* “…AMAZING ARISE (Brijesh Kumar V) ran detached from the field after passing the 300 Metres.” **Flags:** SLOWLY AWAY.
+
+**SHEER ELEGANCE**
+- *01-Jul-2026 | MYS 1400m:* “SHEER ELEGANCE (SahFarid Ansari) took a fly jump at the Start.” **Flags:** SLOWLY AWAY.
+- *10-Jun-2026 | MYS 1400m:* “…the rider of SHEER ELEGANCE was fined Rs.2,000/- for shifting ‘in’ and causing interference to SD QUEEN…” **Flags:** FITNESS CERTIFICATE REQUIRED, CLEARED ON EXAM, STUMBLED.
+
+**ALPHA DOMINO**
+- *17-Jun-2026 | MYS 1600m:* “…the rider of ALPHA DOMINO was fined Rs.2,000/- for shifting ‘in’ and causing interference to D ROMAN POWER…” **Flags:** FITNESS CERTIFICATE REQUIRED, HANGING IN/OUT.
+- *08-Jul-2026 | MYS 1600m:* “Jockey Vishal, the rider of NATURAL QUEEN was reprimanded for shifting out and inconveniencing ALPHA DOMINO…” **Flags:** GAIT ISSUE.
+
+**GAJABO GRANDE**
+- *26-Nov-2025 | MYS 1600m:* “GAJABO GRANDE (Salman Khan) was extremely fractious on the way to the Starting gates whereby the rider was injured.” **Flags:** GATE INCIDENT.
+
+**HIGHER LOVE**
+- *08-Jul-2026 | MYS 1400m:* “…the rider of KING CARLOS was fined Rs.2,000/- for coming ‘in’ and tightening the horses on his inside, viz., LEV RON, HIGHER LOVE and ARMAMENT…” **Flags:** WITHDRAWN ON VET GROUNDS *(likely misattributed; Higher Love won the race).*
+- *26-Oct-2025 | MYS 1400m:* “…the rider of HIGHER LOVE was reprimanded for traveling wide throughout the race for no apparent reason.”
+
+**SAIGON**
+- *27-May-2026 | MYS 1400m:* “SAIGON (S Mubarak) was slowly away, did not raise a fluent gallop and lost few lengths at the start.” **Flags:** SLOWLY AWAY, STUMBLED.
+- *01-Jul-2026 | MYS 1600m:* “Jockey Sah Farid Ansari, the rider of STAR OF LIGHT was fined… for shifting out and bumping the horses on his outside, viz; SAIGON…”
+
+**THEOS**
+- *05-Jul-2026 | BANG 1800m:* “…shifted ‘away’ from MANDATE…and inconvenienced THEOS (Vivek).” **Flags:** SLOWLY AWAY.
+- *13-Jun-2026 | BANG 1600m:* “THEOS (Hindu Singh) broke away from the handler while being brought into the saddling enclosure, once re-captured, was examined by the club’s veterinary officer subsequently was declared fit to race.” **Flags:** CLEARED ON EXAM.
+
+**ROYAL FALCON**
+- *24-Jun-2026 | MYS 1400m:* “…the rider of ROYAL FALCON reported that his saddle shifted back passing the 300 Metres.” **Flags:** SLOWLY AWAY.
+- *10-Jun-2026 | MYS 1400m:* “ROYAL FALCON (S…” **Flags:** FITNESS CERTIFICATE REQUIRED, CLEARED ON EXAM, STUMBLED.
+
+---
+
+**FIELD ASSESSMENT**
+
+**A) Likely pace scenario**  
+A race full of closers with no designated pacemaker almost always produces a **crawl-and-sprint**. Expect the field to dawdle through the first 1200m in a tightly bunched group, then fan 5–6 wide turning for home. The rails are fixed 2.5m out from the 1600m to the winning post, giving a modest inside-path advantage on the final bend. Horses drawn 1–4 (GAJABO GRANDE, HIGHER LOVE, STAR OF LIGHT, ALPHA DOMINO) can save ground; those drawn 7–10 must circle wide or accept a blocked run. Because the pace will be slow, deep closers coming from 8th–10th at the 800m pole are at a disadvantage — there will not be enough momentum in the leaders to collapse, and traffic will be fierce.
+
+**B) Winner profile that fits today**  
+A **stalking type** who can sit 3rd–5th at the 800m mark, jump cleanly, save ground on the bend, and produce one sustained run of acceleration between the 400m and 150m markers. Genuine 2000m blood is a bonus if the race accidentally develops into a staying test.
+
+**C) Field ranking — Top 5**
+
+1. **SHEER ELEGANCE** — Consistently stalks in 3rd at 4f (unusual in this field), stays on into 4th, and carries the strongest competition validation (lost narrowly to subsequent dual winner Natural Diamond). Draw 6 is neutral; he does not need to be buried to win.  
+2. **NATURAL ONE** — Best recent raw form (won 1600m, 2nd twice since). Deep closer with a powerful turn of foot, but drawn 7 and vulnerable if the race becomes a bulging stampede over the last 400m. Validated by subsequent winners among his close rivals.  
+3. **SAIGON** — The **sole proven 2000m performer** (2nd at 2000m Class 4; 4th in OPEN 2000m). Recent 1400m/1600m form is poor, but the trip is a massive positive corrective. If he breaks cleanly from gate 5 and tracks midfield, his stamina edge in a sprint finish could be decisive.  
+4. **HIGHER LOVE** — Brilliant turn of foot last start (1400m win from 10th at 4f). Body weight dropped 12kg into that victory, signalling a fitness peak. Draw 2 is ideal. The unknown is whether he sees out 2000m after racing exclusively at 1200m–1400m.  
+5. **STAR OF LIGHT** — Deep closer who rattled home to win at 1400m and placed 3rd at 1600m. Draw 3 is a big plus versus his recent wide alleys. Opposing concern is the 392kg body weight — extremely light — and no evidence beyond 1600m.
+
+**D) Danger horses outside top 5**  
+No strongly supported danger. **THEOS** (placed 3rd maiden 1600m, 5th 1800m rated) is unexposed at 2000m and could sneak a minor cheque if the leaders go too hard, but there is no pace to collapse. **ALPHA DOMINO** has run in this class consistently and may pick up minor money if the sprint becomes a war of attrition, yet he has shown no winning edge.
+
+**E) Horses to oppose (and why)**
+
+- **AMAZING ARISE** — Recurrent **SLOWLY AWAY** (two confirmed), one **DETACHED** run, zero wins in this class, no competition-form validation, and no distance evidence beyond a tailed-off 1600m. High likelihood of being last entering the straight.  
+- **GAJABO GRANDE** — **WITHDRAWAL_VET** last run (excluded); no racing since November 2025; prior sprint form only (1100m–1200m); jumping to 2000m with no stamina data.  
+- **ROYAL FALCON** — **DETACHED** and **STUMBLED** flags, saddle-shift incident, **SLOWLY AWAY** history, and a string of 7th–11th finishes in similar 1400m–1600m company. No reason to expect 2000m will improve him.  
+
+*Not opposed but noted:*  
+- **ALPHA DOMINO** — Has beaten nothing of note recently and sits deep, yet his 1800m/1600m range means he could outlast the sprinters for a minor share.  
+- **STAR OF LIGHT** — Light weight and deep-closing style are risks at 2000m, but his 1400m win and draw 3 are positive correctives; therefore not a strong oppose.

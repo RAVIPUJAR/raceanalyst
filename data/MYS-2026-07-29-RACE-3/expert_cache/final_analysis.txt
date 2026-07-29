@@ -1,0 +1,609 @@
+THE MANASASAROVARA PLATE
+Class 5 | 00 to 25 | 1600M | MYSORE | 2026-07-29
+
+================================================================
+1) FIELD ASSESSMENT
+================================================================
+
+A) FIELD RANKING -- TOP 2
+
+***** TOP TIER CONTENDER
+1. ARMAMENT
+   EffR=34 | 8yo | peak_R=20 curr_R=16 drop=4 (RELIEF)
+   The strongest weight-adjusted form signal in the field: two
+   consecutive runs within 0.02-0.09 seconds of horses rated 33-53,
+   indicating a true current class of 25-30, well above the mark of
+   16. Proven T+J partnership (1 win this season), SHARP trackwork
+   on a VERY FRESH prep, and an official Blister Bit addition
+   addressing steering. Medical flag (EIPH 28 days ago) is the sole
+   concern, but he ran 3rd beaten only 2.75L seven days after that
+   incident, proving the issue was managed. Unproven at 1600m but
+   sub-25 final-400m sectionals at 1400m strongly suggest the
+   extra 200m is within his stamina range. The 8yo veteran status
+   is offset by improving recent form and a light weight (55.5kg).
+
+**** STRONG CONTENDER
+2. MIRACLE HONEY
+   EffR=30 | 7yo | peak_R=14 curr_R=9 drop=5 (RELIEF)
+   The most proven 1600m runner in the field with four starts at
+   the trip (3rd, 3rd, 5th, 6th), including a 3rd beaten only 3.25L
+   on 2026-06-24 where she was decisively faster than every other
+   1600m runner that day (rated 14-22). Day Results flags a STRONG
+   SIGNAL: true current class reads 18-22, far above the rating of
+   9. Top of the head-to-head pecking order at 1600m on 2026-06-24,
+   beating King Carlos, Davids Delight, Always For You and Kallipos.
+   Medical concerns (post-race lameness 14 days ago, eye injury 34
+   days ago, underweight 410kg) and a 17-day trackwork gap temper
+   confidence, but the same-distance form evidence is compelling
+   enough to outweigh those flags. A 26% jockey upgrade is a
+   further positive despite a 0-for-4 T+J record.
+
+================================================================
+PER-HORSE BREAKDOWN
+================================================================
+
+----------------------------------------------------------------
+STARLIGHT WHISPER (4yo filly)
+----------------------------------------------------------------
+- Ratings:        EffR=32 | peak_R=27 curr_R=25 drop=2 (FLAT). Below
+                  current rating per Day Results; three consecutive
+                  poor runs running alongside 5-rated peers.
+- Sweepstakes:    NONE | UNKNOWN | No nominations; connections show
+                  no long-term investment in this filly.
+- trackwork / swimming: SHARP (-6 solo, 4 days out), VERY FRESH.
+                  Daily swimming alongside full galloping programme.
+                  Mock race 7th of 8 is the only cloud; jockey did
+                  not work the horse.
+- Distance/going: Mixed at 1600m (5th then 12th last two attempts).
+                  No going bias; firm/good suits all.
+- Form:           Eliminated by last-run filter (15.5L, 28.25L and
+                  22.75L all 10+ without qualifying incident). Day
+                  Results verdict: BELOW rating 25 across all three
+                  runs. Ran identical time to a 5-rated horse.
+- Day Results:    BELOW current rating 25. Same-time peer evidence
+                  repeatedly shows performance 10+ rating points
+                  below the current mark.
+- Connections:    Jockey upgrade to Pavan (26%) but 0 prior T+J
+                  rides. Jockey-only quality; no proven machinery.
+- Equipment:      STABLE | No confirmed change. Carries blinkers
+                  and tongue strap unchanged from last start.
+- Field Rivals:   Beaten by Always For You (1.5L) and Striking
+                  Viking (dead-heat) on 2026-07-08. Well behind
+                  Ocean Of Grace and Kallania at 1600m on
+                  2026-06-10. Deep closer (inconsistent) from draw
+                  1; planted at start in prior 1600m attempt.
+- Medical/BW:     LOW RISK medically. Weight 427kg (healthy) but
+                  reverse trend down (-9kg) with declining form is
+                  a yellow flag.
+- Market:          Not yet published.
+- Verdict:         Form does not support the current rating. Three
+                  poor runs and no 1600m success. Oppose.
+
+----------------------------------------------------------------
+LOOKING FOR LADOO (6yo)
+----------------------------------------------------------------
+- Ratings:        EffR=41 (highest in field) | peak_R=30 curr_R=24
+                  drop=6 (RELIEF, ENGINEERED DROP). Won a 20-45
+                  rated race last start; AT current rating per Day
+                  Results.
+- Sweepstakes:    NONE | UNKNOWN | No nominations; no confidence
+                  signal from connections.
+- trackwork / swimming: SHARP historically but STALE RISK -- 31 days
+                  since last gallop. No swimming pattern. Fitness
+                  is a complete unknown despite past sharp work.
+- Distance/going: Unproven at 1600m. Best form at 1400m; placed 4th
+                  at 2000m in Jan 2025. Going firm/good is fine.
+- Form:           Survived last-run filter (11.25L forgiven due to
+                  SLOWLY_AWAY HIGH). Won last start in a 20-45
+                  band. Competition form NEUTRAL (rivals' subsequent
+                  runs mixed; AURELE unplaced at higher level,
+                  BROCSTON dropped class).
+- Day Results:    AT current rating 24. Won a 20-45 band race most
+                  recently; older 1400m form competitive with peers
+                  rated 9-22.
+- Connections:    Hot T+J pair: 1 ride, 1 win (100%), winner only
+                  two weeks ago (Mystic Charm, 2026-07-15). Real
+                  advantage claim (-5kg allowance). Strongest
+                  intent signal among non-Armament runners.
+- Equipment:      STABLE | Unconfirmed data-derived changes only;
+                  no official change file entry. Treat as stable.
+- Field Rivals:   Beat Davids Delight by 1.25L on 2025-07-30. Beat
+                  Kallania (4th) easily when winning on 2026-06-03.
+                  Deep closer / unproven at trip. SLOWLY_AWAY
+                  history. No draw impact noted.
+- Medical/BW:     LOW RISK. No medical record. Historical vet
+                  withdrawal ~12 months ago. Body weight unknown
+                  (insufficient data).
+- Market:          Not yet published.
+- Verdict:         Highest weight-adjusted rating and a perfect T+J
+                  record, but 31 days without trackwork and no
+                  1600m form make fitness and stamina genuine
+                  queries. Respect the connections but the
+                  preparation is insufficient for top-tier
+                  confidence.
+
+----------------------------------------------------------------
+OCEAN OF GRACE (4yo gelding)
+----------------------------------------------------------------
+- Ratings:        EffR=33 | peak_R=32 curr_R=24 drop=8 (TARGET,
+                  ENGINEERED DROP). AT to slightly ABOVE rating
+                  historically, but +9kg weight burden today vs
+                  prior 1600m run is a severe handicap.
+- Sweepstakes:    NONE | UNKNOWN | No nominations; no classic or cup
+                  entries filed.
+- trackwork / swimming: LAZY (last session +9, declining trend).
+                  STALE RISK -- 53 days since last gallop. Two
+                  recent swims but zero trackwork for two months.
+                  Impossible to support with confidence.
+- Distance/going: One moderate 1600m run (6th, beaten 11.25L at
+                  53kg). Won at 1200m. Going firm/good suits.
+- Form:           Eliminated by last-run filter (11.25L at 1600m
+                  without incident). Competition form MILD
+                  DOWNGRADE (rivals failed at same level; only
+                  subsequent win came after dropping class).
+- Day Results:    AT current rating 24 historically, BUT the +9kg
+                  weight increase today vs the only prior 1600m run
+                  makes today's task much harder. Win at 1200m was
+                  ABOVE-rating but at 55kg.
+- Connections:    Cold T+J pairing: 0 wins from 10 rides. Lateral
+                  jockey change. No connections intent signal.
+- Equipment:      STABLE | Unconfirmed data-derived changes (hood,
+                  tongue strap added per data only); no official
+                  change file entry.
+- Field Rivals:   Beat Kallania by 2.5L at 1600m on 2026-06-10.
+                  Mid-field / unreliable runner from draw 1. Gate
+                  trust is low (walked out of gates previously,
+                  vet withdrawal).
+- Medical/BW:     SERIOUS. Bilateral fore-knee injury 63 days ago
+                  (fell in saddling yard, withdrawn on vet grounds)
+                  plus historical EIPH. Weight decline of -12kg
+                  over 4 runs reads as trainer trimming (positive)
+                  but medical counter-flag remains.
+- Market:          Not yet published.
+- Verdict:         Weight decline suggests deliberate conditioning,
+                  but 53 days without trackwork, a bilateral knee
+                  injury, +9kg today vs prior 1600m, and a cold T+J
+                  pairing are too many negatives to overcome.
+
+----------------------------------------------------------------
+KALLIPOS (6yo)
+----------------------------------------------------------------
+- Ratings:        EffR=39 | peak_R=26 curr_R=22 drop=4 (RELIEF,
+                  ENGINEERED DROP). BELOW current rating per Day
+                  Results; recent form has declined sharply.
+- Sweepstakes:    NONE | UNKNOWN | No nominations.
+- trackwork / swimming: SHARP (average -4.2, latest -5). VERY FRESH
+                  (3 days). Same jockey throughout. Strongest
+                  trackwork profile in the field on paper.
+- Distance/going: Won at 1600m in Sep 2025 (Chennai, 0.85x
+                  reliability). Recent 1600m: 9th beaten 23L.
+                  Going firm/good suits.
+- Form:           Eliminated by last-run filter (21L and 23L both
+                  10+ without incident). Competition form MILD
+                  UPGRADE but thin sample and cross-centre
+                  discount applies (Chennai).
+- Day Results:    BELOW current rating 22. Beat peers rated 5-17
+                  narrowly; lost to 15-rated horse at level weights.
+                  2025 Chennai win shows past ability but form has
+                  collapsed.
+- Connections:    T+J 0 wins from 7 rides. Jockey upgrade on paper
+                  but the pair is winless. Discount claim (-5kg)
+                  unsupported.
+- Equipment:      STABLE | Unconfirmed removal of hanging bit; no
+                  official change. Carries cross nose band and
+                  tongue strap.
+- Field Rivals:   Lost to Always For You (3.75L), Kallania (2.25L)
+                  and Moonlight Speed (4.75L) recently. Mid-field
+                  / fader from draw 2 or 12. Fades in the straight.
+- Medical/BW:     CRITICAL. Recurring EIPH (two 2025 bleed events)
+                  plus two 2026 injury entries within 3 weeks.
+                  Respiratory + orthopaedic compound concern at
+                  1600m. Elimination candidate on medical grounds.
+                  Weight 452kg stable/healthy.
+- Market:          Not yet published.
+- Verdict:         Trackwork is excellent but form has collapsed
+                  and medical profile is CRITICAL with recurring
+                  EIPH. The 1600m win is 10 months old at a
+                  different centre. Oppose despite sharp work.
+
+----------------------------------------------------------------
+KALLANIA (6yo)
+----------------------------------------------------------------
+- Ratings:        EffR=35 | peak_R=30 curr_R=20 drop=10 (TARGET,
+                  FORM DEGRADATION). AT to slightly ABOVE rating per
+                  Day Results; highest class drop in the field.
+- Sweepstakes:    NONE | UNKNOWN | No nominations.
+- trackwork / swimming: GOOD (latest -2 improving). VERY FRESH (5
+                  days). Only three career works but the latest is
+                  positive. New jockey partner.
+- Distance/going: Proven 1600m winner (Feb 2025). Also placed 2nd
+                  at 2000m. Recent 1600m form is poor (8th, 5th,
+                  9th). Going firm/good suits.
+- Form:           Eliminated by last-run filter (18.75L and 13.75L
+                  both 10+ without incident). Competition form MILD
+                  UPGRADE -- two rivals within 3L subsequently won
+                  at same class (MARTINO and SANDS OF DUBAI). This
+                  is the strongest competition validation in the
+                  field.
+- Day Results:    AT to slightly ABOVE current rating 20. The
+                  2026-06-03 1400m form read ABOVE (faster than
+                  peers rated 10-29). 1600m form at 52kg was BELOW;
+                  +8kg burden today is a major concern.
+- Connections:    T+J 0 wins from 9 rides. Jockey upgrade but cold
+                  partnership. Recent disciplinary record on
+                  jockey. Weak signal.
+- Equipment:      STABLE | Unconfirmed removal of shadow roll; no
+                  official change. Carries blinkers and tongue
+                  strap.
+- Field Rivals:   Beat Kallipos (2.25L) on 2026-07-08. Lost to
+                  Always For You (4.75L) and Ocean Of Grace (2.5L).
+                  Kallania reversed Always For You at 1600m twice in
+                  late 2025. Mid-field / irregular closer from draw
+                  9; may be parked wide.
+- Medical/BW:     LOW RISK. No medical record. Weight 464kg
+                  stable/healthy. +11kg spike in July noted;
+                  monitor today's declared weight.
+- Market:          Not yet published.
+- Verdict:         The 10-point class drop and competition form
+                  validation are the strongest positives, but
+                  consecutive 10+L beatings without incident and a
+                  +8kg weight burden at 1600m today make it hard
+                  to recommend despite the drop. Marginal each-way
+                  interest only if the market goes wide.
+
+----------------------------------------------------------------
+ALWAYS FOR YOU (4yo gelding)
+----------------------------------------------------------------
+- Ratings:        EffR=37 | peak_R=26 curr_R=19 drop=7 (TARGET,
+                  FORM DEGRADATION). AT current rating per Day
+                  Results. Prime-age 4yo gelding.
+- Sweepstakes:    NONE | UNKNOWN | No nominations; no long-term
+                  plan signalled.
+- trackwork / swimming: GOOD (average -2.0, latest STANDARD). VERY
+                  FRESH (2 days). Extensive swimming alongside full
+                  programme. Same jockey (Faiz). Enormous workload
+                  but timing trend slightly downwards.
+- Distance/going: No top-4 placing at 1600m in three attempts (8th,
+                  8th, 10th). Needs more stamina than shown. Going
+                  firm/good suits.
+- Form:           Eliminated by last-run filter (14L and 12.25L
+                  both 10+ without incident). Beat R27 horse
+                  (Striking Viking) receiving 2.5kg on 2026-07-08.
+                  Competition form NEUTRAL (no valid data).
+- Day Results:    AT current rating 19. Competitive 1400m form
+                  including being within 0.25s of KNOTTY ONE (R50)
+                  in a weak race. Last 1600m run was poor with
+                  SLOWLY_AWAY excuse.
+- Connections:    T+J 0 wins from 16 rides -- the coldest long-term
+                  pairing in the race. Jockey upgrade on paper but
+                  no evidence of a live connection.
+- Equipment:      STABLE | No equipment changes. Carries cross
+                  nose band only.
+- Field Rivals:   Beat Kallania (4.75L), Kallipos (3.75L) and
+                  Starlight Whisper (1.5L) on 2026-07-08. Lost to
+                  Davids Delight (3.5L) at 1600m on 2026-06-24.
+                  Deep closer from draw 3. Two SLOWLY_AWAY
+                  incidents compromise the usual settling position.
+- Medical/BW:     SERIOUS. Post-race lameness + vet withdrawal 35
+                  days ago. Fitness certificate required.
+                  Overweight at 499kg suggests idle period. Verify
+                  cleared status for today.
+- Market:          Not yet published.
+- Verdict:         Prime age and a fast closing sectional (23.86s
+                  last 400m) are appealing, but no 1600m success,
+                  a 0-for-16 T+J record, recent lameness, and
+                  overweight condition make this a risky
+                  proposition.
+
+----------------------------------------------------------------
+ARIES CELESTIAL (5yo)
+----------------------------------------------------------------
+- Ratings:        EffR=33 | peak_R=24 curr_R=16 drop=8 (TARGET,
+                  FORM DEGRADATION). BELOW current rating per Day
+                  Results.
+- Sweepstakes:    NONE | UNKNOWN | No nominations.
+- trackwork / swimming: GOOD (last work -3 SHARP). STALE RISK -- 16
+                  days without a session. Same jockey retained.
+                  Gap combined with prior medical issues raises
+                  concerns.
+- Distance/going: No 1600m runs at all. Unproven at the trip;
+                  significant risk. Going firm/good suits.
+- Form:           Eliminated by last-run filter (15.25L, 22.75L and
+                  16.5L all 10+ without incident). Competition form
+                  NEUTRAL (no valid data).
+- Day Results:    BELOW current rating 16. Recent 1200m run was
+                  10th beaten 15.25L. Older form at 1400m/1100m
+                  also poor.
+- Connections:    T+J 0 wins from 1 ride. Same jockey retained
+                  (0% strike rate). Recent suspension. No
+                  meaningful intent signal.
+- Equipment:      STABLE | Unconfirmed data-derived changes (tongue
+                  strap added, hood removed per data only); no
+                  official change file entry.
+- Field Rivals:   Lost to Davids Delight (3.75L) and Miracle Honey
+                  (7.0L) on 2026-07-15. Mid-field / fader. Hangs
+                  drastically (ran out onto sand track in Oct 2025).
+                  No 1600m experience. Draw 6.
+- Medical/BW:     SERIOUS. Post-race lameness 14 days ago + mouth
+                  injury 29 days ago + injury 48 days ago. Three
+                  issues in 7 weeks. Underweight 392kg. Mouth
+                  injury may affect bit acceptance and feed intake.
+                  Verify fitness certificate cleared.
+- Market:          Not yet published.
+- Verdict:         No 1600m form, three recent medical issues,
+                  underweight, and consistently poor race-day
+                  results. Elimination candidate.
+
+----------------------------------------------------------------
+ARMAMENT (8yo)
+----------------------------------------------------------------
+- Ratings:        EffR=34 | peak_R=20 curr_R=16 drop=4 (RELIEF,
+                  FORM DEGRADATION). STRONG SIGNAL -- ABOVE current
+                  rating per Day Results; true class likely 25-30+.
+- Sweepstakes:    NONE | UNKNOWN | No nominations. No sweepstakes
+                  tiebreaker applies; differentiation comes
+                  entirely from form and connections.
+- trackwork / swimming: SHARP (latest -3, and an impressive -6
+                  recently). VERY FRESH (3 days). Same jockey
+                  (Abhishek Mhatre) throughout. One slow gate
+                  session but horse jumped cleanly. No swimming
+                  signal. Outstanding preparation.
+- Distance/going: Unproven at 1600m (all runs at 1200-1400m). But
+                  sub-25 final-400m sectionals in three separate
+                  races and consistent late-closing patterns at
+                  1400m strongly suggest the extra 200m is within
+                  range. Going firm/good suits.
+- Form:           Eliminated by last-run filter (15.5L third-last
+                  run without incident), but the last two runs
+                  override: 3rd beaten 2.75L (within 0.02s of R44
+                  horse) and 3rd beaten 3L (within 0.06s of R46
+                  horse, within 0.09s of R53 horse). Competition
+                  form MILD UPGRADE (V CAVIAR won at same class
+                  after Armament beat him). Rule 2 priority:
+                  older form takes precedence for small trainer +
+                  proven jockey -- the Jun/Jul form is compelling
+                  and recent enough to override the third-last run.
+- Day Results:    STRONG SIGNAL -- ABOVE current rating 16. Two
+                  consecutive runs within 0.02-0.09s of horses
+                  rated 33-53. AIR BENDER's HUNG-MEDIUM incident
+                  makes the read conservative. Strongest form
+                  signal in the field.
+- Connections:    Jockey upgrade to Abhishek Mhatre (8%). T+J 1
+                  win from 12 rides (MIND GAMES, 2026-06-03). Real
+                  advantage claim (-2.5kg allowance). Proven
+                  partnership with a winner this season. Trainer
+                  rides as well (trainer-jockey combo).
+- Equipment:      POSITIVE -- Official addition of BLISTER BIT (BB)
+                  per change_of_equipments.txt. Addresses
+                  directional/steering issues. Clear intent signal
+                  from connections.
+- Field Rivals:   Beat King Carlos by 1.25L on 2026-07-08. Prior
+                  H2H with Miracle Honey: Armament beat MH by 2L
+                  at 1100m (Sep 2025); MH beat Armament by 1L at
+                  1400m (Jul 2025). Deep closer from draw 3. Three
+                  SLOWLY_AWAY incidents on record but gate 3 is
+                  favourable. Must jump cleanly.
+- Medical/BW:     SERIOUS. EIPH (burst blood vessel) 28 days ago
+                  (stewards-flagged). Colic 113 days ago (old).
+                  Horse ran 3rd beaten 2.75L only 7 days after the
+                  EIPH incident, suggesting the issue was managed.
+                  Weight 439kg stable/healthy. 1600m stresses
+                  respiratory system but recent evidence shows
+                  the horse is competing effectively.
+- Market:          Not yet published. IfArmament opens at double
+                  digits, the value is significant given the form
+                  gap between rating and demonstrated class.
+- Verdict:         The strongest overall profile in the field.
+                  Form signal is elite relative to this grade,
+                  connections are proven, trackwork is sharp and
+                  fresh, and the equipment change signals intent.
+                  The EIPH flag is the only serious negative, but
+                  he ran well 7 days post-incident. Top pick.
+
+----------------------------------------------------------------
+DAVIDS DELIGHT (6yo)
+----------------------------------------------------------------
+- Ratings:        EffR=33 | peak_R=23 curr_R=15 drop=8 (TARGET,
+                  ENGINEERED DROP). BELOW current rating per Day
+                  Results.
+- Sweepstakes:    NONE | UNKNOWN | No nominations.
+- trackwork / swimming: SHARP (consistent -3 to -4 in every
+                  session). STALE RISK -- 24 days without work.
+                  Different jockey (M S Deora has not worked the
+                  horse). Every gallop was fast but the 24-day gap
+                  erodes confidence.
+- Distance/going: Placed at 1600m (4th Jan 2025, 5th Jun 2025, 7th
+                  Jun 2026). Solid but not winning at the trip.
+                  Going firm/good suits.
+- Form:           Eliminated by last-run filter (11.5L and 15.75L
+                  both 10+ with only LOW incidents). Competition
+                  form NEUTRAL (no valid data after filtering).
+- Day Results:    BELOW current rating 15. Recent form consistently
+                  poor (7th at 1200m, 7th at 1600m). +4-8pt heavier
+                  today adds to the disadvantage.
+- Connections:    T+J 0 wins from 3 rides. Jockey upgrade to M S
+                  Deora (12% strike rate) but pair yet to click.
+- Equipment:      STABLE | Unconfirmed removal of SCP; no official
+                  change. Carries cross nose band and tongue strap.
+- Field Rivals:   Beat Always For You (3.5L) at 1600m on 2026-06-24
+                  but was 4L behind Miracle Honey. Beat Aries
+                  Celestial (3.75L) on 2026-07-15. Mid-field
+                  stalker from draw 10. Fines for shifting in/out
+                  suggest he needs a clear corridor. Proven 1600m
+                  tank but not winning.
+- Medical/BW:     CRITICAL. Three post-race lameness flags across
+                  multiple runs, including one only 14 days ago.
+                  Fitness certificate required after each event.
+                  Highest medical concern in the field. Weight
+                  448kg stable but stability does not offset very
+                  recent lameness. Verify vet clearance.
+- Market:          Not yet published.
+- Verdict:         Proven at 1600m but three post-race lameness
+                  events (one 14 days ago), below-rating form, and
+                  +4-8kg heavier today make this an elimination
+                  candidate on medical grounds.
+
+----------------------------------------------------------------
+DAKSHA (5yo)
+----------------------------------------------------------------
+- Ratings:        EffR=25 | peak_R=14 curr_R=14 drop=0 (FLAT).
+                  Rating unreliable -- fewer than 3 career runs.
+                  AT current rating per Day Results.
+- Sweepstakes:    NONE | UNKNOWN | No nominations.
+- trackwork / swimming: GOOD historically but no recent evidence.
+                  STALE RISK -- 66 days since last gallop. Recovery
+                  /management swimming only (one light swim in 2
+                  months). Same jockey retained. Least-prepared
+                  runner in the field.
+- Distance/going: Never raced beyond 1400m. Unproven at 1600m.
+                  Going firm/good suits.
+- Form:           Eliminated by last-run filter (10.5L without
+                  incident). Only 2 career runs. Competition form
+                  MILD DOWNGRADE (all rivals who beat her within 5L
+                  failed to place subsequently).
+- Day Results:    AT current rating 14. Limited data. 1200m form
+                  was competitive against 21-25 rated peers but
+                  1400m form only beat a R27 horse who may have
+                  been below form.
+- Connections:    T+J 1 win from 17 rides (6%). Lateral jockey
+                  switch to Anil Bandal (5%). Modest but live
+                  connection -- won together on 2026-06-24 (GIMME).
+- Equipment:      STABLE | No equipment changes. Carries blinkers
+                  and tongue strap.
+- Field Rivals:   Beat Starlight Whisper (0.15s faster) at 1200m on
+                  2026-05-27. Deep closer / unproven at trip from
+                  draw 5. Settled 7th and made late headway at
+                  1400m last start.
+- Medical/BW:     SERIOUS. Eye injury 41 days ago + lameness 20
+                  days ago. Two distinct serious conditions within
+                  3 weeks. Weight 424kg stable/healthy but medical
+                  flags dominate. Eye injury affects racing safety
+                  and vision.
+- Market:          Not yet published.
+- Verdict:         Only 2 career runs, 66 days without trackwork,
+                  two serious medical conditions, and unproven at
+                  1600m. Not recommendable.
+
+----------------------------------------------------------------
+KING CARLOS (7yo)
+----------------------------------------------------------------
+- Ratings:        EffR=25 | peak_R=14 curr_R=14 drop=0 (FLAT).
+                  Rating unreliable -- fewer than 3 career runs.
+                  AT current rating per Day Results.
+- Sweepstakes:    NONE | UNKNOWN | No nominations.
+- trackwork / swimming: SHARP (latest -4, trend improving). VERY
+                  FRESH (3 days). Same jockey (Ankit Pal). Frequent
+                  double swims alongside active trackwork. Thorough
+                  preparation. One slow gate session but jumped
+                  cleanly.
+- Distance/going: One 1600m run (5th, beaten 8.25L despite
+                  SLOWLY_AWAY HIGH). Creditable debut at the trip;
+                  likely stays. Going firm/good suits.
+- Form:           Survived last-run filter (8.25L forgiven due to
+                  SLOWLY_AWAY HIGH; 4.0L last start with only LOW
+                  incident). Competition form MILD UPGRADE (BROCSTON
+                  placed 2nd at same class after being 1.8L ahead).
+- Day Results:    AT current rating 14. 2026-07-08 1400m 4th (beaten
+                  4L) competitive with peers rated 24-44. 2026-06-24
+                  1600m 5th (beaten 8.25L) decent despite SLOWLY_AWAY
+                  at same distance as today.
+- Connections:    The strongest T+J partnership in the race: 4 wins
+                  from 23 rides (17%). Multiple recent winners
+                  (SCOUT, NATURAL DIAMOND x2, SAPPHIRE). Same jockey
+                  retained. No claim but proven machinery. Ankit Pal
+                  carries a recent disciplinary record.
+- Equipment:      STABLE | No equipment changes. Carries cross nose
+                  band and tongue strap.
+- Field Rivals:   Lost to Armament by 1.25L on 2026-07-08. Beat
+                  Always For You, Davids Delight, Kallipos and
+                  Miracle Honey at 1600m on 2026-06-24 (5th vs their
+                  8th, 7th, 9th, 3rd -- actually MH was 3rd, KC
+                  5th). Deep closer from draw 2. Gate 2 is a map
+                  advantage. SLOWLY_AWAY last time at 1600m is a
+                  concern.
+- Medical/BW:     WATCH. Old dry cough 107 days ago only; no recent
+                  medical flag. Underweight 406kg (14kg below
+                  healthy lower limit). Possible chronic inability
+                  to hold condition or light-framed individual.
+- Market:          Not yet published.
+- Verdict:         Best connections in the race and a creditable
+                  1600m debut despite a slow start, but only 2
+                  career runs, underweight, and a low effective
+                  rating of 25. Each-way potential at odds if the
+                  gate break is clean, but not top-tier.
+
+----------------------------------------------------------------
+MIRACLE HONEY (7yo)
+----------------------------------------------------------------
+- Ratings:        EffR=30 | peak_R=14 curr_R=9 drop=5 (RELIEF,
+                  ENGINEERED DROP). STRONG SIGNAL -- ABOVE current
+                  rating per Day Results; true class reads 18-22+.
+- Sweepstakes:    NONE | UNKNOWN | No nominations. No sweepstakes
+                  tiebreaker applies; differentiation comes
+                  entirely from form and connections.
+- trackwork / swimming: SHARP (last three gallops all strongly
+                  above standard). STALE RISK -- 17 days since last
+                  piece of work. Mock race: last of 6, beaten 7L
+                  adrift of the horse ahead. New jockey (A Ashhad
+                  Asbar, 26%) did not work the horse. Positive
+                  gallops diluted by the gap, mock race failure,
+                  and jockey mismatch.
+- Distance/going: Proven and effective at 1600m: 3rd (Jun 2026,
+                  beaten 3.25L), 3rd (Jul 2025), 5th (Jun 2025), 6th
+                  (Dec 2025). The most proven 1600m runner in the
+                  field. Going firm/good suits.
+- Form:           Eliminated by last-run filter (18L third-last run
+                  without incident), but the last two runs override
+                  the filter: 3rd beaten 2.75L (within 0.06s of R46
+                  and R53 horses) and 3rd beaten 3.25L at 1600m
+                  (faster than all other 1600m runners rated 14-22
+                  that day). Competition form MILD UPGRADE (BROCSTON
+                  placed 2nd at same class after being 3.2L behind).
+                  Rule 2 priority: small trainer + big jockey (26%
+                  upgrade) -- older 1600m form (Jun 2026) takes
+                  precedence over the third-last 18L run.
+- Day Results:    STRONG SIGNAL -- ABOVE current rating 9. The
+                  2026-06-24 1600m run (same distance as today) was
+                  3rd beaten only 3.25L, decisively faster than all
+                  other 1600m runners that day. True current class
+                  reads 18-22+, a massive 9-13pt gap above the
+                  rating.
+- Connections:    Significant jockey upgrade to A Ashhad Asbar (26%
+                  strike rate). T+J 0 wins from 4 rides. Jockey
+                  carries a recent suspension. The upgrade is
+                  eye-catching but the pair is unproven.
+- Equipment:      STABLE | Unconfirmed removal of RHBB; no official
+                  change. Carries blinkers, cross nose band, and
+                  tongue strap (three items -- complex management
+                  profile).
+- Field Rivals:   Top of the H2H pecking order at 1600m on
+                  2026-06-24: beat King Carlos (2L), Davids Delight
+                  (4L), Always For You (5L), Kallipos (6L). Prior
+                  H2H with Armament: MH beat Armament by 1L at
+                  1400m (Jul 2025); Armament beat MH by 2L at 1100m
+                  (Sep 2025). Deep closer (effective) from draw 11.
+                  Wide draw is a handicap but mitigated by the
+                  lack of pace in the field. Most proven 1600m
+                  closer.
+- Medical/BW:     SERIOUS. Eye injury 34 days ago + post-race
+                  lameness 14 days ago (stewards-flagged, fitness
+                  certificate required). Underweight 410kg (10kg
+                  below healthy lower limit). Compound concern at
+                  1600m. The lameness is very recent and the
+                  underweight may reflect injury-related stress.
+                  However, the same-distance form signal is
+                  compelling enough that past performance evidence
+                  overrides the medical tiebreaker exception.
+- Market:          Not yet published. If Miracle Honey opens at
+                  long odds, the value is significant given the
+                  9-13pt gap between rating and demonstrated class.
+- Verdict:         The most proven 1600m runner with a massive
+                  rating-vs-form gap. Medical flags (lameness 14
+                  days ago, underweight, eye injury) are genuine
+                  concerns, but the same-distance form evidence is
+                  the strongest in the field for this trip. The 26%
+                  jockey upgrade is a further positive. Second pick
+                  behind Armament on the balance of trackwork
+                  freshness, connections proven-ness, and equipment
+                  intent, but the first past the post at 1600m if
+                  the medical issues are managed.

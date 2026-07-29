@@ -1,0 +1,148 @@
+ **1. HEAD-TO-HEAD**
+
+Confirmed prior meetings among today’s runners:
+
+- **2026-07-08 | MYSORE 1400M (Group)** — **PILOT OFFICER** finished **3rd** (draw 2, odds 20); **THE KILLER** finished **5th** (draw 1, odds 25). PILOT OFFICER came out on top by two placings on firm going (penetro 2.7) at today’s exact trip and course.  
+- **2026-06-24 | MYSORE 1200M (Maiden)** — **PILOT OFFICER** finished **1st** (draw 1, odds 65/100); **THE KILLER** finished **3rd** (draw 7, odds 15). PILOT OFFICER accounted for THE KILLER comfortably at a shorter trip, also on firm going.  
+- **2026-06-24 | MYSORE 1200M (Maiden)** — **MYSORE PAK** was **WITHDRAWN (W)** on veterinary grounds; PILOT OFFICER won and THE KILLER ran third.
+
+**Assessment:** PILOT OFFICER holds a clear 2–0 advantage over THE KILLER over two different trips on the same Mysore surface. THE KILLER would need a significant change in form, body weight, or race shape to reverse that form. MYSORE PAK’s only common-race appearance is void due to vet withdrawal.
+
+---
+
+**2. RUNNING STYLES**
+
+*Note — “Whips Not Allowed” is not stated in today’s race conditions; default (whips permitted) applies. No whip-bias applied.*
+
+**PILOT OFFICER** — **FRONT-RUNNER** (with slight gate-reliability caveat)  
+- **2026-07-08 | 1400M | Pos3 | Odds20 | Draw2** | Led at 1.5 furlongs before dropping back to second at the final furlong and finishing third.  
+- **2026-06-24 | 1200M | Pos1 | Odds65/100 | Draw1** | [TOTE FAV] Led from the front to claim a dominant victory.  
+- **2026-06-10 | 1100M | Pos3 | Odds6 | Draw1** | Settled fifth approaching the final bend before improved positioning.  
+
+Style verdict: Two runs showing prominent gate speed and willingness to lead; one debut showing ability to race mid-pack and improve. **AWKWARD_JUMP @ AT_START** in the June 24 win slightly downgrades the assumption he will always land in front, but he is still the only exposed pace horse in the field. Drawn gate 5 today; should push forward or sit just off any unexpected inside speed.
+
+**THE KILLER** — **MID-FIELD / STALKER**  
+- **2026-07-08 | 1400M | Pos5 | Odds25 | Draw1** | Settled fourth approaching the final bend before making late headway.  
+- **2026-06-24 | 1200M | Pos3 | Odds15 | Draw7** | Settled well before being dropped back in the final stages to finish third.  
+
+Style verdict: Takes a holding position early (3rd–4th) but lacks a genuine finishing burst in the context of these rivals. The **HUNG** incident (hanging out in the straight) supports that he can become wayward under pressure.
+
+**MYSORE PAK** — **UNKNOWN / UNPROVEN**  
+- **2026-06-24 | 1200M | PosW | Odds? | Draw?** | WITHDRAWAL_VET — excluded from form.  
+
+**GIVE A SPIN** — No runs shown in provided context. Style: **UNKNOWN**.  
+**AZKABAN** — No runs shown in provided context. Style: **UNKNOWN**.  
+**CRAZY LOVE** — No runs shown in provided context. Style: **UNKNOWN**.  
+**TIMOCLEA** — No runs shown in provided context. Style: **UNKNOWN**.  
+
+**Likely pace map:** PILOT OFFICER is the sole confirmed pace horse. With gate 5 he may cross to the fence or sit outside any debutant breaking from gates 1–2. Tempo will likely be *moderate* rather than scorching, because there is no second exposed front-runner to force the issue. That tends to help stalkers sitting 2nd–4th, but the only exposed stalker (THE KILLER) has already failed to close the gap on PO. Deep closers need a genuine pace collapse; on what we know, that looks unlikely.
+
+---
+
+**3. DISTANCE FORM (1300m–1500m band)**
+
+- **PILOT OFFICER:** 1 run at 1400m — 3rd in The Mysore Colts Trial Stakes (Group) on 08-Jul-2026. **Proven at the trip.** Trending respectably (dropped from lead late but placed at Group level).  
+- **THE KILLER:** 1 run at 1400m — 5th in same Group race on 08-Jul-2026. **Unproven in terms of winning at the trip**; was closing into the Group placing without threatening the winner.  
+- **MYSORE PAK:** No completed run at any trip in context; withdrew at 1200m. **Unproven at 1400m — risk factor.**  
+- **GIVE A SPIN / AZKABAN / CRAZY LOVE / TIMOCLEA:** No distance form shown in context. Their 1400m debut is a **risk factor.**
+
+---
+
+**4. SECTIONALS — who can quicken late?**
+
+Per methodology: sectionals are presented as valid closing-speed indicators only if the horse was leading at the relevant distance point and won the race.
+
+- **PILOT OFFICER (2026-06-24, 1200M, won, led throughout):** last-400m **25.08s**; last-200m **12.61s**. Not sub-24.0; indicates sustaining speed under control rather than a devastating off-the-pace burst.  
+- **PILOT OFFICER (2026-07-08, 1400M, 3rd, did not win):** last-400m **~23.96s** / last-200m **~12.20s** recorded, but as he did not win, this is **not a valid closing-speed indicator**.  
+- **THE KILLER (2026-07-08, 1400M, 5th, did not win):** same race timings as above exist; **not a valid closing-speed indicator** under the stated criterion.  
+- **THE KILLER (2026-06-24, 1200M, 3rd, did not win):** shared race splits; **not a valid closing-speed indicator**.
+
+No sub-24 last-400m sustained winning split is on offer from the exposed form.
+
+**4B. COMPETITION FORM VALIDATION**
+
+- **PILOT OFFICER:** Close rivals AIR BENDER, BORN RULER, STORMRIDER, EDISON are all **UNVALIDATED** (no subsequent runs within 90 days). No positive or negative validation. The absence of close rivals in the Maiden win is explained by the comfortable margin and is **not penalised**.  
+- **THE KILLER:** Close rivals TEJASH, MYSTICAL EVE, AIR BENDER, EDISON are all **UNVALIDATED**. Treat as neutral. No subsequent form to validate or discount the 3rd and 5th placings.
+
+---
+
+**5. BODY WEIGHT TRENDS**
+
+Today’s declared body weights are **not yet published**.
+
+Historical trends from context:
+- **PILOT OFFICER:** 498 → 492 → 485 (10-Jun / 24-Jun / 08-Jul). Consistent drop of **13 kg** across the three runs coinciding with a Maiden win and a Group placing. **Strong fitness signal** — tightening up and peaking.  
+- **THE KILLER:** 431 → 427 (24-Jun / 08-Jul). Modest **4 kg decline**; stable territory, no spike.  
+- **MYSORE PAK:** No historical BW in context.  
+- **GIVE A SPIN / AZKABAN / CRAZY LOVE / TIMOCLEA:** No prior BW data in context.
+
+---
+
+**6. GOING PREFERENCES**
+
+- **PILOT OFFICER:** All three recorded runs on **Firm** (penetrometer 2.7–2.9). Handled that surface well at Mysore, but softer ground preference is unknown.  
+- **THE KILLER / MYSORE PAK / Others:** No penetrometer readings attached to their runs. No exposed going preference.
+
+Proxy: The moderate shared last-400m sectional (~25.1s) was recorded on firm ground. If today’s penetrometer reading rises toward Good-to-Soft or softer, the unexposed horses may find 1400m more searching than PO, who has at least shown tactical speed on the surface.
+
+---
+
+**7. STRUCTURED RACE INCIDENTS**
+
+**A) Pace-relevant / Soundness Incidents**
+- **PILOT OFFICER:** 2026-06-24 | MYSORE 1200M | **AWKARD_JUMP @ AT_START**. Recovered to win; slightly downgrades automatic front-running assumption, but he still showed gate speed.  
+- **MYSORE PAK:** 2026-06-24 | MYSORE 1200M | **WITHDRAWAL_VET @ PRE_RACE**. *Run excluded from form.* Respiratory infection cited.  
+- **THE KILLER:** 2026-06-24 | MYSORE 1200M | **HUNG @ RACE**. Rider reported hanging out after entering the straight; raises straightness/tractability concerns in the finish.  
+- **PILOT OFFICER:** 2026-07-08 | MYSORE 1400M | **JOCKEY_FINE** for shifting out and bumping EDISON; hanging/waywardness under pressure flagged.
+
+**B) Discipline Incidents**
+- **1 jockey fine** across the field (PILOT OFFICER, 2026-07-08).  
+- Zero reprimands or trainer fines recorded among today’s runners.
+
+---
+
+**8. RAW STEWARDS REPORTS**
+
+*Exact steward sentences naming today’s horses:*
+
+**PILOT OFFICER**
+- 08-Jul-2026 | MYSORE 1400M: *“Nikhil, the rider of PILOT OFFICER was fined Rs.3,000/- for shifting out and bumping EDISON (Vivek.”* — **HANGING IN/OUT / INTERFERENCE**.  
+- 24-Jun-2026 | MYSORE 1200M: *“PILOT OFFICER (B. Darshan Anthony) after jumping out shied away from PILOT OFFICER (B.”* — truncated quote; refers to an awkward jump / shying at the start. Auto-parsed flags include HANGING IN/OUT; key issue is gate reliability.
+
+**THE KILLER**
+- 24-Jun-2026 | MYSORE 1200M: *“Jockey Abhishek Mhatre, the rider of THE KILLER reported that his mount was hanging out after entering the straight.”* — **RECURRENT HANGING OUT**.
+
+**MYSORE PAK**
+- 24-Jun-2026 | MYSORE 1200M: *“M to withdraw MYSORE PAK on veterinary grounds as it was suffering from respiratory infection.”*
+
+**GIVE A SPIN / AZKABAN / CRAZY LOVE / TIMOCLEA**
+- No stewards reports found.
+
+**Recurrent issue summary:** PILOT OFFICER has two records involving shifting/shying at the start or under pressure — gate reliability is functional but not flawless. THE KILLER has a clear recurrent hanging-out problem.
+
+---
+
+## FIELD ASSESSMENT
+
+**A) Likely pace scenario**  
+PILOT OFFICER is the only runner with exposed early speed. Drawn 5 of 7, he should either cross to the lead or sit a prominent 1st/2nd. With no confirmed pace rival among the five exposed or unexposed runners, the tempo will likely be *honest but not brutal*. That generally benefits horses stationed within 2–3 lengths of the lead through the early 800m. Deep closers probably will not get the hot pace they need to sweep past over this 1400m trip at Mysore.
+
+**B) Winner profile**  
+A tractable, race-fit 3YO with proven Mysore 1400m form and the tactical speed to sit in the first three without being buried. Soundness in the straight is essential given the hanging issues seen in the exposed form.
+
+**C) Field ranking (top 5)**  
+1. **PILOT OFFICER** — Only runner with a Mysore win and a Group 1400m placing. Body-weight trend is strongly positive (peaking fitness), and he controls the likely pace shape. Hanging/shying flags exist but are mitigated by proven recovery and race- savvy. Clear form standard.  
+2. **THE KILLER** — Second-best of the exposed runners by default; has raced twice at the track and once at 1400m. Concerns over straightness and a 0–2 record against PO cap his appeal, though a drop in class from the Group trial offers some hope.  
+3. **MYSORE PAK** — Draws gate 1 and may land a soft rail trip if he breaks cleanly, but entirely unproven after a respiratory withdrawal. Respect the trainer if market moves emerge; purely speculative on supplied data.  
+4. **GIVE A SPIN** — Unexposed. No form data in context. Gate 3 offers a positional advantage if he has natural speed, but impossible to assess against the known form.  
+5. **TIMOCLEA** — Unexposed. Drawn 4, which is workable. No data to separate her from the other newcomers, so she is a place-holder among the unknowns.
+
+*(AZKABAN and CRAZY LOVE are also unexposed with no context data; CRAZY LOVE draws widest in 7, a marginal negative.)*
+
+**D) Danger horses outside top 5 if pace/weight changes**  
+None identifiable from the current dataset. If today’s published body weights reveal a sharp fitness drop for an unexposed runner, or if Phase 2 live odds show heavy market support for AZKABAN or CRAZY LOVE, reassess accordingly.
+
+**E) Horses to oppose (and why)**  
+- **MYSORE PAK** — Veterinary withdrawal with a respiratory infection on his only recorded start; no subsequent published run or barrier trial in the data to confirm fitness at 1400m. Oppose on health/fitness uncertainty.  
+- **THE KILLER** — NOT strongly opposed because the drop from a Group race to a 3YO Plate is a *positive corrective measure*, but he remains a clear negative against PILOT OFFICER on direct form and straightness reports.  
+- **No firm oppose call on the four unexposed runners** — lack of data is not the same as a negative; they could be well above average debutants. CRAZY LOVE’s wide gate (7) is a minor handicap, but not sufficient to oppose without exposed form.
